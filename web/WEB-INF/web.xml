@@ -16,6 +16,14 @@
         <servlet-name>DashboardAdmin</servlet-name>
         <servlet-class>AdminControlles.DashboardAdmin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>CommonControllers.ChangePasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LossPasswordController</servlet-name>
+        <servlet-class>CommonControllers.LossPasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -31,5 +39,13 @@
     <servlet-mapping>
         <servlet-name>DashboardAdmin</servlet-name>
         <url-pattern>/dashboardAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LossPasswordController</servlet-name>
+        <url-pattern>/lostpassword</url-pattern>
     </servlet-mapping>
 </web-app>

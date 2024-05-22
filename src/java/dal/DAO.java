@@ -75,10 +75,80 @@ public class DAO extends DBContext {
         }
         return null;
     }
+    
+    public User getUserByEmail(String email) {
+        String query = """
+                       select u.userID, u.username, u.password, u.email, u.status, r.roleID, r.role_name, u.LevelPass
+                       from [User] u 
+                       join Role r on u.roleID = r.roleID
+                       where u.email = ?""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Role role = new Role(rs.getInt("roleID"), rs.getString("role_name"));
+                return new User(rs.getInt("userID"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getString("status"),
+                        role,
+                        rs.getBoolean("LevelPass"));
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+    
+    
+    public ArrayList<User> getAllUser() {
+        ArrayList<User> listUser = new ArrayList<>();
+        String query = """
+                       select u.userID, u.username, u.password, u.email, u.status, r.roleID, r.role_name, u.LevelPass 
+                       from [User] u 
+                       join Role r on u.roleID = r.roleID
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Role role = new Role(rs.getInt("roleID"), rs.getString("role_name"));
+                listUser.add(new User(rs.getInt("userID"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getString("status"),
+                        role,
+                        rs.getBoolean("LevelPass")));
+
+            }
+        } catch (SQLException e) {
+        }
+        return listUser;
+    }
+    
+    public void UpdatePassword(String password,int LevelPass,String email) {
+        String sql = """
+                     UPDATE [User] SET password=?, LevelPass=? WHERE email=?;
+                     """;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, password);
+            statement.setInt(2, LevelPass);
+            statement.setString(3, email);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        User u = dao.getLogin("freelacer", "abc123");
-        System.out.println(u.toString());
+        dao.UpdatePassword("12345678",1, "tannguyennhat916@gmail.com");
+            
     }
 }
