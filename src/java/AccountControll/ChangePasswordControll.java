@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package CommonControllers;
+package AccountControll;
 
 
 import Models.User;
@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author tanng
  */
-public class ChangePasswordController extends HttpServlet {
+public class ChangePasswordControll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

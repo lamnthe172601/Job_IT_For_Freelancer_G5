@@ -1,5 +1,5 @@
 
-package CommonControllers;
+package AccountControll;
 
 import java.util.Date;
 import java.util.Properties;

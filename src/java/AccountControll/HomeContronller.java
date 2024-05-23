@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package CommonControllers;
+package AccountControll;
 
 import dal.DAO;
 import dal.PostDAO;
@@ -14,7 +14,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import Models.Categories;
+import Models.Company;
 import Models.Post;
+import Models.Skills;
+import dal.CategoriesDAO;
 
 /**
  *
@@ -61,13 +64,21 @@ public class HomeContronller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        DAO cDao = new DAO();
+        CategoriesDAO cDao = new CategoriesDAO();
         PostDAO pDAO = new PostDAO();
         List<Categories> list2 = cDao.getAllCategory();
         request.setAttribute("listCC", list2);
         
         List<Post> listpost = pDAO.TopPost();
         request.setAttribute("listpost", listpost);
+        
+        List<Skills> listSkill = pDAO.TopSkill();
+        request.setAttribute("listSkill", listSkill);
+        
+        
+        
+         List<Company> listcompany = pDAO.TopCompany();
+        request.setAttribute("listcompany", listcompany);
         request.getRequestDispatcher("views/home.jsp").forward(request, response);
     }
 

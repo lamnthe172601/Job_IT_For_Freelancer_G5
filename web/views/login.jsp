@@ -64,10 +64,6 @@
                                             <c:if test = "${username != null }" >
                                             <p style="text-align: center;" class="text-danger">${loginFaild}</p>
                                             </c:if>
-                                            <c:if test = "${mess != null }" >
-                                            <p style="text-align: center;" class="text-danger">${mess}</p>
-                                            </c:if>
-                                            
                                     <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Login Now<i class="feather-arrow-right ms-2"></i></button>
                                     <div class="login-or">
                                         <p><span>OR</span></p>
@@ -76,7 +72,7 @@
                                     <div class="row">
                                         <div class="col-sm-8 dont-have d-flex  align-items-center">New to Kofejob <a href="register.html" class="ms-2">Signup?</a></div>
                                         <div class="col-sm-4 text-sm-end">
-                                            <a class="forgot-link" href="lostpassword">Lost Password?</a>
+                                            <a class="forgot-link" href="forgot-password.html">Lost Password?</a>
                                         </div>
                                     </div>
                                 </form>
