@@ -15,6 +15,8 @@ import java.io.PrintWriter;
 import java.util.List;
 import Models.Categories;
 import Models.Post;
+import Models.User;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -65,8 +67,9 @@ public class HomeContronller extends HttpServlet {
         PostDAO pDAO = new PostDAO();
         List<Categories> list2 = cDao.getAllCategory();
         request.setAttribute("listCC", list2);
-        
-        List<Post> listpost = pDAO.TopPost();
+         HttpSession s = request.getSession();
+        User user = (User) s.getAttribute("account");
+        List<Post> listpost = pDAO.TopPost(1);
         request.setAttribute("listpost", listpost);
         request.getRequestDispatcher("views/home.jsp").forward(request, response);
     }

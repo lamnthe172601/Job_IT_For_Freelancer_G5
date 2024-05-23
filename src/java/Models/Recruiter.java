@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Admin
  */
 public class Recruiter {
-    int recruiterID;
+    int recruiterID, userID;
     String firstName, lastName;
     boolean gender;
     Date dob;
@@ -21,17 +21,20 @@ public class Recruiter {
     public Recruiter() {
     }
 
-    public Recruiter(int recruiterID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone, Company companyID) {
+    public Recruiter(int recruiterID, int userID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone, Company companyID) {
         this.recruiterID = recruiterID;
+        this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.dob = dob;
         this.image = image;
         this.email = email;
-        this.phone = phone;       
+        this.phone = phone;
         this.companyID = companyID;
     }
+
+   
 
     public int getRecruiterID() {
         return recruiterID;
@@ -97,6 +100,11 @@ public class Recruiter {
         this.phone = phone;
     }
 
+    @Override
+    public String toString() {
+        return "Recruiter{" + "recruiterID=" + recruiterID + ", userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dob=" + dob + ", image=" + image + ", email=" + email + ", phone=" + phone + ", companyID=" + companyID + '}';
+    }
+
     
 
     public Company getCompanyID() {
@@ -105,6 +113,14 @@ public class Recruiter {
 
     public void setCompanyID(Company companyID) {
         this.companyID = companyID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
     
     
