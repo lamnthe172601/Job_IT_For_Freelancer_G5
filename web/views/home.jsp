@@ -48,13 +48,18 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="home" class="navbar-brand logo scroll-logo">
+                            <a href="index.html" class="navbar-brand logo scroll-logo">
                                 <img src="assets/img/logo-white.svg" class="img-fluid" alt="Logo">
                             </a>
-                            <a href="home" class="navbar-brand logo original-logo">
+                            <a href="index.html" class="navbar-brand logo original-logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
-      
+                            <div class="input-group">
+                                <img src="assets/img/icon/dashboard-line.svg" alt="Img">
+                                <select class="select">
+                                    <option value>Categories</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
@@ -75,10 +80,14 @@
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="about">About us</a></li>
-                                        <li><a href="BlankPage">Starter Page</a></li>
-                                        <li><a href="404-page.jsp">404 Page</a></li>                                      
+                                        <li><a href="about.html">About us</a></li>
+                                        <li><a href="blank-page.html">Starter Page</a></li>
+                                        <li><a href="404-page.html">404 Page</a></li>
+                                        <li><a href="login">Login</a></li>
+                                        <li><a href="register.html">Register</a></li>
                                         <li><a href="onboard-screen.html">Onboard Screen</a></li>
+                                        <li><a href="forgot-password.html">Forgot Password</a></li>
+                                        <li><a href="change-passwords.html">Change Password</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-submenu">
@@ -116,7 +125,7 @@
                                 </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
                                     <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Recruiter <i class="fas fa-chevron-down"></i></a>
+                                        <a href="javascript:void(0);">For Employers <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
                                             <li class="has-submenu">
                                                 <a href="javascript:void(0);">Freelancer</a>
@@ -137,7 +146,6 @@
                                             <li><a href="deposit-funds.html">Payments</a></li>
                                             <li><a href="verify-identity.html">Verify Identity</a></li>
                                             <li><a href="profile-settings.html">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
                                 </c:if>
@@ -147,13 +155,13 @@
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.account == null}">
-                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                                    <li><a href="register.html" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
                                     <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
-                                        </c:if>
+                                </c:if>
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
-
+                            
                             <li class="searchbar">
                                 <a href="javascript:void(0);" class="reg-btn"><i class="feather-search"></i></a>
                                 <div class="togglesearch">
@@ -165,15 +173,9 @@
                                     </form>
                                 </div>
                             </li>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                            <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                            <li><a href="post-project" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                            <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
-                             </c:if>
+
+
+                            <li><a href="post-project.html" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
                         </ul>
                     </nav>
                 </div>
@@ -242,21 +244,21 @@
                     <div class="category-slider-section">
                         <div id="category-slider" class="owl-carousel owl-theme blog-trick-five blog-slider aos" data-aos="fade-up">
                             <c:forEach items="${listCC}" var="o">
-                                <div class="project-by-category-widget">
-                                    <a href="project.html" class="category-widget-img">
-                                        <img style="width: 100%; height: 280px;" src="${o.image}" class="img-fluid" alt="slider-image">
-                                    </a>
-                                    <div class="category-widget-content">
-                                        <h5>${o.categoriesName}</h5>                                   
-                                    </div>
+                            <div class="project-by-category-widget">
+                                <a href="project.html" class="category-widget-img">
+                                    <img style="width: 100%; height: 280px;" src="${o.image}" class="img-fluid" alt="slider-image">
+                                </a>
+                                <div class="category-widget-content">
+                                    <h5>${o.categoriesName}</h5>                                   
                                 </div>
+                            </div>
                             </c:forEach>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="home-five-section-btn">
-                                <a href="allCategories" class="btn btn-primary">View all Categories</a>
+                                <a href="project.html" class="btn btn-primary">View all Categories</a>
                             </div>
                         </div>
                     </div>
@@ -341,26 +343,26 @@
                     </div>
                     <div class="row">
                         <c:forEach items="${listpost}" var="list">
-                            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-                                <div class="project-item project-popular-item aos" data-aos="fade-up">
-                                    <div class="project-img">
-                                        <a href="project.jsp"><img src="${list.image}" alt="Img" class="img-fluid"></a>
-                                    </div>
-                                    <div class="feature-content">
-                                        <h4><a href="project.jsp">${list.title}</a></h4>
-                                        <ul class="feature-project-list nav">
-                                            <li><i class="feather-user me-1"></i>${list.caID.categoriesName}</li>
-                                            <li>$ ${list.budget}</li>
-                                        </ul>
-                                    </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
+                            <div class="project-item project-popular-item aos" data-aos="fade-up">
+                                <div class="project-img">
+                                    <a href="project.html"><img src="${list.image}" alt="Img" class="img-fluid"></a>
+                                </div>
+                                <div class="feature-content">
+                                    <h4><a href="project.html">${list.title}</a></h4>
+                                    <ul class="feature-project-list nav">
+                                        <li><i class="feather-user me-1"></i>${list.caID.categoriesName}</li>
+                                        <li>$ ${list.budget}</li>
+                                    </ul>
                                 </div>
                             </div>
+                        </div>
                         </c:forEach>
 
 
                         <div class="col-md-12">
                             <div class="home-five-section-btn">
-                                <a href="project.jsp" class="btn btn-primary">View More Projects</a>
+                                <a href="project.html" class="btn btn-primary">View More Projects</a>
                             </div>
                         </div>
                     </div>
@@ -423,8 +425,8 @@
                                     <h2>Join World’s Best Marketplace for developers</h2>
                                     <p>Why hire people when you can simply integrate our talented cloud workforce instead?</p>
                                     <div class="market-place-btn bidding-btn">
-                                        <a href="project.jsp" class="btn btn-primary market-project me-2">Post a Project</a>
-                                        <a href="project.jsp" class="btn btn-primary project-post">Start Bidding</a>
+                                        <a href="project.html" class="btn btn-primary market-project me-2">Post a Project</a>
+                                        <a href="project.html" class="btn btn-primary project-post">Start Bidding</a>
                                     </div>
                                 </div>
                             </div>
@@ -450,30 +452,98 @@
                         </div>
                     </div>
                     <div class="row">
-                        <c:forEach items="${listSkill}" var="listskill">
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="hired-developers aos" data-aos="fade-up">
-                                    <div class="hired-developers-img">
-                                        <a href="freelancerDetails?cid=${listskill.freelancerID.freelanceID}"><img src="${listskill.freelancerID.image}" class="img-fluid" alt="Img"></a>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="hired-developers aos" data-aos="fade-up">
+                                <div class="hired-developers-img">
+                                    <a href="developer-details.html"><img src="assets/img/developer/developer-13.jpg" class="img-fluid" alt="Img"></a>
+                                </div>
+                                <div class="hired-developers-img-content d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <a data-toggle="modal" href="#rating" class="favourite color-active"><i class="feather-heart"></i></a>
+                                        <h4><a href="developer-details.html">Steven Picard</a></h4>
+                                        <span>Angular Developer</span>
+                                        <h6><img src="assets/img/icon/dollar-developper.svg" class="me-1" alt="Img">$32 /hr</h6>
                                     </div>
-                                    <div class="hired-developers-img-content d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <a data-toggle="modal" href="#rating" class="favourite color-active"><i class="feather-heart"></i></a>
-                                            <h4><a href="developer-details.html">${listskill.freelancerID.first_name} ${listskill.freelancerID.last_name}</a></h4>
-                                            <span>${listskill.skill_set_ID.skill_set_name}</span>
-                                            <h6><img src="assets/img/icon/dollar-developper.svg" class="me-1" alt="Img">$32 /hr</h6>
-                                        </div>
-                                        <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-
-                                            <span class="average-rating">3.0</span>
-                                        </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <span class="average-rating">5.0</span>
                                     </div>
                                 </div>
                             </div>
-                        </c:forEach>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="hired-developers aos" data-aos="fade-up">
+                                <div class="hired-developers-img">
+                                    <a href="developer-details.html"><img src="assets/img/developer/developer-14.jpg" class="img-fluid" alt="Img"></a>
+                                </div>
+                                <div class="hired-developers-img-content d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <a data-toggle="modal" href="#rating" class="favourite color-active"><i class="feather-heart"></i></a>
+                                        <h4><a href="developer-details.html">Aroon Merkel</a></h4>
+                                        <span>Java Developer</span>
+                                        <h6><img src="assets/img/icon/dollar-developper.svg" class="me-1" alt="Img">$72 /hr</h6>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <span class="average-rating">5.0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="hired-developers aos" data-aos="fade-up">
+                                <div class="hired-developers-img">
+                                    <a href="developer-details.html"><img src="assets/img/developer/developer-15.jpg" class="img-fluid" alt="Img"></a>
+                                </div>
+                                <div class="hired-developers-img-content d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <a data-toggle="modal" href="#rating" class="favourite color-active"><i class="feather-heart"></i></a>
+                                        <h4><a href="developer-details.html">Durso Raeen</a></h4>
+                                        <span>React Developer</span>
+                                        <h6><img src="assets/img/icon/dollar-developper.svg" class="me-1" alt="Img">$452 /hr</h6>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <span class="average-rating">5.0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="hired-developers aos" data-aos="fade-up">
+                                <div class="hired-developers-img">
+                                    <a href="developer-details.html"><img src="assets/img/developer/developer-16.jpg" class="img-fluid" alt="Img"></a>
+                                </div>
+                                <div class="hired-developers-img-content d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <a data-toggle="modal" href="#rating" class="favourite color-active"><i class="feather-heart"></i></a>
+                                        <h4><a href="developer-details.html">Andrew Jene</a></h4>
+                                        <span>Html Developer</span>
+                                        <h6><img src="assets/img/icon/dollar-developper.svg" class="me-1" alt="Img">$63 /hr</h6>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <span class="average-rating">5.0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -614,7 +684,7 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-12 mx-auto">
                             <div class="section-header text-center aos" data-aos="fade-up">
-                                <h2 class="header-title">Top Company</h2>
+                                <h2 class="header-title">Top Review</h2>
                                 <p>People love to come again for Kofejob </p>
                             </div>
                         </div>
@@ -622,40 +692,128 @@
                     <div class="offset-xl-1 col-xl-10">
                         <div class="slid-review-group">
                             <div class="slider say-about slider-for aos " data-aos="fade-up">
-                                <c:forEach items="${listcompany}" var="lits">
-                                    <div>
-                                        <div class="testimonial-all d-flex justify-content-center">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="img-reviews">
-                                                        <div class="review-quote">
-                                                            <img src="assets/img/quote-01.svg" alt="Img">
-                                                        </div>
-                                                        <img style="width: 150px;
-                                                             height: 150px;
-                                                             border-radius: 50%" src="${lits.logo}" alt="Img">
+                                <div>
+                                    <div class="testimonial-all d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="img-reviews">
+                                                    <div class="review-quote">
+                                                        <img src="assets/img/quote-02.svg" alt="Img">
                                                     </div>
+                                                    <img src="assets/img/user/avatar-4.jpg" alt="Img">
                                                 </div>
-                                                <div class="col-md-9">
-                                                    <div class="testimonial-two-head ">
-                                                        <h3>${lits.companyName}</h3>
-                                                        <span>Team Number: ${lits.teamNumber}</span>
-                                                        <p> ${lits.describe} </p>
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="testimonial-two-head ">
+                                                    <h3>George Wells</h3>
+                                                    <span>Product Designer</span>
+                                                    <p>Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing </p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </c:forEach>                               
+                                </div>
+                                <div>
+                                    <div class="testimonial-all d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="img-reviews">
+                                                    <div class="review-quote">
+                                                        <img src="assets/img/quote-02.svg" alt="Img">
+                                                    </div>
+                                                    <img src="assets/img/user/avatar-2.jpg" alt="Img">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="testimonial-two-head ">
+                                                    <h3>Timothy Smith</h3>
+                                                    <span>Product Designer</span>
+                                                    <p>Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae.Lorem ipsum dolor sit amet consectetur. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="testimonial-all d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="img-reviews">
+                                                    <div class="review-quote">
+                                                        <img src="assets/img/quote-02.svg" alt="Img">
+                                                    </div>
+                                                    <img src="assets/img/user/avatar-3.jpg" alt="Img">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="testimonial-two-head ">
+                                                    <h3>Janet Paden</h3>
+                                                    <span>Product Designer</span>
+                                                    <p>Faucibus varius condimentum adipiscingLorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="testimonial-all d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="img-reviews">
+                                                    <div class="review-quote">
+                                                        <img src="assets/img/quote-01.svg" alt="Img">
+                                                    </div>
+                                                    <img src="assets/img/user/avatar-4.jpg" alt="Img">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="testimonial-two-head ">
+                                                    <h3>James Douglas</h3>
+                                                    <span>Product Designer</span>
+                                                    <p>Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae.Lorem ipsum dolor sit amet consectetur. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="testimonial-all d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="img-reviews">
+                                                    <div class="review-quote">
+                                                        <img src="assets/img/quote-01.svg" alt="Img">
+                                                    </div>
+                                                    <img src="assets/img/user/avatar-5.jpg" alt="Img">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="testimonial-two-head ">
+                                                    <h3>Timothy Smith</h3>
+                                                    <span>Product Designer</span>
+                                                    <p>Faucibus varius condimentum adipiscingLorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class=" slider client-img slider-nav aos " data-aos="fade-up">
-                                <c:forEach items="${listcompany}" var="lits">
-                                    <div class="testimonial-thumb">
-                                        <img style="width: 50px;
-                                             height: 50px;
-                                             border-radius: 50%" src="${lits.logo}" alt="Img">
-                                    </div>
-                                </c:forEach>
+                                <div class="testimonial-thumb">
+                                    <img src="assets/img/user/avatar-4.jpg" alt="Img">
+                                </div>
+                                <div class="testimonial-thumb">
+                                    <img src="assets/img/user/avatar-2.jpg" alt="Img">
+                                </div>
+                                <div class="testimonial-thumb">
+                                    <img src="assets/img/user/avatar-3.jpg" alt="Img">
+                                </div>
+                                <div class="testimonial-thumb">
+                                    <img src="assets/img/user/avatar-4.jpg" alt="Img">
+                                </div>
+                                <div class="testimonial-thumb">
+                                    <img src="assets/img/user/avatar-5.jpg" alt="Img">
+                                </div>
                             </div>
                         </div>
                     </div>
