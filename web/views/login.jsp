@@ -52,28 +52,29 @@
                                         <label class="focus-label">Username <span class="label-star"> *</span></label>
                                         <input required name="user" type="text" class="form-control floating" value="${username}" >
                                     </div>
-
-
                                     <div class="input-block">
                                         <label class="focus-label">Password <span class="label-star"> *</span></label>
                                         <div class="position-relative">
                                             <input required name="pass" type="password" class="form-control floating pass-input" value="${password}">
-                                            <div class="password-icon">
-                                                <span style="cursor: pointer;" class="fas toggle-password fa-eye-slash"></span>
+                                            <div class="password-icon ">
+                                                <span class="fas toggle-password fa-eye-slash"></span>
                                             </div>
                                         </div>
-                                    </div>       
-
-                                    <c:if test = "${username != null }" >
-                                        <p style="text-align: center;" class="text-danger">${loginFaild}</p>
-                                    </c:if>
+                                    </div>  
+                                            <c:if test = "${username != null }" >
+                                            <p style="text-align: center;" class="text-danger">${loginFaild}</p>
+                                            </c:if>
+                                            <c:if test = "${mess != null }" >
+                                            <p style="text-align: center;" class="text-danger">${mess}</p>
+                                            </c:if>
+                                            
                                     <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Login Now<i class="feather-arrow-right ms-2"></i></button>
                                     <div class="login-or">
                                         <p><span>OR</span></p>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-8 dont-have d-flex  align-items-center">New to Kofejob <a href="Register" class="ms-2">Signup?</a></div>
+                                        <div class="col-sm-8 dont-have d-flex  align-items-center">New to Kofejob <a href="register.html" class="ms-2">Signup?</a></div>
                                         <div class="col-sm-4 text-sm-end">
                                             <a class="forgot-link" href="lostpassword">Lost Password?</a>
                                         </div>
@@ -190,7 +191,7 @@
 
         </div>
 
-        <script src="assets/js/checkpass.js" type="text/javascript"></script>                                   
+
         <script src="assets/js/jquery-3.7.1.min.js" type="4bfb9e18a84f35f1be6270cc-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="4bfb9e18a84f35f1be6270cc-text/javascript"></script>
@@ -198,7 +199,7 @@
         <script src="assets/js/slick.js" type="4bfb9e18a84f35f1be6270cc-text/javascript"></script>
 
         <script src="assets/js/script.js" type="4bfb9e18a84f35f1be6270cc-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="4bfb9e18a84f35f1be6270cc-|49" defer></script></body>
+        <script src="../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="4bfb9e18a84f35f1be6270cc-|49" defer></script></body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:08 GMT -->
 </html>
