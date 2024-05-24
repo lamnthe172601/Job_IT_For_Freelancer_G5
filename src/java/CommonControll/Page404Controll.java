@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class BlankPageControll extends HttpServlet {
+public class Page404Controll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +33,10 @@ public class BlankPageControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlankPageControll</title>");  
+            out.println("<title>Servlet Page404Controll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlankPageControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet Page404Controll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +53,7 @@ public class BlankPageControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       request.getRequestDispatcher("views/404Page.jsp").forward(request, response);
     } 
 
     /** 

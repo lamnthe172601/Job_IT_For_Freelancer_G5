@@ -33,12 +33,28 @@
         <servlet-class>CommonControll.AllCategoriesControll</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BlankPageControll</servlet-name>
-        <servlet-class>CommonControll.BlankPageControll</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>FreelancerDetailsControll</servlet-name>
         <servlet-class>CommonControll.FreelancerDetailsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogListControll</servlet-name>
+        <servlet-class>CommonControll.BlogListControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDetailsControll</servlet-name>
+        <servlet-class>CommonControll.BlogDetailsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterControll</servlet-name>
+        <servlet-class>AccountControll.RegisterControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Page404Controll</servlet-name>
+        <servlet-class>CommonControll.Page404Controll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>blogGridControll</servlet-name>
+        <servlet-class>CommonControll.blogGridControll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -73,11 +89,27 @@
         <url-pattern>/AllCategories</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BlankPageControll</servlet-name>
-        <url-pattern>/BlankPage</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>FreelancerDetailsControll</servlet-name>
         <url-pattern>/FreelancerDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogListControll</servlet-name>
+        <url-pattern>/blogList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetailsControll</servlet-name>
+        <url-pattern>/BlogDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterControll</servlet-name>
+        <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Page404Controll</servlet-name>
+        <url-pattern>/Page404</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>blogGridControll</servlet-name>
+        <url-pattern>/blogGrid</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -4,6 +4,7 @@
  */
 package dal;
 
+import Models.Blogs;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,14 +20,13 @@ import Models.Recruiter;
 import Models.SkillSet;
 import Models.Skills;
 
-
 /**
  *
  * @author Admin
  */
 public class PostDAO extends DBContext {
 
-       public List<Post> TopPost() {
+    public List<Post> TopPost() {
         List<Post> list = new ArrayList<>();
         String query = "  SELECT TOP(3) * FROM Post p \n"
                 + "                 join JobType j on p.job_type_ID =  j.jobID\n"
@@ -116,7 +116,25 @@ public class PostDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                list.add(new Company(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getString(5),rs.getString(6), rs.getString(7), rs.getString(8)));
+                list.add(new Company(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Blogs> TopBlogs() {
+        List<Blogs> list = new ArrayList<>();
+        String query = "   SELECT TOP(3) blogID, title, image, date_blog, description, tag\n"
+                + "FROM Blogs\n"
+                + "ORDER BY date_blog DESC;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                list.add(new Blogs(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getString(6)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -126,8 +144,8 @@ public class PostDAO extends DBContext {
 
     public static void main(String[] args) {
         PostDAO p = new PostDAO();
-        List<Post> c = p.TopPost();
-        for (Post post : c) {
+        List<Blogs> c = p.TopBlogs();
+        for (Blogs post : c) {
             System.out.println(post.toString());
         }
     }

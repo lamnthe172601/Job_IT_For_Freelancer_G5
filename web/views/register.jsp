@@ -98,7 +98,7 @@
                                                 <div class="position-relative">
                                                     <input type="password" class="form-control floating pass-input">
                                                     <div class="password-icon ">
-                                                        <span class="fas toggle-password fa-eye-slash"></span>
+                                                        <span style="cursor: pointer;" class="fas toggle-password fa-eye-slash"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,7 +107,7 @@
                                                 <div class="position-relative">
                                                     <input type="password" class="form-control floating pass-inputs">
                                                     <div class="password-icons">
-                                                        <span class="fas toggle-passwords fa-eye-slash"></span>
+                                                        <span style="cursor: pointer;" class="fas toggle-passwords fa-eye-slash"></span>
                                                     </div>
                                                 </div>
                                             </div>
