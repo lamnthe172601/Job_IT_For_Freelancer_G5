@@ -1,7 +1,7 @@
 <%-- 
-    Document   : home
+    Document   : index-5
     Created on : May 16, 2024, 9:48:18 PM
-    Author     : Khuongld
+    Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
-                                <a href="home" class="menu-logo">
+                                <a href="index.html" class="menu-logo">
                                     <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                 </a>
                                 <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -72,7 +72,7 @@
                             </div>
                             <ul class="main-nav">
                                 <li class="active has-submenu">
-                                    <a href="home">Home <i class="fas "></i></a>
+                                    <a href="index-5.html">Home <i class="fas "></i></a>
 
                                 </li>
 
@@ -80,8 +80,11 @@
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="about">About us</a></li>                                        
-                                        <li><a href="Page404">404 Page</a></li>                                      
+                                        <li><a href="about.html">About us</a></li>
+                                        <li><a href="blank-page.html">Starter Page</a></li>
+                                        <li><a href="404-page.html">404 Page</a></li>
+                                        <li><a href="login">Login</a></li>
+                                        <li><a href="register.html">Register</a></li>
                                         <li><a href="onboard-screen.html">Onboard Screen</a></li>
                                         <li><a href="forgot-password.html">Forgot Password</a></li>
                                         <li><a href="change-passwords.html">Change Password</a></li>
@@ -90,9 +93,9 @@
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">Blog <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="blogList">Blog List</a></li>
-                                        <li><a href="blogGrid">Blog Grid</a></li>
-                                        <li><a href="BlogDetails">Blog Details</a></li>
+                                        <li><a href="blog-list.html">Blog List</a></li>
+                                        <li><a href="blog-grid.html">Blog Grid</a></li>
+                                        <li><a href="blog-details.html">Blog Details</a></li>
                                     </ul>
                                 </li>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
@@ -158,17 +161,21 @@
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
-
                             
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                            <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                            <li><a href="postProject" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                            <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
-                             </c:if>
+                            <li class="searchbar">
+                                <a href="javascript:void(0);" class="reg-btn"><i class="feather-search"></i></a>
+                                <div class="togglesearch">
+                                    <form action="https://kofejob.dreamstechnologies.com/html/template/project.html">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                            <button type="submit" class="btn">Search</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+
+
+                            <li><a href="post-project.html" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
                         </ul>
                     </nav>
                 </div>
@@ -825,22 +832,48 @@
                         </div>
                     </div>
                     <div class="row aos aos-init aos-animate" data-aos="fade-up">
-                        <c:forEach items="${listblogs}" var="listblogs">
                         <div class="col-lg-4 col-md-6">
                             <div class="grid-blog blog-two aos aos-init aos-animate" data-aos="fade-up">
                                 <div class="blog-image">
-                                    <a href="BlogDetails"><img style="width: 348px; height: 218px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
+                                    <a href="blog-details.html"><img class="img-fluid" src="assets/img/blog/blog-12.jpg" alt="Post Image"></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="feature-time-blk">
-                                        <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
-                                        <span><i class="feather-calendar me-1"></i> ${listblogs.date_blog}</span>
+                                        <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>Jobs</span>
+                                        <span><i class="feather-calendar me-1"></i> 06 Oct, 2023</span>
                                     </div>
-                                    <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
+                                    <h3 class="blog-title mt-0"><a href="blog-details.html">Top 10 Resume Tips for Landing Your Dream Job</a></h3>
                                 </div>
                             </div>
                         </div>
-                        </c:forEach>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="grid-blog blog-two aos aos-init aos-animate" data-aos="fade-up">
+                                <div class="blog-image">
+                                    <a href="blog-details.html"><img class="img-fluid" src="assets/img/blog/blog-13.jpg" alt="Post Image"></a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="feature-time-blk">
+                                        <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>Jobs</span>
+                                        <span><i class="feather-calendar me-1"></i> 06 Oct, 2023</span>
+                                    </div>
+                                    <h3 class="blog-title mt-0"><a href="blog-details.html">Navigating the Gig Economy: Freelancing and Side Hustles</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="grid-blog blog-two aos aos-init aos-animate" data-aos="fade-up">
+                                <div class="blog-image">
+                                    <a href="blog-details.html"><img class="img-fluid" src="assets/img/blog/blog-14.jpg" alt="Post Image"></a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="feature-time-blk">
+                                        <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>Jobs</span>
+                                        <span><i class="feather-calendar me-1"></i> 06 Oct, 2023</span>
+                                    </div>
+                                    <h3 class="blog-title mt-0"><a href="blog-details.html">Interview Success: How to Ace Common Interview Questions</a></h3>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -857,7 +890,7 @@
                                 <div class="job-content-blk aos aos-init aos-animate" data-aos="fade-up">
                                     <h2>Find Your Next Great Job Opportunity!</h2>
                                     <p>Quisque pretium dolor turpis, quis blandit turpis semper ut. Nam malesuada eros nec luctus laoreet.</p>
-                                    <a href="Register" class="btn all-btn">Join Now</a>
+                                    <a href="register.html" class="btn all-btn">Join Now</a>
                                 </div>
                             </div>
                         </div>

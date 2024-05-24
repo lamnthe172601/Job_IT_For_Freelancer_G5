@@ -4,7 +4,6 @@
  */
 package CommonControllers;
 
-import Models.Blogs;
 import dal.DAO;
 import dal.PostDAO;
 import jakarta.servlet.ServletException;
@@ -16,9 +15,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import Models.Categories;
 import Models.Post;
-import Models.Skills;
-import dal.CategoriesDAO;
-import org.eclipse.jdt.internal.compiler.ast.Block;
 
 /**
  *
@@ -72,15 +68,6 @@ public class HomeContronller extends HttpServlet {
         
         List<Post> listpost = pDAO.TopPost();
         request.setAttribute("listpost", listpost);
-        
-        List<Skills> listSkill = pDAO.TopSkill();
-        request.setAttribute("listSkill", listSkill);
-        
-        List<Company> listcompany = pDAO.TopCompany();
-        request.setAttribute("listcompany", listcompany);
-        
-        List<Blogs> listBlogs = pDAO.TopBlogs();
-        request.setAttribute("listblogs", listBlogs);
         request.getRequestDispatcher("views/home.jsp").forward(request, response);
     }
 

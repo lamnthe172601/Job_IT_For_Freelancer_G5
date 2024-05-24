@@ -71,8 +71,7 @@ public class LoginController extends HttpServlet {
         DAO accDao = new DAO();
         User c = accDao.getLogin(username, password);
 
-        try{
-               if (c == null) {
+        if (c == null) {
             request.setAttribute("loginFaild", "Username or Password Wrong");
             request.getRequestDispatcher("views/login.jsp").forward(request, response);
         } else {
@@ -89,9 +88,6 @@ public class LoginController extends HttpServlet {
 
                 response.sendRedirect("changePassword");
             }
-        }
-        } catch(Exception e){
-            
         }
     }
 
