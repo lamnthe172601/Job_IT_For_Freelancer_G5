@@ -33,7 +33,7 @@
 
             <header class="header">
                 <div class="container">                                                                   
-                    <a href="index.html" class="navbar-brand logo">
+                    <a href="home" class="navbar-brand logo">
                         <img style="margin: 20px;" src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                     </a>                                                               
                 </div>

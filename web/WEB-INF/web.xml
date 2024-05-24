@@ -2,15 +2,15 @@
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
         <servlet-name>HomeContronller</servlet-name>
-        <servlet-class>CommonControllers.HomeContronller</servlet-class>
+        <servlet-class>AccountControll.HomeContronller</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
-        <servlet-class>CommonControllers.LoginController</servlet-class>
+        <servlet-class>AccountControll.LoginController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutController</servlet-name>
-        <servlet-class>CommonControllers.LogoutController</servlet-class>
+        <servlet-class>AccountControll.LogoutController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DashboardAdmin</servlet-name>
@@ -18,11 +18,43 @@
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
-        <servlet-class>CommonControllers.ChangePasswordController</servlet-class>
+        <servlet-class>AccountControll.ChangePasswordControll</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LossPasswordController</servlet-name>
-        <servlet-class>CommonControllers.LossPasswordController</servlet-class>
+        <servlet-class>AccountControll.LossPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AboutControll</servlet-name>
+        <servlet-class>CommonControll.AboutControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllCategoriesControll</servlet-name>
+        <servlet-class>CommonControll.AllCategoriesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FreelancerDetailsControll</servlet-name>
+        <servlet-class>CommonControll.FreelancerDetailsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogListControll</servlet-name>
+        <servlet-class>CommonControll.BlogListControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDetailsControll</servlet-name>
+        <servlet-class>CommonControll.BlogDetailsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterControll</servlet-name>
+        <servlet-class>AccountControll.RegisterControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Page404Controll</servlet-name>
+        <servlet-class>CommonControll.Page404Controll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>blogGridControll</servlet-name>
+        <servlet-class>CommonControll.blogGridControll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -47,5 +79,37 @@
     <servlet-mapping>
         <servlet-name>LossPasswordController</servlet-name>
         <url-pattern>/lostpassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AboutControll</servlet-name>
+        <url-pattern>/About</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllCategoriesControll</servlet-name>
+        <url-pattern>/AllCategories</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FreelancerDetailsControll</servlet-name>
+        <url-pattern>/FreelancerDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogListControll</servlet-name>
+        <url-pattern>/blogList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetailsControll</servlet-name>
+        <url-pattern>/BlogDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterControll</servlet-name>
+        <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Page404Controll</servlet-name>
+        <url-pattern>/Page404</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>blogGridControll</servlet-name>
+        <url-pattern>/blogGrid</url-pattern>
     </servlet-mapping>
 </web-app>
