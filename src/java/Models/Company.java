@@ -13,13 +13,14 @@ import java.util.Date;
 public class Company {
     int companyID, teamNumber;
     Date establishedOn;
-    String companyName, website,describe, location;
+    String logo ,companyName, website,describe, location;
 
     public Company() {
     }
 
-    public Company(int companyID, String companyName, int teamNumber, Date establishedOn, String website, String describe, String location) {
+    public Company(int companyID, String companyName, int teamNumber, Date establishedOn,String logo, String website, String describe, String location) {
         this.companyID = companyID;
+        this.logo = logo;
         this.teamNumber = teamNumber;
         this.establishedOn = establishedOn;
         this.companyName = companyName;
@@ -27,6 +28,16 @@ public class Company {
         this.describe = describe;
         this.location = location;
     }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+    
+    
 
     public int getCompanyID() {
         return companyID;

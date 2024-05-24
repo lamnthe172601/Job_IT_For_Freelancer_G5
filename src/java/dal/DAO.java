@@ -45,36 +45,7 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public List<Categories> getAllCategory() {
-        List<Categories> list = new ArrayList<>();
-        String query = "select * from Categories";
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Categories(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3)));
-            }
-        } catch (SQLException e) {
-        }
-        return list;
-    }
 
-    public Categories getCategoryByID(int categoryId) {
-        String query = "select * from Categories where caID=?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, categoryId);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Categories c = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("image"));
-                return c;
-            }
-        } catch (SQLException e) {
-        }
-        return null;
-    }
     
     public User getUserByEmail(String email) {
         String query = """
@@ -143,6 +114,8 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
+    
+    
     
     
 

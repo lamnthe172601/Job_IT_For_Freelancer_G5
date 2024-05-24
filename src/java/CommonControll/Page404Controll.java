@@ -3,24 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package CommonControllers;
+package CommonControll;
 
-
-import Models.User;
-import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author tanng
+ * @author Admin
  */
-public class ChangePasswordController extends HttpServlet {
+public class Page404Controll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +33,10 @@ public class ChangePasswordController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangePasswordController</title>");  
+            out.println("<title>Servlet Page404Controll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangePasswordController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet Page404Controll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +53,7 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("views/changePassword.jsp").forward(request, response);
+       request.getRequestDispatcher("views/404Page.jsp").forward(request, response);
     } 
 
     /** 
@@ -70,33 +66,7 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        DAO dao = new DAO();
-        HttpSession session = request.getSession();
-        try {
-            String newPass = request.getParameter("newPass");
-            String confirmPass = request.getParameter("confirmPass");
-            if (newPass.isEmpty() != true && confirmPass.isEmpty() != true) {
-                if (newPass.equals(confirmPass)) {
-                    User u = (User)session.getAttribute("account");
-                    String email=u.getEmail();
-                    dao.UpdatePassword(newPass, 1, email);
-                    session.removeAttribute("email");
-                    request.setAttribute("mess", "Change Password Success");
-                    request.getRequestDispatcher("login").forward(request, response);
-                } else {
-                    request.setAttribute("mess", "New Password and Confirm Password are different");  
-                    request.getRequestDispatcher("views/changePassword.jsp").forward(request, response);
-                }
-            } else {
-                request.setAttribute("mess", "You must input all information!");   
-                request.getRequestDispatcher("views/changePassword.jsp").forward(request, response);
-            }
-            
-
-        } catch (Exception e) {
-            request.setAttribute("mess", "Change Password Faile!");
-            request.getRequestDispatcher("views/changePassword.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /** 
