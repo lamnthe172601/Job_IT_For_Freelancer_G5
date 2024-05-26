@@ -142,7 +142,7 @@
                                 </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 1}">
                                     <li>
-                                        <a href="/admin/index.html" target="_blank">Admin</a>
+                                        <a href="dashboardAdmin" target="_blank">Admin</a>
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.account == null}">

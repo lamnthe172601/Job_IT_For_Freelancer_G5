@@ -28,13 +28,14 @@ public class PostDAO extends DBContext {
 
     public List<Post> TopPost() {
         List<Post> list = new ArrayList<>();
-        String query = "  SELECT TOP(3) * FROM Post p \n"
-                + "                 join JobType j on p.job_type_ID =  j.jobID\n"
-                + "                 join Duration du on p.durationID =  du.durationID\n"
-                + "                 join Recruiter re on p.recruiterID =  re.recruiterID\n"
-                + "                 join Categories ca on p.caID = ca.caID\n"
-                + "				 join Company co on re.companyID = co.companyID\n"
-                + "                 ORDER BY quantity;";
+        String query = """
+                         SELECT TOP(3) * FROM Post p 
+                                        join JobType j on p.job_type_ID =  j.jobID
+                                        join Duration du on p.durationID =  du.durationID
+                                        join Recruiter re on p.recruiterID =  re.recruiterID
+                                        join Categories ca on p.caID = ca.caID
+                       \t\t\t\t join Company co on re.companyID = co.companyID
+                                        ORDER BY quantity;""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
 

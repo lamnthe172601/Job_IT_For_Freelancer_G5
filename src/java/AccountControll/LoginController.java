@@ -77,10 +77,12 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("views/login.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession();
-            session.setAttribute("account", c);
             session.setMaxInactiveInterval(1000);
+            session.setAttribute("account", c);
+            
             if (c.isLevelPass() == true) {
                 if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
+                    session.setAttribute("adminProfile",accDao.getAdminProfileByUserID(c.getUserID()));
                     response.sendRedirect("dashboardAdmin");
                 } else {
                     response.sendRedirect("home");

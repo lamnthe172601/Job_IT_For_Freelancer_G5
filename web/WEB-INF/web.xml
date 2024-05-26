@@ -56,6 +56,18 @@
         <servlet-name>blogGridControll</servlet-name>
         <servlet-class>CommonControll.blogGridControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileAdmin</servlet-name>
+        <servlet-class>AdminControlles.ProfileAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageFreelancer</servlet-name>
+        <servlet-class>AdminControlles.ManageFreelancerAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageRecruiterAdmin</servlet-name>
+        <servlet-class>AdminControlles.ManageRecruiterAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -111,5 +123,17 @@
     <servlet-mapping>
         <servlet-name>blogGridControll</servlet-name>
         <url-pattern>/blogGrid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileAdmin</servlet-name>
+        <url-pattern>/profileAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageFreelancer</servlet-name>
+        <url-pattern>/manageFreelancerAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageRecruiterAdmin</servlet-name>
+        <url-pattern>/manageRecruiterAdmin</url-pattern>
     </servlet-mapping>
 </web-app>

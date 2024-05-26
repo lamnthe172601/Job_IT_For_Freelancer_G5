@@ -8,10 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import Models.Categories;
 import Models.Role;
 import Models.User;
+import Models.Admin;
 
 /**
  *
@@ -45,8 +44,6 @@ public class DAO extends DBContext {
         return null;
     }
 
-
-    
     public User getUserByEmail(String email) {
         String query = """
                        select u.userID, u.username, u.password, u.email, u.status, r.roleID, r.role_name, u.LevelPass
@@ -72,8 +69,7 @@ public class DAO extends DBContext {
         }
         return null;
     }
-    
-    
+
     public ArrayList<User> getAllUser() {
         ArrayList<User> listUser = new ArrayList<>();
         String query = """
@@ -99,8 +95,8 @@ public class DAO extends DBContext {
         }
         return listUser;
     }
-    
-    public void UpdatePassword(String password,int LevelPass,String email) {
+
+    public void UpdatePassword(String password, int LevelPass, String email) {
         String sql = """
                      UPDATE [User] SET password=?, LevelPass=? WHERE email=?;
                      """;
@@ -114,14 +110,28 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
-    
-    
-    
-    
+
+    public Admin getAdminProfileByUserID(int userid) {
+
+        String sql = """
+                     select * from [Admin] where [userID] = ?
+                     """;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, userid);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {               
+                return new Admin(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        dao.UpdatePassword("12345678",1, "tannguyennhat916@gmail.com");
-            
+        System.out.println(dao.getAdminProfileByUserID(1).getImage());
+
     }
 }
