@@ -11,15 +11,17 @@ import java.util.Date;
  * @author Admin
  */
 public class Company {
-    int companyID, teamNumber;
+
+    int companyID;
+    TeamNumber teamNumber;
     Date establishedOn;
-    String logo ,companyName, website,describe, location;
-    
+    String logo, companyName, website, describe, location;
+    Recruiter recruiID;
 
     public Company() {
     }
 
-    public Company(int companyID,String companyName, int teamNumber, Date establishedOn, String logo, String website, String describe, String location) {
+    public Company(int companyID, String companyName, TeamNumber teamNumber, Date establishedOn, String logo, String website, String describe, String location, Recruiter recruiID) {
         this.companyID = companyID;
         this.teamNumber = teamNumber;
         this.establishedOn = establishedOn;
@@ -28,6 +30,15 @@ public class Company {
         this.website = website;
         this.describe = describe;
         this.location = location;
+        this.recruiID = recruiID;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public int getCompanyID() {
@@ -38,11 +49,11 @@ public class Company {
         this.companyID = companyID;
     }
 
-    public int getTeamNumber() {
+    public TeamNumber getTeamNumber() {
         return teamNumber;
     }
 
-    public void setTeamNumber(int teamNumber) {
+    public void setTeamNumber(TeamNumber teamNumber) {
         this.teamNumber = teamNumber;
     }
 
@@ -95,11 +106,12 @@ public class Company {
         this.location = location;
     }
 
-   
+    public Recruiter getRecruiID() {
+        return recruiID;
+    }
 
-    
-    
-    
-    
-    
+    public void setRecruiID(Recruiter recruiID) {
+        this.recruiID = recruiID;
+    }
+
 }

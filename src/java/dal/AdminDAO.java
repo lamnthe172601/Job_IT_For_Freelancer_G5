@@ -14,20 +14,24 @@ import java.sql.SQLException;
  *
  * @author kudol
  */
-public class AdminDAO extends DBContext{
-   public int getNumberUsers(){
-        String query = " SELECT COUNT(DISTINCT username) AS total_user FROM [user]";
+public class AdminDAO extends DBContext {
+
+    public int getNumberUsers() {
+        String query = """
+                        SELECT COUNT(userID) AS total_users
+                       FROM [User];""";
         try {
-            PreparedStatement ps = connection.prepareStatement(query);           
+            PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {               
-                return rs.getInt("total_user");
+            while (rs.next()) {
+                return rs.getInt("total_users");
             }
         } catch (SQLException e) {
-        }       
-       return -1;       
-   }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         System.out.println(new AdminDAO().getNumberUsers());
     }

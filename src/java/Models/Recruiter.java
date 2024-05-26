@@ -16,12 +16,12 @@ public class Recruiter {
     boolean gender;
     Date dob;
     String image, email, phone;
-    Company companyID;
-
+    int UserID;
+    
     public Recruiter() {
     }
 
-    public Recruiter(int recruiterID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone, Company companyID) {
+    public Recruiter(int recruiterID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone, int UserID) {
         this.recruiterID = recruiterID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,8 +29,9 @@ public class Recruiter {
         this.dob = dob;
         this.image = image;
         this.email = email;
-        this.phone = phone;       
-        this.companyID = companyID;
+        this.phone = phone;
+        this.UserID = UserID;
+                
     }
 
     public int getRecruiterID() {
@@ -97,15 +98,17 @@ public class Recruiter {
         this.phone = phone;
     }
 
+    public int getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(int UserID) {
+        this.UserID = UserID;
+    }
+
     
 
-    public Company getCompanyID() {
-        return companyID;
-    }
-
-    public void setCompanyID(Company companyID) {
-        this.companyID = companyID;
-    }
+   
     
     
 }
