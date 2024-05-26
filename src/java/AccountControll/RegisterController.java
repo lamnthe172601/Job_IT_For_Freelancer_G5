@@ -12,13 +12,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
  *
- * @author Admin
+ * @author tanng
  */
-public class RegisterControll extends HttpServlet {
+public class RegisterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +38,10 @@ public class RegisterControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterControll</title>");
+            out.println("<title>Servlet RegisterController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterControll at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,29 +74,28 @@ public class RegisterControll extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
         try {
-            String username = request.getParameter("username");
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            String repassword = request.getParameter("repassword");
-            ArrayList<User> user =dao.getAllUser();
-            for (User user1 : user) {
-                if (user1.getUsername().equals(username)) {
-                    
-                    //request.setAttribute("mess", "This Username have been exit!");
-                    request.getRequestDispatcher("views/register.jsp").forward(request, response);
-                }
-                if (user1.getEmail().equals(email)) {
-                    //request.setAttribute("mess", "This Email have been exit!");
-                    request.getRequestDispatcher("views/register.jsp").forward(request, response);
-                }
+            if (dao.checkUserExsit(username)) {
+                request.setAttribute("mess1", "This Username have been exit!");
+                request.getRequestDispatcher("views/register.jsp").forward(request, response);
+            }
+            if (dao.checkEmailExsit(email)) {
+                request.setAttribute("mess2", "This Email have been exit!");
+                request.getRequestDispatcher("views/register.jsp").forward(request, response);
             }
             dao.register(username, password, email, "active");
-            request.getRequestDispatcher("views/inputFreelancerInfo.jsp").forward(request, response);
+            User user = dao.getUserByEmail(email);
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            request.getRequestDispatcher("views/accountType.jsp").forward(request, response);
         } catch (Exception e) {
             System.out.println(e);
-            request.setAttribute("mess", "Error");
-            request.getRequestDispatcher("views/register.jsp").forward(request, response);
+            //request.setAttribute("mess", "Error");
+            //request.getRequestDispatcher("views/register.jsp").forward(request, response);
+            response.sendRedirect("views/login.jsp");
         }
 
     }

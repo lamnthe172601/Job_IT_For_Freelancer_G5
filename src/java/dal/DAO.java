@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Models.Categories;
 import Models.Role;
+import Models.SkillSet;
 import Models.User;
 
 /**
@@ -45,8 +46,6 @@ public class DAO extends DBContext {
         return null;
     }
 
-
-    
     public User getUserByEmail(String email) {
         String query = """
                        select u.userID, u.username, u.password, u.email, u.status, r.roleID, r.role_name, u.LevelPass
@@ -72,8 +71,7 @@ public class DAO extends DBContext {
         }
         return null;
     }
-    
-    
+
     public ArrayList<User> getAllUser() {
         ArrayList<User> listUser = new ArrayList<>();
         String query = """
@@ -99,8 +97,8 @@ public class DAO extends DBContext {
         }
         return listUser;
     }
-    
-    public void UpdatePassword(String password,int LevelPass,String email) {
+
+    public void UpdatePassword(String password, int LevelPass, String email) {
         String sql = """
                      UPDATE [User] SET password=?, LevelPass=? WHERE email=?;
                      """;
@@ -110,11 +108,11 @@ public class DAO extends DBContext {
             statement.setInt(2, LevelPass);
             statement.setString(3, email);
             statement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    
+
     public void register(String username, String password, String email, String status) {
         String sql = "insert into [User]\n"
                 + "values(?,?,?,?,5,1)";
@@ -130,17 +128,164 @@ public class DAO extends DBContext {
         }
 
     }
+
+    public boolean checkUserExsit(String username) {
+        ArrayList<User> user = getAllUser();
+        for (User user1 : user) {
+            if (user1.getUsername().equalsIgnoreCase(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkEmailExsit(String email) {
+        ArrayList<User> user = getAllUser();
+        for (User user1 : user) {
+            if (user1.getEmail().equalsIgnoreCase(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<SkillSet> listSkill() {
+        ArrayList<SkillSet> listSkill = new ArrayList<>();
+        String query = """
+                       select * from Skill_Set;
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listSkill.add(new SkillSet(rs.getInt(1),
+                        rs.getString(2)));
+            }
+        } catch (SQLException e) {
+        }
+        return listSkill;
+    }
+
+    public void inputFreelancerInfo(String firstname, String lastname, String img,
+            String gender, String dob, String decscibe, String email, String phone, int userID) {
+        String sql = """
+                     insert into [Freelancer]
+                     values(?,?,?,?,?,?,?,?,?)""";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, firstname);
+            statement.setString(2, lastname);
+            statement.setString(3, img);
+            statement.setString(4, gender);
+            statement.setString(5, dob);
+            statement.setString(6, decscibe);
+            statement.setString(7, email);
+            statement.setString(8, phone);
+            statement.setInt(9, userID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public void UpdateRole(int userID, int roleID) {
+        String sql = """
+                     UPDATE [User] SET roleID=? WHERE userID=?;
+                     """;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, roleID);
+            statement.setInt(2, userID);
+            
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public int getFreelancerIDbyUserID(int userID) {
+        int freelancerID = 0;
+        String query = """
+                       select freelanceID from Freelancer where userID=?;
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, userID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                freelancerID = rs.getInt("freelanceID");
+            }
+  
+
+        } catch (SQLException e) {
+        }
+        return freelancerID;
+    }
     
+
+    public void inputFreelancerSkill(String SkillID, int freelancerID) {
+        String sql = """
+                     insert into [Skills]
+                     values(?,?)""";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, SkillID);
+            statement.setInt(2, freelancerID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public void inputFreelancerEducation(String uniname, String start, String end, int id, String deegreID) {
+        String sql = """
+                     insert into [Education]
+                     values(?,?,?,?,?)""";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, uniname);
+            statement.setString(2, start);
+            statement.setString(3, end);
+            statement.setInt(4, id);
+            statement.setString(5, deegreID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+
     
-    
-    
+    public void inputFreelancerExperiance(String experiance, String project, String position ,String start, String end,int freeID) {
+        String sql = """
+                     insert into [Experience]
+                     values(?,?,?,?,?,?)""";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, experiance);
+            statement.setString(2, position);
+            statement.setString(3, start);
+            statement.setString(4, end);
+            statement.setString(5, project);
+            statement.setInt(6, freeID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        ArrayList<User> user=dao.getAllUser();
-        for (User user1 : user) {
-            System.out.println(user1.toString());
+        ArrayList<SkillSet> listSkill = dao.listSkill();
+        for (SkillSet skillSet : listSkill) {
+            System.out.println(skillSet.toString());
         }
-            
+        System.out.println(dao.getFreelancerIDbyUserID(10));
+        
+        //dao.inputFreelancerExperiance("chem gio", "chem bao", "nguoi chem", "12/12/2003", "12/12/2004", 35);
+        dao.inputFreelancerEducation("FPT", "12/12/2004", "12/12/2010", 35, "3");
     }
 }

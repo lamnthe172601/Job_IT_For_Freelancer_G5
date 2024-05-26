@@ -5,7 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,12 +79,12 @@
                                             <div class="input-block ">
                                                 <label class="focus-label">User Name <span class="label-star"> *</span></label>
                                                 <input type="text" class="form-control floating" id="username" name="username">
-                                                <div style="color: red" id="errorUsername"></div>
+                                                <div style="color: red" id="errorUsername">${mess1}</div>
                                             </div>
                                             <div class="input-block ">
                                                 <label class="focus-label">Email Address<span class="label-star"> *</span></label>
                                                 <input type="email" class="form-control floating" id="email" name="email">
-                                                <div style="color: red" id="errorEmail"></div>
+                                                <div style="color: red" id="errorEmail">${mess2}</div>
                                             </div>
                                             <div class="input-block ">
                                                 <label class="focus-label">Password <span class="label-star"> *</span></label>
@@ -106,65 +107,11 @@
                                                     <div style="color: red" id="errorRepass"></div>
                                                 </div>
                                             </div>
-                                            <div style="color: red" >${mess}</div>
+                                            
                                             <div class="dont-have">
                                                 <label class="custom_check">
                                                     <input type="checkbox" name="rem_password">
 
-                                                </label>
-                                            </div>
-                                            <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" >Sign In Now<i class="feather-arrow-right ms-2"></i></button>
-                                            <div class="login-or">
-                                                <p><span>Or</span></p>
-                                            </div>
-                                            <div class="row social-login">
-                                                <div class="col-sm-4">
-                                                    <a href="javascript:void(0);" class="btn btn-block"><img src="assets/img/icon/google-icon.svg" alt="Google">Google</a>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <a href="javascript:void(0);" class="btn btn-block"><img src="assets/img/icon/fb-icon.svg" alt="Fb">Facebook</a>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <a href="javascript:void(0);" class="btn btn-block"><img src="assets/img/icon/ios-icon.svg" alt="Apple">Apple</a>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-8 dont-have d-flex  align-items-center">Already have account <a href="login.html" class="ms-2">Sign in?</a></div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div role="tabpanel" id="company" class="tab-pane fade">
-                                        <form action="https://fackbook.com" ">
-                                            <div class="input-block ">
-                                                <label class="focus-label">User Name <span class="label-star"> *</span></label>
-                                                <input type="email" class="form-control floating">
-                                            </div>
-                                            <div class="input-block ">
-                                                <label class="focus-label">Email Address<span class="label-star"> *</span></label>
-                                                <input type="email" class="form-control floating">
-                                            </div>
-                                            <div class="input-block ">
-                                                <label class="focus-label">Password <span class="label-star"> *</span></label>
-                                                <div class="position-relative">
-                                                    <input type="password" class="form-control floating pass-input">
-                                                    <div class="password-icon ">
-                                                        <span class="fas toggle-password fa-eye-slash"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="input-block  mb-0">
-                                                <label class="focus-label">Confirm Password <span class="label-star"> *</span></label>
-                                                <div class="position-relative">
-                                                    <input type="password" class="form-control floating pass-inputs">
-                                                    <div class="password-icons">
-                                                        <span class="fas toggle-passwords fa-eye-slash"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="dont-have">
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="rem_password">
-                                                    <span class="checkmark"></span> I have read and agree to all <a href="privacy-policy.html">Terms &amp; Conditions</a>
                                                 </label>
                                             </div>
                                             <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Sign In Now<i class="feather-arrow-right ms-2"></i></button>
@@ -297,10 +244,7 @@
             </footer>
 
         </div>
-        
-        <script src="assets/js/checkfrom.js"></scrip>
-
-
+                                             
         <script src="assets/js/jquery-3.7.1.min.js" type="60ab19134118e3e714333e43-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="60ab19134118e3e714333e43-text/javascript"></script>
@@ -308,7 +252,11 @@
         <script src="assets/js/slick.js" type="60ab19134118e3e714333e43-text/javascript"></script>
 
         <script src="assets/js/script.js" type="60ab19134118e3e714333e43-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="60ab19134118e3e714333e43-|49" defer></script></body>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="60ab19134118e3e714333e43-|49" defer></script>
+        <script src="assets/js/checkfrom.js"></script>
+            
+    </body>
+        
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:08 GMT -->
 </html>

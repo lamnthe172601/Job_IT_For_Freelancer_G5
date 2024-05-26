@@ -45,16 +45,24 @@
         <servlet-class>CommonControll.BlogDetailsControll</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegisterControll</servlet-name>
-        <servlet-class>AccountControll.RegisterControll</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Page404Controll</servlet-name>
         <servlet-class>CommonControll.Page404Controll</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>blogGridControll</servlet-name>
         <servlet-class>CommonControll.blogGridControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>AccountControll.RegisterController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InputFreelancerProfileController</servlet-name>
+        <servlet-class>AccountControll.InputFreelancerProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InputRecruiterProfileController</servlet-name>
+        <servlet-class>AccountControll.InputRecruiterProfileController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -101,15 +109,23 @@
         <url-pattern>/BlogDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegisterControll</servlet-name>
-        <url-pattern>/Register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Page404Controll</servlet-name>
         <url-pattern>/Page404</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>blogGridControll</servlet-name>
         <url-pattern>/blogGrid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterController</servlet-name>
+        <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InputFreelancerProfileController</servlet-name>
+        <url-pattern>/InputFreelancerProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InputRecruiterProfileController</servlet-name>
+        <url-pattern>/InputRecruiterProfile</url-pattern>
     </servlet-mapping>
 </web-app>
