@@ -19,22 +19,24 @@ import Models.Post;
 import Models.Recruiter;
 import Models.SkillSet;
 import Models.Skills;
+import Models.TeamNumber;
 
 /**
  *
  * @author Admin
  */
-public class PostDAO extends DBContext {
+public class HomeDAO extends DBContext {
 
     public List<Post> TopPost() {
         List<Post> list = new ArrayList<>();
-        String query = "  SELECT TOP(3) * FROM Post p \n"
-                + "                 join JobType j on p.job_type_ID =  j.jobID\n"
-                + "                 join Duration du on p.durationID =  du.durationID\n"
-                + "                 join Recruiter re on p.recruiterID =  re.recruiterID\n"
-                + "                 join Categories ca on p.caID = ca.caID\n"
-                + "				 join Company co on re.companyID = co.companyID\n"
-                + "                 ORDER BY quantity;";
+        String query = "    SELECT  top(3)* FROM Post p\n"
+                + "    join JobType j on p.job_type_ID =  j.jobID\n"
+                + "    join Duration du on p.durationID =  du.durationID\n"
+                + "                              join Recruiter re on p.recruiterID =  re.recruiterID\n"
+                + "                                join Categories ca on p.caID = ca.caID\n"
+                + "                               join Company co on re.recruiterID = co.recruiterID\n"
+                + "                                join Team_Number temp on temp.team_numberID= co.team_numberID\n"
+                + "                                ORDER BY date_post DESC;";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
 
@@ -42,8 +44,9 @@ public class PostDAO extends DBContext {
             while (rs.next()) {
                 Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
-                Company com = new Company(rs.getInt("companyID"), rs.getString("company_name"), rs.getInt("team_number"), rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"));
-                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email"), rs.getString("phone"), com);
+                TeamNumber tem = new TeamNumber(rs.getInt("team_numberID"), rs.getString("team_number"));
+                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"));
+                Company com = new Company(rs.getInt("companyID"), rs.getString("company_name"), tem, rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"), re);
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
                 list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca));
             }
@@ -89,7 +92,7 @@ public class PostDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Freelancer fre = new Freelancer(rs.getInt("freelanceID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("image"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("describe"), rs.getString("email"), rs.getString("phone"));
+                Freelancer fre = new Freelancer(rs.getInt("freelanceID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("image"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("describe"), rs.getString("email__contact"), rs.getString("phone_contact"));
                 SkillSet ss = new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name"));
                 list.add(new Skills(rs.getInt("skill_set_ID"), ss, fre));
             }
@@ -101,22 +104,19 @@ public class PostDAO extends DBContext {
 
     public List<Company> TopCompany() {
         List<Company> list = new ArrayList<>();
-        String query = "   SELECT TOP (5) [companyID]\n"
-                + "      ,[company_name]\n"
-                + "      ,[team_number]\n"
-                + "      ,[established_on]\n"
-                + "      ,[logo]\n"
-                + "      ,[website]\n"
-                + "      ,[describe]\n"
-                + "      ,[location]\n"
-                + "  FROM [freelancer].[dbo].[Company]\n"
-                + " order by team_number DESC";
+        String query = """
+                           SELECT TOP (5) *  FROM [freelancer].[dbo].[Company] com
+                                                 join recruiter re on com.recruiterID = re.recruiterID 
+                          					   join Team_Number te on te.team_numberID = com.team_numberID
+                          					   """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                list.add(new Company(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+                TeamNumber tem = new TeamNumber(rs.getInt("team_numberID"), rs.getString("team_number"));
+                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"));
+                list.add(new Company(rs.getInt("companyID"), rs.getString("company_name"), tem, rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"), re));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +132,7 @@ public class PostDAO extends DBContext {
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 list.add(new Blogs(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getString(6)));
             }
@@ -142,11 +142,59 @@ public class PostDAO extends DBContext {
         return list;
     }
 
+    public int getNumberUsers() {
+        String query = """
+                        SELECT COUNT(userID) AS total_users
+                       FROM [User] where roleID = 3;""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("total_users");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
+
+    public int getNumberPost() {
+        String query = """
+                        SELECT COUNT(postID) AS total_posts
+                       FROM [Post];""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("total_posts");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
+
+    public int getNumberCompany() {
+        String query = """
+                        SELECT COUNT(companyID) AS total_company
+                       FROM [Company];""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("total_company");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
-        PostDAO p = new PostDAO();
-        List<Blogs> c = p.TopBlogs();
-        for (Blogs post : c) {
-            System.out.println(post.toString());
+        HomeDAO p = new HomeDAO();
+        List<Company> ps = p.TopCompany();
+        for (Company p1 : ps) {
+            System.out.println(p1.toString());
         }
     }
 }

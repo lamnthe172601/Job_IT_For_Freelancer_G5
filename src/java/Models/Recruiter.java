@@ -16,12 +16,11 @@ public class Recruiter {
     boolean gender;
     Date dob;
     String image, email, phone;
-    Company companyID;
 
     public Recruiter() {
     }
 
-    public Recruiter(int recruiterID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone, Company companyID) {
+    public Recruiter(int recruiterID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone) {
         this.recruiterID = recruiterID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,7 +29,6 @@ public class Recruiter {
         this.image = image;
         this.email = email;
         this.phone = phone;       
-        this.companyID = companyID;
     }
 
     public int getRecruiterID() {
@@ -99,13 +97,7 @@ public class Recruiter {
 
     
 
-    public Company getCompanyID() {
-        return companyID;
-    }
-
-    public void setCompanyID(Company companyID) {
-        this.companyID = companyID;
-    }
+   
     
     
 }
