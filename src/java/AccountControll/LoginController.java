@@ -88,12 +88,24 @@ public class LoginController extends HttpServlet {
                     response.sendRedirect("home");
                 }
             } else {
-
-                response.sendRedirect("changePassword");
+                HttpSession session = request.getSession();
+                session.setAttribute("account", c);
+                session.setMaxInactiveInterval(1000);
+                if (c.isLevelPass() == true && c.getStatus().equals("active")) {
+                    if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
+                        response.sendRedirect("dashboardAdmin");
+                    } else {
+                        response.sendRedirect("home");
+                    }
+                } else if (c.isLevelPass() == true && c.getStatus().equals("banned")) {
+                    request.setAttribute("loginFaild", "Your account has been banned");
+                    request.getRequestDispatcher("views/login.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("changePassword");
+                }
             }
-        }
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
 

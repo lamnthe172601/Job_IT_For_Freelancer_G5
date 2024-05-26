@@ -5,7 +5,8 @@
 package AccountControll;
 
 import Models.Blogs;
-import dal.PostDAO;
+import dal.DAO;
+import dal.HomeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +18,9 @@ import Models.Categories;
 import Models.Company;
 import Models.Post;
 import Models.Skills;
+import dal.AdminDAO;
 import dal.CategoriesDAO;
+
 
 /**
  *
@@ -65,7 +68,8 @@ public class HomeContronller extends HttpServlet {
             throws ServletException, IOException {
         
         CategoriesDAO cDao = new CategoriesDAO();
-        PostDAO pDAO = new PostDAO();
+        HomeDAO pDAO = new HomeDAO();
+       
         List<Categories> list2 = cDao.getAllCategory();
         request.setAttribute("listCC", list2);
         
@@ -78,6 +82,10 @@ public class HomeContronller extends HttpServlet {
         List<Company> listcompany = pDAO.TopCompany();
         request.setAttribute("listcompany", listcompany);
         
+        
+        request.setAttribute("NumberUsers", pDAO.getNumberUsers());
+        request.setAttribute("NumberPost", pDAO.getNumberPost());
+        request.setAttribute("NumberCompany", pDAO.getNumberCompany());
         List<Blogs> listBlogs = pDAO.TopBlogs();
         request.setAttribute("listblogs", listBlogs);
         request.getRequestDispatcher("views/home.jsp").forward(request, response);
