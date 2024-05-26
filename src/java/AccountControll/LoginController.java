@@ -4,6 +4,8 @@
  */
 package AccountControll;
 
+import Models.Company;
+import Models.Recruiter;
 import dal.DAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +15,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import Models.User;
+import dal.CompanyDAO;
+import dal.RecruiterDAO;
 
 /**
  *
@@ -71,38 +75,44 @@ public class LoginController extends HttpServlet {
         DAO accDao = new DAO();
         User c = accDao.getLogin(username, password);
 
-        try{
-               if (c == null) {
-            request.setAttribute("loginFaild", "Username or Password Wrong");
-            request.getRequestDispatcher("views/login.jsp").forward(request, response);
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("account", c);
-            session.setMaxInactiveInterval(1000);
-            if (c.isLevelPass() == true) {
-                if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
-                    response.sendRedirect("dashboardAdmin");
-                } else {
-                    response.sendRedirect("home");
-                }
+        try {
+            if (c == null) {
+                request.setAttribute("loginFaild", "Username or Password Wrong");
+                request.getRequestDispatcher("views/login.jsp").forward(request, response);
             } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("account", c);
+                session.setMaxInactiveInterval(1000);
 
-                response.sendRedirect("changePassword");
+                // Lấy thông tin recruiter
+                RecruiterDAO recruiterDAO = new RecruiterDAO();
+                Recruiter recruiter = recruiterDAO.getRecruiterProfile(c.getUserID());
+
+                if (recruiter != null) {
+                    // Lấy thông tin công ty và lưu vào session
+                    CompanyDAO companyDAO = new CompanyDAO();
+                    Company company = companyDAO.getCompanyByCompanyID(recruiter.getCompany().getCompanyID());
+                    session.setAttribute("company", company);
+                    session.setAttribute("recruiter", recruiter); // Đảm bảo recruiter cũng được lưu vào session
+                }
+
+                if (c.isLevelPass() == true) {
+                    if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
+                        response.sendRedirect("dashboardAdmin");
+                    } else {
+                        response.sendRedirect("home");
+                    }
+                } else {
+                    response.sendRedirect("changePassword");
+                }
             }
-        }
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

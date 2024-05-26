@@ -43,7 +43,7 @@ public class PostDAO extends DBContext {
                 Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Company com = new Company(rs.getInt("companyID"), rs.getString("company_name"), rs.getInt("team_number"), rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"));
-                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email"), rs.getString("phone"), com);
+                Recruiter re = new Recruiter(rs.getInt("recruiterID"),rs.getInt("userID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email"), rs.getString("phone"), com);
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
                 list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca));
             }
@@ -132,7 +132,7 @@ public class PostDAO extends DBContext {
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 list.add(new Blogs(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getString(6)));
             }

@@ -147,6 +147,7 @@ public class Post {
     public String toString() {
         return "Post{" + "postID=" + postID + ", quantity=" + quantity + ", budget=" + budget + ", title=" + title + ", description=" + description + ", location=" + location + ", skill=" + skill + ", image=" + image + ", datePost=" + datePost + ", jobTypeID=" + jobTypeID + ", durationID=" + durationID + ", recruiterID=" + recruiterID + ", caID=" + caID + '}';
     }
-    
+
+ 
     
 }

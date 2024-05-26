@@ -16,7 +16,7 @@ public class Recruiter {
     boolean gender;
     Date dob;
     String image, email, phone;
-    Company companyID;
+    Company company;
 
     public Recruiter() {
     }
@@ -31,7 +31,7 @@ public class Recruiter {
         this.image = image;
         this.email = email;
         this.phone = phone;
-        this.companyID = companyID;
+        this.company = companyID;
     }
 
    
@@ -42,6 +42,14 @@ public class Recruiter {
 
     public void setRecruiterID(int recruiterID) {
         this.recruiterID = recruiterID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getFirstName() {
@@ -102,26 +110,20 @@ public class Recruiter {
 
     @Override
     public String toString() {
-        return "Recruiter{" + "recruiterID=" + recruiterID + ", userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dob=" + dob + ", image=" + image + ", email=" + email + ", phone=" + phone + ", companyID=" + companyID + '}';
+        return "Recruiter{" + "recruiterID=" + recruiterID + ", userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dob=" + dob + ", image=" + image + ", email=" + email + ", phone=" + phone + ", companyID=" + company + '}';
     }
 
     
 
-    public Company getCompanyID() {
-        return companyID;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyID(Company companyID) {
-        this.companyID = companyID;
+    public void setCompany(Company companyID) {
+        this.company = companyID;
     }
 
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
+   
     
     
 }

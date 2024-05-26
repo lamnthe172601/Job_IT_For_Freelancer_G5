@@ -29,15 +29,17 @@ public class RecruiterDAO extends DBContext {
             ps.setInt(1, uid);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 String fname = rs.getString(1);
                 String lname = rs.getString(2);
                 int reid = rs.getInt(3);
+                
                 boolean gd = rs.getBoolean(4);
                 Date dob = rs.getDate(5);
                 String ig = rs.getString(6);
                 String phone = rs.getString(7);
                 String em = rs.getString(8);
+                
                 
                 Company companyID = comDAO.getCompanyByCompanyID(rs.getInt(9));
                 int userid = rs.getInt(10);
@@ -49,7 +51,38 @@ public class RecruiterDAO extends DBContext {
         return null;
     }
     
+ public Recruiter getRecruiterProfileByCompanyID(int cid) {
+        CompanyDAO comDAO= new CompanyDAO();
+        String query = "select userID, first_name,last_name,recruiterID,gender,dob,[image],phone,email,companyID\n" +
+"                from Recruiter \n" +
+"                where companyID = 1";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, cid);
+            ResultSet rs = ps.executeQuery();
 
+            while (rs.next()) {
+                String fname = rs.getString(1);
+                String lname = rs.getString(2);
+                int reid = rs.getInt(3);
+                
+                boolean gd = rs.getBoolean(4);
+                Date dob = rs.getDate(5);
+                String ig = rs.getString(6);
+                String phone = rs.getString(7);
+                String em = rs.getString(8);
+                
+                
+                Company companyID = comDAO.getCompanyByCompanyID(rs.getInt(9));
+                int userid = rs.getInt(10);
+               return new Recruiter(reid, userid, fname, lname, gd, dob, ig, em, phone, companyID);
+                       
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+    
     
     
     

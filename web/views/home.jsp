@@ -180,12 +180,7 @@
                                     <form class="form" name="store" id="store" method="post" action="https://kofejob.dreamstechnologies.com/html/template/project.html">
                                         <div class="form-inner">
                                             <div class="input-group">
-                                                <span class="drop-detail">
-                                                    <select class="form-control select" name="storeID">
-                                                        <option value="project.html">Projects</option>
-                                                        <option value="developer.html">Freelancers</option>
-                                                    </select>
-                                                </span>
+                                                
                                                 <input type="email" class="form-control" placeholder="Keywords">
                                                 <button class="btn btn-primary sub-btn" type="submit">Search</button>
                                             </div>
