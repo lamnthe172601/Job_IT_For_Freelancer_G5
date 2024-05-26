@@ -71,78 +71,104 @@
 
                                 </li>
 
-
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
+                                    <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu"> 
+                                        
+                                            <li><a href="jobFavourites">Jobs Favourites</a></li>
+                                                                                                                                                           
+                                        <li><a href="jobsApply">Jobs Apply</a></li>
+                                        <li><a href="jobforyou">Jobs For you</a></li>
+                                    </ul>
+                                </li>
+                               
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="about">About us</a></li>                                        
-                                        <li><a href="Page404">404 Page</a></li>                                      
-                                        <li><a href="onboard-screen.html">Onboard Screen</a></li>
+                                                                                                                                                                                                  
+                                        <li><a href="jobsList">Jobs List</a></li>
+                                        <li><a href="newsJobs">News Jobs</a></li>
+                                        <li><a href="findJobs">Find Jobs</a></li>  
+                                        <li><a href="company">Company</a></li>
+                                    </ul>
+                                </li>
+                                 </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                 <li class="has-submenu">
+                                    <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                                                                                                                                                                                  
+                                        <li><a href="jobsList">Top Freelancer</a></li>
+                                        <li><a href="newsJobs">Skills</a></li>
+                                        
                                     </ul>
                                 </li>
                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">Blog <i class="fas fa-chevron-down"></i></a>
+                                    <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
+                                                                                                                                                                                                  
+                                        <li><a href="jobsList">List Post</a></li>
+                                        <li><a href="newsJobs">Reviews</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                </c:if>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        
                                         <li><a href="blogList">Blog List</a></li>
                                         <li><a href="blogGrid">Blog Grid</a></li>
-                                        <li><a href="BlogDetails">Blog Details</a></li>
+                                        <li><a href="AboutUs">About us</a></li>
+                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                    
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
-                                            <li class="has-submenu">
-                                                <a href="javascript:void(0);">Projects</a>
-                                                <ul class="submenu">
-                                                    <li><a href="project.html">Projects</a></li>
-                                                    <li><a href="project-details.html">Project Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="freelancer-dashboard">Dashboard</a></li>
-                                            <li><a href="developer-profile">My Profile</a></li>
-                                            <li><a href="developer-details.html">Freelancer Details</a></li>
-                                            <li><a href="freelancer-project-proposals.html">Projects</a></li>
-                                            <li><a href="freelancer-favourites.html">Favourites</a></li>
-                                            <li><a href="freelancer-membership.html">Membership</a></li>
-                                            <li><a href="freelancer-change-password.html">Change Password</a></li>                                         
-                                            <li><a href="freelancer-review.html">Review</a></li>
-                                            <li><a href="freelancer-withdraw-money.html">Payments</a></li>
-                                            <li><a href="freelancer-profile-settings.html">Settings</a></li>
+                                           
+                                            <li><a href="dashboard">Dashboard</a></li>
+                                            <li><a href="MyProfile">My Profile</a></li>
+                                            <li><a href="Project">Projects</a></li>                        
+                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
                                     <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Recruiter <i class="fas fa-chevron-down"></i></a>
+                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
-                                            <li class="has-submenu">
-                                                <a href="javascript:void(0);">Freelancer</a>
-                                                <ul class="submenu">
-                                                    <li><a href="developer.html">Freelancer</a></li>
-                                                    <li><a href="developer-details.html">Freelancer Details</a></li>
-                                                </ul>
-                                            </li>
+                                            
                                             <li><a href="dashboard.html">Dashboard</a></li>
                                             <li><a href="company-profile.html">My Profile</a></li>
                                             <li><a href="company-details.html">Company Details</a></li>
                                             <li><a href="manage-projects.html">Projects</a></li>
                                             <li><a href="favourites.html">Favourites</a></li>
-                                            <li><a href="membership-plans.html">Membership</a></li>
-                                            <li><a href="milestones.html">Milestones</a></li>
-                                            <li><a href="chats.html">Chats</a></li>
-                                            <li><a href="review.html">Review</a></li>
-                                            <li><a href="deposit-funds.html">Payments</a></li>
-                                            <li><a href="verify-identity.html">Verify Identity</a></li>
+                                                                                       
                                             <li><a href="profile-settings.html">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
                                 </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1}">
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
                                     <li>
                                         <a href="/admin/index.html" target="_blank">Admin</a>
+                                        <ul class="submenu">
+                                            
+                                            <li><a href="dashboard.html">Dashboard</a></li>
+                                            <li><a href="company-profile.html">My Profile</a></li>
+                                            <li><a href="company-details.html">Company Details</a></li>
+                                            <li><a href="manage-projects.html">Projects</a></li>
+                                            <li><a href="favourites.html">Favourites</a></li>
+                                                                                       
+                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.account == null}">
@@ -323,7 +349,7 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-12 mx-auto text-center">
                             <div class="section-header aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Popular Projects near you</h2>
+                                <h2 class="header-title">Top New Jobs Projects</h2>
                                 <p>Bid and stary the new Jobs</p>
                             </div>
                         </div>
@@ -338,7 +364,7 @@
                                     <div class="feature-content">
                                         <h4><a href="project.jsp">${list.title}</a></h4>
                                         <ul class="feature-project-list nav">
-                                            <li><i class="feather-user me-1"></i>${list.caID.categoriesName}</li>
+                                            <li><i class="feather-user me-1"></i>${list.quantity}</li>
                                             <li>$ ${list.budget}</li>
                                         </ul>
                                     </div>
@@ -349,7 +375,7 @@
 
                         <div class="col-md-12">
                             <div class="home-five-section-btn">
-                                <a href="project.jsp" class="btn btn-primary">View More Projects</a>
+                                <a href="project.jsp" class="btn btn-primary">View More Jobs Projects</a>
                             </div>
                         </div>
                     </div>
@@ -412,8 +438,19 @@
                                     <h2>Join World’s Best Marketplace for developers</h2>
                                     <p>Why hire people when you can simply integrate our talented cloud workforce instead?</p>
                                     <div class="market-place-btn bidding-btn">
-                                        <a href="project.jsp" class="btn btn-primary market-project me-2">Post a Project</a>
-                                        <a href="project.jsp" class="btn btn-primary project-post">Start Bidding</a>
+                                        <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                        <a href="postProject" class="btn btn-primary market-project me-2">Post a Project</a>
+                                        </c:if>
+                                       <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
+                                        <a href="login" class="btn btn-primary market-project me-2">Post a Project</a>
+                                        </c:if>
+                                        
+                                        <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
+                                        <a href="Register" class="btn btn-primary project-post">Start Bidding</a>
+                                        </c:if>
+                                        <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                        <a href="SearchJobs" class="btn btn-primary project-post">Searchs Jobs</a>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -549,7 +586,7 @@
                                     <img src="assets/img/icon/count-icon-01.svg" class="img-fluid" alt="Img">
                                 </div>
                                 <div class="feature-content course-count">
-                                    <h3 class="counter-up">9,207</h3>
+                                    <h3 class="counter-up">${NumberUsers}</h3>
                                     <p>Freelance developers</p>
                                 </div>
                             </div>
@@ -562,8 +599,8 @@
                                     <img src="assets/img/icon/count-icon-02.svg" class="img-fluid" alt="Img">
                                 </div>
                                 <div class="feature-content course-count">
-                                    <h3><span class="counter-up">6000</span></h3>
-                                    <p>Projects Added</p>
+                                    <h3><span class="counter-up">${NumberPost}</span></h3>
+                                    <p>Projects Post</p>
                                 </div>
                             </div>
                         </div>
@@ -588,7 +625,7 @@
                                     <img src="assets/img/icon/count-icon-04.svg" class="img-fluid" alt="Img">
                                 </div>
                                 <div class="feature-content course-count">
-                                    <h3 class="counter-up">998</h3>
+                                    <h3 class="counter-up">${NumberCompany}</h3>
                                     <p>Companies Registered</p>
                                 </div>
                             </div>
@@ -628,7 +665,7 @@
                                                 <div class="col-md-9">
                                                     <div class="testimonial-two-head ">
                                                         <h3>${lits.companyName}</h3>
-                                                        <span>Team Number: ${lits.teamNumber}</span>
+                                                        <span>Team Number: ${lits.teamNumber.name}</span>
                                                         <p> ${lits.describe} </p>
                                                     </div>
                                                 </div>
