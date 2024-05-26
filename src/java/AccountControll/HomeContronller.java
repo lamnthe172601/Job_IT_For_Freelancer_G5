@@ -5,7 +5,7 @@
 package AccountControll;
 
 import Models.Blogs;
-import dal.DAO;
+
 import dal.HomeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -18,7 +18,6 @@ import Models.Categories;
 import Models.Company;
 import Models.Post;
 import Models.Skills;
-import dal.AdminDAO;
 import dal.CategoriesDAO;
 
 

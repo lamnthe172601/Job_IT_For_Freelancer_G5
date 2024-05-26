@@ -28,7 +28,7 @@ public class FreelancerInformationDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                User u = new User(rs.getInt("userID"),rs.getString("username"),rs.getString("password"),rs.getString("email"), rs.getString("status"),new Role(rs.getInt("roleID"), rs.getString("role_name")),rs.getBoolean("LevelPass"));
-               Freelancer f = new Freelancer(rs.getInt("freelanceID"), rs.getString("first_name"),rs.getString("last_name"),rs.getString("image"),rs.getBoolean("gender"),rs.getDate("dob"),rs.getString("describe"),rs.getString("emailcontact"),rs.getString("phonecontact"));
+               Freelancer f = new Freelancer(rs.getInt("freelanceID"), rs.getString("first_name"),rs.getString("last_name"),rs.getString("image"),rs.getBoolean("gender"),rs.getDate("dob"),rs.getString("describe"),rs.getString("email__contact"),rs.getString("phone_contact"));
                list.add(new FreelancerInformation(u, f) );
             }
             return list;
