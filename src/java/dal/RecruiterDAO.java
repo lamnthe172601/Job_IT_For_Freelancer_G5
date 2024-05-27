@@ -20,10 +20,10 @@ import java.util.Date;
 public class RecruiterDAO extends DBContext {
 
     public Recruiter getRecruiterProfile(int uid) {
-        CompanyDAO comDAO= new CompanyDAO();
-        String query = "select first_name,last_name,recruiterID,gender,dob,[image],phone,email,companyID,userID\n"
-                + "from Recruiter \n"
-                + "where userID = ?";
+        
+        String query = "select first_name,last_name,recruiterID,gender,dob,[image],phone_contact,email_contact,userID \n" +
+"               from Recruiter \n" +
+"                where userID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, uid);
@@ -33,60 +33,24 @@ public class RecruiterDAO extends DBContext {
                 String fname = rs.getString(1);
                 String lname = rs.getString(2);
                 int reid = rs.getInt(3);
-                
-                boolean gd = rs.getBoolean(4);
-                Date dob = rs.getDate(5);
-                String ig = rs.getString(6);
-                String phone = rs.getString(7);
-                String em = rs.getString(8);
-                
-                
-                Company companyID = comDAO.getCompanyByCompanyID(rs.getInt(9));
-                int userid = rs.getInt(10);
-               return new Recruiter(reid, userid, fname, lname, gd, dob, ig, em, phone, companyID);
-                       
-            }
-        } catch (SQLException e) {
-        }
-        return null;
-    }
-    
- public Recruiter getRecruiterProfileByCompanyID(int cid) {
-        CompanyDAO comDAO= new CompanyDAO();
-        String query = "select userID, first_name,last_name,recruiterID,gender,dob,[image],phone,email,companyID\n" +
-"                from Recruiter \n" +
-"                where companyID = 1";
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, cid);
-            ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                String fname = rs.getString(1);
-                String lname = rs.getString(2);
-                int reid = rs.getInt(3);
-                
                 boolean gd = rs.getBoolean(4);
                 Date dob = rs.getDate(5);
                 String ig = rs.getString(6);
                 String phone = rs.getString(7);
                 String em = rs.getString(8);
-                
-                
-                Company companyID = comDAO.getCompanyByCompanyID(rs.getInt(9));
-                int userid = rs.getInt(10);
-               return new Recruiter(reid, userid, fname, lname, gd, dob, ig, em, phone, companyID);
-                       
+
+               
+                int userid = rs.getInt(9);
+                return new Recruiter(reid, userid, fname, lname, gd, dob, ig, em, phone);
             }
         } catch (SQLException e) {
         }
         return null;
     }
+
     
-    
-    
-    
-public String convertDateTimeFormat(String inputDateTime) {
+    public String convertDateTimeFormat(String inputDateTime) {
         if (inputDateTime == null) {
             return null;
         } else {
@@ -104,4 +68,32 @@ public String convertDateTimeFormat(String inputDateTime) {
 
     }
 
+    public Recruiter getRecruiterProfileByRecruiterID(int reid) {
+        CompanyDAO comDAO = new CompanyDAO();
+        String query = "select recruiterID, first_name,last_name,gender,dob,[image],phone_contact,email_contact,userID\n"
+                + "               from Recruiter \n"
+                + "			   where recruiterID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, reid);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                
+                String fname = rs.getString(1);
+                String lname = rs.getString(2);            
+                int rid = rs.getInt(3);
+                boolean gd = rs.getBoolean(4);
+                Date dob = rs.getDate(5);
+                String ig = rs.getString(6);
+                String phone = rs.getString(7);
+                String em = rs.getString(8);
+                int userid = rs.getInt(9);
+                return new Recruiter(userid, userid, fname, lname, gd, dob, ig, em, phone);
+
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
 }

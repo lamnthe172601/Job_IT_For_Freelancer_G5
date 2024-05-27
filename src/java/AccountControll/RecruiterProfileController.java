@@ -25,10 +25,10 @@ public class RecruiterProfileController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession s = req.getSession();
-        User user = (User) s.getAttribute("account");
-        RecruiterDAO reDAO = new RecruiterDAO();
-        Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
-        req.setAttribute("recruiter",  re);
+        Company company = (Company) s.getAttribute("company");
+        CompanyDAO coDAO = new CompanyDAO();
+        Company co = coDAO.getCompanyByCompanyID(company.getCompanyID());
+        req.setAttribute("company",  co);
         req.getRequestDispatcher("views/recruiterprofile.jsp").forward(req, resp);
     }  
 }

@@ -90,8 +90,15 @@ public class LoginController extends HttpServlet {
 
                 if (recruiter != null) {
                     // Lấy thông tin công ty và lưu vào session
-                    CompanyDAO companyDAO = new CompanyDAO();
-                    Company company = companyDAO.getCompanyByCompanyID(recruiter.getCompany().getCompanyID());
+                    CompanyDAO comDao = new CompanyDAO();
+                    
+                    
+                    
+                    
+                    Company company = comDao.getCompanyByRecruiterID(recruiter.getRecruiterID());
+                    
+                    
+                    
                     session.setAttribute("company", company);
                     session.setAttribute("recruiter", recruiter); // Đảm bảo recruiter cũng được lưu vào session
                 }

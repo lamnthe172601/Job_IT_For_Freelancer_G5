@@ -14,20 +14,24 @@ public class Company {
     int companyID, teamNumber;
     Date establishedOn;
     String logo ,companyName, website,describe, location;
-
+    Recruiter recruiterID ;
+    
     public Company() {
     }
 
-    public Company(int companyID, String companyName, int teamNumber, Date establishedOn,String logo, String website, String describe, String location) {
+    public Company(int companyID, int teamNumber, Date establishedOn, String logo, String companyName, String website, String describe, String location, Recruiter recruiterID) {
         this.companyID = companyID;
-        this.logo = logo;
         this.teamNumber = teamNumber;
         this.establishedOn = establishedOn;
+        this.logo = logo;
         this.companyName = companyName;
         this.website = website;
         this.describe = describe;
         this.location = location;
+        this.recruiterID = recruiterID;
     }
+
+    
 
     public String getLogo() {
         return logo;
@@ -94,7 +98,15 @@ public class Company {
     public void setLocation(String location) {
         this.location = location;
     }
-    
+
+    public Recruiter getRecruiterID() {
+        return recruiterID;
+    }
+
+    public void setRecruiterID(Recruiter recruiterID) {
+        this.recruiterID = recruiterID;
+    }
+
     
     
     

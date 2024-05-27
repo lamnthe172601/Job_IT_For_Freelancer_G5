@@ -1,8 +1,7 @@
 package CommonControll;
 
-import Models.Post;
-import Models.User;
-import dal.PostDAO;
+import Models.*;
+import dal.HomeDAO;
 import dal.RecruiterDAO;
 import java.io.IOException;
 import java.util.List;
@@ -29,7 +28,7 @@ public class SearchController extends HttpServlet {
         HttpSession s = request.getSession();
         Post post = (Post) s.getAttribute("account");
         RecruiterDAO reDAO = new RecruiterDAO();
-        PostDAO po = new PostDAO();
+        HomeDAO po = new HomeDAO();
         List<Post> list = po.TopPost();
         request.setAttribute("listCC", po);
         request.getRequestDispatcher("views/search.jsp").forward(request, response);

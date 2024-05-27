@@ -15,13 +15,13 @@ public class Recruiter {
     String firstName, lastName;
     boolean gender;
     Date dob;
-    String image, email, phone;
-    Company company;
+    String image, email_contact, phone_contact;
+   
 
     public Recruiter() {
     }
 
-    public Recruiter(int recruiterID, int userID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone, Company companyID) {
+    public Recruiter(int recruiterID, int userID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone) {
         this.recruiterID = recruiterID;
         this.userID = userID;
         this.firstName = firstName;
@@ -29,9 +29,9 @@ public class Recruiter {
         this.gender = gender;
         this.dob = dob;
         this.image = image;
-        this.email = email;
-        this.phone = phone;
-        this.company = companyID;
+        this.email_contact = email;
+        this.phone_contact = phone;
+      
     }
 
    
@@ -93,36 +93,29 @@ public class Recruiter {
     }
 
     public String getEmail() {
-        return email;
+        return email_contact;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email_contact = email;
     }
 
     public String getPhone() {
-        return phone;
+        return phone_contact;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone_contact = phone;
     }
 
     @Override
     public String toString() {
-        return "Recruiter{" + "recruiterID=" + recruiterID + ", userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dob=" + dob + ", image=" + image + ", email=" + email + ", phone=" + phone + ", companyID=" + company + '}';
+        return "Recruiter{" + "recruiterID=" + recruiterID + ", userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dob=" + dob + ", image=" + image + ", email=" + email_contact + ", phone=" + phone_contact +  '}';
     }
 
     
 
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company companyID) {
-        this.company = companyID;
-    }
-
+  
    
     
     

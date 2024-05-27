@@ -178,7 +178,7 @@
                                     </div>
                                     <div class="company-title">
                                         <p>Company Name</p>
-                                        <h4>${requestScope.recruiter.company.companyName}</h4>
+                                        <h4>${company.companyName}</h4>
                                     </div>
                                 </div>
                                 
@@ -190,7 +190,7 @@
                                             </div>
                                             <div class="proposal-detail text-capitalize">
                                                 <span class=" d-block">Team Number</span>
-                                                <p class="mb-0">${requestScope.recruiter.company.teamNumber}</p>
+                                                <p class="mb-0">${company.teamNumber}</p>
                                             </div>
                                         </li>
                                         <li>
@@ -199,7 +199,7 @@
                                             </div>
                                             <div class="proposal-detail text-capitalize">
                                                 <span class=" d-block">Established On</span>
-                                                <p class="mb-0">${requestScope.recruiter.company.establishedOn}</p>
+                                                <p class="mb-0">${company.establishedOn}</p>
                                             </div>
                                         </li>
                                         <li>
@@ -208,7 +208,7 @@
                                             </div>
                                             <div class="proposal-detail text-capitalize">
                                                 <span class=" d-block">Website</span>
-                                                <p class="mb-0">${requestScope.recruiter.company.website}</p>
+                                                <p class="mb-0">${company.website}</p>
                                             </div>
                                         </li>
                                         
@@ -218,7 +218,7 @@
                                             </div>
                                             <div class="proposal-detail text-capitalize">
                                                 <span class=" d-block">Location</span>
-                                                <p class="mb-0">${requestScope.recruiter.company.location}</p>
+                                                <p class="mb-0">${company.location}</p>
                                             </div>
                                         </li>
                                     </ul>
@@ -226,7 +226,7 @@
                             </div>
                             <div class="company-detail-block company-description">
                                 <h4 class="company-detail-title">Describe</h4>
-                                <p>${requestScope.recruiter.company.describe}</p>
+                                <p>${company.describe}</p>
                                 
                             </div>
                             <div class="company-detail-block company-description">
