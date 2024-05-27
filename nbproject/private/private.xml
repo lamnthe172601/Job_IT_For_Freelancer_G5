@@ -9,11 +9,10 @@
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/Models/Recruiter.java</file>
         </group>
         <group>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ProfileAdmin.java</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/dashboardAdmin.jsp</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/DashboardAdmin.java</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/profileAdmin.jsp</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/DashboardDAO.java</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/HomeContronller.java</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ManageFreelancerAdmin.java</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/freelancerAdmin.jsp</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/MutiDAO/FreelancerInformationDAO.java</file>
         </group>
     </open-files>
 </project-private>

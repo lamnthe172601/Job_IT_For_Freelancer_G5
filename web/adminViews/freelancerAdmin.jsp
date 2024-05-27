@@ -208,7 +208,7 @@
                                                 <tr>
                                                     <th>No.</th>                                                
                                                     <th>Freelancer</th>                                                   
-                                                    <th>Verified</th>                                                                                                                                                       
+                                                    <th>Email</th>                                                                                                                                                       
                                                     <th>Status</th>
                                                     <th></th>
                                                 </tr>
@@ -221,35 +221,100 @@
                                                     </td>
                                                     <td>
                                                         <div class="table-avatar user-profile">
-                                                            <a href="profile.html"><img class="avatar-img rounded-circle " src="adminAssets/img/profiles/avatar-14.jpg" alt="User Image"></a>
+                                                            <a href="profile.html"><img class="avatar-img rounded-circle " src="${freelancer.getBasicInformation().getImage()}" alt="User Image"></a>
                                                             <div>
                                                                 <h5><a href="javascript:void(0);">${freelancer.getBasicInformation().fullname()}</a></h5>
                                                                 
                                                             </div>
                                                         </div>
                                                     </td>                                                   
-                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>Email</td>
+                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getAccount().getEmail()}</td>
 
                                                     <td>
                                                       
                                                         <c:if test='${freelancer.getAccount().getStatus() == "active"}'>
                                                         <a href="javascript:void(0);" class="user-active-btn">${freelancer.getAccount().getStatus()}</a>
                                                         </c:if>
-                                                         <c:if test='${freelancer.getAccount().getStatus() == "pending"}'>
-                                                             <a href="javascript:void(0);" class="pending">${freelancer.getAccount().getStatus()}</a>
-                                                        </c:if>
+                                                        
                                                          <c:if test='${freelancer.getAccount().getStatus() == "inactive"}'>
                                                         <a href="javascript:void(0);" class="user-inactive-btn">${freelancer.getAccount().getStatus()}</a>
                                                         </c:if>
                                                         </td>
                                                     <td class="text-end three-dots">
-                                                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
-                                                        <div class="dropdown-menu user-menu-list">
-                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i data-feather="edit" class="me-2"></i> Edit</a>
-                                                            <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
+                                                       <td class="text-end three-dots">
+                                                            <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
+                                                            <div class="dropdown-menu user-menu-list">
+                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
+                                                                <a class="dropdown-item" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
+                                                                <a class="dropdown-item" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i data-feather="edit" class="me-2"></i> Edit</a>
+                                                                <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
+                                                            </div>
+
+                                                        </td>
+                                                <div class="modal custom-modal fade" id="delete_category" role="dialog">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body">
+                                                                <div class="form-header">
+                                                                    <h3>Status</h3>
+                                                                    <p>Are you sure want to change status?</p>
+                                                                </div>
+                                                                <div class="modal-btn delete-action">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <a href="changStatusUserAdmin" class="btn btn-primary continue-btn">Change</a>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade custom-modal" id="add-category">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+
+                                                            <div class="modal-header flex-wrap">
+                                                                <h4 class="modal-title">Edit Provider</h4>
+                                                                <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+
+                                                            <div class="modal-body">
+                                                                <form>
+                                                                    <div class="form-group">
+                                                                        <label>Company Name</label>
+                                                                        <input type="text" class="form-control" value="Focused Holistic Hardware">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Primary Contact</label>
+                                                                        <input type="text" class="form-control" value="Emily Smith">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Website</label>
+                                                                        <input type="text" class="form-control" value="https://focusedhardware.de/">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Total Projects</label>
+                                                                        <input type="text" class="form-control" value="120">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Status</label>
+                                                                        <select class="form-control form-select">
+                                                                            <option selected>Enabled</option>
+                                                                            <option>Disable</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mt-4">
+                                                                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                     </td>
                                                 </tr>     
                                                 </c:forEach>
@@ -465,74 +530,7 @@
         </div>
 
 
-        <div class="modal fade custom-modal" id="edit-category">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header flex-wrap">
-                        <div class="text-center w-100 mb-3">
-                            <img src="adminAssets/img/logo-small.png" alt="Img">
-                        </div>
-                        <h4 class="modal-title">Edit User</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label>Full Name</label>
-                                <input type="text" class="form-control" value=" George Wells">
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" value="georgewells@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" value="*******">
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password</label>
-                                <input type="password" class="form-control" value="********">
-                            </div>
-                            <div class="form-group">
-                                <label>User Type</label>
-                                <select class="form-control form-select">
-                                    <option>Select</option>
-                                    <option selected>Frontend Developer</option>
-                                    <option>Graphic Designer</option>
-                                </select>
-                            </div>
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal custom-modal fade" id="delete_category" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="form-header">
-                            <h3>Delete</h3>
-                            <p>Are you sure want to delete?</p>
-                        </div>
-                        <div class="modal-btn delete-action">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
-                                </div>
-                                <div class="col-6">
-                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      
 
 
         <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="adminAssets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>

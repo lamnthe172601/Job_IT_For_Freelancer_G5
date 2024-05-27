@@ -272,8 +272,8 @@ p:last-child{
 	color: #fff;
 }
 .btn-enable {
-	background: #131135;
-	color: #fff;
+	background: red;
+	color:red;
 	width:122px;
 }
 .btn-disable {

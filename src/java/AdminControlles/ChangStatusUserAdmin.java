@@ -5,7 +5,6 @@
 
 package AdminControlles;
 
-import MutiDAO.RecruiterInformationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author kudol
  */
-public class ManageRecruiterAdmin extends HttpServlet {
+public class ChangStatusUserAdmin extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,10 +33,10 @@ public class ManageRecruiterAdmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageRecruiterAdmin</title>");  
+            out.println("<title>Servlet ChangStatusUserAdmin</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageRecruiterAdmin at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ChangStatusUserAdmin at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -54,12 +53,7 @@ public class ManageRecruiterAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    
-        RecruiterInformationDAO f = new RecruiterInformationDAO();
-        request.setAttribute("totalRecruiter",f.getCompany().size());
-        request.setAttribute("listRecruiter",f.getCompany());
-        
-       request.getRequestDispatcher("adminViews/recruiterAdmin.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
