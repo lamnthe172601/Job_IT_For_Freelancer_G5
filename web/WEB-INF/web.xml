@@ -53,6 +53,12 @@
         <servlet-class>CommonControll.blogGridControll</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RecruiterProfileControll</servlet-name>
+        <servlet-class>AccountControll.RecruiterProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RecruitersProfileEditControll</servlet-name>
+        <servlet-class>AccountControll.RecruiterProfileEditControll</servlet-class>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>AccountControll.RegisterController</servlet-class>
     </servlet>
@@ -133,6 +139,12 @@
         <url-pattern>/blogGrid</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>RecruiterProfileControll</servlet-name>
+        <url-pattern>/recruiterprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecruitersProfileEditControll</servlet-name>
+        <url-pattern>/recruitersetting</url-pattern>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/Register</url-pattern>
     </servlet-mapping>
