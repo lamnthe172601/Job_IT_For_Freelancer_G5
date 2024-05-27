@@ -110,7 +110,7 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
-
+    
     public void register(String username, String password, String email, String status) {
         String sql = "insert into [User]\n"
                 + "values(?,?,?,?,5,1)";
@@ -126,6 +126,18 @@ public class DAO extends DBContext {
         }
 
     }
+    
+    
+    
+    
+
+    public static void main(String[] args) {
+        DAO dao = new DAO();
+        ArrayList<User> user=dao.getAllUser();
+        for (User user1 : user) {
+            System.out.println(user1.toString());
+        }
+            
 
     public Admin getAdminProfileByUserID(int userid) {
 
@@ -136,8 +148,8 @@ public class DAO extends DBContext {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, userid);
             ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                return new Admin(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+            while (rs.next()) {               
+                return new Admin(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -145,12 +157,6 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public static void main(String[] args) {
-        DAO dao = new DAO();
-        ArrayList<User> user = dao.getAllUser();
-        for (User user1 : user) {
-            System.out.println(user1.toString());
-        }
 
     }
-}
+
