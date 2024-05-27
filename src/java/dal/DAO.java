@@ -129,9 +129,5 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public static void main(String[] args) {
-        DAO dao = new DAO();
-        System.out.println(dao.getAdminProfileByUserID(1).getImage());
-
-    }
+   
 }
