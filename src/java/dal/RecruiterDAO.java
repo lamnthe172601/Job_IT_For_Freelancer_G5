@@ -42,7 +42,7 @@ public class RecruiterDAO extends DBContext {
 
                
                 int userid = rs.getInt(9);
-                return new Recruiter(reid, userid, fname, lname, gd, dob, ig, em, phone);
+                return new Recruiter(reid, fname, lname, gd, dob, ig, em, phone,userid);
             }
         } catch (SQLException e) {
         }
@@ -89,7 +89,7 @@ public class RecruiterDAO extends DBContext {
                 String phone = rs.getString(7);
                 String em = rs.getString(8);
                 int userid = rs.getInt(9);
-                return new Recruiter(userid, userid, fname, lname, gd, dob, ig, em, phone);
+                return new Recruiter(userid, fname, lname, gd, dob, ig, em, phone,userid);
 
             }
         } catch (SQLException e) {
