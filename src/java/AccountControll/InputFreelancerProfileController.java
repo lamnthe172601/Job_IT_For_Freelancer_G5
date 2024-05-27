@@ -135,6 +135,7 @@ public class InputFreelancerProfileController extends HttpServlet {
 
 
         //insert freelancer Experin
+        request.setAttribute("mess", "Registration successful. Please log in again!");
         request.getRequestDispatcher("login").forward(request, response);
 
     }

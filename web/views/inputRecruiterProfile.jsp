@@ -40,7 +40,7 @@
         </div>
     </header>
     <div  class="on-board field-card select-account select-btn">
-        <form action="http://facebook.com" method="" onsubmit="return FormValidate();">
+        <form action="InputRecruiterProfile" method="post" onsubmit="return FormValidate();">
             <div style="margin-top: 50px;" class="text-center onboard-head">
                 <h2>Personal Info</h2>
                 <p>Tell a bit about yourself. This information will appear on your public profile, so that potential buyers can get to know you better.</p>
@@ -187,6 +187,22 @@
             </div>
         </form>
     </div>
+        
+        <style>
+            .file-upload.submit {
+    padding: 15px 30px; 
+    width: auto; 
+    background-color: red; 
+    color: white;
+    border-radius: 10px;
+    border-color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.file-upload.submit:hover {
+    background-color: orange;
+}
+        </style>
 
 
     <script src="assets/js/checkform_2.js"></script>

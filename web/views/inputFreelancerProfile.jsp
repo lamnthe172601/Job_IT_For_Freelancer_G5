@@ -234,10 +234,24 @@
                 </div>
             </div>
             <div class="text-center">
-                <button style="margin-bottom: 100px" class="file-upload image-upbtn " name="lam" value="ngu" type="">Submit</button>
+                <button style="margin-bottom: 100px" class="file-upload image-upbtn submit " name="lam" value="ngu" type="">Submit</button>
             </div>
         </form>
+        <style>
+            .file-upload.submit {
+    padding: 15px 30px; 
+    width: auto; 
+    background-color: red; 
+    color: white;
+    border-radius: 10px;
+    border-color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
 
+.file-upload.submit:hover {
+    background-color: orange;
+}
+        </style>
 
 
 

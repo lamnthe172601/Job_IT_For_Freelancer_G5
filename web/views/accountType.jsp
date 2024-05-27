@@ -45,31 +45,29 @@
                                         <div class="select-type">
                                             <div class="account-onborad onboard-head">
                                                 <h2>Select Account Type</h2>
-                                                <div class="select-box d-flex justify-content-center">
-                                                    <input checked="checked" id="freelance" type="radio" name="credit-card" value="visa">
-                                                    <label class="employee-level free-lance-img accounts_type" data-id="freelance" for="freelance">
-                                                        <a href="InputFreelancerProfile">
+                                                <form action="SelectAccountType" method="post">
+                                                    <div class="select-box d-flex justify-content-center">
+                                                        <input checked="checked" id="freelance" type="radio" name="typeaccount" value="1">
+                                                        <label class="employee-level free-lance-img accounts_type" data-id="freelance" for="freelance">
+
                                                             <!--<img src="assets/img/icon/checks.svg" alt="Img" class="checks-set">-->
                                                             <img src="assets/img/select-04.svg" alt="Img" class="img-fluid">
                                                             <span>Freelancer</span>
-                                                        </a>
-                                                    </label>
-                                                    <input id="employee" class="accounts_type" type="radio" name="credit-card" value="mastercard">
-                                                    <label class="employee-level employee-img accounts_type" data-id="employee" for="employee">
-                                                        <a href="InputRecruiterProfile">
+
+                                                        </label>
+                                                        <input id="employee" class="accounts_type" type="radio" name="typeaccount" value="2">
+                                                        <label class="employee-level employee-img accounts_type" data-id="employee" for="employee">
+
                                                             <img src="assets/img/select-05.svg" alt="Img" class="img-fluid">
                                                             <span>Recruiter</span></a></label>
-                                                </div>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <button style="margin-bottom: 100px" class="file-upload image-upbtn submit" type="submit">Next</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-
-
-                                    
-
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -78,6 +76,21 @@
             </div>
 
         </div>
+                <style>
+            .file-upload.submit {
+    padding: 15px 30px; 
+    width: auto; 
+    background-color: red; 
+    color: white;
+    border-radius: 10px;
+    border-color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.file-upload.submit:hover {
+    background-color: orange;
+}
+        </style>
 
 
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="625b9fc8f423323d8794fc95-text/javascript"></script>
@@ -93,6 +106,6 @@
 
         <script src="assets/js/script.js" type="625b9fc8f423323d8794fc95-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="625b9fc8f423323d8794fc95-|49" defer></script></body>
-        <script src="assets/js/checkfrom_1.js"></script>
+    <script src="assets/js/checkfrom_1.js"></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/onboard-screen.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:30 GMT -->
 </html>
