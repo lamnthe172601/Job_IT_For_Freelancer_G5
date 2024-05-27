@@ -5,18 +5,22 @@
 
 package AccountControll;
 
+import Models.SkillSet;
+import Models.TeamNumber;
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
- * @author Admin
+ * @author tanng
  */
-public class RegisterControll extends HttpServlet {
+public class SelectAccountTypeController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +37,10 @@ public class RegisterControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterControll</title>");  
+            out.println("<title>Servlet SelectAccountTypeController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SelectAccountTypeController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +57,7 @@ public class RegisterControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       request.getRequestDispatcher("views/register.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -66,7 +70,18 @@ public class RegisterControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String type=request.getParameter("typeaccount");
+        if(type.equals("1")){
+            DAO dao = new DAO();
+        ArrayList<SkillSet> listSkill = dao.listSkill();
+        request.setAttribute("listskill", listSkill);
+        request.getRequestDispatcher("views/inputFreelancerProfile.jsp").forward(request, response);
+        }else{
+            DAO dao = new DAO();
+        ArrayList<TeamNumber> listTeamSize=dao.listTeamNumber();
+        request.setAttribute("listTeamSize", listTeamSize);
+        request.getRequestDispatcher("views/inputRecruiterProfile.jsp").forward(request, response);
+        }
     }
 
     /** 

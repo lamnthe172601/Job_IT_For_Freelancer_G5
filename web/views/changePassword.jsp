@@ -46,19 +46,20 @@
                                 <div class="login-header text-center">
                                     <h3>Change your password</h3>
                                 </div>
-                                <form action="changePassword" method="post">
+                                <form action="changePassword" method="post" onsubmit="return FormValidate();">
                                     <div class="input-block">
                                         <label class="focus-label">New Password <span class="label-star"> *</span></label>
                                         <div class="position-relative">
-                                            <input name="newPass" type="password" class="form-control floating pass-input">
+                                            <input name="newPass" type="password" class="form-control floating pass-input" id="password">
                                         </div>
+                                        <div style="color: red" id="errorPass"></div>
                                     </div>
                                     <div class="input-block">
                                         <label class="focus-label">Confirm Password <span class="label-star"> *</span></label>
                                         <div class="position-relative">
-                                            <input name="confirmPass" type="password" class="form-control floating pass-input">
+                                            <input name="confirmPass" type="password" class="form-control floating pass-input" id="repassword">
                                         </div>
-                                        <div style="color: orange; margin-bottom: 20px">${mess}</div>
+                                        <div style="color: red" id="errorRepass">${mess}</div>
                                     </div>
                                     <button style="margin-bottom: 20px" class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Change Password</button>
                                 </form>
@@ -86,6 +87,6 @@
 
         <script src="assets/js/script.js" type="4bfb9e18a84f35f1be6270cc-text/javascript"></script>
         <script src="../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="4bfb9e18a84f35f1be6270cc-|49" defer></script></body>
-
+        <script src="assets/js/checkform_0.js"></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:08 GMT -->
 </html>

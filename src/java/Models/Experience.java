@@ -12,16 +12,18 @@ import java.util.Date;
  */
 public class Experience {
     int experienceID;
-    String experienceName;
+    String experienceName,your_project,experience_work_name;
     Date start_date, end_date;
     Freelancer freelancerID;
 
     public Experience() {
     }
 
-    public Experience(int experienceID, String experienceName, Date start_date, Date end_date, Freelancer freelancerID) {
+    public Experience(int experienceID, String experienceName, String your_project, String experience_work_name, Date start_date, Date end_date, Freelancer freelancerID) {
         this.experienceID = experienceID;
         this.experienceName = experienceName;
+        this.your_project = your_project;
+        this.experience_work_name = experience_work_name;
         this.start_date = start_date;
         this.end_date = end_date;
         this.freelancerID = freelancerID;
@@ -41,6 +43,22 @@ public class Experience {
 
     public void setExperienceName(String experienceName) {
         this.experienceName = experienceName;
+    }
+
+    public String getYour_project() {
+        return your_project;
+    }
+
+    public void setYour_project(String your_project) {
+        this.your_project = your_project;
+    }
+
+    public String getExperience_work_name() {
+        return experience_work_name;
+    }
+
+    public void setExperience_work_name(String experience_work_name) {
+        this.experience_work_name = experience_work_name;
     }
 
     public Date getStart_date() {
@@ -66,6 +84,8 @@ public class Experience {
     public void setFreelancerID(Freelancer freelancerID) {
         this.freelancerID = freelancerID;
     }
+
+    
     
     
 }
