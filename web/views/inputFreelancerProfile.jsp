@@ -32,8 +32,15 @@
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body>
+        <header class="header" 
+                <div class="container">                                                                   
+                    <a href="home" class="navbar-brand logo">
+                        <img style="margin: 20px;" src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                    </a>                                                               
+                </div>
+            </header>
         <form action="InputFreelancerProfile" method="post" onsubmit="return FormValidate();">
-            <div class="on-board field-card select-account select-btn">
+            <div style="margin-top: 50px;" class="on-board field-card select-account select-btn">
                 <div class="text-center onboard-head">
                     <h2>Personal Info</h2>
                     <p>Tell a bit about yourself. This information will appear on your public profile, so that potential buyers can get to know you better.</p>

@@ -27,7 +27,7 @@ function FormValidate() {
         eCompanyname.innerHTML = 'Please Input Company Name';
     } else {
         eCompanyname.innerHTML = '';
-        checkemail = true;
+        checkcompanyname = true;
     }
     
 
@@ -37,7 +37,7 @@ function FormValidate() {
     } else if (!reGexPhone.test(phone)) {
         ePhone.innerHTML = 'Phone number is worng format!';
     } else {
-        checkcompanyname = true;
+        checkphone = true;
         ePhone.innerHTML = '';
     }
 

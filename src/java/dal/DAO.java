@@ -12,6 +12,7 @@ import java.util.List;
 import Models.Categories;
 import Models.Role;
 import Models.SkillSet;
+import Models.TeamNumber;
 import Models.User;
 
 /**
@@ -197,7 +198,7 @@ public class DAO extends DBContext {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, roleID);
             statement.setInt(2, userID);
-            
+
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -216,13 +217,11 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 freelancerID = rs.getInt("freelanceID");
             }
-  
 
         } catch (SQLException e) {
         }
         return freelancerID;
     }
-    
 
     public void inputFreelancerSkill(String SkillID, int freelancerID) {
         String sql = """
@@ -257,8 +256,7 @@ public class DAO extends DBContext {
 
     }
 
-    
-    public void inputFreelancerExperiance(String experiance, String project, String position ,String start, String end,int freeID) {
+    public void inputFreelancerExperiance(String experiance, String project, String position, String start, String end, int freeID) {
         String sql = """
                      insert into [Experience]
                      values(?,?,?,?,?,?)""";
@@ -277,15 +275,97 @@ public class DAO extends DBContext {
 
     }
 
+    public ArrayList<TeamNumber> listTeamNumber() {
+        ArrayList<TeamNumber> listTeamSize = new ArrayList<>();
+        String query = """
+                       select * from Team_Number;
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listTeamSize.add(new TeamNumber(rs.getInt(1),
+                        rs.getString(2)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return listTeamSize;
+    }
+
+    public void inputRecruiterInfo(String firstname, String lastname, String gender, String dob, String img,
+            String email, String phone, int userID) {
+        String sql = """
+                     insert into [Recruiter]
+                     values(?,?,?,?,?,?,?,?)""";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, firstname);
+            statement.setString(2, lastname);
+            statement.setString(3, gender);
+            statement.setString(4, dob);
+            statement.setString(5, img);
+            statement.setString(6, email);
+            statement.setString(7, phone);
+            statement.setInt(8, userID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public int getRecruiterIDbyUserID(int userID) {
+        int recruiterID = 0;
+        String query = """
+                       select recruiterID from Recruiter where userID=?;
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, userID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                recruiterID = rs.getInt("recruiterID");
+            }
+
+        } catch (SQLException e) {
+        }
+        return recruiterID;
+    }
+    
+    public void inputCompanyInfo(String name, String teamID, String established, String logo, String web,
+            String decsribe, String location, int ID) {
+        String sql = """
+                     insert into [Company]
+                     values(?,?,?,?,?,?,?,?)""";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            statement.setString(2, teamID);
+            statement.setString(3, established);
+            statement.setString(4, logo);
+            statement.setString(5, web);
+            statement.setString(6, decsribe);
+            statement.setString(7, location);
+            statement.setInt(8, ID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    
+
     public static void main(String[] args) {
         DAO dao = new DAO();
-        ArrayList<SkillSet> listSkill = dao.listSkill();
-        for (SkillSet skillSet : listSkill) {
+        ArrayList<TeamNumber> listSkill = dao.listTeamNumber();
+        for (TeamNumber skillSet : listSkill) {
             System.out.println(skillSet.toString());
         }
-        System.out.println(dao.getFreelancerIDbyUserID(10));
-        
+        System.out.println(dao.getRecruiterIDbyUserID(133));
+
         //dao.inputFreelancerExperiance("chem gio", "chem bao", "nguoi chem", "12/12/2003", "12/12/2004", 35);
-        dao.inputFreelancerEducation("FPT", "12/12/2004", "12/12/2010", 35, "3");
+        //dao.inputFreelancerEducation("FPT", "12/12/2004", "12/12/2010", 35, "3");
+        //dao.inputRecruiterInfo("tan", "nguen", "1", "12/12/2012", null, "tannn@gmail.com", "0335625766", 50);
+        //dao.inputCompanyInfo("FPT", "4", "12/12/2019", null, "htpvb.com", null, "hoalac", 51);
     }
 }

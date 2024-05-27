@@ -66,13 +66,7 @@ public class Company {
         this.establishedOn = establishedOn;
     }
 
-    public String getLogo() {
-        return logo;
-    }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
 
     public String getCompanyName() {
         return companyName;

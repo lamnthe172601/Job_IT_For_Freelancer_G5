@@ -35,6 +35,11 @@ public class TeamNumber {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "TeamNumber{" + "id=" + id + ", name=" + name + '}';
+    }
     
     
 }

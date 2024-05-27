@@ -135,7 +135,7 @@ public class InputFreelancerProfileController extends HttpServlet {
 
 
         //insert freelancer Experin
-        request.getRequestDispatcher("views/home.jsp").forward(request, response);
+        request.getRequestDispatcher("login").forward(request, response);
 
     }
 

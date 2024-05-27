@@ -83,14 +83,13 @@
                                             </div>
                                             <div class="input-block ">
                                                 <label class="focus-label">Email Address<span class="label-star"> *</span></label>
-                                                <input type="email" class="form-control floating" id="email" name="email">
+                                                <input type="text" class="form-control floating" id="email" name="email">
                                                 <div style="color: red" id="errorEmail">${mess2}</div>
                                             </div>
                                             <div class="input-block ">
                                                 <label class="focus-label">Password <span class="label-star"> *</span></label>
                                                 <div class="position-relative">
-                                                    <input type="password" class="form-control floating pass-input" id="password" name="password">
-                                                    
+                                                    <input type="password" class="form-control floating pass-input" id="password" name="password">                                                  
                                                     <div class="password-icon ">
                                                         <span style="cursor: pointer;" class="fas toggle-password fa-eye-slash"></span>
                                                     </div>

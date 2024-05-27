@@ -5,6 +5,7 @@
 
 package AccountControll;
 
+import Models.TeamNumber;
 import Models.User;
 import dal.DAO;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
@@ -56,6 +58,9 @@ public class InputRecruiterProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        DAO dao = new DAO();
+        ArrayList<TeamNumber> listTeamSize=dao.listTeamNumber();
+        request.setAttribute("listTeamSize", listTeamSize);
         request.getRequestDispatcher("views/inputRecruiterProfile.jsp").forward(request, response);
     } 
 
@@ -69,20 +74,32 @@ public class InputRecruiterProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        DAO dao = new DAO();
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        int userID = user.getUserID();
-
-        dao.UpdateRole(userID,4);
-
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String date = request.getParameter("dob").trim();
-        String gender = request.getParameter("gender");
-        String decscribe = request.getParameter("decscribe");
+//        DAO dao = new DAO();
+////        HttpSession session = request.getSession();
+////        User user = (User) session.getAttribute("user");
+//        int userID = user.getUserID();       
+////        dao.UpdateRole(userID,4);
+//        String firstname = request.getParameter("firstname");
+//        String lastname = request.getParameter("lastname");
+//        String email = request.getParameter("email");
+//        String phone = request.getParameter("phone");
+//        String date = request.getParameter("dob").trim();
+//        String gender = request.getParameter("gender");
+//        
+//        dao.inputRecruiterInfo(firstname, lastname, gender, date, null, email, phone, userID);
+//        
+//        String companyname = request.getParameter("companyname");
+//        String established = request.getParameter("established");
+//        String website = request.getParameter("website");
+//        String logo = request.getParameter("logo");
+//        String location = request.getParameter("location");
+//        String budget = request.getParameter("budget");
+//        String describe = request.getParameter("describe");
+//        
+//        int recruiterID=dao.getRecruiterIDbyUserID(userID);
+//        
+//        dao.inputCompanyInfo(companyname, budget, established, logo, website, describe, location, recruiterID);
+//        request.getRequestDispatcher("login").forward(request, response);
     }
 
     /** 
