@@ -11,30 +11,28 @@ import java.util.Date;
  * @author Admin
  */
 public class Recruiter {
-    int recruiterID, userID;
+    int recruiterID;
     String firstName, lastName;
     boolean gender;
     Date dob;
-    String image, email_contact, phone_contact;
-   
-
+    String image, email, phone;
+    int UserID;
+    
     public Recruiter() {
     }
 
-    public Recruiter(int recruiterID, int userID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone) {
+    public Recruiter(int recruiterID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone, int UserID) {
         this.recruiterID = recruiterID;
-        this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.dob = dob;
         this.image = image;
-        this.email_contact = email;
-        this.phone_contact = phone;
-      
+        this.email = email;
+        this.phone = phone;
+        this.UserID = UserID;
+                
     }
-
-   
 
     public int getRecruiterID() {
         return recruiterID;
@@ -42,14 +40,6 @@ public class Recruiter {
 
     public void setRecruiterID(int recruiterID) {
         this.recruiterID = recruiterID;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public String getFirstName() {
@@ -93,29 +83,31 @@ public class Recruiter {
     }
 
     public String getEmail() {
-        return email_contact;
+        return email;
     }
 
     public void setEmail(String email) {
-        this.email_contact = email;
+        this.email = email;
     }
 
     public String getPhone() {
-        return phone_contact;
+        return phone;
     }
 
     public void setPhone(String phone) {
-        this.phone_contact = phone;
+        this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        return "Recruiter{" + "recruiterID=" + recruiterID + ", userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dob=" + dob + ", image=" + image + ", email=" + email_contact + ", phone=" + phone_contact +  '}';
+    public int getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(int UserID) {
+        this.UserID = UserID;
     }
 
     
 
-  
    
     
     

@@ -31,7 +31,7 @@
         <div class="main-wrapper">
             <header class="header">
                 <div class="container">                                                                   
-                    <a href="index.html" class="navbar-brand logo">
+                    <a href="home" class="navbar-brand logo">
                         <img style="margin: 20px;" src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                     </a>                                                               
                 </div>
@@ -62,8 +62,7 @@
                                     </div>
                                     <button style="margin-bottom: 20px" class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Change Password</button>
                                 </form>
-                                    <button  class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Login Now
-                                        </button>
+                                    
                                   
                                 
                             </div>

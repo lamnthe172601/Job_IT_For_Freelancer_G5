@@ -115,13 +115,32 @@ public class DAO extends DBContext {
         }
     }
     
+    public void register(String username, String password, String email, String status) {
+        String sql = "insert into [User]\n"
+                + "values(?,?,?,?,5,1)";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.setString(3, email);
+            statement.setString(4, status);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+    
     
     
     
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        dao.UpdatePassword("12345678",1, "tannguyennhat916@gmail.com");
+        ArrayList<User> user=dao.getAllUser();
+        for (User user1 : user) {
+            System.out.println(user1.toString());
+        }
             
     }
 }

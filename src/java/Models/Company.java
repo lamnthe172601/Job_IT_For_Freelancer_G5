@@ -11,27 +11,27 @@ import java.util.Date;
  * @author Admin
  */
 public class Company {
-    int companyID, teamNumber;
+
+    int companyID;
+    TeamNumber teamNumber;
     Date establishedOn;
-    String logo ,companyName, website,describe, location;
-    Recruiter recruiterID ;
-    
+    String logo, companyName, website, describe, location;
+    Recruiter recruiID;
+
     public Company() {
     }
 
-    public Company(int companyID, int teamNumber, Date establishedOn, String logo, String companyName, String website, String describe, String location, Recruiter recruiterID) {
+    public Company(int companyID, String companyName, TeamNumber teamNumber, Date establishedOn, String logo, String website, String describe, String location, Recruiter recruiID) {
         this.companyID = companyID;
+        this.logo = logo;
         this.teamNumber = teamNumber;
         this.establishedOn = establishedOn;
-        this.logo = logo;
         this.companyName = companyName;
         this.website = website;
         this.describe = describe;
         this.location = location;
-        this.recruiterID = recruiterID;
+        this.recruiID = recruiID;
     }
-
-    
 
     public String getLogo() {
         return logo;
@@ -40,8 +40,6 @@ public class Company {
     public void setLogo(String logo) {
         this.logo = logo;
     }
-    
-    
 
     public int getCompanyID() {
         return companyID;
@@ -51,11 +49,11 @@ public class Company {
         this.companyID = companyID;
     }
 
-    public int getTeamNumber() {
+    public TeamNumber getTeamNumber() {
         return teamNumber;
     }
 
-    public void setTeamNumber(int teamNumber) {
+    public void setTeamNumber(TeamNumber teamNumber) {
         this.teamNumber = teamNumber;
     }
 
@@ -99,15 +97,12 @@ public class Company {
         this.location = location;
     }
 
-    public Recruiter getRecruiterID() {
-        return recruiterID;
+    public Recruiter getRecruiID() {
+        return recruiID;
     }
 
-    public void setRecruiterID(Recruiter recruiterID) {
-        this.recruiterID = recruiterID;
+    public void setRecruiID(Recruiter recruiID) {
+        this.recruiID = recruiID;
     }
 
-    
-    
-    
 }
