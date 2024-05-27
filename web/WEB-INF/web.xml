@@ -67,6 +67,8 @@
     <servlet>
         <servlet-name>SelectAccountTypeController</servlet-name>
         <servlet-class>AccountControll.SelectAccountTypeController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ProfileAdmin</servlet-name>
         <servlet-class>AdminControlles.ProfileAdmin</servlet-class>
     </servlet>
@@ -145,6 +147,8 @@
     <servlet-mapping>
         <servlet-name>SelectAccountTypeController</servlet-name>
         <url-pattern>/SelectAccountType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ProfileAdmin</servlet-name>
         <url-pattern>/profileAdmin</url-pattern>
     </servlet-mapping>
