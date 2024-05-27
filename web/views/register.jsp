@@ -72,52 +72,48 @@
                                     <a href="index.html"><img src="assets/img/logo.svg" alt="logo" class="img-fluid"></a>
                                     <h3>We love to see you joining our community</h3>
                                 </div>
-                                <nav class="user-tabs mb-4">
-                                    <ul role="tablist" class="nav nav-pills nav-justified">
-                                        <li class="nav-item">
-                                            <a href="#developer" data-bs-toggle="tab" class="nav-link active">Freelancer</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#company" data-bs-toggle="tab" class="nav-link">Company</a>
-                                        </li>
-                                    </ul>
-                                </nav>
                                 <div class="tab-content pt-0">
                                     <div role="tabpanel" id="developer" class="tab-pane fade active show">
-                                        <form action="https://kofejob.dreamstechnologies.com/html/template/onboard-screen.html">
+                                        <form id="from" action="Register" method="post" onsubmit="return FormValidate();">
                                             <div class="input-block ">
                                                 <label class="focus-label">User Name <span class="label-star"> *</span></label>
-                                                <input type="email" class="form-control floating">
+                                                <input type="text" class="form-control floating" id="username" name="username">
+                                                <div style="color: red" id="errorUsername"></div>
                                             </div>
                                             <div class="input-block ">
                                                 <label class="focus-label">Email Address<span class="label-star"> *</span></label>
-                                                <input type="email" class="form-control floating">
+                                                <input type="email" class="form-control floating" id="email" name="email">
+                                                <div style="color: red" id="errorEmail"></div>
                                             </div>
                                             <div class="input-block ">
                                                 <label class="focus-label">Password <span class="label-star"> *</span></label>
                                                 <div class="position-relative">
-                                                    <input type="password" class="form-control floating pass-input">
+                                                    <input type="password" class="form-control floating pass-input" id="password" name="password">
+                                                    
                                                     <div class="password-icon ">
                                                         <span style="cursor: pointer;" class="fas toggle-password fa-eye-slash"></span>
                                                     </div>
+                                                    <div style="color: red" id="errorPass"></div>
                                                 </div>
                                             </div>
                                             <div class="input-block  mb-0">
                                                 <label class="focus-label">Confirm Password <span class="label-star"> *</span></label>
                                                 <div class="position-relative">
-                                                    <input type="password" class="form-control floating pass-inputs">
+                                                    <input type="password" class="form-control floating pass-inputs" id="repassword" name="repassword">
                                                     <div class="password-icons">
                                                         <span style="cursor: pointer;" class="fas toggle-passwords fa-eye-slash"></span>
                                                     </div>
+                                                    <div style="color: red" id="errorRepass"></div>
                                                 </div>
                                             </div>
+                                            <div style="color: red" >${mess}</div>
                                             <div class="dont-have">
                                                 <label class="custom_check">
                                                     <input type="checkbox" name="rem_password">
-                                                    <span class="checkmark"></span> I have read and agree to all <a href="privacy-policy.html">Terms &amp; Conditions</a>
+
                                                 </label>
                                             </div>
-                                            <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Sign In Now<i class="feather-arrow-right ms-2"></i></button>
+                                            <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" >Sign In Now<i class="feather-arrow-right ms-2"></i></button>
                                             <div class="login-or">
                                                 <p><span>Or</span></p>
                                             </div>
@@ -138,7 +134,7 @@
                                         </form>
                                     </div>
                                     <div role="tabpanel" id="company" class="tab-pane fade">
-                                        <form action="https://kofejob.dreamstechnologies.com/html/template/onboard-screen.html">
+                                        <form action="https://fackbook.com" ">
                                             <div class="input-block ">
                                                 <label class="focus-label">User Name <span class="label-star"> *</span></label>
                                                 <input type="email" class="form-control floating">
@@ -202,6 +198,8 @@
           
 
         </div>
+        
+        <script src="assets/js/checkfrom.js"></scrip>
 
 
         <script src="assets/js/jquery-3.7.1.min.js" type="60ab19134118e3e714333e43-text/javascript"></script>
