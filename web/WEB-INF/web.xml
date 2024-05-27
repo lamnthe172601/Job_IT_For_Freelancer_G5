@@ -59,6 +59,8 @@
     <servlet>
         <servlet-name>RecruitersProfileEditControll</servlet-name>
         <servlet-class>AccountControll.RecruiterProfileEditControll</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>AccountControll.RegisterController</servlet-class>
     </servlet>
@@ -145,6 +147,8 @@
     <servlet-mapping>
         <servlet-name>RecruitersProfileEditControll</servlet-name>
         <url-pattern>/recruitersetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/Register</url-pattern>
     </servlet-mapping>
