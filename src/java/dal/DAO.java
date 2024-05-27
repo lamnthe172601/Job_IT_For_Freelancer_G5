@@ -110,34 +110,6 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
-    
-    public void register(String username, String password, String email, String status) {
-        String sql = "insert into [User]\n"
-                + "values(?,?,?,?,5,1)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, username);
-            statement.setString(2, password);
-            statement.setString(3, email);
-            statement.setString(4, status);
-            statement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }
-    
-    
-    
-    
-
-    public static void main(String[] args) {
-        DAO dao = new DAO();
-        ArrayList<User> user=dao.getAllUser();
-        for (User user1 : user) {
-            System.out.println(user1.toString());
-        }
-            
 
     public Admin getAdminProfileByUserID(int userid) {
 
@@ -157,6 +129,9 @@ public class DAO extends DBContext {
         return null;
     }
 
+    public static void main(String[] args) {
+        DAO dao = new DAO();
+        System.out.println(dao.getAdminProfileByUserID(1).getImage());
 
     }
-
+}
