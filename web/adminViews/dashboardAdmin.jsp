@@ -25,16 +25,15 @@
         <link rel="stylesheet" href="adminAssets/css/style.css">
     </head>
     <body>
-
         <div class="main-wrapper">
 
             <div class="header">
 
                 <div class="header-left">
-                    <a href="index.html" class="logo">
+                    <a href="home" class="logo">
                         <img src="adminAssets/img/logo.png" alt="Logo">
                     </a>
-                    <a href="index.html" class="logo logo-small">
+                    <a href="home" class="logo logo-small">
                         <img src="adminAssets/img/logo-small.png" alt="Logo" width="30" height="30">
                     </a>
 
@@ -83,59 +82,7 @@
                                                 </div>
                                             </div>
                                         </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex">
-                                                <span class="avatar avatar-sm flex-shrink-0">
-                                                    <img class="avatar-img rounded-circle" alt="Img" src="adminAssets/img/profiles/avatar-03.jpg">
-                                                </span>
-                                                <div class="media-body flex-grow-1">
-                                                    <p class="noti-details"><span class="noti-title">Marie Canales</span> has accepted your estimate <span class="noti-title">#GTR458789</span></p>
-                                                    <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex">
-                                                <div class="avatar avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title rounded-circle bg-primary-light"><i class="far fa-user"></i></span>
-                                                </div>
-                                                <div class="media-body flex-grow-1">
-                                                    <p class="noti-details"><span class="noti-title">New user registered</span></p>
-                                                    <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex">
-                                                <span class="avatar avatar-sm flex-shrink-0">
-                                                    <img class="avatar-img rounded-circle" alt="Img" src="adminAssets/img/profiles/avatar-04.jpg">
-                                                </span>
-                                                <div class="media-body flex-grow-1">
-                                                    <p class="noti-details"><span class="noti-title">Barbara Moore</span> declined the invoice <span class="noti-title">#RDW026896</span></p>
-                                                    <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex">
-                                                <div class="avatar avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title rounded-circle bg-info-light"><i class="far fa-comment"></i></span>
-                                                </div>
-                                                <div class="media-body flex-grow-1">
-                                                    <p class="noti-details"><span class="noti-title">You have received a new message</span></p>
-                                                    <p class="noti-time"><span class="notification-time">2 days ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    </li>                                   
                                 </ul>
                             </div>
                             <div class="topnav-dropdown-footer">
@@ -148,14 +95,14 @@
                     <li class="nav-item dropdown has-arrow main-drop">
                         <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                             <span class="user-img">
-                                <img src="adminAssets/img/profiles/avatar-07.jpg" alt="Img">
+                                <img src="${adminProfile.image}" alt="Img">
                                 <span class="status online"></span>
                             </span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profile.html"><i data-feather="user" class="me-1"></i> Profile</a>
+                            <a class="dropdown-item" href="profileAdmin"><i data-feather="user" class="me-1"></i> Profile</a>
                             <a class="dropdown-item" href="settings.html"><i data-feather="settings" class="me-1"></i> Settings</a>
-                            <a class="dropdown-item" href="login.html"><i data-feather="log-out" class="me-1"></i> Logout</a>
+                            <a class="dropdown-item" href="logout"><i data-feather="log-out" class="me-1"></i> Logout</a>
                         </div>
                     </li>
 
@@ -171,68 +118,32 @@
                             <li class="menu-title"><span>Main</span></li>
                             <li class="active">
                                 <a href="dashboardAdmin"><i data-feather="home"></i> <span>Dashboard</span></a>
+                            </li>                           
+                            <li>
+                                <a href="projectAdmin"><i data-feather="database"></i> <span>Projects</span></a>
                             </li>
                             <li>
-                                <a href="categories.html"><i data-feather="copy"></i> <span>Categories</span></a>
+                                <a href="manageFreelancerAdmin"><i data-feather="users"></i> <span>Freelancer</span></a>
                             </li>
                             <li>
-                                <a href="projects.html"><i data-feather="database"></i> <span>Projects</span></a>
+                                <a href="manageRecruiterAdmin"><i data-feather="user-check"></i> <span>Recuiter</span></a>
+                            </li>                          
+                            <li>
+                                <a href="categorieAdmin"><i data-feather="copy"></i> <span>Categories</span></a>
+                            </li>                        
+                            <li>
+                                <a href="skillAdmin"><i data-feather="award"></i> <span>Skills</span></a>
                             </li>
                             <li>
-                                <a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>
+                                <a href="blogAdmin"><i data-feather="clipboard"></i> <span>Blog</span></a>
                             </li>
                             <li>
-                                <a href="deposit.html"><i data-feather="user-check"></i> <span>Deposit</span></a>
+                                <a href="verifyIdentityAdmin"><i data-feather="user-check"></i> <span>Verify Identity</span></a>
                             </li>
                             <li>
-                                <a href="withdrawn.html"><i data-feather="user-check"></i> <span>Withdrawn</span></a>
-                            </li>
-                            <li>
-                                <a href="transaction.html"><i data-feather="clipboard"></i> <span>Transaction</span></a>
-                            </li>
-                            <li>
-                                <a href="providers.html"><i data-feather="user-check"></i> <span>Providers</span></a>
-                            </li>
-                            <li>
-                                <a href="subscription.html"><i data-feather="user-check"></i> <span>Subscription</span></a>
-                            </li>
-                            <li>
-                                <a href="reports.html"><i data-feather="pie-chart"></i> <span>Reports</span></a>
-                            </li>
-                            <li>
-                                <a href="roles.html"><i data-feather="clipboard"></i> <span>Roles</span></a>
-                            </li>
-                            <li>
-                                <a href="skills.html"><i data-feather="award"></i> <span>Skills</span></a>
-                            </li>
-                            <li>
-                                <a href="verify-identity.html"><i data-feather="user-check"></i> <span>Verify Identity</span></a>
-                            </li>
-                            <li>
-                                <a href="settings.html"><i data-feather="settings"></i> <span>Settings</span></a>
-                            </li>
-                            <li class="menu-title"><span>UI Interface</span></li>
-                            <li>
-                                <a href="components.html"><i data-feather="pocket"></i> <span>Components</span></a>
-                            </li>
-                            <li class="submenu">
-                                <a href="javascript:void(0);"><i data-feather="file-minus"></i> <span> Forms</span> <span class="menu-arrow"></span></a>
-                                <ul>
-                                    <li><a href="form-basic-inputs.html">Basic Inputs</a></li>
-                                    <li><a href="form-input-groups.html">Input Groups</a></li>
-                                    <li><a href="form-horizontal.html">Horizontal Form</a></li>
-                                    <li><a href="form-vertical.html">Vertical Form</a></li>
-                                    <li><a href="form-mask.html">Form Mask</a></li>
-                                    <li><a href="form-validation.html">Form Validation</a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="javascript:void(0);"><i data-feather="align-justify"></i> <span> Tables</span> <span class="menu-arrow"></span></a>
-                                <ul>
-                                    <li><a href="tables-basic.html">Basic Tables</a></li>
-                                    <li><a href="data-tables.html">Data Table</a></li>
-                                </ul>
-                            </li>
+                                <a href="settingsAdmin"><i data-feather="settings"></i> <span>Settings</span></a>
+                            </li>                          
+
                         </ul>
                     </div>
                 </div>
@@ -247,7 +158,7 @@
                             <div class="col">
                                 <h3 class="page-title">Dashboard</h3>
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="home">Home</a></li>
                                     <li class=" active">/Dashboard</li>
                                 </ul>
                             </div>
@@ -262,7 +173,7 @@
                                     <div class="card wizard-card flex-fill">
                                         <div class="card-body">
                                             <p class="text-primary mt-0 mb-2">Users</p>
-                                            <h5>1682</h5>
+                                            <h5>${totalUsers}</h5>
                                             <p><a href="users.html">view details</a></p>
                                             <span class="dash-widget-icon bg-1">
                                                 <i class="fas fa-users"></i>
@@ -274,7 +185,7 @@
                                     <div class="card wizard-card flex-fill">
                                         <div class="card-body">
                                             <p class="text-primary mt-0 mb-2">Completed Projects</p>
-                                            <h5>15k</h5>
+                                            <h5>${totalPosts}</h5>
                                             <p><a href="projects.html">view details</a></p>
                                             <span class="dash-widget-icon bg-1">
                                                 <i class="fas fa-th-large"></i>
@@ -286,7 +197,7 @@
                                     <div class="card wizard-card flex-fill">
                                         <div class="card-body">
                                             <p class="text-primary mt-0 mb-2">Active Projects</p>
-                                            <h5>1568</h5>
+                                            <h5>${totalJobApplys}</h5>
                                             <p><a href="projects.html">view details</a></p>
                                             <span class="dash-widget-icon bg-1">
                                                 <i class="fas fa-bezier-curve"></i>
@@ -309,84 +220,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 d-flex">
-                            <div class="card w-100">
-                                <div class="card-body pt-0">
-                                    <div class="card-header">
-                                        <div class="row">
-                                            <div class="col-7">
-                                                <p>Welcome back,</p>
-                                                <h6 class="text-primary">Super Admin</h6>
-                                            </div>
-                                            <div class="col-5 text-end">
-                                                <span class="welcome-dash-icon bg-1">
-                                                    <i class="fas fa-user"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="account-balance">
-                                        <p>Account balance</p>
-                                        <h6>$50,000,00 </h6>
-                                    </div>
-                                    <div class="mt-3">
-                                        <h6 class="text-primary">Payments</h6>
-                                        <div class="table-responsive">
-                                            <table class="table table-center table-hover mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-nowrap">Client or Freelancer</th>
-                                                        <th>Amount</th>
-                                                        <th class="text-end">Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="text-nowrap">Sakib Khan</td>
-                                                        <td>$2222</td>
-                                                        <td class="text-end">Completed</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-nowrap">Pixel Inc Ltd</td>
-                                                        <td>$750</td>
-                                                        <td class="text-end">
-                                                            <a href="javascript:void(0);" class="btn btn-sm btn-success me-2"><i class="far fa-edit"></i></a>
-                                                            <a href="javascript:void(0);" class="btn btn-sm btn-danger me-2"><i class="far fa-trash-alt"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-nowrap">Jon M Mullins</td>
-                                                        <td>$3150</td>
-                                                        <td class="text-end text-nowrap">Money released to Freelancer</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-nowrap">Rose M Milewski</td>
-                                                        <td>$1455</td>
-                                                        <td class="text-end text-nowrap">Money returned to Client</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-nowrap">Gerald K Myers</td>
-                                                        <td>$3000</td>
-                                                        <td class="text-end">
-                                                            <a href="javascript:void(0);" class="btn btn-sm btn-success me-2"><i class="far fa-edit"></i></a>
-                                                            <a href="javascript:void(0);" class="btn btn-sm btn-danger me-2"><i class="far fa-trash-alt"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-nowrap">Marcin Kowalski</td>
-                                                        <td>$895</td>
-                                                        <td class="text-end">
-                                                            <a href="javascript:void(0);" class="btn btn-sm btn-success me-2"><i class="far fa-edit"></i></a>
-                                                            <a href="javascript:void(0);" class="btn btn-sm btn-danger me-2"><i class="far fa-trash-alt"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                     
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
