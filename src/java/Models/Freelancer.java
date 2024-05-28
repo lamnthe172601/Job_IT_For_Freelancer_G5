@@ -108,6 +108,8 @@ public class Freelancer {
         return "Freelancer{" + "freelanceID=" + freelanceID + ", first_name=" + first_name + ", last_name=" + last_name + ", image=" + image + ", describe=" + describe + ", email=" + email + ", phone=" + phone + ", gender=" + gender + ", dob=" + dob + '}';
     }
     
-    
+    public String fullname(){
+        return first_name +" "+last_name;
+    }
     
 }
