@@ -13,7 +13,7 @@ public class Categories {
     String categoriesName;
     String image;
 
-    public Categories() {
+    public Categories(int aInt) {
     }
 
     public Categories(int caID, String categoriesName, String image) {

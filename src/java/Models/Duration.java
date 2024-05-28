@@ -12,7 +12,7 @@ public class Duration {
     int durationID;
     String durationName;
 
-    public Duration() {
+    public Duration(int aInt) {
     }
 
     public Duration(int durationID, String durationName) {
