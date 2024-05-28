@@ -183,8 +183,8 @@
     <servlet-mapping>
         <servlet-name>ManageRecruiterAdmin</servlet-name>
         <url-pattern>/manageRecruiterAdmin</url-pattern>
-     </servlet-mapping>
-        <servlet>
+        </servlet-mapping>
+    <servlet>
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>com.example.ProfileServlet</servlet-class>
     </servlet>
