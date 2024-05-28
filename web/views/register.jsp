@@ -69,7 +69,7 @@
                         <div class="align-items-center justify-content-center">
                             <div class="login-right">
                                 <div class="login-header text-center">
-                                    <a href="index.html"><img src="assets/img/logo.svg" alt="logo" class="img-fluid"></a>
+                                    <a href="home"><img src="assets/img/logo.svg" alt="logo" class="img-fluid"></a>
                                     <h3>We love to see you joining our community</h3>
                                 </div>
                                 <div class="tab-content pt-0">

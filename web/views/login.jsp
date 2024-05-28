@@ -47,20 +47,23 @@
                                     <a href="home"><img src="assets/img/logo.svg" alt="logo" class="img-fluid"></a>
                                     <h3>Welcome! Nice to see you again</h3>
                                 </div>
-                                <form action="login" method="post">
+                                <form action="login" method="post" onsubmit="return FormValidate();">
                                     <div class="input-block">
                                         <label class="focus-label">Username <span class="label-star"> *</span></label>
-                                        <input required name="user" type="text" class="form-control floating" value="${username}" >
+                                        <input id="user"  name="user" type="text" class="form-control floating" value="${username}" >
+                                        <div style="color: red" id="userFail"></div>
                                     </div>
 
 
                                     <div class="input-block">
                                         <label class="focus-label">Password <span class="label-star"> *</span></label>
                                         <div class="position-relative">
-                                            <input required name="pass" type="password" class="form-control floating pass-input" value="${password}">
+                                            <input id="pass"  name="pass" type="password" class="form-control floating pass-input" value="${password}">
+                                            
                                             <div class="password-icon">
                                                 <span style="cursor: pointer;" class="fas toggle-password fa-eye-slash"></span>
                                             </div>
+                                            <div style="color: red" id="passFail"></div>
                                         </div>
                                     </div>       
 
@@ -189,8 +192,8 @@
             </footer>
 
         </div>
-
-        <script src="assets/js/checkpass.js" type="text/javascript"></script>                                   
+        <script src="assets/js/checkvalidatelogin.js" type="text/javascript"></script>                                    
+                                          
         <script src="assets/js/jquery-3.7.1.min.js" type="4bfb9e18a84f35f1be6270cc-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="4bfb9e18a84f35f1be6270cc-text/javascript"></script>
