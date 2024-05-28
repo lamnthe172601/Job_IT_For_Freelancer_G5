@@ -168,7 +168,7 @@ public class DAO extends DBContext {
         } catch (SQLException e) {
         }
         return null;
-
+    }
     public boolean checkUserExsit(String username) {
         ArrayList<User> user = getAllUser();
         for (User user1 : user) {
@@ -410,20 +410,6 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public static void main(String[] args) {
-        DAO dao = new DAO();
-        ArrayList<TeamNumber> listSkill = dao.listTeamNumber();
-        for (TeamNumber skillSet : listSkill) {
-            System.out.println(skillSet.toString());
-        }
-        System.out.println(dao.getRecruiterIDbyUserID(133));
-
-        //dao.inputFreelancerExperiance("chem gio", "chem bao", "nguoi chem", "12/12/2003", "12/12/2004", 35);
-        //dao.inputFreelancerEducation("FPT", "12/12/2004", "12/12/2010", 35, "3");
-        //dao.inputRecruiterInfo("tan", "nguen", "1", "12/12/2012", null, "tannn@gmail.com", "0335625766", 50);
-        //dao.inputCompanyInfo("FPT", "4", "12/12/2019", null, "htpvb.com", null, "hoalac", 51);
-
    
     }
    
-}
