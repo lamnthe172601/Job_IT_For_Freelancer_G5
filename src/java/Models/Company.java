@@ -23,9 +23,9 @@ public class Company {
 
     public Company(int companyID, String companyName, TeamNumber teamNumber, Date establishedOn, String logo, String website, String describe, String location, Recruiter recruiID) {
         this.companyID = companyID;
-        this.logo = logo;
         this.teamNumber = teamNumber;
         this.establishedOn = establishedOn;
+        this.logo = logo;
         this.companyName = companyName;
         this.website = website;
         this.describe = describe;
@@ -57,6 +57,7 @@ public class Company {
         this.teamNumber = teamNumber;
     }
 
+
     public Date getEstablishedOn() {
         return establishedOn;
     }
@@ -64,6 +65,8 @@ public class Company {
     public void setEstablishedOn(Date establishedOn) {
         this.establishedOn = establishedOn;
     }
+
+
 
     public String getCompanyName() {
         return companyName;

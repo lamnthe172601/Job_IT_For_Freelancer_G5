@@ -105,6 +105,10 @@ public class LoginController extends HttpServlet {
                     request.setAttribute("loginFaild", "Your account has been banned");
                     request.getRequestDispatcher("views/login.jsp").forward(request, response);
                 } else {
+                    response.sendRedirect("home");
+                }
+            } else {             
+              
                     response.sendRedirect("changePassword");
                 }
             }

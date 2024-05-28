@@ -67,6 +67,7 @@
                                     <c:if test = "${username != null }" >
                                         <p style="text-align: center;" class="text-danger">${loginFaild}</p>
                                     </c:if>
+                                        <p style="text-align: center;" class="text-danger">${mess}</p>
                                     <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Login Now<i class="feather-arrow-right ms-2"></i></button>
                                     <div class="login-or">
                                         <p><span>OR</span></p>
