@@ -190,7 +190,7 @@
                                             </div>
                                             <div class="proposal-detail text-capitalize">
                                                 <span class=" d-block">Team Number</span>
-                                                <p class="mb-0">${company.teamNumber}</p>
+                                                <p class="mb-0">${company.getTeamNumber().getName()}</p>
                                             </div>
                                         </li>
                                         <li>

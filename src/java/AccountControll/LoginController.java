@@ -4,6 +4,8 @@
  */
 package AccountControll;
 
+import Models.Company;
+import Models.Recruiter;
 import dal.DAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +15,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import Models.User;
+import dal.CompanyDAO;
+import dal.RecruiterDAO;
 
 /**
  *
@@ -70,7 +74,7 @@ public class LoginController extends HttpServlet {
         request.setAttribute("password", password);
         DAO accDao = new DAO();
         User c = accDao.getLogin(username, password);
-
+        
         try {
             if (c == null) {
                 request.setAttribute("loginFaild", "Username or Password Wrong");
@@ -79,6 +83,18 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("account", c);
                 session.setMaxInactiveInterval(1000);
+                
+                
+                RecruiterDAO re = new RecruiterDAO();
+                CompanyDAO com = new CompanyDAO();
+                Recruiter rec = re.getRecruiterProfile(c.getUserID());
+                Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
+                session.setAttribute("company", co);
+                session.setAttribute("recruiter", rec);
+                
+                
+                
+                
                 if (c.isLevelPass() == true && c.getStatus().equals("active")) {
                     if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
                         response.sendRedirect("dashboardAdmin");
@@ -97,11 +113,7 @@ public class LoginController extends HttpServlet {
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+   
     @Override
     public String getServletInfo() {
         return "Short description";

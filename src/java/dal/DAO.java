@@ -10,8 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import Models.Categories;
+import Models.Recruiter;
 import Models.Role;
+import Models.TeamNumber;
 import Models.User;
+import java.util.Date;
 
 /**
  *
@@ -45,8 +48,6 @@ public class DAO extends DBContext {
         return null;
     }
 
-
-    
     public User getUserByEmail(String email) {
         String query = """
                        select u.userID, u.username, u.password, u.email, u.status, r.roleID, r.role_name, u.LevelPass
@@ -72,8 +73,7 @@ public class DAO extends DBContext {
         }
         return null;
     }
-    
-    
+
     public ArrayList<User> getAllUser() {
         ArrayList<User> listUser = new ArrayList<>();
         String query = """
@@ -99,8 +99,8 @@ public class DAO extends DBContext {
         }
         return listUser;
     }
-    
-    public void UpdatePassword(String password,int LevelPass,String email) {
+
+    public void UpdatePassword(String password, int LevelPass, String email) {
         String sql = """
                      UPDATE [User] SET password=?, LevelPass=? WHERE email=?;
                      """;
@@ -114,7 +114,7 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
-    
+
     public void register(String username, String password, String email, String status) {
         String sql = "insert into [User]\n"
                 + "values(?,?,?,?,5,1)";
@@ -130,17 +130,38 @@ public class DAO extends DBContext {
         }
 
     }
-    
-    
-    
-    
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        ArrayList<User> user=dao.getAllUser();
+        ArrayList<User> user = dao.getAllUser();
         for (User user1 : user) {
             System.out.println(user1.toString());
         }
-            
+
+    }
+
+    public TeamNumber getTeamnumberByTeamNumberID(int Tid) {
+         TeamNumber teDao = new TeamNumber();
+        String query = "select team_number,team_numberID \n"
+                + "from Team_Number\n"
+                + "               		   where team_numberID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, Tid);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                
+                int tid = rs.getInt(1);
+              
+                String tnumber = rs.getString(2);
+                
+               
+                return new TeamNumber(tid, tnumber);
+            }
+        } catch (SQLException e) {
+        }
+        return null;
     }
 }
