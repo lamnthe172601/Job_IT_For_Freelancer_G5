@@ -12,7 +12,7 @@ public class JobType {
     int jobTypeID;
     String jobName;
 
-    public JobType() {
+    public JobType(int aInt) {
     }
 
     public JobType(int jobTypeID, String jobName) {
