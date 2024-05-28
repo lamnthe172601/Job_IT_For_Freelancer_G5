@@ -9,18 +9,19 @@
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/Models/Recruiter.java</file>
         </group>
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/Freelancer.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/register.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/SkillSet.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputRecruiterProfile.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/RegisterController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_0.js</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputFreelancerProfileController.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputRecruiterProfileController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/accountType.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/Company.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/Education.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/TeamNumber.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/Role.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/login.jsp</file>
         </group>
     </open-files>
 </project-private>
