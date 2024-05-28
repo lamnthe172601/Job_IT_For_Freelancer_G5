@@ -56,6 +56,14 @@
         <servlet-name>blogGridControll</servlet-name>
         <servlet-class>CommonControll.blogGridControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewProfile</servlet-name>
+        <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProfile_Freelancer</servlet-name>
+        <servlet-class>AccountControll.UpdateProfile_Freelancer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -111,5 +119,21 @@
     <servlet-mapping>
         <servlet-name>blogGridControll</servlet-name>
         <url-pattern>/blogGrid</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>com.example.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProfile</servlet-name>
+        <url-pattern>/ViewProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProfile_Freelancer</servlet-name>
+        <url-pattern>/UpdateProfile_Freelancer</url-pattern>
     </servlet-mapping>
 </web-app>
