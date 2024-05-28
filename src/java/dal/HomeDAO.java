@@ -191,11 +191,5 @@ public class HomeDAO extends DBContext {
         return -1;
     }
 
-    public static void main(String[] args) {
-        HomeDAO p = new HomeDAO();
-        List<Company> ps = p.TopCompany();
-        for (Company p1 : ps) {
-            System.out.println(p1.toString());
-        }
-    }
+  
 }

@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package AccountControll;
+package AdminControlles;
 
+import MutiDAO.RecruiterInformationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,9 +15,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Admin
+ * @author kudol
  */
-public class RegisterControll extends HttpServlet {
+public class ManageRecruiterAdmin extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +34,10 @@ public class RegisterControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterControll</title>");  
+            out.println("<title>Servlet ManageRecruiterAdmin</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ManageRecruiterAdmin at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +54,12 @@ public class RegisterControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       request.getRequestDispatcher("views/register.jsp").forward(request, response);
+    
+        RecruiterInformationDAO f = new RecruiterInformationDAO();
+        request.setAttribute("totalRecruiter",f.getCompany().size());
+        request.setAttribute("listRecruiter",f.getCompany());
+        
+       request.getRequestDispatcher("adminViews/recruiterAdmin.jsp").forward(request, response);
     } 
 
     /** 

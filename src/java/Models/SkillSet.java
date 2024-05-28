@@ -35,6 +35,11 @@ public class SkillSet {
     public void setSkill_set_name(String skill_set_name) {
         this.skill_set_name = skill_set_name;
     }
+
+    @Override
+    public String toString() {
+        return "SkillSet{" + "skill_set_ID=" + skill_set_ID + ", skill_set_name=" + skill_set_name + '}';
+    }
     
     
 }

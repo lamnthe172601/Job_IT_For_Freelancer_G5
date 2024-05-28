@@ -5,6 +5,7 @@
 
 package AdminControlles;
 
+import dal.DashboardDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -53,6 +54,10 @@ public class DashboardAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        DashboardDAO d = new DashboardDAO();
+        request.setAttribute("totalUsers",d.getTotalUsers() );
+        request.setAttribute("totalPosts",d.getTotalPost() );
+        request.setAttribute("totalJobApplys",d.getTotalJobApply() );
          request.getRequestDispatcher("adminViews/dashboardAdmin.jsp").forward(request, response);
     } 
 

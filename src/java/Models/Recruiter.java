@@ -106,7 +106,9 @@ public class Recruiter {
         this.UserID = UserID;
     }
 
-    
+    public String fullName(){
+        return getFirstName() + " " + getLastName();
+    }
 
    
     
