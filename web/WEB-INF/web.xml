@@ -87,6 +87,8 @@
     <servlet>
         <servlet-name>ManageRecruiterAdmin</servlet-name>
         <servlet-class>AdminControlles.ManageRecruiterAdmin</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ViewProfile</servlet-name>
         <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
     </servlet>
@@ -181,7 +183,8 @@
     <servlet-mapping>
         <servlet-name>ManageRecruiterAdmin</servlet-name>
         <url-pattern>/manageRecruiterAdmin</url-pattern>
-    <servlet>
+     </servlet-mapping>
+        <servlet>
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>com.example.ProfileServlet</servlet-class>
     </servlet>
