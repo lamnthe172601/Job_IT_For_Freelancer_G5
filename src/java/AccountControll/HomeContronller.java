@@ -61,7 +61,7 @@ public class HomeContronller extends HttpServlet {
         CategoriesDAO cDao = new CategoriesDAO();
         HomeDAO pDAO = new HomeDAO();
        
-        List<Categories> list2 = cDao.getAllCategory();
+        List<Categories> list2 = cDao.getTop6Category();
         request.setAttribute("listCC", list2);
         
         List<Post> listpost = pDAO.TopPost();
@@ -89,14 +89,10 @@ public class HomeContronller extends HttpServlet {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+   
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

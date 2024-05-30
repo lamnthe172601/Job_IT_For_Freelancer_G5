@@ -13,7 +13,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KofeJob</title>
+        <title>KLTTLJob</title>
 
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
@@ -504,7 +504,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="copyright-text text-center">
-                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+                                        <p class="mb-0">Copyright 2024 © KLTTLJob. All right reserved.</p>
                                     </div>
                                 </div>
                             </div>
