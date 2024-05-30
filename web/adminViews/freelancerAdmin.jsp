@@ -239,8 +239,7 @@
                                                          <c:if test='${freelancer.getAccount().getStatus() == "inactive"}'>
                                                         <a href="javascript:void(0);" class="user-inactive-btn">${freelancer.getAccount().getStatus()}</a>
                                                         </c:if>
-                                                        </td>
-                                                    <td class="text-end three-dots">
+                                                        </td>                                                   
                                                        <td class="text-end three-dots">
                                                             <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu user-menu-list">

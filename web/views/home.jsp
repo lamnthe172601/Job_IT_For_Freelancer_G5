@@ -49,7 +49,7 @@
                                 </span>
                             </a>
                             <a href="home" class="navbar-brand logo scroll-logo">
-                                <img src="assets/img/logo-white.svg" class="img-fluid" alt="Logo">
+                                <img src="assets/img/test.png" class="img-fluid" alt="Logo">
                             </a>
                             <a href="home" class="navbar-brand logo original-logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">

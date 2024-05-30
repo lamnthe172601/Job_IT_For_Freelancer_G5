@@ -40,8 +40,8 @@
                 </div>
             </header>
         <form action="InputFreelancerProfile" method="post" onsubmit="return FormValidate();">
-            <div style="margin-top: 50px;" class="on-board field-card select-account select-btn">
-                <div class="text-center onboard-head">
+            <div  class="on-board field-card select-account select-btn">
+                <div style="margin-top: 50px;" class="text-center onboard-head">
                     <h2>Personal Info</h2>
                     <p>Tell a bit about yourself. This information will appear on your public profile, so that potential buyers can get to know you better.</p>
                 </div>

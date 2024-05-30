@@ -95,7 +95,7 @@
                     <li class="nav-item dropdown has-arrow main-drop">
                         <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                             <span class="user-img">
-                                <img src="${adminProfile.image}" alt="Img">
+                                <img src="${adminProfile.getImage()}" alt="Img">
                                 <span class="status online"></span>
                             </span>
                         </a>
