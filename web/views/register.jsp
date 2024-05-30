@@ -14,7 +14,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KofeJob</title>
+        <title>KLTTLJob</title>
 
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
@@ -116,7 +116,7 @@
                                             <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Sign In Now<i class="feather-arrow-right ms-2"></i></button>
 
                                             <div class="row">
-                                                <div class="col-sm-8 dont-have d-flex  align-items-center">Already have account <a href="login.html" class="ms-2">Sign in?</a></div>
+                                                <div class="col-sm-8 dont-have d-flex  align-items-center">Already have account <a href="login" class="ms-2">Sign in?</a></div>
                                             </div>
                                         </form>
                                     </div>

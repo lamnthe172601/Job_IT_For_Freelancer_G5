@@ -6,7 +6,6 @@ package AccountControll;
 
 import Models.*;
 import dal.CompanyDAO;
-import dal.RecruiterDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

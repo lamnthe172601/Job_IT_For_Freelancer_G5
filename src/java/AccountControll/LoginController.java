@@ -84,7 +84,10 @@ public class LoginController extends HttpServlet {
                 if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
                     session.setAttribute("adminProfile",accDao.getAdminProfileByUserID(c.getUserID()));
                     response.sendRedirect("dashboardAdmin");
-                } else {
+                }else if(c.getRoleID().getRoleID() == 5){
+                    response.sendRedirect("SelectAccountType");
+                } 
+                else {
                     response.sendRedirect("home");
                 }
             } else {             

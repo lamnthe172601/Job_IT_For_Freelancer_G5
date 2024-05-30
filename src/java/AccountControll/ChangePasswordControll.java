@@ -82,7 +82,7 @@ public class ChangePasswordControll extends HttpServlet {
                     dao.UpdatePassword(newPass, 1, email);
                     session.removeAttribute("email");
                     request.setAttribute("mess", "Change Password Success");
-                    request.getRequestDispatcher("login").forward(request, response);
+                    request.getRequestDispatcher("home").forward(request, response);
                 } else {
                     request.setAttribute("mess", "New Password and Confirm Password are different");  
                     request.getRequestDispatcher("views/changePassword.jsp").forward(request, response);
