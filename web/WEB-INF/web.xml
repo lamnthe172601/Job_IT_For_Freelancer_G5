@@ -45,10 +45,6 @@
         <servlet-class>CommonControll.BlogDetailsControll</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Page404Controll</servlet-name>
-        <servlet-class>CommonControll.Page404Controll</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>blogGridControll</servlet-name>
         <servlet-class>CommonControll.blogGridControll</servlet-class>
     </servlet>
@@ -141,10 +137,6 @@
         <url-pattern>/BlogDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Page404Controll</servlet-name>
-        <url-pattern>/Page404</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>blogGridControll</servlet-name>
         <url-pattern>/blogGrid</url-pattern>
     </servlet-mapping>
@@ -183,7 +175,7 @@
     <servlet-mapping>
         <servlet-name>ManageRecruiterAdmin</servlet-name>
         <url-pattern>/manageRecruiterAdmin</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet>
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>com.example.ProfileServlet</servlet-class>
