@@ -71,10 +71,4 @@ public class Email {
     }
 
 
-
-    public static void main(String[] args) {
-
-        Email.sendEmail("tannguyennhat916@gmail.com","YOUR NEW PASSWORD", "Your new password is: ");
-    }
-
 }
