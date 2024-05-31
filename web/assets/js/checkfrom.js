@@ -7,7 +7,7 @@ function FormValidate() {
     var errorEmail = document.getElementById('errorEmail');
     var reGexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    var username = document.getElementById('username').value;
+    var username = document.getElementById('username').value.trim();
     var errorUsername = document.getElementById('errorUsername');
     if (username === '' || username === null) {
         errorUsername.innerHTML = "Please Input Username!";
