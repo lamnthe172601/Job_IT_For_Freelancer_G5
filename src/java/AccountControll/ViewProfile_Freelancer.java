@@ -68,7 +68,7 @@ public class ViewProfile_Freelancer extends HttpServlet {
        }
         if (freelancer != null) {
             request.setAttribute("freelancer", freelancer);
-            request.getRequestDispatcher("WEB-INF/views/freelancerProfile.jsp").forward(request, response);
+            request.getRequestDispatcher("views/profile.jsp").forward(request, response);
         } else {
             response.sendRedirect("notfound.jsp");
         }

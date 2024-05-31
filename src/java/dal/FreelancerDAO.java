@@ -14,8 +14,11 @@ import java.sql.SQLException;
  * @author DUC MINH
  */
 public class FreelancerDAO  extends DBContext{
+    
+   
+    
     public Freelancer getFreelancerById(int id) throws SQLException {
-        String query = "SELECT * FROM freelancers WHERE freelanceID = ?";
+        String query = "SELECT * FROM freelancer WHERE userID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -28,8 +31,8 @@ public class FreelancerDAO  extends DBContext{
                         rs.getBoolean("gender"),
                         rs.getDate("dob"),
                         rs.getString("describe"),
-                        rs.getString("email"),
-                        rs.getString("phone")
+                        rs.getString("email__contact"),
+                        rs.getString("phone_contact")
                     );
                 }
             }
@@ -38,6 +41,12 @@ public class FreelancerDAO  extends DBContext{
             throw new SQLException("Error while fetching freelancer", e);
         }
         return null;
+    }
+    
+    public static void main(String[] args) throws SQLException {
+        FreelancerDAO  m = new FreelancerDAO();
+        Freelancer n = m.getFreelancerById(3);
+        System.out.println(n);
     }
     public boolean updateFreelancer(Freelancer freelancer) throws SQLException {
         String query = "UPDATE freelancers SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, describe = ?, email = ?, phone = ? WHERE freelanceID = ?";

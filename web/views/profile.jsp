@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,17 +33,17 @@
                             </a> 
                             <h1>Freelancer Profile</h1>
                             <c:if test="${not empty freelancer}">
-                                <p>ID: ${Freelancer.freelanceID}</p>
-                                <p>First Name: ${Freelancer.firstName}</p>
-                                <p>Last Name: ${Freelancer.lastName}</p>
-                                <p>Image: <img src="${Freelancer.image}" alt="Freelancer Image" /></p>
-                                <p>Gender: ${Freelancer.gender ? 'Male' : 'Female'}</p>
-                                <p>Date of Birth: ${Freelancer.dob}</p>
-                                <p>Description: ${Freelancer.description}</p>
-                                <p>Email: ${Freelancer.email}</p>
-                                <p>Phone: ${Freelancer.phone}</p>
+                                <p>ID: ${freelancer.freelanceID}</p>
+                                <p>First Name: ${freelancer.first_name}</p>
+                                <p>Last Name: ${freelancer.last_name}</p>
+                                <p>Image: <img src="${freelancer.image}" alt="Freelancer Image" /></p>
+                                <p>Gender: ${freelancer.gender ? 'Male' : 'Female'}</p>
+                                <p>Date of Birth: ${freelancer.dob}</p>
+                                <p>Description: ${freelancer.describe}</p>
+                                <p>Email: ${freelancer.email}</p>
+                                <p>Phone: ${freelancers.phone}</p>
                             </c:if>
-                            <c:if test="${empty Freelancer}">
+                            <c:if test="${empty freelancer}">
                                 <p>Freelancer not found.</p>
                             </c:if>
 
