@@ -58,60 +58,10 @@
                                     <a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
                                         <li><a href="index.html">Home</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                        <li><a href="index-4.html">Home 4</a></li>
-                                        <li><a href="index-5.html">Home 5</a></li>
+                                       
                                     </ul>
                                 </li>
-                                <li class="has-submenu active">
-                                    <a href="javascript:void(0);">For <i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        <li class="has-submenu">
-                                            <a href="javascript:void(0);">Freelancer</a>
-                                            <ul class="submenu">
-                                                <li><a href="developer.html">Freelancer</a></li>
-                                                <li><a href="developer-details.html">Freelancer Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="dashboard.html">Dashboard</a></li>
-                                        <li><a href="recruiterprofile">My Profile</a></li>
-                                        <li><a href="company-details.html">Company Details</a></li>
-                                        <li><a href="manage-projects.html">Projects</a></li>
-                                        <li><a href="favourites.html">Favourites</a></li>
-                                        <li><a href="membership-plans.html">Membership</a></li>
-                                        <li><a href="milestones.html">Milestones</a></li>
-                                        <li><a href="chats.html">Chats</a></li>
-                                        <li><a href="review.html">Review</a></li>
-                                        <li><a href="deposit-funds.html">Payments</a></li>
-                                        <li><a href="verify-identity.html">Verify Identity</a></li>
-                                        <li class="active"><a href="profile-settings.html">Settings</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        <li class="has-submenu">
-                                            <a href="javascript:void(0);">Projects</a>
-                                            <ul class="submenu">
-                                                <li><a href="project.html">Projects</a></li>
-                                                <li><a href="project-details.html">Project Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="freelancer-dashboard.html">Dashboard</a></li>
-                                        <li><a href="developer-profile.html">My Profile</a></li>
-                                        <li><a href="developer-details.html">Freelancer Details</a></li>
-                                        <li><a href="freelancer-project-proposals.html">Projects</a></li>
-                                        <li><a href="freelancer-favourites.html">Favourites</a></li>
-                                        <li><a href="freelancer-membership.html">Membership</a></li>
-                                        <li><a href="freelancer-change-password.html">Change Password</a></li>
-                                        <li><a href="freelancer-chats.html">Chats</a></li>
-                                        <li><a href="freelancer-review.html">Review</a></li>
-                                        <li><a href="freelancer-withdraw-money.html">Payments</a></li>
-                                        <li><a href="freelancer-verify-identity.html">Verify Identity</a></li>
-                                        <li><a href="freelancer-profile-settings.html">Settings</a></li>
-                                    </ul>
-                                </li>
+                                
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">

@@ -147,7 +147,15 @@
                     <div class="row align-items-center inner-banner">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h3>Project Grid</h3>
+                                <h3>Post Grid</h3>
+                                <form class="form" name="title" id="store" method="get" action="search">
+                                    <div class="form-inner">
+                                        <div class="input-group">                                             
+                                            <input type="text" class="form-control" name="searchInput" placeholder="Keywords">
+                                            <button class="btn btn-primary sub-btn" type="submit">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html"> Home</a></li>
@@ -537,15 +545,17 @@
                                                 <div
                                                     <h1>Search Results</h1>
 
-                                                    
-                                                    <c:forEach var="post" items="${listCC}">
+
+                                                    <c:forEach var="post" items="${posts}">
                                                         <div class="post">
                                                             <div class="profile-name">
-                                                                <div class="author-location">${post.recruiterID.company.companyName}</div>
+                                                                <div class="author-location">
+                                                                    <h1>${posts.recruiterID.company.companyName}</h1>
+                                                                </div>
                                                             </div>
                                                             <div class="freelance-info">
-                                                                <h3><a href="javascript:void(0);">${post.title}</a></h3>
-                                                                <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${post.location}</div>
+                                                                <h3><a href="javascript:void(0);">${posts.getTitle()}</a></h3>
+                                                                <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${posts.location}</div>
                                                             </div>
                                                             <div class="freelance-tags">
                                                                 <%-- Split skills into individual badges --%>
@@ -554,7 +564,16 @@
                                                                 </c:forEach>
                                                             </div>
                                                             <div class="freelancers-price">$${post.budget}</div>
+                                                        </div>
                                                     </c:forEach>
+
+
+
+
+
+
+
+
 
                                                 </div>
                                             </div>

@@ -96,6 +96,10 @@
         <servlet-name>UpdateProfile_Freelancer</servlet-name>
         <servlet-class>AccountControll.UpdateProfile_Freelancer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListApply</servlet-name>
+        <servlet-class>AdminControlles.ListApply</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -183,7 +187,7 @@
     <servlet-mapping>
         <servlet-name>ManageRecruiterAdmin</servlet-name>
         <url-pattern>/manageRecruiterAdmin</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet>
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>com.example.ProfileServlet</servlet-class>
@@ -199,5 +203,9 @@
     <servlet-mapping>
         <servlet-name>UpdateProfile_Freelancer</servlet-name>
         <url-pattern>/UpdateProfile_Freelancer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListApply</servlet-name>
+        <url-pattern>/listapply</url-pattern>
     </servlet-mapping>
 </web-app>

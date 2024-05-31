@@ -5,6 +5,8 @@
 package AccountControll;
 
 import Models.Company;
+import Models.Freelancer;
+import Models.Post;
 import Models.Recruiter;
 import dal.DAO;
 import jakarta.servlet.ServletException;
@@ -16,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import Models.User;
 import dal.CompanyDAO;
+import dal.HomeDAO;
 import dal.RecruiterDAO;
 
 /**
@@ -71,6 +74,7 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
         request.setAttribute("username", username);
+        
         request.setAttribute("password", password);
         DAO accDao = new DAO();
         User c = accDao.getLogin(username, password);
@@ -87,11 +91,14 @@ public class LoginController extends HttpServlet {
                 
                 RecruiterDAO re = new RecruiterDAO();
                 CompanyDAO com = new CompanyDAO();
+                
+                
                 Recruiter rec = re.getRecruiterProfile(c.getUserID());
                 Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
                 session.setAttribute("company", co);
                 session.setAttribute("recruiter", rec);
-                
+               
+               
                 
                 
                 
@@ -107,7 +114,8 @@ public class LoginController extends HttpServlet {
                 } else {
                     response.sendRedirect("home");
                 }
-            } else {             
+   
+             {             
               
                     response.sendRedirect("changePassword");
                 }
