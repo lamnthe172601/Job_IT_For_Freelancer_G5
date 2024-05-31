@@ -19,7 +19,7 @@ function FormValidate() {
     var eDob = document.getElementById('eDob');
     var eSkill = document.getElementById('eSkill');
 
-    var reGexPass = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{6,16}$/;
+    var reGexPass = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{8,16}$/;
     var reGexPhone = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 
     var checkboxes = document.getElementsByName('skill');
