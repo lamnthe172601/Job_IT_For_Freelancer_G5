@@ -184,7 +184,7 @@
                                 <div class="col-md-4 d-flex">
                                     <div class="card wizard-card flex-fill">
                                         <div class="card-body">
-                                            <p class="text-primary mt-0 mb-2">Completed Projects</p>
+                                            <p class="text-primary mt-0 mb-2">Projects</p>
                                             <h5>${totalPosts}</h5>
                                             <p><a href="projects.html">view details</a></p>
                                             <span class="dash-widget-icon bg-1">
@@ -196,7 +196,7 @@
                                 <div class="col-md-4 d-flex">
                                     <div class="card wizard-card flex-fill">
                                         <div class="card-body">
-                                            <p class="text-primary mt-0 mb-2">Active Projects</p>
+                                            <p class="text-primary mt-0 mb-2">Job application</p>
                                             <h5>${totalJobApplys}</h5>
                                             <p><a href="projects.html">view details</a></p>
                                             <span class="dash-widget-icon bg-1">

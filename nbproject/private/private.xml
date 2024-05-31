@@ -2,21 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/register.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputRecruiterProfile.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/RegisterController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_0.js</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputFreelancerProfileController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputRecruiterProfileController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/accountType.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/Company.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/login.jsp</file>
-        </group>
         <group name="SWP391">
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/web/assets/img/logo-white.svg</file>
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/web/views/error.jsp</file>
@@ -71,6 +56,10 @@
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/web/views/about.jsp</file>
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/web/views/search.jsp</file>
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/Models/TeamNumber.java</file>
+        </group>
+        <group>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/dashboardAdmin.jsp</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/freelancerAdmin.jsp</file>
         </group>
     </open-files>
 </project-private>
