@@ -6,11 +6,11 @@ function FormValidate() {
     let checkdate = false;
     let checkskill = false;
 
-    var email = document.getElementById('email').value;
-    var firstname = document.getElementById('firstname').value;
-    var lastname = document.getElementById('lastname').value;
-    var phone = document.getElementById('phone').value;
-    var dob = document.getElementById('dob').value;
+    var email = document.getElementById('email').value.trim();
+    var firstname = document.getElementById('firstname').value.trim();
+    var lastname = document.getElementById('lastname').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var dob = document.getElementById('dob').value.trim();
 
     var eEmail = document.getElementById('eEmail');
     var ePhone = document.getElementById('ePhone');
