@@ -5,26 +5,85 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="757b1481-fb67-479a-9b9e-e3f2f126911f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/4/745a9fa1ee2eec6f93ed5a2b985b3db28315b4f8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/4/745a9fa1ee2eec6f93ed5a2b985b3db28315b4f8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Job_IT_For_Freelancer_G5.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nbproject/private/retriever/catalog.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nbproject/private/retriever/jakarta.ee/xml/ns/jakartaee/jakartaee_10.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nbproject/private/retriever/jakarta.ee/xml/ns/jakartaee/jakartaee_web_services_client_2_0.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nbproject/private/retriever/jakarta.ee/xml/ns/jakartaee/jsp_3_1.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nbproject/private/retriever/jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nbproject/private/retriever/jakarta.ee/xml/ns/jakartaee/web-common_6_0.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nbproject/private/retriever/www.w3.org/2001/xml.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/AccountControll/InputFreelancerProfileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/AccountControll/InputRecruiterProfileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/AccountControll/RecruiterProfileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/AccountControll/RecruiterProfileEditControll.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/AccountControll/SelectAccountTypeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/AdminControlles/ChangStatusUserAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/AdminControlles/ManageFreelancerAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/AdminControlles/ManageRecruiterAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/AdminControlles/ProfileAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/CommonControll/SearchController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/Models/Admin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/MutiDAO/FreelancerInformationDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/MutiDAO/RecruiterInformationDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/MutiModels/FreelancerInformation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/MutiModels/RecruiterInformation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/dal/CompanyDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/dal/DashboardDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/dal/DurationDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/dal/FreelancerDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/dal/JobTypeDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/dal/RecruiterDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/IMG/dfd8896234aefc299efe21e8e51e3825.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/adminViews/freelancerAdmin.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/adminViews/profileAdmin.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/adminViews/recruiterAdmin.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/assets/js/checkform_0.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/assets/js/checkform_1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/assets/js/checkform_2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/views/accountType.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/views/inputFreelancerProfile.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/views/inputRecruiterProfile.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/views/recruiterprofile.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/views/recruitersetting.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/views/search.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/build-impl.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/genfiles.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/AccountControll/HomeContronller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/AccountControll/HomeContronller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/AccountControll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/AccountControll/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/AccountControll/RegisterControll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/AccountControll/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/AdminControlles/DashboardAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/AdminControlles/DashboardAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/CommonControll/blogGridControll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/CommonControll/blogGridControll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Models/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Models/Company.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Models/Experience.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Models/Experience.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Models/Freelancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Models/Freelancer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Models/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Models/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Models/Recruiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Models/Recruiter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Models/SkillSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Models/SkillSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Models/TeamNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Models/TeamNumber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dal/AdminDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/AdminDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/adminAssets/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/adminAssets/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/adminAssets/js/feather.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/adminAssets/js/feather.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/DBContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/DBContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/HomeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/HomeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/adminAssets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/adminAssets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/adminAssets/js/bootstrap-datetimepicker.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/adminAssets/js/bootstrap-datetimepicker.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/adminAssets/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/adminAssets/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/adminAssets/js/jquery-3.7.1.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/adminAssets/js/jquery-3.7.1.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/adminAssets/plugins/datatables/datatables.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/adminAssets/plugins/datatables/datatables.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/adminAssets/plugins/datatables/jquery.dataTables.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/adminAssets/plugins/datatables/jquery.dataTables.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/adminViews/dashboardAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/adminViews/dashboardAdmin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/assets/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/js/checkfrom.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/js/checkfrom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/views/changePassword.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/views/changePassword.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/views/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/views/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/views/inputFreelancerInfo.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/views/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/views/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/views/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/views/register.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,10 +93,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2grPVoHZiXDrNhVhBcLaron45nq" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -52,7 +111,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "LamNT",
+    "git-widget-placeholder": "Merging Khuongld",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>

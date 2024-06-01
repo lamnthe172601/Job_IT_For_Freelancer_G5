@@ -18,7 +18,7 @@ public class Recruiter {
     String image, email, phone;
     int UserID;
     
-    public Recruiter() {
+    public Recruiter(int aInt) {
     }
 
     public Recruiter(int recruiterID, String firstName, String lastName, boolean gender, Date dob, String image, String email, String phone, int UserID) {
@@ -106,7 +106,9 @@ public class Recruiter {
         this.UserID = UserID;
     }
 
-    
+    public String fullName(){
+        return getFirstName() + " " + getLastName();
+    }
 
    
     

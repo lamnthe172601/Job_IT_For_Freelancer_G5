@@ -45,12 +45,16 @@
         <servlet-class>CommonControll.BlogDetailsControll</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Page404Controll</servlet-name>
-        <servlet-class>CommonControll.Page404Controll</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>blogGridControll</servlet-name>
         <servlet-class>CommonControll.blogGridControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RecruiterProfileControll</servlet-name>
+        <servlet-class>AccountControll.RecruiterProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RecruitersProfileEditControll</servlet-name>
+        <servlet-class>AccountControll.RecruiterProfileEditControll</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterController</servlet-name>
@@ -67,6 +71,26 @@
     <servlet>
         <servlet-name>SelectAccountTypeController</servlet-name>
         <servlet-class>AccountControll.SelectAccountTypeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileAdmin</servlet-name>
+        <servlet-class>AdminControlles.ProfileAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageFreelancer</servlet-name>
+        <servlet-class>AdminControlles.ManageFreelancerAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageRecruiterAdmin</servlet-name>
+        <servlet-class>AdminControlles.ManageRecruiterAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewProfile</servlet-name>
+        <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProfile_Freelancer</servlet-name>
+        <servlet-class>AccountControll.UpdateProfile_Freelancer</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -113,12 +137,16 @@
         <url-pattern>/BlogDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Page404Controll</servlet-name>
-        <url-pattern>/Page404</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>blogGridControll</servlet-name>
         <url-pattern>/blogGrid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecruiterProfileControll</servlet-name>
+        <url-pattern>/recruiterprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecruitersProfileEditControll</servlet-name>
+        <url-pattern>/recruitersetting</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -135,5 +163,33 @@
     <servlet-mapping>
         <servlet-name>SelectAccountTypeController</servlet-name>
         <url-pattern>/SelectAccountType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileAdmin</servlet-name>
+        <url-pattern>/profileAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageFreelancer</servlet-name>
+        <url-pattern>/manageFreelancerAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageRecruiterAdmin</servlet-name>
+        <url-pattern>/manageRecruiterAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>com.example.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProfile</servlet-name>
+        <url-pattern>/ViewProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProfile_Freelancer</servlet-name>
+        <url-pattern>/UpdateProfile_Freelancer</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -7,11 +7,11 @@ function FormValidate() {
     
     
     if (passW === '' || passW === null) {
-        errorPass.innerHTML = "Password are required fields.";
+        errorPass.innerHTML = "Please Input Password!";
     } else if (passW.length < 8 || passW.length > 16) {
-        errorPass.innerHTML = "Password must be between 8 and 16 characters.";
+        errorPass.innerHTML = "Password must be between 8 and 16 characters!";
     } else if (!reGexPass.test(passW)) {
-        errorPass.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter and one number.";
+        errorPass.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter and one number!";
     } else {
         checkpass = true;
         errorPass.innerHTML = "";
@@ -21,10 +21,10 @@ function FormValidate() {
     var errorConPass = document.getElementById('errorRepass');
 
     if (ConPass === '' || ConPass === null) {
-        errorConPass.innerHTML = "Confirm Password.";
+        errorConPass.innerHTML = "Please Confirm Password!";
     } 
     else if (ConPass !== passW) {
-        errorConPass.innerHTML = "Confirmed Password does not match Password.";
+        errorConPass.innerHTML = "Confirmed Password does not match Password!";
     } else {
         errorConPass.innerHTML = "";
         checkrepass = true;

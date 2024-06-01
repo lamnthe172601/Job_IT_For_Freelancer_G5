@@ -8,12 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import Models.Categories;
 import Models.Role;
 import Models.SkillSet;
 import Models.TeamNumber;
 import Models.User;
+import Models.Admin;
 
 /**
  *
@@ -22,10 +21,11 @@ import Models.User;
 public class DAO extends DBContext {
 
     public User getLogin(String user, String pass) {
-        String query = " select u.userID, u.username, u.password, u.email, u.status, r.roleID, r.role_name, u.LevelPass  \n"
-                + "                       from [User] u \n"
-                + "                       join Role r on u.roleID = r.roleID\n"
-                + "                       where u.username = ? and u.password = ?";
+        String query = """
+                        select u.userID, u.username, u.password, u.email, u.status, r.roleID, r.role_name, u.LevelPass  
+                                              from [User] u 
+                                              join Role r on u.roleID = r.roleID
+                                              where u.username = ? and u.password = ?""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, user);
@@ -329,6 +329,7 @@ public class DAO extends DBContext {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return recruiterID;
     }
@@ -354,7 +355,23 @@ public class DAO extends DBContext {
         }
     }
     
-    
+     public Admin getAdminProfileByUserID(int userid) {
+
+        String sql = """
+                     select * from [Admin] where [userID] = ?
+                     """;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, userid);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {               
+                return new Admin(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         DAO dao = new DAO();
@@ -369,5 +386,8 @@ public class DAO extends DBContext {
         //dao.inputFreelancerEducation("FPT", "12/12/2004", "12/12/2010", 35, "3");
         dao.inputRecruiterInfo("tan", "nguen", "1", "12/12/2012", null, "tannn@gmail.com", "0335625766", 193);
         //dao.inputCompanyInfo("FPT", "4", "12/12/2019", null, "htpvb.com", null, "hoalac", 51);
+
+   
     }
+   
 }

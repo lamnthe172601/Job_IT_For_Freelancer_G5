@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KofeJob</title>
+        <title>KLTTLJob</title>
 
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
@@ -64,28 +64,28 @@
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">First Name <span class="label-star"> *</span></label>
-                                <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstname">
+                                <input type="text" class="form-control" id="firstname" name="firstname">
                                 <div style="color: red" id="eFirstname"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Last Name <span class="label-star"> *</span></label>
-                                <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastname">
+                                <input type="text" class="form-control" id="lastname" name="lastname">
                                 <div style="color: red" id="eLastname"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label"> Phone Number<span class="label-star"> *</span></label>
-                                <input oninput="checkphone()"  type="text" class="form-control" id="phone" name="phone">
+                                <input type="text" class="form-control" id="phone" name="phone">
                                 <div style="color: red" id="ePhone"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Email Address<span class="label-star"> *</span></label>
-                                <input oninput="checkEmail()" type="text" class="form-control" id="email" name="email">
+                                <input type="text" class="form-control" id="email" name="email">
                                 <div style="color: red" id="eEmail"></div>
                             </div>
                         </div>
@@ -136,6 +136,11 @@
                             </div>
                         </c:forEach> 
                         <div style="color: red" id="eSkill"></div>
+                        <div class="col-md-6">
+                            <div class="input-block">
+                            </div>
+                        </div>
+                        <div id="skill_add_row"></div>
                     </div>
 
                     <div class="row">
@@ -194,16 +199,6 @@
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="input-block">
-                                <label class="focus-label">Degree Name</label>
-                                <select name="degreename" class="form-control select-level select-edu select">
-                                    <option value="3">Basic</option>
-                                    <option value="1">Bachelor's degree</option>
-                                    <option value="2">Master's Degree</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="input-block">
                                 <label class="focus-label">University Name</label>
                                 <input type="text" name="university" class="form-control">
                             </div>
@@ -224,16 +219,29 @@
                                 </div>
                             </div>
                         </div>
+                                                <div class="col-md-6 col-lg-3">
+                            <div class="input-block">
+                                <label class="focus-label">Degree Name</label>
+                                <select name="degreename" class="form-control select-level select-edu select">
+                                    <option value="3">Basic</option>
+                                    <option value="1">Bachelor's degree</option>
+                                    <option value="2">Master's Degree</option>
+                                </select>
+                            </div>
+                        </div>
                         <div id="education_add_row"></div>
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                 <a style="margin-bottom: 100px" class="file-upload image-upbtn back "href="SelectAccountType">Back</a>
+                <a style="margin-bottom: 100px" class="file-upload image-upbtn back "href="SelectAccountType">Back</a>
                 <button style="margin-bottom: 100px" class="file-upload image-upbtn submit " type="">Submit</button>
+                
             </div>
         </form>
+        
         <style>
+/* CSS cho nút Back */
 a.back {
     display: inline-block;
     padding: 10px 20px;
@@ -264,6 +272,7 @@ button.submit:hover {
     background-color: white;
     color: black;
 }
+
         </style>
 
 
@@ -282,6 +291,5 @@ button.submit:hover {
         <script src="assets/js/script.js" type="625b9fc8f423323d8794fc95-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="625b9fc8f423323d8794fc95-|49" defer></script></body>
     <script src="assets/js/checkform_1.js"></script>
-    <script src="assets/js/checkinput.js"></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/onboard-screen.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:30 GMT -->
 </html>
