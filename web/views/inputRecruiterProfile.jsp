@@ -65,14 +65,14 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="input-block">
                             <label class="form-label">First Name<span class="label-star"> *</span></label>
-                            <input oninput="checkFirstname()" type="text" class="form-control" id="firstname" name="firstname">
+                            <input type="text" class="form-control" id="firstname" name="firstname">
                             <div style="color: red" id="eFirstname"></div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="input-block">
                             <label class="form-label">Last Name<span class="label-star"> *</span></label>
-                            <input oninput="checkLastName()" type="text" class="form-control" id="lastname" name="lastname">
+                            <input type="text" class="form-control" id="lastname" name="lastname">
                             <div style="color: red" id="eLastname"></div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <div class="input-block">
                             <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
                             <div class="cal-icon">
-                                <input oninput="checkdob()" type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
+                                <input type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
                                 <div style="color: red" id="eDob"></div>
                             </div>
                         </div>
@@ -98,14 +98,14 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="input-block">
                             <label class="form-label">Phone Number<span class="label-star"> *</span></label>
-                            <input oninput="checkPhone()" type="text" class="form-control" id="phone" name="phone">
+                            <input type="text" class="form-control" id="phone" name="phone">
                             <div style="color: red" id="ePhone"></div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="input-block">
                             <label class="form-label">Email Address<span class="label-star"> *</span></label>
-                            <input oninput="checkEmail1()" type="text" class="form-control" id="email" name="email">
+                            <input type="text" class="form-control" id="email" name="email">
                             <div style="color: red" id="eEmail"></div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                         <div class="col-md-6">
                             <div class="input-block">
                                 <label class="form-label">Company Name<span class="label-star"> *</span></label>
-                                <input oninput="checkCompany()" type="text" class="form-control" name="companyname" id="companyname">
+                                <input type="text" class="form-control" name="companyname" id="companyname">
                                 <div style="color: red" id="eCompanyname"></div>
                             </div>
                         </div>
@@ -225,7 +225,6 @@ button.submit:hover {
 
 
     <script src="assets/js/checkform_2.js"></script>
-    <script src="assets/js/checkform_3.js"></script>
 
     <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="7080e2a7a4fb758dacdaf0ab-text/javascript"></script>
 

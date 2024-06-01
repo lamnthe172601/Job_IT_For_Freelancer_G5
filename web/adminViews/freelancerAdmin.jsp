@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="adminAssets/css/style.css">
     </head>
     <body>
-
+        
         <div class="main-wrapper">
 
             <div class="header">
@@ -38,7 +38,7 @@
                 <div class="header-left">
                     <a href="home" class="logo">
                         <img src="adminAssets/img/logo.png" alt="Logo">
-
+                        
                     </a>
                     <a href="home" class="logo logo-small">
                         <img src="adminAssets/img/logo-small.png" alt="Logo" width="30" height="30">
@@ -215,80 +215,54 @@
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="${listFreelancer}" var="freelancer" varStatus="loop">
-                                                    <tr>
-                                                        <td>
-                                                            ${loop.index+1}
-                                                        </td>
-                                                        <td>
-                                                            <div class="table-avatar user-profile">
-                                                                <a href="profile.html"><img class="avatar-img rounded-circle " src="${freelancer.getBasicInformation().getImage()}" alt="User Image"></a>
-                                                                <div>
-                                                                    <h5><a href="javascript:void(0);">${freelancer.getBasicInformation().fullname()}</a></h5>
-
-                                                                </div>
+                                                <tr>
+                                                    <td>
+                                                        ${loop.index+1}
+                                                    </td>
+                                                    <td>
+                                                        <div class="table-avatar user-profile">
+                                                            <a href="profile.html"><img class="avatar-img rounded-circle " src="${freelancer.getBasicInformation().getImage()}" alt="User Image"></a>
+                                                            <div>
+                                                                <h5><a href="javascript:void(0);">${freelancer.getBasicInformation().fullname()}</a></h5>
+                                                                
                                                             </div>
-                                                        </td>                                                   
-                                                        <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getAccount().getEmail()}</td>
+                                                        </div>
+                                                    </td>                                                   
+                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getAccount().getEmail()}</td>
 
-                                                        <td>
-
-                                                            <c:if test='${freelancer.getAccount().getStatus() == "active"}'>
-                                                                <a href="javascript:void(0);" class="user-active-btn">${freelancer.getAccount().getStatus()}</a>
-                                                            </c:if>
-
-                                                            <c:if test='${freelancer.getAccount().getStatus() == "inactive"}'>
-                                                                <a href="javascript:void(0);" class="user-inactive-btn">${freelancer.getAccount().getStatus()}</a>
-                                                            </c:if>
-                                                        </td>                                                   
-                                                        <td class="text-end three-dots">
+                                                    <td>
+                                                      
+                                                        <c:if test='${freelancer.getAccount().getStatus() == "active"}'>
+                                                        <a href="javascript:void(0);" class="user-active-btn">${freelancer.getAccount().getStatus()}</a>
+                                                        </c:if>
+                                                        
+                                                         <c:if test='${freelancer.getAccount().getStatus() == "inactive"}'>
+                                                        <a href="javascript:void(0);" class="user-inactive-btn">${freelancer.getAccount().getStatus()}</a>
+                                                        </c:if>
+                                                        </td>
+                                                    <td class="text-end three-dots">
+                                                       <td class="text-end three-dots">
                                                             <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu user-menu-list">
                                                                 <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                                    <c:if test='${freelancer.getAccount().getStatus() == "active"}'>
-                                                                    <a class="dropdown-item" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
-                                                                    </c:if>
-                                                                    <c:if test='${freelancer.getAccount().getStatus() == "inactive"}'>
-                                                                    <a class="dropdown-item" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>
-                                                                    </c:if>
+                                                                <a class="dropdown-item" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
                                                                 <a class="dropdown-item" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i data-feather="edit" class="me-2"></i> Edit</a>
                                                                 <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
                                                             </div>
 
                                                         </td>
-                                                <div class="modal custom-modal fade" id="Suspend_user" role="dialog">
+                                                <div class="modal custom-modal fade" id="delete_category" role="dialog">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-body">
                                                                 <div class="form-header">
                                                                     <h3>Status</h3>
-                                                                    <p>Are you sure want to Suspend user?</p>
+                                                                    <p>Are you sure want to change status?</p>
                                                                 </div>
                                                                 <div class="modal-btn delete-action">
                                                                     <div class="row">
                                                                         <div class="col-6">
-                                                                            <a href="changStatusUserAdmin" class="btn btn-primary continue-btn">Suspend</a>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>       
-                                                <div class="modal custom-modal fade" id="Activate_user" role="dialog">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-body">
-                                                                <div class="form-header">
-                                                                    <h3>Status</h3>
-                                                                    <p>Are you sure want to Activate user?</p>
-                                                                </div>
-                                                                <div class="modal-btn delete-action">
-                                                                    <div class="row">
-                                                                        <div class="col-6">
-                                                                            <a href="changStatusUserAdmin" class="btn btn-primary continue-btn">Activate</a>
+                                                                            <a href="changStatusUserAdmin" class="btn btn-primary continue-btn">Change</a>
                                                                         </div>
                                                                         <div class="col-6">
                                                                             <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -341,9 +315,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                </td>
+                                                    </td>
                                                 </tr>     
-                                            </c:forEach>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
@@ -556,7 +530,7 @@
         </div>
 
 
-
+      
 
 
         <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="adminAssets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>

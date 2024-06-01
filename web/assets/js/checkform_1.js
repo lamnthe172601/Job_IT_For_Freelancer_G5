@@ -6,10 +6,10 @@ function FormValidate() {
     let checkdate = false;
     let checkskill = false;
 
-    var email = document.getElementById('email').value.trim();
-    var firstname = document.getElementById('firstname').value.trim();
-    var lastname = document.getElementById('lastname').value.trim();
-    var phone = document.getElementById('phone').value.trim();
+    var email = document.getElementById('email').value;
+    var firstname = document.getElementById('firstname').value;
+    var lastname = document.getElementById('lastname').value;
+    var phone = document.getElementById('phone').value;
     var dob = document.getElementById('dob').value;
 
     var eEmail = document.getElementById('eEmail');
@@ -19,7 +19,7 @@ function FormValidate() {
     var eDob = document.getElementById('eDob');
     var eSkill = document.getElementById('eSkill');
 
-    var reGexPass = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{8,16}$/;
+    var reGexPass = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{6,16}$/;
     var reGexPhone = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 
     var checkboxes = document.getElementsByName('skill');
@@ -30,7 +30,7 @@ function FormValidate() {
         }
     }
     if (!checkskill) {
-        eSkill.innerHTML = "Choose at least one skill!";
+        eSkill.innerHTML = "Please choose at least one skill!";
         eSkill.style.display = 'block';
     } else {
         eSkill.style.display = 'none';
@@ -38,7 +38,7 @@ function FormValidate() {
 
     //check phone
     if (phone === null || phone === '') {
-        ePhone.innerHTML = 'Phone Number is required fields.';
+        ePhone.innerHTML = 'Please Input Your Phone!';
     } else if (!reGexPhone.test(phone)) {
         ePhone.innerHTML = 'Phone number is worng format!';
     } else {
@@ -48,7 +48,7 @@ function FormValidate() {
 
     //check email
     if (email === null || email === '') {
-        eEmail.innerHTML = 'Email is required fields.';
+        eEmail.innerHTML = 'Please Input your Email!';
     } else if (!reGexEmail.test(email)) {
         eEmail.innerHTML = 'Email is wrong format!';
     } else {
@@ -59,7 +59,7 @@ function FormValidate() {
 
     //check first name
     if (firstname === null || firstname === '') {
-        eFirstname.innerHTML = "Firstname is required fields.";
+        eFirstname.innerHTML = "Please Input Your Firstname!";
     } else {
         checkfirstname = true;
         eFirstname.innerHTML = '';
@@ -67,7 +67,7 @@ function FormValidate() {
 
     //check last name
     if (lastname === null || lastname === '') {
-        eLastname.innerHTML = "Lastname is required fields.";
+        eLastname.innerHTML = "Please Input Your Lastname!";
     } else {
         checklastname = true;
         eLastname.innerHTML = '';
@@ -75,7 +75,7 @@ function FormValidate() {
 
     //check dob
     if (dob === null || dob === '') {
-        eDob.innerHTML = "Date of Birth is required fields.";
+        eDob.innerHTML = "Please Input Your Date of Birth!";
     } else {
         checkdate = true;
         eDob.innerHTML = '';
