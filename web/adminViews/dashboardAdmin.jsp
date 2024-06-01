@@ -95,7 +95,7 @@
                     <li class="nav-item dropdown has-arrow main-drop">
                         <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                             <span class="user-img">
-                                <img src="${adminProfile.getImage()}" alt="Img">
+                                <img src="${adminProfile.image}" alt="Img">
                                 <span class="status online"></span>
                             </span>
                         </a>
@@ -184,7 +184,7 @@
                                 <div class="col-md-4 d-flex">
                                     <div class="card wizard-card flex-fill">
                                         <div class="card-body">
-                                            <p class="text-primary mt-0 mb-2">Projects</p>
+                                            <p class="text-primary mt-0 mb-2">Completed Projects</p>
                                             <h5>${totalPosts}</h5>
                                             <p><a href="projects.html">view details</a></p>
                                             <span class="dash-widget-icon bg-1">
@@ -196,7 +196,7 @@
                                 <div class="col-md-4 d-flex">
                                     <div class="card wizard-card flex-fill">
                                         <div class="card-body">
-                                            <p class="text-primary mt-0 mb-2">Job application</p>
+                                            <p class="text-primary mt-0 mb-2">Active Projects</p>
                                             <h5>${totalJobApplys}</h5>
                                             <p><a href="projects.html">view details</a></p>
                                             <span class="dash-widget-icon bg-1">

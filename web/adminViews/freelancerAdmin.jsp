@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="adminAssets/css/style.css">
     </head>
     <body>
-
+        
         <div class="main-wrapper">
 
             <div class="header">
@@ -39,7 +39,7 @@
                 <div class="header-left">
                     <a href="home" class="logo">
                         <img src="adminAssets/img/logo.png" alt="Logo">
-
+                        
                     </a>
                     <a href="home" class="logo logo-small">
                         <img src="adminAssets/img/logo-small.png" alt="Logo" width="30" height="30">
@@ -265,8 +265,9 @@
 
                                                                 </div>
                                                             </div>
-                                                        </td>                                                   
-                                                        <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getAccount().getEmail()}</td>
+                                                        </div>
+                                                    </td>                                                   
+                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getAccount().getEmail()}</td>
 
                                                         <td class="test1">
 

@@ -1,15 +1,15 @@
 function FormValidate() {
     let checkpass = false;
     let checkrepass = false;
-    var reGexPass = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{8,16}$/;
+    var reGexPass = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{6,16}$/;
     var passW = document.getElementById('password').value;
     var errorPass = document.getElementById('errorPass');
     
     
     if (passW === '' || passW === null) {
         errorPass.innerHTML = "Please Input Password!";
-    } else if (passW.length < 8 || passW.length > 16) {
-        errorPass.innerHTML = "Password must be between 8 and 16 characters!";
+    } else if (passW.length < 6 || passW.length > 16) {
+        errorPass.innerHTML = "Password must be between 6 and 16 characters!";
     } else if (!reGexPass.test(passW)) {
         errorPass.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter and one number!";
     } else {

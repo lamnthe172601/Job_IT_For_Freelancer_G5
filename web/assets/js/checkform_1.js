@@ -6,10 +6,10 @@ function FormValidate() {
     let checkdate = false;
     let checkskill = false;
 
-    var email = document.getElementById('email').value.trim();
-    var firstname = document.getElementById('firstname').value.trim();
-    var lastname = document.getElementById('lastname').value.trim();
-    var phone = document.getElementById('phone').value.trim();
+    var email = document.getElementById('email').value;
+    var firstname = document.getElementById('firstname').value;
+    var lastname = document.getElementById('lastname').value;
+    var phone = document.getElementById('phone').value;
     var dob = document.getElementById('dob').value;
 
     var eEmail = document.getElementById('eEmail');
@@ -19,7 +19,7 @@ function FormValidate() {
     var eDob = document.getElementById('eDob');
     var eSkill = document.getElementById('eSkill');
 
-    var reGexPass = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{8,16}$/;
+    var reGexPass = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{6,16}$/;
     var reGexPhone = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 
     var checkboxes = document.getElementsByName('skill');

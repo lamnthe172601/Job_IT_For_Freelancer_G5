@@ -239,55 +239,29 @@
                                                             <c:if test='${recruiter.getStatus() == "inactive"}'>
                                                                 <a href="javascript:void(0);" class="btnuser-inactive-btn"> ${recruiter.getStatus()}</a>
                                                             </c:if>
-                                                       <td class="text-end three-dots">
+                                                        </td>
+                                                        <td class="text-end three-dots">
                                                             <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu user-menu-list">
                                                                 <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                                    <c:if test='${recruiter.getStatus() == "active"}'>
-                                                                    <a class="dropdown-item" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
-                                                                    </c:if>
-                                                                    <c:if test='${recruiter.getStatus() == "inactive"}'>
-                                                                    <a class="dropdown-item" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>
-                                                                    </c:if>
+                                                                <a class="dropdown-item" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
                                                                 <a class="dropdown-item" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i data-feather="edit" class="me-2"></i> Edit</a>
                                                                 <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
                                                             </div>
 
                                                         </td>
-                                                <div class="modal custom-modal fade" id="Suspend_user" role="dialog">
+                                                <div class="modal custom-modal fade" id="delete_category" role="dialog">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-body">
                                                                 <div class="form-header">
                                                                     <h3>Status</h3>
-                                                                    <p>Are you sure want to Suspend user?</p>
+                                                                    <p>Are you sure want to change status?</p>
                                                                 </div>
                                                                 <div class="modal-btn delete-action">
                                                                     <div class="row">
                                                                         <div class="col-6">
-                                                                            <a href="changStatusUserAdmin" class="btn btn-primary continue-btn">Suspend</a>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>       
-                                                <div class="modal custom-modal fade" id="Activate_user" role="dialog">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-body">
-                                                                <div class="form-header">
-                                                                    <h3>Status</h3>
-                                                                    <p>Are you sure want to Activate user?</p>
-                                                                </div>
-                                                                <div class="modal-btn delete-action">
-                                                                    <div class="row">
-                                                                        <div class="col-6">
-                                                                            <a href="changStatusUserAdmin" class="btn btn-primary continue-btn">Activate</a>
+                                                                            <a href="changStatusUserAdmin" class="btn btn-primary continue-btn">Change</a>
                                                                         </div>
                                                                         <div class="col-6">
                                                                             <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
