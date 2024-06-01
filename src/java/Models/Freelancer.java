@@ -16,6 +16,8 @@ public class Freelancer {
     boolean gender;
     Date dob;
 
+    
+    
     public Freelancer() {
     }
 
