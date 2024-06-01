@@ -49,9 +49,5 @@ public class PostDAO extends DBContext{
     }
     
     
-    public static void main(String[] args) throws SQLException {
-        PostDAO p = new PostDAO();
-        List<Post> l = p.getPopularPosts(1);
-        System.out.println(l);
-    }
+
 }
