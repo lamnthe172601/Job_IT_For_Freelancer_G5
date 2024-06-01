@@ -40,8 +40,8 @@
                 </div>
             </header>
         <form action="InputFreelancerProfile" method="post" onsubmit="return FormValidate();">
-            <div style="margin-top: 50px;" class="on-board field-card select-account select-btn">
-                <div class="text-center onboard-head">
+            <div  class="on-board field-card select-account select-btn">
+                <div style="margin-top: 50px;" class="text-center onboard-head">
                     <h2>Personal Info</h2>
                     <p>Tell a bit about yourself. This information will appear on your public profile, so that potential buyers can get to know you better.</p>
                 </div>
@@ -64,28 +64,28 @@
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">First Name <span class="label-star"> *</span></label>
-                                <input type="text" class="form-control" id="firstname" name="firstname">
+                                <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstname">
                                 <div style="color: red" id="eFirstname"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Last Name <span class="label-star"> *</span></label>
-                                <input type="text" class="form-control" id="lastname" name="lastname">
+                                <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastname">
                                 <div style="color: red" id="eLastname"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label"> Phone Number<span class="label-star"> *</span></label>
-                                <input type="text" class="form-control" id="phone" name="phone">
+                                <input oninput="checkphone()"  type="text" class="form-control" id="phone" name="phone">
                                 <div style="color: red" id="ePhone"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Email Address<span class="label-star"> *</span></label>
-                                <input type="text" class="form-control" id="email" name="email">
+                                <input oninput="checkEmail()" type="text" class="form-control" id="email" name="email">
                                 <div style="color: red" id="eEmail"></div>
                             </div>
                         </div>
@@ -136,11 +136,6 @@
                             </div>
                         </c:forEach> 
                         <div style="color: red" id="eSkill"></div>
-                        <div class="col-md-6">
-                            <div class="input-block">
-                            </div>
-                        </div>
-                        <div id="skill_add_row"></div>
                     </div>
 
                     <div class="row">
@@ -234,22 +229,40 @@
                 </div>
             </div>
             <div class="text-center">
-                <button style="margin-bottom: 100px" class="file-upload image-upbtn submit " name="lam" value="ngu" type="">Submit</button>
+                 <a style="margin-bottom: 100px" class="file-upload image-upbtn back "href="SelectAccountType">Back</a>
+                <button style="margin-bottom: 100px" class="file-upload image-upbtn submit " type="">Submit</button>
             </div>
         </form>
         <style>
-            .file-upload.submit {
-    padding: 15px 30px; 
-    width: auto; 
-    background-color: red; 
+a.back {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
     color: white;
-    border-radius: 10px;
-    border-color: white;
+    border: 2px solid black;
+    text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
 }
 
-.file-upload.submit:hover {
-    background-color: orange;
+a.back:hover {
+    background-color: white;
+    color: black;
+}
+
+/* CSS cho nút Submit */
+button.submit {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #DD4B39; /* Màu cam đỏ */
+    color: white;
+    border: 2px solid black;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button.submit:hover {
+    background-color: white;
+    color: black;
 }
         </style>
 
@@ -269,5 +282,6 @@
         <script src="assets/js/script.js" type="625b9fc8f423323d8794fc95-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="625b9fc8f423323d8794fc95-|49" defer></script></body>
     <script src="assets/js/checkform_1.js"></script>
+    <script src="assets/js/checkinput.js"></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/onboard-screen.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:30 GMT -->
 </html>
