@@ -24,8 +24,8 @@ function FormValidate() {
 
     if (passW === '' || passW === null) {
         errorPass.innerHTML = "Please Input Password!";
-    } else if (passW.length < 6 || passW.length > 16) {
-        errorPass.innerHTML = "Password must be between 6 and 16 characters!";
+    } else if (passW.length < 8 || passW.length > 16) {
+        errorPass.innerHTML = "Password must be between 8 and 16 characters!";
     } else if (!reGexPass.test(passW)) {
         errorPass.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter and one number!";
     } else {
