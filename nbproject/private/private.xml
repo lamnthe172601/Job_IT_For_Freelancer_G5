@@ -58,8 +58,21 @@
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/Models/TeamNumber.java</file>
         </group>
         <group>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/dashboardAdmin.jsp</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/freelancerAdmin.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/register.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkfrom.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputRecruiterProfile.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/RegisterController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_0.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputFreelancerProfileController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_3.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/SHA_1.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_4.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_2.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_1.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
         </group>
     </open-files>
 </project-private>

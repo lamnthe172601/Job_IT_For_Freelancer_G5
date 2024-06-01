@@ -378,7 +378,7 @@ public class DAO extends DBContext {
             System.out.println(skillSet.toString());
         }
         System.out.println(dao.getRecruiterIDbyUserID(133));
-
+        dao.inputFreelancerInfo("tan", "tim", null, "1", "12-12-2003", null, "tandeptrai@gmail.com", "0335625766", 168);
         //dao.inputFreelancerExperiance("chem gio", "chem bao", "nguoi chem", "12/12/2003", "12/12/2004", 35);
         //dao.inputFreelancerEducation("FPT", "12/12/2004", "12/12/2010", 35, "3");
         //dao.inputRecruiterInfo("tan", "nguen", "1", "12/12/2012", null, "tannn@gmail.com", "0335625766", 50);
