@@ -1,14 +1,15 @@
 <%-- 
-    Document   : 404Page
-    Created on : May 24, 2024, 10:21:59 AM
+    Document   : ProfileFreelancer
+    Created on : Jun 1, 2024, 11:43:49 PM
     Author     : khuongld
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/404-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:00 GMT -->
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/freelancer-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:37:42 GMT -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -20,8 +21,6 @@
 
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-
-        <link rel="stylesheet" href="assets/plugins/feather/feather.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
@@ -55,7 +54,7 @@
                                 </a>
                             </div>
                             <ul class="main-nav">
-                                <li class=" has-submenu">
+                                <li class="has-submenu">
                                     <a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
                                         <li><a href="index.html">Home</a></li>
@@ -65,7 +64,7 @@
                                         <li><a href="index-5.html">Home 5</a></li>
                                     </ul>
                                 </li>
-                                <li class="has-submenu">
+                                <li class="has-submenu active">
                                     <a href="javascript:void(0);">For Employers <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
                                         <li class="has-submenu">
@@ -76,7 +75,7 @@
                                             </ul>
                                         </li>
                                         <li><a href="dashboard.html">Dashboard</a></li>
-                                        <li><a href="company-profile.html">My Profile</a></li>
+                                        <li class="active"><a href="company-profile.html">My Profile</a></li>
                                         <li><a href="manage-projects.html">Projects</a></li>
                                         <li><a href="favourites.html">Favourites</a></li>
                                         <li><a href="membership-plans.html">Membership</a></li>
@@ -111,12 +110,12 @@
                                         <li><a href="freelancer-profile-settings.html">Settings</a></li>
                                     </ul>
                                 </li>
-                                <li class="has-submenu active">
+                                <li class="has-submenu">
                                     <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
                                         <li><a href="about.html">About us</a></li>
                                         <li><a href="blank-page.html">Starter Page</a></li>
-                                        <li class="active"><a href="404-page.html">404 Page</a></li>
+                                        <li><a href="404-page.html">404 Page</a></li>
                                         <li><a href="login.html">Login</a></li>
                                         <li><a href="register.html">Register</a></li>
                                         <li><a href="onboard-screen.html">Onboard Screen</a></li>
@@ -147,22 +146,203 @@
             </header>
 
 
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
+            <div class="bread-crumb-bar">
+                <div class="container">
+                    <div class="row align-items-center inner-banner">
+                        <div class="col-md-12 col-12 text-center">
+                            <div class="breadcrumb-list">
+                                <h2>Freelancer Profile</h2>
+                                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item" aria-current="page">Freelancer Profile</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div class="empty-content text-center">
-                                <img src="assets/img/404.png" alt="logo" class="img-fluid">
-                                <h2>Page not found</h2>
-                                <p>Oops! looks like you followed a bad link. If you think this is a problem with us, please tell us.</p>
-                                <div class="btn-item">
-                                    <a class="btn get-btn" href="index.html">Go To Home <i class="feather-arrow-right ms-2"></i></a>
-                                    <a class="btn courses-btn" href="javascript:void(0);">Back <i class="feather-arrow-right ms-2"></i></a>
+
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="profile profile-freelance">
+                                <div class="profile-box">
+                                    <div class="provider-widget">
+                                        <div class="pro-info-left">
+                                            <div class="provider-img "><img style="width: 80px; height: 80px;" src="${freelancer.image}" class="img-fluid" alt="User"></div>
+                                            <div class="profile-info">
+                                                <h2 class="profile-title">${freelancer.fullname()}</h2>
+                                                <p class="mb-0">@${freelancer.email}</p>                                             
+                                            </div>
+                                        </div>
+                                        <div class="pro-info-right profile-inf">
+                                            <a class="btn profile-edit-btn" href="freelancer-profile-settings.html">Edit Profile</a>
+                                        </div>
+                                    </div>
                                 </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-md-12">
+                            <div class="pro-view">
+
+                                <nav class="provider-tabs mb-4">
+                                    <ul class="nav nav-tabs nav-tabs-solid nav-justified">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#overview">
+                                                <img src="assets/img/icon/tab-icon-01.png" height="25" alt="User Image">
+                                                <p class="bg-red">Overview</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#experience">
+                                                <img src="assets/img/icon/tab-icon-03.png" height="25" alt="User Image">
+                                                <p class="bg-violet">Experience</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#education">
+                                                <img src="assets/img/icon/tab-icon-04.png" height="25" alt="User Image">
+                                                <p class="bg-yellow">Education</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#skill">
+                                                <img src="assets/img/icon/tab-icon-05.png" height="25" alt="User Image">
+                                                <p class="bg-pink">Skills</p>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </nav>
+
+
+                                <div class="pro-post widget-box" id="overview">
+                                    <h3 class="pro-title">Overview</h3>
+                                    <div class="pro-content">
+
+                                        <div class="mt-4">
+                                            <h4 class="widget-title">First Name:</h4>
+                                            <p>${freelancer.first_name}</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h4 class="widget-title">Last Name:</h4>
+                                            <p>${freelancer.last_name}</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h4 class="widget-title">Date of birth: </h4>
+                                            <p>${freelancer.dob}</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h4 class="widget-title">Location: </h4>
+                                            <p>${freelancer.describe}</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="pro-post project-widget widget-box" id="experience">
+                                    <h3 class="pro-title">Experience</h3>
+                                    <c:forEach  items="${experience}" var="experience">
+                                    <div class="pro-content">
+                                        <div class="widget-list mb-0">
+                                            <ul class="clearfix">
+                                                <li>
+                                                    <h4>${experience.experience_work_name}</h4>
+                                                    <h5>${experience.getStart_date()} -> ${experience.getEnd_date()}</h5>
+                                                    <p>${experience.position}</p>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    </c:forEach>
+                                </div>
+
+
+                                <div class="pro-post project-widget widget-box" id="education">
+                                    <h3 class="pro-title">Educational Details</h3>
+                                    <div class="pro-content">
+                                        <div class="widget-list mb-0">
+                                            <ul class="clearfix">
+                                                <c:forEach items="${education}" var="education">
+                                                <li>
+                                                    <h4>${education.university_name} </h4>
+                                                    <h5>${education.start_date} -> ${education.end_date}</h5>
+                                                    <p>Degree: ${education.degreeID.degree_name}</p>
+                                                </li>
+                                                </c:forEach>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="pro-post project-widget widget-box" id="skill">
+                                    <h3 class="pro-title">Technical Skills</h3>
+                                    
+                                    <div class="pro-content">
+                                        <div class="tags">
+                                            <c:forEach items="${skills}" var="skill">
+                                            <span class="badge badge-pill badge-skills">+ ${skill.skill_set_ID.skill_set_name}</span>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
+                            <div class="pro-post widget-box follow-widget">
+                                <a href="javascript:void(0);" class="btn follow-btn">+ Follow</a>
+                                <ul class="follow-posts pro-post">
+                                    <li><p>Following</p><h6>49</h6></li>
+                                    <li><p>Followers</p><h6>422</h6></li>
+                                </ul>
+                            </div>
+                            <div class="pro-post widget-box language-widget">
+                                <h4 class="pro-title">LANGUAGE SKILLS</h4>
+                                <ul class="latest-posts pro-content pt-0">
+                                    <li><p>English</p>
+                                        <div class="progress progress-md mb-0">
+                                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </li>
+                                    <li><p>Russian</p>
+                                        <div class="progress progress-md mb-0">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div></li>
+                                    <li><p>German</p>
+                                        <div class="progress progress-md mb-0">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="pro-post widget-box about-widget">
+                                <h4 class="pro-title mb-0">ABOUT ME</h4>
+                                <ul class="latest-posts pro-content">
+                                    <li><p>Gender</p><h6>${freelancer.gender ? "Male" : "Female"} </h6></li>
+                                    <li><p>Experience</p><h6>5 Years</h6></li>
+                                    <li><p>Location</p><h6>Istanbul/Turkey</h6></li>
+                                </ul>
                             </div>
 
+                           
+
+
+                           
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -273,12 +453,15 @@
         </div>
 
 
-        <script src="assets/js/jquery-3.7.1.min.js" type="7768a2853b435a211c9eaf70-text/javascript"></script>
+        <script src="assets/js/jquery-3.7.1.min.js" type="c62a37b1c7e125ad6ef80457-text/javascript"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="7768a2853b435a211c9eaf70-text/javascript"></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="c62a37b1c7e125ad6ef80457-text/javascript"></script>
 
-        <script src="assets/js/script.js" type="7768a2853b435a211c9eaf70-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="7768a2853b435a211c9eaf70-|49" defer></script></body>
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="c62a37b1c7e125ad6ef80457-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="c62a37b1c7e125ad6ef80457-text/javascript"></script>
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/404-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:03 GMT -->
+        <script src="assets/js/script.js" type="c62a37b1c7e125ad6ef80457-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="c62a37b1c7e125ad6ef80457-|49" defer></script></body>
+
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/freelancer-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:37:52 GMT -->
 </html>

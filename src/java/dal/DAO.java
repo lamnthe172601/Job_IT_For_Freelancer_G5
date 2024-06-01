@@ -311,6 +311,7 @@ public class DAO extends DBContext {
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -378,11 +379,12 @@ public class DAO extends DBContext {
         for (TeamNumber skillSet : listSkill) {
             System.out.println(skillSet.toString());
         }
-        System.out.println(dao.getRecruiterIDbyUserID(133));
-
+        System.out.println(dao.getRecruiterIDbyUserID(159));
+        User u=dao.getUserByEmail("tannguyennhat916@gmail.com");
+        System.out.println(u.toString());
         //dao.inputFreelancerExperiance("chem gio", "chem bao", "nguoi chem", "12/12/2003", "12/12/2004", 35);
         //dao.inputFreelancerEducation("FPT", "12/12/2004", "12/12/2010", 35, "3");
-        //dao.inputRecruiterInfo("tan", "nguen", "1", "12/12/2012", null, "tannn@gmail.com", "0335625766", 50);
+        dao.inputRecruiterInfo("tan", "nguen", "1", "12/12/2012", null, "tannn@gmail.com", "0335625766", 193);
         //dao.inputCompanyInfo("FPT", "4", "12/12/2019", null, "htpvb.com", null, "hoalac", 51);
 
    
