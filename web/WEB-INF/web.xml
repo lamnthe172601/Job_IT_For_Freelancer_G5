@@ -85,7 +85,7 @@
         <servlet-class>AdminControlles.ManageRecruiterAdmin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewProfile_Freelancer</servlet-name>
+        <servlet-name>ViewProfile</servlet-name>
         <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
     </servlet>
     <servlet>
@@ -94,12 +94,7 @@
     </servlet>
     <servlet>
         <servlet-name>changePass</servlet-name>
-
         <servlet-class>AccountControll.changePass</servlet-class>
-        </servlet>
-        <servlet>
-        <servlet-name>ChangeStatusUserAdmin</servlet-name>
-        <servlet-class>AdminControlles.ChangeStatusUserAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -194,8 +189,8 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewProfile_Freelancer</servlet-name>
-        <url-pattern>/MyProfile</url-pattern>
+        <servlet-name>ViewProfile</servlet-name>
+        <url-pattern>/ViewProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateProfile_Freelancer</servlet-name>
@@ -204,9 +199,5 @@
     <servlet-mapping>
         <servlet-name>changePass</servlet-name>
         <url-pattern>/changePass</url-pattern>
-        </servlet-mapping>
-        <servlet-mapping>
-        <servlet-name>ChangeStatusUserAdmin</servlet-name>
-        <url-pattern>/changeStatusUserAdmin</url-pattern>
     </servlet-mapping>
 </web-app>

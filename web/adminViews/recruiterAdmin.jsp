@@ -124,7 +124,7 @@
                     <div id="sidebar-menu" class="sidebar-menu">
                         <ul>
                             <li class="menu-title"><span>Main</span></li>
-                            <li >
+                            <li class="active">
                                 <a href="dashboardAdmin"><i data-feather="home"></i> <span>Dashboard</span></a>
                             </li>                           
                             <li>
@@ -133,7 +133,7 @@
                             <li>
                                 <a href="manageFreelancerAdmin"><i data-feather="users"></i> <span>Freelancer</span></a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="manageRecruiterAdmin"><i data-feather="user-check"></i> <span>Recuiter</span></a>
                             </li>                          
                             <li>
@@ -233,11 +233,11 @@
                                                         <td>
 
                                                             <c:if test='${recruiter.getStatus() == "active"}'>
-                                                                <a href="javascript:void(0);" class="btn user-active-btn"> ${recruiter.getStatus()}</a>
+                                                                <a href="javascript:void(0);" class="btn btn-enable"> ${recruiter.getStatus()}</a>
                                                             </c:if>
 
                                                             <c:if test='${recruiter.getStatus() == "inactive"}'>
-                                                                <a href="javascript:void(0);" class="btnuser-inactive-btn"> ${recruiter.getStatus()}</a>
+                                                                <a href="javascript:void(0);" class="btn btn-disable"> ${recruiter.getStatus()}</a>
                                                             </c:if>
                                                         </td>
                                                         <td class="text-end three-dots">
