@@ -155,14 +155,6 @@ public class FreelancerDAO  extends DBContext{
         return list;
     }
     
-    public static void main(String[] args) throws SQLException {
-        FreelancerDAO m = new FreelancerDAO();
-        List<Skills> n = m.getSkillSetById(1);
-        for (Skills skills : n) {
-            System.out.println(skills);
-        }
-        
-    }
 
     public boolean updateFreelancer(Freelancer freelancer) throws SQLException {
         String query = "UPDATE freelancer SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, describe = ?, email = ?, phone = ? WHERE freelanceID = ?";
