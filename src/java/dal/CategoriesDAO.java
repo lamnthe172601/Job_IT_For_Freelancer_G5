@@ -16,9 +16,9 @@ import java.util.List;
  * @author Admin
  */
 public class CategoriesDAO extends DBContext{
-        public List<Categories> getTop6Category() {
+        public List<Categories> getAllCategory() {
         List<Categories> list = new ArrayList<>();
-        String query = "select top(6)* from Categories";
+        String query = "select * from Categories";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();

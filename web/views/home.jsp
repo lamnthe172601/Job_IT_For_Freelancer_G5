@@ -13,7 +13,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KLTTLJob</title>
+        <title>KofeJob</title>
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
@@ -48,10 +48,13 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="home" class="navbar-brand logo scroll-logo">   
-                                 <img src="assets/img/logo-white.svg" class="img-fluid" alt="Logo">
+                            <a href="home" class="navbar-brand logo scroll-logo">
+                                <img src="assets/img/logo-white.svg" class="img-fluid" alt="Logo">
                             </a>
-                             
+                            <a href="home" class="navbar-brand logo original-logo">
+                                <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                            </a>
+      
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
@@ -128,9 +131,9 @@
                                         <ul class="submenu">
                                            
                                             <li><a href="dashboard">Dashboard</a></li>
-                                            <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
+                                            <li><a href="MyProfile">My Profile</a></li>
                                             <li><a href="Project">Projects</a></li>                        
-                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
+                                            <li><a href="changePass">Change Password</a></li>                                                                                     
                                             <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
@@ -142,11 +145,11 @@
                                         <ul class="submenu">
                                             
                                             <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="recruiterprofile">My Profile</a></li>
+                                            <li><a href="company-profile.html">My Profile</a></li>
                                             <li><a href="company-details.html">Company Details</a></li>
                                             <li><a href="manage-projects.html">Projects</a></li>
                                             <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
+                                            <li><a href="changePass">Change Password</a></li>                                           
                                             <li><a href="profile-settings.html">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
@@ -203,12 +206,7 @@
                                     <form class="form" name="store" id="store" method="post" action="https://kofejob.dreamstechnologies.com/html/template/project.html">
                                         <div class="form-inner">
                                             <div class="input-group">
-                                                <span class="drop-detail">
-                                                    <select class="form-control select" name="storeID">
-                                                        <option value="project.html">Projects</option>
-                                                        <option value="developer.html">Freelancers</option>
-                                                    </select>
-                                                </span>
+                                                
                                                 <input type="email" class="form-control" placeholder="Keywords">
                                                 <button class="btn btn-primary sub-btn" type="submit">Search</button>
                                             </div>
@@ -830,7 +828,7 @@
                                 <div class="col-md-12 col-lg-12 ">
                                     <div class="footer-bottom-content">
                                         <div class="copyright-text">
-                                            <p class="mb-0">Copyright 2024 © KLTTLJob. All right reserved.</p>
+                                            <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
                                         </div>
                                         <ul>
                                             <li><a href="javascript:void(0);" class="icon" target="_blank"><i class="fab fa-facebook-f"></i> </a></li>

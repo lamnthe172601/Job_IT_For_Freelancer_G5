@@ -3,11 +3,11 @@ function FormValidate() {
     let checkun = false;
     let checkpass = false;
     let checkrepass = false;
-    var email = document.getElementById('email').value.trim();
+    var email = document.getElementById('email').value;
     var errorEmail = document.getElementById('errorEmail');
     var reGexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    var username = document.getElementById('username').value.trim();
+    var username = document.getElementById('username').value;
     var errorUsername = document.getElementById('errorUsername');
     if (username === '' || username === null) {
         errorUsername.innerHTML = "Please Input Username!";
@@ -19,13 +19,13 @@ function FormValidate() {
     }
 
     var reGexPass = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{6,16}$/;
-    var passW = document.getElementById('password').value.trim();
+    var passW = document.getElementById('password').value;
     var errorPass = document.getElementById('errorPass');
 
     if (passW === '' || passW === null) {
         errorPass.innerHTML = "Please Input Password!";
-    } else if (passW.length < 8 || passW.length > 16) {
-        errorPass.innerHTML = "Password must be between 8 and 16 characters!";
+    } else if (passW.length < 6 || passW.length > 16) {
+        errorPass.innerHTML = "Password must be between 6 and 16 characters!";
     } else if (!reGexPass.test(passW)) {
         errorPass.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter and one number!";
     } else {
@@ -43,7 +43,7 @@ function FormValidate() {
         checkmail=true;
     }
 
-    var ConPass = document.getElementById('repassword').value.trim();
+    var ConPass = document.getElementById('repassword').value;
     var errorConPass = document.getElementById('errorRepass');
 
     if (ConPass === '' || ConPass === null) {

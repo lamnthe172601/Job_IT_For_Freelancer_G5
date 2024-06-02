@@ -4,41 +4,32 @@
  */
 package dal;
 
-import Models.Dregee;
-import Models.Education;
-import Models.Experience;
 import Models.Freelancer;
-import Models.SkillSet;
-import Models.Skills;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author DUC MINH
  */
-public class FreelancerDAO extends DBContext {
-
+public class FreelancerDAO  extends DBContext{
     public Freelancer getFreelancerById(int id) throws SQLException {
-        String query = "SELECT * FROM freelancer WHERE userID = ?";
+        String query = "SELECT * FROM freelancers WHERE freelanceID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new Freelancer(
-                            rs.getInt("freelanceID"),
-                            rs.getString("first_name"),
-                            rs.getString("last_name"),
-                            rs.getString("image"),
-                            rs.getBoolean("gender"),
-                            rs.getDate("dob"),
-                            rs.getString("describe"),
-                            rs.getString("email__contact"),
-                            rs.getString("phone_contact")
+                        rs.getInt("freelanceID"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("image"),
+                        rs.getBoolean("gender"),
+                        rs.getDate("dob"),
+                        rs.getString("describe"),
+                        rs.getString("email"),
+                        rs.getString("phone")
                     );
                 }
             }
@@ -174,7 +165,7 @@ public class FreelancerDAO extends DBContext {
     }
 
     public boolean updateFreelancer(Freelancer freelancer) throws SQLException {
-        String query = "UPDATE freelancers SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, describe = ?, email = ?, phone = ? WHERE freelanceID = ?";
+        String query = "UPDATE freelancer SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, describe = ?, email = ?, phone = ? WHERE freelanceID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, freelancer.getFirst_name());
             stmt.setString(2, freelancer.getLast_name());
