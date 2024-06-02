@@ -14,8 +14,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 
 /**
  *
@@ -80,6 +84,13 @@ public class InputFreelancerProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int userID = user.getUserID();
+
+        //customer ->> freelancer
+        dao.UpdateRole(userID,3);
+
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
@@ -88,35 +99,45 @@ public class InputFreelancerProfileController extends HttpServlet {
         String gender = request.getParameter("gender");
         String decscribe = request.getParameter("decscribe");
 
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            int userID = user.getUserID();
-            dao.UpdateRole(userID, 3);
-            dao.inputFreelancerInfo(firstname, lastname, null, gender, date, decscribe, email, phone, userID);
-            int freelancerID = dao.getFreelancerIDbyUserID(userID);
-            String[] skills = request.getParameterValues("skill");
-            if (skills != null) {
-                for (int i = 0; i < skills.length; i++) {
-                    dao.inputFreelancerSkill(skills[i], freelancerID);
-                }
-            }
+        //Part part = request.getPart("file");
+        //String realPath=request.getServletContext().getRealPath("/IMG");
+        //String fliename=Paths.get(part.getSubmittedFileName()).getFileName().toString();
+        String[] skills = request.getParameterValues("skill");
+        String position = request.getParameter("position");
+        String datestart = request.getParameter("datestart");
+        String dateend = request.getParameter("dateend");
+        String project = request.getParameter("project");
+        String exworkname = request.getParameter("exworkname");
+        String degreename = request.getParameter("degreename");
+        String university = request.getParameter("university");
+        String edustart = request.getParameter("edustart").trim();
+        String eduend = request.getParameter("eduend").trim();
 
-            String position = request.getParameter("position");
-            String datestart = request.getParameter("datestart");
-            String dateend = request.getParameter("dateend");
-            String project = request.getParameter("project");
-            String exworkname = request.getParameter("exworkname");
-            String degreename = request.getParameter("degreename");
-            String university = request.getParameter("university");
-            String edustart = request.getParameter("edustart").trim();
-            String eduend = request.getParameter("eduend").trim();
-            
-            dao.inputFreelancerEducation(university, edustart, eduend, freelancerID, degreename);
-            dao.inputFreelancerExperiance(exworkname, project, position,datestart, dateend, freelancerID);
-            request.setAttribute("mess", "Registration successful. Please log in again!");
-            request.getRequestDispatcher("login").forward(request, response);
+
+        //insert Freelancer Personal info
+        dao.inputFreelancerInfo(firstname, lastname, null, gender, date, decscribe, email, phone, userID);
+
+        //insert Freelancer skill
+        int freelancerID = dao.getFreelancerIDbyUserID(userID);
+        
+        if (skills != null) {
+            for (int i=0;i<skills.length;i++) {
+                dao.inputFreelancerSkill(skills[i], freelancerID);
+            }
         }
+
+        //insert freelancer education
+            dao.inputFreelancerEducation(university, edustart, eduend, freelancerID, degreename);
+
+        //insert freelancer experiance
+
+            dao.inputFreelancerExperiance(exworkname, project, position,datestart, dateend, freelancerID);
+
+
+        //insert freelancer Experin
+        request.setAttribute("mess", "Registration successful. Please log in again!");
+        request.getRequestDispatcher("login").forward(request, response);
+
     }
 
     /**

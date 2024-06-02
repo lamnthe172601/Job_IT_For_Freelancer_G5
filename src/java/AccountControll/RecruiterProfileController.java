@@ -6,6 +6,7 @@ package AccountControll;
 
 import Models.*;
 import dal.CompanyDAO;
+import dal.RecruiterDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class RecruiterProfileController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession s = req.getSession();
-        Company company = (Company) s.getAttribute("account");
+        Company company = (Company) s.getAttribute("company");
         CompanyDAO coDAO = new CompanyDAO();
         Company co = coDAO.getCompanyByCompanyID(company.getCompanyID());
         req.setAttribute("company",  co);

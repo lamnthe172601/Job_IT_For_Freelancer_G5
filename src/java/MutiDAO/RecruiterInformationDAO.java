@@ -13,7 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ *
+ * @author kudol
+ */
 public class RecruiterInformationDAO extends DBContext{
      public List<RecruiterInformation> getCompany() {
         List<RecruiterInformation> list = new ArrayList<>();

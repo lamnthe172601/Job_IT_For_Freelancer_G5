@@ -84,7 +84,7 @@ public class UpdateProfile_Freelancer extends HttpServlet {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "The requested resource was not found.");
             }
         } catch (SQLException e) {
-            throw new ServletException("Database error", e);
+            System.out.println(e);
         }
     } 
 
