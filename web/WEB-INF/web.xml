@@ -45,10 +45,6 @@
         <servlet-class>CommonControll.BlogDetailsControll</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Page404Controll</servlet-name>
-        <servlet-class>CommonControll.Page404Controll</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>blogGridControll</servlet-name>
         <servlet-class>CommonControll.blogGridControll</servlet-class>
     </servlet>
@@ -96,6 +92,10 @@
         <servlet-name>UpdateProfile_Freelancer</servlet-name>
         <servlet-class>AccountControll.UpdateProfile_Freelancer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>changePass</servlet-name>
+        <servlet-class>AccountControll.changePass</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -141,10 +141,6 @@
         <url-pattern>/BlogDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Page404Controll</servlet-name>
-        <url-pattern>/Page404</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>blogGridControll</servlet-name>
         <url-pattern>/blogGrid</url-pattern>
     </servlet-mapping>
@@ -183,7 +179,7 @@
     <servlet-mapping>
         <servlet-name>ManageRecruiterAdmin</servlet-name>
         <url-pattern>/manageRecruiterAdmin</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet>
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>com.example.ProfileServlet</servlet-class>
@@ -199,5 +195,9 @@
     <servlet-mapping>
         <servlet-name>UpdateProfile_Freelancer</servlet-name>
         <url-pattern>/UpdateProfile_Freelancer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changePass</servlet-name>
+        <url-pattern>/changePass</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -40,7 +40,7 @@ public class FreelancerDAO  extends DBContext{
         return null;
     }
     public boolean updateFreelancer(Freelancer freelancer) throws SQLException {
-        String query = "UPDATE freelancers SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, describe = ?, email = ?, phone = ? WHERE freelanceID = ?";
+        String query = "UPDATE freelancer SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, describe = ?, email = ?, phone = ? WHERE freelanceID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, freelancer.getFirst_name());
             stmt.setString(2, freelancer.getLast_name());
