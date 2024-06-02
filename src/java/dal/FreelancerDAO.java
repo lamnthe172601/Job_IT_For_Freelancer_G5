@@ -4,11 +4,18 @@
  */
 package dal;
 
+import Models.Dregee;
+import Models.Education;
+import Models.Experience;
 import Models.Freelancer;
+import Models.SkillSet;
+import Models.Skills;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author DUC MINH
