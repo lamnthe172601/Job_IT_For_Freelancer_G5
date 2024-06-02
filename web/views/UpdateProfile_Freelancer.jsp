@@ -1,8 +1,4 @@
-<%-- 
-    Document   : UpdateProfile_Freelancer
-    Created on : May 28, 2024, 3:30:21 AM
-    Author     : DUC MINH
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
