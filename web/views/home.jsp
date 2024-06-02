@@ -33,9 +33,7 @@
         <%@ include file="header.jsp" %>
 
 
-
-        
-
+ <div class="main-wrapper home-five-wrapper">
 
             <section class="section home-banner home-five row-middle">
                 <div class="container">
