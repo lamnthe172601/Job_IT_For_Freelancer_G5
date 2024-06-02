@@ -133,7 +133,7 @@
                                             <li><a href="dashboard">Dashboard</a></li>
                                             <li><a href="MyProfile">My Profile</a></li>
                                             <li><a href="Project">Projects</a></li>                        
-                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
+                                            <li><a href="changePass">Change Password</a></li>                                                                                     
                                             <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
@@ -149,7 +149,7 @@
                                             <li><a href="company-details.html">Company Details</a></li>
                                             <li><a href="manage-projects.html">Projects</a></li>
                                             <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
+                                            <li><a href="changePass">Change Password</a></li>                                           
                                             <li><a href="profile-settings.html">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>

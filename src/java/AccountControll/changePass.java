@@ -57,7 +57,7 @@ public class changePass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
     } 
 
     /** 
@@ -88,11 +88,11 @@ public class changePass extends HttpServlet {
                     
                 } else {
                     request.setAttribute("errorMessage", "New passwords do not match.");
-                    request.getRequestDispatcher("views/changePassword.jsp").forward(request, response);
+                    request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
                 }
             } else {
                 request.setAttribute("errorMessage", "Current password is incorrect.");
-                request.getRequestDispatcher("views/changePassword.jsp").forward(request, response);
+                request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
             }
         } catch (SQLException e) {
             System.out.println(e);
