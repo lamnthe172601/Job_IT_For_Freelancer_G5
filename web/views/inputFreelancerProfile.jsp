@@ -82,6 +82,13 @@
                                 <div style="color: red" id="ePhone"></div>
                             </div>
                         </div>
+
+
+
+
+
+
+
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Email Address<span class="label-star"> *</span></label>
