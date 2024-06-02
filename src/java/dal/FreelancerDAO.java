@@ -11,11 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author DUC MINH
  */
-public class FreelancerDAO  extends DBContext{
+public class FreelancerDAO extends DBContext {
+
     public Freelancer getFreelancerById(int id) throws SQLException {
         String query = "SELECT * FROM freelancers WHERE freelanceID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -23,15 +25,15 @@ public class FreelancerDAO  extends DBContext{
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new Freelancer(
-                        rs.getInt("freelanceID"),
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("image"),
-                        rs.getBoolean("gender"),
-                        rs.getDate("dob"),
-                        rs.getString("describe"),
-                        rs.getString("email"),
-                        rs.getString("phone")
+                            rs.getInt("freelanceID"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getString("image"),
+                            rs.getBoolean("gender"),
+                            rs.getDate("dob"),
+                            rs.getString("describe"),
+                            rs.getString("email"),
+                            rs.getString("phone")
                     );
                 }
             }
@@ -41,6 +43,7 @@ public class FreelancerDAO  extends DBContext{
         }
         return null;
     }
+
     public boolean updateFreelancer(Freelancer freelancer) throws SQLException {
         String query = "UPDATE freelancers SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, describe = ?, email = ?, phone = ? WHERE freelanceID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -60,9 +63,8 @@ public class FreelancerDAO  extends DBContext{
             throw new SQLException("Error while updating freelancer", e);
         }
     }
-    
-    
-     public List<Freelancer> getSearchFreebySkill(String skill_set_name) {
+
+    public List<Freelancer> getSearchFreebySkill(String skill_set_name) {
         List<Freelancer> list = new ArrayList<>();
         String query = " SELECT  Freelancer.freelanceID,\n"
                 + "                 Freelancer.first_name,\n"
@@ -108,4 +110,54 @@ public class FreelancerDAO  extends DBContext{
         }
         return list;
     }
+
+    public List<Freelancer> getFreelancersByFreelancerID(int freelancerID) {
+        List<Freelancer> freelancers = new ArrayList<>();
+        String query = "  SELECT \n"
+                + "    Freelancer.freelanceID,\n"
+                + "    Freelancer.first_name,\n"
+                + "    Freelancer.last_name,\n"
+                + "    Freelancer.[image],\n"
+                + "    Freelancer.gender,\n"
+                + "    Freelancer.dob,\n"
+                + "    Freelancer.[describe],\n"
+                + "    Freelancer.email__contact,\n"
+                + "    Freelancer.phone_contact,\n"
+                + "    JobApply.applyID,\n"
+                + "    JobApply.postID,\n"
+                + "    JobApply.[status]\n"
+                + "FROM \n"
+                + "    JobApply\n"
+                + "JOIN \n"
+                + "    Freelancer ON JobApply.freelanceID = Freelancer.freelanceID\n"
+                + "WHERE \n"
+                + "    Freelancer.freelanceID = ?\n"
+                + "    ";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, freelancerID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("freelancerID");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String image = rs.getString("image");
+                boolean gender = rs.getBoolean("gender");
+                Date dob = rs.getDate("dob");
+                String description = rs.getString("describe");
+                String email = rs.getString("email_contact");
+                String phone = rs.getString("phone_contact");
+
+                Freelancer freelancer = new Freelancer(id, firstName, lastName, image, gender, dob, description, email, phone);
+                freelancers.add(freelancer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return freelancers;
+    }
+
 }

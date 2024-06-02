@@ -60,7 +60,7 @@ public class PostDAO extends DBContext {
 
         String query = "select postID,title,[image], job_type_ID, durationID,date_post,quantity,[description],budget, [location] ,skill, recruiterID,caID\n"
                 + "               from Post\n"
-                + "            where title like '%?%'";
+                + "            where title like ?'";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, "%" + title + "%");
@@ -112,5 +112,35 @@ public class PostDAO extends DBContext {
     }
     return list;
 }
-
+public List<Post> getAllPosts() {
+        List<Post> posts = new ArrayList<>();
+        String query = "SELECT * FROM Post";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                // Create Post object from the result set and add to the list
+                Post post = new Post(
+                    rs.getInt("postID"),
+                    rs.getString("title"),
+                    rs.getString("image"),
+                    new JobType(rs.getInt("job_type_ID"), rs.getString("job_type_name")),
+                    new Duration(rs.getInt("durationID"), rs.getString("duration_name")),
+                    rs.getDate("date_post"),
+                    rs.getInt("quantity"),
+                    rs.getString("description"),
+                    rs.getInt("budget"),
+                    rs.getString("location"),
+                    rs.getString("skill"),
+                    new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID")),
+                    new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"))
+                );
+                posts.add(post);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
 }
+

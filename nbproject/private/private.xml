@@ -9,22 +9,38 @@
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/Models/Recruiter.java</file>
         </group>
         <group>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/UserDAO.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/recruitersetting.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/Recruiter.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/nbproject/build-impl.xml</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/RecruiterDAO.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/META-INF/context.xml</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/assets/css/style.css</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/assets/css/animate.css</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ListApply.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/companydetail.jsp</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/searchpost.jsp</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/SearchController.java</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/searchfreelancer.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/PostDAO.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/assets/css/owl.carousel.min.css</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/HomeContronller.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/HomeDAO.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/RecruiterProfileController.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/assets/css/animate.min.css</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/RecruiterProfileEditControll.java</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/listapply.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/PostFavorite.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/assets/css/owl.video.play.html</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/DashboardAdmin.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/Email.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/recruitersetting.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/CompanyDetailControll.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CompanyDAO.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/SearchController.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/PostDAO.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/assets/css/bootstrap.min.css</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ManageFreelancerAdmin.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/assets/css/owl.theme.default.min.css</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/assets/css/bootstrap-datetimepicker.min.css</file>
         </group>
     </open-files>
 </project-private>

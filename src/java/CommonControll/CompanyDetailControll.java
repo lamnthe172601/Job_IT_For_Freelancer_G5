@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package AccountControll;
+package CommonControll;
 
 import Models.*;
 import dal.CompanyDAO;
@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-public class RecruiterProfileController extends HttpServlet{
+public class CompanyDetailControll extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,6 +29,6 @@ public class RecruiterProfileController extends HttpServlet{
         req.setAttribute("company",  company);
         
             
-        req.getRequestDispatcher("views/recruiterprofile.jsp").forward(req, resp);
+        req.getRequestDispatcher("views/companydetail.jsp").forward(req, resp);
     }  
 }

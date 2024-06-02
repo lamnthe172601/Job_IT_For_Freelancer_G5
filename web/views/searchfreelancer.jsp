@@ -25,7 +25,7 @@
         <div class="main-wrapper">
 
 
-            
+
 
 
             <div class="bread-crumb-bar">
@@ -34,28 +34,29 @@
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
                                 <h2>Freelancer Grid</h2>
-                                  <form class="form" name="store" id="store" method="get" action="search">
-                                        <div class="form-inner">
-                                            <div class="input-group">                                             
-                                                <input type="text" class="form-control" name="searchInput" placeholder="Keywords">
-                                                <button class="btn btn-primary sub-btn" type="submit">Search</button>
-                                            </div>
+                                <form class="form" name="title" id="store" method="get" action="search">
+                                    <div class="form-inner">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="searchInput" placeholder="Keywords">
+                                            <input type="hidden" name="op" value="freelancer">
+                                            <button class="btn btn-primary sub-btn" type="submit">Search</button>
                                         </div>
-                                    </form>
+                                    </div>
+                                </form>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html"> Home</a></li>
                                         <li class="breadcrumb-item" aria-current="page">Developers</li>
                                     </ol>
                                 </nav>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-         
+
+
             <div class="content">
                 <div class="container">
                     <div class="row">

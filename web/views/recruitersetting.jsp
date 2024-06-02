@@ -328,7 +328,7 @@
                                                                 <label class="form-label">Profile Picture</label>
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="upload-images">
-                                                                        <img src="assets/img/img-02.jpg" alt="Image" id="blah">
+                                                                        <img src="${recruiter.image}" alt="Image" id="blah">
                                                                     </div>
                                                                     <div class="ms-3">
                                                                         <label class="file-upload image-upbtn ms-0">
