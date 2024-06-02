@@ -95,6 +95,10 @@
     <servlet>
         <servlet-name>changePass</servlet-name>
         <servlet-class>AccountControll.changePass</servlet-class>
+          </servlet>
+         <servlet>
+        <servlet-name>ChangeStatusUserAdmin</servlet-name>
+        <servlet-class>AdminControlles.ChangeStatusUserAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -199,5 +203,9 @@
     <servlet-mapping>
         <servlet-name>changePass</servlet-name>
         <url-pattern>/changePass</url-pattern>
+         </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>ChangeStatusUserAdmin</servlet-name>
+        <url-pattern>/changeStatusUserAdmin</url-pattern>
     </servlet-mapping>
 </web-app>
