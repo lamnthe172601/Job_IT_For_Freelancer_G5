@@ -311,7 +311,7 @@
         <script src="assets/js/slick.js" type="a94bc7fdfce2d7745705eb4b-text/javascript"></script>
 
         <script src="assets/js/script.js" type="a94bc7fdfce2d7745705eb4b-text/javascript"></script>
-        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="a94bc7fdfce2d7745705eb4b-|49" defer></script></body>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="a94bc7fdfce2d7745705eb4b-|49" defer></script></body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/change-passwords.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:30 GMT -->
 </html>
