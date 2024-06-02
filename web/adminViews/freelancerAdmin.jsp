@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="adminAssets/css/style.css">
     </head>
     <body>
-        
+
         <div class="main-wrapper">
 
             <div class="header">
@@ -39,34 +39,25 @@
                 <div class="header-left">
                     <a href="home" class="logo">
                         <img src="adminAssets/img/logo.png" alt="Logo">
-                        
+
                     </a>
                     <a href="home" class="logo logo-small">
                         <img src="adminAssets/img/logo-small.png" alt="Logo" width="30" height="30">
                     </a>
-
                     <a href="javascript:void(0);" id="toggle_btn">
                         <i class="feather-chevrons-left"></i>
                     </a>
-
-
                     <a class="mobile_btn" id="mobile_btn">
                         <i class="feather-chevrons-left"></i>
                     </a>
-
                 </div>
-
-
                 <div class="top-nav-search">
                     <form>
                         <input type="text" class="form-control" placeholder="Start typing your Search...">
                         <button class="btn" type="submit"><i class="feather-search"></i></button>
                     </form>
                 </div>
-
-
                 <ul class="nav user-menu">
-
                     <li class="nav-item dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                             <i class="feather-bell"></i> <span class="badge badge-pill">5</span>
@@ -265,9 +256,9 @@
 
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </td>                                                   
-                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getAccount().getEmail()}</td>
+                                                            </div>
+                                                        </td>                                                   
+                                                        <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getAccount().getEmail()}</td>
 
                                                         <td class="test1">
 
@@ -436,80 +427,80 @@
         </div>
 
 
-      <script>
-$(document).ready(function() {
-    $('.typeChange').on('click', function(e) {
-        e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+        <script>
+            $(document).ready(function () {
+                $('.typeChange').on('click', function (e) {
+                    e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
 
-        var userId = $(this).closest('tr').find('.user-id').attr('id');
-        var action = $(this).text().trim().toLowerCase();
+                    var userId = $(this).closest('tr').find('.user-id').attr('id');
+                    var action = $(this).text().trim().toLowerCase();
 
-        if (action === 'suspend user') {
-            // Hiển thị popup xác nhận suspend user
-            $('#Suspend_user').find('.user-id1').val(userId);
-            $('#Suspend_user').modal('show');
-        } else if (action === 'activate user') {
-            // Hiển thị popup xác nhận activate user
-            $('#Activate_user').find('.user-id1').val(userId);
-            $('#Activate_user').modal('show');
-        }
-    });
+                    if (action === 'suspend user') {
+                        // Hiển thị popup xác nhận suspend user
+                        $('#Suspend_user').find('.user-id1').val(userId);
+                        $('#Suspend_user').modal('show');
+                    } else if (action === 'activate user') {
+                        // Hiển thị popup xác nhận activate user
+                        $('#Activate_user').find('.user-id1').val(userId);
+                        $('#Activate_user').modal('show');
+                    }
+                });
 
-    $('.user-suspend-link').on('click', function() {
-        var userId = $(this).closest('.modal-body').find('.user-id1').val();
-        suspendUser(userId);
-    });
+                $('.user-suspend-link').on('click', function () {
+                    var userId = $(this).closest('.modal-body').find('.user-id1').val();
+                    suspendUser(userId);
+                });
 
-    $('.user-activate-link').on('click', function() {
-        var userId = $(this).closest('.modal-body').find('.user-id1').val();
-        activateUser(userId);
-    });
-});
+                $('.user-activate-link').on('click', function () {
+                    var userId = $(this).closest('.modal-body').find('.user-id1').val();
+                    activateUser(userId);
+                });
+            });
 
-function suspendUser(userId) {
-    $.ajax({
-        url: '/Job_IT_For_Freelancer_G5/changeStatusUserAdmin', // URL của servlet xử lý suspend user
-        type: 'POST',
-        data: { userId: userId, type: "suspend" },
-        success: function(response) {
-            // Xử lý khi suspend user thành công
-            var statusCell = $('.user-id#' + userId).closest('tr').find('.test1');
-            statusCell.html('<a href="javascript:void(0);" class="user-inactive-btn status">inactive</a>');
+            function suspendUser(userId) {
+                $.ajax({
+                    url: '/Job_IT_For_Freelancer_G5/changeStatusUserAdmin', // URL của servlet xử lý suspend user
+                    type: 'POST',
+                    data: {userId: userId, type: "suspend"},
+                    success: function (response) {
+                        // Xử lý khi suspend user thành công
+                        var statusCell = $('.user-id#' + userId).closest('tr').find('.test1');
+                        statusCell.html('<a href="javascript:void(0);" class="user-inactive-btn status">inactive</a>');
 
-            var threeDotCell = $('.user-id#' + userId).closest('tr').find('.three-dots');
-            threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>');
+                        var threeDotCell = $('.user-id#' + userId).closest('tr').find('.three-dots');
+                        threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>');
 
-            $('#Suspend_user').modal('hide');
-        },
-        error: function(xhr, status, error) {
-            // Xử lý khi có lỗi xảy ra
-            console.error(error);
-        }
-    });
-}
+                        $('#Suspend_user').modal('hide');
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý khi có lỗi xảy ra
+                        console.error(error);
+                    }
+                });
+            }
 
-function activateUser(userId) {
-    $.ajax({
-        url: '/Job_IT_For_Freelancer_G5/changeStatusUserAdmin', // URL của servlet xử lý activate user
-        type: 'POST',
-        data: { userId: userId, type: "active" },
-        success: function(response) {
-            // Xử lý khi activate user thành công
-            var statusCell = $('.user-id#' + userId).closest('tr').find('.test1');
-            statusCell.html('<a href="javascript:void(0);" class="user-active-btn status">active</a>');
+            function activateUser(userId) {
+                $.ajax({
+                    url: '/Job_IT_For_Freelancer_G5/changeStatusUserAdmin', // URL của servlet xử lý activate user
+                    type: 'POST',
+                    data: {userId: userId, type: "active"},
+                    success: function (response) {
+                        // Xử lý khi activate user thành công
+                        var statusCell = $('.user-id#' + userId).closest('tr').find('.test1');
+                        statusCell.html('<a href="javascript:void(0);" class="user-active-btn status">active</a>');
 
-            var threeDotCell = $('.user-id#' + userId).closest('tr').find('.three-dots');
-            threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>');
+                        var threeDotCell = $('.user-id#' + userId).closest('tr').find('.three-dots');
+                        threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>');
 
-            $('#Activate_user').modal('hide');
-        },
-        error: function(xhr, status, error) {
-            // Xử lý khi có lỗi xảy ra
-            console.error(error);
-        }
-    });
-}
-</script>
+                        $('#Activate_user').modal('hide');
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý khi có lỗi xảy ra
+                        console.error(error);
+                    }
+                });
+            }
+        </script>
 
 
 

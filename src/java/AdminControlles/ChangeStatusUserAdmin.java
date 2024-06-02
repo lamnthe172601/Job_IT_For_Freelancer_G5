@@ -31,8 +31,9 @@ public class ChangeStatusUserAdmin extends HttpServlet {
             throws ServletException, IOException {
         AdminDAO d = new AdminDAO();
         // Đọc userId từ yêu cầu AJAX
-        int userId = Integer.parseInt(request.getParameter("userId"));
+        int userId = Integer.parseInt(request.getParameter("userId").trim());
         String type = request.getParameter("type");
+       
         if (type.equals("suspend")) {
             d.changeStatusUser(userId, "inactive");
         } else {
