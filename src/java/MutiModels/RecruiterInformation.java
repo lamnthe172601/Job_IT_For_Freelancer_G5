@@ -10,28 +10,16 @@ import Models.*;
  */
 public class RecruiterInformation {
     private Company company;
-    private int totalPost;
-    private String status;
+    private int totalPost;   
+    private User account;
 
-    public RecruiterInformation(Company company, int totalPost, String status) {
-        this.company = company;
-        this.totalPost = totalPost;
-        this.status = status;
-    }
     public RecruiterInformation() {
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public RecruiterInformation(Company company, int totalPost) {
+    public RecruiterInformation(Company company, int totalPost, User account) {
         this.company = company;
         this.totalPost = totalPost;
+        this.account = account;
     }
 
     public Company getCompany() {
@@ -49,5 +37,15 @@ public class RecruiterInformation {
     public void setTotalPost(int totalPost) {
         this.totalPost = totalPost;
     }
-    
+
+    public User getAccount() {
+        return account;
+    }
+
+    public void setAccount(User account) {
+        this.account = account;
+    }
+
+  
+  
 }

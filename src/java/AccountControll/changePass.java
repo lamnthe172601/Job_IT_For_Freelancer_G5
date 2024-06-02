@@ -3,22 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package AdminControlles;
+package AccountControll;
 
-import MutiDAO.RecruiterInformationDAO;
+import Models.User;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 
 /**
  *
- * @author kudol
+ * @author DUC MINH
  */
-public class ManageRecruiterAdmin extends HttpServlet {
-   
+public class changePass extends HttpServlet {
+   private UserDAO userDAO = new UserDAO();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -34,10 +37,10 @@ public class ManageRecruiterAdmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageRecruiterAdmin</title>");  
+            out.println("<title>Servlet changePass</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageRecruiterAdmin at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet changePass at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -54,12 +57,7 @@ public class ManageRecruiterAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    
-        RecruiterInformationDAO f = new RecruiterInformationDAO();
-        request.setAttribute("totalRecruiter",f.getRecruiters().size());
-        request.setAttribute("listRecruiter",f.getRecruiters());
-        
-       request.getRequestDispatcher("adminViews/recruiterAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
     } 
 
     /** 
@@ -72,7 +70,33 @@ public class ManageRecruiterAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+
+        String currentPassword = request.getParameter("currentPassword");
+        String newPassword = request.getParameter("newPassword");
+        String confirmPassword = request.getParameter("confirmPassword");
+
+        try {
+            User user = userDAO.getUserByUsername(username);
+
+            if (user != null && user.getPassword().equals(currentPassword)) {
+                if (newPassword.equals(confirmPassword)) {
+                    userDAO.changePassword(username, newPassword);
+                    request.setAttribute("mess", "Change password successfully.");
+                    response.sendRedirect("views/profile.jsp"); // Chuyển hướng tới trang hồ sơ người dùng
+                    
+                } else {
+                    request.setAttribute("errorMessage", "New passwords do not match.");
+                    request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
+                }
+            } else {
+                request.setAttribute("errorMessage", "Current password is incorrect.");
+                request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     /** 
