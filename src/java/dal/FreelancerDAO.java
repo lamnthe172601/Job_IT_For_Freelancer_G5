@@ -110,7 +110,7 @@ public class FreelancerDAO extends DBContext {
                             rs.getString("phone_contact")
                     );
                     
-                    Dregee de = new Dregee(rs.getInt("degreeID"), rs.getString("degree_name"));
+                    Dregee de = new Dregee(rs.getInt("dregeeID"), rs.getString("degree_name"));
 
                     list.add( new Education(rs.getInt("educationID"), rs.getString("university_name")
                     ,rs.getDate("start_date"), rs.getDate("end_date"), en, de));
@@ -164,13 +164,49 @@ public class FreelancerDAO extends DBContext {
         return list;
     }
     
-    public static void main(String[] args) throws SQLException {
-        FreelancerDAO m = new FreelancerDAO();
-        List<Skills> n = m.getSkillSetById(1);
-        for (Skills skills : n) {
-            System.out.println(skills);
+     public List<SkillSet> getAllSkillSet() {
+         List<SkillSet> list = new ArrayList<>();
+        String query = """
+                         SELECT [skill_set_ID]
+                         ,[skill_set_name]
+                         FROM [freelancer].[dbo].[Skill_Set]""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {        
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // In chi tiết lỗi ra console
+           
         }
-        
+        return list;
+    }
+     
+      public List<Dregee> getAllDregee() {
+         List<Dregee> list = new ArrayList<>();
+        String query = """
+                         SELECT *
+                         FROM Degree""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {        
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Dregee(rs.getInt("dregeeID"), rs.getString("degree_name")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // In chi tiết lỗi ra console
+           
+        }
+        return list;
+    }
+     
+     public static void main(String[] args) {
+        FreelancerDAO fe = new FreelancerDAO();
+        List<Dregee> li = fe.getAllDregee();
+         for (Dregee skillSet : li) {
+             System.out.println(skillSet.toString());
+         }
     }
 
     public boolean updateFreelancer(Freelancer freelancer) throws SQLException {

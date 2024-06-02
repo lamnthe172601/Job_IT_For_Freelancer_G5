@@ -190,6 +190,6 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateProfile_Freelancer</servlet-name>
-        <url-pattern>/UpdateProfile_Freelancer</url-pattern>
+        <url-pattern>/UpdateProfile</url-pattern>
     </servlet-mapping>
 </web-app>
