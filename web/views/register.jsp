@@ -14,7 +14,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KofeJob</title>
+        <title>KLTTLJob</title>
 
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
@@ -70,7 +70,7 @@
                         <div class="align-items-center justify-content-center">
                             <div class="login-right">
                                 <div class="login-header text-center">
-                                    <a href="index.html"><img src="assets/img/logo.svg" alt="logo" class="img-fluid"></a>
+                                    <a href="home"><img src="assets/img/logo.svg" alt="logo" class="img-fluid"></a>
                                     <h3>We love to see you joining our community</h3>
                                 </div>
                                 <div class="tab-content pt-0">
@@ -113,10 +113,10 @@
 
                                                 </label>
                                             </div>
-                                            <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Sign In Now<i class="feather-arrow-right ms-2"></i></button>
+                                            <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Sign Up Now<i class="feather-arrow-right ms-2"></i></button>
 
                                             <div class="row">
-                                                <div class="col-sm-8 dont-have d-flex  align-items-center">Already have account <a href="login.html" class="ms-2">Sign in?</a></div>
+                                                <div class="col-sm-8 dont-have d-flex  align-items-center">Already have account <a href="login" class="ms-2">Sign in?</a></div>
                                             </div>
                                         </form>
                                     </div>

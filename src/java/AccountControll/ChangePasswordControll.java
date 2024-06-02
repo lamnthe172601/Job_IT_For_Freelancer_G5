@@ -6,6 +6,7 @@
 package AccountControll;
 
 
+import static AccountControll.SHA1.toSHA1;
 import Models.User;
 import dal.DAO;
 import java.io.IOException;
@@ -79,10 +80,11 @@ public class ChangePasswordControll extends HttpServlet {
                 if (newPass.equals(confirmPass)) {
                     User u = (User)session.getAttribute("account");
                     String email=u.getEmail();
-                    dao.UpdatePassword(newPass, 1, email);
+                    String pw=toSHA1(newPass);
+                    dao.UpdatePassword(pw, 1, email);
                     session.removeAttribute("email");
                     request.setAttribute("mess", "Change Password Success");
-                    request.getRequestDispatcher("login").forward(request, response);
+                    request.getRequestDispatcher("home").forward(request, response);
                 } else {
                     request.setAttribute("mess", "New Password and Confirm Password are different");  
                     request.getRequestDispatcher("views/changePassword.jsp").forward(request, response);

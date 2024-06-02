@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="adminAssets/css/bootstrap-datetimepicker.min.css">
 
         <link rel="stylesheet" href="adminAssets/plugins/datatables/datatables.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <link rel="stylesheet" href="adminAssets/css/style.css">
     </head>
@@ -123,13 +124,13 @@
                     <div id="sidebar-menu" class="sidebar-menu">
                         <ul>
                             <li class="menu-title"><span>Main</span></li>
-                            <li class="active">
+                            <li >
                                 <a href="dashboardAdmin"><i data-feather="home"></i> <span>Dashboard</span></a>
                             </li>                           
                             <li>
                                 <a href="projectAdmin"><i data-feather="database"></i> <span>Projects</span></a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="manageFreelancerAdmin"><i data-feather="users"></i> <span>Freelancer</span></a>
                             </li>
                             <li>
@@ -173,6 +174,7 @@
                                     <i class="fas fa-plus "></i> Add Freelancer
                                 </a>
                             </div>
+
                         </div>
                     </div>
 
@@ -194,11 +196,45 @@
                                         <h3 class="page-title">All Freelancer</h3>
                                         <p>Total <span>${totalFreelancer}</span> Freelancer account</p>
                                     </div>
-
+                                    <div class="col-auto">
+                                        <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
+                                            <i class="fas fa-filter"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
 
-
+                            <div class="card filter-card" id="filter_inputs">
+                                <div class="card-body pb-0">
+                                    <form action="#" method="post">
+                                        <div class="row filter-row">
+                                            <div class="col-sm-6 col-md-3">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input class="form-control" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-3">
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input type="email" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-3">
+                                                <div class="form-group">
+                                                    <label>Expertise</label>
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-3">
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
 
                             <div class="card">
                                 <div class="card-body">
@@ -215,108 +251,140 @@
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="${listFreelancer}" var="freelancer" varStatus="loop">
-                                                <tr>
-                                                    <td>
-                                                        ${loop.index+1}
-                                                    </td>
-                                                    <td>
-                                                        <div class="table-avatar user-profile">
-                                                            <a href="profile.html"><img class="avatar-img rounded-circle " src="${freelancer.getBasicInformation().getImage()}" alt="User Image"></a>
-                                                            <div>
-                                                                <h5><a href="javascript:void(0);">${freelancer.getBasicInformation().fullname()}</a></h5>
-                                                                
+
+                                                    <tr >
+                                                        <td>
+
+                                                            ${loop.index+1}
+                                                        </td>
+                                                        <td>
+                                                            <div class="table-avatar user-profile">
+                                                                <a href="profile.html"><img class="avatar-img rounded-circle " src="${freelancer.getBasicInformation().getImage()}" alt="User Image"></a>
+                                                                <div>
+                                                                    <h5><a href="javascript:void(0);">${freelancer.getBasicInformation().fullname()}</a></h5>
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </td>                                                   
                                                     <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getAccount().getEmail()}</td>
 
-                                                    <td>
-                                                      
-                                                        <c:if test='${freelancer.getAccount().getStatus() == "active"}'>
-                                                        <a href="javascript:void(0);" class="user-active-btn">${freelancer.getAccount().getStatus()}</a>
-                                                        </c:if>
-                                                        
-                                                         <c:if test='${freelancer.getAccount().getStatus() == "inactive"}'>
-                                                        <a href="javascript:void(0);" class="user-inactive-btn">${freelancer.getAccount().getStatus()}</a>
-                                                        </c:if>
-                                                        </td>
-                                                    <td class="text-end three-dots">
-                                                       <td class="text-end three-dots">
-                                                            <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
+                                                        <td class="test1">
+
+                                                            <c:if test='${freelancer.getAccount().getStatus() == "active"}'>
+                                                                <a href="javascript:void(0);" class="user-active-btn status">${freelancer.getAccount().getStatus()}</a>
+                                                            </c:if>
+
+                                                            <c:if test='${freelancer.getAccount().getStatus() == "inactive"}'>
+                                                                <a href="javascript:void(0);" class="user-inactive-btn status">${freelancer.getAccount().getStatus()}</a>
+                                                            </c:if>
+                                                        </td>                                                   
+                                                        <td class="text-end three-dots">
+                                                            <input type="hidden" class="user-id" id="${freelancer.getAccount().getUserID()}">
+                                                            <a href="javascript:void(0);" class="dropdown-toggle nav-link three-dot " data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" ></i></a>
                                                             <div class="dropdown-menu user-menu-list">
                                                                 <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                                <a class="dropdown-item" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
+                                                                    <c:if test='${freelancer.getAccount().getStatus() == "active"}'>
+                                                                    <a class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
+                                                                    </c:if>
+                                                                    <c:if test='${freelancer.getAccount().getStatus() == "inactive"}'>
+                                                                    <a class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>
+                                                                    </c:if>
                                                                 <a class="dropdown-item" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i data-feather="edit" class="me-2"></i> Edit</a>
                                                                 <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
                                                             </div>
 
+
+                                                            <div class="modal custom-modal fade" id="Suspend_user" role="dialog">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-body">
+                                                                            <div class="form-header">
+                                                                                <input type="hidden" class="user-id1" id="${freelancer.getAccount().getUserID()}">
+                                                                                <h3>Status</h3>
+                                                                                <p>Are you sure want to Suspend user?</p>
+                                                                            </div>
+                                                                            <div class="modal-btn Suspend-action" >
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <a href="javascript:void(0);" class="user-suspend-link btn btn-primary continue-btn" >Suspend user</a>
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>       
+                                                            <div class="modal custom-modal fade" id="Activate_user" role="dialog">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-body">
+                                                                            <div class="form-header">
+                                                                                <input type="hidden" class="user-id1" id="${freelancer.getAccount().getUserID()}">
+                                                                                <h3>Status</h3>
+                                                                                <p>Are you sure want to Activate user?</p>
+                                                                            </div>
+                                                                            <div class="modal-btn Activate-action">
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <a href="javascript:void(0);" class="user-activate-link btn btn-primary continue-btn" >Activate user</a>
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal fade custom-modal" id="add-category">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+
+                                                                        <div class="modal-header flex-wrap">
+                                                                            <h4 class="modal-title">Edit Provider</h4>
+                                                                            <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                                                                        </div>
+
+                                                                        <div class="modal-body">
+                                                                            <form>
+                                                                                <div class="form-group">
+                                                                                    <label>Company Name</label>
+                                                                                    <input type="text" class="form-control" value="Focused Holistic Hardware">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Primary Contact</label>
+                                                                                    <input type="text" class="form-control" value="Emily Smith">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Website</label>
+                                                                                    <input type="text" class="form-control" value="https://focusedhardware.de/">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Total Projects</label>
+                                                                                    <input type="text" class="form-control" value="120">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Status</label>
+                                                                                    <select class="form-control form-select">
+                                                                                        <option selected>Enabled</option>
+                                                                                        <option>Disable</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="mt-4">
+                                                                                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </td>
-                                                <div class="modal custom-modal fade" id="delete_category" role="dialog">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-body">
-                                                                <div class="form-header">
-                                                                    <h3>Status</h3>
-                                                                    <p>Are you sure want to change status?</p>
-                                                                </div>
-                                                                <div class="modal-btn delete-action">
-                                                                    <div class="row">
-                                                                        <div class="col-6">
-                                                                            <a href="changStatusUserAdmin" class="btn btn-primary continue-btn">Change</a>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal fade custom-modal" id="add-category">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-
-                                                            <div class="modal-header flex-wrap">
-                                                                <h4 class="modal-title">Edit Provider</h4>
-                                                                <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
-                                                            </div>
-
-                                                            <div class="modal-body">
-                                                                <form>
-                                                                    <div class="form-group">
-                                                                        <label>Company Name</label>
-                                                                        <input type="text" class="form-control" value="Focused Holistic Hardware">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Primary Contact</label>
-                                                                        <input type="text" class="form-control" value="Emily Smith">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Website</label>
-                                                                        <input type="text" class="form-control" value="https://focusedhardware.de/">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Total Projects</label>
-                                                                        <input type="text" class="form-control" value="120">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Status</label>
-                                                                        <select class="form-control form-select">
-                                                                            <option selected>Enabled</option>
-                                                                            <option>Disable</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="mt-4">
-                                                                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                    </td>
-                                                </tr>     
+                                                    </tr>     
                                                 </c:forEach>
                                             </tbody>
                                         </table>
@@ -329,168 +397,6 @@
             </div>
 
         </div>
-
-
-        <div class="modal fade transaction-modal" id="transaction-category">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header flex-wrap">
-                        <div class="transaction-group">
-                            <div class="head-transaction">
-                                <h4>Transaction</h4>
-                                <p> #TNX24586414</p>
-                            </div>
-                            <div class="complete-btn">
-                                <a href="javascript:void(0);" class="btn btn-primary">Completed</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <div class="table-avatar user-profile invest-acount">
-                            <a href="profile.html"><i class="fas fa-exchange-alt exchange"></i>
-                                <div>
-                                    <h5>Received from Investment Account</h5>
-                                    <p class="receive-date"> Mar 13, 2022<span>Completed</span></p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="acount-transaction">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="basic-info ">
-                                        <h4>IN ACCOUNT</h4>
-                                        <div class="additional-info">
-                                            <p> Amount </p>
-                                            <h5>6,335.006 USD</h5>
-                                        </div>
-                                        <div class="additional-info">
-                                            <p>Fees </p>
-                                            <h5>0.00 USD</h5>
-                                        </div>
-                                        <div class="additional-info">
-                                            <p> Total Investment </p>
-                                            <h5>6,335.006 USD</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="basic-info">
-                                        <h4>IN TRANSACTION</h4>
-                                        <div class="additional-info">
-                                            <p> Amount </p>
-                                            <h5>6,335.006 USD</h5>
-                                        </div>
-                                        <div class="additional-info">
-                                            <p>Fees </p>
-                                            <h5>0.00 USD</h5>
-                                        </div>
-                                        <div class="additional-info">
-                                            <p> Total Investment </p>
-                                            <h5>6,335.006 USD</h5>
-                                        </div>
-                                        <div class="additional-info">
-                                            <p> Freelancer Account </p>
-                                            <h5>UID00003</h5>
-                                        </div>
-                                        <div class="additional-info">
-                                            <p> Freelancer Email </p>
-                                            <h5><a href="https://kofejob.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c0b151010151d113c19041d110c1019521f1311">[email&#160;protected]</a></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="basic-info additional-detail top-border">
-                                        <h4>Order Details</h4>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Order Date</p>
-                                                    <h5>Mar 13, 2022</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p> Placed By</p>
-                                                    <h5>UID00001 </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Completed At</p>
-                                                    <h5> Mar 13, 2022 07:00 PM</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Completed By</p>
-                                                    <h5> Super Admin</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="basic-info additional-detail">
-                                        <h4 class="mt-0">Additional Details</h4>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Transaction</p>
-                                                    <h5>Mar 13, 2022</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p> Payment Gateway</p>
-                                                    <h5>Paypal </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Payment From</p>
-                                                    <h5> Dean Jones</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Payment To</p>
-                                                    <h5> Main Account</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="basic-info additional-detail">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="additional-info">
-                                                    <p>Updated Balance</p>
-                                                    <h5 class="active-balance">13,144.626 USD</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="basic-info additional-detail ">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="additional-info mb-0">
-                                                    <p>Transaction Details</p>
-                                                    <h5> Received from Investment Account</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
         <div class="modal fade custom-modal" id="add-category">
             <div class="modal-dialog modal-dialog-centered">
@@ -530,10 +436,85 @@
         </div>
 
 
-      
+      <script>
+$(document).ready(function() {
+    $('.typeChange').on('click', function(e) {
+        e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+
+        var userId = $(this).closest('tr').find('.user-id').attr('id');
+        var action = $(this).text().trim().toLowerCase();
+
+        if (action === 'suspend user') {
+            // Hiển thị popup xác nhận suspend user
+            $('#Suspend_user').find('.user-id1').val(userId);
+            $('#Suspend_user').modal('show');
+        } else if (action === 'activate user') {
+            // Hiển thị popup xác nhận activate user
+            $('#Activate_user').find('.user-id1').val(userId);
+            $('#Activate_user').modal('show');
+        }
+    });
+
+    $('.user-suspend-link').on('click', function() {
+        var userId = $(this).closest('.modal-body').find('.user-id1').val();
+        suspendUser(userId);
+    });
+
+    $('.user-activate-link').on('click', function() {
+        var userId = $(this).closest('.modal-body').find('.user-id1').val();
+        activateUser(userId);
+    });
+});
+
+function suspendUser(userId) {
+    $.ajax({
+        url: '/Job_IT_For_Freelancer_G5/changeStatusUserAdmin', // URL của servlet xử lý suspend user
+        type: 'POST',
+        data: { userId: userId, type: "suspend" },
+        success: function(response) {
+            // Xử lý khi suspend user thành công
+            var statusCell = $('.user-id#' + userId).closest('tr').find('.test1');
+            statusCell.html('<a href="javascript:void(0);" class="user-inactive-btn status">inactive</a>');
+
+            var threeDotCell = $('.user-id#' + userId).closest('tr').find('.three-dots');
+            threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>');
+
+            $('#Suspend_user').modal('hide');
+        },
+        error: function(xhr, status, error) {
+            // Xử lý khi có lỗi xảy ra
+            console.error(error);
+        }
+    });
+}
+
+function activateUser(userId) {
+    $.ajax({
+        url: '/Job_IT_For_Freelancer_G5/changeStatusUserAdmin', // URL của servlet xử lý activate user
+        type: 'POST',
+        data: { userId: userId, type: "active" },
+        success: function(response) {
+            // Xử lý khi activate user thành công
+            var statusCell = $('.user-id#' + userId).closest('tr').find('.test1');
+            statusCell.html('<a href="javascript:void(0);" class="user-active-btn status">active</a>');
+
+            var threeDotCell = $('.user-id#' + userId).closest('tr').find('.three-dots');
+            threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>');
+
+            $('#Activate_user').modal('hide');
+        },
+        error: function(xhr, status, error) {
+            // Xử lý khi có lỗi xảy ra
+            console.error(error);
+        }
+    });
+}
+</script>
 
 
-        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="adminAssets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+
+
+        <!--        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="adminAssets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>-->
 
         <script src="adminAssets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 
