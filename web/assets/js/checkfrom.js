@@ -27,7 +27,7 @@ function FormValidate() {
     } else if (passW.length < 8 || passW.length > 16) {
         errorPass.innerHTML = "Password must be between 8 and 16 characters.";
     } else if (!reGexPass.test(passW)) {
-        errorPass.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter and one number!";
+        errorPass.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter and one number.";
     } else {
         checkpass = true;
         errorPass.innerHTML = "";
@@ -36,7 +36,7 @@ function FormValidate() {
     if (email === '' || email === null) {
         errorEmail.innerHTML = "Email are required fields.";
     } else if (!reGexEmail.test(email)) {
-        errorEmail.innerHTML = "Email is worng Format!";
+        errorEmail.innerHTML = "Email is worng Format.";
         email = '';
     } else {
         errorEmail.innerHTML = '';
@@ -50,7 +50,7 @@ function FormValidate() {
         errorConPass.innerHTML = "Confirm Password.";
     } 
     else if (ConPass !== passW) {
-        errorConPass.innerHTML = "Confirmed Password does not match Password!";
+        errorConPass.innerHTML = "Confirmed Password does not match Password.";
     } else {
         errorConPass.innerHTML = "";
         checkrepass = true;

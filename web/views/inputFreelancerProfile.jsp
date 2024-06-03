@@ -40,8 +40,8 @@
                 </div>
             </header>
         <form action="InputFreelancerProfile" method="post" onsubmit="return FormValidate();">
-            <div style="margin-top: 50px;" class="on-board field-card select-account select-btn">
-                <div class="text-center onboard-head">
+            <div  class="on-board field-card select-account select-btn">
+                <div style="margin-top: 50px;" class="text-center onboard-head">
                     <h2>Personal Info</h2>
                     <p>Tell a bit about yourself. This information will appear on your public profile, so that potential buyers can get to know you better.</p>
                 </div>
@@ -241,22 +241,41 @@
                 </div>
             </div>
             <div class="text-center">
-                <button style="margin-bottom: 100px" class="file-upload image-upbtn submit " name="lam" value="ngu" type="">Submit</button>
+                <a style="margin-bottom: 100px" class="file-upload image-upbtn back "href="SelectAccountType">Back</a>
+                <button style="margin-bottom: 100px" class="file-upload image-upbtn submit " type="">Submit</button>
+                
             </div>
         </form>
         <style>
-            .file-upload.submit {
-    padding: 15px 30px; 
-    width: auto; 
-    background-color: red; 
+a.back {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
     color: white;
-    border-radius: 10px;
-    border-color: white;
+    border: 2px solid black;
+    text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
 }
 
-.file-upload.submit:hover {
-    background-color: orange;
+a.back:hover {
+    background-color: white;
+    color: black;
+}
+
+/* CSS cho nút Submit */
+button.submit {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #DD4B39; /* Màu cam đỏ */
+    color: white;
+    border: 2px solid black;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button.submit:hover {
+    background-color: white;
+    color: black;
 }
         </style>
 

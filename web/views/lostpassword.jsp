@@ -51,13 +51,14 @@
                                         <h2>Forgot Password</h2>
                                         <h3>Please enter your email address</h3>
                                     </div>
-                                    <form action="lostpassword" method="post">
+                                    <form action="lostpassword" method="post" onsubmit="return FormValidate();">
                                         <div class="input-block">
                                             <label class="focus-label">Email Address <span class="label-star"> *</span></label>
-                                            <input type="text" class="form-control floating" name="email" required="" >
+                                            <input oninput="checkEmail()" type="text" class="form-control floating" name="email" id="email">
+                                            <div style="color: red" id="errorEmail">${mess}</div>
                                         </div>
-                                        <div style="color: orange; margin-bottom: 20px">${mess}</div>
-                                        <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center mb-4" type="submit">Send Now<i class="feather-arrow-right ms-2"></i></button>
+                                        
+                                        <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center mb-4" type="">Send Now<i class="feather-arrow-right ms-2"></i></button>
                                         <div class="row">
                                             <div class="col-sm-8 dont-have d-flex mt-0  align-items-center">Remember Password<a href="login" class="ms-2">Sign in?</a></div>
                                         </div>
@@ -71,8 +72,29 @@
             </div>
 
         </div>
+                                        
+<script>
+    function FormValidate(){
+        
+         var email = document.getElementById('email').value.trim();
+    var eEmail = document.getElementById('errorEmail');
+    var reGexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (email === null || email === '') {
+        eEmail.innerHTML = 'Email are required fields.';
+        return false;
+    } else if (!reGexEmail.test(email)) {
+        eEmail.innerHTML = 'Email is wrong format!';
+        return false;
+    } else {
+        eEmail.innerHTML = '';
+        return true;
+    }
+      
+    }
+                           
+</script>
 
-
+        <script src="assets/js/jsvalidate.js"></script>
         <script src="assets/js/jquery-3.7.1.min.js" type="45a1088af290e96a12659ad2-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="45a1088af290e96a12659ad2-text/javascript"></script>
