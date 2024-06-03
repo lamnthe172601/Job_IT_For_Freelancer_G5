@@ -25,7 +25,7 @@ function checkEmail() {
     if (email === null || email === '') {
         eEmail.innerHTML = 'Email are required fields.';
     } else if (!reGexEmail.test(email)) {
-        eEmail.innerHTML = 'Email is wrong format!';
+        eEmail.innerHTML = 'Email is wrong format.';
     } else {
         eEmail.innerHTML = '';
     }
