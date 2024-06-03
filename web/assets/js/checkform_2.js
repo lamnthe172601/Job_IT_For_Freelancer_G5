@@ -24,7 +24,7 @@ function FormValidate() {
     var reGexPhone = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 
     if (company === null || company === '') {
-        eCompanyname.innerHTML = 'Please Input Company Name';
+        eCompanyname.innerHTML = 'Company Name are required fields.';
     } else {
         eCompanyname.innerHTML = '';
         checkcompanyname = true;
@@ -33,9 +33,9 @@ function FormValidate() {
 
     //check phone
     if (phone === null || phone === '') {
-        ePhone.innerHTML = 'Please Input Your Phone!';
+        ePhone.innerHTML = 'Phone number are required fields.';
     } else if (!reGexPhone.test(phone)) {
-        ePhone.innerHTML = 'Phone number is worng format!';
+        ePhone.innerHTML = 'Phone number is worng format.';
     } else {
         checkphone = true;
         ePhone.innerHTML = '';
@@ -43,9 +43,9 @@ function FormValidate() {
 
     //check email
     if (email === null || email === '') {
-        eEmail.innerHTML = 'Please Input your Email!';
+        eEmail.innerHTML = 'Email are required fields.';
     } else if (!reGexEmail.test(email)) {
-        eEmail.innerHTML = 'Email is wrong format!';
+        eEmail.innerHTML = 'Email is wrong format.';
     } else {
         eEmail.innerHTML = '';
         checkemail = true;
@@ -53,7 +53,7 @@ function FormValidate() {
 
     //check first name
     if (firstname === null || firstname === '') {
-        eFirstname.innerHTML = "Please Input Your Firstname!";
+        eFirstname.innerHTML = "Firstname are required fields.";
     } else {
         checkfirstname = true;
         eFirstname.innerHTML = '';
@@ -61,7 +61,7 @@ function FormValidate() {
 
     //check last name
     if (lastname === null || lastname === '') {
-        eLastname.innerHTML = "Please Input Your Lastname!";
+        eLastname.innerHTML = "Lastname are required fields.";
     } else {
         checklastname = true;
         eLastname.innerHTML = '';

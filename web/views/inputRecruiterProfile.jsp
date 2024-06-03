@@ -185,12 +185,12 @@
             <div class="text-center">
                 <a style="margin-bottom: 100px" class="file-upload image-upbtn back "href="SelectAccountType">Back</a>
                 <button style="margin-bottom: 100px" class="file-upload image-upbtn submit " type="">Submit</button>
+                
             </div>
         </form>
     </div>
         
         <style>
-
 a.back {
     display: inline-block;
     padding: 10px 20px;
