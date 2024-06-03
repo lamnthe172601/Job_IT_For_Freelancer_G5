@@ -4,8 +4,6 @@
  */
 package AccountControll;
 
-import Models.User;
-import dal.DAO;
 import dal.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -16,8 +14,6 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -62,8 +58,8 @@ public class changePass extends HttpServlet {
             request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
         } else {
             // Kiểm tra xem mật khẩu mới đáp ứng các yêu cầu (bắt đầu bằng chữ cái in hoa, dài ít nhất 5 kí tự, có ít nhất 1 chữ số)
-            if (!newPassword.matches("^(?=.*[A-Z])(?=.*[0-9]).{5,}$")) {
-                request.setAttribute("errorPass", "Mật khẩu mới phải bắt đầu bằng chữ cái in hoa, dài ít nhất 5 kí tự và có ít nhất 1 chữ số");
+            if (!newPassword.matches("^(?=.*[A-Z])(?=.*[0-9]).{8,}$")) {
+                request.setAttribute("errorPass", "Mật khẩu mới phải bắt đầu bằng chữ cái in hoa, dài ít nhất 8 kí tự và có ít nhất 1 chữ số");
                 request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
             } else {
                 try {
