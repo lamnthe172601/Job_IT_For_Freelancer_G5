@@ -101,14 +101,10 @@
         <servlet-class>AdminControlles.ChangeStatusUserAdmin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FreelancerProfileControll</servlet-name>
-        <servlet-class>AccountControll.FreelancerProfileControll</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UpdateProfileFreelancer</servlet-name>
         <servlet-class>AccountControll.UpdateProfileFreelancer</servlet-class>
-        </servlet>
-        <servlet>
+    </servlet>
+    <servlet>
         <servlet-name>ViewProfile_Freelancer</servlet-name>
         <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
     </servlet>

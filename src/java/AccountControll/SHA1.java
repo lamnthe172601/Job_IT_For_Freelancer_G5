@@ -27,4 +27,7 @@ public class SHA1 {
         }
         return result;
 }
+    public static void main(String[] args) {
+        System.out.println(toSHA1("Abc12345678"));
+    }
 }
