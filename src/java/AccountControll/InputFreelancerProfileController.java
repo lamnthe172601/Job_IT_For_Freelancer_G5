@@ -16,8 +16,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import jakarta.servlet.http.Part;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 
 /**
  *
@@ -82,6 +86,8 @@ public class InputFreelancerProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
+        
+
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
@@ -138,6 +144,8 @@ public class InputFreelancerProfileController extends HttpServlet {
             request.setAttribute("mess", "Registration successful. Please log in again!");
             request.getRequestDispatcher("login").forward(request, response);
         }
+
+
     }
 
     /**

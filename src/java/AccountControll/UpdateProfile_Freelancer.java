@@ -5,7 +5,12 @@
 
 package AccountControll;
 
+import Models.Dregee;
+import Models.Education;
+import Models.Experience;
 import Models.Freelancer;
+import Models.SkillSet;
+import Models.Skills;
 import dal.FreelancerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +22,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,67 +31,60 @@ import java.util.logging.Logger;
  * @author DUC MINH
  */
 public class UpdateProfile_Freelancer extends HttpServlet {
+    
+    
    private FreelancerDAO freelancerDAO = new FreelancerDAO();
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UpdateProfile_Freelancer</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UpdateProfile_Freelancer at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String idParam = request.getParameter("id");
-        if (idParam == null || idParam.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "The requested resource was not found.");
-            return;
-        }
-
-        int freelanceID;
+        Freelancer freelancer = null;
         try {
-            freelanceID = Integer.parseInt(idParam);
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "The requested resource was not found.");
-            return;
-        }
-
-        try {
-            Freelancer freelancer = freelancerDAO.getFreelancerById(freelanceID);
+            int id = Integer.parseInt(request.getParameter("id"));
+            freelancer = freelancerDAO.getFreelancerById(id);
+            List<Education> education = freelancerDAO.getEducationById(freelancer.getFreelanceID());
+            List<Experience> experience = freelancerDAO.getExperienceById(freelancer.getFreelanceID());
+            List<SkillSet> skillset = freelancerDAO.getAllSkillSet();
+            List<Skills> skills = freelancerDAO.getSkillSetById(freelancer.getFreelanceID());
+            List<Dregee> dregee = freelancerDAO.getAllDregee();
             if (freelancer != null) {
                 request.setAttribute("freelancer", freelancer);
-                request.getRequestDispatcher("views/UpdateProfile_Freelancer.jsp").forward(request, response);
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "The requested resource was not found.");
-            }
-        } catch (SQLException e) {
-            throw new ServletException("Database error", e);
+                request.setAttribute("education", education);
+                request.setAttribute("experience", experience);
+                request.setAttribute("skills", skills);
+                request.setAttribute("skillset", skillset);
+                request.setAttribute("dregee", dregee);
+                request.getRequestDispatcher("views/ProfileSettingFreelancer.jsp").forward(request, response);
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewProfile_Freelancer.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        String idParam = request.getParameter("id");
+//        if (idParam == null || idParam.isEmpty()) {
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND, "The requested resource was not found.");
+//            return;
+//        }
+//
+//        int freelanceID;
+//        try {
+//            freelanceID = Integer.parseInt(idParam);
+//        } catch (NumberFormatException e) {
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND, "The requested resource was not found.");
+//            return;
+//        }
+//
+//        try {
+//            Freelancer freelancer = freelancerDAO.getFreelancerById(freelanceID);
+//            if (freelancer != null) {
+//                request.setAttribute("freelancer", freelancer);
+//                request.getRequestDispatcher("views/UpdateProfile_Freelancer.jsp").forward(request, response);
+//            } else {
+//                response.sendError(HttpServletResponse.SC_NOT_FOUND, "The requested resource was not found.");
+//            }
+//        } catch (SQLException e) {
+//            throw new ServletException("Database error", e);
+//        }
     } 
 
     /** 
@@ -98,38 +97,38 @@ public class UpdateProfile_Freelancer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int freelanceID = Integer.parseInt(request.getParameter("freelanceID"));
-        String first_name = request.getParameter("first_name");
-        String last_name = request.getParameter("last_name");
-        String image = request.getParameter("image");
-        boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
-        String dobParam = request.getParameter("dob");
-        String describe = request.getParameter("describe");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-
-        Date dob = null;
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date parsedDate = format.parse(dobParam);
-            dob = new Date(parsedDate.getTime());
-        } catch (ParseException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid date format.");
-            return;
-        }
-
-        Freelancer freelancer = new Freelancer(freelanceID, first_name, last_name, image, gender, dob, describe, email, phone);
-
-        try {
-            boolean isUpdated = freelancerDAO.updateFreelancer(freelancer);
-            if (isUpdated) {
-                response.sendRedirect("freelancerProfile?id=" + freelanceID);
-            } else {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update the freelancer profile.");
-            }
-        } catch (SQLException e) {
-            throw new ServletException("Database error", e);
-        }
+//        int freelanceID = Integer.parseInt(request.getParameter("freelanceID"));
+//        String first_name = request.getParameter("first_name");
+//        String last_name = request.getParameter("last_name");
+//        String image = request.getParameter("image");
+//        boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
+//        String dobParam = request.getParameter("dob");
+//        String describe = request.getParameter("describe");
+//        String email = request.getParameter("email");
+//        String phone = request.getParameter("phone");
+//
+//        Date dob = null;
+//        try {
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//            java.util.Date parsedDate = format.parse(dobParam);
+//            dob = new Date(parsedDate.getTime());
+//        } catch (ParseException e) {
+//            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid date format.");
+//            return;
+//        }
+//
+//        Freelancer freelancer = new Freelancer(freelanceID, first_name, last_name, image, gender, dob, describe, email, phone);
+//
+//        try {
+//            boolean isUpdated = freelancerDAO.updateFreelancer(freelancer);
+//            if (isUpdated) {
+//                response.sendRedirect("freelancerProfile?id=" + freelanceID);
+//            } else {
+//                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update the freelancer profile.");
+//            }
+//        } catch (SQLException e) {
+//            throw new ServletException("Database error", e);
+//        }
     }
     
     

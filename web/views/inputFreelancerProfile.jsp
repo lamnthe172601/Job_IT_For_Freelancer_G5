@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KLTTLJob</title>
+        <title>KofeJob</title>
 
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
@@ -40,8 +40,8 @@
                 </div>
             </header>
         <form action="InputFreelancerProfile" method="post" onsubmit="return FormValidate();">
-            <div  class="on-board field-card select-account select-btn">
-                <div style="margin-top: 50px;" class="text-center onboard-head">
+            <div style="margin-top: 50px;" class="on-board field-card select-account select-btn">
+                <div class="text-center onboard-head">
                     <h2>Personal Info</h2>
                     <p>Tell a bit about yourself. This information will appear on your public profile, so that potential buyers can get to know you better.</p>
                 </div>
@@ -82,6 +82,13 @@
                                 <div style="color: red" id="ePhone"></div>
                             </div>
                         </div>
+
+
+
+
+
+
+
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Email Address<span class="label-star"> *</span></label>
@@ -199,6 +206,16 @@
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="input-block">
+                                <label class="focus-label">Degree Name</label>
+                                <select name="degreename" class="form-control select-level select-edu select">
+                                    <option value="3">Basic</option>
+                                    <option value="1">Bachelor's degree</option>
+                                    <option value="2">Master's Degree</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="input-block">
                                 <label class="focus-label">University Name</label>
                                 <input type="text" name="university" class="form-control">
                             </div>
@@ -219,60 +236,28 @@
                                 </div>
                             </div>
                         </div>
-                                                <div class="col-md-6 col-lg-3">
-                            <div class="input-block">
-                                <label class="focus-label">Degree Name</label>
-                                <select name="degreename" class="form-control select-level select-edu select">
-                                    <option value="3">Basic</option>
-                                    <option value="1">Bachelor's degree</option>
-                                    <option value="2">Master's Degree</option>
-                                </select>
-                            </div>
-                        </div>
                         <div id="education_add_row"></div>
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                <a style="margin-bottom: 100px" class="file-upload image-upbtn back "href="SelectAccountType">Back</a>
-                <button style="margin-bottom: 100px" class="file-upload image-upbtn submit " type="">Submit</button>
-                
+                <button style="margin-bottom: 100px" class="file-upload image-upbtn submit " name="lam" value="ngu" type="">Submit</button>
             </div>
         </form>
-        
         <style>
-/* CSS cho nút Back */
-a.back {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: black;
+            .file-upload.submit {
+    padding: 15px 30px; 
+    width: auto; 
+    background-color: red; 
     color: white;
-    border: 2px solid black;
-    text-decoration: none;
+    border-radius: 10px;
+    border-color: white;
     transition: background-color 0.3s, color 0.3s;
 }
 
-a.back:hover {
-    background-color: white;
-    color: black;
+.file-upload.submit:hover {
+    background-color: orange;
 }
-
-/* CSS cho nút Submit */
-button.submit {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #DD4B39; /* Màu cam đỏ */
-    color: white;
-    border: 2px solid black;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-button.submit:hover {
-    background-color: white;
-    color: black;
-}
-
         </style>
 
 

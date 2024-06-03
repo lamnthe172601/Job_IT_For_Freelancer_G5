@@ -110,7 +110,7 @@ public class FreelancerDAO extends DBContext {
                             rs.getString("phone_contact")
                     );
                     
-                    Dregee de = new Dregee(rs.getInt("degreeID"), rs.getString("degree_name"));
+                    Dregee de = new Dregee(rs.getInt("dregeeID"), rs.getString("degree_name"));
 
                     list.add( new Education(rs.getInt("educationID"), rs.getString("university_name")
                     ,rs.getDate("start_date"), rs.getDate("end_date"), en, de));
@@ -165,6 +165,50 @@ public class FreelancerDAO extends DBContext {
     }
     
 
+     public List<SkillSet> getAllSkillSet() {
+         List<SkillSet> list = new ArrayList<>();
+        String query = """
+                         SELECT [skill_set_ID]
+                         ,[skill_set_name]
+                         FROM [freelancer].[dbo].[Skill_Set]""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {        
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // In chi tiết lỗi ra console
+           
+        }
+        return list;
+    }
+     
+      public List<Dregee> getAllDregee() {
+         List<Dregee> list = new ArrayList<>();
+        String query = """
+                         SELECT *
+                         FROM Degree""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {        
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Dregee(rs.getInt("dregeeID"), rs.getString("degree_name")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // In chi tiết lỗi ra console
+           
+        }
+        return list;
+    }
+     
+     public static void main(String[] args) {
+        FreelancerDAO fe = new FreelancerDAO();
+        List<Dregee> li = fe.getAllDregee();
+         for (Dregee skillSet : li) {
+             System.out.println(skillSet.toString());
+         }
+    }
 
     public boolean updateFreelancer(Freelancer freelancer) throws SQLException {
         String query = "UPDATE freelancers SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, describe = ?, email = ?, phone = ? WHERE freelanceID = ?";
@@ -185,4 +229,51 @@ public class FreelancerDAO extends DBContext {
             throw new SQLException("Error while updating freelancer", e);
         }
     }
+     public List<Freelancer> getSearchFreebySkill(String skill_set_name) {
+        List<Freelancer> list = new ArrayList<>();
+        String query = " SELECT  Freelancer.freelanceID,\n"
+                + "                 Freelancer.first_name,\n"
+                + "				 Freelancer.freelanceID,\n"
+                + "               Freelancer.[image],\n"
+                + "              Freelancer.gender,\n"
+                + "                   Freelancer.dob,\n"
+                + "                   Freelancer.[describe],\n"
+                + "                Freelancer.email__contact,\n"
+                + "                 Freelancer.phone_contact,\n"
+                + "                  Freelancer.userID\n"
+                + "                 \n"
+                + "               FROM\n"
+                + "            Freelancer\n"
+                + "              JOIN\n"
+                + "                 Skills ON Freelancer.freelanceID = Skills.freelancerID\n"
+                + "                JOIN\n"
+                + "                 Skill_Set ON Skills.skill_set_ID = Skill_Set.skill_set_ID\n"
+                + "               WHERE\n"
+                + "                 Skill_Set.skill_set_name LIKE ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, "%" + skill_set_name + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String fname = rs.getString(2);
+                String lname = rs.getString(3);
+                String im = rs.getString(4);
+                boolean gender = rs.getBoolean(5);
+                java.util.Date dob = rs.getDate(6);
+                String des = rs.getString(7);
+                int uid = rs.getInt(8);
+                String ec = rs.getString(9);
+                String pc = rs.getString(10);
+                int fid = rs.getInt(1);
+
+                list.add(new Freelancer(fid, fname, lname, im, gender, dob, des, ec, pc));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

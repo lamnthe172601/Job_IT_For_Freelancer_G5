@@ -45,12 +45,6 @@ public class Skills {
     public void setFreelancerID(Freelancer freelancerID) {
         this.freelancerID = freelancerID;
     }
-
-    @Override
-    public String toString() {
-        return "Skills{" + "skillID=" + skillID + ", skill_set_ID=" + skill_set_ID + ", freelancerID=" + freelancerID + '}';
-    }
-
-    
+     
     
 }
