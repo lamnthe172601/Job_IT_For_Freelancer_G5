@@ -228,4 +228,51 @@ public class FreelancerDAO extends DBContext {
             throw new SQLException("Error while updating freelancer", e);
         }
     }
+     public List<Freelancer> getSearchFreebySkill(String skill_set_name) {
+        List<Freelancer> list = new ArrayList<>();
+        String query = " SELECT  Freelancer.freelanceID,\n"
+                + "                 Freelancer.first_name,\n"
+                + "				 Freelancer.freelanceID,\n"
+                + "               Freelancer.[image],\n"
+                + "              Freelancer.gender,\n"
+                + "                   Freelancer.dob,\n"
+                + "                   Freelancer.[describe],\n"
+                + "                Freelancer.email__contact,\n"
+                + "                 Freelancer.phone_contact,\n"
+                + "                  Freelancer.userID\n"
+                + "                 \n"
+                + "               FROM\n"
+                + "            Freelancer\n"
+                + "              JOIN\n"
+                + "                 Skills ON Freelancer.freelanceID = Skills.freelancerID\n"
+                + "                JOIN\n"
+                + "                 Skill_Set ON Skills.skill_set_ID = Skill_Set.skill_set_ID\n"
+                + "               WHERE\n"
+                + "                 Skill_Set.skill_set_name LIKE ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, "%" + skill_set_name + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String fname = rs.getString(2);
+                String lname = rs.getString(3);
+                String im = rs.getString(4);
+                boolean gender = rs.getBoolean(5);
+                java.util.Date dob = rs.getDate(6);
+                String des = rs.getString(7);
+                int uid = rs.getInt(8);
+                String ec = rs.getString(9);
+                String pc = rs.getString(10);
+                int fid = rs.getInt(1);
+
+                list.add(new Freelancer(fid, fname, lname, im, gender, dob, des, ec, pc));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }
