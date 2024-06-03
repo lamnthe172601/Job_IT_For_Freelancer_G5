@@ -22,7 +22,7 @@ function checkEmail() {
         errorEmail.innerHTML = "Email are required fields.";
     } else if (!reGexEmail.test(email)) {
         document.getElementById('email').style.borderColor = "red";
-        errorEmail.innerHTML = "Email is worng Format!";
+        errorEmail.innerHTML = "Email is wrong Format!";
     } else {
         errorEmail.innerHTML = '';
         document.getElementById('email').style.borderColor = "#00FF00";
@@ -41,7 +41,7 @@ function checkpass() {
         errorPass.innerHTML = "Password must be between 8 and 16 characters!";
     } else if (!reGexPass.test(passW)) {
         document.getElementById('password').style.borderColor = "red";
-        errorPass.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter and one number!";
+        errorPass.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter and one number.";
     } else {
         errorPass.innerHTML = "";
         document.getElementById('password').style.borderColor = "#00FF00";
@@ -53,11 +53,11 @@ function checkpass() {
 
     if (ConPass === '' || ConPass === null) {
         document.getElementById('repassword').style.borderColor = "red";
-        errorConPass.innerHTML = "Please Confirm Password!";
+        errorConPass.innerHTML = "Confirm Password.";
     } 
     else if (ConPass !== passW) {
         document.getElementById('repassword').style.borderColor = "red";
-        errorConPass.innerHTML = "Confirmed Password does not match Password!";
+        errorConPass.innerHTML = "Confirmed Password does not match Password.";
     } else {
         errorConPass.innerHTML = "";
         document.getElementById('repassword').style.borderColor = "#00FF00";

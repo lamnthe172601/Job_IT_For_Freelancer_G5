@@ -35,7 +35,7 @@ function FormValidate() {
     if (phone === null || phone === '') {
         ePhone.innerHTML = 'Phone number are required fields.';
     } else if (!reGexPhone.test(phone)) {
-        ePhone.innerHTML = 'Phone number is worng format!';
+        ePhone.innerHTML = 'Phone number is worng format.';
     } else {
         checkphone = true;
         ePhone.innerHTML = '';
@@ -45,7 +45,7 @@ function FormValidate() {
     if (email === null || email === '') {
         eEmail.innerHTML = 'Email are required fields.';
     } else if (!reGexEmail.test(email)) {
-        eEmail.innerHTML = 'Email is wrong format!';
+        eEmail.innerHTML = 'Email is wrong format.';
     } else {
         eEmail.innerHTML = '';
         checkemail = true;

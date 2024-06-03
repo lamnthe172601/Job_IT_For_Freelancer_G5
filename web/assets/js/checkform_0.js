@@ -7,7 +7,7 @@ function FormValidate() {
     
     
     if (passW === '' || passW === null) {
-        errorPass.innerHTML = "Please Input Password!";
+        errorPass.innerHTML = "Password are required fields.";
     } else if (passW.length < 8 || passW.length > 16) {
         errorPass.innerHTML = "Password must be between 8 and 16 characters!";
     } else if (!reGexPass.test(passW)) {
@@ -21,7 +21,7 @@ function FormValidate() {
     var errorConPass = document.getElementById('errorRepass');
 
     if (ConPass === '' || ConPass === null) {
-        errorConPass.innerHTML = "Please Confirm Password!";
+        errorConPass.innerHTML = "Confirmed Password are required fields.";
     } 
     else if (ConPass !== passW) {
         errorConPass.innerHTML = "Confirmed Password does not match Password!";
