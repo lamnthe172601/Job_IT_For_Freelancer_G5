@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package AdminControlles;
+package CommonControll;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,8 +12,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
-public class ChangStatusUserAdmin extends HttpServlet {
+/**
+ *
+ * @author Admin
+ */
+public class Page404Controll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,10 +33,10 @@ public class ChangStatusUserAdmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangStatusUserAdmin</title>");  
+            out.println("<title>Servlet Page404Controll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangStatusUserAdmin at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet Page404Controll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -50,7 +53,7 @@ public class ChangStatusUserAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       request.getRequestDispatcher("views/404Page.jsp").forward(request, response);
     } 
 
     /** 

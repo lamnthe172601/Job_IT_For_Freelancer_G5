@@ -56,8 +56,8 @@ public class ManageRecruiterAdmin extends HttpServlet {
     throws ServletException, IOException {
     
         RecruiterInformationDAO f = new RecruiterInformationDAO();
-        request.setAttribute("totalRecruiter",f.getCompany().size());
-        request.setAttribute("listRecruiter",f.getCompany());
+        request.setAttribute("totalRecruiter",f.getRecruiters().size());
+        request.setAttribute("listRecruiter",f.getRecruiters());
         
        request.getRequestDispatcher("adminViews/recruiterAdmin.jsp").forward(request, response);
     } 

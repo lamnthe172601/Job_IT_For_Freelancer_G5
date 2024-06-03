@@ -15,7 +15,7 @@ public class Email {
 
     public static boolean sendEmail(String to, String tieuDe, String noiDung) {
         String from = "tannguyennhat130@gmail.com";
-        String password = "sptuzuwgopmttsuz";
+        String password = "xwhccqwvakevtwek";
         // Properties : khai báo các thuộc tính
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com"); // SMTP HOST
@@ -70,5 +70,11 @@ public class Email {
         }
     }
 
+
+
+    public static void main(String[] args) {
+
+        Email.sendEmail("tannguyennhat916@gmail.com","YOUR NEW PASSWORD", "Your new password is: ");
+    }
 
 }

@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import jakarta.servlet.http.Part;
 import java.nio.file.Paths;
 import java.text.DateFormat;
@@ -84,59 +86,65 @@ public class InputFreelancerProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        int userID = user.getUserID();
-
-        //customer ->> freelancer
-        dao.UpdateRole(userID,3);
+        
 
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        String date = request.getParameter("dob").trim();
+        String date = request.getParameter("dob");
         String gender = request.getParameter("gender");
         String decscribe = request.getParameter("decscribe");
-
-        //Part part = request.getPart("file");
-        //String realPath=request.getServletContext().getRealPath("/IMG");
-        //String fliename=Paths.get(part.getSubmittedFileName()).getFileName().toString();
-        String[] skills = request.getParameterValues("skill");
-        String position = request.getParameter("position");
-        String datestart = request.getParameter("datestart");
-        String dateend = request.getParameter("dateend");
-        String project = request.getParameter("project");
-        String exworkname = request.getParameter("exworkname");
-        String degreename = request.getParameter("degreename");
-        String university = request.getParameter("university");
-        String edustart = request.getParameter("edustart").trim();
-        String eduend = request.getParameter("eduend").trim();
-
-
-        //insert Freelancer Personal info
-        dao.inputFreelancerInfo(firstname, lastname, null, gender, date, decscribe, email, phone, userID);
-
-        //insert Freelancer skill
-        int freelancerID = dao.getFreelancerIDbyUserID(userID);
+        String dob="";
+        if(date.isEmpty()!=true){
+            dob=formatDate(date);
+        }
         
-        if (skills != null) {
-            for (int i=0;i<skills.length;i++) {
-                dao.inputFreelancerSkill(skills[i], freelancerID);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            int userID = user.getUserID();
+            dao.UpdateRole(userID, 3);
+            dao.inputFreelancerInfo(firstname, lastname, null, gender, dob, decscribe, email, phone, userID);
+            int freelancerID = dao.getFreelancerIDbyUserID(userID);
+            String[] skills = request.getParameterValues("skill");
+            if (skills != null) {
+                for (int i = 0; i < skills.length; i++) {
+                    dao.inputFreelancerSkill(skills[i], freelancerID);
+                }
             }
+            
+
+            String position = request.getParameter("position");
+            String datestart = request.getParameter("datestart");
+            String dateend = request.getParameter("dateend");
+            String project = request.getParameter("project");
+            String exworkname = request.getParameter("exworkname");
+            String degreename = request.getParameter("degreename");
+            String university = request.getParameter("university");
+            String edustart = request.getParameter("edustart");
+            String eduend = request.getParameter("eduend");
+            
+            String d1="",d2="",e1="",e2="";
+            if(datestart.isEmpty()!=true){
+                d1=formatDate(datestart);
+            }
+            if(dateend.isEmpty()!=true){
+                d2=formatDate(dateend);
+            }
+            if(edustart.isEmpty()!=true){
+                e1=formatDate(edustart);
+            }
+            if(eduend.isEmpty()!=true){
+                e2=formatDate(eduend);
+            }
+            
+            dao.inputFreelancerEducation(university, e1, e2, freelancerID, degreename);
+            dao.inputFreelancerExperiance(exworkname, project, position,d1, d2, freelancerID);
+            request.setAttribute("mess", "Registration successful. Please log in again!");
+            request.getRequestDispatcher("login").forward(request, response);
         }
 
-        //insert freelancer education
-            dao.inputFreelancerEducation(university, edustart, eduend, freelancerID, degreename);
-
-        //insert freelancer experiance
-
-            dao.inputFreelancerExperiance(exworkname, project, position,datestart, dateend, freelancerID);
-
-
-        //insert freelancer Experin
-        request.setAttribute("mess", "Registration successful. Please log in again!");
-        request.getRequestDispatcher("login").forward(request, response);
 
     }
 
@@ -149,5 +157,9 @@ public class InputFreelancerProfileController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+        public static String formatDate(String input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(input, formatter);
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
 }

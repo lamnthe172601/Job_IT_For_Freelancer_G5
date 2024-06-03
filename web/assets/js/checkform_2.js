@@ -6,12 +6,12 @@ function FormValidate() {
     let checkdate = false;
     let checkcompanyname=false;
 
-    var email = document.getElementById('email').value.trim();
-    var firstname = document.getElementById('firstname').value.trim();
-    var lastname = document.getElementById('lastname').value.trim();
-    var phone = document.getElementById('phone').value.trim();
-    var dob = document.getElementById('dob').value.trim();
-    var company=document.getElementById('companyname').value.trim();
+    var email = document.getElementById('email').value;
+    var firstname = document.getElementById('firstname').value;
+    var lastname = document.getElementById('lastname').value;
+    var phone = document.getElementById('phone').value;
+    var dob = document.getElementById('dob').value;
+    var company=document.getElementById('companyname').value;
 
     var eEmail = document.getElementById('eEmail');
     var ePhone = document.getElementById('ePhone');
@@ -68,12 +68,16 @@ function FormValidate() {
     }
 
     //check dob
+
     if (dob === null || dob === '') {
-        eDob.innerHTML = "Please Input Your Date of Birth!";
-    } else {
+        eDob.innerHTML = "Date of Birth are required fields.";
+    }
+    else{
         checkdate = true;
         eDob.innerHTML = '';
     }
+    
+    
 
 
 

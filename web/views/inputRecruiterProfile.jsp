@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KLTTLJob</title>
+        <title>KofeJob</title>
 
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
@@ -65,26 +65,26 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="input-block">
                             <label class="form-label">First Name<span class="label-star"> *</span></label>
-                            <input type="text" class="form-control" id="firstname" name="firstname">
+                            <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstname">
                             <div style="color: red" id="eFirstname"></div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="input-block">
                             <label class="form-label">Last Name<span class="label-star"> *</span></label>
-                            <input type="text" class="form-control" id="lastname" name="lastname">
+                            <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastname">
                             <div style="color: red" id="eLastname"></div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-6">
-                        <div class="input-block">
-                            <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
-                            <div class="cal-icon">
-                                <input type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
-                                <div style="color: red" id="eDob"></div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="input-block">
+                                <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
+                                <div class="cal-icon">
+                                    <input type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
+                                    <div style="color: red" id="eDob"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="input-block">
                             <label class="form-label">Gender</label>
@@ -98,14 +98,14 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="input-block">
                             <label class="form-label">Phone Number<span class="label-star"> *</span></label>
-                            <input type="text" class="form-control" id="phone" name="phone">
+                            <input oninput="checkphone()" type="text" class="form-control" id="phone" name="phone">
                             <div style="color: red" id="ePhone"></div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="input-block">
                             <label class="form-label">Email Address<span class="label-star"> *</span></label>
-                            <input type="text" class="form-control" id="email" name="email">
+                            <input oninput="checkEmail()" type="text" class="form-control" id="email" name="email">
                             <div style="color: red" id="eEmail"></div>
                         </div>
                     </div>
@@ -183,48 +183,30 @@
 
             </div>
             <div class="text-center">
-                <a style="margin-bottom: 100px" class="file-upload image-upbtn back "href="SelectAccountType">Back</a>
-                <button style="margin-bottom: 100px" class="file-upload image-upbtn submit " type="">Submit</button>
+                <button  class="file-upload image-upbtn submit" type="">Submit</button>
             </div>
         </form>
     </div>
         
         <style>
-
-a.back {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: black;
+            .file-upload.submit {
+    padding: 15px 30px; 
+    width: auto; 
+    background-color: red; 
     color: white;
-    border: 2px solid black;
-    text-decoration: none;
+    border-radius: 10px;
+    border-color: white;
     transition: background-color 0.3s, color 0.3s;
 }
 
-a.back:hover {
-    background-color: white;
-    color: black;
-}
-
-/* CSS cho nút Submit */
-button.submit {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #DD4B39; /* Màu cam đỏ */
-    color: white;
-    border: 2px solid black;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-button.submit:hover {
-    background-color: white;
-    color: black;
+.file-upload.submit:hover {
+    background-color: orange;
 }
         </style>
 
 
     <script src="assets/js/checkform_2.js"></script>
+    <script src="assets/js/checkinput.js"></script>
 
     <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="7080e2a7a4fb758dacdaf0ab-text/javascript"></script>
 
