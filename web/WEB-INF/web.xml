@@ -81,6 +81,10 @@
         <servlet-class>AdminControlles.ManageRecruiterAdmin</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UpdateProfile_Freelancer</servlet-name>
+        <servlet-class>AccountControll.UpdateProfile_Freelancer</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CompanyDetailControll</servlet-name>
         <servlet-class>CommonControll.CompanyDetailControll</servlet-class>
     </servlet>
@@ -103,6 +107,10 @@
     <servlet>
         <servlet-name>UpdateProfileFreelancer</servlet-name>
         <servlet-class>AccountControll.UpdateProfileFreelancer</servlet-class>
+        </servlet>
+        <servlet>
+        <servlet-name>ViewProfile_Freelancer</servlet-name>
+        <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -193,6 +201,10 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>UpdateProfile_Freelancer</servlet-name>
+        <url-pattern>/UpdateProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CompanyDetailControll</servlet-name>
         <url-pattern>/companydetail</url-pattern>
     </servlet-mapping>
@@ -209,11 +221,7 @@
         <url-pattern>/changeStatusUserAdmin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>FreelancerProfileControll</servlet-name>
+        <servlet-name>ViewProfile_Freelancer</servlet-name>
         <url-pattern>/MyProfile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateProfileFreelancer</servlet-name>
-        <url-pattern>/UpdateProfile</url-pattern>
     </servlet-mapping>
 </web-app>

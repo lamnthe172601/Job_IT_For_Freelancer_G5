@@ -113,10 +113,10 @@
 
                                                 </label>
                                             </div>
-                                            <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Sign In Now<i class="feather-arrow-right ms-2"></i></button>
+                                            <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Sign Up Now<i class="feather-arrow-right ms-2"></i></button>
 
                                             <div class="row">
-                                                <div class="col-sm-8 dont-have d-flex  align-items-center">Already have account <a href="login.html" class="ms-2">Sign in?</a></div>
+                                                <div class="col-sm-8 dont-have d-flex  align-items-center">Already have account <a href="login" class="ms-2">Sign in?</a></div>
                                             </div>
                                         </form>
                                     </div>
