@@ -26,6 +26,8 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
+                            
+                            
                             <ul class="main-nav">
                                 <li class="active has-submenu">
                                     <a href="home">Home <i class="fas "></i></a>
@@ -137,6 +139,10 @@
                                     <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
                                         </c:if>
                             </ul>
+                                    
+                                    
+                                    
+                                    
                         </div>
                         <ul class="nav header-navbar-rht">
 
