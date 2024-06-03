@@ -14,18 +14,14 @@
         </group>
         <group>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/register.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/Email.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/changePassword.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkinput.js</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/SHA1.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputRecruiterProfile.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputFreelancerProfileController.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputRecruiterProfileController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/LossPasswordController.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_2.js</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_1.js</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/ChangePasswordControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/HomeContronller.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkinput.js</file>
         </group>
     </open-files>
 </project-private>
