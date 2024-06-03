@@ -20,7 +20,10 @@ import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 2328b07 (proflie freelancer)
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
