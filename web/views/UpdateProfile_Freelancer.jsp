@@ -402,45 +402,35 @@
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">First Name</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" name="first_name" value="${freelancer.first_name}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Last Name</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" name="last_name" value="${freelancer.last_name}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Phone Number</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" name="phone_contact" value="${Freelancer.phone}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Email Address</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" name="email__contact" value="${Freelancer.email}" >
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Date of Birth</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" name="dob" value="${Freelancer.dob}">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Your Job Title</label>
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Type of Job</label>
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
+                                                    
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -452,7 +442,7 @@
                                                 <div class="row">
                                                     <div class="input-block col-md-12">
                                                         <label class="form-label">Description</label>
-                                                        <textarea class="form-control" rows="5"></textarea>
+                                                        <textarea class="form-control" name="describe" rows="5">${freelancer.describe}></textarea>
                                                     </div>
                                                 </div>
                                             </div>

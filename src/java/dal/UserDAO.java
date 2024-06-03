@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author DUC MINH
+ * @author DUC LINH
  */
 public class UserDAO extends DBContext{
     
@@ -43,7 +43,7 @@ public class UserDAO extends DBContext{
     
     public void changePassword(String username, String newPassword) throws SQLException {
             
-        String query = "UPDATE Users SET password = ? WHERE username = ?";
+        String query = "  UPDATE [freelancer].[dbo].[User] SET password = ? WHERE username = ?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, newPassword);
             stmt.setString(2, username);
