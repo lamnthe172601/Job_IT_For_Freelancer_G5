@@ -1,4 +1,9 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
 <!DOCTYPE html>
+
 <html lang="en">
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/developer.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:29:40 GMT -->
@@ -25,7 +30,141 @@
         <div class="main-wrapper">
 
 
+<header class="header">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg header-nav p-0">
+                        <div class="navbar-header">
+                            <a id="mobile_btn" href="javascript:void(0);">
+                                <span class="bar-icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                            </a>
+                            <a href="index.html" class="navbar-brand logo">
+                                <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                            </a>
+                        </div>
+                        <div class="main-menu-wrapper">
+                            <div class="menu-header">
+                                <a href="index.html" class="menu-logo">
+                                    <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                                </a>
+                                <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </div>
+                            
+                            
+                            
+                            <ul class="main-nav">
+                                <li class=" has-submenu">
+                                    <a href="home">Home <i class="fas "></i></a>
 
+                                </li>
+
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="about.html">About us</a></li>                                      
+                                        <li><a href="404-page.html">404 Page</a></li>              
+                                        <li><a href="onboard-screen.html">Onboard Screen</a></li>                       
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">Blog <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="blogList">Blog List</a></li>
+                                        <li><a href="blog-grid.html">Blog Grid</a></li>
+                                        <li><a href="BlogDetails">Blog Details</a></li>
+                                    </ul>
+                                </li>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+                                            <li class="has-submenu">
+                                                <a href="javascript:void(0);">Projects</a>
+                                                <ul class="submenu">
+                                                    <li><a href="project.html">Projects</a></li>
+                                                    <li><a href="project-details.html">Project Details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="freelancer-dashboard.html">Dashboard</a></li>
+                                            <li><a href="developer-profile.html">My Profile</a></li>
+                                            <li><a href="developer-details.html">Freelancer Details</a></li>
+                                            <li><a href="freelancer-project-proposals.html">Projects</a></li>
+                                            <li><a href="freelancer-favourites.html">Favourites</a></li>
+                                            <li><a href="freelancer-membership.html">Membership</a></li>
+                                            <li><a href="freelancer-change-password.html">Change Password</a></li>                                         
+                                            <li><a href="freelancer-review.html">Review</a></li>
+                                            <li><a href="freelancer-withdraw-money.html">Payments</a></li>
+                                            <li><a href="freelancer-profile-settings.html">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Recruiter <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+                                            <li class="has-submenu">
+                                                <a href="javascript:void(0);">Freelancer</a>
+                                                <ul class="submenu">
+                                                    <li><a href="developer.html">Freelancer</a></li>
+                                                    <li><a href="developer-details.html">Freelancer Details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="dashboard.html">Dashboard</a></li>
+                                            <li><a href="company-profile.html">My Profile</a></li>
+                                            <li><a href="company-details.html">Company Details</a></li>
+                                            <li><a href="manage-projects.html">Projects</a></li>
+                                            <li><a href="favourites.html">Favourites</a></li>
+                                            <li><a href="membership-plans.html">Membership</a></li>
+                                            <li><a href="milestones.html">Milestones</a></li>
+                                            <li><a href="chats.html">Chats</a></li>
+                                            <li><a href="review.html">Review</a></li>
+                                            <li><a href="deposit-funds.html">Payments</a></li>
+                                            <li><a href="verify-identity.html">Verify Identity</a></li>
+                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1}">
+                                    <li>
+                                        <a href="/admin/index.html" target="_blank">Admin</a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account == null}">
+                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
+                                        </c:if>
+                            </ul>
+
+
+
+                        </div>
+                        <ul class="nav header-navbar-rht reg-head">
+                            <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
+                                <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                <li><a href="postProject" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
+                                </c:if>
+
+
+                        </ul>
+
+
+
+
+                    </nav>
+                </div>
+            </header>
 
 
             <div class="bread-crumb-bar">
@@ -926,7 +1065,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="copyright-text text-center">
-                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+                                        <p class="mb-0">Copyright 2024 Â© KofeJob. All right reserved.</p>
                                     </div>
                                 </div>
                             </div>
