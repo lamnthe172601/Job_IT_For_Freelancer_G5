@@ -81,7 +81,7 @@
         <servlet-class>AdminControlles.ManageRecruiterAdmin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewProfile</servlet-name>
+        <servlet-name>ViewProfile_Freelancer</servlet-name>
         <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
     </servlet>
     <servlet>
@@ -193,7 +193,7 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewProfile</servlet-name>
+        <servlet-name>ViewProfile_Freelancer</servlet-name>
         <url-pattern>/ViewProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
