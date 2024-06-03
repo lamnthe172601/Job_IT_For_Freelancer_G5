@@ -13,6 +13,11 @@
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkinput.js</file>
         </group>
-        <group name="SWP391"/>
+        <group name="SWP391">
+            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/web/views/ProfileSettingFreelancer.jsp</file>
+            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
+            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/src/java/dal/FreelancerDAO.java</file>
+            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/src/java/AccountControll/UpdateProfile_Freelancer.java</file>
+        </group>
     </open-files>
 </project-private>
