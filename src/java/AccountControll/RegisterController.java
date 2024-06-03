@@ -87,7 +87,8 @@ public class RegisterController extends HttpServlet {
                 request.getRequestDispatcher("views/register.jsp").forward(request, response);
             }
             if (!dao.checkUserExsit(username) && !dao.checkEmailExsit(email)) {
-                dao.register(username, password, email, "active");
+                String pw=SHA1.toSHA1(password);
+                dao.register(username, pw, email, "active");
                 User user = dao.getUserByEmail(email);
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
