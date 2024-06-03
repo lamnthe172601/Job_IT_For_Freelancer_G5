@@ -4,6 +4,8 @@
  */
 package AccountControll;
 
+import Models.Company;
+import Models.Recruiter;
 import dal.DAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +15,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import Models.User;
+import dal.CompanyDAO;
+import dal.RecruiterDAO;
 
 /**
  *
@@ -80,6 +84,22 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1000);
                 session.setAttribute("account", c);
+
+                
+                
+                RecruiterDAO re = new RecruiterDAO();
+                CompanyDAO com = new CompanyDAO();
+                
+                
+                Recruiter rec = re.getRecruiterProfile(c.getUserID());
+                Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
+                session.setAttribute("company", co);
+                session.setAttribute("recruiter", rec);
+               
+               
+                
+                
+                
 
                 if (c.isLevelPass() == true && c.getStatus().equals("active")) {
                     if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {

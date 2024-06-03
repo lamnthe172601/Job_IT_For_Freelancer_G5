@@ -24,6 +24,7 @@ public class SearchController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
     throws ServletException, IOException {
         HttpSession s = request.getSession();
         Post post = (Post) s.getAttribute("account");
@@ -33,6 +34,25 @@ public class SearchController extends HttpServlet {
         request.setAttribute("listCC", po);
         request.getRequestDispatcher("views/search.jsp").forward(request, response);
     } 
+
+//            throws ServletException, IOException {
+//        
+//        String searchInput = request.getParameter("searchInput");
+//        String option = request.getParameter("op");
+//
+//
+//        if ("post".equals(option)) {
+//            List<Post> posts = postdao.getSearch(searchInput);
+//            request.setAttribute("posts", posts);
+//            request.getRequestDispatcher("views/searchpost.jsp").forward(request, response);
+//        } else {
+//
+////            List<Freelancer> freelancers = freedao.getSearchFreebySkill(searchInput);
+////            request.setAttribute("freelancers", freelancers);
+//            request.getRequestDispatcher("views/searchfreelancer.jsp").forward(request, response);
+//        }
+//    }
+
 
   
     @Override
