@@ -79,8 +79,7 @@ public class ChangePasswordControll extends HttpServlet {
                 if (newPass.equals(confirmPass)) {
                     User u = (User)session.getAttribute("account");
                     String email=u.getEmail();
-                    String pw=SHA1.toSHA1(newPass);
-                    dao.UpdatePassword(pw, 1, email);
+                    dao.UpdatePassword(newPass, 1, email);
                     session.removeAttribute("email");
                     request.setAttribute("mess", "Change Password Success");
                     request.getRequestDispatcher("login").forward(request, response);

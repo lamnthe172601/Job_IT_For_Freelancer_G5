@@ -1,7 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,124 +53,40 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                            
-                            
-                            
+                            <ul class="main-nav">
+                                <li class="has-submenu">
+                                    <a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="index.html">Home</a></li>
+                                       
+                                    </ul>
+                                </li>
                                 
-                                <ul class="main-nav">
-                                <li class="active has-submenu">
-                                    <a href="home">Home <i class="fas "></i></a>
-
-                                </li>
-
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu"> 
-                                        
-                                            <li><a href="jobFavourites">Jobs Favourites</a></li>
-                                                                                                                                                           
-                                        <li><a href="jobsApply">Jobs Apply</a></li>
-                                        <li><a href="jobforyou">Jobs For you</a></li>
-                                    </ul>
-                                </li>
-                               
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                    <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">Jobs List</a></li>
-                                        <li><a href="newsJobs">News Jobs</a></li>
-                                        <li><a href="findJobs">Find Jobs</a></li>  
-                                        <li><a href="company">Company</a></li>
-                                    </ul>
-                                </li>
-                                 </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">Top Freelancer</a></li>
-                                        <li><a href="newsJobs">Skills</a></li>
-                                        
+                                        <li><a href="about.html">About us</a></li>
+                                        <li><a href="blank-page.html">Starter Page</a></li>
+                                        <li><a href="404-page.html">404 Page</a></li>
+                                        <li><a href="login.html">Login</a></li>
+                                        <li><a href="register.html">Register</a></li>
+                                        <li><a href="onboard-screen.html">Onboard Screen</a></li>
+                                        <li><a href="forgot-password.html">Forgot Password</a></li>
+                                        <li><a href="change-passwords.html">Change Password</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
+                                    <a href="javascript:void(0);">Blog <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">List Post</a></li>
-                                        <li><a href="newsJobs">Reviews</a></li>
-                                        
+                                        <li><a href="blog-list.html">Blog List</a></li>
+                                        <li><a href="blog-grid.html">Blog Grid</a></li>
+                                        <li><a href="blog-details.html">Blog Details</a></li>
                                     </ul>
                                 </li>
-                                </c:if>
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        
-                                        <li><a href="blogList">Blog List</a></li>
-                                        <li><a href="blogGrid">Blog Grid</a></li>
-                                        <li><a href="AboutUs">About us</a></li>
-                                         <li><a href="ContactUs">Contact us</a></li>
-                                    </ul>
+                                <li>
+                                    <a href="admin/index.html" target="_blank">Admin</a>
                                 </li>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                                    
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                           
-                                            <li><a href="dashboard">Dashboard</a></li>
-                                            <li><a href="MyProfile">My Profile</a></li>
-                                            <li><a href="Project">Projects</a></li>                        
-                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
-                                            <li><a href="profile-settings">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                            
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="companydetail">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
-                                            <li><a href="recruitersetting">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
-                                    <li>
-                                        <a href="/admin/index.html" target="_blank">Admin</a>
-                                        <ul class="submenu">
-                                            
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="recruiterprofile">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
-                                            <li><a href="profile-settings.html">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account == null}">
-                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
-                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
-                                        </c:if>
-                            </ul> 
-                                
-                                
-                                
+                            </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
                             <li><a href="chats.html"><img src="assets/img/icon/message-chat-icon.svg" alt="Img"></a></li>
@@ -527,10 +439,107 @@
             </div>
 
 
-           
+            <footer class="footer">
+                <div class="footer-top ">
+                    <div class="container">
+                        <div class="row">
+                            <div class=" col-lg-4 col-md-12">
+                                <div class="footer-bottom-logo">
+                                    <a href="index.html" class="menu-logo">
+                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                                    </a>
+                                    <p>We?re always in search for talented and motivated people. Don?t be shy introduce yourself!</p>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                    <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
+                                </div>
+                            </div>
+                            <div class=" col-lg-8 col-md-12">
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Useful Links</h2>
+                                            <ul>
+                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
+                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
+                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
+                                                <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
+                                                <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Help & Support</h2>
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Other Links</h2>
+                                            <ul>
+                                                <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
+                                                <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
+                                                <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
+                                                <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
+                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Connect With Us</h2>
+                                            <ul>
+                                                <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
+                                                <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
+                                                <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
+                                                <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
+                                                <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <%@ include file="footter.jsp" %>                  
 
+                <div class="footer-bottom">
+                    <div class="container">
+
+                        <div class="copyright">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="copyright-text text-center">
+                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </footer>
 
         </div>
 

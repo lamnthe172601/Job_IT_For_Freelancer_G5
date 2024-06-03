@@ -1,6 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,114 +49,94 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                            
-                            
-                            
                             <ul class="main-nav">
-                                <li class=" has-submenu">
-                                    <a href="home">Home <i class="fas "></i></a>
-
+                                <li class="has-submenu">
+                                    <a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="index-2.html">Home 2</a></li>
+                                        <li><a href="index-3.html">Home 3</a></li>
+                                        <li><a href="index-4.html">Home 4</a></li>
+                                        <li><a href="index-5.html">Home 5</a></li>
+                                    </ul>
                                 </li>
-
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">For Employers <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li class="has-submenu">
+                                            <a href="javascript:void(0);">Freelancer</a>
+                                            <ul class="submenu">
+                                                <li><a href="developer.html">Freelancer</a></li>
+                                                <li><a href="developer-details.html">Freelancer Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="dashboard.html">Dashboard</a></li>
+                                        <li><a href="company-profile.html">My Profile</a></li>
+                                        <li><a href="manage-projects.html">Projects</a></li>
+                                        <li><a href="favourites.html">Favourites</a></li>
+                                        <li><a href="membership-plans.html">Membership</a></li>
+                                        <li><a href="milestones.html">Milestones</a></li>
+                                        <li><a href="chats.html">Chats</a></li>
+                                        <li><a href="review.html">Review</a></li>
+                                        <li><a href="deposit-funds.html">Payments</a></li>
+                                        <li><a href="verify-identity.html">Verify Identity</a></li>
+                                        <li><a href="profile-settings.html">Settings</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu active">
+                                    <a href="javascript:void(0);">For Freelancer <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li class="has-submenu active">
+                                            <a href="javascript:void(0);">Projects</a>
+                                            <ul class="submenu">
+                                                <li class="active"><a href="project.html">Projects</a></li>
+                                                <li><a href="project-details.html">Project Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="freelancer-dashboard.html">Dashboard</a></li>
+                                        <li><a href="developer-profile.html">My Profile</a></li>
+                                        <li><a href="freelancer-project-proposals.html">Projects</a></li>
+                                        <li><a href="freelancer-favourites.html">Favourites</a></li>
+                                        <li><a href="freelancer-membership.html">Membership</a></li>
+                                        <li><a href="freelancer-change-password.html">Change Password</a></li>
+                                        <li><a href="freelancer-chats.html">Chats</a></li>
+                                        <li><a href="freelancer-review.html">Review</a></li>
+                                        <li><a href="freelancer-withdraw-money.html">Payments</a></li>
+                                        <li><a href="freelancer-verify-identity.html">Verify Identity</a></li>
+                                        <li><a href="freelancer-profile-settings.html">Settings</a></li>
+                                    </ul>
+                                </li>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="about.html">About us</a></li>                                      
-                                        <li><a href="404-page.html">404 Page</a></li>              
-                                        <li><a href="onboard-screen.html">Onboard Screen</a></li>                       
+                                        <li><a href="about.html">About us</a></li>
+                                        <li><a href="blank-page.html">Starter Page</a></li>
+                                        <li><a href="404-page.html">404 Page</a></li>
+                                        <li><a href="login.jsp">Login</a></li>
+                                        <li><a href="register.jsp">Register</a></li>
+                                        <li><a href="onboard-screen.html">Onboard Screen</a></li>
+                                        <li><a href="forgot-password.html">Forgot Password</a></li>
+                                        <li><a href="change-passwords.html">Change Password</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">Blog <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="blogList">Blog List</a></li>
+                                        <li><a href="blog-list.html">Blog List</a></li>
                                         <li><a href="blog-grid.html">Blog Grid</a></li>
-                                        <li><a href="BlogDetails">Blog Details</a></li>
+                                        <li><a href="blog-details.html">Blog Details</a></li>
                                     </ul>
                                 </li>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                            <li class="has-submenu">
-                                                <a href="javascript:void(0);">Projects</a>
-                                                <ul class="submenu">
-                                                    <li><a href="project.html">Projects</a></li>
-                                                    <li><a href="project-details.html">Project Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="freelancer-dashboard.html">Dashboard</a></li>
-                                            <li><a href="developer-profile.html">My Profile</a></li>
-                                            <li><a href="developer-details.html">Freelancer Details</a></li>
-                                            <li><a href="freelancer-project-proposals.html">Projects</a></li>
-                                            <li><a href="freelancer-favourites.html">Favourites</a></li>
-                                            <li><a href="freelancer-membership.html">Membership</a></li>
-                                            <li><a href="freelancer-change-password.html">Change Password</a></li>                                         
-                                            <li><a href="freelancer-review.html">Review</a></li>
-                                            <li><a href="freelancer-withdraw-money.html">Payments</a></li>
-                                            <li><a href="freelancer-profile-settings.html">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Recruiter <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                            <li class="has-submenu">
-                                                <a href="javascript:void(0);">Freelancer</a>
-                                                <ul class="submenu">
-                                                    <li><a href="developer.html">Freelancer</a></li>
-                                                    <li><a href="developer-details.html">Freelancer Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="company-profile.html">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                            <li><a href="membership-plans.html">Membership</a></li>
-                                            <li><a href="milestones.html">Milestones</a></li>
-                                            <li><a href="chats.html">Chats</a></li>
-                                            <li><a href="review.html">Review</a></li>
-                                            <li><a href="deposit-funds.html">Payments</a></li>
-                                            <li><a href="verify-identity.html">Verify Identity</a></li>
-                                            <li><a href="profile-settings.html">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1}">
-                                    <li>
-                                        <a href="/admin/index.html" target="_blank">Admin</a>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account == null}">
-                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
-                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
-                                        </c:if>
+                                <li>
+                                    <a href="admin/index.html" target="_blank">Admin</a>
+                                </li>
                             </ul>
-
-
-
                         </div>
                         <ul class="nav header-navbar-rht reg-head">
-                            <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                                <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                <li><a href="postProject" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                                <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
-                                </c:if>
-
-
+                            <li><a href="register.html" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                            <li><a href="login.html" class="log-btn"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
+                            <li><a href="post-project.html" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
                         </ul>
-
-
-
-
                     </nav>
                 </div>
             </header>
@@ -171,11 +148,11 @@
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
                                 <h3>Post Grid</h3>
-                                <form class="form" name="searchForm" method="get" action="${pageContext.request.contextPath}/search">
-                                    <input type="hidden" name="op" value="post">
+                                <form class="form" name="title" id="store" method="get" action="search">
                                     <div class="form-inner">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="searchInput" placeholder="Search Posts">
+                                            <input type="text" class="form-control" name="searchInput" placeholder="Keywords">
+                                            <input type="hidden" name="op" value="post">
                                             <button class="btn btn-primary sub-btn" type="submit">Search</button>
                                         </div>
                                     </div>
@@ -577,7 +554,7 @@
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$168</div>
+                                                <div class="freelancers-price">168</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
@@ -622,13 +599,13 @@
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$472</div>
+                                                <div class="freelancers-price">472</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
                                                         <h5>Skill</h5>
-                                                        <h3 class="counter-value">Staff Scientist Skill</h3>
+                                                        <h3 class="counter-value">Staff Scientist</h3>
                                                     </li>
 
 
@@ -664,13 +641,13 @@
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$499</div>
+                                                <div class="freelancers-price">499</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
                                                         <h5>Skill</h5>
-                                                        <h3 class="counter-value">Social Worker Skill</h3>
+                                                        <h3 class="counter-value">Social Worker</h3>
                                                     </li>
 
 
@@ -706,13 +683,13 @@
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$212</div>
+                                                <div class="freelancers-price">212</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
                                                         <h5>Skill</h5>
-                                                        <h3 class="counter-value">Chemical Engineer Skill</h3>
+                                                        <h3 class="counter-value">Chemical Engineer</h3>
                                                     </li>
 
                                                 </ul>
@@ -753,7 +730,7 @@
                                                 <ul>
                                                     <li>
                                                         <h5>Skill</h5>
-                                                        <h3 class="counter-value">Internal Auditor Skill</h3>
+                                                        <h3 class="counter-value">Internal Auditor</h3>
                                                     </li>
 
                                                 </ul>
@@ -794,7 +771,7 @@
                                                 <ul>
                                                     <li>
                                                         <h5>Skill</h5>
-                                                        <h3 class="counter-value">Sales Associate Skill</h3>
+                                                        <h3 class="counter-value">Sales Associate</h3>
                                                     </li>
 
                                                 </ul>
@@ -917,7 +894,7 @@
                                                 <ul>
                                                     <li>
                                                         <h5>Skill</h5>
-                                                        <h3 class="counter-value">Project Manager Skill</h3>
+                                                        <h3 class="counter-value">Project Manager</h3>
                                                     </li>
 
                                                 </ul>
@@ -1040,7 +1017,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="copyright-text text-center">
-                                        <p class="mb-0">Copyright 2024 Â© KofeJob. All right reserved.</p>
+                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
                                     </div>
                                 </div>
                             </div>
