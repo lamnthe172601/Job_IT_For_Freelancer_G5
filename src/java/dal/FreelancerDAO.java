@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class FreelancerDAO extends DBContext {
                             rs.getDate("end_date"),
                             en
                     ));
-                    
+
                 }
             }
         } catch (SQLException e) {
@@ -88,7 +89,7 @@ public class FreelancerDAO extends DBContext {
     }
 
     public List<Education> getEducationById(int id) throws SQLException {
-         List<Education> list = new ArrayList<>();
+        List<Education> list = new ArrayList<>();
         String query = """
                        SELECT * FROM Education ex 
                        join freelancer fe on ex.freelanceID = fe.freelanceID 
@@ -109,14 +110,12 @@ public class FreelancerDAO extends DBContext {
                             rs.getString("email__contact"),
                             rs.getString("phone_contact")
                     );
-                    
+
                     Dregee de = new Dregee(rs.getInt("dregeeID"), rs.getString("degree_name"));
 
-                    list.add( new Education(rs.getInt("educationID"), rs.getString("university_name")
-                    ,rs.getDate("start_date"), rs.getDate("end_date"), en, de));
-                      
-                  
-                    
+                    list.add(new Education(rs.getInt("educationID"), rs.getString("university_name"),
+                             rs.getDate("start_date"), rs.getDate("end_date"), en, de));
+
                 }
             }
         } catch (SQLException e) {
@@ -127,7 +126,7 @@ public class FreelancerDAO extends DBContext {
     }
 
     public List<Skills> getSkillSetById(int id) throws SQLException {
-         List<Skills> list = new ArrayList<>();
+        List<Skills> list = new ArrayList<>();
         String query = """
                          SELECT * FROM Skills ex 
                                               join freelancer fe on ex.freelancerID = fe.freelanceID 
@@ -148,13 +147,11 @@ public class FreelancerDAO extends DBContext {
                             rs.getString("email__contact"),
                             rs.getString("phone_contact")
                     );
-                    
+
                     SkillSet skillset = new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name"));
 
-                    list.add( new Skills(rs.getInt("skillID"), skillset, en));
-                      
-                  
-                    
+                    list.add(new Skills(rs.getInt("skillID"), skillset, en));
+
                 }
             }
         } catch (SQLException e) {
@@ -163,14 +160,14 @@ public class FreelancerDAO extends DBContext {
         }
         return list;
     }
-    
-     public List<SkillSet> getAllSkillSet() {
-         List<SkillSet> list = new ArrayList<>();
+
+    public List<SkillSet> getAllSkillSet() {
+        List<SkillSet> list = new ArrayList<>();
         String query = """
                          SELECT [skill_set_ID]
                          ,[skill_set_name]
                          FROM [freelancer].[dbo].[Skill_Set]""";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {        
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     list.add(new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name")));
@@ -178,17 +175,17 @@ public class FreelancerDAO extends DBContext {
             }
         } catch (SQLException e) {
             e.printStackTrace(); // In chi tiết lỗi ra console
-           
+
         }
         return list;
     }
-     
-      public List<Dregee> getAllDregee() {
-         List<Dregee> list = new ArrayList<>();
+
+    public List<Dregee> getAllDregee() {
+        List<Dregee> list = new ArrayList<>();
         String query = """
                          SELECT *
                          FROM Degree""";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {        
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     list.add(new Dregee(rs.getInt("dregeeID"), rs.getString("degree_name")));
@@ -196,27 +193,32 @@ public class FreelancerDAO extends DBContext {
             }
         } catch (SQLException e) {
             e.printStackTrace(); // In chi tiết lỗi ra console
-           
+
         }
         return list;
     }
-     
-     public static void main(String[] args) {
-        FreelancerDAO fe = new FreelancerDAO();
-        List<Dregee> li = fe.getAllDregee();
-         for (Dregee skillSet : li) {
-             System.out.println(skillSet.toString());
-         }
-    }
+
+    
 
     public boolean updateFreelancer(Freelancer freelancer) throws SQLException {
-        String query = "UPDATE freelancers SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, describe = ?, email = ?, phone = ? WHERE freelanceID = ?";
+        String query = "UPDATE [dbo].[Freelancer]\n"
+                + "   SET [first_name] = ?\n"
+                + "      ,[last_name] = ?\n"
+                + "      ,[image] = ?\n"
+                + "      ,[gender] = ?\n"
+                + "      ,[dob] = ?\n"
+                + "      ,[describe] = ?\n"
+                + "      ,[email__contact] = ?\n"
+                + "      ,[phone_contact] =?\n"
+                + " WHERE freelanceID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, freelancer.getFirst_name());
             stmt.setString(2, freelancer.getLast_name());
             stmt.setString(3, freelancer.getImage());
             stmt.setBoolean(4, freelancer.isGender());
-            stmt.setDate(5, (Date) freelancer.getDob());
+            SimpleDateFormat spd = new SimpleDateFormat("yyyy-MM-dd");
+            String date1 = spd.format(freelancer.getDob());
+            stmt.setDate(5,  Date.valueOf(date1));
             stmt.setString(6, freelancer.getDescribe());
             stmt.setString(7, freelancer.getEmail());
             stmt.setString(8, freelancer.getPhone());
@@ -227,5 +229,22 @@ public class FreelancerDAO extends DBContext {
             e.printStackTrace();
             throw new SQLException("Error while updating freelancer", e);
         }
+    }
+
+    public int getMaxIdPost() {
+        int maxId = 1;
+        try {
+            String sql = "  select max(freelanceID) as MaxIdPost from Freelancer";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                maxId = rs.getInt("MaxIdPost");
+            }
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            return maxId;
+        }
+        return maxId;
     }
 }
