@@ -24,7 +24,7 @@ function FormValidate() {
     var reGexPhone = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 
     if (company === null || company === '') {
-        eCompanyname.innerHTML = 'Company Name are required fields.';
+        eCompanyname.innerHTML = 'Please Input Company Name';
     } else {
         eCompanyname.innerHTML = '';
         checkcompanyname = true;
@@ -33,9 +33,9 @@ function FormValidate() {
 
     //check phone
     if (phone === null || phone === '') {
-        ePhone.innerHTML = 'Phone number are required fields.';
+        ePhone.innerHTML = 'Please Input Your Phone!';
     } else if (!reGexPhone.test(phone)) {
-        ePhone.innerHTML = 'Phone number is worng format.';
+        ePhone.innerHTML = 'Phone number is worng format!';
     } else {
         checkphone = true;
         ePhone.innerHTML = '';
@@ -43,9 +43,9 @@ function FormValidate() {
 
     //check email
     if (email === null || email === '') {
-        eEmail.innerHTML = 'Email are required fields.';
+        eEmail.innerHTML = 'Please Input your Email!';
     } else if (!reGexEmail.test(email)) {
-        eEmail.innerHTML = 'Email is wrong format.';
+        eEmail.innerHTML = 'Email is wrong format!';
     } else {
         eEmail.innerHTML = '';
         checkemail = true;
@@ -53,7 +53,7 @@ function FormValidate() {
 
     //check first name
     if (firstname === null || firstname === '') {
-        eFirstname.innerHTML = "Firstname are required fields.";
+        eFirstname.innerHTML = "Please Input Your Firstname!";
     } else {
         checkfirstname = true;
         eFirstname.innerHTML = '';
@@ -61,23 +61,19 @@ function FormValidate() {
 
     //check last name
     if (lastname === null || lastname === '') {
-        eLastname.innerHTML = "Lastname are required fields.";
+        eLastname.innerHTML = "Please Input Your Lastname!";
     } else {
         checklastname = true;
         eLastname.innerHTML = '';
     }
 
     //check dob
-
     if (dob === null || dob === '') {
-        eDob.innerHTML = "Date of Birth are required fields.";
-    }
-    else{
+        eDob.innerHTML = "Please Input Your Date of Birth!";
+    } else {
         checkdate = true;
         eDob.innerHTML = '';
     }
-    
-    
 
 
 

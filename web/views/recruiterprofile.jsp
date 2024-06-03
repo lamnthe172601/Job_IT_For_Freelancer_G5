@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : login
+    Created on : May 18, 2024, 2:59:55 PM
+    Author     : Admin
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -9,7 +13,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KofeJob</title>
+        <title>KLTTLJob</title>
 
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
@@ -186,7 +190,7 @@
                                             </div>
                                             <div class="proposal-detail text-capitalize">
                                                 <span class=" d-block">Team Number</span>
-                                                <p class="mb-0">${company.getTeamNumber().getName()}</p>
+                                                <p class="mb-0">${company.teamNumber}</p>
                                             </div>
                                         </li>
                                         <li>
@@ -663,7 +667,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="copyright-text text-center">
-                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+                                        <p class="mb-0">Copyright 2024 © KLTTLJob. All right reserved.</p>
                                     </div>
                                 </div>
                             </div>

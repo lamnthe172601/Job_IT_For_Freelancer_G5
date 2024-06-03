@@ -37,10 +37,10 @@ public class CompanyDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
+                
                 TeamNumber tem = new TeamNumber(rs.getInt("team_numberID"), rs.getString("team_number"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
-
+                
                 return new Company(rs.getInt("companyID"), rs.getString("company_name"), tem, rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"), re);
             }
         } catch (SQLException e) {
@@ -48,48 +48,45 @@ public class CompanyDAO extends DBContext {
         return null;
     }
 
-    public Company getCompanyByRecruiterID(int reid) {
-        DAO teDao = new DAO();
-        RecruiterDAO reDao = new RecruiterDAO();
-        String query = "SELECT [companyID]\n"
-                + "                      ,[company_name]\n"
-                + "                     ,[team_numberID]\n"
-                + "                     ,[established_on]\n"
-                + "                    ,[logo]\n"
-                + "                      ,[website]\n"
-                + "                  ,[describe]\n"
-                + "                    ,[location]\n"
-                + "                   ,[recruiterID]\n"
-                + "                  FROM [dbo].[Company]\n"
-                + "               	WHERE [recruiterID] = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, reid);
-
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                int cid = rs.getInt(1);
-                String cname = rs.getString(2);
-                TeamNumber teamnumber = teDao.getTeamnumberByTeamNumberID(rs.getInt(3));
-                Date eon = rs.getDate(4);
-                String logo = rs.getString(5);
-                String website = rs.getString(6);
-                String describe = rs.getString(7);
-                String location = rs.getString(8);
-
-                Recruiter recruiterID = reDao.getRecruiterProfileByRecruiterID(rs.getInt(10));
-                return new Company(cid, cname, teamnumber, eon, logo, website, describe, location, recruiterID);
-            }
-        } catch (SQLException e) {
-        }
-        return null;
-    }
-
-    public static void main(String[] args) {
+//    public Company getCompanyByRecruiterID(int reid) {
+//        RecruiterDAO reDao = new RecruiterDAO();
+//        String query = "SELECT [companyID]\n"
+//                + "                      ,[company_name]\n"
+//                + "                     ,[team_numberID]\n"
+//                + "                     ,[established_on]\n"
+//                + "                    ,[logo]\n"
+//                + "                      ,[website]\n"
+//                + "                  ,[describe]\n"
+//                + "                    ,[location]\n"
+//                + "                   ,[recruiterID]\n"
+//                + "                  FROM [dbo].[Company]\n"
+//                + "               	WHERE [recruiterID] = ?";
+//        try {
+//            PreparedStatement ps = connection.prepareStatement(query);
+//            ps.setInt(1, reid);
+//
+//            ResultSet rs = ps.executeQuery();
+//
+//            if (rs.next()) {
+//                int cid = rs.getInt(1);
+//                String cname = rs.getString(2);
+//                int tnumber = rs.getInt(3);
+//                Date eon = rs.getDate(4);
+//                String logo = rs.getString(5);
+//                String website = rs.getString(6);
+//                String describe = rs.getString(7);
+//                String location = rs.getString(8);
+//
+//                Recruiter recruiterID = reDao.getRecruiterProfileByRecruiterID(rs.getInt(9));
+//                return new Company(cid, tnumber, eon, logo, cname, website, describe, location, recruiterID);
+//            }
+//        } catch (SQLException e) {
+//        }
+//        return null;
+//    }
+public static void main(String[] args) {
         CompanyDAO t = new CompanyDAO();
         Company n = t.getCompanyByCompanyID(4);
         System.out.println(n.toString());
     }
-
 }

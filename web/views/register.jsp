@@ -14,7 +14,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KofeJob</title>
+        <title>KLTTLJob</title>
 
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
@@ -70,7 +70,7 @@
                         <div class="align-items-center justify-content-center">
                             <div class="login-right">
                                 <div class="login-header text-center">
-                                    <a href="index.html"><img src="assets/img/logo.svg" alt="logo" class="img-fluid"></a>
+                                    <a href="home"><img src="assets/img/logo.svg" alt="logo" class="img-fluid"></a>
                                     <h3>We love to see you joining our community</h3>
                                 </div>
                                 <div class="tab-content pt-0">
@@ -78,18 +78,18 @@
                                         <form id="from" action="Register" method="post" onsubmit="return FormValidate();">
                                             <div class="input-block ">
                                                 <label class="focus-label">User Name <span class="label-star"> *</span></label>
-                                                <input oninput="checkUsername()" type="text" class="form-control floating" id="username" name="username">
+                                                <input type="text" class="form-control floating" id="username" name="username">
                                                 <div style="color: red" id="errorUsername">${mess1}</div>
                                             </div>
                                             <div class="input-block ">
                                                 <label class="focus-label">Email Address<span class="label-star"> *</span></label>
-                                                <input oninput="checkEmail()" type="text" class="form-control floating" id="email" name="email">
+                                                <input type="text" class="form-control floating" id="email" name="email">
                                                 <div style="color: red" id="errorEmail">${mess2}</div>
                                             </div>
                                             <div class="input-block ">
                                                 <label class="focus-label">Password <span class="label-star"> *</span></label>
                                                 <div class="position-relative">
-                                                    <input oninput="checkpass()" type="password" class="form-control floating pass-input" id="password" name="password">                                                  
+                                                    <input type="password" class="form-control floating pass-input" id="password" name="password">                                                  
                                                     <div class="password-icon ">
                                                         <span style="cursor: pointer;" class="fas toggle-password fa-eye-slash"></span>
                                                     </div>
@@ -99,7 +99,7 @@
                                             <div class="input-block  mb-0">
                                                 <label class="focus-label">Confirm Password <span class="label-star"> *</span></label>
                                                 <div class="position-relative">
-                                                    <input oninput="checkpass()" type="password" class="form-control floating pass-inputs" id="repassword" name="repassword">
+                                                    <input type="password" class="form-control floating pass-inputs" id="repassword" name="repassword">
                                                     <div class="password-icons">
                                                         <span style="cursor: pointer;" class="fas toggle-passwords fa-eye-slash"></span>
                                                     </div>
@@ -113,10 +113,10 @@
 
                                                 </label>
                                             </div>
-                                            <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Sign In Now<i class="feather-arrow-right ms-2"></i></button>
+                                            <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Sign Up Now<i class="feather-arrow-right ms-2"></i></button>
 
                                             <div class="row">
-                                                <div class="col-sm-8 dont-have d-flex  align-items-center">Already have account <a href="login.html" class="ms-2">Sign in?</a></div>
+                                                <div class="col-sm-8 dont-have d-flex  align-items-center">Already have account <a href="login" class="ms-2">Sign in?</a></div>
                                             </div>
                                         </form>
                                     </div>
@@ -141,7 +141,6 @@
         <script src="assets/js/script.js" type="60ab19134118e3e714333e43-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="60ab19134118e3e714333e43-|49" defer></script>
         <script src="assets/js/checkfrom.js"></script>
-        <script src="assets/js/jsvalidate.js"></script>
             
     </body>
         
