@@ -142,7 +142,7 @@
                                         <ul class="submenu">
                                             
                                             <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="recruiterprofile">My Profile</a></li>
+                                            <li><a href="companydetail">My Profile</a></li>
                                             <li><a href="company-details.html">Company Details</a></li>
                                             <li><a href="manage-projects.html">Projects</a></li>
                                             <li><a href="favourites.html">Favourites</a></li>
