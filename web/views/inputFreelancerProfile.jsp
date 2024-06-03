@@ -241,6 +241,7 @@
         </form>
         
         <style>
+/* CSS cho nút Back */
 a.back {
     display: inline-block;
     padding: 10px 20px;
@@ -252,22 +253,6 @@ a.back {
 }
 
 a.back:hover {
-    background-color: white;
-    color: black;
-}
-
-/* CSS cho nút Submit */
-button.submit {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #DD4B39; /* Màu cam đỏ */
-    color: white;
-    border: 2px solid black;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-button.submit:hover {
     background-color: white;
     color: black;
 }
