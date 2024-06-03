@@ -35,8 +35,8 @@ public class SearchController extends HttpServlet {
             request.getRequestDispatcher("views/searchpost.jsp").forward(request, response);
         } else {
 
-//            List<Freelancer> freelancers = freedao.getSearchFreebySkill(searchInput);
-//            request.setAttribute("freelancers", freelancers);
+            List<Freelancer> freelancers = freedao.getSearchFreebySkill(searchInput);
+            request.setAttribute("freelancers", freelancers);
             request.getRequestDispatcher("views/searchfreelancer.jsp").forward(request, response);
         }
     }
