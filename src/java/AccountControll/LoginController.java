@@ -53,10 +53,10 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
         request.setAttribute("username", username);
-        
+        String pw=SHA1.toSHA1(password);
         request.setAttribute("password", password);
         DAO accDao = new DAO();
-        User c = accDao.getLogin(username, password);
+        User c = accDao.getLogin(username, pw);
         
         try {
             if (c == null) {
