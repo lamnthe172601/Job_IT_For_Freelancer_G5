@@ -66,12 +66,14 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
+        String pw=SHA1.toSHA1(password);
         request.setAttribute("username", username);
         request.setAttribute("password", password);
         DAO accDao = new DAO();
-        User c = accDao.getLogin(username, password);
+        User c = accDao.getLogin(username, pw);
 
         try {
+
             if (c == null) {
                 request.setAttribute("loginFaild", "Username or Password Wrong");
                 request.getRequestDispatcher("views/login.jsp").forward(request, response);
@@ -79,9 +81,18 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1000);
                 session.setAttribute("account", c);
+                if (c.getRoleID().getRoleID() == 4) {
+                    RecruiterDAO re = new RecruiterDAO();
+                    CompanyDAO com = new CompanyDAO();
+                    Recruiter rec = re.getRecruiterProfile(c.getUserID());
+                    Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
+                    session.setAttribute("company", co);
+                    session.setAttribute("recruiter", rec);
+                }
 
                 if (c.isLevelPass() == true && c.getStatus().equals("active")) {
                     if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
+                        session.setAttribute("adminProfile", accDao.getAdminProfileByUserID(c.getUserID()));
                         response.sendRedirect("dashboardAdmin");
                     } else if (c.getRoleID().getRoleID() == 5) {
                         response.sendRedirect("SelectAccountType");
@@ -101,11 +112,6 @@ public class LoginController extends HttpServlet {
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -89,13 +89,12 @@
                                 <div style="color: red" id="eEmail"></div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="input-block">
-                                <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
-                                <div class="cal-icon">
-                                    <input type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
-                                    <div style="color: red" id="eDob"></div>
-                                </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="input-block">
+                            <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
+                            <div class="cal-icon">
+                                <input oninput="checkdob()" type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
+                                <div style="color: red" id="eDob"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
@@ -197,6 +196,7 @@
                         <div class="col-md-12">
                             <h4>Education</h4>
                         </div>
+                        
                         <div class="col-md-6 col-lg-3">
                             <div class="input-block">
                                 <label class="focus-label">University Name</label>
@@ -219,7 +219,7 @@
                                 </div>
                             </div>
                         </div>
-                                                <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-3">
                             <div class="input-block">
                                 <label class="focus-label">Degree Name</label>
                                 <select name="degreename" class="form-control select-level select-edu select">
