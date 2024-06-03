@@ -86,12 +86,7 @@ public class InputFreelancerProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        int userID = user.getUserID();
-
-        //customer ->> freelancer
-        dao.UpdateRole(userID,3);
+        
 
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
@@ -150,17 +145,6 @@ public class InputFreelancerProfileController extends HttpServlet {
             request.getRequestDispatcher("login").forward(request, response);
         }
 
-        //insert freelancer education
-            dao.inputFreelancerEducation(university, edustart, eduend, freelancerID, degreename);
-
-        //insert freelancer experiance
-
-            dao.inputFreelancerExperiance(exworkname, project, position,datestart, dateend, freelancerID);
-
-
-        //insert freelancer Experin
-        request.setAttribute("mess", "Registration successful. Please log in again!");
-        request.getRequestDispatcher("login").forward(request, response);
 
     }
 
