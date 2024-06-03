@@ -3,11 +3,11 @@ function FormValidate() {
     let checkun = false;
     let checkpass = false;
     let checkrepass = false;
-    var email = document.getElementById('email').value;
+    var email = document.getElementById('email').value.trim();
     var errorEmail = document.getElementById('errorEmail');
     var reGexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    var username = document.getElementById('username').value;
+    var username = document.getElementById('username').value.trim();
     var errorUsername = document.getElementById('errorUsername');
     if (username === '' || username === null) {
         errorUsername.innerHTML = "Username are required fields.";
@@ -43,7 +43,7 @@ function FormValidate() {
         checkmail=true;
     }
 
-    var ConPass = document.getElementById('repassword').value;
+    var ConPass = document.getElementById('repassword').value.trim();
     var errorConPass = document.getElementById('errorRepass');
 
     if (ConPass === '' || ConPass === null) {

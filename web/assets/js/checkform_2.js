@@ -6,12 +6,12 @@ function FormValidate() {
     let checkdate = false;
     let checkcompanyname=false;
 
-    var email = document.getElementById('email').value;
-    var firstname = document.getElementById('firstname').value;
-    var lastname = document.getElementById('lastname').value;
-    var phone = document.getElementById('phone').value;
-    var dob = document.getElementById('dob').value;
-    var company=document.getElementById('companyname').value;
+    var email = document.getElementById('email').value.trim();
+    var firstname = document.getElementById('firstname').value.trim();
+    var lastname = document.getElementById('lastname').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var dob = document.getElementById('dob').value.trim();
+    var company=document.getElementById('companyname').value.trim();
 
     var eEmail = document.getElementById('eEmail');
     var ePhone = document.getElementById('ePhone');
@@ -24,7 +24,7 @@ function FormValidate() {
     var reGexPhone = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 
     if (company === null || company === '') {
-        eCompanyname.innerHTML = 'Please Input Company Name';
+        eCompanyname.innerHTML = 'Company Name are required fields.';
     } else {
         eCompanyname.innerHTML = '';
         checkcompanyname = true;
@@ -33,7 +33,7 @@ function FormValidate() {
 
     //check phone
     if (phone === null || phone === '') {
-        ePhone.innerHTML = 'Please Input Your Phone!';
+        ePhone.innerHTML = 'Phone number are required fields.';
     } else if (!reGexPhone.test(phone)) {
         ePhone.innerHTML = 'Phone number is worng format!';
     } else {
@@ -43,7 +43,7 @@ function FormValidate() {
 
     //check email
     if (email === null || email === '') {
-        eEmail.innerHTML = 'Please Input your Email!';
+        eEmail.innerHTML = 'Email are required fields.';
     } else if (!reGexEmail.test(email)) {
         eEmail.innerHTML = 'Email is wrong format!';
     } else {
@@ -53,7 +53,7 @@ function FormValidate() {
 
     //check first name
     if (firstname === null || firstname === '') {
-        eFirstname.innerHTML = "Please Input Your Firstname!";
+        eFirstname.innerHTML = "Firstname are required fields.";
     } else {
         checkfirstname = true;
         eFirstname.innerHTML = '';
@@ -61,7 +61,7 @@ function FormValidate() {
 
     //check last name
     if (lastname === null || lastname === '') {
-        eLastname.innerHTML = "Please Input Your Lastname!";
+        eLastname.innerHTML = "Lastname are required fields.";
     } else {
         checklastname = true;
         eLastname.innerHTML = '';
