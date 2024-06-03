@@ -26,6 +26,13 @@
                     <file>${file.reference.sqljdbc4.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+<<<<<<< HEAD
+=======
+                <library dirs="200">
+                    <file>${file.reference.sqljdbc42.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+>>>>>>> parent of 39a7008 (Merge branch 'Khuongld')
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
