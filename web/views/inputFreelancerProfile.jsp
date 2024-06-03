@@ -100,7 +100,7 @@
                         <div class="input-block">
                             <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
                             <div class="cal-icon">
-                                <input oninput="checkdob()" type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
+                                <input  type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
                                 <div style="color: red" id="eDob"></div>
                             </div>
                         </div>
@@ -204,7 +204,16 @@
                         <div class="col-md-12">
                             <h4>Education</h4>
                         </div>
-                        
+                        <div class="col-md-6 col-lg-3">
+                            <div class="input-block">
+                                <label class="focus-label">Degree Name</label>
+                                <select name="degreename" class="form-control select-level select-edu select">
+                                    <option value="3">Basic</option>
+                                    <option value="1">Bachelor's degree</option>
+                                    <option value="2">Master's Degree</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="input-block">
                                 <label class="focus-label">University Name</label>
@@ -225,16 +234,6 @@
                                 <div class="cal-icon">
                                     <input type="text" name="eduend" class="form-control datetimepicker" placeholder="Choose">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="input-block">
-                                <label class="focus-label">Degree Name</label>
-                                <select name="degreename" class="form-control select-level select-edu select">
-                                    <option value="3">Basic</option>
-                                    <option value="1">Bachelor's degree</option>
-                                    <option value="2">Master's Degree</option>
-                                </select>
                             </div>
                         </div>
                         <div id="education_add_row"></div>

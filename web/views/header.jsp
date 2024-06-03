@@ -1,6 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <header class="header header-three">
                 <div class="container-fluid">
                     <nav class="navbar navbar-expand-lg header-nav">
@@ -29,8 +26,6 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                            
-                            
                             <ul class="main-nav">
                                 <li class="active has-submenu">
                                     <a href="home">Home <i class="fas "></i></a>
@@ -142,10 +137,6 @@
                                     <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
                                         </c:if>
                             </ul>
-                                    
-                                    
-                                    
-                                    
                         </div>
                         <ul class="nav header-navbar-rht">
 

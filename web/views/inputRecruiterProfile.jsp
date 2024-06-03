@@ -80,7 +80,7 @@
                             <div class="input-block">
                                 <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
                                 <div class="cal-icon">
-                                    <input oninput="checkdob()" type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
+                                    <input type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
                                     <div style="color: red" id="eDob"></div>
                                 </div>
                             </div>
@@ -128,8 +128,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="input-block">
-                                <label  class="form-label">Company Name<span class="label-star"> *</span></label>
-                                <input oninput="checkcompany()" type="text" class="form-control" name="companyname" id="companyname">
+                                <label class="form-label">Company Name<span class="label-star"> *</span></label>
+                                <input type="text" class="form-control" name="companyname" id="companyname">
                                 <div style="color: red" id="eCompanyname"></div>
                             </div>
                         </div>
