@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -87,13 +89,16 @@ public class InputRecruiterProfileController extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        String date = request.getParameter("dob").trim();
+        String date = request.getParameter("dob");
         String gender = request.getParameter("gender");
-        
-        dao.inputRecruiterInfo(firstname, lastname, gender, date, null, email, phone, userID);
+        String dob="";
+        if(date.isEmpty()!=true){
+            dob=formatDate(date);
+        }
+        dao.inputRecruiterInfo(firstname, lastname, gender, dob, null, email, phone, userID);
         
         String companyname = request.getParameter("companyname");
-        String established = request.getParameter("established");
+        String established = request.getParameter("established").trim();
         String website = request.getParameter("website");
         String logo = request.getParameter("logo");
         String location = request.getParameter("location");
@@ -101,14 +106,25 @@ public class InputRecruiterProfileController extends HttpServlet {
         String describe = request.getParameter("describe");
         
         int recruiterID=dao.getRecruiterIDbyUserID(userID);
+        String time="";
+        if(established.isEmpty()!=true){
+            time=formatDate(established);
+        }
         
-        dao.inputCompanyInfo(companyname, budget, established, null, website, describe, location, recruiterID);
+        dao.inputCompanyInfo(companyname, budget, time, null, website, describe, location, recruiterID);
         request.setAttribute("mess", "Registration successful. Please log in again!");
         request.getRequestDispatcher("login").forward(request, response);
 
     
 
     }
+        public static String formatDate(String input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(input, formatter);
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+    
+
 
     /**
      * Returns a short description of the servlet.
