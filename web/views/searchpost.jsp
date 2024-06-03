@@ -1,11 +1,3 @@
-<%-- 
-    Document   : postProject
-    Created on : May 23, 2024, 10:08:44 AM
-    Author     : Admin
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,13 +36,13 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="home" class="navbar-brand logo">
+                            <a href="index.html" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
-                                <a href="home" class="menu-logo">
+                                <a href="index.html" class="menu-logo">
                                     <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                 </a>
                                 <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -58,19 +50,73 @@
                                 </a>
                             </div>
                             <ul class="main-nav">
-                                <li class="active has-submenu">
-                                    <a href="home">Home <i class="fas "></i></a>
-
+                                <li class="has-submenu">
+                                    <a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="index-2.html">Home 2</a></li>
+                                        <li><a href="index-3.html">Home 3</a></li>
+                                        <li><a href="index-4.html">Home 4</a></li>
+                                        <li><a href="index-5.html">Home 5</a></li>
+                                    </ul>
                                 </li>
-
-
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">For Employers <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li class="has-submenu">
+                                            <a href="javascript:void(0);">Freelancer</a>
+                                            <ul class="submenu">
+                                                <li><a href="developer.html">Freelancer</a></li>
+                                                <li><a href="developer-details.html">Freelancer Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="dashboard.html">Dashboard</a></li>
+                                        <li><a href="company-profile.html">My Profile</a></li>
+                                        <li><a href="manage-projects.html">Projects</a></li>
+                                        <li><a href="favourites.html">Favourites</a></li>
+                                        <li><a href="membership-plans.html">Membership</a></li>
+                                        <li><a href="milestones.html">Milestones</a></li>
+                                        <li><a href="chats.html">Chats</a></li>
+                                        <li><a href="review.html">Review</a></li>
+                                        <li><a href="deposit-funds.html">Payments</a></li>
+                                        <li><a href="verify-identity.html">Verify Identity</a></li>
+                                        <li><a href="profile-settings.html">Settings</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu active">
+                                    <a href="javascript:void(0);">For Freelancer <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li class="has-submenu active">
+                                            <a href="javascript:void(0);">Projects</a>
+                                            <ul class="submenu">
+                                                <li class="active"><a href="project.html">Projects</a></li>
+                                                <li><a href="project-details.html">Project Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="freelancer-dashboard.html">Dashboard</a></li>
+                                        <li><a href="developer-profile.html">My Profile</a></li>
+                                        <li><a href="freelancer-project-proposals.html">Projects</a></li>
+                                        <li><a href="freelancer-favourites.html">Favourites</a></li>
+                                        <li><a href="freelancer-membership.html">Membership</a></li>
+                                        <li><a href="freelancer-change-password.html">Change Password</a></li>
+                                        <li><a href="freelancer-chats.html">Chats</a></li>
+                                        <li><a href="freelancer-review.html">Review</a></li>
+                                        <li><a href="freelancer-withdraw-money.html">Payments</a></li>
+                                        <li><a href="freelancer-verify-identity.html">Verify Identity</a></li>
+                                        <li><a href="freelancer-profile-settings.html">Settings</a></li>
+                                    </ul>
+                                </li>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="about">About us</a></li>
-                                        <li><a href="BlankPage">Starter Page</a></li>
-                                        <li><a href="404-page.jsp">404 Page</a></li>                                      
+                                        <li><a href="about.html">About us</a></li>
+                                        <li><a href="blank-page.html">Starter Page</a></li>
+                                        <li><a href="404-page.html">404 Page</a></li>
+                                        <li><a href="login.jsp">Login</a></li>
+                                        <li><a href="register.jsp">Register</a></li>
                                         <li><a href="onboard-screen.html">Onboard Screen</a></li>
+                                        <li><a href="forgot-password.html">Forgot Password</a></li>
+                                        <li><a href="change-passwords.html">Change Password</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-submenu">
@@ -81,90 +127,15 @@
                                         <li><a href="blog-details.html">Blog Details</a></li>
                                     </ul>
                                 </li>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                            <li class="has-submenu">
-                                                <a href="javascript:void(0);">Projects</a>
-                                                <ul class="submenu">
-                                                    <li><a href="project.html">Projects</a></li>
-                                                    <li><a href="project-details.html">Project Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="freelancer-dashboard.html">Dashboard</a></li>
-                                            <li><a href="developer-profile.html">My Profile</a></li>
-                                            <li><a href="developer-details.html">Freelancer Details</a></li>
-                                            <li><a href="freelancer-project-proposals.html">Projects</a></li>
-                                            <li><a href="freelancer-favourites.html">Favourites</a></li>
-                                            <li><a href="freelancer-membership.html">Membership</a></li>
-                                            <li><a href="freelancer-change-password.html">Change Password</a></li>                                         
-                                            <li><a href="freelancer-review.html">Review</a></li>
-                                            <li><a href="freelancer-withdraw-money.html">Payments</a></li>
-                                            <li><a href="freelancer-profile-settings.html">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Recruiter <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                            <li class="has-submenu">
-                                                <a href="javascript:void(0);">Freelancer</a>
-                                                <ul class="submenu">
-                                                    <li><a href="developer.html">Freelancer</a></li>
-                                                    <li><a href="developer-details.html">Freelancer Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="company-profile.html">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                            <li><a href="membership-plans.html">Membership</a></li>
-                                            <li><a href="milestones.html">Milestones</a></li>
-                                            <li><a href="chats.html">Chats</a></li>
-                                            <li><a href="review.html">Review</a></li>
-                                            <li><a href="deposit-funds.html">Payments</a></li>
-                                            <li><a href="verify-identity.html">Verify Identity</a></li>
-                                            <li><a href="profile-settings.html">Settings</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1}">
-                                    <li>
-                                        <a href="/admin/index.html" target="_blank">Admin</a>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account == null}">
-                                    <li><a href="register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
-                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
-                                        </c:if>
+                                <li>
+                                    <a href="admin/index.html" target="_blank">Admin</a>
+                                </li>
                             </ul>
                         </div>
-                         <ul class="nav header-navbar-rht">
-
-                            <li class="searchbar">
-                                <a href="javascript:void(0);" class="reg-btn"><i class="feather-search"></i></a>
-                                <div class="togglesearch">
-                                    <form action="https://kofejob.dreamstechnologies.com/html/template/project.html">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control">
-                                            <button type="submit" class="btn">Search</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                            <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                            <li><a href="post-project" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                            <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
-                             </c:if>
+                        <ul class="nav header-navbar-rht reg-head">
+                            <li><a href="register.html" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                            <li><a href="login.html" class="log-btn"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
+                            <li><a href="post-project.html" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
                         </ul>
                     </nav>
                 </div>
@@ -176,11 +147,20 @@
                     <div class="row align-items-center inner-banner">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h3>Project Grid</h3>
+                                <h3>Post Grid</h3>
+                                <form class="form" name="title" id="store" method="get" action="search">
+                                    <div class="form-inner">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="searchInput" placeholder="Keywords">
+                                            <input type="hidden" name="op" value="post">
+                                            <button class="btn btn-primary sub-btn" type="submit">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="home"> Home</a></li>
-                                        <li class="breadcrumb-item" aria-current="page">Categories</li>
+                                        <li class="breadcrumb-item"><a href="index.html"> Home</a></li>
+                                        <li class="breadcrumb-item" aria-current="page">Projects</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -550,55 +530,6 @@
                                 <span class="badge badge-pill badge-skills">USD <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
                             </div>
                             <div class="row">
-
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="freelance-widget widget-author position-relative">
-                                        <div class="freelance-content">
-                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> Posted Just Now</div>
-                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                            <div class="author-heading ">
-                                                <div class=" freelance-img">
-                                                    <a href="javascript:void(0);">
-                                                        <img src="assets/img/company/img-1.png" alt="author">
-                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                    </a>
-                                                </div>
-                                                <div class="profile-name">
-                                                    <div class="author-location">Amaze Tech </div>
-                                                </div>
-                                                <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">UI/UX Developer</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">Georgia, USA</div>
-                                                </div>
-                                                <div class="freelance-tags">
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
-                                                </div>
-                                                <div class="freelancers-price">$40-$500</div>
-                                            </div>
-                                            <div class="counter-stats">
-                                                <ul>
-                                                    <li>
-                                                        <h5>Expiry</h5>
-                                                        <h3 class="counter-value">4 Days Left</h3>
-                                                    </li>
-                                                    <li>
-                                                        <h5>Proposals</h5>
-                                                        <h3 class="counter-value">15</h3>
-                                                    </li>
-                                                    <li>
-                                                        <h5>Job Type</h5>
-                                                        <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-xl-4 col-md-6">
                                     <div class="freelance-widget widget-author position-relative">
                                         <div class="freelance-content">
@@ -612,33 +543,72 @@
                                                     </a>
                                                 </div>
                                                 <div class="profile-name">
-                                                    <div class="author-location">Park INC</div>
+                                                    <div class="author-location">Teacher</div>
                                                 </div>
                                                 <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">UI/UX Developer</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">PHP Developer</div>
+                                                    <h3><a href="javascript:void(0);">2024-05-22</a></h3>
+                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">476 Redwing Place</div>
                                                 </div>
                                                 <div class="freelance-tags">
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$55-$750</div>
+                                                <div class="freelancers-price">168</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
-                                                        <h5>Expiry</h5>
-                                                        <h3 class="counter-value">7 Days left</h3>
+                                                        <h5>Skill</h5>
+                                                        <h3 class="counter-value">Quality Control Specialist</h3>
                                                     </li>
+
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="cart-hover">
+                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="freelance-widget widget-author position-relative">
+                                        <div class="freelance-content">
+                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> 1 min ago</div>
+                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
+                                            <div class="author-heading ">
+                                                <div class=" freelance-img">
+                                                    <a href="javascript:void(0);">
+                                                        <img src="assets/img/company/img-2.png" alt="author">
+                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
+                                                    </a>
+                                                </div>
+                                                <div class="profile-name">
+                                                    <div class="author-location">VP Sales</div>
+                                                </div>
+                                                <div class="freelance-info">
+                                                    <h3><a href="javascript:void(0);">2024-05-17</a></h3>
+                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">269 Hagan Road</div>
+                                                </div>
+                                                <div class="freelance-tags">
+                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
+                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
+                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
+                                                </div>
+                                                <div class="freelancers-price">472</div>
+                                            </div>
+                                            <div class="counter-stats">
+                                                <ul>
                                                     <li>
-                                                        <h5>Proposals</h5>
-                                                        <h3 class="counter-value">18</h3>
+                                                        <h5>Skill</h5>
+                                                        <h3 class="counter-value">Staff Scientist</h3>
                                                     </li>
-                                                    <li>
-                                                        <h5>Job Type</h5>
-                                                        <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
-                                                    </li>
+
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -660,33 +630,27 @@
                                                     </a>
                                                 </div>
                                                 <div class="profile-name">
-                                                    <div class="author-location">Tech Zone</div>
+                                                    <div class="author-location">Internal Auditor</div>
                                                 </div>
                                                 <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">Graphic Designer</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">Florida, USA</div>
+                                                    <h3><a href="javascript:void(0);">2024-05-29</a></h3>
+                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">6 Forest Lane</div>
                                                 </div>
                                                 <div class="freelance-tags">
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$55-$750</div>
+                                                <div class="freelancers-price">499</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
-                                                        <h5>Expiry</h5>
-                                                        <h3 class="counter-value">1 Days left</h3>
+                                                        <h5>Skill</h5>
+                                                        <h3 class="counter-value">Social Worker</h3>
                                                     </li>
-                                                    <li>
-                                                        <h5>Proposals</h5>
-                                                        <h3 class="counter-value">21</h3>
-                                                    </li>
-                                                    <li>
-                                                        <h5>Job Type</h5>
-                                                        <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
-                                                    </li>
+
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -708,33 +672,26 @@
                                                     </a>
                                                 </div>
                                                 <div class="profile-name">
-                                                    <div class="author-location">ABC Software</div>
+                                                    <div class="author-location">Human Resources Assistant III</div>
                                                 </div>
                                                 <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">Graphic Designer</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">iOS Developer</div>
+                                                    <h3><a href="javascript:void(0);">2024-05-13</a></h3>
+                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">Graphic Designer</div>
                                                 </div>
                                                 <div class="freelance-tags">
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$25-$350</div>
+                                                <div class="freelancers-price">212</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
-                                                        <h5>Expiry</h5>
-                                                        <h3 class="counter-value">7 Days left</h3>
+                                                        <h5>Skill</h5>
+                                                        <h3 class="counter-value">Chemical Engineer</h3>
                                                     </li>
-                                                    <li>
-                                                        <h5>Proposals</h5>
-                                                        <h3 class="counter-value">20</h3>
-                                                    </li>
-                                                    <li>
-                                                        <h5>Job Type</h5>
-                                                        <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
-                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -756,33 +713,26 @@
                                                     </a>
                                                 </div>
                                                 <div class="profile-name">
-                                                    <div class="author-location">Alfred Tech</div>
+                                                    <div class="author-location">Database Administrator IV</div>
                                                 </div>
                                                 <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">SEO Developer</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">Virginia, USA</div>
+                                                    <h3><a href="javascript:void(0);">2024-05-21</a></h3>
+                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">037 Delaware Junction</div>
                                                 </div>
                                                 <div class="freelance-tags">
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$30-$250</div>
+                                                <div class="freelancers-price">$186</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
-                                                        <h5>Expiry</h5>
-                                                        <h3 class="counter-value">8 Days left</h3>
+                                                        <h5>Skill</h5>
+                                                        <h3 class="counter-value">Internal Auditor</h3>
                                                     </li>
-                                                    <li>
-                                                        <h5>Proposals</h5>
-                                                        <h3 class="counter-value">09</h3>
-                                                    </li>
-                                                    <li>
-                                                        <h5>Job Type</h5>
-                                                        <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
-                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -804,33 +754,26 @@
                                                     </a>
                                                 </div>
                                                 <div class="profile-name">
-                                                    <div class="author-location">Kind Software's</div>
+                                                    <div class="author-location">Product Engineer</div>
                                                 </div>
                                                 <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">Network Engineer</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">Delaware, USA</div>
+                                                    <h3><a href="javascript:void(0);">2024-05-21</a></h3>
+                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">89052 Hanson Parkway</div>
                                                 </div>
                                                 <div class="freelance-tags">
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$70-$700</div>
+                                                <div class="freelancers-price">$124</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
-                                                        <h5>Expiry</h5>
-                                                        <h3 class="counter-value">3 Days left</h3>
+                                                        <h5>Skill</h5>
+                                                        <h3 class="counter-value">Sales Associate</h3>
                                                     </li>
-                                                    <li>
-                                                        <h5>Proposals</h5>
-                                                        <h3 class="counter-value">05</h3>
-                                                    </li>
-                                                    <li>
-                                                        <h5>Job Type</h5>
-                                                        <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
-                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -852,33 +795,26 @@
                                                     </a>
                                                 </div>
                                                 <div class="profile-name">
-                                                    <div class="author-location">Particles INC</div>
+                                                    <div class="author-location">Tax Accountant</div>
                                                 </div>
                                                 <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">Business Analyst</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">Kansas, USA</div>
+                                                    <h3><a href="javascript:void(0);">2024-05-26</a></h3>
+                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">4060 Kedzie Drive</div>
                                                 </div>
                                                 <div class="freelance-tags">
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$55-$600</div>
+                                                <div class="freelancers-price">$436</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
-                                                        <h5>Expiry</h5>
-                                                        <h3 class="counter-value">10 Days left</h3>
+                                                        <h5>Skill</h5>
+                                                        <h3 class="counter-value">Senior Financial Analyst</h3>
                                                     </li>
-                                                    <li>
-                                                        <h5>Proposals</h5>
-                                                        <h3 class="counter-value">18</h3>
-                                                    </li>
-                                                    <li>
-                                                        <h5>Job Type</h5>
-                                                        <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
-                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -900,33 +836,26 @@
                                                     </a>
                                                 </div>
                                                 <div class="profile-name">
-                                                    <div class="author-location">Amaze Tech </div>
+                                                    <div class="author-location">Office Assistant I </div>
                                                 </div>
                                                 <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">UI/UX Developer</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">Georgia, USA</div>
+                                                    <h3><a href="javascript:void(0);">2024-05-27</a></h3>
+                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">1985 Nancy Avenue</div>
                                                 </div>
                                                 <div class="freelance-tags">
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$40-$500</div>
+                                                <div class="freelancers-price">$428</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
-                                                        <h5>Expiry</h5>
-                                                        <h3 class="counter-value">4 Days Left</h3>
+                                                        <h5>Skill</h5>
+                                                        <h3 class="counter-value">Senior Cost Accountant</h3>
                                                     </li>
-                                                    <li>
-                                                        <h5>Proposals</h5>
-                                                        <h3 class="counter-value">15</h3>
-                                                    </li>
-                                                    <li>
-                                                        <h5>Job Type</h5>
-                                                        <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
-                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -951,30 +880,23 @@
                                                     <div class="author-location">Park INC</div>
                                                 </div>
                                                 <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">UI/UX Developer</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">PHP Developer</div>
+                                                    <h3><a href="javascript:void(0);">2024-05-14</a></h3>
+                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">05 Farwell Lane</div>
                                                 </div>
                                                 <div class="freelance-tags">
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
                                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
                                                 </div>
-                                                <div class="freelancers-price">$55-$750</div>
+                                                <div class="freelancers-price">$201</div>
                                             </div>
                                             <div class="counter-stats">
                                                 <ul>
                                                     <li>
-                                                        <h5>Expiry</h5>
-                                                        <h3 class="counter-value">7 Days left</h3>
+                                                        <h5>Skill</h5>
+                                                        <h3 class="counter-value">Project Manager</h3>
                                                     </li>
-                                                    <li>
-                                                        <h5>Proposals</h5>
-                                                        <h3 class="counter-value">18</h3>
-                                                    </li>
-                                                    <li>
-                                                        <h5>Job Type</h5>
-                                                        <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
-                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -1010,10 +932,10 @@
                         <div class="row">
                             <div class=" col-lg-4 col-md-12">
                                 <div class="footer-bottom-logo">
-                                    <a href="home" class="menu-logo">
+                                    <a href="index.html" class="menu-logo">
                                         <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                     </a>
-                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
+                                    <p>We?re always in search for talented and motivated people. Don?t be shy introduce yourself!</p>
                                     <ul>
                                         <li>
                                             <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
@@ -1095,7 +1017,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="copyright-text text-center">
-                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+                                        <p class="mb-0">Copyright 2024 � KofeJob. All right reserved.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1144,7 +1066,7 @@
 
         <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
         <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script></body>
+        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script></body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
-</html>
+</html

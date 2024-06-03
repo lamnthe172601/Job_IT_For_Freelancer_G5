@@ -4,7 +4,6 @@
  */
 package AccountControll;
 
-import static AccountControll.SHA1.toSHA1;
 import Models.User;
 import dal.DAO;
 import java.io.IOException;
@@ -88,8 +87,7 @@ public class RegisterController extends HttpServlet {
                 request.getRequestDispatcher("views/register.jsp").forward(request, response);
             }
             if (!dao.checkUserExsit(username) && !dao.checkEmailExsit(email)) {
-                String pw=toSHA1(password);
-                dao.register(username, pw, email, "active");
+                dao.register(username, password, email, "active");
                 User user = dao.getUserByEmail(email);
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
@@ -114,7 +112,5 @@ public class RegisterController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-
 
 }

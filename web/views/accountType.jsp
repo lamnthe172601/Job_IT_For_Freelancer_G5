@@ -77,19 +77,18 @@
 
         </div>
                 <style>
-button.submit {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: tomato; /* Màu cam đỏ */
+            .file-upload.submit {
+    padding: 15px 30px; 
+    width: auto; 
+    background-color: red; 
     color: white;
-    border: 2px solid black;
-    text-decoration: none;
+    border-radius: 10px;
+    border-color: white;
     transition: background-color 0.3s, color 0.3s;
 }
 
-button.submit:hover {
-    background-color: white;
-    color: black;
+.file-upload.submit:hover {
+    background-color: orange;
 }
         </style>
 

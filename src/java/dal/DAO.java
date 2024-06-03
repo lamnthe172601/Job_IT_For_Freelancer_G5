@@ -13,6 +13,13 @@ import Models.SkillSet;
 import Models.TeamNumber;
 import Models.User;
 import Models.Admin;
+import java.util.List;
+import Models.Categories;
+import Models.Recruiter;
+import Models.Role;
+import Models.TeamNumber;
+import Models.User;
+import java.util.Date;
 
 /**
  *
@@ -21,11 +28,10 @@ import Models.Admin;
 public class DAO extends DBContext {
 
     public User getLogin(String user, String pass) {
-        String query = """
-                        select u.userID, u.username, u.password, u.email, u.status, r.roleID, r.role_name, u.LevelPass  
-                                              from [User] u 
-                                              join Role r on u.roleID = r.roleID
-                                              where u.username = ? and u.password = ?""";
+        String query = " select u.userID, u.username, u.password, u.email, u.status, r.roleID, r.role_name, u.LevelPass  \n"
+                + "                       from [User] u \n"
+                + "                       join Role r on u.roleID = r.roleID\n"
+                + "                       where u.username = ? and u.password = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, user);
@@ -130,6 +136,39 @@ public class DAO extends DBContext {
 
     }
 
+    public static void main(String[] args) {
+        DAO dao = new DAO();
+        ArrayList<User> user = dao.getAllUser();
+        for (User user1 : user) {
+            System.out.println(user1.toString());
+        }
+
+    }
+
+    public TeamNumber getTeamnumberByTeamNumberID(int Tid) {
+         TeamNumber teDao = new TeamNumber();
+        String query = "select team_number,team_numberID \n"
+                + "from Team_Number\n"
+                + "               		   where team_numberID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, Tid);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                
+                int tid = rs.getInt(1);
+              
+                String tnumber = rs.getString(2);
+                
+               
+                return new TeamNumber(tid, tnumber);
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
     public boolean checkUserExsit(String username) {
         ArrayList<User> user = getAllUser();
         for (User user1 : user) {
@@ -311,7 +350,6 @@ public class DAO extends DBContext {
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
-            e.printStackTrace();
         }
     }
 
@@ -329,7 +367,6 @@ public class DAO extends DBContext {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return recruiterID;
     }
@@ -373,21 +410,6 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public static void main(String[] args) {
-        DAO dao = new DAO();
-        ArrayList<TeamNumber> listSkill = dao.listTeamNumber();
-        for (TeamNumber skillSet : listSkill) {
-            System.out.println(skillSet.toString());
-        }
-        System.out.println(dao.getRecruiterIDbyUserID(159));
-        User u=dao.getUserByEmail("tannguyennhat916@gmail.com");
-        System.out.println(u.toString());
-        //dao.inputFreelancerExperiance("chem gio", "chem bao", "nguoi chem", "12/12/2003", "12/12/2004", 35);
-        //dao.inputFreelancerEducation("FPT", "12/12/2004", "12/12/2010", 35, "3");
-        dao.inputRecruiterInfo("tan", "nguen", "1", "12/12/2012", null, "tannn@gmail.com", "0335625766", 215);
-        //dao.inputCompanyInfo("FPT", "4", "12/12/2019", null, "htpvb.com", null, "hoalac", 51);
-
    
     }
    
-}

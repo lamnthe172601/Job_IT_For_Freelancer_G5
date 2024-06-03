@@ -16,8 +16,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import jakarta.servlet.http.Part;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 
 /**
  *
@@ -82,6 +86,13 @@ public class InputFreelancerProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int userID = user.getUserID();
+
+        //customer ->> freelancer
+        dao.UpdateRole(userID,3);
+
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
@@ -138,6 +149,19 @@ public class InputFreelancerProfileController extends HttpServlet {
             request.setAttribute("mess", "Registration successful. Please log in again!");
             request.getRequestDispatcher("login").forward(request, response);
         }
+
+        //insert freelancer education
+            dao.inputFreelancerEducation(university, edustart, eduend, freelancerID, degreename);
+
+        //insert freelancer experiance
+
+            dao.inputFreelancerExperiance(exworkname, project, position,datestart, dateend, freelancerID);
+
+
+        //insert freelancer Experin
+        request.setAttribute("mess", "Registration successful. Please log in again!");
+        request.getRequestDispatcher("login").forward(request, response);
+
     }
 
     /**

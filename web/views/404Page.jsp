@@ -1,7 +1,7 @@
 <%-- 
     Document   : 404Page
     Created on : May 24, 2024, 10:21:59 AM
-    Author     : khuongld
+    Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

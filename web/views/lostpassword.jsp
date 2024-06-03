@@ -13,7 +13,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KLTTLJob</title>
+        <title>KofeJob</title>
 
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 
@@ -54,9 +54,9 @@
                                     <form action="lostpassword" method="post">
                                         <div class="input-block">
                                             <label class="focus-label">Email Address <span class="label-star"> *</span></label>
-                                            <input oninput="checkEmail()" type="text" class="form-control floating" name="email" id="email">
-                                            <div style="color: red" id="errorEmail">${mess}</div>
+                                            <input type="text" class="form-control floating" name="email" required="" >
                                         </div>
+                                        <div style="color: orange; margin-bottom: 20px">${mess}</div>
                                         <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center mb-4" type="submit">Send Now<i class="feather-arrow-right ms-2"></i></button>
                                         <div class="row">
                                             <div class="col-sm-8 dont-have d-flex mt-0  align-items-center">Remember Password<a href="login" class="ms-2">Sign in?</a></div>
@@ -72,7 +72,7 @@
 
         </div>
 
-         <script src="assets/js/jsvalidate.js"></script> 
+
         <script src="assets/js/jquery-3.7.1.min.js" type="45a1088af290e96a12659ad2-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="45a1088af290e96a12659ad2-text/javascript"></script>

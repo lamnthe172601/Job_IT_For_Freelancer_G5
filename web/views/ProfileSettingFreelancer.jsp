@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -223,7 +224,7 @@
                             <li class="nav-item dropdown account-item">
                                 <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                     <span class="user-img">
-                                        <img src="assets/img/user/avatar-1.jpg" alt="Img">
+                                        <img src="${freelancer.image}" alt="Img">
                                     </span>
                                     <span>Bruce Bush</span>
                                 </a>
@@ -260,10 +261,10 @@
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/avatar-1.jpg" class="avatar-lg rounded-circle"></a>
+                                    <a href="freelancer-profile.html"><img alt="profile image" src="${freelancer.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
-                                        <h3 class="mb-0"><a href="freelancer-profile.html">Bruce Bush</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
-                                        <p class="mb-0">@brucebush</p>
+                                        <h3 class="mb-0">${freelancer.fullname()}</h3>
+                                        <p class="mb-0">@${freelancer.fullname()}</p>
                                     </div>
                                 </div>
                                 <div class="settings-menu">
@@ -387,7 +388,7 @@
                                                                 <label class="form-label">Profile Picture</label>
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="upload-images freelancer-pic-box">
-                                                                        <img src="assets/img/icon/user-img.svg" alt id="blah">
+                                                                        <img style="width: 80px; height: 80px;" src="${freelancer.image}" alt id="blah">
                                                                     </div>
                                                                     <div class="ms-3 freelancer-pic-upload">
                                                                         <label class="file-upload image-upbtn">
@@ -402,45 +403,43 @@
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">First Name</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" value="${freelancer.first_name}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Last Name</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" value="${freelancer.last_name}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Phone Number</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" value="${freelancer.phone}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Email Address</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" value="${freelancer.email}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Date of Birth</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="date" class="form-control" value="${freelancer.dob}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Your Job Title</label>
-                                                            <input type="text" class="form-control">
+                                                        <div class="mb-3 input-block">
+                                                            <label class="form-label">Gender</label>
+                                                            <select name="gender"class="form-control select">
+                                                                <option value="1">Male</option>
+                                                                <option value="0">Female</option>
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Type of Job</label>
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -452,7 +451,7 @@
                                                 <div class="row">
                                                     <div class="input-block col-md-12">
                                                         <label class="form-label">Description</label>
-                                                        <textarea class="form-control" rows="5"></textarea>
+                                                        <textarea class="form-control" rows="5">${freelancer.describe}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -464,66 +463,15 @@
                                                         <h4 class="pro-titles mb-0">Skills</h4>
                                                     </div>
                                                     <div class="pro-body  skill-info">
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-md-6">
-                                                                <input type="text" class="form-control" value="Front End Developer">
+                                                        <c:forEach items="${skillset}" var="skillset">
+                                                            <div class="form-row align-items-center skill-cont">                                                              
+                                                                <input type="checkbox" value="${skillset.skill_set_ID}"
+                                                                       <c:forEach items="${skills}" var="skill">
+                                                                           ${skillset.skill_set_ID == skill.skill_set_ID.skill_set_ID ? 'checked="checked"' : ''}
+                                                                       </c:forEach>>                                                                  
+                                                                ${skillset.skill_set_name} 
                                                             </div>
-                                                            <div class="input-block col-md-5">
-                                                                <select class="form-control select">
-                                                                    <option value="0">Basic</option>
-                                                                    <option value="1">Intermediate</option>
-                                                                    <option value="2">Expert</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="input-block col-md-1">
-                                                                <a href="javascript:void(0);" class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-md-6">
-                                                                <input type="text" class="form-control" value="UI UX Designer">
-                                                            </div>
-                                                            <div class="input-block col-md-5">
-                                                                <select class="form-control select">
-                                                                    <option value="0">Advanced</option>
-                                                                    <option value="1">Intermediate</option>
-                                                                    <option value="2">Expert</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="input-block col-md-1">
-                                                                <a href="javascript:void(0);" class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-md-6">
-                                                                <input type="text" class="form-control" value="React Developer">
-                                                            </div>
-                                                            <div class="input-block col-md-5">
-                                                                <select class="form-control select">
-                                                                    <option value="1">Intermediate</option>
-                                                                    <option value="0">Basic</option>
-                                                                    <option value="2">Expert</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="input-block col-md-1">
-                                                                <a href="javascript:void(0);" class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-md-6">
-                                                                <input type="text" class="form-control" value="React Developer">
-                                                            </div>
-                                                            <div class="input-block col-md-5">
-                                                                <select class="form-control select">
-                                                                    <option value="1">Intermediate</option>
-                                                                    <option value="0">Basic</option>
-                                                                    <option value="2">Expert</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="input-block col-md-1">
-                                                                <a href="javascript:void(0);" class="btn fund-btn skill-add add-btn-profile"><i class="feather-plus"></i></a>
-                                                            </div>
-                                                        </div>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>
@@ -533,576 +481,208 @@
                                                         <h4 class="pro-titles without-border mb-0">Education</h4>
                                                     </div>
                                                     <div class="pro-body  ">
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-lg-3">
-                                                                <label class="form-label">Degree Name</label>
-                                                                <input type="text" class="form-control" value="BE CSE">
-                                                            </div>
-                                                            <div class="input-block col-lg-3">
-                                                                <label class="form-label">University Name</label>
-                                                                <input type="text" class="form-control" value="Brington">
-                                                            </div>
-                                                            <div class="col-md-3 input-block floating-icon">
-                                                                <label class="form-label">Start Date</label>
-                                                                <input type="text" class="form-control datetimepicker" placeholder="Choose">
-                                                                <span><i class="feather-calendar"></i></span>
-                                                            </div>
-                                                            <div class="col-md-2 input-block floating-icon">
-                                                                <label class="form-label">End Date</label>
-                                                                <input type="text" class="form-control datetimepicker" placeholder="Choose">
-                                                                <span><i class="feather-calendar"></i></span>
-                                                            </div>
-                                                            <div class="input-block col-lg-1 mb-0">
-                                                                <a href="javascript:void(0);" class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                                            </div>
-                                                            <div id="education_add_row" class="w-100"></div>
-                                                            <a href="javascript:void(0)" class="add-btn-form add-edu w-100 d-block text-end"><i class="feather-plus-circle me-2"></i>Add New</a>
+                                                        <c:forEach items="${education}" var="education">
+                                                            <div class="form-row align-items-center skill-cont">
+                                                                <div class="input-block col-lg-3">
+                                                                    <label class="form-label">Degree Name</label>
+                                                                    <select class="form-control">
+                                                                        <c:forEach items="${dregee}" var="degree">
+                                                                            <option value="${degree.dregeeID}" ${degree.dregeeID == education.degreeID.dregeeID ? 'selected="selected"' : ''}>
+                                                                                ${degree.degree_name}
+                                                                            </option>
+                                                                        </c:forEach>
+                                                                    </select>
+
+                                                                </div>
+                                                                <div class="input-block col-lg-3">
+                                                                    <label class="form-label">University Name</label>
+                                                                    <input type="text" class="form-control" value="${education.university_name}">
+                                                                </div>
+                                                                <div class="col-md-3 input-block floating-icon">
+                                                                    <label class="form-label">Start Date</label>
+                                                                    <input type="date" value="${education.start_date}" class="form-control " >
+
+                                                                </div>
+                                                                <div class="col-md-2 input-block floating-icon">
+                                                                    <label class="form-label">End Date</label>
+                                                                    <input type="date" value="${education.end_date}" class="form-control " >
+
+                                                                </div>
+
+                                                            </c:forEach>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-12 w-100">
-                                                <div class="card flex-fill mb-3">
-                                                    <div class="pro-head">
-                                                        <h4 class="pro-titles without-border mb-0">Certification</h4>
-                                                    </div>
-                                                    <div class="pro-body  ">
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-lg-4">
-                                                                <label class="form-label">Certification or Award</label>
-                                                                <input type="text" class="form-control" value="Feast of UI">
-                                                            </div>
-                                                            <div class="input-block col-lg-4">
-                                                                <label class="form-label">Certified from</label>
-                                                                <input type="text" class="form-control" value="PSD Technologies">
-                                                            </div>
-                                                            <div class="col-lg-3 input-block floating-icon">
-                                                                <label class="form-label">Year</label>
-                                                                <input type="text" class="form-control datetimepicker" placeholder="Choose">
-                                                                <span><i class="feather-calendar"></i></span>
-                                                            </div>
-                                                            <div class="input-block col-lg-1 mb-0">
-                                                                <a href="javascript:void(0);" class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                                            </div>
-                                                            <div id="certi_add_row" class=" w-100"></div>
-                                                            <a href="javascript:void(0)" class="add-btn-form add-certi w-100 d-block text-end"><i class="feather-plus-circle me-2"></i>Add New</a>
+
+                                                <div class="col-lg-12 w-100">
+                                                    <div class="card flex-fill mb-3">
+                                                        <div class="pro-head">
+                                                            <h4 class="pro-titles without-border mb-0">Experience</h4>
                                                         </div>
+                                                        <c:forEach items="${experience}" var="experience">
+                                                            <div class="pro-body  ">
+                                                                <div class="form-row align-items-center skill-cont">
+                                                                    <div class="input-block col-lg-3">
+                                                                        <label class="form-label">Company Name</label>
+                                                                        <input type="text" class="form-control" value="${experience.experience_work_name}" >
+                                                                    </div>
+                                                                    <div class="input-block col-lg-3">
+                                                                        <label class="form-label">Position</label>
+                                                                        <input type="text" class="form-control" value="${experience.position}">
+                                                                    </div>
+                                                                    <div class="col-md-3 input-block floating-icon">
+                                                                        <label class="form-label">Start Date</label>
+                                                                        <input type="date" class="form-control " value="${experience.start_date}">
+                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-2 input-block floating-icon">
+                                                                        <label class="form-label">End Date</label>
+                                                                        <input type="date" class="form-control " value="${experience.end_date}">
+                                                                       
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                                <div class="card text-end border-0">
+                                                    <div class="pro-body">
+                                                        <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
+                                                        <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-12 w-100">
-                                                <div class="card flex-fill mb-3">
-                                                    <div class="pro-head">
-                                                        <h4 class="pro-titles without-border mb-0">Experience</h4>
-                                                    </div>
-                                                    <div class="pro-body  ">
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-lg-3">
-                                                                <label class="form-label">Company Name</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-lg-3">
-                                                                <label class="form-label">Position</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="col-md-3 input-block floating-icon">
-                                                                <label class="form-label">Start Date</label>
-                                                                <input type="text" class="form-control datetimepicker" placeholder="Choose">
-                                                                <span><i class="feather-calendar"></i></span>
-                                                            </div>
-                                                            <div class="col-md-2 input-block floating-icon">
-                                                                <label class="form-label">End Date</label>
-                                                                <input type="text" class="form-control datetimepicker" placeholder="Choose">
-                                                                <span><i class="feather-calendar"></i></span>
-                                                            </div>
-                                                            <div class="input-block col-lg-1 mb-0">
-                                                                <a href="javascript:void(0);" class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                                            </div>
-                                                            <div id="exp_add_row" class=" w-100"></div>
-                                                            <a href="javascript:void(0)" class="add-btn-form add-exp w-100 d-block text-end"><i class="feather-plus-circle me-2"></i>Add New</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 w-100">
-                                                <div class="card flex-fill mb-3">
-                                                    <div class="pro-head">
-                                                        <h4 class="pro-titles mb-0">Language</h4>
-                                                    </div>
-                                                    <div class="pro-body  ">
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-md-6">
-                                                                <label class="form-label">Language</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-md-5">
-                                                                <label class="form-label">Language Fluency</label>
-                                                                <select class="form-control select">
-                                                                    <option value="0">Select</option>
-                                                                    <option value="1">Intermediate</option>
-                                                                    <option value="2">Expert</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="input-block col-md-1 mb-0">
-                                                                <a href="javascript:void(0);" class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-md-6">
-                                                                <label class="form-label">Language</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-md-5">
-                                                                <label class="form-label">Language Fluency</label>
-                                                                <select class="form-control select">
-                                                                    <option value="0">Select</option>
-                                                                    <option value="1">Intermediate</option>
-                                                                    <option value="2">Expert</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="input-block col-md-1 mb-0">
-                                                                <a href="javascript:void(0);" class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-md-6">
-                                                                <label class="form-label">Language</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-md-5">
-                                                                <label class="form-label">Language Fluency</label>
-                                                                <select class="form-control select">
-                                                                    <option value="0">Select</option>
-                                                                    <option value="1">Intermediate</option>
-                                                                    <option value="2">Expert</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="input-block col-md-1 mb-0">
-                                                                <a href="javascript:void(0);" class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-md-6">
-                                                                <label class="form-label">Language</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-md-5">
-                                                                <label class="form-label">Language Fluency</label>
-                                                                <select class="form-control select">
-                                                                    <option value="0">Select</option>
-                                                                    <option value="1">Intermediate</option>
-                                                                    <option value="2">Expert</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="input-block col-md-1 mb-0">
-                                                                <a href="javascript:void(0)" class="btn fund-btn lang-add add-btn-profile mb-0"><i class="feather-plus"></i></a>
-                                                            </div>
-                                                            <div id="lang_add_row" class=" w-100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 w-100">
-                                                <div class="card flex-fill mb-3">
-                                                    <div class="pro-head">
-                                                        <h4 class="pro-titles mb-0">Social Media</h4>
-                                                    </div>
-                                                    <div class="pro-body  ">
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-lg-4">
-                                                                <label class="form-label">Facebook</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-lg-4">
-                                                                <label class="form-label">Instagram </label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-lg-4">
-                                                                <label class="form-label">LinkedIn</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-lg-4">
-                                                                <label class="form-label">Behance</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-lg-4">
-                                                                <label class="form-label">Pinterest </label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-lg-4">
-                                                                <label class="form-label">Twitter</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="card flex-fill mb-3">
-                                                    <div class="pro-head">
-                                                        <h4 class="pro-titles mb-0">Personal Website</h4>
-                                                    </div>
-                                                    <div class="pro-body  ">
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-lg-12">
-                                                                <label class="form-label">Website Url</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-lg-3">
-                                                                <label class="form-label">City</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-lg-3">
-                                                                <label class="form-label">State / Province</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-lg-3">
-                                                                <label class="form-label">ZIP / Post Code</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="input-block col-md-3">
-                                                                <label class="form-label">Country</label>
-                                                                <select class="form-control select">
-                                                                    <option value="0">Select</option>
-                                                                    <option value="1">USA</option>
-                                                                    <option value="2">UK</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <h4 class="mb-3">Working Hours</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <footer class="footer">
+                        <div class="footer-top ">
+                            <div class="container">
+                                <div class="row">
+                                    <div class=" col-lg-4 col-md-12">
+                                        <div class="footer-bottom-logo">
+                                            <a href="index.html" class="menu-logo">
+                                                <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                                            </a>
+                                            <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
+                                            <ul>
+                                                <li>
+                                                    <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                                                </li>
+                                            </ul>
+                                            <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="input-block d-flex">
-                                                <div class="form-check form-switch d-inline-block work-check position-relative">
-                                                    <input type="checkbox" class="form-check-input" id="check_hour" checked>
-                                                </div>
-                                                <label class="form-label ms-2">Same Every Day</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-hour" style>
-                                                <div class="other-info-list">
+                                    </div>
+                                    <div class=" col-lg-8 col-md-12">
+                                        <div class="row">
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="footer-widget footer-menu">
+                                                    <h2 class="footer-title">Useful Links</h2>
                                                     <ul>
-                                                        <li class="active-hour">Mon</li>
-                                                        <li class="active-hour">Tue</li>
-                                                        <li class="active-hour">Wed</li>
-                                                        <li class="active-hour">Thr</li>
-                                                        <li class="active-hour">Fri</li>
-                                                        <li>Sat</li>
-                                                        <li>Sun</li>
+                                                        <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
+                                                        <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
+                                                        <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
+                                                        <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
+                                                        <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="check-hour" style="display: none;">
-                                                <div class="col-md-12">
-                                                    <h4>Select Days</h4>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="footer-widget footer-menu">
+                                                    <h2 class="footer-title">Help & Support</h2>
+                                                    <ul>
+                                                        <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
+                                                        <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
+                                                        <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
+                                                        <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
+                                                        <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
+                                                    </ul>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-md-1">
-                                                                <div class="other-info-list">
-                                                                    <ul>
-                                                                        <li class="active-hour m-0">Mon</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">Start Time </label>
-                                                                    <input type="text" class="form-control" value="8:00">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">End Time </label>
-                                                                    <input type="text" class="form-control" value="20:00">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-md-1">
-                                                                <div class="other-info-list">
-                                                                    <ul>
-                                                                        <li class="active-hour m-0">Tue</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">Start Time </label>
-                                                                    <input type="text" class="form-control" value="8:00">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">End Time </label>
-                                                                    <input type="text" class="form-control" value="20:00">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-md-1">
-                                                                <div class="other-info-list">
-                                                                    <ul>
-                                                                        <li class="active-hour m-0">Wed</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">Start Time </label>
-                                                                    <input type="text" class="form-control" value="8:00">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">End Time </label>
-                                                                    <input type="text" class="form-control" value="20:00">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-md-1">
-                                                                <div class="other-info-list">
-                                                                    <ul>
-                                                                        <li class="active-hour m-0">Thur</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">Start Time </label>
-                                                                    <input type="text" class="form-control" value="8:00">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">End Time </label>
-                                                                    <input type="text" class="form-control" value="20:00">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-md-1">
-                                                                <div class="other-info-list">
-                                                                    <ul>
-                                                                        <li class="active-hour m-0">Fri</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">Start Time </label>
-                                                                    <input type="text" class="form-control" value="8:00">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">End Time </label>
-                                                                    <input type="text" class="form-control" value="20:00">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-md-1">
-                                                                <div class="other-info-list">
-                                                                    <ul>
-                                                                        <li class="m-0">Fri</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">Start Time </label>
-                                                                    <input type="text" class="form-control" value="8:00">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">End Time </label>
-                                                                    <input type="text" class="form-control" value="20:00">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-md-1">
-                                                                <div class="other-info-list">
-                                                                    <ul>
-                                                                        <li class="m-0">Sun</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">Start Time </label>
-                                                                    <input type="text" class="form-control" value="8:00">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                    <label class="form-label">End Time </label>
-                                                                    <input type="text" class="form-control" value="20:00">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="footer-widget footer-menu">
+                                                    <h2 class="footer-title">Other Links</h2>
+                                                    <ul>
+                                                        <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
+                                                        <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
+                                                        <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
+                                                        <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
+                                                        <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="footer-widget footer-menu">
+                                                    <h2 class="footer-title">Connect With Us</h2>
+                                                    <ul>
+                                                        <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
+                                                        <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
+                                                        <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
+                                                        <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
+                                                        <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card text-end border-0">
-                                            <div class="pro-body">
-                                                <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
-                                                <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="footer-bottom">
+                            <div class="container">
+
+                                <div class="copyright">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="copyright-text text-center">
+                                                <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <footer class="footer">
-                <div class="footer-top ">
-                    <div class="container">
-                        <div class="row">
-                            <div class=" col-lg-4 col-md-12">
-                                <div class="footer-bottom-logo">
-                                    <a href="index.html" class="menu-logo">
-                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                                    </a>
-                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                    <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
-                                </div>
-                            </div>
-                            <div class=" col-lg-8 col-md-12">
-                                <div class="row">
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Useful Links</h2>
-                                            <ul>
-                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
-                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
-                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
-                                                <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
-                                                <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Help & Support</h2>
-                                            <ul>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Other Links</h2>
-                                            <ul>
-                                                <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
-                                                <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
-                                                <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
-                                                <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
-                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Connect With Us</h2>
-                                            <ul>
-                                                <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
-                                                <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
-                                                <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
-                                                <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
-                                                <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-
-                <div class="footer-bottom">
-                    <div class="container">
-
-                        <div class="copyright">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="copyright-text text-center">
-                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
-                    </div>
+                    </footer>
+
                 </div>
 
-            </footer>
 
-        </div>
+                <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 
+                <script src="assets/js/bootstrap.bundle.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 
-        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
+                <script src="assets/plugins/select2/js/select2.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
+                <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="4558dd39f62761c94e962170-text/javascript"></script>
+                <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 
-        <script src="assets/plugins/select2/js/select2.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
+                <script src="assets/js/moment.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
+                <script src="assets/js/bootstrap-datetimepicker.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="4558dd39f62761c94e962170-text/javascript"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="4558dd39f62761c94e962170-text/javascript"></script>
+                <script src="assets/js/profile-settings.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 
-        <script src="assets/js/moment.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
-        <script src="assets/js/bootstrap-datetimepicker.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
+                <script src="assets/js/script.js" type="4558dd39f62761c94e962170-text/javascript"></script>
+                <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="4558dd39f62761c94e962170-|49" defer></script></body>
 
-        <script src="assets/js/profile-settings.js" type="4558dd39f62761c94e962170-text/javascript"></script>
-
-        <script src="assets/js/script.js" type="4558dd39f62761c94e962170-text/javascript"></script>
-        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="4558dd39f62761c94e962170-|49" defer></script></body>
-
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/freelancer-profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:50 GMT -->
-</html>
+                </html>
