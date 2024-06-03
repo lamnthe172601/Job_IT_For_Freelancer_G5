@@ -244,7 +244,7 @@ Version      : 1.0
 	    }],
 	      chart: {
 	      height: 335,
-	      type: 'area'
+	      type: 'bar'
 	    },
 	    dataLabels: {
 	      enabled: false
