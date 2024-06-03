@@ -53,21 +53,19 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
         request.setAttribute("username", username);
-        
         request.setAttribute("password", password);
         DAO accDao = new DAO();
         User c = accDao.getLogin(username, password);
-        
+
         try {
             if (c == null) {
                 request.setAttribute("loginFaild", "Username or Password Wrong");
                 request.getRequestDispatcher("views/login.jsp").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
-                session.setAttribute("account", c);
                 session.setMaxInactiveInterval(1000);
-                
-                
+                session.setAttribute("account", c);
+ 
                 RecruiterDAO re = new RecruiterDAO();
                 CompanyDAO com = new CompanyDAO();
                 
@@ -76,28 +74,22 @@ public class LoginController extends HttpServlet {
                 Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
                 session.setAttribute("company", co);
                 session.setAttribute("recruiter", rec);
-               
-               
-                
-                
-                
+
                 if (c.isLevelPass() == true && c.getStatus().equals("active")) {
                     if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
                         response.sendRedirect("dashboardAdmin");
+                    } else if (c.getRoleID().getRoleID() == 5) {
+                        response.sendRedirect("SelectAccountType");
                     } else {
                         response.sendRedirect("home");
                     }
-                } else if (c.isLevelPass() == true && c.getStatus().equals("banned")) {
+                } else if (c.isLevelPass() == true && c.getStatus().equals("inactive")) {
                     request.setAttribute("loginFaild", "Your account has been banned");
                     request.getRequestDispatcher("views/login.jsp").forward(request, response);
                 } else {
-                    response.sendRedirect("home");
-                }
-   
-             {             
-              
+
                     response.sendRedirect("changePassword");
-                }
+                }              
             }
         } catch (Exception e) {
 
