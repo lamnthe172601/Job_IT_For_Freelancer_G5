@@ -12,10 +12,12 @@ import java.util.Date;
  */
 public class Freelancer {
     int freelanceID;
-    String first_name,last_name, image, describe, email_contact, phone_contact;
+    String first_name,last_name, image, describe, email, phone;
     boolean gender;
     Date dob;
 
+    
+    
     public Freelancer() {
     }
 
@@ -25,8 +27,8 @@ public class Freelancer {
         this.last_name = last_name;
         this.image = image;
         this.describe = describe;
-        this.email_contact = email;
-        this.phone_contact = phone;
+        this.email = email;
+        this.phone = phone;
         this.gender = gender;
         this.dob = dob;
     }
@@ -72,19 +74,19 @@ public class Freelancer {
     }
 
     public String getEmail() {
-        return email_contact;
+        return email;
     }
 
     public void setEmail(String email) {
-        this.email_contact = email;
+        this.email = email;
     }
 
     public String getPhone() {
-        return phone_contact;
+        return phone;
     }
 
     public void setPhone(String phone) {
-        this.phone_contact = phone;
+        this.phone = phone;
     }
 
     public boolean isGender() {
@@ -105,7 +107,7 @@ public class Freelancer {
 
     @Override
     public String toString() {
-        return "Freelancer{" + "freelanceID=" + freelanceID + ", first_name=" + first_name + ", last_name=" + last_name + ", image=" + image + ", describe=" + describe + ", email=" + email_contact + ", phone=" + phone_contact + ", gender=" + gender + ", dob=" + dob + '}';
+        return "Freelancer{" + "freelanceID=" + freelanceID + ", first_name=" + first_name + ", last_name=" + last_name + ", image=" + image + ", describe=" + describe + ", email=" + email + ", phone=" + phone + ", gender=" + gender + ", dob=" + dob + '}';
     }
     
     public String fullname(){

@@ -17,20 +17,6 @@
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/HomeContronller.java</file>
         </group>
-        <group name="SWP391">
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/AccountControll/Email.java</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/AccountControll/ViewProfile_Freelancer.java</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/dal/FreelancerDAO.java</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/AccountControll/UpdateProfile_Freelancer.java</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/Models/Dregee.java</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/Models/Education.java</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/CommonControll/SearchController.java</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/web/views/ProfileSettingFreelancer.jsp</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/Models/Experience.java</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputFreelancerProfileController.java</file>
-            <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
-        </group>
+        <group name="SWP391"/>
     </open-files>
 </project-private>

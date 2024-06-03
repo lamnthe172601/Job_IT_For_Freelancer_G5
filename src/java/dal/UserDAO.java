@@ -17,43 +17,37 @@ import java.sql.ResultSet;
  *
  * @author DUC MINH
  */
-public class UserDAO extends DBContext{
-    
+public class UserDAO {
+    private static final String URL = "jdbc:mysql://localhost:3306/freelancer";
+    private static final String USER = "sa";
+    private static final String PASSWORD = "sa";
 
     public User getUserByUsername(String username) throws SQLException {
-        String query = "select * from [freelancer].[dbo].[User] where [username]= ?";
-        try (PreparedStatement stmt = getConnection().prepareStatement(query)) {
-            stmt.setString(1, username);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return new User(
-                        rs.getInt("userID"),
-                        rs.getString("username"),
-                        rs.getString("password"),
-                        rs.getString("email"),
-                        rs.getString("status"),
-                        rs.getBoolean("levelPass")
-                    );
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)){
+            String query = "SELECT u.*, r.id AS role_id, r.name AS role_name FROM users u LEFT JOIN roles r ON u.roleID = r.id WHERE u.username = ?";
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setString(1, username);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        User user = new User();
+                        user.setUserID(rs.getInt("userID"));
+                        user.setUsername(rs.getString("username"));
+                        user.setPassword(rs.getString("password"));
+                        user.setEmail(rs.getString("email"));
+                        user.setStatus(rs.getString("status"));
+
+                        Role role = new Role();
+                        role.setRoleID(rs.getInt("role_id"));
+                        role.setRoleName(rs.getString("role_name"));
+                        user.setRoleID(role);
+
+                        user.setLevelPass(rs.getBoolean("levelPass"));
+
+                        return user;
+                    }
                 }
             }
         }
         return null;
     }
-
-    
-    public void changePassword(String username, String newPassword) throws SQLException {
-            
-        String query = "UPDATE Users SET password = ? WHERE username = ?";
-        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, newPassword);
-            stmt.setString(2, username);
-            stmt.executeUpdate();
-        }
-    }
-
-    public Connection getConnection() {
-        Connection connection = new DBContext().connection;
-        return connection;
-    }
-    
 }

@@ -4,10 +4,6 @@
  */
 package AccountControll;
 
-import Models.Company;
-import Models.Freelancer;
-import Models.Post;
-import Models.Recruiter;
 import dal.DAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -17,13 +13,22 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import Models.User;
-import dal.CompanyDAO;
-import dal.HomeDAO;
-import dal.RecruiterDAO;
 
+/**
+ *
+ * @author Admin
+ */
 public class LoginController extends HttpServlet {
 
-  
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -41,6 +46,15 @@ public class LoginController extends HttpServlet {
         }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -65,15 +79,6 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1000);
                 session.setAttribute("account", c);
- 
-                RecruiterDAO re = new RecruiterDAO();
-                CompanyDAO com = new CompanyDAO();
-                
-                
-                Recruiter rec = re.getRecruiterProfile(c.getUserID());
-                Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
-                session.setAttribute("company", co);
-                session.setAttribute("recruiter", rec);
 
                 if (c.isLevelPass() == true && c.getStatus().equals("active")) {
                     if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
@@ -96,7 +101,11 @@ public class LoginController extends HttpServlet {
         }
     }
 
-   
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

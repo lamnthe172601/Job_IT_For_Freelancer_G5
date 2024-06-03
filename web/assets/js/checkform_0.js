@@ -2,7 +2,7 @@ function FormValidate() {
     let checkpass = false;
     let checkrepass = false;
     var reGexPass = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{6,16}$/;
-    var passW = document.getElementById('password').value;
+    var passW = document.getElementById('password').value.trim();
     var errorPass = document.getElementById('errorPass');
     
     
@@ -17,7 +17,7 @@ function FormValidate() {
         errorPass.innerHTML = "";
     }
     
-    var ConPass = document.getElementById('repassword').value;
+    var ConPass = document.getElementById('repassword').value.trim();
     var errorConPass = document.getElementById('errorRepass');
 
     if (ConPass === '' || ConPass === null) {
