@@ -66,7 +66,6 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
-        
         request.setAttribute("username", username);
         request.setAttribute("password", password);
         DAO accDao = new DAO();
