@@ -64,40 +64,40 @@
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">First Name <span class="label-star"> *</span></label>
-                                <input type="text" class="form-control" id="firstname" name="firstname">
+                                <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstname">
                                 <div style="color: red" id="eFirstname"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Last Name <span class="label-star"> *</span></label>
-                                <input type="text" class="form-control" id="lastname" name="lastname">
+                                <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastname">
                                 <div style="color: red" id="eLastname"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label"> Phone Number<span class="label-star"> *</span></label>
-                                <input type="text" class="form-control" id="phone" name="phone">
+                                <input oninput="checkphone()" type="text" class="form-control" id="phone" name="phone">
                                 <div style="color: red" id="ePhone"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Email Address<span class="label-star"> *</span></label>
-                                <input type="text" class="form-control" id="email" name="email">
+                                <input oninput="checkEmail()" type="text" class="form-control" id="email" name="email">
                                 <div style="color: red" id="eEmail"></div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="input-block">
-                                <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
-                                <div class="cal-icon">
-                                    <input type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
-                                    <div style="color: red" id="eDob"></div>
-                                </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="input-block">
+                            <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
+                            <div class="cal-icon">
+                                <input  type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
+                                <div style="color: red" id="eDob"></div>
                             </div>
                         </div>
+                    </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Gender</label>
@@ -290,6 +290,7 @@ button.submit:hover {
 
         <script src="assets/js/script.js" type="625b9fc8f423323d8794fc95-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="625b9fc8f423323d8794fc95-|49" defer></script></body>
-    <script src="assets/js/checkform_1.js"></script>
+        <script src="assets/js/checkform_1.js"></script>
+        <script src="assets/js/checkinput.js"></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/onboard-screen.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:30 GMT -->
 </html>

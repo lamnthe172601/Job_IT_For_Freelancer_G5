@@ -4,6 +4,7 @@
  */
 package AccountControll;
 
+import static AccountControll.SHA1.toSHA1;
 import Models.User;
 import dal.DAO;
 import java.io.IOException;
@@ -93,7 +94,8 @@ public class LossPasswordController extends HttpServlet {
                     for (User user : listUser) {
                         if (user.getEmail().equals(email)) {
                             String newPassword=randomPassword();
-                            dao.UpdatePassword(newPassword, 0, email);
+                            String pw=toSHA1(newPassword);
+                            dao.UpdatePassword(pw, 0, email);
                             Email.sendEmail(email,"YOUR NEW PASSWORD", "Your new password is: "+newPassword);
                             request.setAttribute("mess", "Please check your email to get new password!");
                             request.getRequestDispatcher("views/login.jsp").forward(request, response);

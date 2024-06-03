@@ -78,18 +78,18 @@
                                         <form id="from" action="Register" method="post" onsubmit="return FormValidate();">
                                             <div class="input-block ">
                                                 <label class="focus-label">User Name <span class="label-star"> *</span></label>
-                                                <input type="text" class="form-control floating" id="username" name="username">
+                                                <input oninput="checkUsername()" type="text" class="form-control floating" id="username" name="username">
                                                 <div style="color: red" id="errorUsername">${mess1}</div>
                                             </div>
                                             <div class="input-block ">
                                                 <label class="focus-label">Email Address<span class="label-star"> *</span></label>
-                                                <input type="text" class="form-control floating" id="email" name="email">
+                                                <input oninput="checkEmail()" type="text" class="form-control floating" id="email" name="email">
                                                 <div style="color: red" id="errorEmail">${mess2}</div>
                                             </div>
                                             <div class="input-block ">
                                                 <label class="focus-label">Password <span class="label-star"> *</span></label>
                                                 <div class="position-relative">
-                                                    <input type="password" class="form-control floating pass-input" id="password" name="password">                                                  
+                                                    <input oninput="checkpass()" type="password" class="form-control floating pass-input" id="password" name="password">                                                  
                                                     <div class="password-icon ">
                                                         <span style="cursor: pointer;" class="fas toggle-password fa-eye-slash"></span>
                                                     </div>
@@ -99,7 +99,7 @@
                                             <div class="input-block  mb-0">
                                                 <label class="focus-label">Confirm Password <span class="label-star"> *</span></label>
                                                 <div class="position-relative">
-                                                    <input type="password" class="form-control floating pass-inputs" id="repassword" name="repassword">
+                                                    <input oninput="checkpass()" type="password" class="form-control floating pass-inputs" id="repassword" name="repassword">
                                                     <div class="password-icons">
                                                         <span style="cursor: pointer;" class="fas toggle-passwords fa-eye-slash"></span>
                                                     </div>
@@ -141,6 +141,7 @@
         <script src="assets/js/script.js" type="60ab19134118e3e714333e43-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="60ab19134118e3e714333e43-|49" defer></script>
         <script src="assets/js/checkfrom.js"></script>
+        <script src="assets/js/jsvalidate.js"></script>
             
     </body>
         

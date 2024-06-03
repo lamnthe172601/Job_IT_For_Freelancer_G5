@@ -56,15 +56,16 @@ function checkcompany() {
 
 }
 
-function checkdob(){
+function checkdob() {
     var dob = document.getElementById('dob').value.trim();
     var eDob = document.getElementById('eDob');
-        if (dob === null || dob === '') {
+    if (dob === null || dob === '') {
         eDob.innerHTML = "Date of Birth are required fields.";
-    } else {
+    }else {
         eDob.innerHTML = '';
     }
 }
+
 
 
 

@@ -61,7 +61,8 @@ function FormValidate() {
     //check dob
     if (dob === null || dob === '') {
         eDob.innerHTML = "Date of Birth are required fields.";
-    } else {
+    }
+    else{
         checkdate = true;
         eDob.innerHTML = '';
     }

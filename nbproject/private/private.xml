@@ -12,6 +12,16 @@
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/Models/Experience.java</file>
             <file>file:/D:/SU24/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
         </group>
-        <group/>
+        <group>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/register.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputRecruiterProfile.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputFreelancerProfileController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputRecruiterProfileController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_2.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_1.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkinput.js</file>
+        </group>
     </open-files>
 </project-private>
