@@ -164,7 +164,7 @@ public class FreelancerDAO extends DBContext {
         return list;
     }
     
-   
+
 
     public boolean updateFreelancer(Freelancer freelancer) throws SQLException {
         String query = "UPDATE freelancers SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, describe = ?, email = ?, phone = ? WHERE freelanceID = ?";
