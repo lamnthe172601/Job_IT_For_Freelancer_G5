@@ -20,10 +20,7 @@ import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 2328b07 (proflie freelancer)
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,16 +76,17 @@ public class UpdateProfile_Freelancer extends HttpServlet {
             return;
         }
 
-        try {
-            Freelancer freelancer = freelancerDAO.getFreelancerById(freelanceID);
-            if (freelancer != null) {
-                request.setAttribute("freelancer", freelancer);
-                request.getRequestDispatcher("views/UpdateProfile_Freelancer.jsp").forward(request, response);
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "The requested resource was not found.");
-            }
-        } catch (SQLException e) {
-            throw new ServletException("Database error", e);
+        Freelancer freelancer = null;
+       try {
+           freelancer = freelancerDAO.getFreelancerById(freelanceID);
+       } catch (SQLException ex) {
+           Logger.getLogger(UpdateProfile_Freelancer.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        if (freelancer != null) {
+            request.setAttribute("freelancer", freelancer);
+            request.getRequestDispatcher("views/UpdateProfile_Freelancer.jsp").forward(request, response);
+        } else {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "The requested resource was not found.");
         }
     } 
 
@@ -124,15 +122,16 @@ public class UpdateProfile_Freelancer extends HttpServlet {
 
         Freelancer freelancer = new Freelancer(freelanceID, first_name, last_name, image, gender, dob, describe, email, phone);
 
-        try {
-            boolean isUpdated = freelancerDAO.updateFreelancer(freelancer);
-            if (isUpdated) {
-                response.sendRedirect("freelancerProfile?id=" + freelanceID);
-            } else {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update the freelancer profile.");
-            }
-        } catch (SQLException e) {
-            throw new ServletException("Database error", e);
+        boolean isUpdated = false;
+       try {
+           isUpdated = freelancerDAO.updateFreelancer(freelancer);
+       } catch (SQLException ex) {
+           Logger.getLogger(UpdateProfile_Freelancer.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        if (isUpdated) {
+            response.sendRedirect("freelancerProfile?id=" + freelanceID);
+        } else {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update the freelancer profile.");
         }
     }
     
