@@ -427,6 +427,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <form action="https://kofejob.dreamstechnologies.com/html/template/freelancer-profile.html">
                                                         <div class="container">
                                                             <h2>Recruiter Profile</h2>
                                                             <form action="updateRecruiterProfile" method="post">
@@ -508,7 +509,7 @@
                                                             </div>
                                                         </div>
                                                     
-                                                </form>
+                                                
                                             </div>
                                             
                                            

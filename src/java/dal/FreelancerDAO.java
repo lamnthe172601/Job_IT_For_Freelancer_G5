@@ -77,7 +77,7 @@ public class FreelancerDAO extends DBContext {
                             rs.getDate("end_date"),
                             en
                     ));
-                    
+
                 }
             }
         } catch (SQLException e) {
@@ -88,7 +88,7 @@ public class FreelancerDAO extends DBContext {
     }
 
     public List<Education> getEducationById(int id) throws SQLException {
-         List<Education> list = new ArrayList<>();
+        List<Education> list = new ArrayList<>();
         String query = """
                        SELECT * FROM Education ex 
                        join freelancer fe on ex.freelanceID = fe.freelanceID 
@@ -109,14 +109,12 @@ public class FreelancerDAO extends DBContext {
                             rs.getString("email__contact"),
                             rs.getString("phone_contact")
                     );
-                    
+
                     Dregee de = new Dregee(rs.getInt("dregeeID"), rs.getString("degree_name"));
 
-                    list.add( new Education(rs.getInt("educationID"), rs.getString("university_name")
-                    ,rs.getDate("start_date"), rs.getDate("end_date"), en, de));
-                      
-                  
-                    
+                    list.add(new Education(rs.getInt("educationID"), rs.getString("university_name"),
+                             rs.getDate("start_date"), rs.getDate("end_date"), en, de));
+
                 }
             }
         } catch (SQLException e) {
@@ -127,7 +125,7 @@ public class FreelancerDAO extends DBContext {
     }
 
     public List<Skills> getSkillSetById(int id) throws SQLException {
-         List<Skills> list = new ArrayList<>();
+        List<Skills> list = new ArrayList<>();
         String query = """
                          SELECT * FROM Skills ex 
                                               join freelancer fe on ex.freelancerID = fe.freelanceID 
@@ -148,13 +146,11 @@ public class FreelancerDAO extends DBContext {
                             rs.getString("email__contact"),
                             rs.getString("phone_contact")
                     );
-                    
+
                     SkillSet skillset = new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name"));
 
-                    list.add( new Skills(rs.getInt("skillID"), skillset, en));
-                      
-                  
-                    
+                    list.add(new Skills(rs.getInt("skillID"), skillset, en));
+
                 }
             }
         } catch (SQLException e) {
@@ -163,15 +159,14 @@ public class FreelancerDAO extends DBContext {
         }
         return list;
     }
-    
 
-     public List<SkillSet> getAllSkillSet() {
-         List<SkillSet> list = new ArrayList<>();
+    public List<SkillSet> getAllSkillSet() {
+        List<SkillSet> list = new ArrayList<>();
         String query = """
                          SELECT [skill_set_ID]
                          ,[skill_set_name]
                          FROM [freelancer].[dbo].[Skill_Set]""";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {        
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     list.add(new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name")));
@@ -179,17 +174,17 @@ public class FreelancerDAO extends DBContext {
             }
         } catch (SQLException e) {
             e.printStackTrace(); // In chi tiết lỗi ra console
-           
+
         }
         return list;
     }
-     
-      public List<Dregee> getAllDregee() {
-         List<Dregee> list = new ArrayList<>();
+
+    public List<Dregee> getAllDregee() {
+        List<Dregee> list = new ArrayList<>();
         String query = """
                          SELECT *
                          FROM Degree""";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {        
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     list.add(new Dregee(rs.getInt("dregeeID"), rs.getString("degree_name")));
@@ -197,17 +192,17 @@ public class FreelancerDAO extends DBContext {
             }
         } catch (SQLException e) {
             e.printStackTrace(); // In chi tiết lỗi ra console
-           
+
         }
         return list;
     }
-     
-     public static void main(String[] args) {
+
+    public static void main(String[] args) {
         FreelancerDAO fe = new FreelancerDAO();
         List<Dregee> li = fe.getAllDregee();
-         for (Dregee skillSet : li) {
-             System.out.println(skillSet.toString());
-         }
+        for (Dregee skillSet : li) {
+            System.out.println(skillSet.toString());
+        }
     }
 
     public boolean updateFreelancer(Freelancer freelancer) throws SQLException {
@@ -229,27 +224,14 @@ public class FreelancerDAO extends DBContext {
             throw new SQLException("Error while updating freelancer", e);
         }
     }
-     public List<Freelancer> getSearchFreebySkill(String skill_set_name) {
+
+    public List<Freelancer> getSearchFreebySkill(String skill_set_name) {
         List<Freelancer> list = new ArrayList<>();
-        String query = " SELECT  Freelancer.freelanceID,\n"
-                + "                 Freelancer.first_name,\n"
-                + "				 Freelancer.freelanceID,\n"
-                + "               Freelancer.[image],\n"
-                + "              Freelancer.gender,\n"
-                + "                   Freelancer.dob,\n"
-                + "                   Freelancer.[describe],\n"
-                + "                Freelancer.email__contact,\n"
-                + "                 Freelancer.phone_contact,\n"
-                + "                  Freelancer.userID\n"
-                + "                 \n"
-                + "               FROM\n"
-                + "            Freelancer\n"
-                + "              JOIN\n"
-                + "                 Skills ON Freelancer.freelanceID = Skills.freelancerID\n"
-                + "                JOIN\n"
-                + "                 Skill_Set ON Skills.skill_set_ID = Skill_Set.skill_set_ID\n"
-                + "               WHERE\n"
-                + "                 Skill_Set.skill_set_name LIKE ?";
+        String query = " SELECT f.*\n"
+                + "FROM Freelancer f\n"
+                + "JOIN Skills s ON f.freelanceID = s.freelancerID\n"
+                + "JOIN Skill_Set ss ON s.skill_set_ID = ss.skill_set_ID\n"
+                + "WHERE ss.skill_set_name like ?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -261,7 +243,7 @@ public class FreelancerDAO extends DBContext {
                 String lname = rs.getString(3);
                 String im = rs.getString(4);
                 boolean gender = rs.getBoolean(5);
-                java.util.Date dob = rs.getDate(6);
+                Date dob = rs.getDate(6);
                 String des = rs.getString(7);
                 int uid = rs.getInt(8);
                 String ec = rs.getString(9);
