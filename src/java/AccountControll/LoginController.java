@@ -52,50 +52,44 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
-        request.setAttribute("username", username);
         String pw=SHA1.toSHA1(password);
+        request.setAttribute("username", username);
         request.setAttribute("password", password);
         DAO accDao = new DAO();
         User c = accDao.getLogin(username, pw);
-        
+
         try {
+
             if (c == null) {
                 request.setAttribute("loginFaild", "Username or Password Wrong");
                 request.getRequestDispatcher("views/login.jsp").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
-                session.setAttribute("account", c);
                 session.setMaxInactiveInterval(1000);
-                
-                
-                RecruiterDAO re = new RecruiterDAO();
-                CompanyDAO com = new CompanyDAO();
-                
-                
-                Recruiter rec = re.getRecruiterProfile(c.getUserID());
-                Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
-                session.setAttribute("company", co);
-                session.setAttribute("recruiter", rec);
-               
-               
-                
-                
-                
+                session.setAttribute("account", c);
+                if (c.getRoleID().getRoleID() == 4) {
+                    RecruiterDAO re = new RecruiterDAO();
+                    CompanyDAO com = new CompanyDAO();
+                    Recruiter rec = re.getRecruiterProfile(c.getUserID());
+                    Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
+                    session.setAttribute("company", co);
+                    session.setAttribute("recruiter", rec);
+                }
+
                 if (c.isLevelPass() == true && c.getStatus().equals("active")) {
                     if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
+                        session.setAttribute("adminProfile", accDao.getAdminProfileByUserID(c.getUserID()));
                         response.sendRedirect("dashboardAdmin");
+                    } else if (c.getRoleID().getRoleID() == 5) {
+                        response.sendRedirect("SelectAccountType");
                     } else {
                         response.sendRedirect("home");
                     }
-                } else if (c.isLevelPass() == true && c.getStatus().equals("banned")) {
+                } else if (c.isLevelPass() == true && c.getStatus().equals("inactive")) {
                     request.setAttribute("loginFaild", "Your account has been banned");
                     request.getRequestDispatcher("views/login.jsp").forward(request, response);
                 } else {
-                    response.sendRedirect("home");
-                }
-   
-             {             
-              
+
                     response.sendRedirect("changePassword");
                 }
             }
