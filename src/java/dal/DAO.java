@@ -136,17 +136,10 @@ public class DAO extends DBContext {
 
     }
 
-    public static void main(String[] args) {
-        DAO dao = new DAO();
-        ArrayList<User> user = dao.getAllUser();
-        for (User user1 : user) {
-            System.out.println(user1.toString());
-        }
-
-    }
+ 
 
     public TeamNumber getTeamnumberByTeamNumberID(int Tid) {
-         TeamNumber teDao = new TeamNumber();
+        TeamNumber teDao = new TeamNumber();
         String query = "select team_number,team_numberID \n"
                 + "from Team_Number\n"
                 + "               		   where team_numberID = ?";
@@ -157,18 +150,17 @@ public class DAO extends DBContext {
 
             while (rs.next()) {
 
-                
                 int tid = rs.getInt(1);
-              
+
                 String tnumber = rs.getString(2);
-                
-               
+
                 return new TeamNumber(tid, tnumber);
             }
         } catch (SQLException e) {
         }
         return null;
     }
+
     public boolean checkUserExsit(String username) {
         ArrayList<User> user = getAllUser();
         for (User user1 : user) {
@@ -370,7 +362,7 @@ public class DAO extends DBContext {
         }
         return recruiterID;
     }
-    
+
     public void inputCompanyInfo(String name, String teamID, String established, String logo, String web,
             String decsribe, String location, int ID) {
         String sql = """
@@ -391,8 +383,8 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
-    
-     public Admin getAdminProfileByUserID(int userid) {
+
+    public Admin getAdminProfileByUserID(int userid) {
 
         String sql = """
                      select * from [Admin] where [userID] = ?
@@ -401,8 +393,8 @@ public class DAO extends DBContext {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, userid);
             ResultSet rs = statement.executeQuery();
-            while (rs.next()) {               
-                return new Admin(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+            while (rs.next()) {
+                return new Admin(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -410,6 +402,7 @@ public class DAO extends DBContext {
         return null;
     }
 
-   
+    public static void main(String[] args) {
+        System.out.println(new DAO().getAdminProfileByUserID(1).getImage());
     }
-   
+}

@@ -171,15 +171,15 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="subscribe-employe users-list">
-                                <ul>
-                                    <li class="active"><a href="users.html">All Freelancer </a></li>
-                                    <li><a href="user-active.html">Active Freelancer</a></li>
-                                    <li><a href="user-inactive.html">Inactive Freelancer</a></li>
-                                    <li><a href="user-suspended.html">Suspended</a></li>
-                                    <li><a href="user-administrator.html">Administrator</a></li>
-                                </ul>
-                            </div>
+                            <!--                            <div class="subscribe-employe users-list">
+                                                            <ul>
+                                                                <li class="active"><a href="users.html">All Freelancer </a></li>
+                                                                <li><a href="user-active.html">Active Freelancer</a></li>
+                                                                <li><a href="user-inactive.html">Inactive Freelancer</a></li>
+                                                                <li><a href="user-suspended.html">Suspended</a></li>
+                                                                <li><a href="user-administrator.html">Administrator</a></li>
+                                                            </ul>
+                                                        </div>-->
 
                             <div class="page-header user-active">
                                 <div class="row align-items-center">
@@ -187,11 +187,11 @@
                                         <h3 class="page-title">All Freelancer</h3>
                                         <p>Total <span>${totalFreelancer}</span> Freelancer account</p>
                                     </div>
-                                    <div class="col-auto">
-                                        <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
-                                            <i class="fas fa-filter"></i>
-                                        </a>
-                                    </div>
+                                    <!--                                    <div class="col-auto">
+                                                                            <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
+                                                                                <i class="fas fa-filter"></i>
+                                                                            </a>
+                                                                        </div>-->
                                 </div>
                             </div>
 
@@ -258,7 +258,7 @@
                                                             </div>
                                                             </div>
                                                         </td>                                                   
-                                                        <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getAccount().getEmail()}</td>
+                                                        <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getBasicInformation().getEmail()}</td>
 
                                                         <td class="test1">
 
@@ -471,6 +471,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>');
 
                         $('#Suspend_user').modal('hide');
+                        showSuccessNotification('Suspend user successfully!');
                     },
                     error: function (xhr, status, error) {
                         // Xử lý khi có lỗi xảy ra
@@ -493,6 +494,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>');
 
                         $('#Activate_user').modal('hide');
+                        showSuccessNotification('Activate user successfully!');
                     },
                     error: function (xhr, status, error) {
                         // Xử lý khi có lỗi xảy ra
@@ -506,7 +508,8 @@
 
 
         <!--        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="adminAssets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>-->
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
         <script src="adminAssets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 
         <script src="adminAssets/js/feather.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>

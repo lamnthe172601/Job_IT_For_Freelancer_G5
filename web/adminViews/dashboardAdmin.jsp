@@ -95,7 +95,7 @@
                     <li class="nav-item dropdown has-arrow main-drop">
                         <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                             <span class="user-img">
-                                <img src="${adminProfile.image}" alt="Img">
+                                <img src="${adminProfile.getImage()}" alt="Img">
                                 <span class="status online"></span>
                             </span>
                         </a>
@@ -444,7 +444,7 @@
             </div>
 
         </div>
-
+    
         <script src="adminAssets/js/jquery-3.7.1.min.js" defer></script>
         <script src="adminAssets/js/bootstrap.bundle.min.js" defer></script>
         <script src="adminAssets/js/feather.min.js" defer></script>

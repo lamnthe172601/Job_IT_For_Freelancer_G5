@@ -442,6 +442,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>');
 
                         $('#Suspend_user').modal('hide');
+                        showSuccessNotification('Suspend user successfully!');
                     },
                     error: function (xhr, status, error) {
                         // Xử lý khi có lỗi xảy ra
@@ -464,6 +465,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>');
 
                         $('#Activate_user').modal('hide');
+                        showSuccessNotification('Activate user successfully!');
                     },
                     error: function (xhr, status, error) {
                         // Xử lý khi có lỗi xảy ra
@@ -477,7 +479,8 @@
 
 
 
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
         <script src="adminAssets/js/jquery-3.7.1.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
 
         <script src="adminAssets/js/bootstrap.bundle.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
