@@ -23,7 +23,6 @@ import dal.RecruiterDAO;
 
 public class LoginController extends HttpServlet {
 
-  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -98,7 +97,6 @@ public class LoginController extends HttpServlet {
         }
     }
 
-   
     @Override
     public String getServletInfo() {
         return "Short description";

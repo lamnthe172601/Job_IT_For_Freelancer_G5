@@ -13,15 +13,13 @@
             <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/web/views/UpdateProfile_Freelancer.jsp</file>
         </group>
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/register.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputRecruiterProfile.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/RegisterController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/Email.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/ChangePasswordControll.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkinput.js</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/login.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkform_1.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/ChangePasswordControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/adminViews/freelancerAdmin.jsp</file>
         </group>
     </open-files>
 </project-private>

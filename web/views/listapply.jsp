@@ -1,25 +1,25 @@
+
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/users.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:40:50 GMT -->
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/index-5.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:18:36 GMT -->
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Kofejob - Bootstrap Admin HTML Template</title>
-
-        <link rel="shortcut icon" href="assets/img/favicon.png">
-
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+        <title>KofeJob</title>
+        <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-
-        <link rel="stylesheet" href="assets/css/feather.css">
-
-        <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-
-        <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
-
+        <link rel="stylesheet" href="assets/plugins/feather/feather.css">
+        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="assets/plugins/aos/aos.css">
+        <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body>
