@@ -171,7 +171,7 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="subscribe-employe users-list">
+<!--                            <div class="subscribe-employe users-list">
                                 <ul>
                                     <li class="active"><a href="users.html">All Freelancer </a></li>
                                     <li><a href="user-active.html">Active Freelancer</a></li>
@@ -179,7 +179,7 @@
                                     <li><a href="user-suspended.html">Suspended</a></li>
                                     <li><a href="user-administrator.html">Administrator</a></li>
                                 </ul>
-                            </div>
+                            </div>-->
 
                             <div class="page-header user-active">
                                 <div class="row align-items-center">
@@ -187,11 +187,11 @@
                                         <h3 class="page-title">All Freelancer</h3>
                                         <p>Total <span>${totalFreelancer}</span> Freelancer account</p>
                                     </div>
-                                    <div class="col-auto">
+<!--                                    <div class="col-auto">
                                         <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
                                             <i class="fas fa-filter"></i>
                                         </a>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
 

@@ -1,3 +1,8 @@
+<%-- 
+    Document   : home
+    Created on : May 16, 2024, 9:48:18 PM
+    Author     : Khuongld
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -8,7 +13,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KofeJob</title>
+        <title>KLTTLJob</title>
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
@@ -29,11 +34,162 @@
         </div>
 
 
+        <div class="main-wrapper home-five-wrapper">
 
-        <%@ include file="header.jsp" %>
 
+            <header class="header header-three">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg header-nav">
+                        <div class="navbar-header">
+                            <a id="mobile_btn" href="javascript:void(0);">
+                                <span class="bar-icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                            </a>
+                            <a href="home" class="navbar-brand logo scroll-logo">   
+                                 <img src="assets/img/logo-white.svg" class="img-fluid" alt="Logo">
+                            </a>
+                             
+                        </div>
+                        <div class="main-menu-wrapper">
+                            <div class="menu-header">
+                                <a href="home" class="menu-logo">
+                                    <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                                </a>
+                                <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </div>
+                            <ul class="main-nav">
+                                <li class="active has-submenu">
+                                    <a href="home">Home <i class="fas "></i></a>
 
- <div class="main-wrapper home-five-wrapper">
+                                </li>
+
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu"> 
+                                        
+                                            <li><a href="jobFavourites">Jobs Favourites</a></li>
+                                                                                                                                                           
+                                        <li><a href="jobsApply">Jobs Apply</a></li>
+                                        <li><a href="jobforyou">Jobs For you</a></li>
+                                    </ul>
+                                </li>
+                               
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                                                                                                                                                                                  
+                                        <li><a href="ListPost">Jobs List</a></li>                                        
+                                        <li><a href="SreachJob">Find Jobs</a></li>  
+                                        <li><a href="company">Company</a></li>
+                                    </ul>
+                                </li>
+                                 </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                 <li class="has-submenu">
+                                    <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                                                                                                                                                                                  
+                                        <li><a href="jobsList">Top Freelancer</a></li>
+                                        <li><a href="newsJobs">Skills</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                                                                                                                                                                                  
+                                        <li><a href="jobsList">List Post</a></li>
+                                        <li><a href="newsJobs">Reviews</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                </c:if>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        
+                                        <li><a href="blogList">Blog List</a></li>
+                                        <li><a href="blogGrid">Blog Grid</a></li>
+                                        <li><a href="About">About us</a></li>
+                                         <li><a href="ContactUs">Contact us</a></li>
+                                    </ul>
+                                </li>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                    
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+                                           
+                                            <li><a href="dashboard">Dashboard</a></li>
+                                            <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
+                                            <li><a href="Project">Projects</a></li>                        
+                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
+                                            <li><a href="profile-settings">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+                                            
+                                            <li><a href="dashboard">Dashboard</a></li>
+                                            <li><a href="companydetail">My Profile</a></li>
+                                            <li><a href="company-details.html">Company Details</a></li>
+                                            <li><a href="manage-projects.html">Projects</a></li>
+                                            <li><a href="favourites.html">Favourites</a></li>
+                                                                                       
+                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
+                                    <li>
+                                        <a href="/admin/index.html" target="_blank">Admin</a>
+                                        <ul class="submenu">
+                                            
+                                            <li><a href="dashboard.html">Dashboard</a></li>
+                                            <li><a href="company-profile.html">My Profile</a></li>
+                                            <li><a href="company-details.html">Company Details</a></li>
+                                            <li><a href="manage-projects.html">Projects</a></li>
+                                            <li><a href="favourites.html">Favourites</a></li>
+                                                                                       
+                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account == null}">
+                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
+                                        </c:if>
+                            </ul>
+                        </div>
+                        <ul class="nav header-navbar-rht">
+
+                            
+                             <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
+                            <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                             </c:if>
+                             <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                            <li><a href="projectJob" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                             </c:if>
+                             <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                            <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
+                             </c:if>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+
 
             <section class="section home-banner home-five row-middle">
                 <div class="container">
@@ -43,22 +199,20 @@
                                 <div class="banner-content text-center aos" data-aos="fade-up">
                                     <h1>Get the Perfect Developers & Projects</h1>
                                     <p>With the world's #1 Developers Marketplace</p>
-
-                                    <form class="form" name="store" id="store" method="get" action="search">
+                                    <form class="form" name="store" id="store" method="post" action="https://kofejob.dreamstechnologies.com/html/template/project.html">
                                         <div class="form-inner">
                                             <div class="input-group">
                                                 <span class="drop-detail">
-                                                    <select class="form-control select" name="op">
-                                                        <option value="post">Post</option>
-                                                        <option value="free">Freelancer</option>
+                                                    <select class="form-control select" name="storeID">
+                                                        <option value="project.html">Projects</option>
+                                                        <option value="developer.html">Freelancers</option>
                                                     </select>
                                                 </span>
-                                                <input type="text" class="form-control" name="searchInput" placeholder="Keywords">
+                                                <input type="email" class="form-control" placeholder="Keywords">
                                                 <button class="btn btn-primary sub-btn" type="submit">Search</button>
                                             </div>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
@@ -206,8 +360,9 @@
                                     <div class="feature-content">
                                         <h4><a href="project.jsp">${list.title}</a></h4>
                                         <ul class="feature-project-list nav">
+                                            
+                                            <li> ${list.skill}</li>
                                             <li><i class="feather-user me-1"></i>${list.quantity}</li>
-                                            <li>$ ${list.budget}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -217,7 +372,7 @@
 
                         <div class="col-md-12">
                             <div class="home-five-section-btn">
-                                <a href="project.jsp" class="btn btn-primary">View More Jobs Projects</a>
+                                <a href="ListPost" class="btn btn-primary">View More Jobs Projects</a>
                             </div>
                         </div>
                     </div>
@@ -281,17 +436,17 @@
                                     <p>Why hire people when you can simply integrate our talented cloud workforce instead?</p>
                                     <div class="market-place-btn bidding-btn">
                                         <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                            <a href="postProject" class="btn btn-primary market-project me-2">Post a Project</a>
+                                        <a href="postProject" class="btn btn-primary market-project me-2">Post a Project</a>
                                         </c:if>
-                                        <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                                            <a href="login" class="btn btn-primary market-project me-2">Post a Project</a>
+                                       <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
+                                        <a href="login" class="btn btn-primary market-project me-2">Post a Project</a>
                                         </c:if>
-
+                                        
                                         <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                                            <a href="Register" class="btn btn-primary project-post">Start Bidding</a>
+                                        <a href="Register" class="btn btn-primary project-post">Start Bidding</a>
                                         </c:if>
                                         <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                                            <a href="SearchJobs" class="btn btn-primary project-post">Searchs Jobs</a>
+                                        <a href="SearchJobs" class="btn btn-primary project-post">Searchs Jobs</a>
                                         </c:if>
                                     </div>
                                 </div>
@@ -306,7 +461,7 @@
                 </div>
             </section>
 
-
+            <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
             <section class="most-hired-section">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -341,6 +496,39 @@
                                     </div>
                                 </div>
                             </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </section>
+            </c:if>
+            
+            
+               <section class="section blog-tricks">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-header text-center aos aos-init aos-animate" data-aos="fade-up">
+                                <h2 class="header-title">Featured Blogs</h2>
+                                <p>Read Our Article To Get Tricks </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row aos aos-init aos-animate" data-aos="fade-up">
+                        <c:forEach items="${listblogs}" var="listblogs">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="grid-blog blog-two aos aos-init aos-animate" data-aos="fade-up">
+                                <div class="blog-image">
+                                    <a href="BlogDetails"><img style="width: 348px; height: 218px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="feature-time-blk">
+                                        <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
+                                        <span><i class="feather-calendar me-1"></i> ${listblogs.date_blog}</span>
+                                    </div>
+                                    <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
+                                </div>
+                            </div>
+                        </div>
                         </c:forEach>
                     </div>
                 </div>
@@ -531,37 +719,7 @@
             </section>
 
 
-            <section class="section blog-tricks">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="section-header text-center aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Featured Blogs</h2>
-                                <p>Read Our Article To Get Tricks </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row aos aos-init aos-animate" data-aos="fade-up">
-                        <c:forEach items="${listblogs}" var="listblogs">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="grid-blog blog-two aos aos-init aos-animate" data-aos="fade-up">
-                                    <div class="blog-image">
-                                        <a href="BlogDetails"><img style="width: 348px; height: 218px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
-                                    </div>
-                                    <div class="blog-content">
-                                        <div class="feature-time-blk">
-                                            <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
-                                            <span><i class="feather-calendar me-1"></i> ${listblogs.date_blog}</span>
-                                        </div>
-                                        <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </section>
-
+         
 
             <section class="section job-registers">
                 <div class="container position-relative job-register">
@@ -583,37 +741,114 @@
             </section>
 
 
+            <footer class="footer footer-five">
+
+                <div class="footer-top ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-4">
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">Useful Links</h2>
+                                    <ul>
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="blog-list.html">Blog</a></li>
+                                        <li><a href="login">Login</a></li>
+                                        <li><a href="register.html">Register</a></li>
+                                        <li><a href="forgot-password.html">Forgot Password</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4">
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">Help & Support</h2>
+                                    <ul>
+                                        <li><a href="javascript:void(0);">Browse Candidates</a></li>
+                                        <li><a href="javascript:void(0);">Employers Dashboard</a></li>
+                                        <li><a href="javascript:void(0);">Job Packages</a></li>
+                                        <li><a href="javascript:void(0);">Jobs Featured</a></li>
+                                        <li><a href="javascript:void(0);">Post A Job</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4">
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">Other Links</h2>
+                                    <ul>
+                                        <li><a href="freelancer-dashboard.html">Freelancers</a></li>
+                                        <li><a href="freelancer-portfolio.html">Freelancer Details</a></li>
+                                        <li><a href="project.html">Project</a></li>
+                                        <li><a href="project-details.html">Project Details</a></li>
+                                        <li><a href="post-project.html">Post Project</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4">
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">Featured Catgeories</h2>
+                                    <ul>
+                                        <li><a href="project.html">Illustration</a></li>
+                                        <li><a href="project.html">Link Building</a></li>
+                                        <li><a href="project.html">Python Dev</a></li>
+                                        <li><a href="project.html">Angular Dev</a></li>
+                                        <li><a href="project.html">Node JS</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">Subscribe</h2>
+                                    <div class="banner-content aos aos-init aos-animate" data-aos="fade-up">
+                                        <form class="form" name="store" method="post" action="https://kofejob.dreamstechnologies.com/html/template/project.html">
+                                            <div class="form-inner">
+                                                <div class="input-group">
+                                                    <input type="email" class="form-control" placeholder="Your Email address.....">
+                                                    <button class="btn btn-primary sub-btn" type="submit"><i class="fas fa-long-arrow-alt-right long-arrow"></i></button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="applicate-mobile-blk">
+                                        <h6 class="mb-3">Mobile Application</h6>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-lg-4">
+                                            <a href="javascript:void(0);"><img class="img-fluid" src="assets/img/app-store.svg" alt="app-store"></a>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <a href="javascript:void(0);"><img class="img-fluid" src="assets/img/google-play.svg" alt="google-play"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
+                <div class="footer-bottom">
+                    <div class="container">
 
+                        <div class="copyright">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 ">
+                                    <div class="footer-bottom-content">
+                                        <div class="copyright-text">
+                                            <p class="mb-0">Copyright 2024 © KLTTLJob. All right reserved.</p>
+                                        </div>
+                                        <ul>
+                                            <li><a href="javascript:void(0);" class="icon" target="_blank"><i class="fab fa-facebook-f"></i> </a></li>
+                                            <li><a href="javascript:void(0);" class="icon" target="_blank"><i class="fab fa-linkedin-in"></i> </a></li>
+                                            <li><a href="javascript:void(0);" class="icon" target="_blank"><i class="fab fa-twitter"></i> </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
 
-
-            <%@ include file="footter.jsp" %>                  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            </footer>
 
         </div>
 

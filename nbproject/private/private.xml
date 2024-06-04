@@ -12,6 +12,7 @@
             <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
             <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/web/views/UpdateProfile_Freelancer.jsp</file>
         </group>
+<<<<<<< HEAD
         <group>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/UpdateProfile_Freelancer.java</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/UpdateProfile_Freelancer.jsp</file>
@@ -22,5 +23,8 @@
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/RecruiterProfileEditControll.java</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/profile.jsp</file>
         </group>
+=======
+        <group/>
+>>>>>>> main
     </open-files>
 </project-private>

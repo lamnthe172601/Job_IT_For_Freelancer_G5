@@ -23,7 +23,6 @@ import dal.RecruiterDAO;
 
 public class LoginController extends HttpServlet {
 
-  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -52,10 +51,18 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
        String username = request.getParameter("user");
         String password = request.getParameter("pass");
+<<<<<<< HEAD
         request.setAttribute("username", username);
         request.setAttribute("password", password);
         DAO accDao = new DAO();
         User c = accDao.getLogin(username, password);
+=======
+        String pw=SHA1.toSHA1(password);
+        request.setAttribute("username", username);
+        request.setAttribute("password", password);
+        DAO accDao = new DAO();
+        User c = accDao.getLogin(username, pw);
+>>>>>>> main
 
         try {
 
@@ -66,6 +73,7 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1000);
                 session.setAttribute("account", c);
+<<<<<<< HEAD
                 
                 RecruiterDAO re = new RecruiterDAO();
                 CompanyDAO com = new CompanyDAO();
@@ -73,9 +81,20 @@ public class LoginController extends HttpServlet {
                 Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
                 session.setAttribute("company", co);
                 session.setAttribute("recruiter", rec);
+=======
+                if (c.getRoleID().getRoleID() == 4) {
+                    RecruiterDAO re = new RecruiterDAO();
+                    CompanyDAO com = new CompanyDAO();
+                    Recruiter rec = re.getRecruiterProfile(c.getUserID());
+                    Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
+                    session.setAttribute("company", co);
+                    session.setAttribute("recruiter", rec);
+                }
+>>>>>>> main
 
                 if (c.isLevelPass() == true && c.getStatus().equals("active")) {
                     if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
+                        session.setAttribute("adminProfile", accDao.getAdminProfileByUserID(c.getUserID()));
                         response.sendRedirect("dashboardAdmin");
                     } else if (c.getRoleID().getRoleID() == 5) {
                         response.sendRedirect("SelectAccountType");
@@ -95,7 +114,6 @@ public class LoginController extends HttpServlet {
         }
     }
 
-   
     @Override
     public String getServletInfo() {
         return "Short description";
