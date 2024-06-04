@@ -346,6 +346,14 @@
                                     <li><p>Followers</p><h6>422</h6></li>
                                 </ul>
                             </div>
+                            <div class="pro-post widget-box about-widget">
+                                <h4 class="pro-title mb-0">ABOUT ME</h4>
+                                <ul class="latest-posts pro-content">
+                                    <li><p>Gender</p><h6>${freelancer.gender ? "Male" : "Female"} </h6></li>
+                                    <li><p>Email Contact</p><h6>${freelancer.email}</h6></li>
+                                    <li><p>Phone Contact</p><h6>${freelancer.phone}</h6></li>
+                                </ul>
+                            </div>
                             <div class="pro-post widget-box language-widget">
                                 <h4 class="pro-title">LANGUAGE SKILLS</h4>
                                 <ul class="latest-posts pro-content pt-0">
@@ -365,18 +373,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="pro-post widget-box about-widget">
-                                <h4 class="pro-title mb-0">ABOUT ME</h4>
-                                <ul class="latest-posts pro-content">
-                                    <li><p>Gender</p><h6>${freelancer.gender ? "Male" : "Female"} </h6></li>
-                                    <li><p>Experience</p><h6>5 Years</h6></li>
-                                    <li><p>Location</p><h6>Istanbul/Turkey</h6></li>
-                                </ul>
-                            </div>
-
-
-
-
 
                         </div>
 

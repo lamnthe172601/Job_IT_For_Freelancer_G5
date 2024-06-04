@@ -7,7 +7,19 @@
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
         </group>
         <group name="SWP391">
-            <file>file:/D:/SU24/A/nbproject/build-impl.xml</file>
+            <file>file:/D:/SU24/A/web/views/recruitersetting.jsp</file>
+            <file>file:/D:/SU24/A/web/views/blogList.jsp</file>
+            <file>file:/D:/SU24/A/src/java/CommonControll/AboutControll.java</file>
+            <file>file:/D:/SU24/A/web/views/allCategories.jsp</file>
+            <file>file:/D:/SU24/A/web/views/register.jsp</file>
+            <file>file:/D:/SU24/A/web/views/blogGrid.jsp</file>
+            <file>file:/D:/SU24/A/web/views/ProfileFreelancer.jsp</file>
+            <file>file:/D:/SU24/A/web/views/blogDetails.jsp</file>
+            <file>file:/D:/SU24/A/web/views/ProfileSettingFreelancer.jsp</file>
+            <file>file:/D:/SU24/A/web/views/freelancerDetails.jsp</file>
+            <file>file:/D:/SU24/A/web/views/about.jsp</file>
+            <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
+            <file>file:/D:/SU24/A/web/views/home.jsp</file>
         </group>
     </open-files>
 </project-private>

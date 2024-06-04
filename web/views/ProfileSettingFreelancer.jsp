@@ -578,7 +578,7 @@
 
                                         <div class="card text-end border-0">
                                             <div class="pro-body">
-                                                <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
+                                                <button onclick="MyProfile" class="btn btn-secondary click-btn btn-plan">Cancel</button>
                                                 <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
                                             </div>
                                         </div>
