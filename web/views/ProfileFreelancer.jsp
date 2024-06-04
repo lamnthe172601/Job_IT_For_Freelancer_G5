@@ -40,13 +40,13 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
-                                <a href="index.html" class="menu-logo">
+                                <a href="home" class="menu-logo">
                                     <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                 </a>
                                 <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -75,9 +75,8 @@
                                         <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">Jobs List</a></li>
-                                            <li><a href="newsJobs">News Jobs</a></li>
-                                            <li><a href="findJobs">Find Jobs</a></li>  
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
+                                            <li><a href="search">Find Jobs</a></li>  
                                             <li><a href="company">Company</a></li>
                                         </ul>
                                     </li>
@@ -108,7 +107,7 @@
 
                                         <li><a href="blogList">Blog List</a></li>
                                         <li><a href="blogGrid">Blog Grid</a></li>
-                                        <li><a href="AboutUs">About us</a></li>
+                                        <li><a href="About">About us</a></li>
                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
@@ -132,7 +131,7 @@
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="dashboard.html">Dashboard</a></li>
+                                            <li><a href="dashboard">Dashboard</a></li>
                                             <li><a href="recruiterprofile">My Profile</a></li>
                                             <li><a href="company-details.html">Company Details</a></li>
                                             <li><a href="manage-projects.html">Projects</a></li>
@@ -162,21 +161,22 @@
                                 <c:if test="${sessionScope.account == null}">
                                     <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
                                     <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
-                                </c:if>
+                                        </c:if>
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
 
 
-                            <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
                                 <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
                                 </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                <li><a href="postProject" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                                <li><a href="projectJob" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
                                 </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
                                 <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
                                 </c:if>
+                        
                         </ul>
                     </nav>
                 </div>

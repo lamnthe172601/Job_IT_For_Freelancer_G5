@@ -92,6 +92,14 @@
         <servlet-name>UpdateProfile_Freelancer</servlet-name>
         <servlet-class>AccountControll.UpdateProfile_Freelancer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProjectJob</servlet-name>
+        <servlet-class>CommonControll.ProjectJob</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListPostControll</servlet-name>
+        <servlet-class>CommonControll.ListPostControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -191,5 +199,13 @@
     <servlet-mapping>
         <servlet-name>UpdateProfile_Freelancer</servlet-name>
         <url-pattern>/UpdateProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProjectJob</servlet-name>
+        <url-pattern>/projectJob</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListPostControll</servlet-name>
+        <url-pattern>/ListPost</url-pattern>
     </servlet-mapping>
 </web-app>
