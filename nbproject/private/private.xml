@@ -12,19 +12,26 @@
             <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
             <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/web/views/UpdateProfile_Freelancer.jsp</file>
         </group>
-<<<<<<< HEAD
         <group>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/UpdateProfile_Freelancer.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/RecruiterDAO.java</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/UpdateProfile_Freelancer.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/ViewProfile_Freelancer.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/FreelancerDAO.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/SHA1.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/META-INF/context.xml</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/recruitersetting.jsp</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/ProfileSettingFreelancer.jsp</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/Page404Controll.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CompanyDAO.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/CompanyDetailControll.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/companydetail.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/searchpost.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/SearchController.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/searchfreelancer.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/RecruiterProfileEditControll.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/profile.jsp</file>
         </group>
-=======
-        <group/>
->>>>>>> main
     </open-files>
 </project-private>
