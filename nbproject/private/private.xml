@@ -14,8 +14,8 @@
         </group>
         <group>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminAssets/js/script.js</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/AboutControll.java</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/recruiterAdmin.jsp</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/freelancerAdmin.jsp</file>
         </group>
