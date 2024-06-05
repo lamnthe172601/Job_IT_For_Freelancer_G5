@@ -108,7 +108,10 @@ public class UpdateProfile_Freelancer extends HttpServlet {
                 freelancerDAO.updateEducation(educationName, dateStart, dateEnd, degree, freelan.getFreelanceID());
                 freelancerDAO.updateExperience(experienceName, position, startDate, endDate, freelan.getFreelanceID());
                 imgPart.write(imgFilePath);
-                response.sendRedirect("MyProfile?id=" + userID);
+               
+                Thread.sleep(2000);
+
+                response.sendRedirect("UpdateProfile?id=" + userID);
 
             } catch (Exception e) {
                 response.getWriter().write(" " + e);
