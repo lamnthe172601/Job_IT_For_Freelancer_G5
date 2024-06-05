@@ -50,7 +50,8 @@ public class changePass extends HttpServlet {
             } else {
                 try {
                     if (account.getPassword().equals(currentPassword)) {
-                        userDAO.changePassword(account.getUserID(), newPassword);
+                        String pw = SHA1.toSHA1(newPassword);
+                        userDAO.changePassword(account.getUserID(), pw);
                         response.sendRedirect("home");
                     } else {
                         request.setAttribute("errorPass", "Mật khẩu hiện tại không đúng");
