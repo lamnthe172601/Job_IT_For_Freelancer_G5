@@ -162,7 +162,7 @@
                                 <c:if test="${sessionScope.account == null}">
                                     <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
                                     <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
-                                </c:if>
+                                        </c:if>
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
@@ -287,14 +287,14 @@
 
                                 <div class="pro-post project-widget widget-box" id="experience">
                                     <h3 class="pro-title">Experience</h3>
-                                    <c:forEach  items="${experience}" var="experience">
+                                    <c:forEach  items="${experience}" var="ex">
                                         <div class="pro-content">
                                             <div class="widget-list mb-0">
                                                 <ul class="clearfix">
                                                     <li>
-                                                        <h4>${experience.experience_work_name}</h4>
-                                                        <h5>${experience.getStart_date()} -> ${experience.getEnd_date()}</h5>
-                                                        <p>${experience.position}</p>
+                                                        <h4>${ex.experienceName}</h4>
+                                                        <h5>${ex.getStart_date()} -> ${ex.getEnd_date()}</h5>
+                                                         <p>${ex.your_project}</p>
                                                     </li>
 
                                                 </ul>
@@ -346,6 +346,16 @@
                                     <li><p>Followers</p><h6>422</h6></li>
                                 </ul>
                             </div>
+
+                            <div class="pro-post widget-box about-widget">
+                                <h4 class="pro-title mb-0">ABOUT ME</h4>
+                                <ul class="latest-posts pro-content">
+                                    <li><p>Gender</p><h6>${freelancer.gender ? "Male" : "Female"} </h6></li>
+                                    <li><p>Email Contact: </p><h6>${freelancer.email}</h6></li>
+                                    <li><p>Phone Contact: </p><h6>${freelancer.phone}</h6></li>
+                                </ul>
+                            </div>
+
                             <div class="pro-post widget-box language-widget">
                                 <h4 class="pro-title">LANGUAGE SKILLS</h4>
                                 <ul class="latest-posts pro-content pt-0">
@@ -365,18 +375,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="pro-post widget-box about-widget">
-                                <h4 class="pro-title mb-0">ABOUT ME</h4>
-                                <ul class="latest-posts pro-content">
-                                    <li><p>Gender</p><h6>${freelancer.gender ? "Male" : "Female"} </h6></li>
-                                    <li><p>Experience</p><h6>5 Years</h6></li>
-                                    <li><p>Location</p><h6>Istanbul/Turkey</h6></li>
-                                </ul>
-                            </div>
-
-
-
-
 
                         </div>
 
@@ -391,7 +389,7 @@
                         <div class="row">
                             <div class=" col-lg-4 col-md-12">
                                 <div class="footer-bottom-logo">
-                                    <a href="index.html" class="menu-logo">
+                                    <a href="home" class="menu-logo">
                                         <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                     </a>
                                     <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>

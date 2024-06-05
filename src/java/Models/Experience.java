@@ -85,6 +85,11 @@ public class Experience {
         this.freelancerID = freelancerID;
     }
 
+    @Override
+    public String toString() {
+        return "Experience{" + "experienceID=" + experienceID + ", experienceName=" + experienceName + ", your_project=" + your_project + ", experience_work_name=" + experience_work_name + ", start_date=" + start_date + ", end_date=" + end_date + ", freelancerID=" + freelancerID + '}';
+    }
+
     
     
     
