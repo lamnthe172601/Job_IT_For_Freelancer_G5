@@ -46,7 +46,7 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
@@ -66,75 +66,67 @@
                                 </li>
 
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu"> 
-
-                                            <li><a href="jobFavourites">Jobs Favourites</a></li>
-
-                                            <li><a href="jobsApply">Jobs Apply</a></li>
-                                            <li><a href="jobforyou">Jobs For you</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-
-                                            <li><a href="jobsList">Jobs List</a></li>
-                                            <li><a href="newsJobs">News Jobs</a></li>
-                                            <li><a href="findJobs">Find Jobs</a></li>  
-                                            <li><a href="company">Company</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu"> 
+                                        
+                                            <li><a href="PostFavourites">Jobs Favourites</a></li>
+                                                                                                                                                           
+                                        <li><a href="jobsApply">Jobs Apply</a></li>
+                                        <li><a href="jobforyou">Jobs For you</a></li>
+                                    </ul>
+                                </li>
+                               
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                                                                                                                                                                                  
+                                        <li><a href="ListPost">Jobs List</a></li>                                        
+                                        <li><a href="SreachJob">Find Jobs</a></li>  
+                                        <li><a href="company">Company</a></li>
+                                    </ul>
+                                </li>
+                                 </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-
-                                            <li><a href="jobsList">Top Freelancer</a></li>
-                                            <li><a href="newsJobs">Skills</a></li>
-
-                                        </ul>
-                                    </li>
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-
-                                            <li><a href="jobsList">List Post</a></li>
-                                            <li><a href="newsJobs">Reviews</a></li>
-
-                                        </ul>
-                                    </li>
+                                 <li class="has-submenu">
+                                    <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                                                                                                                                                                                  
+                                        <li><a href="jobsList">Top Freelancer</a></li>
+                                        <li><a href="newsJobs">Skills</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                                                                                                                                                                                  
+                                        <li><a href="jobsList">List Post</a></li>
+                                        <li><a href="newsJobs">Reviews</a></li>
+                                        
+                                    </ul>
+                                </li>
                                 </c:if>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-
-                                        <li><a href="blogList">Blog List</a></li>
-                                        <li><a href="blogGrid">Blog Grid</a></li>
-                                        <li><a href="AboutUs">About us</a></li>
-                                        <li><a href="ContactUs">Contact us</a></li>
+                                    <ul class="submenu">                                                                           
+                                        <li><a href="About">About us</a></li>
+                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
-
-
-
-
-
+                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
+                                
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
-
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="recruiterprofile">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-
-                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            
+                                            <li><a href="dashboard">Dashboard</a></li>
+                                            <li><a href="companydetail">My Profile</a></li>
+                                            <li><a href="company-details">Company Details</a></li>
+                                            <li><a href="manage-projects">Projects</a></li>
+                                            <li><a href="favourites">Favourites</a></li>                                                                                       
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -143,14 +135,9 @@
                                     <li>
                                         <a href="/admin/index.html" target="_blank">Admin</a>
                                         <ul class="submenu">
-
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="company-profile.html">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-
-                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            
+                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -238,9 +225,6 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="post-project.html" class="login-btn">Post a Project <i class="feather-plus ms-1"></i></a></li>
-
-
                             <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
                                 <li class="nav-item dropdown account-item">
                                     <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
@@ -253,7 +237,7 @@
                                         <div class="drop-head">
                                             <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                                 <span class="user-img">
-                                                    <img src="assets/img/user/avatar-1.jpg" alt="Img">
+                                                    <img src="${freelancer.image}" alt="Img">
                                                 </span>
                                                 <div>
                                                     <span>${freelancer.fullname()}</span>
@@ -261,13 +245,11 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        <a class="dropdown-item" href="developer-profile.html"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                        <a class="dropdown-item" href="freelancer-project-proposals.html"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
-                                        <a class="dropdown-item" href="freelancer-favourites.html"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Subscription</a>
-                                        <a class="dropdown-item" href="freelancer-statement.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
-                                        <a class="dropdown-item" href="freelancer-chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
-                                        <a class="dropdown-item" href="freelancer-profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                        <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                        <a class="dropdown-item" href="MyProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
+                                        <a class="dropdown-item" href="MyProject?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
+
+                                        <a class="dropdown-item" href="freelancer-profile-settings"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                        <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                     </div>
                                 </li>
                             </c:if>
@@ -293,74 +275,60 @@
                                     <div id="sidebar-menu" class="sidebar-menu">
                                         <ul>
                                             <li class="nav-item">
-                                                <a href="freelancer-dashboard.html" class="nav-link ">
+                                                <a href="freelancer-dashboard" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-project-proposals.html" class="nav-link">
+                                                <a href="MyProject?id=${sessionScope.account.userID}" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="freelancer-project-proposals.html">My Proposal</a>
+                                                        <a href="freelancer-project-proposals">My Proposal</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-ongoing-projects.html">Ongoing Projects</a>
+                                                        <a href="freelancer-ongoing-projects">Ongoing Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-completed-projects.html">Completed Projects</a>
+                                                        <a href="freelancer-completed-projects">Completed Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-cancelled-projects.html">Cancelled Projects</a>
+                                                        <a href="freelancer-cancelled-projects">Cancelled Projects</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-favourites.html" class="nav-link">
+                                                <a href="freelancer-favourites" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="freelancer-favourites.html">Bookmarked Projects</a>
+                                                        <a href="freelancer-favourites">Bookmarked Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-invitations.html">Invitations</a>
+                                                        <a href="freelancer-invitations">Invitations</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-review.html" class="nav-link">
+                                                <a href="freelancer-review" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-portfolio.html" class="nav-link">
+                                                <a href="freelancer-portfolio" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-05.svg" alt="Img"> Portfolio
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-chats.html" class="nav-link">
+                                                <a href="freelancer-chats" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
                                                 </a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-withdraw-money.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-payout.html" class="nav-link ">
-                                                    <img src="assets/img/icon/sidebar-icon-08.svg" alt="Img"> Payout
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-statement.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-09.svg" alt="Img"> Statement
-                                                </a>
-                                            </li>
+
                                             <li class="nav-item submenu">
                                                 <a href="freelancer-profile-settings.html" class="nav-link active">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
@@ -377,11 +345,9 @@
                                                         <a href="freelancer-verify-identity.html">Verify Identity</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-change-password.html">Changes Password</a>
+                                                        <a href="changePassword">Changes Password</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="freelancer-delete-account.html">Delete Account</a>
-                                                    </li>
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
@@ -398,9 +364,7 @@
                             <div class="pro-pos">
                                 <div class="setting-content">
 
-                                    <form action="UpdateProfile" method="post" enctype="multipart/form-data">
-
-
+                                    <form name="profileForm" action="UpdateProfile" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                                         <div class="card">
                                             <div class="pro-head">
                                                 <h3>Profile Setting</h3>
@@ -425,36 +389,33 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div >
 
-                                                        <div class="mb-3">
-                                                            <label hidden="" class="form-label">id</label>
-                                                            <input hidden=""  type="text" name="freelanceID" class="form-control" value="${freelancer.freelanceID}">
-                                                        </div>
-                                                    </div>
                                                     <div class="col-lg-6 col-md-12">
-
                                                         <div class="mb-3">
                                                             <label class="form-label">First Name</label>
-                                                            <input  type="text" name="firstname" class="form-control" value="${freelancer.first_name}">
+                                                            <input type="text" name="firstname" class="form-control" value="${freelancer.first_name}">
+                                                            <div id="firstNameError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Last Name</label>
                                                             <input type="text" name="lastname" class="form-control" value="${freelancer.last_name}">
+                                                            <div id="lastNameError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Phone Number</label>
                                                             <input type="text" name="phone" class="form-control" value="${freelancer.phone}">
+                                                            <div id="phoneError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Email Address</label>
                                                             <input type="text" name="email" class="form-control" value="${freelancer.email}">
+                                                            <div id="emailError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
@@ -466,7 +427,7 @@
                                                     <div class="col-lg-4 col-md-12">
                                                         <div class="mb-3 input-block">
                                                             <label class="form-label">Gender</label>
-                                                            <select  name="gender" class="form-control select">
+                                                            <select name="gender" class="form-control select">
                                                                 <option value="1" ${freelancer.gender ? 'selected="selected"' : ''}>
                                                                     Male
                                                                 </option>
@@ -498,15 +459,13 @@
                                                     <div class="pro-head">
                                                         <h4 class="pro-titles mb-0">Skills</h4>
                                                     </div>
-                                                    <div class="pro-body  skill-info">
+                                                    <div class="pro-body skill-info">
                                                         <c:forEach items="${skillset}" var="skillset">
-                                                            <div class="form-row align-items-center skill-cont">                                                              
-                                                                <input name="skill" type="checkbox" value="${skillset.skill_set_ID}"
-                                                                       <c:forEach items="${skills}" var="skill">
-                                                                           ${skillset.skill_set_ID == skill.skill_set_ID.skill_set_ID ? 'checked="checked"' : ''}
-                                                                       </c:forEach>>                                                                  
-                                                                ${skillset.skill_set_name} 
-                                                            </div>
+                                                            <input name="skill" type="checkbox" value="${skillset.skill_set_ID}"
+                                                                   <c:forEach items="${skills}" var="skill">
+                                                                       ${skillset.skill_set_ID == skill.skill_set_ID.skill_set_ID ? 'checked="checked"' : ''}
+                                                                   </c:forEach>>
+                                                            ${skillset.skill_set_name} 
                                                         </c:forEach>
                                                     </div>
                                                 </div>
@@ -517,7 +476,7 @@
                                                 <div class="pro-head">
                                                     <h4 class="pro-titles without-border mb-0">Education</h4>
                                                 </div>
-                                                <div class="pro-body  ">
+                                                <div class="pro-body">
                                                     <c:forEach items="${education}" var="education">
                                                         <div class="form-row align-items-center skill-cont">
                                                             <div class="input-block col-lg-3">
@@ -529,7 +488,6 @@
                                                                         </option>
                                                                     </c:forEach>
                                                                 </select>
-
                                                             </div>
                                                             <div class="input-block col-lg-3">
                                                                 <label class="form-label">University Name</label>
@@ -537,17 +495,14 @@
                                                             </div>
                                                             <div class="col-md-3 input-block floating-icon">
                                                                 <label class="form-label">Start Date</label>
-                                                                <input name="dateStart" type="date" value="${education.start_date}" class="form-control " >
-
+                                                                <input name="dateStart" type="date" value="${education.start_date}" class="form-control">
                                                             </div>
                                                             <div class="col-md-2 input-block floating-icon">
                                                                 <label class="form-label">End Date</label>
-                                                                <input type="date" name="dateEnd" value="${education.end_date}" class="form-control " >
-
+                                                                <input type="date" name="dateEnd" value="${education.end_date}" class="form-control">
                                                             </div>
                                                         </div>
                                                     </c:forEach>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -557,11 +512,11 @@
                                                     <h4 class="pro-titles without-border mb-0">Experience</h4>
                                                 </div>
                                                 <c:forEach items="${experience}" var="experience">
-                                                    <div class="pro-body  ">
+                                                    <div class="pro-body">
                                                         <div class="form-row align-items-center skill-cont">
                                                             <div class="input-block col-lg-3">
                                                                 <label class="form-label">Company Name</label>
-                                                                <input name="experienceName" type="text" class="form-control" value="${experience.experienceName}" >
+                                                                <input name="experienceName" type="text" class="form-control" value="${experience.experienceName}">
                                                             </div>
                                                             <div class="input-block col-lg-3">
                                                                 <label class="form-label">Position</label>
@@ -569,28 +524,23 @@
                                                             </div>
                                                             <div class="col-md-3 input-block floating-icon">
                                                                 <label class="form-label">Start Date</label>
-                                                                <input name="startDate" type="date" class="form-control " value="${experience.start_date}">
-
+                                                                <input name="startDate" type="date" class="form-control" value="${experience.start_date}">
                                                             </div>
                                                             <div class="col-md-2 input-block floating-icon">
                                                                 <label class="form-label">End Date</label>
-                                                                <input name="endDate" type="date" class="form-control " value="${experience.end_date}">
+                                                                <input name="endDate" type="date" class="form-control" value="${experience.end_date}">
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </c:forEach>
-
                                             </div>
                                         </div>
-
                                         <div class="card text-end border-0">
                                             <div class="pro-body">
                                                 <button onclick="MyProfile" class="btn btn-secondary click-btn btn-plan">Cancel</button>
                                                 <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
                                             </div>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>
@@ -703,7 +653,46 @@
             </footer>
 
 
+            <script>
+                function validateForm() {
+                    let firstName = document.forms["profileForm"]["firstname"].value;
+                    let lastName = document.forms["profileForm"]["lastname"].value;
+                    let email = document.forms["profileForm"]["email"].value;
+                    let phone = document.forms["profileForm"]["phone"].value;
+                    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    let phonePattern = /^[0-9]{10}$/;
 
+                    let isValid = true;
+
+                    // Reset previous error messages
+                    document.getElementById("firstNameError").innerHTML = "";
+                    document.getElementById("lastNameError").innerHTML = "";
+                    document.getElementById("emailError").innerHTML = "";
+                    document.getElementById("phoneError").innerHTML = "";
+
+                    if (firstName === "") {
+                        document.getElementById("firstNameError").innerHTML = "First Name is required";
+                        isValid = false;
+                    }
+
+                    if (lastName === "") {
+                        document.getElementById("lastNameError").innerHTML = "Last Name is required";
+                        isValid = false;
+                    }
+
+                    if (!emailPattern.test(email)) {
+                        document.getElementById("emailError").innerHTML = "Please enter a valid email address";
+                        isValid = false;
+                    }
+
+                    if (!phonePattern.test(phone)) {
+                        document.getElementById("phoneError").innerHTML = "Please enter a valid phone number (10 digits)";
+                        isValid = false;
+                    }
+
+                    return isValid;
+                }
+            </script>                                            
 
             <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 

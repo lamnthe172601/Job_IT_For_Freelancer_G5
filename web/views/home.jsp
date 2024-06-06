@@ -73,9 +73,8 @@
                                     <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu"> 
                                         
-                                            <li><a href="jobFavourites">Jobs Favourites</a></li>
-                                                                                                                                                           
-                                        <li><a href="jobsApply">Jobs Apply</a></li>
+                                        <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
+                                        <li><a href="ListApply">Jobs Apply</a></li>
                                         <li><a href="jobforyou">Jobs For you</a></li>
                                     </ul>
                                 </li>
@@ -86,7 +85,6 @@
                                                                                                                                                                                                   
                                         <li><a href="ListPost">Jobs List</a></li>                                        
                                         <li><a href="SreachJob">Find Jobs</a></li>  
-                                        <li><a href="company">Company</a></li>
                                     </ul>
                                 </li>
                                  </c:if>
@@ -112,21 +110,17 @@
                                 </c:if>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        
-                                        <li><a href="blogList">Blog List</a></li>
-                                        <li><a href="blogGrid">Blog Grid</a></li>
+                                    <ul class="submenu">                                                                           
                                         <li><a href="About">About us</a></li>
                                          <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
+                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
                                     
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
-                                           
-                                            <li><a href="dashboard">Dashboard</a></li>
                                             <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
                                             <li><a href="Project">Projects</a></li>                        
                                             <li><a href="changePassword">Change Password</a></li>                                                                                     
@@ -142,11 +136,10 @@
                                             
                                             <li><a href="dashboard">Dashboard</a></li>
                                             <li><a href="companydetail">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
-                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="company-details">Company Details</a></li>
+                                            <li><a href="manage-projects">Projects</a></li>
+                                            <li><a href="favourites">Favourites</a></li>                                                                                       
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -156,13 +149,8 @@
                                         <a href="/admin/index.html" target="_blank">Admin</a>
                                         <ul class="submenu">
                                             
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="company-profile.html">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
-                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -857,7 +845,7 @@
             <span class="ti-angle-up"><i class="feather-arrow-up"></i></span>
         </button>
 
-
+    </body>                           
         <script src="assets/js/jquery-3.7.1.min.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>

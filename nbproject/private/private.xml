@@ -2,16 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="SWP391">
-            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/web/views/ProfileSettingFreelancer.jsp</file>
-            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/src/java/AccountControll/ViewProfile_Freelancer.java</file>
-            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
-            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/web/views/ProfileFreelancer.jsp</file>
-            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/src/java/AccountControll/UpdateProfile_Freelancer.java</file>
-            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/src/java/AccountControll/HomeContronller.java</file>
-            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
-            <file>file:/D:/SU24/SWP_Job_IT_For_Freelancer_G5/web/views/UpdateProfile_Freelancer.jsp</file>
-        </group>
         <group/>
+        <group name="SWP391">
+            <file>file:/D:/SU24/A/web/adminViews/freelancerAdmin.jsp</file>
+            <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
+            <file>file:/D:/SU24/A/src/java/AccountControll/UpdateProfile_Freelancer.java</file>
+        </group>
     </open-files>
 </project-private>
