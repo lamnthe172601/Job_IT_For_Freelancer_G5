@@ -31,6 +31,57 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <link rel="stylesheet" href="adminAssets/css/style.css">
+        <style>
+
+            .filter-section {
+                display: none;
+                padding: 20px;
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+
+            .filter-section .form-group {
+                margin-bottom: 20px;
+            }
+
+            .filter-section label {
+                font-weight: bold;
+            }
+
+            .filter-section .input-group {
+                width: 100%;
+            }
+
+            .filter-section .input-group input {
+                width: calc(50% - 25px);
+                border-radius: 0;
+            }
+
+            .filter-section .input-group .input-group-text {
+                border-radius: 0;
+            }
+
+            @media (max-width: 767px) {
+                .filter-section .input-group input {
+                    width: 100%;
+                    margin-top: 10px;
+                }
+            }
+
+
+            #statusFilter {
+                cursor: pointer;
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                background-image: url('data:image/svg+xml;utf8,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z" fill="%23333333"/></svg>');
+                background-repeat: no-repeat;
+                background-position: right 12px center;
+                padding-right: 32px;
+            }
+        </style>
     </head>
     <body>
 
@@ -182,7 +233,50 @@
                                 <h3 class="page-title">All Recruiter</h3>
                                 <p>Total <span>${totalRecruiter}</span> Recruiter account</p>
                             </div>
+                            <div class="col-auto">
+                                <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
+                                    <i class="fas fa-filter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="filter-section" style="display: none">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    <input type="text" class="form-control" id="companyFilter" placeholder="Enter company name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Primary Contact</label>
+                                    <input type="text" class="form-control" id="primaryContactFilter" placeholder="Enter primary contact">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select class="form-control" id="statusFilter">
+                                        <option value="">All</option>
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Total Posts</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="totalPostsMinFilter" placeholder="Min" min="0">
+                                        <span class="input-group-text">to</span>
+                                        <input type="number" class="form-control" id="totalPostsMaxFilter" placeholder="Max">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -216,12 +310,12 @@
                                                             </h2>
                                                         </td>
                                                         <td>
-                                                            <h2 class="table-avatar">
+                                                            <h2 class="table-avatar companyName">
                                                                 <a href="javascript:void(0);">${recruiter.getCompany().getCompanyName()}</a>
                                                             </h2>
                                                         </td>
                                                         <td>
-                                                            <h2 class="table-avatar">
+                                                            <h2 class="primaryContact">
                                                                 <a href="profile.html">
                                                                     ${recruiter.getCompany().getRecruiID().fullName()}
                                                                 </a>
@@ -229,7 +323,9 @@
                                                         </td>
                                                         <td> ${recruiter.getCompany().getWebsite()}</td>
                                                         <td>
-                                                            ${recruiter.getTotalPost()}
+                                                            <h2 class="totalPost">
+                                                                ${recruiter.getTotalPost()}
+                                                            </h2>
                                                         </td>
                                                         <td class="test1">
 
@@ -396,8 +492,55 @@
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function () {
+                $('#filter_search').click(function () {
+                    $('.filter-section').toggle();
+                });
+            });
+        </script>
+        <script>
 
+            const companyFilter = document.getElementById('companyFilter');
+            const primaryContactFilter = document.getElementById('primaryContactFilter');
+            const totalPostsMinFilter = document.getElementById('totalPostsMinFilter');
+            const totalPostsMaxFilter = document.getElementById('totalPostsMaxFilter');
+            const statusFilter = document.getElementById('statusFilter');
 
+            const rows = document.querySelectorAll('.table tbody tr');
+            function filterRows() {
+                const companyValue = companyFilter.value.toLowerCase();
+                const primaryContactValue = primaryContactFilter.value.toLowerCase();
+                const totalPostsMinValue = parseInt(totalPostsMinFilter.value) || 0;
+                const totalPostsMaxValue = parseInt(totalPostsMaxFilter.value) || Infinity;
+                const statusValue = statusFilter.value;
+                console.log(totalPostsMinValue);
+                console.log(totalPostsMaxValue);
+                console.log(totalPostsMaxValue - totalPostsMinValue);
+                rows.forEach(row => {
+                    const company = row.querySelector('.companyName a').textContent.toLowerCase();
+                    const primaryContact = row.querySelector('.primaryContact a').textContent.toLowerCase();
+                    const totalPosts = parseInt(row.querySelector('.totalPost').textContent);
+                    console.log(totalPosts);
+                    const status = row.querySelector('.status').textContent.toLowerCase();
+
+                    const showRow =
+                            (!companyValue || company.includes(companyValue)) &&
+                            (!primaryContactValue || primaryContact.includes(primaryContactValue)) &&
+                            (totalPosts >= totalPostsMinValue && totalPosts <= totalPostsMaxValue) &&
+                            (statusValue === '' || status === statusValue);
+
+                    row.style.display = showRow ? '' : 'none';
+                });
+
+            }
+            // Gán sự kiện lọc cho các trường lọc
+            companyFilter.addEventListener('input', filterRows);
+            primaryContactFilter.addEventListener('input', filterRows);
+            totalPostsMinFilter.addEventListener('input', filterRows);
+            totalPostsMaxFilter.addEventListener('input', filterRows);
+            statusFilter.addEventListener('change', filterRows);
+        </script>
         <script>
             $(document).ready(function () {
                 $('.typeChange').on('click', function (e) {
