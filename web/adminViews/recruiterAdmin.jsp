@@ -273,7 +273,7 @@
                                     <div class="input-group">
                                         <input type="number" class="form-control" id="totalPostsMinFilter" placeholder="Min" min="0">
                                         <span class="input-group-text">to</span>
-                                        <input type="number" class="form-control" id="totalPostsMaxFilter" placeholder="Max">
+                                        <input type="number" class="form-control" id="totalPostsMaxFilter" placeholder="Max" min="0">
                                     </div>
                                 </div>
                             </div>
@@ -513,6 +513,9 @@
                 const primaryContactValue = primaryContactFilter.value.toLowerCase();
                 const totalPostsMinValue = parseInt(totalPostsMinFilter.value) || 0;
                 const totalPostsMaxValue = parseInt(totalPostsMaxFilter.value) || Infinity;
+                if (totalPostsMaxValue < totalPostsMinValue) {
+                    totalPostsMaxValue= Infinity;
+                }
                 const statusValue = statusFilter.value;
                 console.log(totalPostsMinValue);
                 console.log(totalPostsMaxValue);
