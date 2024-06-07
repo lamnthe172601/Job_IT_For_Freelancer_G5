@@ -4,6 +4,7 @@
  */
 package AccountControll;
 
+import Models.Categories;
 import Models.Company;
 import Models.Freelancer;
 import Models.Post;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import Models.User;
+import dal.CategoriesDAO;
 import dal.CompanyDAO;
 import dal.HomeDAO;
 import dal.RecruiterDAO;
@@ -47,22 +49,15 @@ public class LoginController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String username = request.getParameter("user");
+        String username = request.getParameter("user");
         String password = request.getParameter("pass");
-<<<<<<< HEAD
-        request.setAttribute("username", username);
-        request.setAttribute("password", password);
-        DAO accDao = new DAO();
-        User c = accDao.getLogin(username, password);
-=======
         String pw=SHA1.toSHA1(password);
         request.setAttribute("username", username);
         request.setAttribute("password", password);
         DAO accDao = new DAO();
         User c = accDao.getLogin(username, pw);
->>>>>>> main
 
         try {
 
@@ -73,24 +68,17 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1000);
                 session.setAttribute("account", c);
-<<<<<<< HEAD
-                
-                RecruiterDAO re = new RecruiterDAO();
-                CompanyDAO com = new CompanyDAO();
-                Recruiter rec = re.getRecruiterProfile(c.getUserID());
-                Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
-                session.setAttribute("company", co);
-                session.setAttribute("recruiter", rec);
-=======
                 if (c.getRoleID().getRoleID() == 4) {
                     RecruiterDAO re = new RecruiterDAO();
                     CompanyDAO com = new CompanyDAO();
+                    CategoriesDAO cat = new CategoriesDAO();
+                    Categories ca = cat.getCategoryByID(c.getUserID());
                     Recruiter rec = re.getRecruiterProfile(c.getUserID());
                     Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
                     session.setAttribute("company", co);
                     session.setAttribute("recruiter", rec);
+                    session.setAttribute("categories", ca);
                 }
->>>>>>> main
 
                 if (c.isLevelPass() == true && c.getStatus().equals("active")) {
                     if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
@@ -113,10 +101,4 @@ public class LoginController extends HttpServlet {
 
         }
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

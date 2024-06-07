@@ -1,8 +1,4 @@
-<%-- 
-    Document   : postProject
-    Created on : May 23, 2024, 10:08:44 AM
-    Author     : Admin
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -134,7 +130,7 @@
                                 </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 1}">
                                     <li>
-                                        <a href="/admin/index.html" target="_blank">Admin</a>
+                                        <a href="/admin/home.jsp" target="_blank">Admin</a>
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.account == null}">
@@ -143,7 +139,7 @@
                                         </c:if>
                             </ul>
                         </div>
-                         <ul class="nav header-navbar-rht">
+                        <ul class="nav header-navbar-rht">
 
                             <li class="searchbar">
                                 <a href="javascript:void(0);" class="reg-btn"><i class="feather-search"></i></a>
@@ -156,15 +152,15 @@
                                     </form>
                                 </div>
                             </li>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                            <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                            <li><a href="post-project" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                            <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
-                             </c:if>
+                            <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
+                                <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                <li><a href="post-project" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
+                                </c:if>
                         </ul>
                     </nav>
                 </div>

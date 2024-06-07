@@ -104,6 +104,10 @@
         <servlet-name>ViewProfile_Freelancer</servlet-name>
         <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewCategoryAdmin</servlet-name>
+        <servlet-class>AdminControlles.ViewCategoryAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -215,5 +219,9 @@
     <servlet-mapping>
         <servlet-name>ViewProfile_Freelancer</servlet-name>
         <url-pattern>/MyProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCategoryAdmin</servlet-name>
+        <url-pattern>/viewcategory</url-pattern>
     </servlet-mapping>
 </web-app>
