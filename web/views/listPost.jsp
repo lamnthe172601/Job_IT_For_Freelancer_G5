@@ -1,10 +1,14 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%-- 
+    Document   : listPost
+    Created on : Jun 6, 2024, 11:59:32 PM
+    Author     : Admin
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:09 GMT -->
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:38:34 GMT -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -14,10 +18,10 @@
 
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
+        <link rel="stylesheet" href="assets/plugins/feather/feather.css">
+
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-
-        <link rel="stylesheet" href="assets/plugins/feather/feather.css">
 
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
@@ -52,12 +56,94 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                            
-                            
-                          <jsp:include page="header.jsp" />
-
-
-
+                            <ul class="main-nav">
+                                <li class="has-submenu">
+                                    <a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="index-2.html">Home 2</a></li>
+                                        <li><a href="index-3.html">Home 3</a></li>
+                                        <li><a href="index-4.html">Home 4</a></li>
+                                        <li><a href="index-5.html">Home 5</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">For Employers <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li class="has-submenu">
+                                            <a href="javascript:void(0);">Freelancer</a>
+                                            <ul class="submenu">
+                                                <li><a href="developer.html">Freelancer</a></li>
+                                                <li><a href="developer-details.html">Freelancer Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="dashboard.html">Dashboard</a></li>
+                                        <li><a href="company-profile.html">My Profile</a></li>
+                                        <li><a href="manage-projects.html">Projects</a></li>
+                                        <li><a href="favourites.html">Favourites</a></li>
+                                        <li><a href="membership-plans.html">Membership</a></li>
+                                        <li><a href="milestones.html">Milestones</a></li>
+                                        <li><a href="chats.html">Chats</a></li>
+                                        <li><a href="review.html">Review</a></li>
+                                        <li><a href="deposit-funds.html">Payments</a></li>
+                                        <li><a href="verify-identity.html">Verify Identity</a></li>
+                                        <li><a href="profile-settings.html">Settings</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu active">
+                                    <a href="javascript:void(0);">For Freelancer <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li class="has-submenu active">
+                                            <a href="javascript:void(0);">Projects</a>
+                                            <ul class="submenu">
+                                                <li class="active"><a href="project.html">Projects</a></li>
+                                                <li><a href="project-details.html">Project Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="freelancer-dashboard.html">Dashboard</a></li>
+                                        <li><a href="developer-profile.html">My Profile</a></li>
+                                        <li><a href="freelancer-project-proposals.html">Projects</a></li>
+                                        <li><a href="freelancer-favourites.html">Favourites</a></li>
+                                        <li><a href="freelancer-membership.html">Membership</a></li>
+                                        <li><a href="freelancer-change-password.html">Change Password</a></li>
+                                        <li><a href="freelancer-chats.html">Chats</a></li>
+                                        <li><a href="freelancer-review.html">Review</a></li>
+                                        <li><a href="freelancer-withdraw-money.html">Payments</a></li>
+                                        <li><a href="freelancer-verify-identity.html">Verify Identity</a></li>
+                                        <li><a href="freelancer-profile-settings.html">Settings</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="about.html">About us</a></li>
+                                        <li><a href="blank-page.html">Starter Page</a></li>
+                                        <li><a href="404-page.html">404 Page</a></li>
+                                        <li><a href="login.html">Login</a></li>
+                                        <li><a href="register.html">Register</a></li>
+                                        <li><a href="onboard-screen.html">Onboard Screen</a></li>
+                                        <li><a href="forgot-password.html">Forgot Password</a></li>
+                                        <li><a href="change-passwords.html">Change Password</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">Blog <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="blog-list.html">Blog List</a></li>
+                                        <li><a href="blog-grid.html">Blog Grid</a></li>
+                                        <li><a href="blog-details.html">Blog Details</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="admin/index.html" target="_blank">Admin</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <ul class="nav header-navbar-rht reg-head">
+                            <li><a href="register.html" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                            <li><a href="login.html" class="log-btn"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
+                            <li><a href="post-project.html" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                        </ul>
                     </nav>
                 </div>
             </header>
@@ -68,20 +154,11 @@
                     <div class="row align-items-center inner-banner">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h3>Post Grid</h3>
-                                <form class="form" name="searchForm" method="get" action="${pageContext.request.contextPath}/search">
-                                    <input type="hidden" name="op" value="post">
-                                    <div class="form-inner">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="searchInput" placeholder="Search Posts">
-                                            <button class="btn btn-primary sub-btn" type="submit">Search</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <h2>Project List</h2>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html"> Home</a></li>
-                                        <li class="breadcrumb-item" aria-current="page">Projects</li>
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item" aria-current="page">Project</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -95,6 +172,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+
 
                             <div class="card search-filter">
                                 <div class="card-header d-flex justify-content-between">
@@ -415,6 +493,7 @@
                             </div>
 
                         </div>
+
                         <div class="col-md-12 col-lg-8 col-xl-9">
                             <div class="sort-tab develop-list-select">
                                 <div class="row align-items-center">
@@ -427,8 +506,7 @@
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-sm-end">
                                         <div class="sort-by">
-                                            <select class="select ">
-                                                <option>Sort by (Default)</option>
+                                            <select class=" select">
                                                 <option>Relevance</option>
                                                 <option>Rating</option>
                                                 <option>Popular</option>
@@ -437,408 +515,300 @@
                                             </select>
                                         </div>
                                         <ul class="list-grid d-flex align-items-center">
-                                            <li><a href="project.html" class="favour-active"><i class="fas fa-th-large"></i></a></li>
-                                            <li><a href="project-list.html"><i class="fas fa-list"></i></a></li>
+                                            <li><a href="project.html"><i class="fas fa-th-large"></i></a></li>
+                                            <li><a href="project-list.html" class="favour-active"><i class="fas fa-list"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="bootstrap-tags text-start pl-0 d-none">
-                                <span class="badge badge-pill badge-skills">UI/UX Developer <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
-                                <span class="badge badge-pill badge-skills">USA <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
-                                <span class="badge badge-pill badge-skills">Hourly <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
-                                <span class="badge badge-pill badge-skills">0-1 years <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
-                                <span class="badge badge-pill badge-skills">USD <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="freelance-widget widget-author position-relative">
-                                        <div class="freelance-content">
-                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> 1 min ago</div>
-                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                            <div class="author-heading ">
-                                                <div class=" freelance-img">
-                                                    <a href="javascript:void(0);">
-                                                        <img src="assets/img/company/img-2.png" alt="author">
-                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                    </a>
-                                                </div>
-                                                <div class="profile-name">
-                                                    <div class="author-location">Teacher</div>
-                                                </div>
-                                                <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">2024-05-22</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">476 Redwing Place</div>
-                                                </div>
-                                                <div class="freelance-tags">
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
-                                                </div>
-                                                <div class="freelancers-price">$168</div>
+                            <div class="list-book-mark book-mark favour-book">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class=" project-list-card">
+                                            <a href="javascript:void(0);" class="add-fav-list"><i class="fa-regular fa-heart"></i></a>
+                                            <div class="company-detail-image">
+                                                <img src="assets/img/default-logo.svg" class="img-fluid" alt="logo">
                                             </div>
-                                            <div class="counter-stats">
-                                                <ul>
-                                                    <li>
-                                                        <h5>Skill</h5>
-                                                        <h3 class="counter-value">Quality Control Specialist</h3>
-                                                    </li>
-
-
-                                                </ul>
+                                            <div>
+                                                <div class="company-title">
+                                                    <p>UI/UX Developer</p>
+                                                    <h4>Website Designer Required For Directory Theme</h4>
+                                                </div>
+                                                <div class="company-splits">
+                                                    <div>
+                                                        <div class="company-address">
+                                                            <ul>
+                                                                <li>
+                                                                    <i class="feather-map-pin"></i>Los Angels
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-calendar"></i>Posted just now
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-file-2"></i>1 Proposal
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <div class="tags">
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">After Effects</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Illustrator</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Whiteboard</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="company-split-price">
+                                                        <h5>$35-$350</h5>
+                                                        <h6>Price : Fixed</h6>
+                                                        <a href="project-details.html" class="btn btn-submits">Submit Proposal</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="cart-hover">
-                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
+                                        <div class=" project-list-card">
+                                            <a href="javascript:void(0);" class="add-fav-list"><i class="fa-regular fa-heart"></i></a>
+                                            <div class="company-detail-image">
+                                                <img src="assets/img/company/img-1.png" class="img-fluid" alt="logo">
+                                            </div>
+                                            <div>
+                                                <div class="company-title">
+                                                    <p>UI/UX Developer</p>
+                                                    <h4>Create desktop applications with source PHP</h4>
+                                                </div>
+                                                <div class="company-splits">
+                                                    <div>
+                                                        <div class="company-address">
+                                                            <ul>
+                                                                <li>
+                                                                    <i class="feather-map-pin"></i>Florida, USA
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-calendar"></i>Posted 1 day ago
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-file-2"></i>76 Proposal
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <div class="tags">
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">After Effects</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Illustrator</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Whiteboard</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="company-split-price">
+                                                        <h5>$40-$350</h5>
+                                                        <h6>Price : Fixed</h6>
+                                                        <a href="project-details.html" class="btn btn-submits">Submit Proposal</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class=" project-list-card">
+                                            <a href="javascript:void(0);" class="add-fav-list"><i class="fa-regular fa-heart"></i></a>
+                                            <div class="company-detail-image">
+                                                <img src="assets/img/company/img-2.png" class="img-fluid" alt="logo">
+                                            </div>
+                                            <div>
+                                                <div class="company-title">
+                                                    <p>UI/UX Developer</p>
+                                                    <h4>PHP, Javascript Projects for Beginners</h4>
+                                                </div>
+                                                <div class="company-splits">
+                                                    <div>
+                                                        <div class="company-address">
+                                                            <ul>
+                                                                <li>
+                                                                    <i class="feather-map-pin"></i>Alabama, USA
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-calendar"></i>Posted 15 days ago
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-file-2"></i>15 Proposal
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <div class="tags">
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">After Effects</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Illustrator</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Whiteboard</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="company-split-price">
+                                                        <h5>$45-$650</h5>
+                                                        <h6>Price : Fixed</h6>
+                                                        <a href="project-details.html" class="btn btn-submits">Submit Proposal</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class=" project-list-card">
+                                            <a href="javascript:void(0);" class="add-fav-list"><i class="fa-regular fa-heart"></i></a>
+                                            <div class="company-detail-image">
+                                                <img src="assets/img/company/img-3.png" class="img-fluid" alt="logo">
+                                            </div>
+                                            <div>
+                                                <div class="company-title">
+                                                    <p>UI/UX Developer</p>
+                                                    <h4>Swift / SwiftUI Developer for B2B iOS apps</h4>
+                                                </div>
+                                                <div class="company-splits">
+                                                    <div>
+                                                        <div class="company-address">
+                                                            <ul>
+                                                                <li>
+                                                                    <i class="feather-map-pin"></i>Texas, USA
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-calendar"></i>Posted 2 months ago
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-file-2"></i>44 Proposal
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <div class="tags">
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">After Effects</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Illustrator</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Whiteboard</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="company-split-price">
+                                                        <h5>$100-$700</h5>
+                                                        <h6>Price : Fixed</h6>
+                                                        <a href="project-details.html" class="btn btn-submits">Submit Proposal</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class=" project-list-card">
+                                            <a href="javascript:void(0);" class="add-fav-list"><i class="fa-regular fa-heart"></i></a>
+                                            <div class="company-detail-image">
+                                                <img src="assets/img/company/img-4.png" class="img-fluid" alt="logo">
+                                            </div>
+                                            <div>
+                                                <div class="company-title">
+                                                    <p>UI/UX Developer</p>
+                                                    <h4>Full-stack Developer to help us to build our</h4>
+                                                </div>
+                                                <div class="company-splits">
+                                                    <div>
+                                                        <div class="company-address">
+                                                            <ul>
+                                                                <li>
+                                                                    <i class="feather-map-pin"></i>Kansas, USA
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-calendar"></i>Posted 3 months ago
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-file-2"></i>36 Proposal
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <div class="tags">
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">After Effects</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Illustrator</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Whiteboard</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="company-split-price">
+                                                        <h5>$100-$700</h5>
+                                                        <h6>Price : Fixed</h6>
+                                                        <a href="project-details.html" class="btn btn-submits">Submit Proposal</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class=" project-list-card">
+                                            <a href="javascript:void(0);" class="add-fav-list"><i class="fa-regular fa-heart"></i></a>
+                                            <div class="company-detail-image">
+                                                <img src="assets/img/company/img-5.png" class="img-fluid" alt="logo">
+                                            </div>
+                                            <div>
+                                                <div class="company-title">
+                                                    <p>UI/UX Developer</p>
+                                                    <h4>Website Designer Required For Directory Theme</h4>
+                                                </div>
+                                                <div class="company-splits">
+                                                    <div>
+                                                        <div class="company-address">
+                                                            <ul>
+                                                                <li>
+                                                                    <i class="feather-map-pin"></i>California, USA
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-calendar"></i>Posted 1 months ago
+                                                                </li>
+                                                                <li>
+                                                                    <i class="feather-file-2"></i>6 Proposal
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                                        </div>
+                                                        <div class="company-description">
+                                                            <div class="tags">
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">After Effects</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Illustrator</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
+                                                                <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Whiteboard</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="company-split-price">
+                                                        <h5>$10-$70</h5>
+                                                        <h6>Price : Fixed</h6>
+                                                        <a href="project-details.html" class="btn btn-submits">Submit Proposal</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="freelance-widget widget-author position-relative">
-                                        <div class="freelance-content">
-                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> 1 min ago</div>
-                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                            <div class="author-heading ">
-                                                <div class=" freelance-img">
-                                                    <a href="javascript:void(0);">
-                                                        <img src="assets/img/company/img-2.png" alt="author">
-                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                    </a>
-                                                </div>
-                                                <div class="profile-name">
-                                                    <div class="author-location">VP Sales</div>
-                                                </div>
-                                                <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">2024-05-17</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">269 Hagan Road</div>
-                                                </div>
-                                                <div class="freelance-tags">
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
-                                                </div>
-                                                <div class="freelancers-price">$472</div>
-                                            </div>
-                                            <div class="counter-stats">
-                                                <ul>
-                                                    <li>
-                                                        <h5>Skill</h5>
-                                                        <h3 class="counter-value">Staff Scientist Skill</h3>
-                                                    </li>
-
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ul class="paginations list-pagination">
+                                            <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a>
+                                            </li>
+                                            <li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
+                                            <li class="page-item"><a href="javascript:void(0);">2</a></li>
+                                            <li class="page-item"><a href="javascript:void(0);">3</a></li>
+                                            <li class="page-item"><a href="javascript:void(0);">...</a></li>
+                                            <li class="page-item"><a href="javascript:void(0);">10</a></li>
+                                            <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-right"></i></a></li>
+                                        </ul>
                                     </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="freelance-widget widget-author position-relative">
-                                        <div class="freelance-content">
-                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> 10 min ago</div>
-                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                            <div class="author-heading ">
-                                                <div class=" freelance-img">
-                                                    <a href="javascript:void(0);">
-                                                        <img src="assets/img/company/img-3.png" alt="author">
-                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                    </a>
-                                                </div>
-                                                <div class="profile-name">
-                                                    <div class="author-location">Internal Auditor</div>
-                                                </div>
-                                                <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">2024-05-29</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">6 Forest Lane</div>
-                                                </div>
-                                                <div class="freelance-tags">
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
-                                                </div>
-                                                <div class="freelancers-price">$499</div>
-                                            </div>
-                                            <div class="counter-stats">
-                                                <ul>
-                                                    <li>
-                                                        <h5>Skill</h5>
-                                                        <h3 class="counter-value">Social Worker Skill</h3>
-                                                    </li>
-
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="freelance-widget widget-author position-relative">
-                                        <div class="freelance-content">
-                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> 1 hour ago</div>
-                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                            <div class="author-heading ">
-                                                <div class=" freelance-img">
-                                                    <a href="javascript:void(0);">
-                                                        <img src="assets/img/company/img-4.png" alt="author">
-                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                    </a>
-                                                </div>
-                                                <div class="profile-name">
-                                                    <div class="author-location">Human Resources Assistant III</div>
-                                                </div>
-                                                <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">2024-05-13</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">Graphic Designer</div>
-                                                </div>
-                                                <div class="freelance-tags">
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
-                                                </div>
-                                                <div class="freelancers-price">$212</div>
-                                            </div>
-                                            <div class="counter-stats">
-                                                <ul>
-                                                    <li>
-                                                        <h5>Skill</h5>
-                                                        <h3 class="counter-value">Chemical Engineer Skill</h3>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="freelance-widget widget-author position-relative">
-                                        <div class="freelance-content">
-                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> 5 hour ago</div>
-                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                            <div class="author-heading ">
-                                                <div class=" freelance-img">
-                                                    <a href="javascript:void(0);">
-                                                        <img src="assets/img/company/img-5.png" alt="author">
-                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                    </a>
-                                                </div>
-                                                <div class="profile-name">
-                                                    <div class="author-location">Database Administrator IV</div>
-                                                </div>
-                                                <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">2024-05-21</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">037 Delaware Junction</div>
-                                                </div>
-                                                <div class="freelance-tags">
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
-                                                </div>
-                                                <div class="freelancers-price">$186</div>
-                                            </div>
-                                            <div class="counter-stats">
-                                                <ul>
-                                                    <li>
-                                                        <h5>Skill</h5>
-                                                        <h3 class="counter-value">Internal Auditor Skill</h3>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="freelance-widget widget-author position-relative">
-                                        <div class="freelance-content">
-                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> 1 day ago</div>
-                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                            <div class="author-heading ">
-                                                <div class=" freelance-img">
-                                                    <a href="javascript:void(0);">
-                                                        <img src="assets/img/company/img-6.png" alt="author">
-                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                    </a>
-                                                </div>
-                                                <div class="profile-name">
-                                                    <div class="author-location">Product Engineer</div>
-                                                </div>
-                                                <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">2024-05-21</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">89052 Hanson Parkway</div>
-                                                </div>
-                                                <div class="freelance-tags">
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
-                                                </div>
-                                                <div class="freelancers-price">$124</div>
-                                            </div>
-                                            <div class="counter-stats">
-                                                <ul>
-                                                    <li>
-                                                        <h5>Skill</h5>
-                                                        <h3 class="counter-value">Sales Associate Skill</h3>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="freelance-widget widget-author position-relative">
-                                        <div class="freelance-content">
-                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> 3 day ago</div>
-                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                            <div class="author-heading ">
-                                                <div class=" freelance-img">
-                                                    <a href="javascript:void(0);">
-                                                        <img src="assets/img/company/img-7.png" alt="author">
-                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                    </a>
-                                                </div>
-                                                <div class="profile-name">
-                                                    <div class="author-location">Tax Accountant</div>
-                                                </div>
-                                                <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">2024-05-26</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">4060 Kedzie Drive</div>
-                                                </div>
-                                                <div class="freelance-tags">
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
-                                                </div>
-                                                <div class="freelancers-price">$436</div>
-                                            </div>
-                                            <div class="counter-stats">
-                                                <ul>
-                                                    <li>
-                                                        <h5>Skill</h5>
-                                                        <h3 class="counter-value">Senior Financial Analyst</h3>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="freelance-widget widget-author position-relative">
-                                        <div class="freelance-content">
-                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> Posted Just Now</div>
-                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                            <div class="author-heading ">
-                                                <div class=" freelance-img">
-                                                    <a href="javascript:void(0);">
-                                                        <img src="assets/img/company/img-8.png" alt="author">
-                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                    </a>
-                                                </div>
-                                                <div class="profile-name">
-                                                    <div class="author-location">Office Assistant I </div>
-                                                </div>
-                                                <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">2024-05-27</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">1985 Nancy Avenue</div>
-                                                </div>
-                                                <div class="freelance-tags">
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
-                                                </div>
-                                                <div class="freelancers-price">$428</div>
-                                            </div>
-                                            <div class="counter-stats">
-                                                <ul>
-                                                    <li>
-                                                        <h5>Skill</h5>
-                                                        <h3 class="counter-value">Senior Cost Accountant</h3>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="freelance-widget widget-author position-relative">
-                                        <div class="freelance-content">
-                                            <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> 1 min ago</div>
-                                            <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                            <div class="author-heading ">
-                                                <div class=" freelance-img">
-                                                    <a href="javascript:void(0);">
-                                                        <img src="assets/img/company/img-9.png" alt="author">
-                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                    </a>
-                                                </div>
-                                                <div class="profile-name">
-                                                    <div class="author-location">Park INC</div>
-                                                </div>
-                                                <div class="freelance-info">
-                                                    <h3><a href="javascript:void(0);">2024-05-14</a></h3>
-                                                    <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">05 Farwell Lane</div>
-                                                </div>
-                                                <div class="freelance-tags">
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">React</span></a>
-                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">PHP</span></a>
-                                                </div>
-                                                <div class="freelancers-price">$201</div>
-                                            </div>
-                                            <div class="counter-stats">
-                                                <ul>
-                                                    <li>
-                                                        <h5>Skill</h5>
-                                                        <h3 class="counter-value">Project Manager Skill</h3>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="paginations list-pagination">
-                                        <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a>
-                                        </li>
-                                        <li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">2</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">3</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">...</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">10</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-right"></i></a></li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -856,7 +826,7 @@
                                     <a href="index.html" class="menu-logo">
                                         <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                     </a>
-                                    <p>We?re always in search for talented and motivated people. Don?t be shy introduce yourself!</p>
+                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
                                     <ul>
                                         <li>
                                             <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
@@ -962,10 +932,10 @@
                         <form action="https://kofejob.dreamstechnologies.com/html/template/project.html">
                             <div class="modal-info">
                                 <div class="text-center pt-0 mb-5">
-                                    <h3>Please login to Favourite Project</h3>
+                                    <h3>Please login to Favourite Freelancer</h3>
                                 </div>
                                 <div class="submit-section text-center">
-                                    <a data-bs-dismiss="modal" href="javascript:void(0);" class="btn btn-primary black-btn click-btn">Cancel</a>
+                                    <button data-bs-dismiss="modal" class="btn btn-primary black-btn click-btn">Cancel</button>
                                     <button type="submit" class="btn btn-primary click-btn">Submit</button>
                                 </div>
                             </div>
@@ -976,18 +946,20 @@
         </div>
 
 
-        <script src="assets/js/jquery-3.7.1.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+        <script src="assets/js/jquery-3.7.1.min.js" type="bc66fce3ba46b5bdad93a1f5-text/javascript"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="bc66fce3ba46b5bdad93a1f5-text/javascript"></script>
 
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="bc66fce3ba46b5bdad93a1f5-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="bc66fce3ba46b5bdad93a1f5-text/javascript"></script>
 
-        <script src="assets/plugins/select2/js/select2.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+        <script src="assets/plugins/select2/js/select2.min.js" type="bc66fce3ba46b5bdad93a1f5-text/javascript"></script>
 
-        <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
-        <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
-        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script></body>
+        <script src="assets/js/range.js" type="bc66fce3ba46b5bdad93a1f5-text/javascript"></script>
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
-</html
+        <script src="assets/js/profile-settings.js" type="bc66fce3ba46b5bdad93a1f5-text/javascript"></script>
+        <script src="assets/js/script.js" type="bc66fce3ba46b5bdad93a1f5-text/javascript"></script>
+        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="bc66fce3ba46b5bdad93a1f5-|49" defer></script></body>
+
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:38:36 GMT -->
+</html>
