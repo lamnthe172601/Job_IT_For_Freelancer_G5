@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +35,7 @@
         <div class="main-wrapper">
 
 
-            <header class="header header-bg">
+                       <header class="header header-bg">
                 <div class="container">
                     <nav class="navbar navbar-expand-lg header-nav">
                         <div class="navbar-header">
@@ -45,13 +46,13 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
-                                <a href="index.html" class="menu-logo">
+                                <a href="home" class="menu-logo">
                                     <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                 </a>
                                 <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -59,91 +60,95 @@
                                 </a>
                             </div>
                             <ul class="main-nav">
-                                <li class="has-submenu">
-                                    <a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                        <li><a href="index-4.html">Home 4</a></li>
-                                        <li><a href="index-5.html">Home 5</a></li>
-                                    </ul>
+                                <li class="active has-submenu">
+                                    <a href="home">Home <i class="fas "></i></a>
+
                                 </li>
+
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Employers<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        <li class="has-submenu">
-                                            <a href="javascript:void(0);">Freelancer</a>
-                                            <ul class="submenu">
-                                                <li><a href="developer.html">Freelancer</a></li>
-                                                <li><a href="developer-details.html">Freelancer Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="dashboard.html">Dashboard</a></li>
-                                        <li><a href="company-profile.html">My Profile</a></li>
-                                        <li><a href="manage-projects.html">Projects</a></li>
-                                        <li><a href="favourites.html">Favourites</a></li>
-                                        <li><a href="membership-plans.html">Membership</a></li>
-                                        <li><a href="milestones.html">Milestones</a></li>
-                                        <li><a href="chats.html">Chats</a></li>
-                                        <li><a href="review.html">Review</a></li>
-                                        <li><a href="deposit-funds.html">Payments</a></li>
-                                        <li><a href="verify-identity.html">Verify Identity</a></li>
-                                        <li><a href="profile-settings.html">Settings</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-submenu active">
                                     <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu"> 
+                                        
+                                            <li><a href="PostFavourites">Jobs Favourites</a></li>
+                                                                                                                                                           
+                                        <li><a href="jobsApply">Jobs Apply</a></li>
+                                        <li><a href="jobforyou">Jobs For you</a></li>
+                                    </ul>
+                                </li>
+                               
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                        <li class="has-submenu">
-                                            <a href="javascript:void(0);">Projects</a>
-                                            <ul class="submenu">
-                                                <li><a href="project.html">Projects</a></li>
-                                                <li><a href="project-details.html">Project Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="freelancer-dashboard.html">Dashboard</a></li>
-                                        <li><a href="developer-profile.html">My Profile</a></li>
-                                        <li><a href="freelancer-project-proposals.html">Projects</a></li>
-                                        <li class="active"><a href="freelancer-favourites.html">Favourites</a></li>
-                                        <li><a href="freelancer-membership.html">Membership</a></li>
-                                        <li><a href="freelancer-change-password.html">Change Password</a></li>
-                                        <li><a href="freelancer-chats.html">Chats</a></li>
-                                        <li><a href="freelancer-review.html">Review</a></li>
-                                        <li><a href="freelancer-portfolio.html">Portfolio</a></li>
-                                        <li><a href="freelancer-withdraw-money.html">Payments</a></li>
-                                        <li><a href="freelancer-verify-identity.html">Verify Identity</a></li>
-                                        <li><a href="freelancer-profile-settings.html">Settings</a></li>
+                                                                                                                                                                                                  
+                                        <li><a href="ListPost">Jobs List</a></li>                                        
+                                        <li><a href="SreachJob">Find Jobs</a></li>  
+                                        <li><a href="company">Company</a></li>
+                                    </ul>
+                                </li>
+                                 </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                 <li class="has-submenu">
+                                    <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                                                                                                                                                                                  
+                                        <li><a href="jobsList">Top Freelancer</a></li>
+                                        <li><a href="newsJobs">Skills</a></li>
+                                        
                                     </ul>
                                 </li>
                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
+                                    <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="about.html">About us</a></li>
-                                        <li><a href="blank-page.html">Starter Page</a></li>
-                                        <li><a href="404-page.html">404 Page</a></li>
-                                        <li><a href="login.html">Login</a></li>
-                                        <li><a href="register.html">Register</a></li>
-                                        <li><a href="onboard-screen.html">Onboard Screen</a></li>
-                                        <li><a href="forgot-password.html">Forgot Password</a></li>
-                                        <li><a href="change-passwords.html">Change Password</a></li>
+                                                                                                                                                                                                  
+                                        <li><a href="jobsList">List Post</a></li>
+                                        <li><a href="newsJobs">Reviews</a></li>
+                                        
                                     </ul>
                                 </li>
+                                </c:if>
                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">Blog <i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="blog-list.html">Blog List</a></li>
-                                        <li><a href="blog-grid.html">Blog Grid</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
+                                    <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">                                                                           
+                                        <li><a href="About">About us</a></li>
+                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="admin/index.html" target="_blank">Admin</a>
-                                </li>
+                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
+                                
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+                                            
+                                            <li><a href="dashboard">Dashboard</a></li>
+                                            <li><a href="companydetail">My Profile</a></li>
+                                            <li><a href="company-details">Company Details</a></li>
+                                            <li><a href="manage-projects">Projects</a></li>
+                                            <li><a href="favourites">Favourites</a></li>                                                                                       
+                                            <li><a href="profile-settings">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
+                                    <li>
+                                        <a href="/admin/index.html" target="_blank">Admin</a>
+                                        <ul class="submenu">
+                                            
+                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
+                                            <li><a href="profile-settings">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account == null}">
+                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
+                                        </c:if>
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
-                            <li><a href="freelancer-chats.html"><img src="assets/img/icon/message-chat-icon.svg" alt="Img"></a></li>
                             <li class="dropdown">
                                 <a data-bs-toggle="dropdown" href="javascript:void(0);"><img src="assets/img/icon/notification-bell-icon.svg" alt="Img"></a>
                                 <div class="dropdown-menu notifications">
@@ -220,35 +225,34 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="post-project.html" class="login-btn">Post a Project <i class="feather-plus ms-1"></i></a></li>
-                            <li class="nav-item dropdown account-item">
-                                <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                                    <span class="user-img">
-                                        <img src="assets/img/user/avatar-1.jpg" alt="Img">
-                                    </span>
-                                    <span>Bruce Bush</span>
-                                </a>
-                                <div class="dropdown-menu emp">
-                                    <div class="drop-head">
-                                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                                            <span class="user-img">
-                                                <img src="assets/img/user/avatar-1.jpg" alt="Img">
-                                            </span>
-                                            <div>
-                                                <span>Bruce Bush</span>
-                                                <p><span class="__cf_email__" data-cfemail="553c3b333a1537272036303720263d7b363a38">[email&#160;protected]</span></p>
-                                            </div>
-                                        </a>
+                            <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                <li class="nav-item dropdown account-item">
+                                    <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                                        <span class="user-img">
+                                            <img src="${freelancer.image}" alt="Img">
+                                        </span>
+                                        <span>${freelancer.fullname()}</span>
+                                    </a>
+                                    <div class="dropdown-menu emp">
+                                        <div class="drop-head">
+                                            <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                                                <span class="user-img">
+                                                    <img src="${freelancer.image}" alt="Img">
+                                                </span>
+                                                <div>
+                                                    <span>${freelancer.fullname()}</span>
+                                                    <p><span  data-cfemail="81e8efe7eec1e3f3f4e2e4e3f4f2e9afe2eeec">@${sessionScope.account.username}</span></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <a class="dropdown-item" href="MyProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
+                                        <a class="dropdown-item" href="MyProject?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
+
+                                        <a class="dropdown-item" href="freelancer-profile-settings"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                        <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                     </div>
-                                    <a class="dropdown-item" href="developer-profile.html"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                    <a class="dropdown-item" href="freelancer-project-proposals.html"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
-                                    <a class="dropdown-item" href="freelancer-favourites.html"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Subscription</a>
-                                    <a class="dropdown-item" href="freelancer-statement.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
-                                    <a class="dropdown-item" href="freelancer-chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
-                                    <a class="dropdown-item" href="freelancer-profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                    <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
-                                </div>
-                            </li>
+                                </li>
+                            </c:if>
                         </ul>
                     </nav>
                 </div>

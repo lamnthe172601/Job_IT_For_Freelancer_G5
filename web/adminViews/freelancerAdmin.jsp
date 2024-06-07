@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/users.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:40:50 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -228,7 +227,7 @@
                                         <h3 class="page-title">All Freelancer</h3>
                                         <p>Total <span>${totalFreelancer}</span> Freelancer account</p>
                                     </div>
-                                    <div class="col-auto">
+                                   <div class="col-auto">
                                         <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
                                             <i class="fas fa-filter"></i>
                                         </a>

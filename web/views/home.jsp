@@ -73,9 +73,8 @@
                                     <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu"> 
                                         
-                                            <li><a href="jobFavourites">Jobs Favourites</a></li>
-                                                                                                                                                           
-                                        <li><a href="jobsApply">Jobs Apply</a></li>
+                                        <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
+                                        <li><a href="ListApply">Jobs Apply</a></li>
                                         <li><a href="jobforyou">Jobs For you</a></li>
                                     </ul>
                                 </li>
@@ -84,10 +83,8 @@
                                     <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
                                                                                                                                                                                                   
-                                        <li><a href="jobsList">Jobs List</a></li>
-                                        <li><a href="newsJobs">News Jobs</a></li>
-                                        <li><a href="findJobs">Find Jobs</a></li>  
-                                        <li><a href="company">Company</a></li>
+                                        <li><a href="ListPost">Jobs List</a></li>                                        
+                                        <li><a href="SreachJob">Find Jobs</a></li>  
                                     </ul>
                                 </li>
                                  </c:if>
@@ -113,21 +110,17 @@
                                 </c:if>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        
-                                        <li><a href="blogList">Blog List</a></li>
-                                        <li><a href="blogGrid">Blog Grid</a></li>
-                                        <li><a href="AboutUs">About us</a></li>
+                                    <ul class="submenu">                                                                           
+                                        <li><a href="About">About us</a></li>
                                          <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
+                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
                                     
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
-                                           
-                                            <li><a href="dashboard">Dashboard</a></li>
                                             <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
                                             <li><a href="Project">Projects</a></li>                        
                                             <li><a href="changePassword">Change Password</a></li>                                                                                     
@@ -141,13 +134,12 @@
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
                                             
-                                            <li><a href="dashboard.html">Dashboard</a></li>
+                                            <li><a href="dashboard">Dashboard</a></li>
                                             <li><a href="companydetail">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
-                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="company-details">Company Details</a></li>
+                                            <li><a href="manage-projects">Projects</a></li>
+                                            <li><a href="favourites">Favourites</a></li>                                                                                       
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -157,13 +149,8 @@
                                         <a href="/admin/index.html" target="_blank">Admin</a>
                                         <ul class="submenu">
                                             
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="company-profile.html">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
-                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -181,7 +168,7 @@
                             <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
                              </c:if>
                              <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                            <li><a href="postProject" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                            <li><a href="projectJob" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
                              </c:if>
                              <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
                             <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
@@ -361,8 +348,9 @@
                                     <div class="feature-content">
                                         <h4><a href="project.jsp">${list.title}</a></h4>
                                         <ul class="feature-project-list nav">
+                                            
+                                            <li> ${list.skill}</li>
                                             <li><i class="feather-user me-1"></i>${list.quantity}</li>
-                                            <li>$ ${list.budget}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -372,7 +360,7 @@
 
                         <div class="col-md-12">
                             <div class="home-five-section-btn">
-                                <a href="project.jsp" class="btn btn-primary">View More Jobs Projects</a>
+                                <a href="ListPost" class="btn btn-primary">View More Jobs Projects</a>
                             </div>
                         </div>
                     </div>
@@ -461,7 +449,7 @@
                 </div>
             </section>
 
-
+            <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
             <section class="most-hired-section">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -496,6 +484,39 @@
                                     </div>
                                 </div>
                             </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </section>
+            </c:if>
+            
+            
+               <section class="section blog-tricks">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-header text-center aos aos-init aos-animate" data-aos="fade-up">
+                                <h2 class="header-title">Featured Blogs</h2>
+                                <p>Read Our Article To Get Tricks </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row aos aos-init aos-animate" data-aos="fade-up">
+                        <c:forEach items="${listblogs}" var="listblogs">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="grid-blog blog-two aos aos-init aos-animate" data-aos="fade-up">
+                                <div class="blog-image">
+                                    <a href="BlogDetails"><img style="width: 348px; height: 218px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="feature-time-blk">
+                                        <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
+                                        <span><i class="feather-calendar me-1"></i> ${listblogs.date_blog}</span>
+                                    </div>
+                                    <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
+                                </div>
+                            </div>
+                        </div>
                         </c:forEach>
                     </div>
                 </div>
@@ -686,37 +707,7 @@
             </section>
 
 
-            <section class="section blog-tricks">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="section-header text-center aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Featured Blogs</h2>
-                                <p>Read Our Article To Get Tricks </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row aos aos-init aos-animate" data-aos="fade-up">
-                        <c:forEach items="${listblogs}" var="listblogs">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="grid-blog blog-two aos aos-init aos-animate" data-aos="fade-up">
-                                <div class="blog-image">
-                                    <a href="BlogDetails"><img style="width: 348px; height: 218px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
-                                </div>
-                                <div class="blog-content">
-                                    <div class="feature-time-blk">
-                                        <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
-                                        <span><i class="feather-calendar me-1"></i> ${listblogs.date_blog}</span>
-                                    </div>
-                                    <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </section>
-
+         
 
             <section class="section job-registers">
                 <div class="container position-relative job-register">
@@ -854,7 +845,7 @@
             <span class="ti-angle-up"><i class="feather-arrow-up"></i></span>
         </button>
 
-
+    </body>                           
         <script src="assets/js/jquery-3.7.1.min.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>

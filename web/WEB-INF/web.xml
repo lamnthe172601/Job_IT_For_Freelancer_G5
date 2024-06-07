@@ -104,6 +104,18 @@
         <servlet-name>ViewProfile_Freelancer</servlet-name>
         <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PostFavouritesControll</servlet-name>
+        <servlet-class>FreelancerControll.PostFavouritesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListApplyControll</servlet-name>
+        <servlet-class>FreelancerControll.ListApplyControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListPostControll</servlet-name>
+        <servlet-class>CommonControll.ListPostControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -134,7 +146,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AllCategoriesControll</servlet-name>
-        <url-pattern>/AllCategories</url-pattern>
+        <url-pattern>/allCategories</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FreelancerDetailsControll</servlet-name>
@@ -215,5 +227,17 @@
     <servlet-mapping>
         <servlet-name>ViewProfile_Freelancer</servlet-name>
         <url-pattern>/MyProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostFavouritesControll</servlet-name>
+        <url-pattern>/PostFavourites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListApplyControll</servlet-name>
+        <url-pattern>/ListApply</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListPostControll</servlet-name>
+        <url-pattern>/ListPost</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -29,10 +29,10 @@
             <div class="header">
 
                 <div class="header-left">
-                    <a href="index.html" class="logo">
+                    <a href="home" class="logo">
                         <img src="assets/img/logo.png" alt="Logo">
                     </a>
-                    <a href="index.html" class="logo logo-small">
+                    <a href="home" class="logo logo-small">
                         <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
                     </a>
 
@@ -865,7 +865,7 @@
         <script src="assets/plugins/datatables/datatables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 
         <script src="assets/js/script.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-        <script src="../../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
+        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/users.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:03 GMT -->
 </html>
