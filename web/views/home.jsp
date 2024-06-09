@@ -49,9 +49,9 @@
                                 </span>
                             </a>
                             <a href="home" class="navbar-brand logo scroll-logo">   
-                                 <img src="assets/img/logo-white.svg" class="img-fluid" alt="Logo">
+                                <img src="assets/img/logo-white.svg" class="img-fluid" alt="Logo">
                             </a>
-                             
+
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
@@ -89,42 +89,42 @@
                                 </li>
                                  </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">Top Freelancer</a></li>
-                                        <li><a href="newsJobs">Skills</a></li>
-                                        
-                                    </ul>
-                                </li>
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">List Post</a></li>
-                                        <li><a href="newsJobs">Reviews</a></li>
-                                        
-                                    </ul>
-                                </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="jobsList">Top Freelancer</a></li>
+                                            <li><a href="newsJobs">Skills</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="newsJobs">Reviews</a></li>
+
+                                        </ul>
+                                    </li>
                                 </c:if>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">                                                                           
                                         <li><a href="About">About us</a></li>
-                                         <li><a href="ContactUs">Contact us</a></li>
+                                        <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
                                  <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                                    
+
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
                                             <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
                                             <li><a href="Project">Projects</a></li>                        
                                             <li><a href="changePassword">Change Password</a></li>                                                                                     
-                                            <li><a href="profile-settings">Settings</a></li>
+                                            <li><a href="recruitersetting">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -133,7 +133,7 @@
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
-                                            
+
                                             <li><a href="dashboard">Dashboard</a></li>
                                             <li><a href="companydetail">My Profile</a></li>
                                             <li><a href="company-details">Company Details</a></li>
@@ -163,16 +163,16 @@
                         </div>
                         <ul class="nav header-navbar-rht">
 
-                            
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                            <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                            <li><a href="projectJob" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                            <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
-                             </c:if>
+
+                            <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
+                                <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                <li><a href="projectJob" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
+                                </c:if>
                         </ul>
                     </nav>
                 </div>
@@ -187,20 +187,24 @@
                                 <div class="banner-content text-center aos" data-aos="fade-up">
                                     <h1>Get the Perfect Developers & Projects</h1>
                                     <p>With the world's #1 Developers Marketplace</p>
-                                    <form class="form" name="store" id="store" method="post" action="https://kofejob.dreamstechnologies.com/html/template/project.html">
+                                    
+                                    
+                                    <form class="form" name="op" id="store" method="get" action="search">
                                         <div class="form-inner">
                                             <div class="input-group">
                                                 <span class="drop-detail">
-                                                    <select class="form-control select" name="storeID">
-                                                        <option value="project.html">Projects</option>
-                                                        <option value="developer.html">Freelancers</option>
+                                                    <select class="form-control select" name="op">
+                                                        <option value="post">Post</option>
+                                                        <option value="freelancer">Freelancers</option>
                                                     </select>
                                                 </span>
-                                                <input type="email" class="form-control" placeholder="Keywords">
+                                                <input type="text" name="searchInput" class="form-control" placeholder="Keywords">
                                                 <button class="btn btn-primary sub-btn" type="submit">Search</button>
                                             </div>
                                         </div>
                                     </form>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
@@ -348,7 +352,7 @@
                                     <div class="feature-content">
                                         <h4><a href="project.jsp">${list.title}</a></h4>
                                         <ul class="feature-project-list nav">
-                                            
+
                                             <li> ${list.skill}</li>
                                             <li><i class="feather-user me-1"></i>${list.quantity}</li>
                                         </ul>
@@ -424,17 +428,17 @@
                                     <p>Why hire people when you can simply integrate our talented cloud workforce instead?</p>
                                     <div class="market-place-btn bidding-btn">
                                         <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                        <a href="postProject" class="btn btn-primary market-project me-2">Post a Project</a>
+                                            <a href="postProject" class="btn btn-primary market-project me-2">Post a Project</a>
                                         </c:if>
-                                       <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                                        <a href="login" class="btn btn-primary market-project me-2">Post a Project</a>
-                                        </c:if>
-                                        
                                         <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                                        <a href="Register" class="btn btn-primary project-post">Start Bidding</a>
+                                            <a href="login" class="btn btn-primary market-project me-2">Post a Project</a>
+                                        </c:if>
+
+                                        <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
+                                            <a href="Register" class="btn btn-primary project-post">Start Bidding</a>
                                         </c:if>
                                         <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                                        <a href="SearchJobs" class="btn btn-primary project-post">Searchs Jobs</a>
+                                            <a href="SearchJobs" class="btn btn-primary project-post">Searchs Jobs</a>
                                         </c:if>
                                     </div>
                                 </div>
@@ -450,48 +454,48 @@
             </section>
 
             <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-            <section class="most-hired-section">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 col-sm-12 col-12 mx-auto text-center">
-                            <div class="section-header aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Most Hired Developers</h2>
-                                <p>Work with talented people at the most affordable price</p>
+                <section class="most-hired-section">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 col-sm-12 col-12 mx-auto text-center">
+                                <div class="section-header aos aos-init aos-animate" data-aos="fade-up">
+                                    <h2 class="header-title">Most Hired Developers</h2>
+                                    <p>Work with talented people at the most affordable price</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <c:forEach items="${listSkill}" var="listskill">
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="hired-developers aos" data-aos="fade-up">
-                                    <div class="hired-developers-img">
-                                        <a href="freelancerDetails?cid=${listskill.freelancerID.freelanceID}"><img src="${listskill.freelancerID.image}" class="img-fluid" alt="Img"></a>
-                                    </div>
-                                    <div class="hired-developers-img-content d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <a data-toggle="modal" href="#rating" class="favourite color-active"><i class="feather-heart"></i></a>
-                                            <h4><a href="developer-details.html">${listskill.freelancerID.first_name} ${listskill.freelancerID.last_name}</a></h4>
-                                            <span>${listskill.skill_set_ID.skill_set_name}</span>
-                                            <h6><img src="assets/img/icon/dollar-developper.svg" class="me-1" alt="Img">$32 /hr</h6>
+                        <div class="row">
+                            <c:forEach items="${listSkill}" var="listskill">
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="hired-developers aos" data-aos="fade-up">
+                                        <div class="hired-developers-img">
+                                            <a href="freelancerDetails?cid=${listskill.freelancerID.freelanceID}"><img src="${listskill.freelancerID.image}" class="img-fluid" alt="Img"></a>
                                         </div>
-                                        <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
+                                        <div class="hired-developers-img-content d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <a data-toggle="modal" href="#rating" class="favourite color-active"><i class="feather-heart"></i></a>
+                                                <h4><a href="developer-details.html">${listskill.freelancerID.first_name} ${listskill.freelancerID.last_name}</a></h4>
+                                                <span>${listskill.skill_set_ID.skill_set_name}</span>
+                                                <h6><img src="assets/img/icon/dollar-developper.svg" class="me-1" alt="Img">$32 /hr</h6>
+                                            </div>
+                                            <div class="rating">
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
 
-                                            <span class="average-rating">3.0</span>
+                                                <span class="average-rating">3.0</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
             </c:if>
-            
-            
-               <section class="section blog-tricks">
+
+
+            <section class="section blog-tricks">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -503,20 +507,20 @@
                     </div>
                     <div class="row aos aos-init aos-animate" data-aos="fade-up">
                         <c:forEach items="${listblogs}" var="listblogs">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="grid-blog blog-two aos aos-init aos-animate" data-aos="fade-up">
-                                <div class="blog-image">
-                                    <a href="BlogDetails"><img style="width: 348px; height: 218px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
-                                </div>
-                                <div class="blog-content">
-                                    <div class="feature-time-blk">
-                                        <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
-                                        <span><i class="feather-calendar me-1"></i> ${listblogs.date_blog}</span>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="grid-blog blog-two aos aos-init aos-animate" data-aos="fade-up">
+                                    <div class="blog-image">
+                                        <a href="BlogDetails"><img style="width: 348px; height: 218px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
                                     </div>
-                                    <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
+                                    <div class="blog-content">
+                                        <div class="feature-time-blk">
+                                            <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
+                                            <span><i class="feather-calendar me-1"></i> ${listblogs.date_blog}</span>
+                                        </div>
+                                        <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </c:forEach>
                     </div>
                 </div>
@@ -707,7 +711,7 @@
             </section>
 
 
-         
+
 
             <section class="section job-registers">
                 <div class="container position-relative job-register">

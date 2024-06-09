@@ -38,7 +38,7 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
@@ -161,63 +161,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <div class="attachment-file">
-                                            <div class="attachment-files-details">
-                                                <h6>Website logo.jpg</h6>
-                                                <span>file size 139 KB</span>
-                                            </div>
-                                            <a href="javascript:void(0);" class="file-download-btn">
-                                                <i class="feather-download"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <div class="attachment-file">
-                                            <div class="attachment-files-details">
-                                                <h6>Banner image.jpg</h6>
-                                                <span>file size 139 KB</span>
-                                            </div>
-                                            <a href="javascript:void(0);" class="file-download-btn">
-                                                <i class="feather-download"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <div class="attachment-file">
-                                            <div class="attachment-files-details">
-                                                <h6>Services image.jpg</h6>
-                                                <span>file size 139 KB</span>
-                                            </div>
-                                            <a href="javascript:void(0);" class="file-download-btn">
-                                                <i class="feather-download"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <div class="attachment-file">
-                                            <div class="attachment-files-details">
-                                                <h6>About us.jpg</h6>
-                                                <span>file size 139 KB</span>
-                                            </div>
-                                            <a href="javascript:void(0);" class="file-download-btn">
-                                                <i class="feather-download"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <div class="attachment-file">
-                                            <div class="attachment-files-details">
-                                                <h6>Website Content.dcs</h6>
-                                                <span>file size 139 KB</span>
-                                            </div>
-                                            <a href="javascript:void(0);" class="file-download-btn">
-                                                <i class="feather-download"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    
                             <div class="company-detail-block company-description">
                                 <h4 class="company-detail-title">Tags</h4>
                                 <div class="tags">
@@ -226,164 +170,7 @@
                                     <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Virtual Assistant</span></a>
                                 </div>
                             </div>
-                            <div class="company-detail-block pb-0">
-                                <h4 class="company-detail-title">Project Proposals (5)</h4>
-                                <div class="project-proposals-block ">
-                                    <div class="project-proposals-img">
-                                        <img src="assets/img/user/avatar-1.jpg" class="img-fluid" alt="user">
-                                    </div>
-                                    <div class="project-proposals-description">
-                                        <div class="proposals-user-detail">
-                                            <div>
-                                                <h5>Theresa Phillips</h5>
-                                                <ul class="d-flex">
-                                                    <li>
-                                                        <div class="proposals-user-review">
-                                                            <span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="proposals-user-review">
-                                                            <span><i class="feather-calendar"></i>1 min ago</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <div class="proposals-pricing">
-                                                    <h4>$40-$500</h4>
-                                                    <span>Price : Fixed </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="mb-0">I've been buying and selling on kofejob Marketplace for the past two years, and it's been a game-changer for me. The platform is user-friendly, and I've had great success selling my handmade crafts. Plus, the customer support team is always there to help if I have any questions or issues.</p>
-                                    </div>
-                                </div>
-                                <div class="project-proposals-block ">
-                                    <div class="project-proposals-img">
-                                        <img src="assets/img/user/avatar-2.jpg" class="img-fluid" alt="user">
-                                    </div>
-                                    <div class="project-proposals-description">
-                                        <div class="proposals-user-detail">
-                                            <div>
-                                                <h5>Aaron Storey</h5>
-                                                <ul class="d-flex">
-                                                    <li>
-                                                        <div class="proposals-user-review">
-                                                            <span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="proposals-user-review">
-                                                            <span><i class="feather-calendar"></i>1 min ago</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <div class="proposals-pricing">
-                                                    <h4>$20-$350</h4>
-                                                    <span>Price : Fixed </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="mb-0">I've been buying and selling on kofejob Marketplace for the past two years, and it's been a game-changer for me. The platform is user-friendly, and I've had great success selling my handmade crafts. Plus, the customer support team is always there to help if I have any questions or issues.</p>
-                                    </div>
-                                </div>
-                                <div class="project-proposals-block ">
-                                    <div class="project-proposals-img">
-                                        <img src="assets/img/user/avatar-3.jpg" class="img-fluid" alt="user">
-                                    </div>
-                                    <div class="project-proposals-description">
-                                        <div class="proposals-user-detail">
-                                            <div>
-                                                <h5>Aaron Storey</h5>
-                                                <ul class="d-flex">
-                                                    <li>
-                                                        <div class="proposals-user-review">
-                                                            <span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="proposals-user-review">
-                                                            <span><i class="feather-calendar"></i>1 min ago</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <div class="proposals-pricing">
-                                                    <h4>$50-$200</h4>
-                                                    <span>Price : Fixed </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="mb-0">I've been buying and selling on kofejob Marketplace for the past two years, and it's been a game-changer for me. The platform is user-friendly, and I've had great success selling my handmade crafts. Plus, the customer support team is always there to help if I have any questions or issues.</p>
-                                    </div>
-                                </div>
-                                <div class="project-proposals-block ">
-                                    <div class="project-proposals-img">
-                                        <img src="assets/img/user/avatar-4.jpg" class="img-fluid" alt="user">
-                                    </div>
-                                    <div class="project-proposals-description">
-                                        <div class="proposals-user-detail">
-                                            <div>
-                                                <h5>Archer Crossley</h5>
-                                                <ul class="d-flex">
-                                                    <li>
-                                                        <div class="proposals-user-review">
-                                                            <span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="proposals-user-review">
-                                                            <span><i class="feather-calendar"></i>1 min ago</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <div class="proposals-pricing">
-                                                    <h4>$10-$450</h4>
-                                                    <span>Price : Fixed </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="mb-0">I've been buying and selling on kofejob Marketplace for the past two years, and it's been a game-changer for me. The platform is user-friendly, and I've had great success selling my handmade crafts. Plus, the customer support team is always there to help if I have any questions or issues.</p>
-                                    </div>
-                                </div>
-                                <div class="project-proposals-block ">
-                                    <div class="project-proposals-img">
-                                        <img src="assets/img/user/avatar-5.jpg" class="img-fluid" alt="user">
-                                    </div>
-                                    <div class="project-proposals-description">
-                                        <div class="proposals-user-detail">
-                                            <div>
-                                                <h5>Amy Stockdill</h5>
-                                                <ul class="d-flex">
-                                                    <li>
-                                                        <div class="proposals-user-review">
-                                                            <span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="proposals-user-review">
-                                                            <span><i class="feather-calendar"></i>5 min ago</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <div class="proposals-pricing">
-                                                    <h4>$300-$350</h4>
-                                                    <span>Price : Fixed </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="mb-0">I've been buying and selling on kofejob Marketplace for the past two years, and it's been a game-changer for me. The platform is user-friendly, and I've had great success selling my handmade crafts. Plus, the customer support team is always there to help if I have any questions or issues.</p>
-                                    </div>
-                                </div>
-                            </div>
+                         
                         </div>
 
                         <div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar project-client-view">
