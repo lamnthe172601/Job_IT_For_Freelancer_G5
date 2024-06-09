@@ -44,27 +44,22 @@
                                     <div class="text-center on-board select-account group-select">
                                         <div class="select-type">
                                             <div class="account-onborad onboard-head">
-                                                <h2>Select Account Type</h2>
-                                                <form action="SelectAccountType" method="post">
+                                                <h2>Select Account Type</h2>                                               
                                                     <div class="select-box d-flex justify-content-center">
                                                         <input checked="checked" id="freelance" type="radio" name="typeaccount" value="1">
                                                         <label class="employee-level free-lance-img accounts_type" data-id="freelance" for="freelance">
 
                                                             <!--<img src="assets/img/icon/checks.svg" alt="Img" class="checks-set">-->
-                                                            <img src="assets/img/select-04.svg" alt="Img" class="img-fluid">
+                                                            <a href="InputFreelancerProfile"> <img src="assets/img/select-04.svg" alt="Img" class="img-fluid"></a>
                                                             <span>Freelancer</span>
 
                                                         </label>
                                                         <input id="employee" class="accounts_type" type="radio" name="typeaccount" value="2">
                                                         <label class="employee-level employee-img accounts_type" data-id="employee" for="employee">
 
-                                                            <img src="assets/img/select-05.svg" alt="Img" class="img-fluid">
+                                                            <a href="InputRecruiterProfile"><img src="assets/img/select-05.svg" alt="Img" class="img-fluid"></a>
                                                             <span>Recruiter</span></a></label>
                                                     </div>
-                                                    <div class="text-center">
-                                                        <button style="margin-bottom: 100px" class="file-upload image-upbtn submit" type="submit">Next</button>
-                                                    </div>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>

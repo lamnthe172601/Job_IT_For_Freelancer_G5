@@ -99,10 +99,10 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="input-block">
                             <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
-                            <div class="cal-icon">
-                                <input oninput="checkdob()" type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
+                            
+                                <input oninput="checkdob()" type="date" class="form-control" placeholder="Choose" name="dob" id="dob">
                                 <div style="color: red" id="eDob"></div>
-                            </div>
+                            
                         </div>
                     </div>
                         <div class="col-md-6 col-lg-6">
@@ -175,17 +175,17 @@
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="focus-label">Start Date</label>
-                                <div class="cal-icon">
-                                    <input type="text" name="datestart" class="form-control datetimepicker" placeholder="Choose">
-                                </div>
+                                
+                                    <input type="date" name="datestart" class="form-control" placeholder="Choose">
+                                
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="focus-label">End Date</label>
-                                <div class="cal-icon">
-                                    <input type="text" name="dateend" class="form-control datetimepicker" placeholder="Choose">
-                                </div>
+                                
+                                    <input type="date" name="dateend" class="form-control " placeholder="Choose">
+                                
                             </div>
                         </div>
 
@@ -214,17 +214,17 @@
                         <div class="col-md-6 col-lg-3">
                             <div class="input-block">
                                 <label class="focus-label">Start Date</label>
-                                <div class="cal-icon">
-                                    <input type="text" name="edustart" class="form-control datetimepicker" placeholder="Choose">
-                                </div>
+                                
+                                    <input type="date" name="edustart" class="form-control " placeholder="Choose">
+                                
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="input-block">
                                 <label class="focus-label">End Date</label>
-                                <div class="cal-icon">
-                                    <input type="text" name="eduend" class="form-control datetimepicker" placeholder="Choose">
-                                </div>
+                                
+                                    <input type="date" name="eduend" class="form-control " placeholder="Choose">
+                                
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
