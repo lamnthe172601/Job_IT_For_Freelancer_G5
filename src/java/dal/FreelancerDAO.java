@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class FreelancerDAO extends DBContext {
 
-    public Freelancer getFreelancerById(int id) throws SQLException {
+    public Freelancer getFreelancerById(int id) {
         String query = "SELECT * FROM freelancer WHERE userID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -47,7 +47,7 @@ public class FreelancerDAO extends DBContext {
             }
         } catch (SQLException e) {
             e.printStackTrace(); // In chi tiết lỗi ra console
-            throw new SQLException("Error while fetching freelancer", e);
+
         }
         return null;
     }
@@ -90,6 +90,8 @@ public class FreelancerDAO extends DBContext {
         return list;
     }
 
+   
+
     public List<Education> getEducationById(int id) throws SQLException {
         List<Education> list = new ArrayList<>();
         String query = """
@@ -116,7 +118,7 @@ public class FreelancerDAO extends DBContext {
                     Dregee de = new Dregee(rs.getInt("dregeeID"), rs.getString("degree_name"));
 
                     list.add(new Education(rs.getInt("educationID"), rs.getString("university_name"),
-                            rs.getDate("start_date"), rs.getDate("end_date"), en, de));
+                             rs.getDate("start_date"), rs.getDate("end_date"), en, de));
 
                 }
             }
@@ -223,12 +225,6 @@ public class FreelancerDAO extends DBContext {
         return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
-    public static void main(String[] args) {
-        // Tạo một đối tượng DAO
-        FreelancerDAO freelancerDAO = new FreelancerDAO();
-
-        freelancerDAO.updateEducation("Bach Khoa", "2024-03-05", "2025-03-05", "3", 1);
-    }
 
     public void updateFreelancer(String firstname, String lastname, String image, String gender, String dob, String describe, String email, String phone, int user, int freelancerID) {
         String query = "UPDATE [dbo].[Freelancer]\n"
@@ -346,25 +342,11 @@ public class FreelancerDAO extends DBContext {
 
     public List<Freelancer> getSearchFreebySkill(String skill_set_name) {
         List<Freelancer> list = new ArrayList<>();
-        String query = " SELECT  Freelancer.freelanceID,\n"
-                + "                 Freelancer.first_name,\n"
-                + "				 Freelancer.freelanceID,\n"
-                + "               Freelancer.[image],\n"
-                + "              Freelancer.gender,\n"
-                + "                   Freelancer.dob,\n"
-                + "                   Freelancer.[describe],\n"
-                + "                Freelancer.email__contact,\n"
-                + "                 Freelancer.phone_contact,\n"
-                + "                  Freelancer.userID\n"
-                + "                 \n"
-                + "               FROM\n"
-                + "            Freelancer\n"
-                + "              JOIN\n"
-                + "                 Skills ON Freelancer.freelanceID = Skills.freelancerID\n"
-                + "                JOIN\n"
-                + "                 Skill_Set ON Skills.skill_set_ID = Skill_Set.skill_set_ID\n"
-                + "               WHERE\n"
-                + "                 Skill_Set.skill_set_name LIKE ?";
+        String query = " SELECT f.*\n"
+                + "FROM Freelancer f\n"
+                + "JOIN Skills s ON f.freelanceID = s.freelancerID\n"
+                + "JOIN Skill_Set ss ON s.skill_set_ID = ss.skill_set_ID\n"
+                + "WHERE ss.skill_set_name like ?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -376,7 +358,7 @@ public class FreelancerDAO extends DBContext {
                 String lname = rs.getString(3);
                 String im = rs.getString(4);
                 boolean gender = rs.getBoolean(5);
-                java.util.Date dob = rs.getDate(6);
+                Date dob = rs.getDate(6);
                 String des = rs.getString(7);
                 int uid = rs.getInt(8);
                 String ec = rs.getString(9);

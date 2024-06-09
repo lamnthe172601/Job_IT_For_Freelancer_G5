@@ -28,6 +28,56 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <link rel="stylesheet" href="adminAssets/css/style.css">
+        <style>
+            .filter-section {
+                background-color: #fff;
+                border: 1px solid #e0e0e0;
+                border-radius: 4px;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-group label {
+                font-weight: 600;
+                color: #444;
+                margin-bottom: 6px;
+                display: block;
+            }
+
+            .form-control {
+                border: 1px solid #d9d9d9;
+                border-radius: 3px;
+                padding: 8px 12px;
+                transition: border-color 0.3s ease;
+                font-size: 14px;
+                width: 100%;
+            }
+
+            .form-control:focus {
+                border-color: #8c8c8c;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                outline: none;
+            }
+
+            .form-control::placeholder {
+                color: #bbb;
+            }
+
+            #statusFilter {
+                cursor: pointer;
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                background-image: url('data:image/svg+xml;utf8,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z" fill="%23333333"/></svg>');
+                background-repeat: no-repeat;
+                background-position: right 12px center;
+                padding-right: 32px;
+            }
+        </style>
     </head>
     <body>
 
@@ -169,16 +219,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-12">
-<!--                            <div class="subscribe-employe users-list">
-                                <ul>
-                                    <li class="active"><a href="users.html">All Freelancer </a></li>
-                                    <li><a href="user-active.html">Active Freelancer</a></li>
-                                    <li><a href="user-inactive.html">Inactive Freelancer</a></li>
-                                    <li><a href="user-suspended.html">Suspended</a></li>
-                                    <li><a href="user-administrator.html">Administrator</a></li>
-                                </ul>
-                            </div>-->
+                        <div class="col-sm-12">                           
 
                             <div class="page-header user-active">
                                 <div class="row align-items-center">
@@ -186,43 +227,38 @@
                                         <h3 class="page-title">All Freelancer</h3>
                                         <p>Total <span>${totalFreelancer}</span> Freelancer account</p>
                                     </div>
-<!--                                    <div class="col-auto">
+                                   <div class="col-auto">
                                         <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
                                             <i class="fas fa-filter"></i>
                                         </a>
-                                    </div>-->
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="card filter-card" id="filter_inputs">
-                                <div class="card-body pb-0">
-                                    <form action="#" method="post">
-                                        <div class="row filter-row">
-                                            <div class="col-sm-6 col-md-3">
-                                                <div class="form-group">
-                                                    <label>Name</label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-3">
-                                                <div class="form-group">
-                                                    <label>Email</label>
-                                                    <input type="email" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-3">
-                                                <div class="form-group">
-                                                    <label>Expertise</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-3">
-                                                <div class="form-group">
-                                                    <button class="btn btn-primary btn-block" type="submit">Submit</button>
-                                                </div>
-                                            </div>
+                            <div  class="filter-section" style="display: none;">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="nameFilter">Name</label>
+                                            <input type="text" class="form-control" id="nameFilter" placeholder="Enter name">
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="emailFilter">Email</label>
+                                            <input type="text" class="form-control" id="emailFilter" placeholder="Enter email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="statusFilter">Status</label>
+                                            <select class="form-control" id="statusFilter">
+                                                <option value="">All</option>
+                                                <option value="active">Active</option>
+                                                <option value="inactive">Inactive</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -257,7 +293,7 @@
                                                             </div>
                                                             </div>
                                                         </td>                                                   
-                                                        <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getAccount().getEmail()}</td>
+                                                        <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getBasicInformation().getEmail()}</td>
 
                                                         <td class="test1">
 
@@ -428,6 +464,13 @@
 
         <script>
             $(document).ready(function () {
+                $('#filter_search').click(function () {
+                    $('.filter-section').toggle();
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
                 $('.typeChange').on('click', function (e) {
                     e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
 
@@ -470,6 +513,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>');
 
                         $('#Suspend_user').modal('hide');
+                        showSuccessNotification('Suspend user successfully!');
                     },
                     error: function (xhr, status, error) {
                         // Xử lý khi có lỗi xảy ra
@@ -492,6 +536,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>');
 
                         $('#Activate_user').modal('hide');
+                        showSuccessNotification('Activate user successfully!');
                     },
                     error: function (xhr, status, error) {
                         // Xử lý khi có lỗi xảy ra
@@ -500,12 +545,44 @@
                 });
             }
         </script>
+        <script>
+            // Lấy các phần tử lọc
+            const nameFilter = document.getElementById('nameFilter');
+            const emailFilter = document.getElementById('emailFilter');
+            const statusFilter = document.getElementById('statusFilter');
 
+            // Lấy danh sách các dòng trong bảng
+            const rows = document.querySelectorAll('.table tbody tr');
 
+            // Hàm để lọc các dòng
+            function filterRows() {
+                const nameValue = nameFilter.value.toLowerCase();
+                const emailValue = emailFilter.value.toLowerCase();
+                const statusValue = statusFilter.value;
 
+                rows.forEach(row => {
+                    const name = row.querySelector('.user-profile h5 a').textContent.toLowerCase();
+                    const email = row.querySelector('.verify-mail').textContent.toLowerCase();
+                    const status = row.querySelector('.status').textContent.toLowerCase();
+
+                    const showRow =
+                            (!nameValue || name.includes(nameValue)) &&
+                            (!emailValue || email.includes(emailValue)) &&
+                            (statusValue === '' || status === statusValue);
+
+                    row.style.display = showRow ? '' : 'none';
+                });
+            }
+
+            // Gán sự kiện lọc cho các trường lọc
+            nameFilter.addEventListener('input', filterRows);
+            emailFilter.addEventListener('input', filterRows);
+            statusFilter.addEventListener('change', filterRows);
+        </script>
 
         <!--        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="adminAssets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>-->
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
         <script src="adminAssets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 
         <script src="adminAssets/js/feather.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>

@@ -4,9 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
         <group name="SWP391">
-            <file>file:/D:/SU24/A/web/adminViews/freelancerAdmin.jsp</file>
-            <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
-            <file>file:/D:/SU24/A/src/java/AccountControll/UpdateProfile_Freelancer.java</file>
+            <file>file:/D:/SU24/A/web/views/allApplication.jsp</file>
+            <file>file:/D:/SU24/A/web/views/expiredProjects.jsp</file>
+            <file>file:/D:/SU24/A/web/views/recruiterDashboard.jsp</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ExpiredProjectsControll.java</file>
+            <file>file:/D:/SU24/A/web/views/managePost.jsp</file>
+            <file>file:/D:/SU24/A/web/views/home.jsp</file>
+            <file>file:/D:/SU24/A/src/java/Models/Recruiter.java</file>
+            <file>file:/D:/SU24/A/web/views/completedProjects.jsp</file>
         </group>
     </open-files>
 </project-private>

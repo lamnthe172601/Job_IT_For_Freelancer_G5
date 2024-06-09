@@ -1,11 +1,15 @@
+<%-- 
+    Document   : dashboard
+    Created on : Jun 8, 2024, 11:05:23 PM
+    Author     : Admin
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:09 GMT -->
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:30:15 GMT -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -20,11 +24,7 @@
 
         <link rel="stylesheet" href="assets/plugins/feather/feather.css">
 
-        <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
-
-        <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
@@ -44,7 +44,7 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="home" class="navbar-brand logo">
+                            <a href="index.html" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
@@ -57,33 +57,34 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                            
-                            <ul class="main-nav">
+                           <ul class="main-nav">
                                 <li class="active has-submenu">
                                     <a href="home">Home <i class="fas "></i></a>
 
                                 </li>
 
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu"> 
-                                        
-                                        <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
-                                        <li><a href="ListApply">Jobs Apply</a></li>
-                                        <li><a href="jobforyou">Jobs For you</a></li>
-                                    </ul>
-                                </li>
-                               
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="ListPost">Jobs List</a></li>                                        
-                                        <li><a href="SreachJob">Find Jobs</a></li>  
-                                    </ul>
-                                </li>
-                                 </c:if>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu"> 
+
+                                            <li><a href="PostFavourites">Jobs Favourites</a></li>
+
+                                            <li><a href="jobsApply">Jobs Apply</a></li>
+                                            <li><a href="jobforyou">Jobs For you</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
+                                            <li><a href="SreachJob">Find Jobs</a></li>  
+                                            <li><a href="company">Company</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
@@ -108,57 +109,13 @@
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">                                                                           
                                         <li><a href="About">About us</a></li>
-                                         <li><a href="ContactUs">Contact us</a></li>
+                                        <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
-                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
 
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                            <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
-                                            <li><a href="Project">Projects</a></li>                        
-                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
-                                            <li><a href="profile-settings">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                            
-                                            <li><a href="dashboard">Dashboard</a></li>
-                                            <li><a href="companydetail">My Profile</a></li>
-                                            <li><a href="company-details">Company Details</a></li>
-                                            <li><a href="manage-projects">Projects</a></li>
-                                            <li><a href="favourites">Favourites</a></li>                                                                                       
-                                            <li><a href="profile-settings">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
-                                    <li>
-                                        <a href="/admin/index.html" target="_blank">Admin</a>
-                                        <ul class="submenu">
-                                            
-                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
-                                            <li><a href="profile-settings">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account == null}">
-                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
-                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
-                                        </c:if>
+                               
                             </ul>
-                                
-                                
-                                
                         </div>
                         <ul class="nav header-navbar-rht">
                             <li><a href="chats.html"><img src="assets/img/icon/message-chat-icon.svg" alt="Img"></a></li>
@@ -242,19 +199,19 @@
                             <li class="nav-item dropdown account-item">
                                 <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                     <span class="user-img">
-                                        <img src="assets/img/user/table-avatar-03.jpg" alt="Img">
+                                        <img src="${recruiter.image}" alt="Img">
                                     </span>
-                                    <span>Walter Griffin</span>
+                                    <span>${recruiter.fullName()}</span>
                                 </a>
                                 <div class="dropdown-menu emp">
                                     <div class="drop-head">
                                         <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                             <span class="user-img">
-                                                <img src="assets/img/user/table-avatar-03.jpg" alt="Img">
+                                                <img src="${recruiter.image}" alt="Img">
                                             </span>
                                             <div>
-                                                <span>Walter Griffin</span>
-                                                <p><span class="__cf_email__" data-cfemail="d4bdbab2bb94a3b5b8a0b1a6b3a6bdb2b2bdbafab7bbb9">[email&#160;protected]</span></p>
+                                                <span>${recruiter.fullName()}</span>
+                                                <p><span  data-cfemail="81e8efe7eec1e3f3f4e2e4e3f4f2e9afe2eeec">@${sessionScope.account.username}</span></p>
                                             </div>
                                         </a>
                                     </div>
@@ -273,51 +230,46 @@
             </header>
 
 
-            <div class="content content-page bookmark">
+            <div class="content content-page">
                 <div class="container">
                     <div class="row">
-
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
                                     <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/table-avatar-03.jpg" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
-                                        <h3 class="mb-0"><a href="profile-settings.html"></a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
-
+                                        <h3 class="mb-0"><a href="profile-settings.html">${recruiter.fullName()}</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
+                                        <p class="mb-0">@${sessionScope.account.username}</p>
                                     </div>
                                 </div>
                                 <div class="settings-menu">
                                     <div id="sidebar-menu" class="sidebar-menu">
                                         <ul>
                                             <li class="nav-item">
-                                                <a href="dashboard.html" class="nav-link">
+                                                <a href="Dashboard" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
                                                 </a>
                                             </li>
-                                            <li class="nav-item submenu">
-                                                <a href="freelancer-project-proposals.html" class="nav-link">
+                                            <li class="nav-item submenu active">
+                                                <a href="milestones.html" class="nav-link active">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="manage-projects.html">All Projects</a>
+                                                        <a href="manageJobsPosts" >Manage jobs</a>
                                                     </li>
                                                     <li>
-                                                        <a href="ongoing-projects.html">Ongoing Projects</a>
+                                                        <a href="tasks.html">All applicants</a>
                                                     </li>
                                                     <li>
-                                                        <a href="completed-projects.html">Completed Projects</a>
+                                                        <a class="active" href="CompletedProjects">Completed Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="pending-projects.html">Pending Projects</a>
+                                                        <a href="ExpiredProjects">Expired Projects</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="cancelled-projects.html">Cancelled Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="expired-projects.html">Expired Projects</a>
-                                                    </li>
+                                                    
+                                                    
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
@@ -349,14 +301,14 @@
                                                     <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
                                                 </a>
                                             </li>
-                                            <li class="nav-item submenu">
+                                            <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="profile-settings.html" class="active">Profile</a>
+                                                        <a href="profile-settings.html">Profile</a>
                                                     </li>
                                                     <li>
                                                         <a href="membership-plans.html">Plan & Billing</a>
@@ -373,7 +325,7 @@
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="home" class="nav-link">
+                                                <a href="index.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-11.svg" alt="Img"> Logout
                                                 </a>
                                             </li>
@@ -382,128 +334,228 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-xl-9 col-lg-8">
-                            <div class="pro-pos">
-                                <div class="setting-content employee-profile-new">
+                            <div class="page-title">
+                                <h3>Manage Projects</h3>
+                            </div>
+                            <nav class="user-tabs mb-4">
+                                <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="manageJobsPosts">Manage jobs</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="ManageApplication">All applicants</a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="CompletedProjects">Completed Projects</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="ExpiredProjects">Expired Projects</a>
+                                    </li>
+                                </ul>
+                            </nav>
 
-
-                                    <form action="updateRecruiterProfile" method="post">
-                                        <div class="card">
-                                            <div class="pro-head">
-                                                <h3>Profile Setting</h3>
-                                            </div>
-                                            <div class="pro-body">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="form-row pro-pad pt-0 ps-0">
-                                                            <div class="input-block col-md-6 pro-pic">                                             
-                                                                <label class="form-label">Profile Picture</label>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="upload-images">
-                                                                        <img src="${recruiter.image}" alt="Image" id="blah">
-                                                                    </div>
-                                                                    <div class="ms-3">
-                                                                        <label class="file-upload image-upbtn ms-0">
-                                                                            Upload Image <input type="file" id="imgInp">
-                                                                        </label>
-                                                                        <p>Max Image size 300*300</p>
-                                                                    </div>
+                            <div class="my-projects-view">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="title-head d-flex justify-content-between align-items-center mb-4">
+                                            <h4 class="mb-0">Payments</h4>
+                                        </div>
+                                        <div class="table-responsive table-box manage-projects-table">
+                                            <table class="table table-center table-hover datatable no-sort">
+                                                <thead class="thead-pink">
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Type of Payment</th>
+                                                        <th>Budget</th>
+                                                        <th>Status</th>
+                                                        <th>Date Paid</th>
+                                                        <th>Invoice</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Research </td>
+                                                        <td>
+                                                            Milestone
+                                                        </td>
+                                                        <td>$2222</td>
+                                                        <td><span class="badge badge-pill bg-success-light">Completed</span></td>
+                                                        <td>29 Sep 2023</td>
+                                                        <td>
+                                                            <div class="action-table-data">
+                                                                <div class="edit-delete-action m-0">
+                                                                    <a href="javascript:void(0);" class="download-icon"><i class="feather-download"></i></a>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <form action="https://kofejob.dreamstechnologies.com/html/template/freelancer-profile.html">
-                                                            <div class="container">
-                                                                <h2>Recruiter Profile</h2>
-
-                                                                <div class="row">
-                                                                    <div class="col-lg-6 col-md-12">
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">First Name</label>
-                                                                            <input type="text" class="form-control" name="firstName" value="${recruiter.firstName}">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-12">
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Last Name</label>
-                                                                            <input type="text" class="form-control" name="lastName" value="${recruiter.lastName}">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-12">
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Phone Number</label>
-                                                                            <input type="text" class="form-control" name="phoneNumber" value="${recruiter.phone}">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-12">
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Email</label>
-                                                                            <input type="text" class="form-control" name="email" value="${recruiter.email}" readonly>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-12">
-                                                                        <h2>Company Details</h2>
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Company Name</label>
-                                                                            <input type="text" class="form-control" name="companyName" value="${company.companyName}">
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Established On</label>
-                                                                            <input type="text" class="form-control" name="establishedOn" value="${company.establishedOn}">
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Website</label>
-                                                                            <input type="text" class="form-control" name="website" value="${company.website}">
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Describe</label>
-                                                                            <textarea rows="4" class="form-control" name="describe">${company.describe}</textarea>
-                                                                        </div>
-                                                                    </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Design </td>
+                                                        <td>
+                                                            Milestone
+                                                        </td>
+                                                        <td>$5762</td>
+                                                        <td><span class="badge badge-pill bg-warning-light">Pending</span></td>
+                                                        <td>29 Sep 2023</td>
+                                                        <td>
+                                                            <div class="action-table-data">
+                                                                <div class="edit-delete-action m-0">
+                                                                    <a href="javascript:void(0);" class="download-icon"><i class="feather-download"></i></a>
                                                                 </div>
-                                                                <div class="card text-end border-0">
-                                                                    <div class="pro-body">
-                                                                        <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
-                                                                        <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
-
-                                                                    </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Development </td>
+                                                        <td>
+                                                            Milestone
+                                                        </td>
+                                                        <td>$4879</td>
+                                                        <td><span class="badge badge-pill bg-success-light">Completed</span></td>
+                                                        <td>29 Sep 2023</td>
+                                                        <td>
+                                                            <div class="action-table-data">
+                                                                <div class="edit-delete-action m-0">
+                                                                    <a href="javascript:void(0);" class="download-icon"><i class="feather-download"></i></a>
                                                                 </div>
-                                                        </form>
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
+            <footer class="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class=" col-lg-4 col-md-12">
+                                <div class="footer-bottom-logo">
+                                    <a href="index.html" class="menu-logo">
+                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                                    </a>
+                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                    <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
+                                </div>
+                            </div>
+                            <div class=" col-lg-8 col-md-12">
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Useful Links</h2>
+                                            <ul>
+                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
+                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
+                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
+                                                <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
+                                                <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Help & Support</h2>
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Other Links</h2>
+                                            <ul>
+                                                <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
+                                                <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
+                                                <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
+                                                <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
+                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Connect With Us</h2>
+                                            <ul>
+                                                <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
+                                                <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
+                                                <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
+                                                <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
+                                                <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <%@ include file="footter.jsp" %>                  
 
+                <div class="footer-bottom">
+                    <div class="container">
 
+                        <div class="copyright">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="copyright-text text-center">
+                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
+                    </div>
+                </div>
 
-                        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+            </footer>
 
-                        <script src="assets/js/bootstrap.bundle.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        </div>
 
-                        <script src="assets/plugins/select2/js/select2.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-                        <script src="assets/js/moment.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-                        <script src="assets/js/bootstrap-datetimepicker.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+       <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+                                        
+        </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
 
-                        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-                        <script src="assets/plugins/datatables/datatables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
 
-                        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-                        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="assets/plugins/apexchart/apexcharts.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script src="assets/plugins/apexchart/chart-data.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
 
-                        <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-                        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
 
-                        <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:09 GMT -->
-                        </html>
+        <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script></body>
+
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:31:10 GMT -->
+</html>
