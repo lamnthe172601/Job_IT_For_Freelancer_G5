@@ -46,12 +46,6 @@ public class RecruiterDAO extends DBContext {
         }
         return null;
     }
-    
-    public static void main(String[] args) {
-        RecruiterDAO d = new RecruiterDAO();
-        Recruiter m = d.getRecruiterProfile(4);
-        System.out.println(m);
-    }
 
     public String convertDateTimeFormat(String inputDateTime) {
         if (inputDateTime == null) {
