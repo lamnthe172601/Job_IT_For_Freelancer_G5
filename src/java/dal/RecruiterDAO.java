@@ -20,28 +20,27 @@ import java.util.Date;
 public class RecruiterDAO extends DBContext {
 
     public Recruiter getRecruiterProfile(int uid) {
-
-        String query = "select first_name,last_name,recruiterID,gender,dob,[image],phone_contact,email_contact,userID \n"
-                + "               from Recruiter \n"
-                + "                where userID = ?";
+        
+        String query = """
+                       select * from Recruiter 
+                                       where userID = ?""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, uid);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                String fname = rs.getString(1);
-                String lname = rs.getString(2);
-                int reid = rs.getInt(3);
-
-                boolean gd = rs.getBoolean(4);
-                Date dob = rs.getDate(5);
-                String ig = rs.getString(6);
-                String phone = rs.getString(7);
-                String em = rs.getString(8);
-
-                int userid = rs.getInt(9);
-                return new Recruiter(reid, fname, lname, gd, dob, ig, em, phone, userid);
+                return new Recruiter(
+                            rs.getInt("recruiterID"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getBoolean("gender"),
+                            rs.getDate("dob"),
+                            rs.getString("image"),
+                            rs.getString("email_contact"),
+                            rs.getString("phone_contact"),
+                            rs.getInt("userID")
+                    );
             }
         } catch (SQLException e) {
         }

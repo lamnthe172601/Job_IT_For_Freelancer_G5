@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class FreelancerDAO extends DBContext {
 
-    public Freelancer getFreelancerById(int id) throws SQLException {
+    public Freelancer getFreelancerById(int id) {
         String query = "SELECT * FROM freelancer WHERE userID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -47,7 +47,7 @@ public class FreelancerDAO extends DBContext {
             }
         } catch (SQLException e) {
             e.printStackTrace(); // In chi tiết lỗi ra console
-            throw new SQLException("Error while fetching freelancer", e);
+
         }
         return null;
     }
@@ -89,6 +89,8 @@ public class FreelancerDAO extends DBContext {
         }
         return list;
     }
+
+   
 
     public List<Education> getEducationById(int id) throws SQLException {
         List<Education> list = new ArrayList<>();
