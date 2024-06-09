@@ -104,6 +104,42 @@
         <servlet-name>ViewProfile_Freelancer</servlet-name>
         <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewCategoryAdmin</servlet-name>
+        <servlet-class>AdminControlles.ViewCategoryAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostFavouritesControll</servlet-name>
+        <servlet-class>FreelancerControll.PostFavouritesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListApplyControll</servlet-name>
+        <servlet-class>FreelancerControll.ListApplyControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListPostControll</servlet-name>
+        <servlet-class>CommonControll.ListPostControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Dashboard</servlet-name>
+        <servlet-class>RecruiterControll.Dashboard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageJobsPostsControll</servlet-name>
+        <servlet-class>RecruiterControll.ManageJobsPostsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAllApplicationControll</servlet-name>
+        <servlet-class>RecruiterControll.ManageAllApplicationControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompletedProjectsControll</servlet-name>
+        <servlet-class>RecruiterControll.CompletedProjectsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExpiredProjectsControll</servlet-name>
+        <servlet-class>RecruiterControll.ExpiredProjectsControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -134,7 +170,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AllCategoriesControll</servlet-name>
-        <url-pattern>/AllCategories</url-pattern>
+        <url-pattern>/allCategories</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FreelancerDetailsControll</servlet-name>
@@ -215,5 +251,41 @@
     <servlet-mapping>
         <servlet-name>ViewProfile_Freelancer</servlet-name>
         <url-pattern>/MyProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCategoryAdmin</servlet-name>
+        <url-pattern>/viewcategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostFavouritesControll</servlet-name>
+        <url-pattern>/PostFavourites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListApplyControll</servlet-name>
+        <url-pattern>/ListApply</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListPostControll</servlet-name>
+        <url-pattern>/ListPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Dashboard</servlet-name>
+        <url-pattern>/Dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageJobsPostsControll</servlet-name>
+        <url-pattern>/manageJobsPosts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAllApplicationControll</servlet-name>
+        <url-pattern>/ManageApplication</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompletedProjectsControll</servlet-name>
+        <url-pattern>/CompletedProjects</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExpiredProjectsControll</servlet-name>
+        <url-pattern>/ExpiredProjects</url-pattern>
     </servlet-mapping>
 </web-app>

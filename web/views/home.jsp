@@ -1,7 +1,7 @@
 <%-- 
-    Document   : home
-    Created on : May 16, 2024, 9:48:18 PM
-    Author     : Khuongld
+    Document   : homepage
+    Created on : Jun 7, 2024, 11:45:22 PM
+    Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,23 +9,54 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/index-5.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:18:36 GMT -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-        <title>KLTTLJob</title>
+        <title>KofeJob</title>
+
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+
         <link rel="stylesheet" href="assets/plugins/feather/feather.css">
+
         <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
         <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+
         <link rel="stylesheet" href="assets/plugins/aos/aos.css">
+
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
         <link rel="stylesheet" href="assets/css/style.css">
+
+        <style>
+            .project-img {
+                position: relative;
+            }
+
+            .favorite-icon {
+                position: absolute;
+                top: 0;
+                right: 0;
+                font-size: 24px; /* Kích thước to hơn */
+                color: #777; /* Màu mặc định */
+                transition: color 0.3s ease; /* Hiệu ứng chuyển đổi màu */
+                z-index: 1; /* Đảm bảo nằm trên cùng */
+            }
+
+            .favorite-icon:hover {
+                color: red; /* Màu đỏ khi hover */
+            }
+
+
+
+        </style>
     </head>
-    <body class="home-page bg-five">
+    <body class="home-page bg-two">
+
         <div id="global-loader">
             <div class="whirly-loader"> </div>
             <div class="loader-img">
@@ -34,13 +65,12 @@
         </div>
 
 
-        <div class="main-wrapper home-five-wrapper">
+        <div class="main-wrapper">
+            <header class="header header-two">
 
-
-            <header class="header header-three">
-                <div class="container-fluid">
-                    <nav class="navbar navbar-expand-lg header-nav">
-                        <div class="navbar-header">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg header-nav p-0">
+                        <div class="navbar-header header-select">
                             <a id="mobile_btn" href="javascript:void(0);">
                                 <span class="bar-icon">
                                     <span></span>
@@ -48,10 +78,10 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="home" class="navbar-brand logo scroll-logo">   
-                                 <img src="assets/img/logo-white.svg" class="img-fluid" alt="Logo">
+                            <a href="home" class="navbar-brand logo">
+                                <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
-                             
+
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
@@ -62,705 +92,806 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                            <ul class="main-nav">
-                                <li class="active has-submenu">
-                                    <a href="home">Home <i class="fas "></i></a>
 
-                                </li>
-
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu"> 
-                                        
-                                            <li><a href="jobFavourites">Jobs Favourites</a></li>
-                                                                                                                                                           
-                                        <li><a href="jobsApply">Jobs Apply</a></li>
-                                        <li><a href="jobforyou">Jobs For you</a></li>
-                                    </ul>
-                                </li>
-                               
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="ListPost">Jobs List</a></li>                                        
-                                        <li><a href="SreachJob">Find Jobs</a></li>  
-                                        <li><a href="company">Company</a></li>
-                                    </ul>
-                                </li>
-                                 </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">Top Freelancer</a></li>
-                                        <li><a href="newsJobs">Skills</a></li>
-                                        
-                                    </ul>
-                                </li>
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">List Post</a></li>
-                                        <li><a href="newsJobs">Reviews</a></li>
-                                        
-                                    </ul>
-                                </li>
-                                </c:if>
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        
-                                        <li><a href="blogList">Blog List</a></li>
-                                        <li><a href="blogGrid">Blog Grid</a></li>
-                                        <li><a href="About">About us</a></li>
-                                         <li><a href="ContactUs">Contact us</a></li>
-                                    </ul>
-                                </li>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                                    
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                           
-                                            <li><a href="dashboard">Dashboard</a></li>
-                                            <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
-                                            <li><a href="Project">Projects</a></li>                        
-                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
-                                            <li><a href="profile-settings">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                            
-                                            <li><a href="dashboard">Dashboard</a></li>
-                                            <li><a href="companydetail">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
-                                            <li><a href="profile-settings.html">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
-                                    <li>
-                                        <a href="/admin/index.html" target="_blank">Admin</a>
-                                        <ul class="submenu">
-                                            
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="company-profile.html">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
-                                            <li><a href="profile-settings.html">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account == null}">
-                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
-                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
-                                        </c:if>
-                            </ul>
-                        </div>
-                        <ul class="nav header-navbar-rht">
-
-                            
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                            <li><a href="login" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                            <li><a href="projectJob" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                             </c:if>
-                             <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                            <li><a href="searchJob" class="login-btn"><i class="feather-plus me-1"></i>Search a Job IT </a></li>
-                             </c:if>
-                        </ul>
+                            <jsp:include page="header.jsp" />
                     </nav>
                 </div>
             </header>
 
 
-            <section class="section home-banner home-five row-middle">
+            <section class="section home-banner  home-two">
                 <div class="container">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-lg-12 ">
-                            <div class="banner-blk-five justify-content-center">
-                                <div class="banner-content text-center aos" data-aos="fade-up">
-                                    <h1>Get the Perfect Developers & Projects</h1>
-                                    <p>With the world's #1 Developers Marketplace</p>
-                                    <form class="form" name="store" id="store" method="post" action="https://kofejob.dreamstechnologies.com/html/template/project.html">
-                                        <div class="form-inner">
-                                            <div class="input-group">
-                                                <span class="drop-detail">
-                                                    <select class="form-control select" name="storeID">
-                                                        <option value="project.html">Projects</option>
-                                                        <option value="developer.html">Freelancers</option>
-                                                    </select>
-                                                </span>
-                                                <input type="email" class="form-control" placeholder="Keywords">
-                                                <button class="btn btn-primary sub-btn" type="submit">Search</button>
+                    <div class="row align-items-center">
+                        <div class=" col-lg-6 col-md-12">
+                            <div class="banner-content aos" data-aos="fade-up">
+                                <div class="market-place">
+                                    <h3>With the world's #1 Developers Marketplace</h3>
+                                </div>
+                                <h1>Get the perfect <br>Developers & Projects</h1>
+
+                                <div class="home-count">
+                                    <ul class="nav">
+                                        <li class="course-count"><span class="counter-up">${NumberUsers}</span><span class="list-count">Freelance developers</span></li>
+                                        <li class="course-count"><span class="counter-up">${NumberPost} </span><span>+</span><span class="list-count">Projects Added</span></li>
+                                        <li class="course-count"><span class="counter-up">919,207</span><span class="list-count">Completed projects</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-5">
+                            <div class="banner-two-img aos" data-aos="fade-up">
+                                <img src="assets/img/home-two-banner-bg-01.png" class="img-fluid trusted-user-img aos" data-aos="zoom-in" alt="banner" data-aos-duration="3000">
+                                <img src="assets/img/home-two-banner-bg-02.png" class="img-fluid best-marketing-img aos" data-aos="zoom-in" alt="banner" data-aos-duration="3000">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!--            post project for you        -->
+            <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">        
+                <section class="section feature-project home-two-projects">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-12 mx-auto">
+                                <div class="section-header section-header-two text-center aos" data-aos="fade-up">
+                                    <h2 class="header-title">Featured Projects <span> For You</span></h2>
+                                    <p>We have over 2000+ Projects waiting for you</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <c:forEach items="${getPostsByFreelancerSkill}" var="list">
+                                <div class="col-lg-4 col-md-6 d-flex">
+                                    <div class="project-item feature-project-item aos" data-aos="fade-up">
+                                        <div class="project-img position-relative">
+                                            <!-- Hình ảnh -->
+                                            <a href="project.html"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
+                                            <!-- Biểu tượng trái tym -->
+                                            <div class="favorite-icon" onclick="toggleHeart(this)" >
+                                                <i class="far fa-heart"></i>
                                             </div>
                                         </div>
-                                    </form>
+                                        <div class="feature-content">
+                                            <!-- Các nội dung khác -->
+                                            <div class="feature-time-blk">
+                                                <a href="javascript:void(0);" class="btn btn-primary green-active">${list.durationID.durationName}</a>
+                                                <span><i class="far fa-clock me-1"></i> ${list.datePost}</span>
+                                            </div>
+                                            <h4><a href="project.html">${list.getTitle()}</a></h4>
+                                            <ul class="feature-project-list nav">
+                                                <li><i class="feather-user me-1"></i>${list.caID.categoriesName}</li>
+                                                <li><i class="feather-map-pin me-1"></i>${list.location}</li>
+                                            </ul>
+                                            <div class="feature-foot">
+                                                <div class="logo-company">
+                                                    <a href="project.html">
+                                                        <img src="assets/img/icon/logo-icon-01.svg" class="me-1" alt="icon">
+                                                        <span>AMAZE TECH</span>
+                                                    </a>
+                                                </div>
+                                                <a href="project-details.html" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                            <div class="col-xl-12">
+                                <div class="more-project text-center aos" data-aos="fade-up">
+                                    <a href="project.html" class="btn btn-primary">View More Projects</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </c:if>         
 
-            <div class="trusted-by-section">
-                <span>Trusted By :</span>
-                <ul>
-                    <li>
-                        <img src="assets/img/icon/trusted1.svg" alt="Img">
-                    </li>
-                    <li>
-                        <img src="assets/img/icon/trusted2.svg" alt="Img">
-                    </li>
-                    <li>
-                        <img src="assets/img/icon/trusted3.svg" alt="Img">
-                    </li>
-                    <li>
-                        <img src="assets/img/icon/trusted4.svg" alt="Img">
-                    </li>
-                    <li>
-                        <img src="assets/img/icon/trusted5.svg" alt="Img">
-                    </li>
-                </ul>
-            </div>
-            <section class="project-by-category">
-                <div class="container">
-                    <div class="row ">
-                        <div class="col-md-12 col-sm-12 col-12 mx-auto text-center">
-                            <div class="section-header aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Browse Projects By Category</h2>
-                                <p>Get work done in over 60 different categories</p>
+
+
+            <c:if test="${sessionScope.account.roleID.getRoleID() == null}">              
+                <section style="margin-top: 100px;" class="section platform">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="plat-form-img aos" data-aos="fade-up">
+                                    <img src="assets/img/plat-form.png" alt="Img" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <div class="platform-group aos" data-aos="fade-up">
+                                    <h1>Discover Project Around your Location <span> In Our Platform</span></h1>
+                                    <h5>Get Inspired by Development Projects</h5>
+                                    <p>We Provide Stable Service With Experts Freelancers around the globe, are looking for work and provide the best they have .Experience state-of-the-art marketplace platform with the Kofejob. We combine the experience of our global community around the globe for a best marketplace theme.</p>
+                                    <div class="market-place-btn platform-btn">
+                                        <a href="Register" class="btn btn-primary market-project me-2">Find Jobs Projects</a>
+                                        <a href="Register" class="btn btn-primary project-post">Post a Project</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="category-slider-section">
-                        <div id="category-slider" class="owl-carousel owl-theme blog-trick-five blog-slider aos" data-aos="fade-up">
-                            <c:forEach items="${listCC}" var="o">
-                                <div class="project-by-category-widget">
-                                    <a href="project.html" class="category-widget-img">
-                                        <img style="width: 100%; height: 280px;" src="${o.image}" class="img-fluid" alt="slider-image">
-                                    </a>
-                                    <div class="category-widget-content">
-                                        <h5>${o.categoriesName}</h5>                                   
+                </section>
+            </c:if> 
+
+
+            <!--            the new post project        -->
+            <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">           
+                <section class="section feature-project home-two-projects">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-12 mx-auto">
+                                <div class="section-header section-header-two text-center aos" data-aos="fade-up">
+                                    <h2 class="header-title">The New Projects <span> Update</span></h2>
+                                    <p>Summary of latest project articles </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <c:forEach items="${listpost}" var="list">
+                                <div class="col-lg-4 col-md-6 d-flex">
+                                    <div class="project-item feature-project-item aos" data-aos="fade-up">
+                                        <div class="project-img position-relative">
+                                            <!-- Hình ảnh -->
+                                            <a href="project.html"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
+                                            <!-- Biểu tượng trái tym -->
+                                            <div class="favorite-icon" onclick="toggleHeart(this)" >
+                                                <i class="far fa-heart"></i>
+                                            </div>
+                                        </div>
+                                        <div class="feature-content">
+                                            <!-- Các nội dung khác -->
+                                            <div class="feature-time-blk">
+                                                <a href="javascript:void(0);" class="btn btn-primary green-active">${list.durationID.durationName}</a>
+                                                <span><i class="far fa-clock me-1"></i> ${list.datePost}</span>
+                                            </div>
+                                            <h4><a href="project.html">${list.getTitle()}</a></h4>
+                                            <ul class="feature-project-list nav">
+                                                <li><i class="feather-user me-1"></i>${list.caID.categoriesName}</li>
+                                                <li><i class="feather-map-pin me-1"></i>${list.location}</li>
+                                            </ul>
+                                            <div class="feature-foot">
+                                                <div class="logo-company">
+                                                    <a href="project.html">
+                                                        <img src="assets/img/icon/logo-icon-01.svg" class="me-1" alt="icon">
+                                                        <span>AMAZE TECH</span>
+                                                    </a>
+                                                </div>
+                                                <a href="project-details.html" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+
+                            <div class="col-xl-12">
+                                <div class="more-project text-center aos" data-aos="fade-up">
+                                    <a href="project.html" class="btn btn-primary">View More Projects</a>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </section>
+            </c:if> 
+
+
+            <!--            the top freelancer by skill       -->
+            <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">          
+                <section class="section feature-developer home-two-developers">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-12 mx-auto">
+                                <div class="section-header section-header-two text-center aos" data-aos="fade-up">
+                                    <h2 class="header-title">Featured <span>Developers</span></h2>
+                                    <p>We have over 1400+ Developers </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                            <c:forEach items="${freelancerSkill}" var="freelancerSkill">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="feature-develop-blk aos" data-aos="fade-up">
+                                    <div class="developer-sub-blk">
+                                        <div class="img-developer">
+                                            <a href="developer-details.html"><img src="assets/img/user/avatar-21.jpg" class="me-2" alt="Img"></a>
+                                        </div>
+                                        <div class="developer-content">
+                                            <h4><a href="developer-details.html">${freelancerSkill.freelancer.fullname()}</a></h4>
+                                            <p>${freelancerSkill.skills.skill_set_ID.skill_set_name}</p>
+                                            <div class="rating">
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <span class="average-rating">5.0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hour-rate">
+                                        <ul class="nav">
+                                            <li><i class="feather-dollar-sign me-1"></i>$34 Hourly</li>
+                                            <li>
+                                                <div class="favorite-icon" onclick="toggleHeart(this)" >
+                                                <i class="far fa-heart"></i>
+                                            </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            </c:forEach>
+                            
+                            <div class="col-xl-12">
+                                <div class="more-project text-center aos" data-aos="fade-up">
+                                    <a href="developer-details.html" class="btn btn-primary">View More Freelancers</a>
+                                </div>
+                                <div class="review-bottom text-center aos" data-aos="fade-up">
+                                    <div class="client-rate">
+                                        <h4>Clients rate our Data Processing Executives</h4>
+                                        <div class="rating">
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <span class="average-rating">5.0 (30)</span>
+                                        </div>
+                                        <p>from 4227 reviews</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </c:if> 
+
+            <!--the post project by categori-->
+            <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">           
+                <section class="section feature-project home-two-projects">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-12 mx-auto">
+                                <div class="section-header section-header-two text-center aos" data-aos="fade-up">
+                                    <h2 class="header-title">The Jobs Project<span> By Categories</span></h2>
+                                    <p>Summary of latest project articles </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <c:forEach items="${getOtherPostsBySimilarCategories}" var="list">
+                                <div class="col-lg-4 col-md-6 d-flex">
+                                    <div class="project-item feature-project-item aos" data-aos="fade-up">
+                                        <div class="project-img position-relative">
+                                            <!-- Hình ảnh -->
+                                            <a href="project.html"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
+                                            <!-- Biểu tượng trái tym -->
+                                            <div class="favorite-icon" onclick="toggleHeart(this)" >
+                                                <i class="far fa-heart"></i>
+                                            </div>
+                                        </div>
+                                        <div class="feature-content">
+                                            <!-- Các nội dung khác -->
+                                            <div class="feature-time-blk">
+                                                <a href="javascript:void(0);" class="btn btn-primary green-active">${list.durationID.durationName}</a>
+                                                <span><i class="far fa-clock me-1"></i> ${list.datePost}</span>
+                                            </div>
+                                            <h4><a href="project.html">${list.getTitle()}</a></h4>
+                                            <ul class="feature-project-list nav">
+                                                <li><i class="feather-user me-1"></i>${list.caID.categoriesName}</li>
+                                                <li><i class="feather-map-pin me-1"></i>${list.location}</li>
+                                            </ul>
+                                            <div class="feature-foot">
+                                                <div class="logo-company">
+                                                    <a href="project.html">
+                                                        <img src="assets/img/icon/logo-icon-01.svg" class="me-1" alt="icon">
+                                                        <span>AMAZE TECH</span>
+                                                    </a>
+                                                </div>
+                                                <a href="project-details.html" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+
+                            <div class="col-xl-12">
+                                <div class="more-project text-center aos" data-aos="fade-up">
+                                    <a href="project.html" class="btn btn-primary">View More Projects</a>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </section>
+            </c:if>
+
+            <c:if test="${sessionScope.account.roleID.getRoleID() == null}">              
+                <section class="section top-skill">
+                    <div class="container">
+                        <div class="section-header section-header-two text-center aos" data-aos="fade-up">
+                            <h2 class="header-title">Featured <span> Skills</span></h2>
+                            <p>Get work done in over 1800 different categories </p>
+                        </div>
+                        <div class="row justify-content-center aos" data-aos="fade-up">
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-01.svg" alt="Img">
+                                    </div>
+                                    <span>Translation</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-02.svg" alt="Img">
+                                    </div>
+                                    <span>Research Writing</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-03.svg" alt="Img">
+                                    </div>
+                                    <span>Web Scraping</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-04.svg" alt="Img">
+                                    </div>
+                                    <span>Article Writing</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-05.svg" alt="Img">
+                                    </div>
+                                    <span>HTML 5</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-06.svg" alt="Img">
+                                    </div>
+                                    <span>Website Design</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-07.svg" alt="Img">
+                                    </div>
+                                    <span>Mobile Apps</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-08.svg" alt="Img">
+                                    </div>
+                                    <span>Android Apps</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-09.svg" alt="Img">
+                                    </div>
+                                    <span>Iphone Apps</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-10.svg" alt="Img">
+                                    </div>
+                                    <span>Software Architecture</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-11.svg" alt="Img">
+                                    </div>
+                                    <span>Graphic Design</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-12.svg" alt="Img">
+                                    </div>
+                                    <span>Logo Design</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-13.svg" alt="Img">
+                                    </div>
+                                    <span>Public Relations</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-14.svg" alt="Img">
+                                    </div>
+                                    <span>Proofreading</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-15.svg" alt="Img">
+                                    </div>
+                                    <span>Photoshop</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-16.svg" alt="Img">
+                                    </div>
+                                    <span>Technical Writing</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-17.svg" alt="Img">
+                                    </div>
+                                    <span>Blogging</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-18.svg" alt="Img">
+                                    </div>
+                                    <span>Internet Marketing</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-19.svg" alt="Img">
+                                    </div>
+                                    <span>eCommerce</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-20.svg" alt="Img">
+                                    </div>
+                                    <span>Data Entry</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-21.svg" alt="Img">
+                                    </div>
+                                    <span>Link Building</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-22.svg" alt="Img">
+                                    </div>
+                                    <span>C++ Programming</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-23.svg" alt="Img">
+                                    </div>
+                                    <span>C# Programming</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-24.svg" alt="Img">
+                                    </div>
+                                    <span>Content Writing</span>
+                                </div>
+                            </div>
+                            <div class="skill-custom-col">
+                                <div class="skills-feature">
+                                    <div class="skill-icon">
+                                        <img src="assets/img/icon/skill-icon-25.svg" alt="Img">
+                                    </div>
+                                    <span>Marketing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </c:if>
+
+            <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">      
+                <section class="section update-project">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-12 mx-auto">
+                                <div class="section-header section-header-two text-center aos" data-aos="fade-up">
+                                    <h2 class="header-title">Recently Updated <span>Projects for you</span></h2>
+                                    <p>Get work done in over 60 different categories</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <c:forEach items="${listCC}" var="categori">
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="aos" data-aos="fade-up">
+                                        <a href="project.html" class="update-project-blk move-box ">
+                                            <div class="update-content">
+                                                <h6>${categori.categoriesName}</h6>
+                                                <p>${categoriesPostCount[categori.categoriesName]}  Projects Available</p>
+                                            </div>
+                                            <div class="update-icon-end">
+                                                <i class="feather-arrow-right"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </c:forEach>
+
+
+
+                            <div class="col-xl-12">
+                                <div class="more-project text-center aos" data-aos="fade-up">
+                                    <a href="project.html" class="btn btn-primary">View More Projects</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </c:if>  
+
+            <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">           
+                <section class="section job-location home-two-jobsec">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-12 mx-auto">
+                                <div class="section-header section-header-two d-block text-center section-locate aos" data-aos="fade-up">
+                                    <h2 class="header-title">Jobs By <span>Locations</span></h2>
+                                    <p>Find your favourite jobs and get the benefits of yourself</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <c:forEach var="location" items="${locations}">
+                                <div class="col-xl-3 col-md-4">
+                                    <div class="job-locate-blk aos" data-aos="fade-up">
+                                        <div class="location-img">
+                                            <a href="project.html"><img class="img-fluid" src="${location[1]}" alt="Img"></a>
+                                        </div>
+                                        <div class="job-it-content">
+                                            <h6>${location[0]}</h6>
+                                            <ul class="nav job-locate-foot">
+                                                <li>${locationPostCount[location[0]] != null ? locationPostCount[location[0]] : 0} Companies</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </c:forEach>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="home-five-section-btn">
-                                <a href="allCategories" class="btn btn-primary">View all Categories</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="section projects">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-12 mx-auto text-center">
-                            <div class="section-header aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Need something done?</h2>
-                                <p>Kofejob is here to help you to get job completed</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-gap">
-
-                        <div class="col-xl-3 col-md-6 aos d-flex aos-init aos-animate" data-aos="zoom-in" data-aos-duration="1000">
-                            <div class="feature-items">
-                                <div class="feature-icon">
-                                    <img src="assets/img/icon/great1.svg" class="img-fluid" alt="Img">
-                                </div>
-                                <div class="feature-content course-count">
-                                    <h3>Browse Portfolios</h3>
-                                    <p>Find professionals you can trust by browsing their samples of previous work .</p>
-                                </div>
-                            </div>
-                        </div>
+                </section>
+            </c:if> 
 
 
-                        <div class="col-xl-3 col-md-6 aos d-flex aos-init aos-animate" data-aos="zoom-in" data-aos-duration="1500">
-                            <div class="feature-items ">
-                                <div class="feature-icon">
-                                    <img src="assets/img/icon/great2.svg" class="img-fluid" alt="Img">
-                                </div>
-                                <div class="feature-content course-count">
-                                    <h3>Fast Bids</h3>
-                                    <p>Receive obligation free quotes from our talented freelancers fast. 80% of projects get bid</p>
-                                </div>
-                            </div>
-                        </div>
 
 
-                        <div class="col-xl-3 col-md-6 aos d-flex aos-init aos-animate" data-aos="zoom-in" data-aos-duration="2000">
-                            <div class="feature-items ">
-                                <div class="feature-icon">
-                                    <img src="assets/img/icon/great3.svg" class="img-fluid" alt="Img">
-                                </div>
-                                <div class="feature-content course-count">
-                                    <h3>Quality Work</h3>
-                                    <p>Kofejob.com has by far the largest pool of quality freelancers globally- over 50 million to choose from.</p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xl-3 col-md-6 aos d-flex aos-init aos-animate" data-aos="zoom-in" data-aos-duration="2500">
-                            <div class="feature-items ">
-                                <div class="feature-icon">
-                                    <img src="assets/img/icon/great4.svg" class="img-fluid" alt="Img">
-                                </div>
-                                <div class="feature-content course-count">
-                                    <h3>Track Progress</h3>
-                                    <p>Keep up-to-date and on-the-go with our time tracker Always know what freelancers are up to.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <section class="section popular-projects-job">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-12 mx-auto text-center">
-                            <div class="section-header aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Top New Jobs Projects</h2>
-                                <p>Bid and stary the new Jobs</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <c:forEach items="${listpost}" var="list">
-                            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-                                <div class="project-item project-popular-item aos" data-aos="fade-up">
-                                    <div class="project-img">
-                                        <a href="project.jsp"><img src="${list.image}" alt="Img" class="img-fluid"></a>
-                                    </div>
-                                    <div class="feature-content">
-                                        <h4><a href="project.jsp">${list.title}</a></h4>
-                                        <ul class="feature-project-list nav">
-                                            
-                                            <li> ${list.skill}</li>
-                                            <li><i class="feather-user me-1"></i>${list.quantity}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-
-
-                        <div class="col-md-12">
-                            <div class="home-five-section-btn">
-                                <a href="ListPost" class="btn btn-primary">View More Jobs Projects</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section review">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="work-set-image">
-                                <img src="assets/img/work4.png" alt="Img" class="img-fluid ">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="aos " data-aos="fade-up">
-                                <div class="demand-professional">
-                                    <h2>More than 50 million professionals on demand</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                </div>
-                                <div class="demand-post-job">
-                                    <div class="demand-post-img">
-                                        <img src="assets/img/icon/recent-icon-04.svg" alt="Img" class="img-fluid">
-                                    </div>
-                                    <div class="demand-content">
-                                        <h6>Post a job</h6>
-                                        <p>Publish the job posting on your selected platforms. Follow the specific submission process for each platform.</p>
-                                    </div>
-                                </div>
-                                <div class="demand-post-job">
-                                    <div class="demand-post-img">
-                                        <img src="assets/img/icon/recent-icon-05.svg" alt="Img" class="img-fluid">
-                                    </div>
-                                    <div class="demand-content">
-                                        <h6>Hire Freelancers</h6>
-                                        <p>Depending on the platform, you can either wait for freelancers to apply or invite specific freelancers to submit proposals.</p>
-                                    </div>
-                                </div>
-                                <div class="demand-post-job">
-                                    <div class="demand-post-img">
-                                        <img src="assets/img/icon/recent-icon-06.svg" alt="Img" class="img-fluid">
-                                    </div>
-                                    <div class="demand-content">
-                                        <h6>Get Work Done</h6>
-                                        <p>Utilize productivity tools and apps to help you stay organized, manage tasks, and set reminders.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section market-place-join">
-                <div class="container">
-                    <div class="market-place-bg">
-                        <div class="row">
-                            <div class="col-md-6 d-flex align-items-center">
-                                <div class="join-market-world aos" data-aos="fade-up">
-                                    <h2>Join World’s Best Marketplace for developers</h2>
-                                    <p>Why hire people when you can simply integrate our talented cloud workforce instead?</p>
-                                    <div class="market-place-btn bidding-btn">
-                                        <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                        <a href="postProject" class="btn btn-primary market-project me-2">Post a Project</a>
-                                        </c:if>
-                                       <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                                        <a href="login" class="btn btn-primary market-project me-2">Post a Project</a>
-                                        </c:if>
-                                        
-                                        <c:if test="${sessionScope.account.roleID.getRoleID() == null}">
-                                        <a href="Register" class="btn btn-primary project-post">Start Bidding</a>
-                                        </c:if>
-                                        <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                                        <a href="SearchJobs" class="btn btn-primary project-post">Searchs Jobs</a>
-                                        </c:if>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="join-platform-img aos" data-aos="fade-up">
-                                    <img src="assets/img/platform-img1.png" alt="Img" class="img-fluid">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-            <section class="most-hired-section">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 col-sm-12 col-12 mx-auto text-center">
-                            <div class="section-header aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Most Hired Developers</h2>
-                                <p>Work with talented people at the most affordable price</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <c:forEach items="${listSkill}" var="listskill">
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="hired-developers aos" data-aos="fade-up">
-                                    <div class="hired-developers-img">
-                                        <a href="freelancerDetails?cid=${listskill.freelancerID.freelanceID}"><img src="${listskill.freelancerID.image}" class="img-fluid" alt="Img"></a>
-                                    </div>
-                                    <div class="hired-developers-img-content d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <a data-toggle="modal" href="#rating" class="favourite color-active"><i class="feather-heart"></i></a>
-                                            <h4><a href="developer-details.html">${listskill.freelancerID.first_name} ${listskill.freelancerID.last_name}</a></h4>
-                                            <span>${listskill.skill_set_ID.skill_set_name}</span>
-                                            <h6><img src="assets/img/icon/dollar-developper.svg" class="me-1" alt="Img">$32 /hr</h6>
-                                        </div>
-                                        <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-
-                                            <span class="average-rating">3.0</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </section>
-            </c:if>
-            
-            
-               <section class="section blog-tricks">
+            <section class="section top-company-two border-bottom-0">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <div class="section-header text-center aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Featured Blogs</h2>
+                            <div class="section-header section-header-two text-center aos" data-aos="fade-up">
+                                <h2 class="header-title">Trusted By The <span>World’s Best</span></h2>
+                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="company-slider" class="owl-carousel owl-theme testimonial-slider aos" data-aos="fade-up">
+                        <div class="company-logos">
+                            <img src="assets/img/company-logo-01.svg" alt="Img">
+                        </div>
+                        <div class="company-logos">
+                            <img src="assets/img/company-logo-02.svg" alt="Img">
+                        </div>
+                        <div class="company-logos">
+                            <img src="assets/img/company-logo-03.svg" alt="Img">
+                        </div>
+                        <div class="company-logos">
+                            <img src="assets/img/company-logo-04.svg" alt="Img">
+                        </div>
+                        <div class="company-logos">
+                            <img src="assets/img/company-logo-05.svg" alt="Img">
+                        </div>
+                        <div class="company-logos">
+                            <img src="assets/img/company-logo-06.svg" alt="Img">
+                        </div>
+                        <div class="company-logos">
+                            <img src="assets/img/company-logo-03.svg" alt="Img">
+                        </div>
+                        <div class="company-logos">
+                            <img src="assets/img/company-logo-02.svg" alt="Img">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="section blog-tricks">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-header section-header-two text-center aos" data-aos="fade-up">
+                                <h2 class="header-title">Featured <span>Blogs</span></h2>
                                 <p>Read Our Article To Get Tricks </p>
                             </div>
                         </div>
                     </div>
-                    <div class="row aos aos-init aos-animate" data-aos="fade-up">
+                    <div class="row aos" data-aos="fade-up">
                         <c:forEach items="${listblogs}" var="listblogs">
                         <div class="col-lg-4 col-md-6">
-                            <div class="grid-blog blog-two aos aos-init aos-animate" data-aos="fade-up">
+                            <div class="grid-blog blog-two aos" data-aos="fade-up">
                                 <div class="blog-image">
-                                    <a href="BlogDetails"><img style="width: 348px; height: 218px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
+                                    <a href="blog-details.html"><img style="width: 331px; height: 207px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="feature-time-blk">
                                         <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
-                                        <span><i class="feather-calendar me-1"></i> ${listblogs.date_blog}</span>
+                                        <span><i class="far fa-calendar me-1"></i>${listblogs.date_blog} 06 Oct, 2023</span>
                                     </div>
                                     <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </section>
-
-
-            <section class="faq-section-three" id="faq">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-12 mx-auto text-center">
-                            <div class="section-header aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Frequently Question Answer</h2>
-                                <p>View all the questions, answered for users</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" id="accordionExample">
-                        <div class="col-lg-12">
-                            <div class="faq-card aos  " data-aos="fade-up">
-                                <h4 class="faq-title">
-                                    <a class="collapseds active" data-bs-toggle="collapse" href="#faqOne" aria-expanded="true">1. What are the costs to buy a house?</a>
-                                </h4>
-                                <div id="faqOne" class="card-collapse collapse show" data-bs-parent="#accordionExample">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.Lorem ipsum dolor sit amet,</p>
-                                </div>
-                            </div>
-                            <div class="faq-card aos  " data-aos="fade-up">
-                                <h4 class="faq-title">
-                                    <a class="collapsed" data-bs-toggle="collapse" href="#faqtwo" aria-expanded="false">2. What are the costs to buy a house?</a>
-                                </h4>
-                                <div id="faqtwo" class="card-collapse collapse" data-bs-parent="#accordionExample">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.Lorem ipsum dolor sit amet,</p>
-                                </div>
-                            </div>
-                            <div class="faq-card aos  " data-aos="fade-up">
-                                <h4 class="faq-title">
-                                    <a class="collapsed" data-bs-toggle="collapse" href="#faqthree" aria-expanded="false">3. Do you have loan consultants?</a>
-                                </h4>
-                                <div id="faqthree" class="card-collapse collapse" data-bs-parent="#accordionExample">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.Lorem ipsum dolor sit amet,</p>
-                                </div>
-                            </div>
-                            <div class="faq-card aos  " data-aos="fade-up">
-                                <h4 class="faq-title">
-                                    <a class="collapsed" data-bs-toggle="collapse" href="#faqfour" aria-expanded="false">4. What are the costs to buy a house?</a>
-                                </h4>
-                                <div id="faqfour" class="card-collapse collapse" data-bs-parent="#accordionExample">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.Lorem ipsum dolor sit amet,</p>
-                                </div>
-                            </div>
-                            <div class="faq-card aos  " data-aos="fade-up">
-                                <h4 class="faq-title">
-                                    <a class="collapsed" data-bs-toggle="collapse" href="#faqfive" aria-expanded="false">5. What are the costs to buy a house?</a>
-                                </h4>
-                                <div id="faqfive" class="card-collapse collapse" data-bs-parent="#accordionExample">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.Lorem ipsum dolor sit amet,</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            <section class="section feature-count feature-count-three">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-12 mx-auto text-center">
-                            <div class="section-header aos aos-init aos-animate" data-aos="fade-up">
-                                <h2 class="header-title">Achievement We Have Earned</h2>
-                                <p>At Freelancer, we believe that talent is borderless and opportunity should be too.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="count-sec">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-xl-3 col-md-6">
-                            <div class="feature-item freelance-count aos aos-init aos-animate" data-aos="fade-up">
-                                <div class="feature-icon ">
-                                    <img src="assets/img/icon/count-icon-01.svg" class="img-fluid" alt="Img">
-                                </div>
-                                <div class="feature-content course-count">
-                                    <h3 class="counter-up">${NumberUsers}</h3>
-                                    <p>Freelance developers</p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xl-3 col-md-6">
-                            <div class="feature-item aos aos-init aos-animate" data-aos="fade-up">
-                                <div class="feature-icon">
-                                    <img src="assets/img/icon/count-icon-02.svg" class="img-fluid" alt="Img">
-                                </div>
-                                <div class="feature-content course-count">
-                                    <h3><span class="counter-up">${NumberPost}</span></h3>
-                                    <p>Projects Post</p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xl-3 col-md-6">
-                            <div class="feature-item comp-project aos aos-init aos-animate" data-aos="fade-up">
-                                <div class="feature-icon">
-                                    <img src="assets/img/icon/count-icon-03.svg" class="img-fluid" alt="Img">
-                                </div>
-                                <div class="feature-content course-count">
-                                    <h3 class="counter-up">919,207</h3>
-                                    <p>Completed projects</p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xl-3 col-md-6">
-                            <div class="feature-item comp-project aos aos-init aos-animate" data-aos="fade-up">
-                                <div class="feature-icon">
-                                    <img src="assets/img/icon/count-icon-04.svg" class="img-fluid" alt="Img">
-                                </div>
-                                <div class="feature-content course-count">
-                                    <h3 class="counter-up">${NumberCompany}</h3>
-                                    <p>Companies Registered</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <section class="section review-five">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-12 mx-auto">
-                            <div class="section-header text-center aos" data-aos="fade-up">
-                                <h2 class="header-title">Top Company</h2>
-                                <p>People love to come again for Kofejob </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="offset-xl-1 col-xl-10">
-                        <div class="slid-review-group">
-                            <div class="slider say-about slider-for aos " data-aos="fade-up">
-                                <c:forEach items="${listcompany}" var="lits">
-                                    <div>
-                                        <div class="testimonial-all d-flex justify-content-center">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="img-reviews">
-                                                        <div class="review-quote">
-                                                            <img src="assets/img/quote-01.svg" alt="Img">
-                                                        </div>
-                                                        <img style="width: 150px;
-                                                             height: 150px;
-                                                             border-radius: 50%" src="${lits.logo}" alt="Img">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="testimonial-two-head ">
-                                                        <h3>${lits.companyName}</h3>
-                                                        <span>Team Number: ${lits.teamNumber.name}</span>
-                                                        <p> ${lits.describe} </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <p>${listblogs.description}</p>
+                                    <div class="blog-read">
+                                        <a href="blog-details.html">Read More <i class="fas fa-arrow-right ms-1"></i></a>
                                     </div>
-                                </c:forEach>                               
+                                </div>
                             </div>
-                            <div class=" slider client-img slider-nav aos " data-aos="fade-up">
-                                <c:forEach items="${listcompany}" var="lits">
-                                    <div class="testimonial-thumb">
-                                        <img style="width: 50px;
-                                             height: 50px;
-                                             border-radius: 50%" src="${lits.logo}" alt="Img">
-                                    </div>
-                                </c:forEach>
-                            </div>
-                        </div>
+                        
                     </div>
+                                    </c:forEach>
                 </div>
             </section>
 
 
-         
-
-            <section class="section job-registers">
-                <div class="container position-relative job-register">
-                    <div class="float-img">
-                        <img src="assets/img/opportunity.png" alt="img">
-                    </div>
+            <section class="section review review-two">
+                <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <div class="register-job-blk">
-                                <div class="job-content-blk aos aos-init aos-animate" data-aos="fade-up">
+                            <div class="section-header section-header-two text-center aos" data-aos="fade-up">
+                                <h2 class="header-title">Reviews Of The <span>Users</span></h2>
+                                <p>What our Clients say about us </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row aos" data-aos="fade-up">
+                        <div class="col-lg-4 col-md-6">
+
+                            <div class="review-blog user-review">
+                                <div class="review-top ">
+                                    <div class="review-img mx-auto">
+                                        <a href="review.html"><img class="img-fluid" src="assets/img/review/review-01.jpg" alt="Post Image"></a>
+                                    </div>
+                                    <div class="review-info text-center">
+                                        <h3><a href="review.html">Durso Raeen</a></h3>
+                                        <h5>Project Lead</h5>
+                                    </div>
+                                </div>
+                                <div class="review-content text-center">
+                                    <p>Respond to every review, both positive and negative. Thank clients for positive feedback and address concerns in negative reviews professionally and empathetically.</p>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="average-rating">5.0</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+
+                            <div class="review-blog user-review">
+                                <div class="review-top ">
+                                    <div class="review-img mx-auto">
+                                        <a href="review.html"><img class="img-fluid" src="assets/img/review/review-02.jpg" alt="Post Image"></a>
+                                    </div>
+                                    <div class="review-info text-center">
+                                        <h3><a href="review.html">Camelia Rennesa</a></h3>
+                                        <h5>Team Lead</h5>
+                                    </div>
+                                </div>
+                                <div class="review-content text-center">
+                                    <p>Respond promptly to reviews. Aim to acknowledge and reply to reviews within a reasonable timeframe, ideally within 24-48 hours.</p>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="average-rating">5.0</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+
+                            <div class="review-blog user-review">
+                                <div class="review-top ">
+                                    <div class="review-img mx-auto">
+                                        <a href="review.html"><img class="img-fluid" src="assets/img/review/review-03.jpg" alt="Post Image"></a>
+                                    </div>
+                                    <div class="review-info text-center">
+                                        <h3><a href="review.html">Brayan</a></h3>
+                                        <h5>Project Lead</h5>
+                                    </div>
+                                </div>
+                                <div class="review-content text-center">
+                                    <p>Maintain a professional and courteous tone in all responses, even when addressing negative reviews. Avoid getting defensive or confrontational.</p>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="average-rating">5.0</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>        
+
+            <section class="section job-register-two">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="register-job-blk justify-content-center">
+                                <div class="job-content-blk text-center aos" data-aos="fade-up">
                                     <h2>Find Your Next Great Job Opportunity!</h2>
                                     <p>Quisque pretium dolor turpis, quis blandit turpis semper ut. Nam malesuada eros nec luctus laoreet.</p>
-                                    <a href="Register" class="btn all-btn">Join Now</a>
                                 </div>
+                                <div class="bg-img">
+                                    <img src="assets/img/bg/job-sec-bg-01.png" class="img-fluid job-right-bg" alt="Img">
+                                    <img src="assets/img/bg/job-sec-bg-02.png" class="img-fluid job-left-bg" alt="Img">
+                                </div>
+                            </div>
+                            <div class="sign-in-btn text-center mt-5 aos" data-aos="fade-up">
+                                <a href="Register" class="btn btn-primary">Register Kofejob </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-
-            <footer class="footer footer-five">
-
+            <footer class="footer footer-two" id="bottom-scroll">
                 <div class="footer-top ">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-2 col-md-4">
+                            <div class="col-xl-3 col-md-3">
                                 <div class="footer-widget footer-menu">
                                     <h2 class="footer-title">Useful Links</h2>
-                                    <ul>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="blog-list.html">Blog</a></li>
-                                        <li><a href="login">Login</a></li>
-                                        <li><a href="register.html">Register</a></li>
-                                        <li><a href="forgot-password.html">Forgot Password</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-4">
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">Help & Support</h2>
                                     <ul>
                                         <li><a href="javascript:void(0);">Browse Candidates</a></li>
                                         <li><a href="javascript:void(0);">Employers Dashboard</a></li>
@@ -770,9 +901,9 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-4">
+                            <div class="col-xl-2 col-md-3">
                                 <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">Other Links</h2>
+                                    <h2 class="footer-title">Pages</h2>
                                     <ul>
                                         <li><a href="freelancer-dashboard.html">Freelancers</a></li>
                                         <li><a href="freelancer-portfolio.html">Freelancer Details</a></li>
@@ -782,41 +913,35 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-4">
+                            <div class="col-xl-3 col-md-4">
                                 <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">Featured Catgeories</h2>
+                                    <h2 class="footer-title">Featured Categories</h2>
                                     <ul>
-                                        <li><a href="project.html">Illustration</a></li>
-                                        <li><a href="project.html">Link Building</a></li>
-                                        <li><a href="project.html">Python Dev</a></li>
-                                        <li><a href="project.html">Angular Dev</a></li>
-                                        <li><a href="project.html">Node JS</a></li>
+                                        <li><a href="javascript:void(0);">Website Design</a></li>
+                                        <li><a href="javascript:void(0);">Mobile Apps</a></li>
+                                        <li><a href="javascript:void(0);">Android Apps</a></li>
+                                        <li><a href="javascript:void(0);">iPhone Apps</a></li>
+                                        <li><a href="javascript:void(0);">Software Architecture</a></li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6">
+                            <div class="col-xl-4 col-md-6">
                                 <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">Subscribe</h2>
+                                    <h2 class="footer-title">Get Contact</h2>
+                                    <ul class="info-contact">
+                                        <li>Phone: (406) 555-0120</li>
+                                        <li>E-mail: <a href="https://kofejob.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bdd4d3dbd2fdd8c5dcd0cdd1d893ded2d0">[email&#160;protected]</a></li>
+                                    </ul>
+                                    <h2 class="footer-title mb-0">Newsletter</h2>
                                     <div class="banner-content aos aos-init aos-animate" data-aos="fade-up">
                                         <form class="form" name="store" method="post" action="https://kofejob.dreamstechnologies.com/html/template/project.html">
-                                            <div class="form-inner">
+                                            <div class="form-inner mb-0">
                                                 <div class="input-group">
-                                                    <input type="email" class="form-control" placeholder="Your Email address.....">
-                                                    <button class="btn btn-primary sub-btn" type="submit"><i class="fas fa-long-arrow-alt-right long-arrow"></i></button>
+                                                    <input type="email" class="form-control" placeholder="Enter Your Email here..">
+                                                    <button class="btn btn-primary sub-btn" type="submit">Subscribe</button>
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>
-                                    <div class="applicate-mobile-blk">
-                                        <h6 class="mb-3">Mobile Application</h6>
-                                    </div>
-                                    <div class="row g-2">
-                                        <div class="col-lg-4">
-                                            <a href="javascript:void(0);"><img class="img-fluid" src="assets/img/app-store.svg" alt="app-store"></a>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <a href="javascript:void(0);"><img class="img-fluid" src="assets/img/google-play.svg" alt="google-play"></a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -826,55 +951,52 @@
 
 
                 <div class="footer-bottom">
-                    <div class="container">
 
-                        <div class="copyright">
-                            <div class="row">
-                                <div class="col-md-12 col-lg-12 ">
-                                    <div class="footer-bottom-content">
-                                        <div class="copyright-text">
-                                            <p class="mb-0">Copyright 2024 © KLTTLJob. All right reserved.</p>
-                                        </div>
-                                        <ul>
-                                            <li><a href="javascript:void(0);" class="icon" target="_blank"><i class="fab fa-facebook-f"></i> </a></li>
-                                            <li><a href="javascript:void(0);" class="icon" target="_blank"><i class="fab fa-linkedin-in"></i> </a></li>
-                                            <li><a href="javascript:void(0);" class="icon" target="_blank"><i class="fab fa-twitter"></i> </a></li>
-                                        </ul>
-                                    </div>
+                    <div class="copyright">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright-text text-center">
+                                    <p class="mb-0">Copyright 2024 &copy; KofeJob. All right reserved. </p>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
 
             </footer>
 
         </div>
 
-
         <button class="scroll-top scroll-top-next scroll-to-target" data-target="html">
             <span class="ti-angle-up"><i class="feather-arrow-up"></i></span>
         </button>
 
 
-        <script src="assets/js/jquery-3.7.1.min.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
+        <script >
+            function toggleHeart(icon) {
+                icon.querySelector('i').classList.toggle('far'); // Thêm hoặc xóa class 'far' (trắng)
+                icon.querySelector('i').classList.toggle('fas'); // Thêm hoặc xóa class 'fas' (đỏ)
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
+            }
+        </script>
+        <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 
-        <script src="assets/js/owl.carousel.min.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 
-        <script src="assets/js/jquery.waypoints.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
-        <script src="assets/js/jquery.counterup.min.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
+        <script src="assets/js/owl.carousel.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 
-        <script src="assets/plugins/aos/aos.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
+        <script src="assets/js/jquery.waypoints.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
+        <script src="assets/js/jquery.counterup.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 
-        <script src="assets/plugins/select2/js/select2.min.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
+        <script src="assets/plugins/aos/aos.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 
-        <script src="assets/js/slick.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
+        <script src="assets/plugins/select2/js/select2.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 
-        <script src="assets/js/script.js" type="fe61ad1fb2efed3e4fb5c0a3-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="fe61ad1fb2efed3e4fb5c0a3-|49" defer></script></body>
+        <script src="assets/js/slick.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/index-5.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:21:36 GMT -->
+        <script src="assets/js/script.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="94bd991bf5d56390f4d2da30-|49" defer></script></body>
+</body>
+<!-- Mirrored from kofejob.dreamstechnologies.com/html/template/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:27:29 GMT -->
 </html>

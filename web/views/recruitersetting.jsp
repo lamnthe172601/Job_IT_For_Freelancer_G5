@@ -44,13 +44,13 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
-                                <a href="index.html" class="menu-logo">
+                                <a href="home" class="menu-logo">
                                     <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                 </a>
                                 <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -58,10 +58,7 @@
                                 </a>
                             </div>
                             
-                            
-                            
-                                
-                                <ul class="main-nav">
+                            <ul class="main-nav">
                                 <li class="active has-submenu">
                                     <a href="home">Home <i class="fas "></i></a>
 
@@ -72,9 +69,8 @@
                                     <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu"> 
                                         
-                                            <li><a href="jobFavourites">Jobs Favourites</a></li>
-                                                                                                                                                           
-                                        <li><a href="jobsApply">Jobs Apply</a></li>
+                                        <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
+                                        <li><a href="ListApply">Jobs Apply</a></li>
                                         <li><a href="jobforyou">Jobs For you</a></li>
                                     </ul>
                                 </li>
@@ -83,51 +79,45 @@
                                     <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
                                                                                                                                                                                                   
-                                        <li><a href="jobsList">Jobs List</a></li>
-                                        <li><a href="newsJobs">News Jobs</a></li>
-                                        <li><a href="findJobs">Find Jobs</a></li>  
-                                        <li><a href="company">Company</a></li>
+                                        <li><a href="ListPost">Jobs List</a></li>                                        
+                                        <li><a href="SreachJob">Find Jobs</a></li>  
                                     </ul>
                                 </li>
                                  </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">Top Freelancer</a></li>
-                                        <li><a href="newsJobs">Skills</a></li>
-                                        
-                                    </ul>
-                                </li>
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">List Post</a></li>
-                                        <li><a href="newsJobs">Reviews</a></li>
-                                        
-                                    </ul>
-                                </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="jobsList">Top Freelancer</a></li>
+                                            <li><a href="newsJobs">Skills</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="newsJobs">Reviews</a></li>
+
+                                        </ul>
+                                    </li>
                                 </c:if>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        
-                                        <li><a href="blogList">Blog List</a></li>
-                                        <li><a href="blogGrid">Blog Grid</a></li>
-                                        <li><a href="AboutUs">About us</a></li>
+                                    <ul class="submenu">                                                                           
+                                        <li><a href="About">About us</a></li>
                                          <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
+                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-                                    
+
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
-                                           
-                                            <li><a href="dashboard">Dashboard</a></li>
-                                            <li><a href="MyProfile">My Profile</a></li>
+                                            <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
                                             <li><a href="Project">Projects</a></li>                        
                                             <li><a href="changePassword">Change Password</a></li>                                                                                     
                                             <li><a href="profile-settings">Settings</a></li>
@@ -140,13 +130,12 @@
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
                                             
-                                            <li><a href="dashboard.html">Dashboard</a></li>
+                                            <li><a href="dashboard">Dashboard</a></li>
                                             <li><a href="companydetail">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
-                                            <li><a href="recruitersetting">Settings</a></li>
+                                            <li><a href="company-details">Company Details</a></li>
+                                            <li><a href="manage-projects">Projects</a></li>
+                                            <li><a href="favourites">Favourites</a></li>                                                                                       
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -156,13 +145,8 @@
                                         <a href="/admin/index.html" target="_blank">Admin</a>
                                         <ul class="submenu">
                                             
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="recruiterprofile">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-                                                                                       
-                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -171,7 +155,7 @@
                                     <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
                                     <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
                                         </c:if>
-                            </ul> 
+                            </ul>
                                 
                                 
                                 
@@ -389,7 +373,7 @@
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="index.html" class="nav-link">
+                                                <a href="home" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-11.svg" alt="Img"> Logout
                                                 </a>
                                             </li>
@@ -402,7 +386,9 @@
                         <div class="col-xl-9 col-lg-8">
                             <div class="pro-pos">
                                 <div class="setting-content employee-profile-new">
-                                    <form action="https://kofejob.dreamstechnologies.com/html/template/profile-settings.html">
+
+
+                                    <form action="updateRecruiterProfile" method="post">
                                         <div class="card">
                                             <div class="pro-head">
                                                 <h3>Profile Setting</h3>
@@ -411,8 +397,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-row pro-pad pt-0 ps-0">
-                                                            <div class="input-block col-md-6 pro-pic">
-                                                                <h4 class="mb-3">Recruiter Information</h4>
+                                                            <div class="input-block col-md-6 pro-pic">                                             
                                                                 <label class="form-label">Profile Picture</label>
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="upload-images">
@@ -427,9 +412,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="container">
-                                                            <h2>Recruiter Profile</h2>
-                                                            <form action="updateRecruiterProfile" method="post">
+                                                        <form action="https://kofejob.dreamstechnologies.com/html/template/freelancer-profile.html">
+                                                            <div class="container">
+                                                                <h2>Recruiter Profile</h2>
+
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-md-12">
                                                                         <div class="mb-3">
@@ -455,103 +441,69 @@
                                                                             <input type="text" class="form-control" name="email" value="${recruiter.email}" readonly>
                                                                         </div>
                                                                     </div>
-
+                                                                    <div class="col-lg-12">
+                                                                        <h2>Company Details</h2>
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Company Name</label>
+                                                                            <input type="text" class="form-control" name="companyName" value="${company.companyName}">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Established On</label>
+                                                                            <input type="text" class="form-control" name="establishedOn" value="${company.establishedOn}">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Website</label>
+                                                                            <input type="text" class="form-control" name="website" value="${company.website}">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Describe</label>
+                                                                            <textarea rows="4" class="form-control" name="describe">${company.describe}</textarea>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </form>
-                                                        </div>
+                                                                <div class="card text-end border-0">
+                                                                    <div class="pro-body">
+                                                                        <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
+                                                                        <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
+
+                                                                    </div>
+                                                                </div>
+                                                        </form>
+
+
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="container">
-                                                <h2>Company Details</h2>
-                                                <form action="updateCompanyDetails" method="post">
-                                                    <div class="card">
-                                                        <div class="pro-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <div class="form-row pro-pad pt-0 ps-0">
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Company Name</label>
-                                                                        <input type="text" class="form-control" name="companyName" value="${company.companyName}">
-                                                                    </div>
-                                                                </div>
-                                                                                                                               </div>
-                                                                <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Established On</label>
-                                                                        <input type="text" class="form-control" name="establishedOn" value="${company.establishedOn}">
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Website</label>
-                                                                        <input type="text" class="form-control" name="website" value="${company.website}">
-                                                                    </div>
-                                                                </div>
-                                                          <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Team Number</label>
-                                                                        <input type="text" class="form-control" name="website" value="${company.teamNumber}">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <label class="form-label">Describe</label>
-                                                                    <textarea rows="4" class="form-control" name="describe">${company.describe}</textarea>
-                                                                </div>
-                                                               </div> 
-                                                            </div>
-                                                        </div>
-                                                    
-                                                </form>
-                                            </div>
-                                            
-                                           
-                                            <div class="card text-end border-0">
-                                                <div class="pro-body">
-                                                    <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
-                                                    <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
-                                                </div>
-                                            </div>
-                                    </form>
+                                        </div>
                                 </div>
                             </div>
+
+
+
+
+                            <%@ include file="footter.jsp" %>                  
+
+
                         </div>
-                    </div>
-                </div>
-            </div>
 
 
-           
+                        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-            <%@ include file="footter.jsp" %>                  
+                        <script src="assets/js/bootstrap.bundle.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
+                        <script src="assets/plugins/select2/js/select2.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-        </div>
+                        <script src="assets/js/moment.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+                        <script src="assets/js/bootstrap-datetimepicker.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
+                        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+                        <script src="assets/plugins/datatables/datatables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+                        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+                        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+                        <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+                        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
 
-        <script src="assets/plugins/select2/js/select2.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-
-        <script src="assets/js/moment.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="assets/js/bootstrap-datetimepicker.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="assets/plugins/datatables/datatables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-
-        <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
-
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:09 GMT -->
-</html>
+                        <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:09 GMT -->
+                        </html>

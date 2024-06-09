@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale.Category;
 
 /**
  *
@@ -45,5 +46,25 @@ public class CategoriesDAO extends DBContext{
         } catch (SQLException e) {
         }
         return null;
+    }
+    
+      public boolean addCategory(Category category) {
+        String query = "INSERT INTO Categories(categories_name) VALUES (?)";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, category.name());
+            int rowsInserted = ps.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean addCategory(CategoriesDAO category) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public boolean addCategory(Categories category) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

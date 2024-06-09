@@ -46,7 +46,7 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
@@ -70,7 +70,7 @@
                                         <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu"> 
 
-                                            <li><a href="jobFavourites">Jobs Favourites</a></li>
+                                            <li><a href="PostFavourites">Jobs Favourites</a></li>
 
                                             <li><a href="jobsApply">Jobs Apply</a></li>
                                             <li><a href="jobforyou">Jobs For you</a></li>
@@ -81,9 +81,8 @@
                                         <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">Jobs List</a></li>
-                                            <li><a href="newsJobs">News Jobs</a></li>
-                                            <li><a href="findJobs">Find Jobs</a></li>  
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
+                                            <li><a href="SreachJob">Find Jobs</a></li>  
                                             <li><a href="company">Company</a></li>
                                         </ul>
                                     </li>
@@ -110,31 +109,24 @@
                                 </c:if>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-
-                                        <li><a href="blogList">Blog List</a></li>
-                                        <li><a href="blogGrid">Blog Grid</a></li>
-                                        <li><a href="AboutUs">About us</a></li>
+                                    <ul class="submenu">                                                                           
+                                        <li><a href="About">About us</a></li>
                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
-
-
-
-
+                                <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
 
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="recruiterprofile">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-
-                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="dashboard">Dashboard</a></li>
+                                            <li><a href="companydetail">My Profile</a></li>
+                                            <li><a href="company-details">Company Details</a></li>
+                                            <li><a href="manage-projects">Projects</a></li>
+                                            <li><a href="favourites">Favourites</a></li>                                                                                       
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -144,13 +136,8 @@
                                         <a href="/admin/index.html" target="_blank">Admin</a>
                                         <ul class="submenu">
 
-                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                            <li><a href="company-profile.html">My Profile</a></li>
-                                            <li><a href="company-details.html">Company Details</a></li>
-                                            <li><a href="manage-projects.html">Projects</a></li>
-                                            <li><a href="favourites.html">Favourites</a></li>
-
-                                            <li><a href="profile-settings.html">Settings</a></li>
+                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
+                                            <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -238,9 +225,6 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="post-project.html" class="login-btn">Post a Project <i class="feather-plus ms-1"></i></a></li>
-
-
                             <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
                                 <li class="nav-item dropdown account-item">
                                     <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
@@ -253,7 +237,7 @@
                                         <div class="drop-head">
                                             <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                                 <span class="user-img">
-                                                    <img src="assets/img/user/avatar-1.jpg" alt="Img">
+                                                    <img src="${freelancer.image}" alt="Img">
                                                 </span>
                                                 <div>
                                                     <span>${freelancer.fullname()}</span>
@@ -261,13 +245,11 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        <a class="dropdown-item" href="developer-profile.html"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                        <a class="dropdown-item" href="freelancer-project-proposals.html"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
-                                        <a class="dropdown-item" href="freelancer-favourites.html"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Subscription</a>
-                                        <a class="dropdown-item" href="freelancer-statement.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
-                                        <a class="dropdown-item" href="freelancer-chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
-                                        <a class="dropdown-item" href="freelancer-profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                        <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                        <a class="dropdown-item" href="MyProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
+                                        <a class="dropdown-item" href="MyProject?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
+
+                                        <a class="dropdown-item" href="freelancer-profile-settings"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                        <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                     </div>
                                 </li>
                             </c:if>
@@ -293,74 +275,60 @@
                                     <div id="sidebar-menu" class="sidebar-menu">
                                         <ul>
                                             <li class="nav-item">
-                                                <a href="freelancer-dashboard.html" class="nav-link ">
+                                                <a href="freelancer-dashboard" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-project-proposals.html" class="nav-link">
+                                                <a href="MyProject?id=${sessionScope.account.userID}" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="freelancer-project-proposals.html">My Proposal</a>
+                                                        <a href="freelancer-project-proposals">My Proposal</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-ongoing-projects.html">Ongoing Projects</a>
+                                                        <a href="freelancer-ongoing-projects">Ongoing Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-completed-projects.html">Completed Projects</a>
+                                                        <a href="freelancer-completed-projects">Completed Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-cancelled-projects.html">Cancelled Projects</a>
+                                                        <a href="freelancer-cancelled-projects">Cancelled Projects</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-favourites.html" class="nav-link">
+                                                <a href="freelancer-favourites" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="freelancer-favourites.html">Bookmarked Projects</a>
+                                                        <a href="freelancer-favourites">Bookmarked Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-invitations.html">Invitations</a>
+                                                        <a href="freelancer-invitations">Invitations</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-review.html" class="nav-link">
+                                                <a href="freelancer-review" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-portfolio.html" class="nav-link">
+                                                <a href="freelancer-portfolio" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-05.svg" alt="Img"> Portfolio
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-chats.html" class="nav-link">
+                                                <a href="freelancer-chats" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
                                                 </a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-withdraw-money.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-payout.html" class="nav-link ">
-                                                    <img src="assets/img/icon/sidebar-icon-08.svg" alt="Img"> Payout
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-statement.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-09.svg" alt="Img"> Statement
-                                                </a>
-                                            </li>
+
                                             <li class="nav-item submenu">
                                                 <a href="freelancer-profile-settings.html" class="nav-link active">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
@@ -377,11 +345,9 @@
                                                         <a href="freelancer-verify-identity.html">Verify Identity</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-change-password.html">Changes Password</a>
+                                                        <a href="changePassword">Changes Password</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="freelancer-delete-account.html">Delete Account</a>
-                                                    </li>
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
@@ -397,10 +363,8 @@
                         <div class="col-xl-9 col-lg-8">
                             <div class="pro-pos">
                                 <div class="setting-content">
-                                    
-                                    <form action="UpdateProfile" method="post" enctype="multipart/form-data">
-                                    
-                                    
+
+                                    <form name="profileForm" action="UpdateProfile" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                                         <div class="card">
                                             <div class="pro-head">
                                                 <h3>Profile Setting</h3>
@@ -425,28 +389,33 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">First Name</label>
-                                                            <input  type="text" name="first_name" class="form-control" value="${freelancer.first_name}">
+                                                            <input type="text" name="firstname" class="form-control" value="${freelancer.first_name}">
+                                                            <div id="firstNameError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Last Name</label>
-                                                            <input type="text" name="last_name" class="form-control" value="${freelancer.last_name}">
+                                                            <input type="text" name="lastname" class="form-control" value="${freelancer.last_name}">
+                                                            <div id="lastNameError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Phone Number</label>
                                                             <input type="text" name="phone" class="form-control" value="${freelancer.phone}">
+                                                            <div id="phoneError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Email Address</label>
                                                             <input type="text" name="email" class="form-control" value="${freelancer.email}">
+                                                            <div id="emailError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
@@ -458,7 +427,7 @@
                                                     <div class="col-lg-4 col-md-12">
                                                         <div class="mb-3 input-block">
                                                             <label class="form-label">Gender</label>
-                                                            <select  name="gender" class="form-control select">
+                                                            <select name="gender" class="form-control select">
                                                                 <option value="1" ${freelancer.gender ? 'selected="selected"' : ''}>
                                                                     Male
                                                                 </option>
@@ -479,7 +448,7 @@
                                                 <div class="row">
                                                     <div class="input-block col-md-12">
                                                         <label class="form-label">Description</label>
-                                                        <textarea name="description" class="form-control" rows="5">${freelancer.describe}</textarea>
+                                                        <textarea name="decscribe" class="form-control" rows="5">${freelancer.describe}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -490,17 +459,15 @@
                                                     <div class="pro-head">
                                                         <h4 class="pro-titles mb-0">Skills</h4>
                                                     </div>
-                                                    <div class="pro-body  skill-info">
-                                                        <c:forEach items="${skillset}" var="skillset">
-                                                            <div class="form-row align-items-center skill-cont">                                                              
-                                                                <input name="skill" type="checkbox" value="${skillset.skill_set_ID}"
-                                                                       <c:forEach items="${skills}" var="skill">
-                                                                           ${skillset.skill_set_ID == skill.skill_set_ID.skill_set_ID ? 'checked="checked"' : ''}
-                                                                       </c:forEach>>                                                                  
-                                                                ${skillset.skill_set_name} 
-                                                            </div>
-                                                        </c:forEach>
-                                                    </div>
+                                                    <c:forEach items="${skillset}" var="skillset">
+                                                        <div class="pro-body skill-info" style="display: inline-block; margin-right: 10px;">
+                                                            <input name="skill" type="checkbox" value="${skillset.skill_set_ID}"
+                                                                   <c:forEach items="${skills}" var="skill">
+                                                                       ${skillset.skill_set_ID == skill.skill_set_ID.skill_set_ID ? 'checked="checked"' : ''}
+                                                                   </c:forEach>>
+                                                            ${skillset.skill_set_name}
+                                                        </div>
+                                                    </c:forEach>
                                                 </div>
                                             </div>
                                         </div>
@@ -509,7 +476,7 @@
                                                 <div class="pro-head">
                                                     <h4 class="pro-titles without-border mb-0">Education</h4>
                                                 </div>
-                                                <div class="pro-body  ">
+                                                <div class="pro-body">
                                                     <c:forEach items="${education}" var="education">
                                                         <div class="form-row align-items-center skill-cont">
                                                             <div class="input-block col-lg-3">
@@ -521,7 +488,6 @@
                                                                         </option>
                                                                     </c:forEach>
                                                                 </select>
-
                                                             </div>
                                                             <div class="input-block col-lg-3">
                                                                 <label class="form-label">University Name</label>
@@ -529,17 +495,14 @@
                                                             </div>
                                                             <div class="col-md-3 input-block floating-icon">
                                                                 <label class="form-label">Start Date</label>
-                                                                <input name="dateStart" type="date" value="${education.start_date}" class="form-control " >
-
+                                                                <input name="dateStart" type="date" value="${education.start_date}" class="form-control">
                                                             </div>
                                                             <div class="col-md-2 input-block floating-icon">
                                                                 <label class="form-label">End Date</label>
-                                                                <input type="date" name="dateEnd" value="${education.end_date}" class="form-control " >
-
+                                                                <input type="date" name="dateEnd" value="${education.end_date}" class="form-control">
                                                             </div>
                                                         </div>
                                                     </c:forEach>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -549,40 +512,35 @@
                                                     <h4 class="pro-titles without-border mb-0">Experience</h4>
                                                 </div>
                                                 <c:forEach items="${experience}" var="experience">
-                                                    <div class="pro-body  ">
+                                                    <div class="pro-body">
                                                         <div class="form-row align-items-center skill-cont">
                                                             <div class="input-block col-lg-3">
                                                                 <label class="form-label">Company Name</label>
-                                                                <input name="experienceName" type="text" class="form-control" value="${experience.experience_work_name}" >
+                                                                <input name="experienceName" type="text" class="form-control" value="${experience.experienceName}">
                                                             </div>
                                                             <div class="input-block col-lg-3">
                                                                 <label class="form-label">Position</label>
-                                                                <input name="position" type="text" class="form-control" value="${experience.position}">
+                                                                <input name="your_project" type="text" class="form-control" value="${experience.your_project}">
                                                             </div>
                                                             <div class="col-md-3 input-block floating-icon">
                                                                 <label class="form-label">Start Date</label>
-                                                                <input name="startDate" type="date" class="form-control " value="${experience.start_date}">
-
+                                                                <input name="startDate" type="date" class="form-control" value="${experience.start_date}">
                                                             </div>
                                                             <div class="col-md-2 input-block floating-icon">
                                                                 <label class="form-label">End Date</label>
-                                                                <input name="endDate" type="date" class="form-control " value="${experience.end_date}">
+                                                                <input name="endDate" type="date" class="form-control" value="${experience.end_date}">
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </c:forEach>
-
                                             </div>
                                         </div>
-
                                         <div class="card text-end border-0">
                                             <div class="pro-body">
                                                 <button onclick="MyProfile" class="btn btn-secondary click-btn btn-plan">Cancel</button>
                                                 <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
                                             </div>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>
@@ -592,110 +550,149 @@
                 </div>
             </div>
 
-                <footer class="footer">
-                    <div class="footer-top ">
-                        <div class="container">
-                            <div class="row">
-                                <div class=" col-lg-4 col-md-12">
-                                    <div class="footer-bottom-logo">
-                                        <a href="index.html" class="menu-logo">
-                                            <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                                        </a>
-                                        <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
-                                            </li>
-                                        </ul>
-                                        <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
-                                    </div>
-                                </div>
-                                <div class=" col-lg-8 col-md-12">
-                                    <div class="row">
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="footer-widget footer-menu">
-                                                <h2 class="footer-title">Useful Links</h2>
-                                                <ul>
-                                                    <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
-                                                    <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
-                                                    <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
-                                                    <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
-                                                    <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="footer-widget footer-menu">
-                                                <h2 class="footer-title">Help & Support</h2>
-                                                <ul>
-                                                    <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="footer-widget footer-menu">
-                                                <h2 class="footer-title">Other Links</h2>
-                                                <ul>
-                                                    <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
-                                                    <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
-                                                    <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
-                                                    <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
-                                                    <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="footer-widget footer-menu">
-                                                <h2 class="footer-title">Connect With Us</h2>
-                                                <ul>
-                                                    <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
-                                                    <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
-                                                    <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
-                                                    <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
-                                                    <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+            <footer class="footer">
+                <div class="footer-top ">
+                    <div class="container">
+                        <div class="row">
+                            <div class=" col-lg-4 col-md-12">
+                                <div class="footer-bottom-logo">
+                                    <a href="home" class="menu-logo">
+                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                                    </a>
+                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                    <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-
-                    <div class="footer-bottom">
-                        <div class="container">
-
-                            <div class="copyright">
+                            <div class=" col-lg-8 col-md-12">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="copyright-text text-center">
-                                            <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Useful Links</h2>
+                                            <ul>
+                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
+                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
+                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
+                                                <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
+                                                <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Help & Support</h2>
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Other Links</h2>
+                                            <ul>
+                                                <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
+                                                <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
+                                                <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
+                                                <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
+                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Connect With Us</h2>
+                                            <ul>
+                                                <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
+                                                <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
+                                                <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
+                                                <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
+                                                <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+                </div>
 
-                </footer>
 
-            
+                <div class="footer-bottom">
+                    <div class="container">
 
+                        <div class="copyright">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="copyright-text text-center">
+                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </footer>
+
+
+            <script>
+                function validateForm() {
+                    let firstName = document.forms["profileForm"]["firstname"].value;
+                    let lastName = document.forms["profileForm"]["lastname"].value;
+                    let email = document.forms["profileForm"]["email"].value;
+                    let phone = document.forms["profileForm"]["phone"].value;
+                    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    let phonePattern = /^[0-9]{10}$/;
+
+                    let isValid = true;
+
+                    // Reset previous error messages
+                    document.getElementById("firstNameError").innerHTML = "";
+                    document.getElementById("lastNameError").innerHTML = "";
+                    document.getElementById("emailError").innerHTML = "";
+                    document.getElementById("phoneError").innerHTML = "";
+
+                    if (firstName === "") {
+                        document.getElementById("firstNameError").innerHTML = "First Name is required";
+                        isValid = false;
+                    }
+
+                    if (lastName === "") {
+                        document.getElementById("lastNameError").innerHTML = "Last Name is required";
+                        isValid = false;
+                    }
+
+                    if (!emailPattern.test(email)) {
+                        document.getElementById("emailError").innerHTML = "Please enter a valid email address";
+                        isValid = false;
+                    }
+
+                    if (!phonePattern.test(phone)) {
+                        document.getElementById("phoneError").innerHTML = "Please enter a valid phone number (10 digits)";
+                        isValid = false;
+                    }
+
+                    return isValid;
+                }
+            </script>                                            
 
             <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 

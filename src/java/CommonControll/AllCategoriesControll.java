@@ -53,7 +53,7 @@ public class AllCategoriesControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("views/allCategories.jsp").forward(request, response);
     } 
 
     /** 

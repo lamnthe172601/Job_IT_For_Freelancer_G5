@@ -4,6 +4,7 @@
  */
 package AccountControll;
 
+import Models.Categories;
 import Models.Company;
 import Models.Freelancer;
 import Models.Post;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import Models.User;
+import dal.CategoriesDAO;
 import dal.CompanyDAO;
 import dal.HomeDAO;
 import dal.RecruiterDAO;
@@ -47,7 +49,7 @@ public class LoginController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
@@ -69,10 +71,13 @@ public class LoginController extends HttpServlet {
                 if (c.getRoleID().getRoleID() == 4) {
                     RecruiterDAO re = new RecruiterDAO();
                     CompanyDAO com = new CompanyDAO();
+                    CategoriesDAO cat = new CategoriesDAO();
+                    Categories ca = cat.getCategoryByID(c.getUserID());
                     Recruiter rec = re.getRecruiterProfile(c.getUserID());
                     Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
                     session.setAttribute("company", co);
                     session.setAttribute("recruiter", rec);
+                    session.setAttribute("categories", ca);
                 }
 
                 if (c.isLevelPass() == true && c.getStatus().equals("active")) {
@@ -96,10 +101,4 @@ public class LoginController extends HttpServlet {
 
         }
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
