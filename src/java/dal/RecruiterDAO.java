@@ -22,7 +22,7 @@ import java.util.List;
 public class RecruiterDAO extends DBContext {
 
     public Recruiter getRecruiterProfile(int uid) {
-        
+
         String query = """
                        select * from Recruiter 
                                        where userID = ?""";
@@ -33,16 +33,16 @@ public class RecruiterDAO extends DBContext {
 
             if (rs.next()) {
                 return new Recruiter(
-                            rs.getInt("recruiterID"),
-                            rs.getString("first_name"),
-                            rs.getString("last_name"),
-                            rs.getBoolean("gender"),
-                            rs.getDate("dob"),
-                            rs.getString("image"),
-                            rs.getString("email_contact"),
-                            rs.getString("phone_contact"),
-                            rs.getInt("userID")
-                    );
+                        rs.getInt("recruiterID"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getBoolean("gender"),
+                        rs.getDate("dob"),
+                        rs.getString("image"),
+                        rs.getString("email_contact"),
+                        rs.getString("phone_contact"),
+                        rs.getInt("userID")
+                );
             }
         } catch (SQLException e) {
         }
@@ -97,8 +97,8 @@ public class RecruiterDAO extends DBContext {
     }
 
     public boolean updateRecruiter(Recruiter recruiter) throws SQLException {
-           CompanyDAO comDAO = new CompanyDAO();
-           
+        CompanyDAO comDAO = new CompanyDAO();
+
         String query = "UPDATE Recruiter SET first_name = ?, last_name = ?, [image] = ?, gender = ?, dob = ?, phone_contact = ? , email_contact = ? , userID =?\n"
                 + "where recruiterID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -107,11 +107,11 @@ public class RecruiterDAO extends DBContext {
             stmt.setString(3, recruiter.getImage());
             stmt.setBoolean(4, recruiter.isGender());
             stmt.setDate(5, (java.sql.Date) recruiter.getDob());
-            
-            stmt.setString(6,recruiter.getEmail());
-            stmt.setString(7,recruiter.getPhone());
-            stmt.setInt(8,recruiter.getRecruiterID());
-           
+
+            stmt.setString(6, recruiter.getEmail());
+            stmt.setString(7, recruiter.getPhone());
+            stmt.setInt(8, recruiter.getRecruiterID());
+
             int rowsUpdated = stmt.executeUpdate();
             Company company = null;
             comDAO.updateCompany(company);
@@ -121,7 +121,7 @@ public class RecruiterDAO extends DBContext {
             throw new SQLException("Error while updating recruiter", e);
         }
     }
-    
+
     public List<Post> ListPostByDateTime(int recruiterID) {
         List<Post> list = new ArrayList<>();
         String query = """
@@ -148,7 +148,7 @@ public class RecruiterDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Post> ListAllPostByRecruiter(int recruiterID) {
         List<Post> list = new ArrayList<>();
         String query = """
@@ -175,21 +175,22 @@ public class RecruiterDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<JobApply> ListAllApplyForFreelancerByRecruiterID(int recruiterID) {
         List<JobApply> list = new ArrayList<>();
         String query = """
                            SELECT 
-                               *
-                           FROM [JobApply] ja
-                           JOIN [Post] p ON ja.postID = p.postID
-                           join Categories ca on p.caID = ca.caID
-                           join JobType jt on jt.jobID = p.job_type_ID
-                           join Duration du on du.durationID = p.durationID
-                           JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
-                           JOIN [Freelancer] free ON ja.freelanceID = free.freelanceID
-                           WHERE 
-                               p.recruiterID = ?;
+                                                              *
+                                                          FROM [JobApply] ja
+                                                          JOIN [Post] p ON ja.postID = p.postID
+                                                          join Categories ca on p.caID = ca.caID
+                                                          join JobType jt on jt.jobID = p.job_type_ID
+                                                          join Duration du on du.durationID = p.durationID
+                                                          
+                                                          JOIN [Freelancer] free ON ja.freelanceID = free.freelanceID
+                               						   JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
+                                                          WHERE 
+                                                              p.recruiterID =?;
                            """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -202,17 +203,17 @@ public class RecruiterDAO extends DBContext {
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
                 Post post = new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca);
                 Freelancer en = new Freelancer(
-                            rs.getInt("freelanceID"),
-                            rs.getString("first_name"),
-                            rs.getString("last_name"),
-                            rs.getString("image"),
-                            rs.getBoolean("gender"),
-                            rs.getDate("dob"),
-                            rs.getString("describe"),
-                            rs.getString("email__contact"),
-                            rs.getString("phone_contact")
-                    );
-                
+                        rs.getInt("freelanceID"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("image"),
+                        rs.getBoolean("gender"),
+                        rs.getDate("dob"),
+                        rs.getString("describe"),
+                        rs.getString("email__contact"),
+                        rs.getString("phone_contact")
+                );
+
                 list.add(new JobApply(rs.getInt("applyID"), en, post, rs.getString("status"), rs.getDate("dateApply")));
             }
         } catch (SQLException e) {
@@ -220,12 +221,12 @@ public class RecruiterDAO extends DBContext {
         }
         return list;
     }
-     
-     public static void main(String[] args) {
+
+    public static void main(String[] args) {
         RecruiterDAO r = new RecruiterDAO();
-        List<JobApply>  e = r.ListAllApplyForFreelancerByRecruiterID(1);
-         for (JobApply post : e) {
-             System.out.println(post.toString());
-         }
+        List<JobApply> e = r.ListAllApplyForFreelancerByRecruiterID(1);
+        for (JobApply post : e) {
+            System.out.println(post.toString());
+        }
     }
 }

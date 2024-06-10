@@ -6,10 +6,11 @@
         <group name="SWP391">
             <file>file:/D:/SU24/A/web/assets/plugins/feather/feather.css</file>
             <file>file:/D:/SU24/A/src/java/dal/RecruiterDAO.java</file>
+            <file>file:/D:/SU24/A/web/views/recruiterDashboard.jsp</file>
+            <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
             <file>file:/D:/SU24/A/web/views/managePost.jsp</file>
             <file>file:/D:/SU24/A/web/views/home.jsp</file>
             <file>file:/D:/SU24/A/src/java/Models/Freelancer.java</file>
-            <file>file:/D:/SU24/A/src/java/Models/JobApply.java</file>
             <file>file:/D:/SU24/A/src/java/Models/Post.java</file>
             <file>file:/D:/SU24/A/src/java/Models/Recruiter.java</file>
             <file>file:/D:/SU24/A/src/java/dal/HomeDAO.java</file>

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +33,9 @@
                 content: '...';
             }
         </style>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
     </head>
     <body class="dashboard-page">
 
@@ -49,7 +53,7 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
@@ -166,7 +170,7 @@
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="notification">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md">
                                                             <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-3.jpg">
@@ -180,7 +184,7 @@
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="notification">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md">
                                                             <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-4.jpg">
@@ -196,7 +200,7 @@
                                         </ul>
                                     </div>
                                     <div class="topnav-dropdown-footer text-center">
-                                        <a href="notification.html">View All Notification</a>
+                                        <a href="notification">View All Notification</a>
                                     </div>
                                 </div>
                             </li>
@@ -330,7 +334,7 @@
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="index.html" class="nav-link">
+                                                <a href="logout" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-11.svg" alt="Img"> Logout
                                                 </a>
                                             </li>
@@ -370,7 +374,7 @@
                                             <a href="#add-milestone" class="login-btn btn-primary" data-bs-toggle="modal">Add Milestone</a>
                                         </div>
                                         <div class="table-responsive table-box manage-projects-table">
-                                            <table class="table table-center table-hover datatable no-sort">
+                                            <table id="datatable" class="table table-center table-hover datatable no-sort ">
                                                 <thead class="thead-pink">
                                                     <tr>
                                                         <th>Title</th>
@@ -386,6 +390,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${listpost}" var="list">
+
                                                         <tr>
                                                             <td>${list.title}</td>
                                                             <td>${list.jobTypeID.jobName}</td>
@@ -397,9 +402,9 @@
                                                             <td><span class="badge badge-pill bg-danger-light">Unpaid</span></td>
                                                             <td>
                                                                 <div class="action-table-data">
-                                                                                 
+
                                                                     <div class="edit-delete-action">
-                                                                        <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
+                                                                        <a href="#edit-milestone${list.postID}" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
                                                                         <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
                                                                     </div>
                                                                     <div style="margin-left: 5px; ">
@@ -411,8 +416,89 @@
                                                                         </select>
                                                                     </div> 
                                                                 </div>
+                                                                <div class="modal fade edit-proposal-modal" id="edit-milestone${list.postID}">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-md">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title">Edit Post a new Jobs</h4>
+                                                                                <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form action="#">
+                                                                                    <div class="modal-info">
+                                                                                        <div class="row">
+                                                                                            <div class="col-lg-4">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">Milestone name</label>
+                                                                                                    <input type="text" class="form-control" value="${list.title}">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-2">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">Amount</label>
+                                                                                                    <input type="text" class="form-control" value="200">
+                                                                                                    <span class="input-group-text">$</span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-3">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">Start Date</label>
+                                                                                                    <div class="cal-icon">
+                                                                                                        <input class="form-control datetimepicker" type="text">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-3">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">End Date</label>
+                                                                                                    <div class="cal-icon">
+                                                                                                        <input class="form-control datetimepicker" type="text">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-12">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">Description</label>
+                                                                                                    <textarea class="form-control summernote">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</textarea>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">Completion (%)</label>
+                                                                                                    <select class="select">
+                                                                                                        <option value>10</option>
+                                                                                                        <option value>20</option>
+                                                                                                        <option value>30</option>
+                                                                                                        <option value>40</option>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">Status</label>
+                                                                                                    <select class="select">
+                                                                                                        <option value>Select</option>
+                                                                                                        <option value>Approved</option>
+                                                                                                        <option value>On Hold</option>
+                                                                                                        <option value>Cancelled</option>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="submit-section text-end">
+                                                                                        <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
+                                                                                        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </td>
+
                                                         </tr>
+
                                                     </c:forEach>
                                                 </tbody>
                                             </table>
@@ -426,6 +512,7 @@
                     </div>
                 </div>
             </div>
+
 
 
             <footer class="footer">
@@ -590,85 +677,7 @@
             </div>
 
 
-            <div class="modal fade edit-proposal-modal" id="edit-milestone">
-                <div class="modal-dialog modal-dialog-centered modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Edit Post a new Jobs</h4>
-                            <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
-                        </div>
-                        <div class="modal-body">
-                            <form action="#">
-                                <div class="modal-info">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="input-block">
-                                                <label class="form-label">Milestone name</label>
-                                                <input type="text" class="form-control" value="Creating Logo">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="input-block">
-                                                <label class="form-label">Amount</label>
-                                                <input type="text" class="form-control" value="200">
-                                                <span class="input-group-text">$</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="input-block">
-                                                <label class="form-label">Start Date</label>
-                                                <div class="cal-icon">
-                                                    <input class="form-control datetimepicker" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="input-block">
-                                                <label class="form-label">End Date</label>
-                                                <div class="cal-icon">
-                                                    <input class="form-control datetimepicker" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="input-block">
-                                                <label class="form-label">Description</label>
-                                                <textarea class="form-control summernote">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-block">
-                                                <label class="form-label">Completion (%)</label>
-                                                <select class="select">
-                                                    <option value>10</option>
-                                                    <option value>20</option>
-                                                    <option value>30</option>
-                                                    <option value>40</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-block">
-                                                <label class="form-label">Status</label>
-                                                <select class="select">
-                                                    <option value>Select</option>
-                                                    <option value>Approved</option>
-                                                    <option value>On Hold</option>
-                                                    <option value>Cancelled</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="submit-section text-end">
-                                    <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
-                                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
 
             <div class="modal fade edit-proposal-modal" id="view-milestone">
@@ -730,7 +739,14 @@
                     }
                 });
             });
-        </script>                            
+        </script>  
+        <script>
+            $(document).ready(function () {
+                $('.datatable').DataTable({
+                    lengthMenu: [10, 25, 50, 100] // Hiển thị tùy chọn 10, 25, 50 và 100 dòng trên mỗi trang
+                });
+            });
+        </script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
 
         </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
@@ -742,9 +758,11 @@
 
         <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-
+        
         <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script></body>
-
+        
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="assets/plugins/datatables/datatables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:31:10 GMT -->
 </html>

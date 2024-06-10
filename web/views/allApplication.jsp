@@ -379,7 +379,7 @@
                                                 <tbody>
                                                     <c:forEach items="${listapply}" var="listapply">
                                                     <tr>
-                                                        <td>${listapply.freelancer.last_name}</td>
+                                                        <td>${listapply.freelancer.name()}</td>
                                                         <td>${listapply.dateApply}</td>
                                                         <td>
                                                             ${listapply.post.title}
