@@ -468,7 +468,14 @@
             emailFilter.addEventListener('input', filterRows);
             statusFilter.addEventListener('change', filterRows);
         </script>
-
+        <script>
+            $(document).ready(function() {
+    $('.datatable').DataTable({
+        lengthMenu: [10, 25, 50, 100] // Hiển thị tùy chọn 10, 25, 50 và 100 dòng trên mỗi trang
+    });
+});
+        </script>
+            
         <!--        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="adminAssets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>-->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
