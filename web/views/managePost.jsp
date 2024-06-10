@@ -27,6 +27,11 @@
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+        <style>
+            .description::after {
+                content: '...';
+            }
+        </style>
     </head>
     <body class="dashboard-page">
 
@@ -57,7 +62,7 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                           <ul class="main-nav">
+                            <ul class="main-nav">
                                 <li class="active has-submenu">
                                     <a href="home">Home <i class="fas "></i></a>
 
@@ -114,7 +119,7 @@
                                 </li>
                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
 
-                               
+
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
@@ -268,8 +273,8 @@
                                                     <li>
                                                         <a href="ExpiredProjects">Expired Projects</a>
                                                     </li>
-                                                    
-                                                    
+
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
@@ -340,14 +345,14 @@
                             </div>
                             <nav class="user-tabs mb-4">
                                 <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
-                                    
+
                                     <li class="nav-item">
                                         <a class="nav-link active" href="manageJobsPosts">Manage jobs</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link " href="ManageApplication">All applicants</a>
                                     </li>
-                                    
+
                                     <li class="nav-item">
                                         <a class="nav-link " href="CompletedProjects">Completed Projects</a>
                                     </li>
@@ -368,216 +373,50 @@
                                             <table class="table table-center table-hover datatable no-sort">
                                                 <thead class="thead-pink">
                                                     <tr>
-                                                        <th>Name</th>
-                                                        <th>Budget</th>
-                                                        <th>Progress</th>
+                                                        <th>Title</th>
+                                                        <th>Job Type</th>
                                                         <th>Start date</th>
-                                                        <th>Due date</th>
+                                                        <th>Description</th>
+                                                        <th>Skill</th>
+                                                        <th>Duration</th>
+                                                        <th>Proposals</th>
                                                         <th>Status</th>
-                                                        <th>Action</th>
+                                                        <th style="text-align: center;">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Logo Design</td>
-                                                        <td>$2222</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <c:forEach items="${listpost}" var="list">
+                                                        <tr>
+                                                            <td>${list.title}</td>
+                                                            <td>${list.jobTypeID.jobName}</td>
+                                                            <td>${list.datePost}</td>
+                                                            <td><div class="description">${list.description}</div></td>
+                                                            <td>${list.skill}</td>
+                                                            <td>${list.durationID.durationName}</td>
+                                                            <td>${list.quantity}</td>
+                                                            <td><span class="badge badge-pill bg-danger-light">Unpaid</span></td>
+                                                            <td>
+                                                                <div class="action-table-data">
+                                                                                 
+                                                                    <div class="edit-delete-action">
+                                                                        <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
+                                                                        <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
+                                                                    </div>
+                                                                    <div style="margin-left: 5px; ">
+                                                                        <select class="select" style="background-color: white; transition: background-color 0.3s;">
+                                                                            <option hidden="" value="Select">Select</option>
+                                                                            <option value="Approved">Approved</option>
+                                                                            <option value="On Hold">On Hold</option>
+                                                                            <option value="Cancelled">Cancelled</option>
+                                                                        </select>
+                                                                    </div> 
                                                                 </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">45%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>29 Sep 2023</td>
-                                                        <td>29 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-danger-light">Unpaid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="javascript:void(0);" class="btn btn-request disabled">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Create desktop applications</td>
-                                                        <td>$5762</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">50%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>25 Sep 2023</td>
-                                                        <td>25 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-danger-light">Unpaid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="#success-milestone" data-bs-toggle="modal" class="btn btn-request">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="javascript:void(0);" class="me-2"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>PHP, Javascript Projects </td>
-                                                        <td>$4879</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">100%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>17 Sep 2023</td>
-                                                        <td>17 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-success-light">Paid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="javascript:void(0);" class="btn btn-request disabled">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Website Designer Required </td>
-                                                        <td>$3651</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">50%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>11 Sep 2023</td>
-                                                        <td>11 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-danger-light">Unpaid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="javascript:void(0);" class="btn btn-request disabled">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Swift / SwiftUI Developer</td>
-                                                        <td>$2789</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">100%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>05 Sep 2023</td>
-                                                        <td>05 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-success-light">Paid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="javascript:void(0);" class="btn btn-request disabled">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Full-stack Developer </td>
-                                                        <td>$7853</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">100%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>01 Sep 2023</td>
-                                                        <td>01 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-success-light">Paid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="javascript:void(0);" class="btn btn-request disabled">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
+
                                         </div>
                                     </div>
                                 </div>
@@ -691,11 +530,209 @@
 
             </footer>
 
+
+            <div class="modal fade edit-proposal-modal" id="add-milestone">
+                <div class="modal-dialog modal-dialog-centered modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Milestone</h4>
+                            <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#">
+                                <div class="modal-info">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="input-block">
+                                                <label class="form-label">Milestone name</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="input-block">
+                                                <label class="form-label">Amount</label>
+                                                <input type="text" class="form-control">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="input-block">
+                                                <label class="form-label">Start Date</label>
+                                                <div class="cal-icon">
+                                                    <input class="form-control datetimepicker" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="input-block">
+                                                <label class="form-label">End Date</label>
+                                                <div class="cal-icon">
+                                                    <input class="form-control datetimepicker" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="input-block">
+                                                <label class="form-label">Description</label>
+                                                <textarea class="form-control summernote"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="submit-section text-end">
+                                    <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
+                                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade edit-proposal-modal" id="edit-milestone">
+                <div class="modal-dialog modal-dialog-centered modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Post a new Jobs</h4>
+                            <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#">
+                                <div class="modal-info">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="input-block">
+                                                <label class="form-label">Milestone name</label>
+                                                <input type="text" class="form-control" value="Creating Logo">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="input-block">
+                                                <label class="form-label">Amount</label>
+                                                <input type="text" class="form-control" value="200">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="input-block">
+                                                <label class="form-label">Start Date</label>
+                                                <div class="cal-icon">
+                                                    <input class="form-control datetimepicker" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="input-block">
+                                                <label class="form-label">End Date</label>
+                                                <div class="cal-icon">
+                                                    <input class="form-control datetimepicker" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="input-block">
+                                                <label class="form-label">Description</label>
+                                                <textarea class="form-control summernote">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-block">
+                                                <label class="form-label">Completion (%)</label>
+                                                <select class="select">
+                                                    <option value>10</option>
+                                                    <option value>20</option>
+                                                    <option value>30</option>
+                                                    <option value>40</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-block">
+                                                <label class="form-label">Status</label>
+                                                <select class="select">
+                                                    <option value>Select</option>
+                                                    <option value>Approved</option>
+                                                    <option value>On Hold</option>
+                                                    <option value>Cancelled</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="submit-section text-end">
+                                    <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
+                                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade edit-proposal-modal" id="view-milestone">
+                <div class="modal-dialog modal-dialog-centered modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">View Milestone</h4>
+                            <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex justify-content-between milestone-view">
+                                <h5>Create desktop applications</h5>
+                                <span>Amount : $400</span>
+                            </div>
+                            <ul class="download-item">
+                                <li>
+                                    <a href="javascript:void(0);">Preview_Screens.zip <i class="feather-download"></i></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Finalupdate.zip <i class="feather-download"></i></a>
+                                </li>
+                            </ul>
+                            <div class="text-end">
+                                <a href="javascript:void(0);" class="btn btn-primary">Approve</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade edit-proposal-modal success-modal" id="success-milestone">
+                <div class="modal-dialog modal-dialog-centered modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header justify-content-end">
+                            <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="success-msg-content text-center">
+                                <h4>Payment Initiated Successfully</h4>
+                                <p>You will be notified when payment is credited to
+                                    your account</p>
+                                <a href="manage-projects.html" class="btn btn-primary mt-3">Go to Projects</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var descriptions = document.querySelectorAll('.description');
+                descriptions.forEach(function (description) {
+                    var words = description.textContent.split(' ');
+                    if (words.length > 6) {
+                        description.textContent = words.slice(0, 5).join(' ') + '...';
+                    }
+                });
+            });
+        </script>                            
+        <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
 
-       <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
-                                        
         </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>

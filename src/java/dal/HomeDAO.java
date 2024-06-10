@@ -196,7 +196,6 @@ public class HomeDAO extends DBContext {
             blogs.add(blog);
         }
     } catch (SQLException e) {
-        e.printStackTrace();
     }
     return blogs;
 }

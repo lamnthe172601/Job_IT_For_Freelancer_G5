@@ -368,20 +368,23 @@
                                             <table class="table table-center table-hover datatable no-sort">
                                                 <thead class="thead-pink">
                                                     <tr>
-                                                        <th>Task Name</th>
+                                                        <th>Name Freelancer</th>
                                                         <th>Milestones</th>
                                                         <th>Description</th>
+                                                        <th>Contact</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <c:forEach items="${listapply}" var="listapply">
                                                     <tr>
-                                                        <td>Website Designer Required </td>
-                                                        <td>Research</td>
+                                                        <td>${listapply.freelancer.last_name}</td>
+                                                        <td>${listapply.dateApply}</td>
                                                         <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
+                                                            ${listapply.post.title}
                                                         </td>
+                                                        <td>${listapply.freelancer.email}</td>
                                                         <td><span class="badge badge-pill bg-success-light">Completed</span></td>
                                                         <td>
                                                             <div class="action-table-data">
@@ -392,86 +395,7 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Create desktop applications </td>
-                                                        <td>Research</td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td><span class="badge badge-pill bg-warning-light">Pending</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>PHP, Javascript Projects </td>
-                                                        <td>Research</td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td><span class="badge badge-pill bg-success-light">Completed</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Website Designer Required </td>
-                                                        <td>Research</td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td><span class="badge badge-pill bg-warning-light">Pending</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Swift / SwiftUI Developer </td>
-                                                        <td>Research</td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td><span class="badge badge-pill bg-success-light">Completed</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Full-stack Developer </td>
-                                                        <td>Research</td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td><span class="badge badge-pill bg-success-light">Completed</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>

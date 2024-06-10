@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -424,77 +425,34 @@
                                     <div class="col-xl-12">
                                         <div class="card mb-4 ongoing-project-card">
                                             <div class="pro-head">
-                                                <h2>Recent Earnings</h2>
+                                                <h2>List News Post Projects</h2>
                                                 <a href="view-project-detail.html" class="btn fund-btn">View All</a>
                                             </div>
                                             <div class="table-responsive recent-earnings flex-fill">
                                                 <table class="table mb-0">
                                                     <thead>
                                                         <tr>
-                                                            <th>Details</th>
+                                                            <th>Title</th>
                                                             <th>Job Type</th>
-                                                            <th>Budget</th>
+                                                            <th>Skill</th>
                                                             <th>Create On</th>
-                                                            <th>Expiring On</th>
+                                                            <th>Categories</th>
                                                             <th>Proposals</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        <c:forEach items="${listpost}" var="listpost">
                                                         <tr>
-                                                            <td>Website Designer Required </td>
-                                                            <td>Hourly</td>
-                                                            <td>$2222</td>
-                                                            <td>29 Sep 2023</td>
-                                                            <td>10 Oct 2023</td>
-                                                            <td>47</td>
+                                                            <td>${listpost.title}</td>
+                                                            <td>${listpost.jobTypeID.jobName}</td>
+                                                            <td>${listpost.skill}</td>
+                                                            <td>${listpost.datePost}</td>
+                                                            <td>${listpost.caID.categoriesName}</td>
+                                                            <td style="text-align: center;">${listpost.quantity}</td>
                                                             <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>Create desktop applications </td>
-                                                            <td>Full time</td>
-                                                            <td>$5762</td>
-                                                            <td>25 Sep 2023</td>
-                                                            <td>05 Oct 2023</td>
-                                                            <td>15</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>PHP, Javascript Projects </td>
-                                                            <td>Part time</td>
-                                                            <td>$4879</td>
-                                                            <td>17 Sep 2023</td>
-                                                            <td>29 Sep 2023</td>
-                                                            <td>26</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Website Designer Required </td>
-                                                            <td>Hourly</td>
-                                                            <td>$2222</td>
-                                                            <td>29 Sep 2023</td>
-                                                            <td>10 Oct 2023</td>
-                                                            <td>47</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Swift / SwiftUI Developer</td>
-                                                            <td>Hourly</td>
-                                                            <td>$2789</td>
-                                                            <td>05 Sep 2023</td>
-                                                            <td>17 Sep 2023</td>
-                                                            <td>19</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Full-stack Developer </td>
-                                                            <td>Part time</td>
-                                                            <td>$7853</td>
-                                                            <td>01 Sep 2023</td>
-                                                            <td>13 Sep 2023</td>
-                                                            <td>38</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
+                                                        </c:forEach>
                                                     </tbody>
                                                 </table>
                                             </div>

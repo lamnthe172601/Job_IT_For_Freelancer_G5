@@ -5,12 +5,18 @@
 
 package RecruiterControll;
 
+import Models.Post;
+import Models.Recruiter;
+import Models.User;
+import dal.RecruiterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
@@ -18,27 +24,21 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class ManageJobsPostsControll extends HttpServlet {
    
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        RecruiterDAO reDAO = new RecruiterDAO();
+        Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
+        List<Post> listpost = reDAO.ListAllPostByRecruiter(re.getRecruiterID());
+        request.setAttribute("listpost", listpost);
         request.getRequestDispatcher("views/managePost.jsp").forward(request, response);
     } 
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
