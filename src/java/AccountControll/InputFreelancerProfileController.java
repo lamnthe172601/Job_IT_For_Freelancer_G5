@@ -93,7 +93,7 @@ public class InputFreelancerProfileController extends HttpServlet {
         String phone = request.getParameter("phone");
         String date = request.getParameter("dob");
         String gender = request.getParameter("gender");
-        String decscribe = request.getParameter("decscribe");
+        String decscribe = request.getParameter("decscribe");       
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -103,10 +103,15 @@ public class InputFreelancerProfileController extends HttpServlet {
             dao.inputFreelancerInfo(firstname, lastname, null, gender, date, decscribe, email, phone, userID);
             int freelancerID = dao.getFreelancerIDbyUserID(userID);
             String[] skills = request.getParameterValues("skill");
+            String[] level=request.getParameterValues("level");
             if (skills != null) {
-                for (int i = 0; i < skills.length; i++) {
-                    dao.inputFreelancerSkill(skills[i], freelancerID);
+                int s=skills.length;
+                int index=0;
+                while(s>index){
+                    dao.inputFreelancerSkill(skills[index], freelancerID,level[index]);
+                    index++;
                 }
+                
             }
 
             String position = request.getParameter("position");

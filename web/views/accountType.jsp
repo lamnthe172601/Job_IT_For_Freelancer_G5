@@ -44,22 +44,22 @@
                                     <div class="text-center on-board select-account group-select">
                                         <div class="select-type">
                                             <div class="account-onborad onboard-head">
-                                                <h2>Select Account Type</h2>                                               
-                                                    <div class="select-box d-flex justify-content-center">
-                                                        <input checked="checked" id="freelance" type="radio" name="typeaccount" value="1">
-                                                        <label class="employee-level free-lance-img accounts_type" data-id="freelance" for="freelance">
+                                                <h2>Select Account Type</h2>
+                                                <div class="select-box d-flex justify-content-center">
+                                                    <input checked="checked" id="freelance" type="radio" name="typeaccount" value="1">
+                                                    <label class="employee-level free-lance-img accounts_type" data-id="freelance" for="freelance">
 
-                                                            <!--<img src="assets/img/icon/checks.svg" alt="Img" class="checks-set">-->
-                                                            <a href="InputFreelancerProfile"> <img src="assets/img/select-04.svg" alt="Img" class="img-fluid"></a>
-                                                            <span>Freelancer</span>
+                                                        <!--<img src="assets/img/icon/checks.svg" alt="Img" class="checks-set">-->
+                                                        <a href="InputFreelancerProfile"> <img src="assets/img/select-04.svg" alt="Img" class="img-fluid"></a>
+                                                        <span>Freelancer</span>
 
-                                                        </label>
-                                                        <input id="employee" class="accounts_type" type="radio" name="typeaccount" value="2">
-                                                        <label class="employee-level employee-img accounts_type" data-id="employee" for="employee">
+                                                    </label>
+                                                    <input id="employee" class="accounts_type" type="radio" name="typeaccount" value="2">
+                                                    <label class="employee-level employee-img accounts_type" data-id="employee" for="employee">
 
-                                                            <a href="InputRecruiterProfile"><img src="assets/img/select-05.svg" alt="Img" class="img-fluid"></a>
-                                                            <span>Recruiter</span></a></label>
-                                                    </div>
+                                                        <a href="InputRecruiterProfile"><img src="assets/img/select-05.svg" alt="Img" class="img-fluid"></a>
+                                                        <span>Recruiter</span></a></label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -71,21 +71,21 @@
             </div>
 
         </div>
-                <style>
-button.submit {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: tomato; /* Màu cam đỏ */
-    color: white;
-    border: 2px solid black;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-}
+        <style>
+            button.submit {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: tomato; /* Màu cam đỏ */
+                color: white;
+                border: 2px solid black;
+                text-decoration: none;
+                transition: background-color 0.3s, color 0.3s;
+            }
 
-button.submit:hover {
-    background-color: white;
-    color: black;
-}
+            button.submit:hover {
+                background-color: white;
+                color: black;
+            }
         </style>
 
 
