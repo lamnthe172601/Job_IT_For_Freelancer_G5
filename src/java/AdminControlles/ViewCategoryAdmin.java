@@ -31,18 +31,20 @@ public class ViewCategoryAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String categoryName = request.getParameter("categoryName");
-        Categories newCategory = new Categories();
-        newCategory.setCategoriesName(categoryName);
+     
+    String categoryName = request.getParameter("categoryName");
+    Categories newCategory = new Categories();
+    newCategory.setCategoriesName(categoryName);
 
-        boolean isAdded = categoryDAO.addCategory(newCategory);
-        if (isAdded) {
-            response.sendRedirect("addcategory");
-        } else {
-            request.setAttribute("errorMessage", "Failed to add category.");
-            doGet(request, response); 
-        }
+    boolean isAdded = categoryDAO.addCategory(newCategory);
+    if (isAdded) {
+        response.sendRedirect("addcategory");
+    } else {
+        request.setAttribute("errorMessage", "Failed to add category.");
+        doGet(request, response);
     }
+}
+
 
     @Override
     public String getServletInfo() {

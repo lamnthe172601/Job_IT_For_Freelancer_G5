@@ -222,6 +222,6 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewCategoryAdmin</servlet-name>
-        <url-pattern>/viewcategory</url-pattern>
+        <url-pattern>/categoryAdmin</url-pattern>
     </servlet-mapping>
 </web-app>

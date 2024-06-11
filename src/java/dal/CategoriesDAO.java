@@ -16,8 +16,9 @@ import java.util.Locale.Category;
  *
  * @author Admin
  */
-public class CategoriesDAO extends DBContext{
-        public List<Categories> getAllCategory() {
+public class CategoriesDAO extends DBContext {
+
+    public List<Categories> getAllCategory() {
         List<Categories> list = new ArrayList<>();
         String query = "select * from Categories";
         try {
@@ -47,11 +48,11 @@ public class CategoriesDAO extends DBContext{
         }
         return null;
     }
-    
-      public boolean addCategory(Category category) {
+
+    public boolean addCategory(Categories category) {
         String query = "INSERT INTO Categories(categories_name) VALUES (?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, category.name());
+            ps.setString(1, category.getCategoriesName());
             int rowsInserted = ps.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
@@ -60,11 +61,4 @@ public class CategoriesDAO extends DBContext{
         }
     }
 
-    public boolean addCategory(CategoriesDAO category) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public boolean addCategory(Categories category) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
