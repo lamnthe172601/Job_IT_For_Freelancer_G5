@@ -266,6 +266,8 @@
             </header>
 
 
+            <%String msg = (String) request.getAttribute("errorPass");%>
+
             <div class="login-wrapper">
                 <div class="content w-100">
                     <div class="container">
@@ -275,13 +277,14 @@
                                 <div class="login-right">
                                     <div class="login-header text-center">
                                         <h2>Password Change</h2>
-                                        <span>Change New Password</span>
+                                        
                                     </div>
                                     <form action="changePass" method="post">
                                         <div class="input-block">
                                             <label class="focus-label">Current Password <span class="label-star"> *</span></label>
                                             <div class="position-relative">
-                                                <input type="password" class="form-control floating pass-input">
+                                                <input type="password" class="form-control floating pass-input" name="currentPassword" required>
+                                                
                                                 <div class="password-icon ">
                                                     <span class="fas toggle-password fa-eye-slash"></span>
                                                 </div>
@@ -290,7 +293,8 @@
                                         <div class="input-block">
                                             <label class="focus-label">New Password <span class="label-star"> *</span></label>
                                             <div class="position-relative">
-                                                <input type="password" class="form-control floating pass-inputs">
+                                                <input type="password" class="form-control floating pass-inputs" name="newPassword" required>
+                                                
                                                 <div class="password-icon ">
                                                     <span class="fas toggle-passwords fa-eye-slash"></span>
                                                 </div>
@@ -299,12 +303,17 @@
                                         <div class="input-block">
                                             <label class="focus-label">Confirm New Password <span class="label-star"> *</span></label>
                                             <div class="position-relative">
-                                                <input type="password" class="form-control floating pass-input1">
+                                                <input type="password" class="form-control floating pass-input1" name="confirmPassword" required>
+                                                
                                                 <div class="password-icon ">
                                                     <span class="fas toggle-password1 fa-eye-slash"></span>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <c:if test="${not empty errorPass}">
+                                            <div class="alert alert-danger">${errorPass}</div>
+                                        </c:if>
                                         <button class="btn btn-primary btn-lg login-btn d-flex align-items-center justify-content-center w-100" type="submit">Password Change<i class="feather-arrow-right ms-2"></i></button>
                                     </form>
                                 </div>
@@ -313,6 +322,7 @@
 
                     </div>
                 </div>
+
             </div>
 
         </div>

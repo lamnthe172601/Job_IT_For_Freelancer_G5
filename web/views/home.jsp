@@ -123,7 +123,7 @@
                                         <ul class="submenu">
                                             <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
                                             <li><a href="Project">Projects</a></li>                        
-                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
+                                            <li><a href="changePass">Change Password</a></li>                                                                                     
                                             <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
                                         </ul>
