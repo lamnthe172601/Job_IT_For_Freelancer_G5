@@ -66,61 +66,61 @@
                                 </li>
 
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu"> 
-                                        
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu"> 
+
                                             <li><a href="PostFavourites">Jobs Favourites</a></li>
-                                                                                                                                                           
-                                        <li><a href="jobsApply">Jobs Apply</a></li>
-                                        <li><a href="jobforyou">Jobs For you</a></li>
-                                    </ul>
-                                </li>
-                               
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="ListPost">Jobs List</a></li>                                        
-                                        <li><a href="SreachJob">Find Jobs</a></li>  
-                                        <li><a href="company">Company</a></li>
-                                    </ul>
-                                </li>
-                                 </c:if>
+
+                                            <li><a href="jobsApply">Jobs Apply</a></li>
+                                            <li><a href="jobforyou">Jobs For you</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
+                                            <li><a href="SreachJob">Find Jobs</a></li>  
+                                            <li><a href="company">Company</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                 <li class="has-submenu">
-                                    <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">Top Freelancer</a></li>
-                                        <li><a href="newsJobs">Skills</a></li>
-                                        
-                                    </ul>
-                                </li>
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="jobsList">List Post</a></li>
-                                        <li><a href="newsJobs">Reviews</a></li>
-                                        
-                                    </ul>
-                                </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="jobsList">Top Freelancer</a></li>
+                                            <li><a href="newsJobs">Skills</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="newsJobs">Reviews</a></li>
+
+                                        </ul>
+                                    </li>
                                 </c:if>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">                                                                           
                                         <li><a href="About">About us</a></li>
-                                         <li><a href="ContactUs">Contact us</a></li>
+                                        <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
-                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
-                                
+                                <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
+
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
-                                            
+
                                             <li><a href="dashboard">Dashboard</a></li>
                                             <li><a href="companydetail">My Profile</a></li>
                                             <li><a href="company-details">Company Details</a></li>
@@ -135,7 +135,7 @@
                                     <li>
                                         <a href="/admin/index.html" target="_blank">Admin</a>
                                         <ul class="submenu">
-                                            
+
                                             <li><a href="dashboardAdmin">Dashboard</a></li>                                           
                                             <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
@@ -459,15 +459,15 @@
                                                     <div class="pro-head">
                                                         <h4 class="pro-titles mb-0">Skills</h4>
                                                     </div>
-                                                    <div class="pro-body skill-info">
-                                                        <c:forEach items="${skillset}" var="skillset">
+                                                    <c:forEach items="${skillset}" var="skillset">
+                                                        <div class="pro-body skill-info" style="display: inline-block; margin-right: 10px;">
                                                             <input name="skill" type="checkbox" value="${skillset.skill_set_ID}"
                                                                    <c:forEach items="${skills}" var="skill">
                                                                        ${skillset.skill_set_ID == skill.skill_set_ID.skill_set_ID ? 'checked="checked"' : ''}
                                                                    </c:forEach>>
-                                                            ${skillset.skill_set_name} 
-                                                        </c:forEach>
-                                                    </div>
+                                                            ${skillset.skill_set_name}
+                                                        </div>
+                                                    </c:forEach>
                                                 </div>
                                             </div>
                                         </div>
