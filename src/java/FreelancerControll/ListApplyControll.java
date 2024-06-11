@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package CommonControll;
+package FreelancerControll;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class AllCategoriesControll extends HttpServlet {
+public class ListApplyControll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +33,10 @@ public class AllCategoriesControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AllCategoriesControll</title>");  
+            out.println("<title>Servlet ListApplyControll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AllCategoriesControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ListApplyControll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +53,7 @@ public class AllCategoriesControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("views/allCategories.jsp").forward(request, response);
+       request.getRequestDispatcher("views/listapply.jsp").forward(request, response);
     } 
 
     /** 
