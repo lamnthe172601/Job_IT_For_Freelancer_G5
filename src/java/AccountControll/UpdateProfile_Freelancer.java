@@ -4,7 +4,7 @@
  */
 package AccountControll;
 
-import static AccountControll.InputFreelancerProfileController.formatDate;
+
 import Models.Dregee;
 import Models.Education;
 import Models.Experience;
