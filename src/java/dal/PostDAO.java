@@ -41,7 +41,8 @@ public class PostDAO extends DBContext {
                             rs.getString("location"),
                             rs.getString("skill"),
                             new Recruiter(rs.getInt("recruiterID")), // Assumes Recruiter has a constructor that accepts an int
-                            new Categories(rs.getInt("caID")) // Assumes Categories has a constructor that accepts an int
+                            new Categories(rs.getInt("caID")), // Assumes Categories has a constructor that accepts an int
+                            rs.getBoolean("status"), rs.getInt("checking")
                     );
                     posts.add(post);
                 }
@@ -81,7 +82,7 @@ public class PostDAO extends DBContext {
                 Duration durationID = duDAO.getDurationByDRid(rs.getInt(11));
                 JobType job_type_ID = joDAO.getJobTypeByJTID(rs.getInt(12));
                 Categories caID = catDAO.getCategoryByID(rs.getInt(13));
-                list.add(new Post(pid, tt, Im, job_type_ID, durationID, dp, qtt, des, bg, loc, sk, recruiterID, caID));
+                list.add(new Post(pid, tt, Im, job_type_ID, durationID, dp, qtt, des, bg, loc, sk, recruiterID, caID, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
         }
@@ -89,30 +90,31 @@ public class PostDAO extends DBContext {
     }
 
     public List<Post> getPostByID(int pid) {
-    List<Post> list = new ArrayList<>();
-    String query = "SELECT postID, title, [image], job_type_ID, durationID, date_post, quantity, [description], budget, [location], skill, recruiterID, caID\n"
-            + "FROM Post\n"
-            + "WHERE postID = ?";
-    try {
-        PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, pid); // Đặt giá trị cho tham số pid
+        List<Post> list = new ArrayList<>();
+        String query = "SELECT postID, title, [image], job_type_ID, durationID, date_post, quantity, [description], budget, [location], skill, recruiterID, caID\n"
+                + "FROM Post\n"
+                + "WHERE postID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, pid); // Đặt giá trị cho tham số pid
 
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
-            Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
-            TeamNumber tem = new TeamNumber(rs.getInt("team_numberID"), rs.getString("team_number"));
-            Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
-            Company com = new Company(rs.getInt("companyID"), rs.getString("company_name"), tem, rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"), re);
-            JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
-            list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                TeamNumber tem = new TeamNumber(rs.getInt("team_numberID"), rs.getString("team_number"));
+                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
+                Company com = new Company(rs.getInt("companyID"), rs.getString("company_name"), tem, rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"), re);
+                JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return list;
     }
-    return list;
-}
-public List<Post> getAllPosts() {
+
+    public List<Post> getAllPosts() {
         List<Post> posts = new ArrayList<>();
         String query = "SELECT * FROM Post";
         try {
@@ -121,19 +123,20 @@ public List<Post> getAllPosts() {
             while (rs.next()) {
                 // Create Post object from the result set and add to the list
                 Post post = new Post(
-                    rs.getInt("postID"),
-                    rs.getString("title"),
-                    rs.getString("image"),
-                    new JobType(rs.getInt("job_type_ID"), rs.getString("job_type_name")),
-                    new Duration(rs.getInt("durationID"), rs.getString("duration_name")),
-                    rs.getDate("date_post"),
-                    rs.getInt("quantity"),
-                    rs.getString("description"),
-                    rs.getInt("budget"),
-                    rs.getString("location"),
-                    rs.getString("skill"),
-                    new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID")),
-                    new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"))
+                        rs.getInt("postID"),
+                        rs.getString("title"),
+                        rs.getString("image"),
+                        new JobType(rs.getInt("job_type_ID"), rs.getString("job_type_name")),
+                        new Duration(rs.getInt("durationID"), rs.getString("duration_name")),
+                        rs.getDate("date_post"),
+                        rs.getInt("quantity"),
+                        rs.getString("description"),
+                        rs.getInt("budget"),
+                        rs.getString("location"),
+                        rs.getString("skill"),
+                        new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID")),
+                        new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img")),
+                         rs.getBoolean("status"), rs.getInt("checking")
                 );
                 posts.add(post);
             }
@@ -143,4 +146,3 @@ public List<Post> getAllPosts() {
         return posts;
     }
 }
-
