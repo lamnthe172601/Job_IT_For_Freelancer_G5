@@ -68,10 +68,10 @@ public class RecruiterDAO extends DBContext {
     }
 
     public Recruiter getRecruiterProfileByRecruiterID(int reid) {
-        CompanyDAO comDAO = new CompanyDAO();
-        String query = "select recruiterID, first_name,last_name,gender,dob,[image],phone_contact,email_contact,userID\n"
-                + "               from Recruiter \n"
-                + "			   where recruiterID = ?";
+        String query = """
+                       select recruiterID, first_name,last_name,gender,dob,[image],phone_contact,email_contact,userID
+                                      from Recruiter 
+                       \t\t\t   where recruiterID = ?""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, reid);
@@ -99,8 +99,9 @@ public class RecruiterDAO extends DBContext {
     public boolean updateRecruiter(Recruiter recruiter) throws SQLException {
         CompanyDAO comDAO = new CompanyDAO();
 
-        String query = "UPDATE Recruiter SET first_name = ?, last_name = ?, [image] = ?, gender = ?, dob = ?, phone_contact = ? , email_contact = ? , userID =?\n"
-                + "where recruiterID = ?";
+        String query = """
+                       UPDATE Recruiter SET first_name = ?, last_name = ?, [image] = ?, gender = ?, dob = ?, phone_contact = ? , email_contact = ? , userID =?
+                       where recruiterID = ?""";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, recruiter.getFirstName());
             stmt.setString(2, recruiter.getLastName());

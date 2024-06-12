@@ -32,9 +32,62 @@
             .description::after {
                 content: '...';
             }
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 2px 6px; /* Giảm kích thước padding để nút nhỏ lại */
+            margin-left: 2px;
+            margin-right: 2px;
+            font-size: 12px;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* Tùy chỉnh nút được chọn */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            background-color: orange;
+            color: white !important;
+            border: 1px solid orange;
+        }
+
+        /* Thay đổi màu nút khi hover */
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background-color: orange;
+            color: white;
+            border: 1px solid orange;
+        }
+
+        /* Đảm bảo chiều cao cố định cho bảng và phần phân trang */
+        .dataTables_wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 500px; /* Đặt chiều cao tối thiểu phù hợp với nội dung của bạn */
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            order: 2;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            order: 1;
+            margin-bottom: 10px;
+            }
+
         </style>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        <!-- DataTables JS -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
     </head>
     <body class="dashboard-page">
@@ -260,7 +313,7 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu active">
-                                                <a href="milestones.html" class="nav-link ">
+                                                <a href="manageJobsPosts" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
@@ -369,141 +422,133 @@
                             <div class="my-projects-view">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="title-head d-flex justify-content-between align-items-center mb-4">
-                                            <h4 class="mb-0">Milestones</h4>
-                                            <a href="#add-milestone" class="login-btn btn-primary" data-bs-toggle="modal">Add Milestone</a>
-                                        </div>
-                                        <div class="table-responsive table-box manage-projects-table">
-                                            <table id="datatable" class="table table-center table-hover datatable no-sort ">
-                                                <thead class="thead-pink">
-                                                    <tr>
-                                                        <th>Title</th>
-                                                        <th>Job Type</th>
-                                                        <th>Start date</th>
-                                                        <th>Description</th>
-                                                        <th>Skill</th>
-                                                        <th>Duration</th>
-                                                        <th>Proposals</th>
-                                                        <th>Status</th>
-                                                        <th style="text-align: center;">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach items="${listpost}" var="list">
 
-                                                        <tr>
-                                                            <td>${list.title}</td>
-                                                            <td>${list.jobTypeID.jobName}</td>
-                                                            <td>${list.datePost}</td>
-                                                            <td><div class="description">${list.description}</div></td>
-                                                            <td>${list.skill}</td>
-                                                            <td>${list.durationID.durationName}</td>
-                                                            <td>${list.quantity}</td>
-                                                            <td><span class="badge badge-pill bg-danger-light">Unpaid</span></td>
-                                                            <td>
-                                                                <div class="action-table-data">
-
-                                                                    <div class="edit-delete-action">
-                                                                        <a href="#edit-milestone${list.postID}" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                        <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                    </div>
-                                                                    <div style="margin-left: 5px; ">
-                                                                        <select class="select" style="background-color: white; transition: background-color 0.3s;">
-                                                                            <option hidden="" value="Select">Select</option>
-                                                                            <option value="Approved">Approved</option>
-                                                                            <option value="On Hold">On Hold</option>
-                                                                            <option value="Cancelled">Cancelled</option>
-                                                                        </select>
-                                                                    </div> 
-                                                                </div>
-                                                                <div class="modal fade edit-proposal-modal" id="edit-milestone${list.postID}">
-                                                                    <div class="modal-dialog modal-dialog-centered modal-md">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h4 class="modal-title">Edit Post a new Jobs</h4>
-                                                                                <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <form action="#">
-                                                                                    <div class="modal-info">
-                                                                                        <div class="row">
-                                                                                            <div class="col-lg-4">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="form-label">Milestone name</label>
-                                                                                                    <input type="text" class="form-control" value="${list.title}">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-2">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="form-label">Amount</label>
-                                                                                                    <input type="text" class="form-control" value="200">
-                                                                                                    <span class="input-group-text">$</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-3">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="form-label">Start Date</label>
-                                                                                                    <div class="cal-icon">
-                                                                                                        <input class="form-control datetimepicker" type="text">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-3">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="form-label">End Date</label>
-                                                                                                    <div class="cal-icon">
-                                                                                                        <input class="form-control datetimepicker" type="text">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-12">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="form-label">Description</label>
-                                                                                                    <textarea class="form-control summernote">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</textarea>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="form-label">Completion (%)</label>
-                                                                                                    <select class="select">
-                                                                                                        <option value>10</option>
-                                                                                                        <option value>20</option>
-                                                                                                        <option value>30</option>
-                                                                                                        <option value>40</option>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="form-label">Status</label>
-                                                                                                    <select class="select">
-                                                                                                        <option value>Select</option>
-                                                                                                        <option value>Approved</option>
-                                                                                                        <option value>On Hold</option>
-                                                                                                        <option value>Cancelled</option>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="submit-section text-end">
-                                                                                        <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
-                                                                                        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-
-                                                        </tr>
-
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
-
-                                        </div>
+                                       <div class="table-responsive table-box manage-projects-table">
+    <table class="table table-center table-hover datatable no-sort">
+        <thead class="thead-pink">
+            <tr>
+                <th>Title</th>
+                <th>Job Type</th>
+                <th>Start date</th>
+                <th>Description</th>
+                <th>Skill</th>
+                <th>Duration</th>
+                <th>Proposals</th>
+                <th>Status</th>
+                <th style="text-align: center;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${listpost}" var="list">
+                <tr>
+                    <td>${list.title}</td>
+                    <td>${list.jobTypeID.jobName}</td>
+                    <td>${list.datePost}</td>
+                    <td><div class="description">${list.description}</div></td>
+                    <td>${list.skill}</td>
+                    <td>${list.durationID.durationName}</td>
+                    <td>${list.quantity}</td>
+                    <td><span class="badge badge-pill bg-danger-light">Unpaid</td>
+                    <td>
+                        <div class="action-table-data">
+                            <div class="edit-delete-action">
+                                <a href="#edit-milestone${list.postID}" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
+                                <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
+                            </div>
+                            <div style="margin-left: 5px;">
+                                <select class="select" style="background-color: white; transition: background-color 0.3s;">
+                                    <option hidden="" value="Select">Select</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="On Hold">On Hold</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                </select>
+                            </div> 
+                        </div>
+                        <div class="modal fade edit-proposal-modal" id="edit-milestone${list.postID}">
+                            <div class="modal-dialog modal-dialog-centered modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Edit Post a new Jobs</h4>
+                                        <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="#">
+                                            <div class="modal-info">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="input-block">
+                                                            <label class="form-label">Milestone name</label>
+                                                            <input type="text" class="form-control" value="${list.title}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="input-block">
+                                                            <label class="form-label">Amount</label>
+                                                            <input type="text" class="form-control" value="200">
+                                                            <span class="input-group-text">$</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="input-block">
+                                                            <label class="form-label">Start Date</label>
+                                                            <div class="cal-icon">
+                                                                <input class="form-control datetimepicker" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="input-block">
+                                                            <label class="form-label">End Date</label>
+                                                            <div class="cal-icon">
+                                                                <input class="form-control datetimepicker" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-block">
+                                                            <label class="form-label">Description</label>
+                                                            <textarea class="form-control summernote">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="input-block">
+                                                            <label class="form-label">Completion (%)</label>
+                                                            <select class="select">
+                                                                <option value>10</option>
+                                                                <option value>20</option>
+                                                                <option value>30</option>
+                                                                <option value>40</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="input-block">
+                                                            <label class="form-label">Status</label>
+                                                            <select class="select">
+                                                                <option value>Select</option>
+                                                                <option value>Approved</option>
+                                                                <option value>On Hold</option>
+                                                                <option value>Cancelled</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="submit-section text-end">
+                                                <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
+                                                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</div>
                                     </div>
                                 </div>
                             </div>
@@ -734,19 +779,26 @@
                 var descriptions = document.querySelectorAll('.description');
                 descriptions.forEach(function (description) {
                     var words = description.textContent.split(' ');
-                    if (words.length > 6) {
+                    if (words.length > 5) {
                         description.textContent = words.slice(0, 5).join(' ') + '...';
                     }
                 });
             });
         </script>  
-        <script>
-            $(document).ready(function () {
-                $('.datatable').DataTable({
-                    lengthMenu: [10, 25, 50, 100] // Hiển thị tùy chọn 10, 25, 50 và 100 dòng trên mỗi trang
-                });
-            });
-        </script>
+       <script>
+    $(document).ready(function() {
+        $('.datatable').DataTable({
+            "paging": true,
+            "pageLength": 10, // Số lượng bài post mặc định mỗi trang là 10
+            "lengthMenu": [10, 25, 50, 100], // Các tùy chọn số lượng mục hiển thị mỗi trang
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "dom": '<"top"l>rt<"bottom"ip><"clear">' // Cấu trúc DOM để di chuyển phần hiển thị số lượng mục xuống dưới
+        });
+    });
+</script>
+
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
 
         </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
@@ -758,11 +810,11 @@
 
         <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        
+
         <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script></body>
-        
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-        <script src="assets/plugins/datatables/datatables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+
+    <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+    <script src="assets/plugins/datatables/datatables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:31:10 GMT -->
 </html>

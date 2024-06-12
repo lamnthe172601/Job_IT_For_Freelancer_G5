@@ -140,6 +140,10 @@
         <servlet-name>ExpiredProjectsControll</servlet-name>
         <servlet-class>RecruiterControll.ExpiredProjectsControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreatePostControll</servlet-name>
+        <servlet-class>RecruiterControll.CreatePostControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -287,5 +291,9 @@
     <servlet-mapping>
         <servlet-name>ExpiredProjectsControll</servlet-name>
         <url-pattern>/ExpiredProjects</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePostControll</servlet-name>
+        <url-pattern>/CreatePost</url-pattern>
     </servlet-mapping>
 </web-app>

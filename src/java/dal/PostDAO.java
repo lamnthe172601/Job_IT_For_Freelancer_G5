@@ -58,9 +58,10 @@ public class PostDAO extends DBContext {
         JobTypeDAO joDAO = new JobTypeDAO();
         CategoriesDAO catDAO = new CategoriesDAO();
 
-        String query = "select postID,title,[image], job_type_ID, durationID,date_post,quantity,[description],budget, [location] ,skill, recruiterID,caID\n"
-                + "               from Post\n"
-                + "            where title like ?'";
+        String query = """
+                       select postID,title,[image], job_type_ID, durationID,date_post,quantity,[description],budget, [location] ,skill, recruiterID,caID
+                                      from Post
+                                   where title like ?'""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, "%" + title + "%");
@@ -90,9 +91,10 @@ public class PostDAO extends DBContext {
 
     public List<Post> getPostByID(int pid) {
     List<Post> list = new ArrayList<>();
-    String query = "SELECT postID, title, [image], job_type_ID, durationID, date_post, quantity, [description], budget, [location], skill, recruiterID, caID\n"
-            + "FROM Post\n"
-            + "WHERE postID = ?";
+    String query = """
+                   SELECT postID, title, [image], job_type_ID, durationID, date_post, quantity, [description], budget, [location], skill, recruiterID, caID
+                   FROM Post
+                   WHERE postID = ?""";
     try {
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, pid); // Đặt giá trị cho tham số pid

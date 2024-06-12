@@ -28,6 +28,64 @@
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+
+        <style>
+            /* Tùy chỉnh kích thước và màu sắc của các nút phân trang */
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                padding: 2px 6px; /* Giảm kích thước padding để nút nhỏ lại */
+                margin-left: 2px;
+                margin-right: 2px;
+                font-size: 12px;
+                color: #333;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+            /* Tùy chỉnh nút được chọn */
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                background-color: orange;
+                color: white !important;
+                border: 1px solid orange;
+            }
+
+            /* Thay đổi màu nút khi hover */
+            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                background-color: orange;
+                color: white;
+                border: 1px solid orange;
+            }
+
+            /* Đảm bảo chiều cao cố định cho bảng và phần phân trang */
+            .dataTables_wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                min-height: 400px; /* Đặt chiều cao tối thiểu phù hợp với nội dung của bạn */
+            }
+
+            .dataTables_wrapper .dataTables_info {
+                order: 2;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .dataTables_wrapper .dataTables_paginate {
+                order: 1;
+                margin-bottom: 10px;
+            }
+        </style>
+
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        <!-- DataTables JS -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     </head>
     <body class="dashboard-page">
 
@@ -261,7 +319,7 @@
                                                     <li><a href="ManageApplication">All applicants</a></li>
                                                     <li><a href="CompletedProjects">Completed Projects</a></li>
                                                     <li><a href="ExpiredProjects">Expired Projects</a></li>
-                                                    
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
@@ -429,7 +487,7 @@
                                                 <a href="view-project-detail.html" class="btn fund-btn">View All</a>
                                             </div>
                                             <div class="table-responsive recent-earnings flex-fill">
-                                                <table class="table mb-0">
+                                                <table class="table mb-0 datatable">
                                                     <thead>
                                                         <tr>
                                                             <th>Title</th>
@@ -443,15 +501,15 @@
                                                     </thead>
                                                     <tbody>
                                                         <c:forEach items="${listpost}" var="listpost">
-                                                        <tr>
-                                                            <td>${listpost.title}</td>
-                                                            <td>${listpost.jobTypeID.jobName}</td>
-                                                            <td>${listpost.skill}</td>
-                                                            <td>${listpost.datePost}</td>
-                                                            <td>${listpost.caID.categoriesName}</td>
-                                                            <td style="text-align: center;">${listpost.quantity}</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
+                                                            <tr>
+                                                                <td>${listpost.title}</td>
+                                                                <td>${listpost.jobTypeID.jobName}</td>
+                                                                <td>${listpost.skill}</td>
+                                                                <td>${listpost.datePost}</td>
+                                                                <td>${listpost.caID.categoriesName}</td>
+                                                                <td style="text-align: center;">${listpost.quantity}</td>
+                                                                <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
+                                                            </tr>
                                                         </c:forEach>
                                                     </tbody>
                                                 </table>
@@ -570,6 +628,19 @@
             </footer>
 
         </div>
+
+        <script>
+            $(document).ready(function () {
+                $('.datatable').DataTable({
+                    "paging": true,
+                    "pageLength": 10, // Số lượng bài post mỗi trang
+                    "searching": true,
+                    "ordering": true,
+                    "info": true
+                   
+                });
+            });
+        </script>
 
 
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
