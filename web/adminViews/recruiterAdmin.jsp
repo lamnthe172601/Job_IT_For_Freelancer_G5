@@ -233,8 +233,7 @@
                                                                     <c:if test='${recruiter.getAccount().getStatus() == "inactive"}'>
                                                                     <a class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>
                                                                     </c:if>
-                                                                <a class="dropdown-item" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i data-feather="edit" class="me-2"></i> Edit</a>
-                                                                <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
+                                                              
                                                             </div>
 
 
@@ -341,42 +340,7 @@
 
         </div>
 
-        <div class="modal fade custom-modal" id="add-category">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header flex-wrap">
-                        <div class="text-center w-100 mb-3">
-                            <img src="adminAssets/img/logo-small.png" alt="Img">
-                        </div>
-                        <h4 class="modal-title">Add New Freelancer</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="Register" method="post">
-                            <div class="form-group">
-                                <label>UserName</label>
-                                <input type="text" class="form-control" name="username">
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" name="email">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="pass">
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password</label>
-                                <input type="password" class="form-control" name="confirmpass">
-                            </div>                            
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+     
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
