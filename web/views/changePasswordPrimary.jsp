@@ -277,14 +277,14 @@
                                 <div class="login-right">
                                     <div class="login-header text-center">
                                         <h2>Password Change</h2>
-                                        
+
                                     </div>
-                                    <form action="changePass" method="post">
+                                    <form action="changePass" method="post" onsubmit="return FormValidate();">
                                         <div class="input-block">
                                             <label class="focus-label">Current Password <span class="label-star"> *</span></label>
                                             <div class="position-relative">
-                                                <input type="password" class="form-control floating pass-input" name="currentPassword" required>
-                                                
+                                                <input type="password" class="form-control floating pass-input" name="currentPassword" value="${not empty currentPassword ? currentPassword : ''}" required="">
+
                                                 <div class="password-icon ">
                                                     <span class="fas toggle-password fa-eye-slash"></span>
                                                 </div>
@@ -293,8 +293,8 @@
                                         <div class="input-block">
                                             <label class="focus-label">New Password <span class="label-star"> *</span></label>
                                             <div class="position-relative">
-                                                <input type="password" class="form-control floating pass-inputs" name="newPassword" required>
-                                                
+                                                <input type="password" class="form-control floating pass-inputs" name="newPassword" value="${not empty newPassword ? newPassword : ''}" required="">
+
                                                 <div class="password-icon ">
                                                     <span class="fas toggle-passwords fa-eye-slash"></span>
                                                 </div>
@@ -303,14 +303,14 @@
                                         <div class="input-block">
                                             <label class="focus-label">Confirm New Password <span class="label-star"> *</span></label>
                                             <div class="position-relative">
-                                                <input type="password" class="form-control floating pass-input1" name="confirmPassword" required>
-                                                
+                                                <input type="password" class="form-control floating pass-input1" name="confirmPassword" value="${not empty confirmPassword ? confirmPassword : ''}" required="">
+
                                                 <div class="password-icon ">
                                                     <span class="fas toggle-password1 fa-eye-slash"></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <c:if test="${not empty errorPass}">
                                             <div class="alert alert-danger">${errorPass}</div>
                                         </c:if>
@@ -336,6 +336,6 @@
 
         <script src="assets/js/script.js" type="a94bc7fdfce2d7745705eb4b-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="a94bc7fdfce2d7745705eb4b-|49" defer></script></body>
-
+    <script src="assets/js/checkform_0.js"></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/change-passwords.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:35:30 GMT -->
 </html>
