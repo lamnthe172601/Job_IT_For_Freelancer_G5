@@ -394,9 +394,11 @@
                                                         <img style="width: 100%; height: 100%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt-dO4eZ3MqlT8-Vl-5rx4gnhC9M4fQJMPCA&s" alt="author">                                                       
                                                     </div>
                                                     <div class="profile-name">
+
                                                         <div class="author-location"><a href="project-details.html">Amaze Tech </a></div>
                                                     </div>
                                                     <div class="freelance-info">
+                                                        <h3><a href="javascript:void(0);">PHP Developer</a></h3>
                                                         <div class="freelance-location"><i class="feather-map-pin me-1"></i>Alabama, USA</div>
                                                     </div>
                                                     <div class="freelance-tags">
@@ -407,17 +409,17 @@
                                                 </div>
                                                 <div class="counter-stats">
                                                     <ul>
-                                                        <li>
-                                                            <h5>Duration</h5>
-                                                            <h3 class="counter-value">4 Days Left</h3>
+                                                        <li class="class3">
+                                                            <h3>Duration</h3>
+                                                            <h5 class="counter-value ">4 Days Left</h5>
                                                         </li>
-                                                        <li>
-                                                            <h5>Quantity</h5>
-                                                            <h3 class="counter-value">15</h3>
+                                                        <li class="class3">
+                                                            <h3>Quantity</h3>
+                                                            <h5 class="counter-value " style="padding-left: 20px">15</h5>
                                                         </li>
-                                                        <li>
-                                                            <h5>Job Type</h5>
-                                                            <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+                                                        <li class="class3">
+                                                            <h3>Job Type</h3>
+                                                            <h5 class="counter-value ">Full Time</h5>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -436,7 +438,6 @@
                                                     </div>
                                                     <div class="author-heading">
                                                         <div class="text-center2" > 
-
                                                             <a>
                                                                 <img  style="width: 100%; height: 100%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt-dO4eZ3MqlT8-Vl-5rx4gnhC9M4fQJMPCA&s" alt="author">                                                       
                                                             </a>
@@ -445,57 +446,55 @@
                                                             <h4><div class="author-location" style="text-align: center">Park INC </div></h4>
                                                         </div>
                                                         <div class="freelance-info">
-
                                                             <div>
-                                                                <div style="display: inline-block;">Date:</div>
-                                                                <div style="display: inline-block; margin-left: 5px;">
+                                                                <div class="class1" style="display: inline-block;">Position:</div>
+                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                    <h3 >Interm</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div class="class1" style="display: inline-block;">Date:</div>
+                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
                                                                     <h3>12-12-2003</h3>
                                                                 </div>
                                                             </div>
-
                                                             <div>
-                                                                <div style="display: inline-block;">Location:</div>
-                                                                <div style="display: inline-block; margin-left: 5px;">
+                                                                <div class="class1" style="display: inline-block;">Location:</div>
+                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
                                                                     <h3>Ha Noi</h3>
                                                                 </div>
                                                             </div>
-
                                                         </div>
-                                                        <div class="freelance-tags" style="margin: 0;padding: 0;">Skill: 
+                                                        <div  class="freelance-tags" style="margin: 0;padding: 0; margin-top: 10px">Skill: 
                                                             <span class="badge badge-pill badge-design">Web Design</span>
                                                             <span class="badge badge-pill badge-design">UI Design</span>
                                                             <span class="badge badge-pill badge-design">Node Js</span>
                                                         </div>
-
                                                     </div>
                                                     <div class="freelance-info">
                                                         <div>
-                                                            <div style="display: inline-block;">Duration:</div>
-                                                            <div style="display: inline-block; margin-left: 5px;">
+                                                            <div class="class1" style="display: inline-block;">Duration:</div>
+                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
                                                                 <h3>Part Time</h3>
                                                             </div>
                                                         </div>
-
                                                         <div>
-                                                            <div style="display: inline-block;">Quantity:</div>
-                                                            <div style="display: inline-block; margin-left: 5px;">
+                                                            <div class="class1" style="display: inline-block;">Quantity:</div>
+                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
                                                                 <h3>15</h3>
                                                             </div>
                                                         </div>
-
                                                         <div>
-                                                            <div style="display: inline-block;">Jop Type:</div>
-                                                            <div style="display: inline-block; margin-left: 5px;">
+                                                            <div class="class1" style="display: inline-block;">Jop Type:</div>
+                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
                                                                 <h3>Interm</h3>
                                                             </div>
                                                         </div>
-
                                                         <div>
-                                                            <div>Decscribe: </div>
-                                                            <h3>PHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssv</h3>
+                                                            <div class="class1">Decscribe: </div>
+                                                            <h3>PHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssvPHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssv
+                                                                PHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssvPHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssvPHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssvPHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssv</h3>
                                                         </div>
-
-
                                                     </div>
                                                 </div>
                                                 <span class="close" onclick="closePopup(1)">&times;</span>
@@ -514,7 +513,6 @@
                                                 </div>
                                                 <div class="author-heading">
                                                     <div class="text-center1" > 
-
                                                         <a href="project-details.html">
                                                             <img style="width: 100%; height: 100%" src="assets/img/company/img-2.png" alt="author">
                                                         </a>
@@ -909,7 +907,7 @@
                 margin:0 10px 0;
                 font-size: 14px;
             }
-            /* CSS cho overlay */
+
             .overlay {
                 display: none;
                 position: fixed;
@@ -921,8 +919,19 @@
                 z-index: 9998;
             }
 
-            /* CSS cho popup */
+            .popup-content {
+                padding-right: 7px;
+            }
+
+            .popup::-webkit-scrollbar {
+                width: 0;
+                background: transparent;
+            }
+
             .popup {
+                max-height: 600px;
+                overflow-y: auto;
+
                 border-radius: 10px;
                 display: none;
                 position: fixed;
@@ -936,28 +945,36 @@
                 z-index: 9999;
             }
 
-            /* CSS cho nội dung của popup */
+  
             .popup-content {
                 position: relative;
             }
 
-            /* CSS cho nút đóng */
-            /*            .close {
-                            position: absolute;
-                            top: 10px;
-                            right: 10px;
-                            cursor: pointer;
-                            font-size: 20px;
-                        }*/
-
             .close {
                 position: absolute;
-                top: -5px; /* Điều chỉnh khoảng cách từ trên xuống */
-                right: 10px; /* Điều chỉnh khoảng cách từ phải sang trái */
-                font-size: 30px; /* Điều chỉnh kích thước của nút */
+                top: -5px; 
+                right: 15px; 
+                font-size: 30px; 
                 cursor: pointer;
-                z-index: 9999; /* Đảm bảo nút này luôn hiển thị trên các phần tử khác */
+                z-index: 9999;
             }
+
+            .class1{
+                position: relative;
+                margin-top: 7px;
+            }
+
+            .class2{
+                position: absolute;
+                left: 22%;
+                padding-top: 10px
+            }
+
+
+            .class3{
+                padding-left: 15px
+            }
+
 
 
 
@@ -969,11 +986,12 @@
                 document.getElementById(int).style.display = 'block';
             }
 
-// Hàm đóng popup
+
             function closePopup(int) {
                 document.getElementById(int).style.display = 'none';
                 document.getElementById(int).style.display = 'none';
             }
+
         </script>
 
 
