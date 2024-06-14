@@ -380,235 +380,139 @@
                             <div class="dashboard-sec freelance-favourites">
                                 <div class="page-title">
                                     <h3>Favourites</h3>
-                                </div>
+                                </div>                               
                                 <div class="row row-gap">
-                                    <div class="col-md-6 col-lg-12 col-xl-4">
-                                        <div class="freelance-widget widget-author">
-                                            <div class="freelance-content">
-                                                <div class="freelance-top-content d-flex">
-                                                    <span> <i class="feather-clock me-1"></i>10/6/2024</span>
-                                                    <a class="favourite color-active"><i class="feather-heart"></i></a>
-                                                </div>
-                                                <div class="author-heading">
-                                                    <div class="text-center1" >                                                                                                              
-                                                        <img style="width: 100%; height: 100%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt-dO4eZ3MqlT8-Vl-5rx4gnhC9M4fQJMPCA&s" alt="author">                                                       
-                                                    </div>
-                                                    <div class="profile-name">
-
-                                                        <div class="author-location"><a href="project-details.html">Amaze Tech </a></div>
-                                                    </div>
-                                                    <div class="freelance-info">
-                                                        <h3><a href="javascript:void(0);">PHP Developer</a></h3>
-                                                        <div class="freelance-location"><i class="feather-map-pin me-1"></i>Alabama, USA</div>
-                                                    </div>
-                                                    <div class="freelance-tags">
-                                                        <span class="badge badge-pill badge-design">Web Design</span>
-                                                        <span class="badge badge-pill badge-design">UI Design</span>
-                                                        <span class="badge badge-pill badge-design">Node Js</span>
-                                                    </div>
-                                                </div>
-                                                <div class="counter-stats">
-                                                    <ul>
-                                                        <li class="class3">
-                                                            <h3>Duration</h3>
-                                                            <h5 class="counter-value ">4 Days Left</h5>
-                                                        </li>
-                                                        <li class="class3">
-                                                            <h3>Quantity</h3>
-                                                            <h5 class="counter-value " style="padding-left: 20px">15</h5>
-                                                        </li>
-                                                        <li class="class3">
-                                                            <h3>Job Type</h3>
-                                                            <h5 class="counter-value ">Full Time</h5>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="cart-hover">
-                                                <a href="javascript:void(0);" onclick="openPopup(1)" class="btn-cart1" tabindex="-1">View Details</a>
-                                                <a href="project-details.html" class="btn-cart1" tabindex="-1">Apply Now</a>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="popup col-md-4" id="1" >
-                                            <div class="popup-content">
+                                    <c:forEach items="${post}" var="p" >
+                                        <div class="col-md-6 col-lg-12 col-xl-4">
+                                            <div class="freelance-widget widget-author">
                                                 <div class="freelance-content">
                                                     <div class="freelance-top-content d-flex">
+                                                        <span> <i class="feather-clock me-1"></i>${p.datePost}</span>
+                                                        <a  class="favourite color-active" onclick="confirmAction(${p.postID})"><i class="feather-heart"></i></a>
                                                     </div>
+                                                    
                                                     <div class="author-heading">
-                                                        <div class="text-center2" > 
-                                                            <a>
-                                                                <img  style="width: 100%; height: 100%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt-dO4eZ3MqlT8-Vl-5rx4gnhC9M4fQJMPCA&s" alt="author">                                                       
-                                                            </a>
+                                                        <div class="text-center1" >                                                                                                              
+                                                            <img style="width: 100%; height: 100%;" src="${p.image}" alt="author">                                                       
                                                         </div>
                                                         <div class="profile-name">
-                                                            <h4><div class="author-location" style="text-align: center">Park INC </div></h4>
+
+                                                            <div class="author-location"><a ">${p.title} </a></div>
                                                         </div>
                                                         <div class="freelance-info">
-                                                            <div>
-                                                                <div class="class1" style="display: inline-block;">Position:</div>
-                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                    <h3 >Interm</h3>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="class1" style="display: inline-block;">Date:</div>
-                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                    <h3>12-12-2003</h3>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="class1" style="display: inline-block;">Location:</div>
-                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                    <h3>Ha Noi</h3>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div  class="freelance-tags" style="margin: 0;padding: 0; margin-top: 10px">Skill: 
-                                                            <span class="badge badge-pill badge-design">Web Design</span>
-                                                            <span class="badge badge-pill badge-design">UI Design</span>
-                                                            <span class="badge badge-pill badge-design">Node Js</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="freelance-info">
-                                                        <div>
-                                                            <div class="class1" style="display: inline-block;">Duration:</div>
-                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                <h3>Part Time</h3>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="class1" style="display: inline-block;">Quantity:</div>
-                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                <h3>15</h3>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="class1" style="display: inline-block;">Jop Type:</div>
-                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                <h3>Interm</h3>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="class1">Decscribe: </div>
-                                                            <h3>PHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssvPHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssv
-                                                                PHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssvPHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssvPHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssvPHP Developer lamtd teudhska gsrdssjs PHP Developer lamtd teudhska gsrdssjsdhdtshssfd shstdhd shsrssv</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span class="close" onclick="closePopup(1)">&times;</span>
-                                            </div>
-                                        </div>
-                                        <div class="overlay" id="1"></div>
-                                    </div>
-
-
-                                    <div class="col-md-6 col-lg-12 col-xl-4">
-                                        <div class="freelance-widget widget-author">
-                                            <div class="freelance-content">
-                                                <div class="freelance-top-content d-flex">
-                                                    <span> <i class="feather-clock me-1"></i>1 min ago</span>
-                                                    <a href="javascript:void(0);" class="favourite color-active"><i class="feather-heart"></i></a>
-                                                </div>
-                                                <div class="author-heading">
-                                                    <div class="text-center1" > 
-                                                        <a href="project-details.html">
-                                                            <img style="width: 100%; height: 100%" src="assets/img/company/img-2.png" alt="author">
-                                                        </a>
-                                                    </div>
-                                                    <div class="profile-name">
-                                                        <div class="author-location"><a href="project-details.html">Park INC </a></div>
-                                                    </div>
-                                                    <div class="freelance-info">
-                                                        <h3><a href="javascript:void(0);">PHP Developer</a></h3>
-                                                        <div class="freelance-location"><i class="feather-map-pin me-1"></i>California, USA</div>
-                                                    </div>
-                                                    <div class="freelance-tags">
-                                                        <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web Design</span></a>
-                                                        <a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI Design</span></a>
-                                                        <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
-                                                    </div>
-
-                                                </div>
-                                                <div class="counter-stats">
-                                                    <ul>
-                                                        <li>
-                                                            <h5>Expiry</h5>
-                                                            <h3 class="counter-value" >5 Days Left</h3>
-                                                        </li>
-                                                        <li>
-                                                            <h5>Proposals</h5>
-                                                            <h3 class="counter-value" >15</h3>
-                                                        </li>
-                                                        <li>
-                                                            <h5>Job Type</h5>
-                                                            <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="cart-hover">
-                                                <a href="javascript:void(0);" onclick="openPopup(2)" class="btn-cart1" tabindex="-1">View Details</a>
-                                                <a href="project-details.html" class="btn-cart1" tabindex="-1">Apply Now</a>
-                                            </div>
-                                        </div>
-
-
-
-
-                                        <div class="popup col-md-4" id="2">
-                                            <div class="popup-content">
-                                                <div class="freelance-content">
-                                                    <div class="freelance-top-content d-flex">
-                                                        <span> <i class="feather-clock me-1"></i>1 min ago</span>
-
-                                                    </div>
-                                                    <div class="author-heading">
-                                                        <div class="text-center2" > 
-
-                                                            <a href="project-details.html">
-                                                                <img style="width: 100%; height: 100%" src="assets/img/company/img-2.png" alt="author">
-                                                            </a>
-                                                        </div>
-                                                        <div class="profile-name">
-                                                            <div class="author-location"><a href="project-details.html">Park INC </a></div>
-                                                        </div>
-                                                        <div class="freelance-info">
-                                                            <h3><a href="javascript:void(0);">PHP Developer</a></h3>
-                                                            <div class="freelance-location"><i class="feather-map-pin me-1"></i>California, USA</div>
+                                                            <h3><a href="javascript:void(0);">${p.caID.categoriesName}</a></h3>
+                                                            <div class="freelance-location"><i class="feather-map-pin me-1"></i>${p.location}</div>
                                                         </div>
                                                         <div class="freelance-tags">
-                                                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web Design</span></a>
-                                                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI Design</span></a>
-                                                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
-                                                        </div>
+                                                            <span class="badge badge-pill badge-design">${p.skill}</span>
 
+                                                        </div>
                                                     </div>
                                                     <div class="counter-stats">
                                                         <ul>
-                                                            <li>
-                                                                <h5>Expiry</h5>
-                                                                <h3 class="counter-value">5 Days Left</h3>
+                                                            <li class="class3">
+                                                                <h3>Duration</h3>
+                                                                <h5 class="counter-value ">${p.durationID.durationName}</h5>
                                                             </li>
-                                                            <li>
-                                                                <h5>Proposals</h5>
-                                                                <h3 class="counter-value">15</h3>
+                                                            <li class="class3">
+                                                                <h3>Quantity</h3>
+                                                                <h5 class="counter-value " style="padding-left: 20px">${p.quantity}</h5>
                                                             </li>
-                                                            <li>
-                                                                <h5>Job Type</h5>
-                                                                <h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+                                                            <li class="class3">
+                                                                <h3>Job Type</h3>
+                                                                <h5 class="counter-value ">${p.jobTypeID.jobName}</h5>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <span class="close" onclick="closePopup(2)">&times;</span>
+                                                <div class="cart-hover">
+                                                    <a href="javascript:void(0);" onclick="openPopup(${p.postID})" class="btn-cart1" tabindex="-1">View Details</a>
+                                                    <a href="project-details.html" class="btn-cart1" tabindex="-1">Apply Now</a>
+                                                </div>
                                             </div>
+
+                                            <div class="popup col-md-4" id="${p.postID}" >
+                                                <div class="popup-content">
+                                                    <div class="freelance-content">
+                                                        <div class="freelance-top-content d-flex">
+                                                        </div>
+                                                        <div class="author-heading">
+                                                            <div class="text-center2" > 
+                                                                <a>
+                                                                    <img  style="width: 100%; height: 100%;" src="${p.image}" alt="author">                                                       
+                                                                </a>
+                                                            </div>
+                                                            <div class="profile-name">
+                                                                <h4><div class="author-location" style="text-align: center">${p.title}</div></h4>
+                                                            </div>
+                                                            <div class="freelance-info">
+                                                                <div>
+                                                                    <div class="class1" style="display: inline-block;">Company:</div>
+                                                                    <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                        <h3>${p.recruiterID.companyname}</h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="class1" style="display: inline-block;">Position:</div>
+                                                                    <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                        <h3>${p.caID.categoriesName}</h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="class1" style="display: inline-block;">Date:</div>
+                                                                    <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                        <h3>${p.datePost}</h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="class1" style="display: inline-block;">Location:</div>
+                                                                    <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                        <h3>${p.location}</h3>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div  class="freelance-tags class1" style="margin: 0;padding: 0; margin-top: 10px">Skill: 
+                                                                <span  class="badge badge-pill badge-design class2">${p.skill}</span>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="freelance-info">
+                                                            <div>
+                                                                <div class="class1" style="display: inline-block;">Duration:</div>
+                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                    <h3>${p.durationID.durationName}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div class="class1" style="display: inline-block;">Quantity:</div>
+                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                    <h3>${p.quantity}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div class="class1" style="display: inline-block;">Jop Type:</div>
+                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                    <h3>${p.jobTypeID.jobName}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div class="class1" style="display: inline-block;">Email:</div>
+                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                    <h3 >${p.recruiterID.email}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div class="class1">Description: </div>
+                                                                <h3>${p.description}</h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="close" onclick="closePopup(${p.postID})">&times;</span>
+                                                </div>
+                                            </div>
+                                            <div class="overlay" id="${p.postID}"></div>
                                         </div>
-                                        <div class="overlay" id="2"></div>
-
-                                    </div>
-
+                                    </c:forEach>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -945,16 +849,16 @@
                 z-index: 9999;
             }
 
-  
+
             .popup-content {
                 position: relative;
             }
 
             .close {
                 position: absolute;
-                top: -5px; 
-                right: 15px; 
-                font-size: 30px; 
+                top: -5px;
+                right: 15px;
+                font-size: 30px;
                 cursor: pointer;
                 z-index: 9999;
             }
@@ -975,12 +879,10 @@
                 padding-left: 15px
             }
 
-
-
-
         </style>
 
         <script>
+
             function openPopup(int) {
                 document.getElementById(int).style.display = 'block';
                 document.getElementById(int).style.display = 'block';
@@ -992,7 +894,21 @@
                 document.getElementById(int).style.display = 'none';
             }
 
+            function confirmAction(postID) {
+                var confirmResult = confirm("Deleting this will remove it permanently. Are you sure?");
+                if (confirmResult) {
+                    window.location.href = "DeletePostFavourites?postID="+postID;
+                } else {
+                    return false;
+                }
+            }
+
         </script>
+
+
+
+
+
 
 
         <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>

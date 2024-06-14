@@ -13,12 +13,10 @@
             <file>file:/D:/SU24/A/web/views/completedProjects.jsp</file>
         </group>
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/Post.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/accountType.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/PostFavouritesControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/Duration.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/FreelancerDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/MutiModels/PostBasic.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/RecruiterDAO.java</file>
         </group>
     </open-files>
 </project-private>
