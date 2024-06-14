@@ -67,25 +67,25 @@
                                 </li>
 
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu"> 
-                                        
-                                        <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
-                                        <li><a href="ListApply">Jobs Apply</a></li>
-                                        <li><a href="jobforyou">Jobs For you</a></li>
-                                    </ul>
-                                </li>
-                               
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                                                                                                                                                                                  
-                                        <li><a href="ListPost">Jobs List</a></li>                                        
-                                        <li><a href="SreachJob">Find Jobs</a></li>  
-                                    </ul>
-                                </li>
-                                 </c:if>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu"> 
+
+                                            <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
+                                            <li><a href="ListApply">Jobs Apply</a></li>
+                                            <li><a href="jobforyou">Jobs For you</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
+                                            <li><a href="SreachJob">Find Jobs</a></li>  
+                                        </ul>
+                                    </li>
+                                </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
@@ -110,11 +110,11 @@
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">                                                                           
                                         <li><a href="About">About us</a></li>
-                                         <li><a href="ContactUs">Contact us</a></li>
+                                        <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
-                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
+                                    <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
 
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
@@ -131,7 +131,7 @@
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
-                                            
+
                                             <li><a href="dashboard">Dashboard</a></li>
                                             <li><a href="companydetail">My Profile</a></li>
                                             <li><a href="company-details">Company Details</a></li>
@@ -146,7 +146,7 @@
                                     <li>
                                         <a href="/admin/index.html" target="_blank">Admin</a>
                                         <ul class="submenu">
-                                            
+
                                             <li><a href="dashboardAdmin">Dashboard</a></li>                                           
                                             <li><a href="profile-settings">Settings</a></li>
                                             <li><a href="logout">Logout</a></li>
@@ -312,33 +312,39 @@
                                                                 <div class="col-lg-6 col-md-12">
                                                                     <div class="mb-3">
                                                                         <label class="form-label">First Name</label>
-                                                                        <input type="text" class="form-control" name="firstName" value="${recruiter.firstName}" required>
+                                                                        <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstName" value="${recruiter.firstName}" required>
+
+                                                                        <div style="color: red" id="eFirstname"></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-12">
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Last Name</label>
-                                                                        <input type="text" class="form-control" name="lastName" value="${recruiter.lastName}" required>
+                                                                        <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastName" value="${recruiter.lastName}" required>
+                                                                        <div style="color: red" id="eLastname"></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-12">
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Phone Number</label>
-                                                                        <input type="text" class="form-control" name="phoneNumber" value="${recruiter.phone}" pattern="^0\d{9}$" title="Phone number must be 10 digits starting with 0" required>
+                                                                        <input oninput="checkphone()" type="text" class="form-control" id="phone" name="phoneNumber" value="${recruiter.phone}" pattern="^0\d{9}$" title="Phone number must be 10 digits starting with 0" required>
+                                                                        <div style="color: red" id="ePhone"></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-12">
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Email</label>
-                                                                        <input type="email" class="form-control" name="email" value="${recruiter.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" required>
+                                                                        <input oninput="checkEmail()"  type="email" class="form-control" id="email"  name="email" value="${recruiter.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" required>
+                                                                        <div style="color: red" id="eEmail"></div>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-lg-12">
                                                                     <h2>Company Details</h2>
-                                                                    <div class="mb-3">
+                                                                    <div class="mb-3">                                                                     
                                                                         <label class="form-label">Company Name</label>
-                                                                        <input type="text" class="form-control" name="companyName" value="${company.companyName}" required>
+                                                                        <input oninput="checkcompany()"  type="text" class="form-control"  id="companyname" name="companyName" value="${company.companyName}" required>                                                                  
+                                                                        <div style="color: red" id="eCompanyname"></div>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Established On</label>
@@ -402,7 +408,7 @@
 
         <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
         <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
-
+    <script src="assets/js/checkinput.js"></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:09 GMT -->
 </html>
 

@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -89,91 +91,25 @@
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
-                                                <th>Category Name</th>
+                                                <th>Category Name</th>                                             
+                                                <th>Description</th>          
                                                 <th class="text-end">Actions</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>Web Development </td>
-                                                <td class="text-end">
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    2
-                                                </td>
-                                                <td>UI Developer</td>
-                                                <td class="text-end">
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    3
-                                                </td>
-                                                <td>.NET Developer</td>
-                                                <td class="text-end">
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    4
-                                                </td>
-                                                <td>Business Analyst</td>
-                                                <td class="text-end">
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    5
-                                                </td>
-                                                <td>Graphic Designer</td>
-                                                <td class="text-end">
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    6
-                                                </td>
-                                                <td>SEO Developer</td>
-                                                <td class="text-end">
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    7
-                                                </td>
-                                                <td>Network Engineer</td>
-                                                <td class="text-end">
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    8
-                                                </td>
-                                                <td>Software Tester</td>
-                                                <td class="text-end">
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
+                                            <c:forEach var="c" items="${categories}">
+                                                <tr>
+                                                    <td>${c.getCaID()}</td>
+                                                    <td>${c.getCategoriesName()}</td>
+                                                    <td>${c.getDescription()}</td>
+                                                    <td class="text-end">
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
+
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -194,7 +130,15 @@
                         <form action="categoryAdmin" id="add-category-form" method="post">
                             <div class="form-group">
                                 <label for="categoryName">Category Name</label>
-                                <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Enter Category Name">
+                                <input  name="mod" value="add" hidden>
+                                <input  oninput="checkCategory()" type="text" class="form-control"  id="categoryname" name="categoryName"  placeholder="Enter Category Name" required>
+                                <div style="color: red" id="eCategoryname"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoryName">Description</label>
+                                <input  name="mod" value="add" hidden>
+                                <input  oninput="checkCategory()" type="text" class="form-control"   name="description"  placeholder="Enter Category Desciption" required>
+                                <div style="color: red" id="eCategoryname"></div>
                             </div>
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-primary btn-block" value="Add">Submit</button>
@@ -208,20 +152,26 @@
         <div class="modal fade custom-modal" id="edit-category">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-
                     <div class="modal-header">
                         <h4 class="modal-title">Edit Category</h4>
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
-
                     <div class="modal-body">
-                        <form>
+                        <form action="categoryAdmin" id="edit-category-form" method="post">
+                            <input type="hidden" name="categoryId" id="edit-categoryId">
                             <div class="form-group">
-                                <label>Category Name</label>
-                                <input type="text" class="form-control" value="Graphic & Design">
+                                <label for="edit-categoryname">Category Name</label>
+                                <input name="mod" value="edit" hidden>
+                                <input oninput="checkCategory()" type="text" class="form-control" id="edit-categoryname" name="categoryName" placeholder="Edit Category Name" required>
+                                <div style="color: red" id="eCategoryname"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-description">Description</label>
+                                <input name="mod" value="edit" hidden>
+                                <input oninput="checkCategory()" type="text" class="form-control" id="edit-description" name="description" placeholder="Edit Category Description" required>
                             </div>
                             <div class="mt-4">
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                <button type="submit" class="btn btn-primary btn-block" value="Edit"> Submit</button>
                             </div>
                         </form>
                     </div>
@@ -234,24 +184,31 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <div class="form-header">
-                            <h3>Delete</h3>
-                            <p>Are you sure want to delete?</p>
-                        </div>
-                        <div class="modal-btn delete-action">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
-                                </div>
-                                <div class="col-6">
-                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                        <form action="categoryAdmin" method="post">
+                            <!--<input type="text" id="deletecategory" name="mod" value="delete" hidden>-->
+                            <div class="form-header">
+                                <h3>Delete</h3>
+                                <p>Are you sure want to delete?</p>
+                            </div>
+                            <div class="modal-btn delete-action">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <!--<a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>-->
+                                        <input  name="cate" value="${c.getCaID()}" hidden>
+                                        <input style="width: 100%" type="submit"  name="mod" class="btn btn-primary continue-btn" value="delete">
+
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <script src="assets/js/jquery-3.7.1.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
