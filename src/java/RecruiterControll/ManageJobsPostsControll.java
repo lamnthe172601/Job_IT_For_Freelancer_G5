@@ -5,9 +5,15 @@
 
 package RecruiterControll;
 
+import Models.Categories;
+import Models.Duration;
+import Models.JobType;
 import Models.Post;
 import Models.Recruiter;
 import Models.User;
+import dal.CategoriesDAO;
+import dal.DurationDAO;
+import dal.JobTypeDAO;
 import dal.RecruiterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,6 +41,17 @@ public class ManageJobsPostsControll extends HttpServlet {
         Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
         List<Post> listpost = reDAO.ListAllPostByRecruiter(re.getRecruiterID());
         request.setAttribute("listpost", listpost);
+        
+        
+        CategoriesDAO caDao = new CategoriesDAO();
+        DurationDAO duDao = new DurationDAO();
+        List<Duration> du = duDao.getAllDuration();
+        JobTypeDAO jobDao = new JobTypeDAO();
+        List<JobType> jobtype = jobDao.getAllJobType();
+        List<Categories> allCate = caDao.getAllCategory();
+        request.setAttribute("allCate", allCate);
+        request.setAttribute("allDuration", du);
+        request.setAttribute("alljobtype", jobtype);
         request.getRequestDispatcher("views/managePost.jsp").forward(request, response);
     } 
 

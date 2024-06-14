@@ -11,13 +11,14 @@ import Models.JobType;
 import Models.Post;
 import Models.Recruiter;
 import Models.TeamNumber;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PostDAO extends DBContext {
 
@@ -91,14 +92,14 @@ public class PostDAO extends DBContext {
     }
 
     public List<Post> getPostByID(int pid) {
-    List<Post> list = new ArrayList<>();
-    String query = """
+        List<Post> list = new ArrayList<>();
+        String query = """
                    SELECT postID, title, [image], job_type_ID, durationID, date_post, quantity, [description], budget, [location], skill, recruiterID, caID
                    FROM Post
                    WHERE postID = ?""";
-    try {
-        PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, pid); // Đặt giá trị cho tham số pid
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, pid); // Đặt giá trị cho tham số pid
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -138,7 +139,7 @@ public class PostDAO extends DBContext {
                         rs.getString("skill"),
                         new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID")),
                         new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img")),
-                         rs.getBoolean("status"), rs.getInt("checking")
+                        rs.getBoolean("status"), rs.getInt("checking")
                 );
                 posts.add(post);
             }
@@ -147,4 +148,61 @@ public class PostDAO extends DBContext {
         }
         return posts;
     }
+    
+      // Method to get the maximum postID
+    public int getMaxPostID() throws SQLException {
+        int maxPostID = 0;
+        String sql = "SELECT MAX(postID) AS max_postID FROM Post";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                maxPostID = resultSet.getInt("max_postID");
+            }
+        }
+
+        return maxPostID;
+    }
+
+    public boolean createPost(String title, String image, int jobTypeId, int durationId,
+            int quantity, String description, int budget, String location, String skill,
+            int recruiterId, int status, int caId, int checking) throws SQLException {
+        String sql = "INSERT INTO [dbo].[Post] ([title], [image], [job_type_ID], [durationID], [date_post], [quantity], [description], [budget], [location], [skill], [recruiterID], [status], [caID], [checking]) "
+                + "VALUES (?, ?, ?, ?, GETDATE(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, title);
+            statement.setString(2, image);
+            statement.setInt(3, jobTypeId);
+            statement.setInt(4, durationId);
+            statement.setInt(5, quantity);
+            statement.setString(6, description);
+            statement.setInt(7, budget);
+            statement.setString(8, location);
+            statement.setString(9, skill);
+            statement.setInt(10, recruiterId);
+            statement.setInt(11, status);
+            statement.setInt(12, caId);
+            statement.setInt(13, checking);
+
+            int rowsInserted = statement.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            return false;
+        }
+
+    }
+    
+//    public static void main(String[] args) {
+//        PostDAO dao = new PostDAO();
+//        try {
+//            boolean inserted = dao.insertPost("Title", "ImageURL", 1, 2, 10,
+//                    "Description", 1000, "Location", "Skill", 1, 1, 1, 0);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }

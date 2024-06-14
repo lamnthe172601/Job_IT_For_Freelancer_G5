@@ -32,6 +32,8 @@ public class CategoriesDAO extends DBContext{
         }
         return list;
     }
+        
+        
 
     public Categories getCategoryByID(int categoryId) {
         String query = "select * from Categories where caID=?";
@@ -59,6 +61,8 @@ public class CategoriesDAO extends DBContext{
             return false;
         }
     }
+      
+      
 
     public boolean addCategory(CategoriesDAO category) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

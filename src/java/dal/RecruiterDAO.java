@@ -142,10 +142,9 @@ public class RecruiterDAO extends DBContext {
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return list;
     }
@@ -169,7 +168,7 @@ public class RecruiterDAO extends DBContext {
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -202,7 +201,20 @@ public class RecruiterDAO extends DBContext {
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
-                Post post = new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca);
+                Post post = new Post(
+                        rs.getInt("postID"),
+                        rs.getString("title"),
+                        rs.getString("image"),
+                        job, du,
+                        rs.getDate("date_post"),
+                        rs.getInt("quantity"),
+                        rs.getString("description"),
+                        rs.getInt("budget"),
+                        rs.getString("location"),
+                        rs.getString("skill"),
+                       re, ca,
+                         rs.getBoolean("status"), rs.getInt("checking"));
+                
                 Freelancer en = new Freelancer(
                         rs.getInt("freelanceID"),
                         rs.getString("first_name"),
@@ -218,15 +230,14 @@ public class RecruiterDAO extends DBContext {
                 list.add(new JobApply(rs.getInt("applyID"), en, post, rs.getString("status"), rs.getDate("dateApply")));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return list;
     }
 
     public static void main(String[] args) {
         RecruiterDAO r = new RecruiterDAO();
-        List<JobApply> e = r.ListAllApplyForFreelancerByRecruiterID(1);
-        for (JobApply post : e) {
+        List<Post> e = r.ListPostByDateTime(1);
+        for (Post post : e) {
             System.out.println(post.toString());
         }
     }
