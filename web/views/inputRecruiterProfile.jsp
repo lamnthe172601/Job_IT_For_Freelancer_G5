@@ -79,10 +79,10 @@
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Date of Birth<span class="label-star"> *</span></label>
-                                <div class="cal-icon">
-                                    <input oninput="checkdob()" type="text" class="form-control datetimepicker" placeholder="Choose" name="dob" id="dob">
+                                
+                                    <input oninput="checkdob()" type="date" class="form-control" placeholder="Choose" name="dob" id="dob">
                                     <div style="color: red" id="eDob"></div>
-                                </div>
+                                
                             </div>
                         </div>
                     <div class="col-md-6 col-lg-6">
@@ -136,9 +136,9 @@
                         <div class="col-md-6 col-lg-6">
                             <div class="input-block">
                                 <label class="form-label">Established On</label>
-                                <div class="cal-icon">
-                                    <input type="text" name="established" class="form-control datetimepicker" placeholder="Choose">
-                                </div>
+                                
+                                    <input type="date" name="established" class="form-control " placeholder="Choose">
+                                
                             </div>
                         </div>
                         <div class="col-md-6">

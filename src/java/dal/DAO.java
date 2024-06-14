@@ -247,14 +247,15 @@ public class DAO extends DBContext {
         return freelancerID;
     }
 
-    public void inputFreelancerSkill(String SkillID, int freelancerID) {
+    public void inputFreelancerSkill(String SkillID, int freelancerID, String level) {
         String sql = """
                      insert into [Skills]
-                     values(?,?)""";
+                     values(?,?,?)""";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, SkillID);
             statement.setInt(2, freelancerID);
+            statement.setString(3, level);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
