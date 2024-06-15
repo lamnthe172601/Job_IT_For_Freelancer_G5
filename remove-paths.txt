@@ -1,0 +1,15 @@
+/build/
+/dist/
+/nbproject/private/
+*.class
+build/
+dist/
+nbproject/private/
+build.xml
+*.nb-gradle/
+*.log
+*.tmp
+*.bak
+nbactions.xml
+tomcat/
+glassfish/
