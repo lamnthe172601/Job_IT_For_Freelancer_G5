@@ -10,6 +10,7 @@ import Models.Duration;
 import Models.JobType;
 import Models.Post;
 import Models.Recruiter;
+import Models.SkillSet;
 import Models.TeamNumber;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,8 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class PostDAO extends DBContext {
 
@@ -91,25 +91,29 @@ public class PostDAO extends DBContext {
         return null;
     }
 
-    public List<Post> getPostByID(int pid) {
+    public List<Post> getPostByRecruiterID(int pid) {
         List<Post> list = new ArrayList<>();
         String query = """
-                   SELECT postID, title, [image], job_type_ID, durationID, date_post, quantity, [description], budget, [location], skill, recruiterID, caID
-                   FROM Post
-                   WHERE postID = ?""";
-        try {
+                   SELECT * 
+                                          FROM Post p
+                                          JOIN JobType j ON p.job_type_ID = j.jobID
+                                          JOIN Duration du ON p.durationID = du.durationID
+                                          JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                                          JOIN Categories ca ON p.caID = ca.caID
+                                          JOIN Company co ON re.recruiterID = co.recruiterID
+                   
+                     where p.recruiterID = ? and p.status = 1 and p.checking = 1""";
+         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, pid); // Đặt giá trị cho tham số pid
-
+            ps.setInt(1, pid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
-                TeamNumber tem = new TeamNumber(rs.getInt("team_numberID"), rs.getString("team_number"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
-                Company com = new Company(rs.getInt("companyID"), rs.getString("company_name"), tem, rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"), re);
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca,rs.getBoolean("status"),rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -196,13 +200,33 @@ public class PostDAO extends DBContext {
 
     }
     
-//    public static void main(String[] args) {
-//        PostDAO dao = new PostDAO();
-//        try {
-//            boolean inserted = dao.insertPost("Title", "ImageURL", 1, 2, 10,
-//                    "Description", 1000, "Location", "Skill", 1, 1, 1, 0);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    public List<SkillSet> getAllSkillSet() {
+        List<SkillSet> list = new ArrayList<>();
+        String query = """
+                         SELECT [skill_set_ID]
+                         ,[skill_set_name]
+                         FROM [freelancer].[dbo].[Skill_Set]""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // In chi tiết lỗi ra console
+
+        }
+        return list;
+    }
+    
+    
+    
+    
+    public static void main(String[] args) {
+        PostDAO dao = new PostDAO();
+       List<Post> s = dao.getPostByRecruiterID(1);
+        for (Post skillSet : s) {
+            System.out.println(skillSet);
+        }
+    }
 }

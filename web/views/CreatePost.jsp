@@ -31,6 +31,69 @@
         <link rel="stylesheet" href="assets/plugins/summernote/dist/summernote-lite.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+
+        <style>
+            /* Modal CSS */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0,0,0);
+                background-color: rgba(0,0,0,0.4);
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 30%;
+                text-align: center;
+                border-radius: 10px;
+            }
+
+            .close-btn {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .success-icon {
+                font-size: 50px;
+                color: green;
+            }
+
+            #okButton, #viewPostsButton {
+                margin-top: 20px;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            #okButton:hover, #viewPostsButton:hover {
+                background-color: #45a049;
+            }
+
+            .btn-item {
+                margin-top: 20px;
+            }
+
+            .error {
+                color: red;
+                margin-top: 5px;
+                font-size: 0.9em;
+            }
+        </style>
     </head>
     <body>
 
@@ -48,13 +111,13 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
-                                <a href="index.html" class="menu-logo">
+                                <a href="home" class="menu-logo">
                                     <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                 </a>
                                 <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -101,7 +164,7 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
                                             <li><a href="CreatePost">Create a new Post</a></li>
-                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
                                             <li><a href="newsJobs">Reviews</a></li>
 
                                         </ul>
@@ -162,11 +225,7 @@
                                         </c:if>
                             </ul>
                         </div>
-                        <ul style="margin-left: 5px;" class="nav header-navbar-rht">
-
-
-                            <li><a href="CreatePost" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-
+                        <ul style="" class="nav header-navbar-rht">
 
                         </ul>
 
@@ -183,7 +242,7 @@
                                 <h3>Post a Project</h3>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="home">Home</a></li>
                                         <li class="breadcrumb-item" aria-current="page">Post a Project</li>
                                     </ol>
                                 </nav>
@@ -199,7 +258,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="select-project mb-4">
-                                <form action="CreatePost" method="post" enctype="multipart/form-data">
+
+
+                                <form id="jobForm" action="CreatePost" method="post" enctype="multipart/form-data">
                                     <div class="title-box widget-box">
                                         <div class="row">
                                             <div class="col-lg-12">
@@ -208,11 +269,12 @@
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="mb-3">
                                                     <label class="focus-label">Project Title</label>
-                                                    <input type="text" class="form-control" name="projectTitle">
+                                                    <input type="text" class="form-control" name="projectTitle" id="projectTitle">
+                                                    <div class="error" id="error-projectTitle"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
-                                                <div class="ms-3 ">
+                                                <div class="ms-3">
                                                     <label class="image-upbtn focus-label">
                                                         Upload Image
                                                     </label>
@@ -222,38 +284,40 @@
                                             </div>
                                             <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                        <label class="focus-label">Jobs Type</label>
-                                                        <select class="form-control select" name="jobsType">
-                                                            <option value="0">Select</option>
-                                                            <c:forEach items="${alljobtype}" var="jobtype">
-                                                                <option value="${jobtype.jobTypeID}">${jobtype.jobName}</option>
-                                                            </c:forEach>
-                                                        </select>
+                                                    <label class="focus-label">Jobs Type</label>
+                                                    <select class="form-control select" name="jobsType" id="jobsType">
+                                                        <option value="0">Select</option>
+                                                        <c:forEach items="${alljobtype}" var="jobtype">
+                                                            <option value="${jobtype.jobTypeID}">${jobtype.jobName}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                    <div class="error" id="error-jobsType"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
                                                     <label class="focus-label">Project Duration</label>
-                                                    <select class="form-control select" name="projectDuration">
+                                                    <select class="form-control select" name="projectDuration" id="projectDuration">
                                                         <option value="0">Select</option>
                                                         <c:forEach items="${allDuration}" var="du">
                                                             <option value="${du.durationID}">${du.durationName}</option>
                                                         </c:forEach>
                                                     </select>
+                                                    <div class="error" id="error-projectDuration"></div>
                                                 </div>
                                             </div>
-                                            
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="mb-3">
                                                     <label class="focus-label">Target</label>
-                                                    <input type="text" class="form-control" name="target">
-                                                        
+                                                    <input type="text" class="form-control" name="target" id="target">
+                                                    <div class="error" id="error-target"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="mb-3">
                                                     <label class="focus-label">Location</label>
-                                                    <input type="text" class="form-control" name="location">
+                                                    <input type="text" class="form-control" name="location" id="location">
+                                                    <div class="error" id="error-location"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 my-3">
@@ -263,10 +327,17 @@
                                                 <div class="title-content p-0">
                                                     <div class="title-detail">
                                                         <h3>Skill Set</h3>
-                                                        <div class="mb-3">
-                                                            <input type="text" data-role="tagsinput" class="input-tags form-control" name="skills" value="Web Design" id="services" placeholder="UX, UI, App Design, Wireframing, Branding">
-                                                            <p class="text-muted mb-0">Enter skills for needed for project, for best result add 5 or more Skills</p>
+                                                        <div class="row">
+                                                            <c:forEach items="${skill}" var="i"> 
+                                                                <div class="col-md-4">
+                                                                    <div class="input-block">
+                                                                        <input type="radio" name="skill" id="skill-${i.skill_set_name}" value="${i.skill_set_name}">
+                                                                        <label for="skill-${i.skill_set_name}">${i.skill_set_name}</label>
+                                                                    </div>
+                                                                </div>
+                                                            </c:forEach>
                                                         </div>
+                                                        <div class="error" id="error-skill"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -278,7 +349,8 @@
                                                     <div class="col-lg-3 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="focus-label">From ($)</label>
-                                                            <input type="text" class="form-control" name="budgetFrom" placeholder="15">
+                                                            <input type="text" class="form-control" name="budgetFrom" id="budgetFrom" placeholder="15">
+                                                            <div class="error" id="error-budgetFrom"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -289,18 +361,20 @@
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="mb-3">
                                                     <label class="focus-label">Categories Name</label>
-                                                    <select class="form-control select" name="categoriesName">
+                                                    <select class="form-control select" name="categoriesName" id="categoriesName">
                                                         <option value="0">Select</option>
                                                         <c:forEach items="${allCate}" var="allcate">
                                                             <option value="${allcate.caID}">${allcate.categoriesName}</option>
                                                         </c:forEach>
                                                     </select>
+                                                    <div class="error" id="error-categoriesName"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="focus-label">Description of Projects</label>
-                                                    <textarea class="form-control" name="description"></textarea>
+                                                    <textarea class="form-control" name="description" id="description"></textarea>
+                                                    <div class="error" id="error-description"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -314,11 +388,157 @@
                                         </div>
                                     </div>
                                 </form>
+
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Success Modal -->
+            <div id="successModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <div class="modal-body">
+                        <div class="success-icon">&#10004;</div>
+                        <h2>Notification!</h2>
+                        <p>Posted successfully</p>
+
+                        <button id="viewPostsButton" class="btn">View post list</button>
+                        <button id="okButton" class="btn">OK</button>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.getElementById('jobForm').addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    // Clear previous error messages
+                    clearErrors();
+
+                    // Validate the form
+                    var isValid = validateForm();
+
+                    if (isValid) {
+                        var formData = new FormData(this);
+
+                        // Send the form data using AJAX
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", this.action, true);
+                        xhr.onload = function () {
+                            if (xhr.status === 200) {
+                                showModal();
+                            } else {
+                                console.error('Form submission failed.');
+                            }
+                        };
+                        xhr.send(formData);
+                    }
+                });
+
+                function clearErrors() {
+                    var errorElements = document.querySelectorAll('.error');
+                    errorElements.forEach(function (element) {
+                        element.textContent = '';
+                    });
+                }
+
+                function validateForm() {
+                    var isValid = true;
+
+                    var projectTitle = document.getElementById('projectTitle').value;
+                    if (projectTitle.trim() === '') {
+                        document.getElementById('error-projectTitle').textContent = 'Project Title is required.';
+                        isValid = false;
+                    }
+
+                    var jobsType = document.getElementById('jobsType').value;
+                    if (jobsType === '0') {
+                        document.getElementById('error-jobsType').textContent = 'Please select a Job Type.';
+                        isValid = false;
+                    }
+
+                    var projectDuration = document.getElementById('projectDuration').value;
+                    if (projectDuration === '0') {
+                        document.getElementById('error-projectDuration').textContent = 'Please select a Project Duration.';
+                        isValid = false;
+                    }
+
+                    var target = document.getElementById('target').value;
+                    if (target.trim() === '') {
+                        document.getElementById('error-target').textContent = 'Target is required.';
+                        isValid = false;
+                    }
+
+                    var location = document.getElementById('location').value;
+                    if (location.trim() === '') {
+                        document.getElementById('error-location').textContent = 'Location is required.';
+                        isValid = false;
+                    }
+
+                    var skill = document.querySelector('input[name="skill"]:checked');
+                    if (!skill) {
+                        document.getElementById('error-skill').textContent = 'Please select a Skill.';
+                        isValid = false;
+                    }
+
+                    var budgetFrom = document.getElementById('budgetFrom').value;
+                    if (budgetFrom.trim() === '' || isNaN(budgetFrom) || budgetFrom <= 0) {
+                        document.getElementById('error-budgetFrom').textContent = 'Please enter a valid budget amount.';
+                        isValid = false;
+                    }
+
+                    var categoriesName = document.getElementById('categoriesName').value;
+                    if (categoriesName === '0') {
+                        document.getElementById('error-categoriesName').textContent = 'Please select a Category.';
+                        isValid = false;
+                    }
+
+                    var description = document.getElementById('description').value;
+                    if (description.trim() === '') {
+                        document.getElementById('error-description').textContent = 'Description is required.';
+                        isValid = false;
+                    }
+
+                    return isValid;
+                }
+
+                function showModal() {
+                    var modal = document.getElementById('successModal');
+                    var span = document.getElementsByClassName('close-btn')[0];
+                    var okButton = document.getElementById('okButton');
+                    var viewPostsButton = document.getElementById('viewPostsButton');
+
+                    modal.style.display = 'block';
+
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function () {
+                        modal.style.display = 'none';
+                        window.location.href = 'home'; // Redirect to home
+                    }
+
+                    // When the user clicks on OK button, close the modal and redirect to home
+                    okButton.onclick = function () {
+                        modal.style.display = 'none';
+                        window.location.href = 'manageJobsPosts'; // Redirect to home
+                    }
+
+                    // When the user clicks on View Posts button, redirect to manageJobsPosts
+                    viewPostsButton.onclick = function () {
+                        window.location.href = 'myListJobProrect'; // Redirect to manageJobsPosts
+                    }
+
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function (event) {
+                        if (event.target == modal) {
+                            modal.style.display = 'none';
+                            window.location.href = 'home'; // Redirect to home
+                        }
+                    }
+                }
+            </script>
 
 
             <footer class="footer">
@@ -424,6 +644,8 @@
             </footer>
 
         </div>
+
+
 
 
         <script src="assets/js/jquery-3.7.1.min.js" type="6fd12bacb56ccade8d32a6ae-text/javascript"></script>

@@ -9,6 +9,7 @@ import Models.Duration;
 import Models.JobType;
 import Models.Post;
 import Models.Recruiter;
+import Models.SkillSet;
 import Models.User;
 import dal.CategoriesDAO;
 import dal.DurationDAO;
@@ -43,8 +44,11 @@ public class CreatePostControll extends HttpServlet {
         DurationDAO duDao = new DurationDAO();
         List<Duration> du = duDao.getAllDuration();
         JobTypeDAO jobDao = new JobTypeDAO();
+        PostDAO postdao = new PostDAO();
         List<JobType> jobtype = jobDao.getAllJobType();
         List<Categories> allCate = caDao.getAllCategory();
+        List<SkillSet> skill = postdao.getAllSkillSet();
+        request.setAttribute("skill", skill);
         request.setAttribute("allCate", allCate);
         request.setAttribute("allDuration", du);
         request.setAttribute("alljobtype", jobtype);
@@ -73,7 +77,7 @@ public class CreatePostControll extends HttpServlet {
             String description = request.getParameter("description");
             String budget_raw = request.getParameter("budgetFrom");
             String location = request.getParameter("location");
-            String skill = request.getParameter("skills");
+            String skill = request.getParameter("skill");
             String caId_raw = request.getParameter("categoriesName");
 
             String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ProjectsPost";

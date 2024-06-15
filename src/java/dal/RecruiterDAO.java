@@ -126,7 +126,7 @@ public class RecruiterDAO extends DBContext {
     public List<Post> ListPostByDateTime(int recruiterID) {
         List<Post> list = new ArrayList<>();
         String query = """
-                           SELECT top 6 * FROM Post p
+                           SELECT  * FROM Post p
                            JOIN JobType j ON p.job_type_ID = j.jobID
                            JOIN Duration du ON p.durationID = du.durationID
                            JOIN Recruiter re ON p.recruiterID = re.recruiterID

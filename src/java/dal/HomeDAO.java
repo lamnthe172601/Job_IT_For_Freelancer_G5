@@ -140,7 +140,7 @@ public class HomeDAO extends DBContext {
                            SELECT TOP 1 p.skill
                            FROM Post p
                            WHERE p.recruiterID = ?
-                           ORDER BY p.date_post DESC
+                            ORDER BY p.postID DESC
                        ),
                        FreelancerWithSkill AS (
                            SELECT DISTINCT f.*,s.skillID, s.skill_set_ID, ss.skill_set_name 

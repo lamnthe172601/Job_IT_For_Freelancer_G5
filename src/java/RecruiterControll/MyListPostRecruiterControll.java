@@ -3,20 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package CommonControll;
+package RecruiterControll;
 
+import Models.Post;
+import Models.Recruiter;
+import Models.User;
+import dal.PostDAO;
+import dal.RecruiterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
-public class ListPostControll extends HttpServlet {
+public class MyListPostRecruiterControll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +40,10 @@ public class ListPostControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListPostControll</title>");  
+            out.println("<title>Servlet MyListPostRecruiterControll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListPostControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet MyListPostRecruiterControll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +60,15 @@ public class ListPostControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       request.getRequestDispatcher("views/listPost.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        RecruiterDAO reDAO = new RecruiterDAO();
+        PostDAO pDao = new PostDAO();
+        Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
+         List<Post> listpost = pDao.getPostByRecruiterID(re.getRecruiterID());
+         
+         request.setAttribute("listpost", listpost);
+        request.getRequestDispatcher("views/myListPostRecruiter.jsp").forward(request, response);
     } 
 
     /** 
