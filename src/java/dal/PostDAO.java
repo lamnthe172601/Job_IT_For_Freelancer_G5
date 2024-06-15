@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 public class PostDAO extends DBContext {
 
     public List<Post> getPopularPosts(int limit) throws SQLException {
@@ -91,34 +90,64 @@ public class PostDAO extends DBContext {
         return null;
     }
 
-    public List<Post> getPostByRecruiterID(int pid) {
+    public List<Post> getPostsByRecruiterIDWithPagination(int recruiterID, int offset, int pageSize) {
         List<Post> list = new ArrayList<>();
-        String query = """
-                   SELECT * 
-                                          FROM Post p
-                                          JOIN JobType j ON p.job_type_ID = j.jobID
-                                          JOIN Duration du ON p.durationID = du.durationID
-                                          JOIN Recruiter re ON p.recruiterID = re.recruiterID
-                                          JOIN Categories ca ON p.caID = ca.caID
-                                          JOIN Company co ON re.recruiterID = co.recruiterID
-                   
-                     where p.recruiterID = ? and p.status = 1 and p.checking = 1""";
-         try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, pid);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
-                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
-                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
-                JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+        String query = "SELECT p.postID, p.title, p.image, p.date_post, p.quantity, p.description, "
+                + "p.budget, p.location, p.skill, p.status, p.checking, "
+                + "p.caID, ca.categories_name, ca.categories_img, "
+                + "p.durationID, du.duration_name, "
+                + "re.recruiterID, re.first_name, re.last_name, re.gender, "
+                + "re.dob, re.image AS recruiter_image, re.email_contact, "
+                + "re.phone_contact, re.UserID, "
+                + "j.jobID, j.job_name "
+                + "FROM Post p "
+                + "JOIN Categories ca ON p.caID = ca.caID "
+                + "JOIN Duration du ON p.durationID = du.durationID "
+                + "JOIN Recruiter re ON p.recruiterID = re.recruiterID "
+                + "JOIN JobType j ON p.job_type_ID = j.jobID "
+                + "WHERE p.recruiterID = ? "
+                + "ORDER BY p.date_post "
+                + "OFFSET ? ROWS "
+                + "FETCH NEXT ? ROWS ONLY";
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca,rs.getBoolean("status"),rs.getInt("checking")));
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            
+            ps.setInt(1, recruiterID);
+            ps.setInt(2, offset);
+            ps.setInt(3, pageSize);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                    Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                    Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("recruiter_image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
+                    JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+
+                    Post post = new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking"));
+                    list.add(post);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    // Method to get the number of posts by recruiter ID
+    public int getNoOfPostsByRecruiterID(int recruiterID) {
+        int count = 0;
+        try {
+
+            PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) FROM Posts WHERE recruiterID = ? and status = 1 and checking = 1");
+            ps.setInt(1, recruiterID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return count;
     }
 
     public List<Post> getAllPosts() {
@@ -152,14 +181,13 @@ public class PostDAO extends DBContext {
         }
         return posts;
     }
-    
-      // Method to get the maximum postID
+
+    // Method to get the maximum postID
     public int getMaxPostID() throws SQLException {
         int maxPostID = 0;
         String sql = "SELECT MAX(postID) AS max_postID FROM Post";
 
-        try (PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
+        try (PreparedStatement statement = connection.prepareStatement(sql); ResultSet resultSet = statement.executeQuery()) {
             if (resultSet.next()) {
                 maxPostID = resultSet.getInt("max_postID");
             }
@@ -199,7 +227,7 @@ public class PostDAO extends DBContext {
         }
 
     }
-    
+
     public List<SkillSet> getAllSkillSet() {
         List<SkillSet> list = new ArrayList<>();
         String query = """
@@ -218,13 +246,10 @@ public class PostDAO extends DBContext {
         }
         return list;
     }
-    
-    
-    
-    
+
     public static void main(String[] args) {
         PostDAO dao = new PostDAO();
-       List<Post> s = dao.getPostByRecruiterID(1);
+        List<Post> s = dao.getPostsByRecruiterIDWithPagination(1, 10, 9);
         for (Post skillSet : s) {
             System.out.println(skillSet);
         }

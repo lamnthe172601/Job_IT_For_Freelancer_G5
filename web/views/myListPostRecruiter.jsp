@@ -462,7 +462,7 @@
                                                 <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
                                                 <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
                                                 <div class="author-heading">
-                                                    <div class="freelance-img">
+                                                    <div class=" freelance-img">
                                                         <a href="javascript:void(0);">
                                                             <img src="${list.image}" alt="author">
                                                             <span class="verified"><i class="fas fa-check-circle"></i></span>
@@ -505,8 +505,26 @@
                                 </c:forEach>
                             </div>
 
-                             <!-- Hiển thị các nút điều hướng phân trang -->
-    
+                            <div class="pagination">
+                                <c:if test="${currentPage > 1}">
+                                    <a href="myListPostRecruiter?page=${currentPage - 1}">&laquo; Previous</a>
+                                </c:if>
+                                <c:forEach begin="1" end="${noOfPages}" var="page">
+                                    <c:choose>
+                                        <c:when test="${page == currentPage}">
+                                            <span class="current-page">${page}</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="myListPostRecruiter?page=${page}">${page}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <c:if test="${currentPage < noOfPages}">
+                                    <a href="myListPostRecruiter?page=${currentPage + 1}">Next &raquo;</a>
+                                </c:if>
+                            </div>
+
+
 
 
 
