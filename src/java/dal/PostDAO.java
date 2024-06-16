@@ -9,6 +9,7 @@ import Models.Company;
 import Models.Duration;
 import Models.JobType;
 import Models.Post;
+
 import Models.Recruiter;
 import Models.SkillSet;
 import Models.TeamNumber;
@@ -255,4 +256,68 @@ public class PostDAO extends DBContext {
 //        PostDAO dao = new PostDAO();
 //        dao.updatePost("Khuong", "abc", 2, 2, 100, "mota", "30", "HCM", "C++", 10, 21);
 //    }
+    
+    
+    //Tan task
+    public List<PostBasic> getAllFavPosts(int id) {
+        List<PostBasic> posts = new ArrayList<>();
+        String query = """
+                       select p.postID,p.title,p.image,p.job_type_ID,p.durationID,p.date_post,p.quantity,p.description,p.budget,p.location,p.skill,p.recruiterID,p.status,p.caID,p.checking,
+                       	j.job_name,
+                       	d.duration_name,
+                       	c.categories_img,c.categories_name,c.description,c.statusCate,
+                       	r.first_name,r.last_name,r.email_contact,
+                       	co.company_name
+                       	from Post p 
+                       	inner join FreelancerFavorites f on p.postID=f.postID 
+                       	inner join JobType j on j.jobID=p.job_type_ID
+                       	inner join Duration d on d.durationID=p.durationID
+                       	inner join Categories c on c.caID=p.caID
+                       	inner join Recruiter r on r.recruiterID=p.recruiterID
+                       	inner join Company co on co.recruiterID=p.recruiterID
+                       	where f.freelanceID=?;
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"),rs.getString("company_name"));
+                JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
+                posts.add(new PostBasic(rs.getInt("postID"),rs.getInt("quantity"),rs.getInt("budget"), rs.getString("title"), rs.getString("description"),rs.getString("location"),rs.getString("skill"),rs.getString("image"),rs.getDate("date_post"),
+                         job, du,    
+                          re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
+    
+    
+        public void deleteFavoPostByPostID(int freelancerID, String postID) {
+        String sql = """
+                     DELETE FROM FreelancerFavorites WHERE freelanceID=? AND postID=?;
+                     """;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            statement.setInt(1, freelancerID);
+            statement.setString(2, postID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    
+    public static void main(String[] args) {
+        PostDAO d= new PostDAO();
+        List<PostBasic> post =  d.getAllFavPosts(97);
+        for (PostBasic post1 : post) {
+            System.out.println(post1.toString());
+        }
+    }
 }

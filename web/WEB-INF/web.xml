@@ -144,6 +144,10 @@
         <servlet-name>MyListPostRecruiterControll</servlet-name>
         <servlet-class>RecruiterControll.MyListPostRecruiterControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeletePostFavouritesControll</servlet-name>
+        <servlet-class>FreelancerControll.DeletePostFavouritesControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -295,5 +299,9 @@
     <servlet-mapping>
         <servlet-name>MyListPostRecruiterControll</servlet-name>
         <url-pattern>/myListJobProject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePostFavouritesControll</servlet-name>
+        <url-pattern>/DeletePostFavourites</url-pattern>
     </servlet-mapping>
 </web-app>
