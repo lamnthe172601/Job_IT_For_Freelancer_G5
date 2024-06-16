@@ -13,6 +13,8 @@ import Models.Post;
 import Models.Recruiter;
 import Models.SkillSet;
 import Models.TeamNumber;
+import MutiModels.PostBasic;
+import MutiModels.RecruiterBasic;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
