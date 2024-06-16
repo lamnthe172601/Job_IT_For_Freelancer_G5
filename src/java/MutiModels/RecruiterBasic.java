@@ -12,16 +12,18 @@ public class RecruiterBasic {
     int recruiterID;
     String firstName, lastName, email;
     String Companyname;
+    String image;
 
     public RecruiterBasic() {
     }
 
-    public RecruiterBasic(int recruiterID, String firstName, String lastName, String email, String Companyname) {
+    public RecruiterBasic(int recruiterID, String firstName, String lastName, String email, String Companyname, String image) {
         this.recruiterID = recruiterID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.Companyname = Companyname;
+        this.image=image;
     }
 
     public int getRecruiterID() {
@@ -64,8 +66,19 @@ public class RecruiterBasic {
         this.Companyname = Companyname;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
-        return "RecruterBasic{" + "recruiterID=" + recruiterID + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", Companyname=" + Companyname + '}';
+        return "RecruiterBasic{" + "recruiterID=" + recruiterID + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", Companyname=" + Companyname + ", image=" + image + '}';
     }
+    
+
+    
 }

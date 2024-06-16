@@ -505,6 +505,7 @@
                                                                 <div class="class1">Description: </div>
                                                                 <h3>${p.description}</h3>
                                                             </div>
+                                                            <a href="PostDetails?postID=${p.postID}" class="btn-cart1" tabindex="-1">More Detail</a>
                                                         </div>
                                                     </div>
                                                     <span class="close" onclick="closePopup(${p.postID})">&times;</span>
