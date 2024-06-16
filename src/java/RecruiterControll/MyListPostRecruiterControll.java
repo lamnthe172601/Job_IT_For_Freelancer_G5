@@ -4,9 +4,16 @@
  */
 package RecruiterControll;
 
+import Models.Categories;
+import Models.Duration;
+import Models.JobType;
 import Models.Post;
 import Models.Recruiter;
+import Models.SkillSet;
 import Models.User;
+import dal.CategoriesDAO;
+import dal.DurationDAO;
+import dal.JobTypeDAO;
 import dal.PostDAO;
 import dal.RecruiterDAO;
 import java.io.IOException;
@@ -50,41 +57,56 @@ public class MyListPostRecruiterControll extends HttpServlet {
         }
     }
 
-   
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-    User user = (User) session.getAttribute("account");
-    RecruiterDAO reDAO = new RecruiterDAO();
-    PostDAO pDao = new PostDAO();
-    Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
-
-    // Pagination parameters
-    int page = 1;
-    int recordsPerPage = 6;
-    if (request.getParameter("page") != null)
-        page = Integer.parseInt(request.getParameter("page"));
-
-    // Fetch the posts with pagination
-    List<Post> listpost = pDao.getPostsByRecruiterIDWithPagination(re.getRecruiterID(), (page-1)*recordsPerPage, recordsPerPage);
-    int noOfRecords = pDao.getNoOfPostsByRecruiterID(re.getRecruiterID());
-    int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-
-    request.setAttribute("listpost", listpost);
-    request.setAttribute("noOfPages", noOfPages);
-    request.setAttribute("currentPage", page);
-    request.getRequestDispatcher("views/myListPostRecruiter.jsp").forward(request, response);
-    }
-
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        RecruiterDAO reDAO = new RecruiterDAO();
+        PostDAO pDao = new PostDAO();
+        CategoriesDAO caDAO = new CategoriesDAO();
+        JobTypeDAO job = new JobTypeDAO();
+        List<JobType> jobtype = job.getAllJobType();
+        DurationDAO duration = new DurationDAO();
+        List<Duration> dura = duration.getAllDuration();
+        Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
+        List<Post> listpost = pDao.getPostByRecruiterID(re.getRecruiterID());
+        List<Categories> cate = caDAO.getAllCategory();
+        List<SkillSet> skill = pDao.getAllSkillSet();
+
+        
+        int tongSoBaiDang = listpost.size();
+        int baiDangTrenMotTrang = 6; 
+        int tongSoTrang = (int) Math.ceil((double) tongSoBaiDang / baiDangTrenMotTrang);
+        int trangHienTai = 1;
+
+
+        String thamSoTrang = request.getParameter("page");
+        if (thamSoTrang != null && !thamSoTrang.isEmpty()) {
+            trangHienTai = Integer.parseInt(thamSoTrang);
+        }
+        request.setAttribute("listpost", listpost);
+        request.setAttribute("tongSoBaiDang", tongSoBaiDang);
+        request.setAttribute("baiDangTrenMotTrang", baiDangTrenMotTrang);
+        request.setAttribute("tongSoTrang", tongSoTrang);
+        request.setAttribute("trangHienTai", trangHienTai);
+        request.setAttribute("cate", cate);
+        request.setAttribute("jobtype", jobtype);
+        request.setAttribute("dura", dura);
+        request.setAttribute("skill", skill);
+        request.getRequestDispatcher("views/myListPostRecruiter.jsp").forward(request, response);
+    }
+
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -7,7 +7,6 @@ package RecruiterControll;
 import Models.Categories;
 import Models.Duration;
 import Models.JobType;
-import Models.Post;
 import Models.Recruiter;
 import Models.SkillSet;
 import Models.User;
@@ -17,7 +16,6 @@ import dal.JobTypeDAO;
 import dal.PostDAO;
 import dal.RecruiterDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -44,9 +42,10 @@ public class CreatePostControll extends HttpServlet {
         DurationDAO duDao = new DurationDAO();
         List<Duration> du = duDao.getAllDuration();
         JobTypeDAO jobDao = new JobTypeDAO();
-        PostDAO postdao = new PostDAO();
+        
         List<JobType> jobtype = jobDao.getAllJobType();
         List<Categories> allCate = caDao.getAllCategory();
+        PostDAO postdao = new PostDAO();
         List<SkillSet> skill = postdao.getAllSkillSet();
         request.setAttribute("skill", skill);
         request.setAttribute("allCate", allCate);
@@ -65,8 +64,9 @@ public class CreatePostControll extends HttpServlet {
             User userInfor = (User) session.getAttribute("account");
             int id = userInfor.getUserID();
             RecruiterDAO reDAO = new RecruiterDAO();
-            PostDAO postDAO = new PostDAO();
+            
             Recruiter re = reDAO.getRecruiterProfile(id);
+            PostDAO postDAO = new PostDAO();
             int postID = postDAO.getMaxPostID() + 1;
 
             String projectTitle = request.getParameter("projectTitle");

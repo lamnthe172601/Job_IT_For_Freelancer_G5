@@ -331,8 +331,8 @@
                                                             <c:forEach items="${skill}" var="i"> 
                                                                 <div class="col-md-4">
                                                                     <div class="input-block">
-                                                                        <input type="radio" name="skill" id="skill-${i.skill_set_name}" value="${i.skill_set_name}">
-                                                                        <label for="skill-${i.skill_set_name}">${i.skill_set_name}</label>
+                                                                        <input type="radio" name="skill"  value="${i.skill_set_name}">
+                                                                        <label ">${i.skill_set_name}</label>
                                                                     </div>
                                                                 </div>
                                                             </c:forEach>

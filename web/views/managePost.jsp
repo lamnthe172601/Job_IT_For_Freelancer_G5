@@ -161,7 +161,7 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                           <li><a href="myListJobProject">My List Post</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
                                             <li><a href="newsJobs">Reviews</a></li>
 
                                         </ul>
@@ -257,7 +257,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="post-project.html" class="login-btn">Post a Project <i class="feather-plus ms-1"></i></a></li>
+                            <li><a href="CreatePost" class="login-btn">Post a Project <i class="feather-plus ms-1"></i></a></li>
                             <li class="nav-item dropdown account-item">
                                 <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                     <span class="user-img">
@@ -435,6 +435,7 @@
                                                         <th>Duration</th>
                                                         <th>Proposals</th>
                                                         <th>Status</th>
+                                                        <th>Checking</th>
                                                         <th style="text-align: center;">Action</th>
                                                     </tr>
                                                 </thead>
@@ -448,7 +449,17 @@
                                                             <td>${list.skill}</td>
                                                             <td>${list.durationID.durationName}</td>
                                                             <td>${list.quantity}</td>
-                                                            <td><span class="badge badge-pill bg-danger-light">Unpaid</td>
+                                                            <td>
+                                                                <span class="badge ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
+                                                                    ${list.status ? 'On going' : 'Reject'}
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="badge badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
+                                                                    ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : (list.checking == 2 ? 'Reject' : 'Suspended'))}
+                                                                </span>
+                                                            </td>
+
                                                             <td>
                                                                 <div class="action-table-data">
                                                                     <div class="edit-delete-action">
@@ -472,13 +483,19 @@
                                                                                 <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <form action="#">
+                                                                                <form action="manageJobsPosts" method="post" enctype="multipart/form-data">
                                                                                     <div class="modal-info">
                                                                                         <div class="row">
+                                                                                            <div hidden class="col-lg-6">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">Project ID</label>
+                                                                                                    <input type="text" name="postID" class="form-control" value="${list.postID}">
+                                                                                                </div>
+                                                                                            </div>
                                                                                             <div class="col-lg-6">
                                                                                                 <div class="input-block">
                                                                                                     <label class="form-label">Project Title</label>
-                                                                                                    <input type="text" class="form-control" value="${list.title}">
+                                                                                                    <input type="text" name="title" class="form-control" value="${list.title}">
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class=" col-lg-6  d-flex align-items-center">
@@ -496,7 +513,7 @@
                                                                                                 <div class="input-block">
                                                                                                     <label class="focus-label">Jobs Type</label>
 
-                                                                                                    <select class="form-control select" name="jobsType">
+                                                                                                    <select name="jobsType" class="form-control select" >
                                                                                                         <c:forEach items="${alljobtype}" var="jobtype">
                                                                                                             <option value="${jobtype.jobTypeID}" <c:if test="${jobtype.jobTypeID == list.jobTypeID.jobTypeID}">selected=""</c:if>>${jobtype.jobName}</option>
                                                                                                         </c:forEach>
@@ -508,7 +525,7 @@
                                                                                                 <div class="input-block">
                                                                                                     <label class="focus-label">Project Duration</label>
 
-                                                                                                    <select class="form-control select" name="jobsType">
+                                                                                                    <select name="Duration" class="form-control select" name="jobsType">
                                                                                                         <c:forEach items="${allDuration}" var="allDuration">
                                                                                                             <option value="${allDuration.durationID}" <c:if test="${allDuration.durationID == list.durationID.durationID}">selected=""</c:if>>${allDuration.durationName}</option>
                                                                                                         </c:forEach>
@@ -528,7 +545,7 @@
                                                                                                 <div class="input-block">
                                                                                                     <div class="mb-3">
                                                                                                         <label class="focus-label">Location</label>
-                                                                                                        <input value="${list.location}" type="text" class="form-control" name="target">
+                                                                                                        <input value="${list.location}" type="text" class="form-control" name="Location">
 
                                                                                                     </div>
                                                                                                 </div>
@@ -539,19 +556,22 @@
                                                                                                     <input type="text" class="form-control" name="budgetFrom" value="${list.budget}">
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <div class="col-lg-8 ">
-                                                                                                <div class="input-block mb-3">
-                                                                                                        <label class="focus-label">Skills Sets</label>    
-                                                                                                        <input type="text" data-role="tagsinput" class="input-tags form-control" name="skills" value="Web Design" id="services" value="${list.skill}" />
-                                                                                                        <p class="text-muted mb-0">Enter skills for needed for project, for best result add 5 or more Skills</p>
-                                                                                                    
-                                                                                                </div>
-                                                                                            </div> 
+                                                                                                
+                                                                                            <div class="row">
+                                                                                                <c:forEach items="${skill}" var="i">
+                                                                                                    <div class="col-md-4">
+                                                                                                        <div class="input-block">
+                                                                                                            <input type="radio" name="skill" value="${i.skill_set_name}" ${i.skill_set_name == list.skill ? 'checked' : ''}>
+                                                                                                            <label>${i.skill_set_name}</label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </c:forEach>
+                                                                                            </div>
                                                                                             <div class="col-lg-4">
                                                                                                 <div class="input-block">
                                                                                                     <label class="focus-label">Categories Name</label>
 
-                                                                                                    <select class="form-control select" name="jobsType">
+                                                                                                    <select class="form-control select" name="Categories">
                                                                                                         <c:forEach items="${allCate}" var="allcate">
                                                                                                             <option value="${allcate.caID}" <c:if test="${allcate.caID == list.caID.caID}">selected=""</c:if>>${allcate.categoriesName}</option>
                                                                                                         </c:forEach>
@@ -561,11 +581,11 @@
                                                                                             <div class="col-lg-12">
                                                                                                 <div class="input-block">
                                                                                                     <label class="form-label">Description</label>
-                                                                                                    <textarea class="form-control summernote">${list.description}</textarea>
+                                                                                                    <textarea name="description" class="form-control summernote">${list.description}</textarea>
                                                                                                 </div>
                                                                                             </div>
-                                                                                            
-                                                                                            
+
+
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="submit-section text-end">

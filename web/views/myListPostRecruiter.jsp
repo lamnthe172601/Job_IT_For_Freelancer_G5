@@ -117,352 +117,151 @@
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                 Category
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
+                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span></a>
                                         </h4>
                                         <div id="collapseOne" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Developer (25)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> UI Developer (62)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> React Developer (46)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> .Net Developer (37)
-                                                </label>
-                                            </div>
+                                            <c:forEach items="${cate}" var="category" varStatus="loop">
+                                                <div style="${loop.index > 3 ? 'display:none;' : ''}" class="category-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
+                                                        <span class="checkmark"></span> ${category.categoriesName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
+
                                             <div id="collapseOnes" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> UI Developer (62)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> React Developer (46)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> .Net Developer (37)
-                                                    </label>
-                                                </div>
+                                                <c:forEach items="${cate}" var="category" begin="4">
+                                                    <div class="category-item">
+                                                        <label class="custom_check">
+                                                            <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
+                                                            <span class="checkmark"></span> ${category.categoriesName}
+                                                        </label>
+                                                    </div>
+                                                </c:forEach>
                                             </div>
+
                                             <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseOnes" aria-expanded="true" aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show More</a>
+                                                <a href="javascript:void(0);" id="showMoreBtn" aria-expanded="false">
+                                                    <i class="feather-plus me-1"></i>Show More
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapsproject" aria-expanded="true" aria-controls="collapseOne">
+                                            <a href="javascript:void(0);" class="w-100" id="projectTypeLink" data-bs-toggle="collapse" data-bs-target="#collapsproject" aria-expanded="true" aria-controls="collapsproject">
                                                 Project Type
                                                 <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
                                             </a>
                                         </h4>
                                         <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Fixed (6)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Hourly (7)
-                                                </label>
-                                            </div>
+                                            <c:forEach items="${jobtype}" var="jobtype">
+                                                <div class="project-type-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="projectType" value="${jobtype.jobName}" data-filter="projectType">
+                                                        <span class="checkmark"></span>${jobtype.jobName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
                                         </div>
                                     </div>
+
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
+                                            <a href="javascript:void(0);" class="w-100" id="projectDurationLink" data-bs-toggle="collapse" data-bs-target="#collapseOneDuration" aria-expanded="true" aria-controls="collapseOneDuration">
                                                 Project Duration
                                                 <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
                                             </a>
                                         </h4>
-                                        <div id="collapseOne1" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> 1-3 Weeks (4)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> 1 Month (2)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Less than 3 Months (2)
-                                                </label>
-                                            </div>
+                                        <div id="collapseOneDuration" class="collapse show" data-bs-parent="#accordionExample1">
+                                            <c:forEach items="${dura}" var="dura">
+                                                <div class="duration-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="projectDuration" value="${dura.durationName}" data-filter="projectDuration">
+                                                        <span class="checkmark"></span>${dura.durationName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
                                         </div>
                                     </div>
+
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseskills" aria-expanded="true" aria-controls="collapseOne">
-                                                Skills
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
+                                            <a href="javascript:void(0);" class="w-100" id="skillsLink" data-bs-toggle="collapse" data-bs-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+                                                Skills <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span></a>
                                         </h4>
-                                        <div id="collapseskills" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> After Effects (6)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Android Developer (7)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Backend Developer (7)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Computer Operator (1)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes1" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
+                                        <div id="collapseOne1" class="collapse show" data-bs-parent="#accordionExample2">
+                                            <c:forEach items="${skill}" var="skill" varStatus="loop">
+                                                <div style="${loop.index > 3 ? 'display:none;' : ''}" class="skill-item">
                                                     <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> After Effects (6)
+                                                        <input type="checkbox" name="skills" value="${skill.skill_set_name}" data-filter="skills">
+                                                        <span class="checkmark"></span> ${skill.skill_set_name}
                                                     </label>
                                                 </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Android Developer (7)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Backend Developer (7)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Computer Operator (1)
-                                                    </label>
-                                                </div>
+                                            </c:forEach>
+
+                                            <div id="collapseOnes1" class="collapse" data-bs-parent="#accordionExample2">
+                                                <c:forEach items="${skill}" var="skill" begin="4">
+                                                    <div class="skill-item">
+                                                        <label class="custom_check">
+                                                            <input type="checkbox" name="skills" value="${skill.skill_set_name}" data-filter="skills">
+                                                            <span class="checkmark"></span>${skill.skill_set_name}
+                                                        </label>
+                                                    </div>
+                                                </c:forEach>
                                             </div>
+
                                             <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseOnes1" aria-expanded="true" aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show More</a>
+                                                <a href="javascript:void(0);" id="showMoreBtn1" aria-expanded="false">
+                                                    <i class="feather-plus me-1"></i>Show More
+                                                </a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapselanguage" aria-expanded="true" aria-controls="collapseOne">
-                                                Languages
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapselanguage" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> English (5)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Arabic (2)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>German (1)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes2" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> English (5)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Arabic (2)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span>German (1)
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseOnes2" aria-expanded="true" aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapselanguagea" aria-expanded="true" aria-controls="collapseOne">
-                                                Freelancer Type
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapselanguagea" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Full Time (3)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Part Time (4)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Project Based (2)
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapselocation" aria-expanded="true" aria-controls="collapseOne">
-                                                Location
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapselocation" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>USA (25)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> IND (62)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>UK (46)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>AUS (37)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes3" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> IND (62)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span>UK (46)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span>AUS (37)
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseOnes3" aria-expanded="true" aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="btn-search">
-                                        <button type="button" class="btn btn-primary">Search</button>
-                                        <button type="button" class="btn btn-block">Reset</button>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="col-md-12 col-lg-8 col-xl-9">
-                            <div class="sort-tab develop-list-select">
-                                <div class="row align-items-center">
 
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-sm-end">
+
+                        <div class="col-md-12 col-lg-8 col-xl-9">
+                            <div class="sort-tab ">
+                                <div class="row">
+                                    <div class="col-xl-6  col-sm-6 d-flex ">
                                         <div class="sort-by">
-                                            <select class="select ">
-                                                <option>Sort by (Default)</option>
-                                                <option>Relevance</option>
-                                                <option>Rating</option>
-                                                <option>Popular</option>
-                                                <option>Latest</option>
-                                                <option>Free</option>
+                                            <select class="select" id="sortSelect">
+                                                <option value="default">Sort by (Default)</option>
+                                                <option value="newest">Newest</option>
+                                                <option value="oldest">Oldest</option>
+                                                <option value="proposals">Proposals</option>
                                             </select>
                                         </div>
-
                                     </div>
+
                                 </div>
                             </div>
-                            <div class="bootstrap-tags text-start pl-0 d-none">
-                                <span class="badge badge-pill badge-skills">UI/UX Developer <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
-                                <span class="badge badge-pill badge-skills">USA <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
-                                <span class="badge badge-pill badge-skills">Hourly <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
-                                <span class="badge badge-pill badge-skills">0-1 years <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
-                                <span class="badge badge-pill badge-skills">USD <span class="tag-close" data-role="remove"><i class="fas fa-times"></i></span></span>
-                            </div>
 
-                            <div class="row">
-                                <c:forEach items="${listpost}" var="list">
-                                    <div class="col-xl-4 col-md-6">
-                                        <div style="width: 296px; height: 490px;" class="freelance-widget widget-author position-relative">
+                            <%-- Lấy danh sách bài đăng và thông tin phân trang từ request --%>
+                            <c:set var="listpost" value="${requestScope.listpost}" />
+                            <c:set var="tongSoBaiDang" value="${requestScope.tongSoBaiDang}" />
+                            <c:set var="baiDangTrenMotTrang" value="${requestScope.baiDangTrenMotTrang}" />
+                            <c:set var="tongSoTrang" value="${requestScope.tongSoTrang}" />
+                            <c:set var="trangHienTai" value="${requestScope.trangHienTai}" />
+
+                            <%-- Tính chỉ số bắt đầu và kết thúc cho danh sách bài đăng hiển thị trên trang hiện tại --%>
+                            <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
+                            <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
+
+                            <%-- Hiển thị danh sách bài đăng --%>
+                            <div class="row" id="listpostContainer">
+                                <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
+                                    <div class="col-xl-4 col-md-6 post-item">
+                                        <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
                                                 <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
                                                 <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
                                                 <div class="author-heading">
-                                                    <div class=" freelance-img">
+                                                    <div class="freelance-img">
                                                         <a href="javascript:void(0);">
                                                             <img src="${list.image}" alt="author">
                                                             <span class="verified"><i class="fas fa-check-circle"></i></span>
@@ -478,7 +277,6 @@
                                                     <div class="freelance-tags">
                                                         <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${list.skill}</span></a>
                                                     </div>
-                                                    <div class="freelancers-price">$40-$500</div>
                                                 </div>
                                                 <div class="counter-stats">
                                                     <ul>
@@ -505,29 +303,33 @@
                                 </c:forEach>
                             </div>
 
-                            <div class="pagination">
-                                <c:if test="${currentPage > 1}">
-                                    <a href="myListPostRecruiter?page=${currentPage - 1}">&laquo; Previous</a>
-                                </c:if>
-                                <c:forEach begin="1" end="${noOfPages}" var="page">
-                                    <c:choose>
-                                        <c:when test="${page == currentPage}">
-                                            <span class="current-page">${page}</span>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <a href="myListPostRecruiter?page=${page}">${page}</a>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                                <c:if test="${currentPage < noOfPages}">
-                                    <a href="myListPostRecruiter?page=${currentPage + 1}">Next &raquo;</a>
+                            <div class="pagination-container">
+                                <c:if test="${tongSoTrang > 1}">
+                                    <nav>
+                                        <ul class="pagination">
+                                            <c:if test="${trangHienTai > 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page=${trangHienTai - 1}" aria-label="Trước">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach var="i" begin="1" end="${tongSoTrang}">
+                                                <li class="page-item ${i == trangHienTai ? 'active' : ''}">
+                                                    <a class="page-link" href="?page=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <c:if test="${trangHienTai < tongSoTrang}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page=${trangHienTai + 1}" aria-label="Sau">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </ul>
+                                    </nav>
                                 </c:if>
                             </div>
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -663,6 +465,65 @@
         </div>
 
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('showMoreBtn').addEventListener('click', function () {
+                    let collapseOne = document.getElementById('collapseOne');
+                    let collapseOnes = document.getElementById('collapseOnes');
+                    let expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !expanded);
+                    collapseOnes.classList.toggle('show');
+                    this.innerHTML = !expanded ? '<i class="feather-minus me-1"></i>Show Less' : '<i class="feather-plus me-1"></i>Show More';
+                    filterPosts(); // Gọi lại hàm lọc sau khi thay đổi
+                });
+
+                document.getElementById('showMoreBtn1').addEventListener('click', function () {
+                    let collapseOne1 = document.getElementById('collapseOne1');
+                    let collapseOnes1 = document.getElementById('collapseOnes1');
+                    let expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !expanded);
+                    collapseOnes1.classList.toggle('show');
+                    this.innerHTML = !expanded ? '<i class="feather-minus me-1"></i>Show Less' : '<i class="feather-plus me-1"></i>Show More';
+                    filterPosts(); // Gọi lại hàm lọc sau khi thay đổi
+                });
+
+                let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.addEventListener('change', filterPosts);
+                });
+            });
+
+            function filterPosts() {
+                let selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(el => el.value.toLowerCase());
+                let selectedProjectTypes = Array.from(document.querySelectorAll('input[name="projectType"]:checked')).map(el => el.value.toLowerCase());
+                let selectedDurations = Array.from(document.querySelectorAll('input[name="projectDuration"]:checked')).map(el => el.value.toLowerCase());
+                let selectedSkills = Array.from(document.querySelectorAll('input[name="skills"]:checked')).map(el => el.value.toLowerCase());
+
+                let posts = document.querySelectorAll('.post-item');
+
+                posts.forEach(function (post) {
+                    let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
+                    let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
+                    let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
+                    let postSkill = post.querySelector('.freelance-tags .badge').innerText.toLowerCase();
+
+                    let matchCategory = selectedCategories.length === 0 || selectedCategories.includes(postCategory);
+                    let matchProjectType = selectedProjectTypes.length === 0 || selectedProjectTypes.includes(postProjectType);
+                    let matchDuration = selectedDurations.length === 0 || selectedDurations.includes(postDuration);
+                    let matchSkill = selectedSkills.length === 0 || selectedSkills.includes(postSkill);
+
+                    if (matchCategory && matchProjectType && matchDuration && matchSkill) {
+                        post.style.display = 'block';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+        <script src="assets/js/filterMyListPost.js" type="text/javascript"></script>
         <script src="assets/js/jquery-3.7.1.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
