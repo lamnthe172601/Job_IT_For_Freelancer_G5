@@ -28,7 +28,16 @@
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+
         <style>
+            .filter-section {
+                background-color: #fff;
+                border: 1px solid #e0e0e0;
+                border-radius: 4px;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            }
+
             .description::after {
                 content: '...';
             }
@@ -77,6 +86,8 @@
                 order: 1;
                 margin-bottom: 10px;
             }
+
+
 
         </style>
 
@@ -419,6 +430,83 @@
                                 </ul>
                             </nav>
 
+
+
+                            <div class="page-header user-active">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="page-title">All Post</h3>
+                                        <p>Total <span></span> Freelancer account</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
+                                            <i class="fas fa-filter"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div  class="filter-section" style="display: none;">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="nameFilter">Name</label>
+                                            <input type="text" class="form-control" id="nameFilter" placeholder="Enter name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="jobTypeFilter">Job type</label>
+                                            <input type="text" class="form-control" id="jobTypeFilter" placeholder="Enter jobType">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="durationFilter">Duration</label>
+                                            <select class="form-control" id="durationFilter">
+                                                <option value="">All</option>
+                                                <option value="ongoing">On going</option>
+                                                <option value="reject">Reject</option>
+                                                <option value="ongoing">On going</option>
+                                                <option value="reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="skillFlter">Skill</label>
+                                            <input type="text" class="form-control" id="skillFlter" placeholder="Enter Skill">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="statusFilter">Status</label>
+                                            <select class="form-control" id="statusFilter">
+                                                <option value="">All</option>
+                                                <option value="ongoing">On going</option>
+                                                <option value="reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="checkingFilter">Checking</label>
+                                            <select class="form-control" id="checkingFilter">
+                                                <option value="">All</option>
+                                                <option value="ongoing">On going</option>
+                                                <option value="reject">Reject</option>
+                                                <option value="ongoing">On going</option>
+                                                <option value="reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
                             <div class="my-projects-view">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -430,7 +518,7 @@
                                                         <th>Title</th>
                                                         <th>Job Type</th>
                                                         <th>Start date</th>
-                                                        <th>Description</th>
+
                                                         <th>Skill</th>
                                                         <th>Duration</th>
                                                         <th>Proposals</th>
@@ -442,19 +530,19 @@
                                                 <tbody>
                                                     <c:forEach items="${listpost}" var="list">
                                                         <tr>
-                                                            <td>${list.title}</td>
-                                                            <td>${list.jobTypeID.jobName}</td>
-                                                            <td>${list.datePost}</td>
-                                                            <td><div class="description">${list.description}</div></td>
-                                                            <td>${list.skill}</td>
-                                                            <td>${list.durationID.durationName}</td>
-                                                            <td>${list.quantity}</td>
-                                                            <td>
+                                                            <td class="titleList">${list.title}</td>
+                                                            <td class="jobTypeList">${list.jobTypeID.jobName}</td>
+                                                            <td >${list.datePost}</td>
+
+                                                            <td class="skillList" >${list.skill}</td>
+                                                            <td class="durationList ">${list.durationID.durationName}</td>
+                                                            <td >${list.quantity}</td>
+                                                            <td class="StatusList">
                                                                 <span class="badge ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
                                                                     ${list.status ? 'On going' : 'Reject'}
                                                                 </span>
                                                             </td>
-                                                            <td>
+                                                            <td class="CheckingList">
                                                                 <span class="badge badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
                                                                     ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : (list.checking == 2 ? 'Reject' : 'Suspended'))}
                                                                 </span>
@@ -483,7 +571,9 @@
                                                                                 <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <form action="manageJobsPosts" method="post" enctype="multipart/form-data">
+
+
+                                                                                <form action="manageJobsPosts" method="post" enctype="multipart/form-data" id="jobsForm">
                                                                                     <div class="modal-info">
                                                                                         <div class="row">
                                                                                             <div hidden class="col-lg-6">
@@ -504,7 +594,7 @@
                                                                                                 </div>
                                                                                                 <div class="ms-3 freelancer-pic-upload">
                                                                                                     <label class="image-upbtn">
-                                                                                                        Upload Image <input  type="file" id="imgInp" name="profileImage">
+                                                                                                        Upload Image <input type="file" id="imgInp" name="profileImage">
                                                                                                     </label>
                                                                                                     <p>Max Image size 300*300</p>
                                                                                                 </div>
@@ -512,20 +602,17 @@
                                                                                             <div class="col-lg-4">
                                                                                                 <div class="input-block">
                                                                                                     <label class="focus-label">Jobs Type</label>
-
-                                                                                                    <select name="jobsType" class="form-control select" >
+                                                                                                    <select name="jobsType" class="form-control select">
                                                                                                         <c:forEach items="${alljobtype}" var="jobtype">
                                                                                                             <option value="${jobtype.jobTypeID}" <c:if test="${jobtype.jobTypeID == list.jobTypeID.jobTypeID}">selected=""</c:if>>${jobtype.jobName}</option>
                                                                                                         </c:forEach>
                                                                                                     </select>
-
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="col-lg-4">
                                                                                                 <div class="input-block">
                                                                                                     <label class="focus-label">Project Duration</label>
-
-                                                                                                    <select name="Duration" class="form-control select" name="jobsType">
+                                                                                                    <select name="Duration" class="form-control select">
                                                                                                         <c:forEach items="${allDuration}" var="allDuration">
                                                                                                             <option value="${allDuration.durationID}" <c:if test="${allDuration.durationID == list.durationID.durationID}">selected=""</c:if>>${allDuration.durationName}</option>
                                                                                                         </c:forEach>
@@ -537,7 +624,6 @@
                                                                                                     <div class="mb-3">
                                                                                                         <label class="focus-label">Target</label>
                                                                                                         <input value="${list.quantity}" type="text" class="form-control" name="target">
-
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -546,17 +632,15 @@
                                                                                                     <div class="mb-3">
                                                                                                         <label class="focus-label">Location</label>
                                                                                                         <input value="${list.location}" type="text" class="form-control" name="Location">
-
                                                                                                     </div>
                                                                                                 </div>
-                                                                                            </div>  
+                                                                                            </div>
                                                                                             <div class="col-lg-3 ">
                                                                                                 <div class="input-block mb-3">
                                                                                                     <label class="focus-label">From ($)</label>
                                                                                                     <input type="text" class="form-control" name="budgetFrom" value="${list.budget}">
                                                                                                 </div>
                                                                                             </div>
-                                                                                                
                                                                                             <div class="row">
                                                                                                 <c:forEach items="${skill}" var="i">
                                                                                                     <div class="col-md-4">
@@ -570,29 +654,30 @@
                                                                                             <div class="col-lg-4">
                                                                                                 <div class="input-block">
                                                                                                     <label class="focus-label">Categories Name</label>
-
                                                                                                     <select class="form-control select" name="Categories">
                                                                                                         <c:forEach items="${allCate}" var="allcate">
                                                                                                             <option value="${allcate.caID}" <c:if test="${allcate.caID == list.caID.caID}">selected=""</c:if>>${allcate.categoriesName}</option>
                                                                                                         </c:forEach>
                                                                                                     </select>
                                                                                                 </div>
-                                                                                            </div>   
+                                                                                            </div>
                                                                                             <div class="col-lg-12">
                                                                                                 <div class="input-block">
                                                                                                     <label class="form-label">Description</label>
                                                                                                     <textarea name="description" class="form-control summernote">${list.description}</textarea>
                                                                                                 </div>
                                                                                             </div>
-
-
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="submit-section text-end">
                                                                                         <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close" class="btn btn-cancel">Cancel</a>
-                                                                                        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                                                                                        <button type="submit" class="btn btn-primary submit-btn">Update</button>
                                                                                     </div>
                                                                                 </form>
+
+
+
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -611,6 +696,7 @@
                     </div>
                 </div>
             </div>
+
 
 
 
@@ -717,128 +803,93 @@
             </footer>
 
 
-            <div class="modal fade edit-proposal-modal" id="add-milestone">
-                <div class="modal-dialog modal-dialog-centered modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Add Milestone</h4>
-                            <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
-                        </div>
-                        <div class="modal-body">
-                            <form action="#">
-                                <div class="modal-info">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="input-block">
-                                                <label class="form-label">Milestone name</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="input-block">
-                                                <label class="form-label">Amount</label>
-                                                <input type="text" class="form-control">
-                                                <span class="input-group-text">$</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="input-block">
-                                                <label class="form-label">Start Date</label>
-                                                <div class="cal-icon">
-                                                    <input class="form-control datetimepicker" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="input-block">
-                                                <label class="form-label">End Date</label>
-                                                <div class="cal-icon">
-                                                    <input class="form-control datetimepicker" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="input-block">
-                                                <label class="form-label">Description</label>
-                                                <textarea class="form-control summernote"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="submit-section text-end">
-                                    <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
-                                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
 
 
 
-            <div class="modal fade edit-proposal-modal" id="view-milestone">
-                <div class="modal-dialog modal-dialog-centered modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">View Milestone</h4>
-                            <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
-                        </div>
-                        <div class="modal-body">
-                            <div class="d-flex justify-content-between milestone-view">
-                                <h5>Create desktop applications</h5>
-                                <span>Amount : $400</span>
-                            </div>
-                            <ul class="download-item">
-                                <li>
-                                    <a href="javascript:void(0);">Preview_Screens.zip <i class="feather-download"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">Finalupdate.zip <i class="feather-download"></i></a>
-                                </li>
-                            </ul>
-                            <div class="text-end">
-                                <a href="javascript:void(0);" class="btn btn-primary">Approve</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-
-            <div class="modal fade edit-proposal-modal success-modal" id="success-milestone">
-                <div class="modal-dialog modal-dialog-centered modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header justify-content-end">
-                            <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
-                        </div>
-                        <div class="modal-body">
-                            <div class="success-msg-content text-center">
-                                <h4>Payment Initiated Successfully</h4>
-                                <p>You will be notified when payment is credited to
-                                    your account</p>
-                                <a href="manage-projects.html" class="btn btn-primary mt-3">Go to Projects</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                var descriptions = document.querySelectorAll('.description');
-                descriptions.forEach(function (description) {
-                    var words = description.textContent.split(' ');
-                    if (words.length > 5) {
-                        description.textContent = words.slice(0, 5).join(' ') + '...';
-                    }
+            document.getElementById('jobsForm').addEventListener('submit', function (event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Show the notification
+                var notification = document.getElementById('notification');
+                notification.style.display = 'block';
+
+                // Hide the notification after 5 seconds
+                setTimeout(function () {
+                    notification.style.display = 'none';
+                    // Optionally submit the form after showing the notification
+                    event.target.submit();
+                }, 5000);
+            });
+        </script>
+
+
+        <script>
+            $(document).ready(function () {
+                $('#filter_search').click(function () {
+                    $('.filter-section').toggle();
                 });
             });
-        </script>  
+        </script>
+
+        <script>
+            // Lấy các phần tử lọc
+            const nameFilter = document.getElementById('nameFilter');
+            const jobTypeFilter = document.getElementById('jobTypeFilter');
+            const durationFilter = document.getElementById('durationFilter');
+            const skillFilter = document.getElementById('skillFilter');
+            const statusFilter = document.getElementById('statusFilter');
+            const checkingFilter = document.getElementById('checkingFilter');
+
+// Lấy danh sách các dòng trong bảng
+            const rows = document.querySelectorAll('.table tbody tr');
+
+// Hàm để lọc các dòng
+            function filterRows() {
+                const nameValue = nameFilter.value.toLowerCase();
+                const jobTypeValue = jobTypeFilter.value.toLowerCase();
+                const durationValue = durationFilter.value.toLowerCase();
+                const skillValue = skillFilter.value.toLowerCase();
+                const statusValue = statusFilter.value.toLowerCase();
+                const checkingValue = checkingFilter.value.toLowerCase();
+
+                rows.forEach(row => {
+                    const title = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
+                    const jobType = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                    const startDate = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                    const skill = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+                    const duration = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
+                    const proposals = row.querySelector('td:nth-child(6)').textContent.toLowerCase();
+                    const status = row.querySelector('td:nth-child(7) span').textContent.toLowerCase();
+                    const checking = row.querySelector('td:nth-child(8) span').textContent.toLowerCase();
+
+                    const showRow =
+                            (!nameValue || title.includes(nameValue)) &&
+                            (!jobTypeValue || jobType.includes(jobTypeValue)) &&
+                            (!durationValue || duration.includes(durationValue)) &&
+                            (!skillValue || skill.includes(skillValue)) &&
+                            (!statusValue || status.includes(statusValue)) &&
+                            (!checkingValue || checking.includes(checkingValue));
+
+                    row.style.display = showRow ? '' : 'none';
+                });
+            }
+
+// Gán sự kiện lọc cho các trường lọc
+            nameFilter.addEventListener('input', filterRows);
+            jobTypeFilter.addEventListener('input', filterRows);
+            durationFilter.addEventListener('change', filterRows);
+            skillFilter.addEventListener('input', filterRows);
+            statusFilter.addEventListener('change', filterRows);
+            checkingFilter.addEventListener('change', filterRows);
+        </script>
         <script>
             $(document).ready(function () {
                 $('.datatable').DataTable({
