@@ -100,7 +100,7 @@ public class CreatePostControll extends HttpServlet {
                 } else {
                     response.getWriter().write("failed");
                 }
-            } catch (Exception e) {
+            } catch (ServletException | IOException | NumberFormatException | SQLException e) {
                 response.getWriter().write(" " + e);
             }
 

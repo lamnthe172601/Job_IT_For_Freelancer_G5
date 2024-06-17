@@ -29,6 +29,8 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
 
+
+
         <style>
             .filter-section {
                 background-color: #fff;
@@ -457,7 +459,13 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="jobTypeFilter">Job type</label>
-                                            <input type="text" class="form-control" id="jobTypeFilter" placeholder="Enter jobType">
+                                            <select class="form-control" id="jobTypeFilter">
+                                                <option value="">All</option>
+                                                <c:forEach items="${alljobtype}" var="alljobtype">
+                                                    <option value="${alljobtype.jobName}">${alljobtype.jobName}</option>
+                                                </c:forEach>
+
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -465,17 +473,24 @@
                                             <label for="durationFilter">Duration</label>
                                             <select class="form-control" id="durationFilter">
                                                 <option value="">All</option>
-                                                <option value="ongoing">On going</option>
-                                                <option value="reject">Reject</option>
-                                                <option value="ongoing">On going</option>
-                                                <option value="reject">Reject</option>
+                                                <c:forEach items="${allDuration}" var="allDuration">
+                                                    <option value="${allDuration.durationName}">${allDuration.durationName}</option>
+                                                </c:forEach>
+
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="skillFlter">Skill</label>
-                                            <input type="text" class="form-control" id="skillFlter" placeholder="Enter Skill">
+                                            <select class="form-control" id="skillFlter">
+
+                                                <option value="">All</option>
+                                                <c:forEach items="${skill}" var="skill">
+                                                    <option value="${skill.skill_set_name}">${skill.skill_set_name}</option>
+                                                </c:forEach>
+                                            </select>
+
                                         </div>
                                     </div>
 
@@ -494,10 +509,10 @@
                                             <label for="checkingFilter">Checking</label>
                                             <select class="form-control" id="checkingFilter">
                                                 <option value="">All</option>
-                                                <option value="ongoing">On going</option>
+                                                <option value="pending">Pending</option>
+                                                <option value="approve">Approve</option>
                                                 <option value="reject">Reject</option>
-                                                <option value="ongoing">On going</option>
-                                                <option value="reject">Reject</option>
+                                                <option value="suspended">Suspended</option>
                                             </select>
                                         </div>
                                     </div>
@@ -530,21 +545,33 @@
                                                 <tbody>
                                                     <c:forEach items="${listpost}" var="list">
                                                         <tr>
-                                                            <td class="titleList">${list.title}</td>
-                                                            <td class="jobTypeList">${list.jobTypeID.jobName}</td>
-                                                            <td >${list.datePost}</td>
+                                                            <td class="titleList">
+                                                                <div class="title">${list.title}</div>
+                                                            </td>
+                                                            <td class="jobTypeList">
+                                                                <div class="jobType">${list.jobTypeID.jobName}</div>
+                                                            </td>
+                                                            <td > 
+                                                                <div class="datePost">${list.datePost}</div>
+                                                            </td>
 
-                                                            <td class="skillList" >${list.skill}</td>
-                                                            <td class="durationList ">${list.durationID.durationName}</td>
-                                                            <td >${list.quantity}</td>
+                                                            <td class="skillList" >
+                                                                <div class="skill">${list.skill}</div>
+                                                            </td>
+                                                            <td class="durationList ">
+                                                                <div class="duration">${list.durationID.durationName}</div>
+                                                            </td>
+                                                            <td > 
+                                                                <div class="quantity">${list.quantity}</div>
+                                                            </td>
                                                             <td class="StatusList">
-                                                                <span class="badge ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
+                                                                <span class="badge status ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
                                                                     ${list.status ? 'On going' : 'Reject'}
                                                                 </span>
                                                             </td>
                                                             <td class="CheckingList">
-                                                                <span class="badge badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
-                                                                    ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : (list.checking == 2 ? 'Reject' : 'Suspended'))}
+                                                                <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
+                                                                    ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}
                                                                 </span>
                                                             </td>
 
@@ -843,8 +870,9 @@
             // Lấy các phần tử lọc
             const nameFilter = document.getElementById('nameFilter');
             const jobTypeFilter = document.getElementById('jobTypeFilter');
+            const skillFilter = document.getElementById('skillFlter');
             const durationFilter = document.getElementById('durationFilter');
-            const skillFilter = document.getElementById('skillFilter');
+
             const statusFilter = document.getElementById('statusFilter');
             const checkingFilter = document.getElementById('checkingFilter');
 
@@ -855,20 +883,18 @@
             function filterRows() {
                 const nameValue = nameFilter.value.toLowerCase();
                 const jobTypeValue = jobTypeFilter.value.toLowerCase();
-                const durationValue = durationFilter.value.toLowerCase();
                 const skillValue = skillFilter.value.toLowerCase();
-                const statusValue = statusFilter.value.toLowerCase();
-                const checkingValue = checkingFilter.value.toLowerCase();
+                const durationValue = durationFilter.value.toLowerCase();
 
+                const statusValue = statusFilter.value.toLowerCase();
+                const checkingValue = checkingFilter.value.toLowerCase();              
                 rows.forEach(row => {
-                    const title = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
-                    const jobType = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-                    const startDate = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-                    const skill = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-                    const duration = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
-                    const proposals = row.querySelector('td:nth-child(6)').textContent.toLowerCase();
-                    const status = row.querySelector('td:nth-child(7) span').textContent.toLowerCase();
-                    const checking = row.querySelector('td:nth-child(8) span').textContent.toLowerCase();
+                    const title = row.querySelector('.title').textContent.toLowerCase();                 
+                    const jobType = row.querySelector('.jobType').textContent.toLowerCase();                    
+                    const skill = row.querySelector('.skill').textContent.toLowerCase();
+                    const duration = row.querySelector('.duration').textContent.toLowerCase();
+                    const status = row.querySelector('.status').textContent.toLowerCase();                   
+                    const checking = row.querySelector('.checked').textContent.toLowerCase();
 
                     const showRow =
                             (!nameValue || title.includes(nameValue)) &&
@@ -884,9 +910,9 @@
 
 // Gán sự kiện lọc cho các trường lọc
             nameFilter.addEventListener('input', filterRows);
-            jobTypeFilter.addEventListener('input', filterRows);
+            jobTypeFilter.addEventListener('change', filterRows);
             durationFilter.addEventListener('change', filterRows);
-            skillFilter.addEventListener('input', filterRows);
+            skillFilter.addEventListener('change', filterRows);
             statusFilter.addEventListener('change', filterRows);
             checkingFilter.addEventListener('change', filterRows);
         </script>

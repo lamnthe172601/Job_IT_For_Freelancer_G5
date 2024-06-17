@@ -470,6 +470,18 @@
                     if (target.trim() === '') {
                         document.getElementById('error-target').textContent = 'Target is required.';
                         isValid = false;
+                    } else {
+                        
+                        if (isNaN(target)) {
+                            document.getElementById('error-target').textContent = 'Target must be a number.';
+                        isValid = false;
+                           
+                        } else if (target >= 1000000000) {
+                            document.getElementById('error-target').textContent = 'Target must be less than 1,000,000,000.';
+                            isValid = false;
+                        } else {
+                           document.getElementById('error-target').textContent = ''; // Clear the error message if everything is valid
+                        }
                     }
 
                     var location = document.getElementById('location').value;
