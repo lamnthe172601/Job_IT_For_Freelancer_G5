@@ -99,7 +99,7 @@ public class ManageJobsPostsControll extends HttpServlet {
             Thread.sleep(1500);
             response.sendRedirect("manageJobsPosts");
 
-        } catch (Exception e) {
+        } catch (ServletException | IOException | InterruptedException e) {
             response.getWriter().write(" " + e);
         }
 
