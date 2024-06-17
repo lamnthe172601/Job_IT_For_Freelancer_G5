@@ -108,25 +108,33 @@ public boolean addCategory(Categories category) {
         return list;
     }
 
-    public boolean deleteCategory(String categoryId) {
-        try {
-            System.out.println(categoryId);
-            String query = "UPDATE categories\n"
-                    + "SET statusCate = 0\n"
-                    + "WHERE caID = ?;";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, categoryId);
-            
-            int rowsDeleted = statement.executeUpdate();
+   public boolean deleteCategory(String categoryId) {
+    PreparedStatement statement = null;
+    try {
+        System.out.println("Deleting category with ID: " + categoryId);
+        String query = "UPDATE categories SET statusCate = 0 WHERE caID = ?";
+        statement = connection.prepareStatement(query);
+        statement.setString(1, categoryId);
 
-            if (rowsDeleted > 0) {
-                return true;
+        int rowsDeleted = statement.executeUpdate();
+
+        if (rowsDeleted > 0) {
+            return true;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); 
+    } finally {
+        try {
+            if (statement != null) {
+                statement.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
         }
-        return false;
     }
+    return false;
+}
+
     
     public boolean updateCategory(Categories category) {
     String query = "UPDATE Categories SET categories_name = ?, [description] = ? WHERE caID = ?";

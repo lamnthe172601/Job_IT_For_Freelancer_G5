@@ -97,20 +97,79 @@
 
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <c:forEach var="c" items="${categories}">
-                                                <tr>
-                                                    <td>${c.getCaID()}</td>
-                                                    <td>${c.getCategoriesName()}</td>
-                                                    <td>${c.getDescription()}</td>
-                                                    <td class="text-end">
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
 
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
+                                        <c:forEach var="c" items="${categories}">
+                                            <tr>
+                                                <td>${c.getCaID()}</td>
+                                                <td>${c.getCategoriesName()}</td>
+                                                <td>${c.getDescription()}</td>
+                                                <td class="text-end">
+                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category-${c.getCaID()}"><i class="far fa-edit"></i></a>
+                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category_${c.getCaID()}"><i class="far fa-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                            <div class="modal custom-modal fade" id="delete_category_${c.getCaID()}" role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <form id="delete-category-form-${c.getCaID()}" action="categoryAdmin" method="post">
+                                                                <input  name="mod" value="delete" hidden>
+                                                                <div class="form-header">
+                                                                    <h3>Delete</h3>
+                                                                    <p>Are you sure you want to delete?</p>
+                                                                </div>
+                                                                <div class="modal-btn delete-action">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <input  name="cate" value="${c.getCaID()}">
+                                                                            <button style="width: 100%" type="submit" class="btn btn-primary continue-btn delete-btn">Delete</button>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="modal fade custom-modal" id="edit-category-${c.getCaID()}">
+                                                <div class="modal-dialog modal-dialog-centered" >
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Edit Category</h4>
+                                                            <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form id="edit-category-${c.getCaID()} action="categoryAdmin" method="post">
+                                                                <input  name="mod" value="edit" hidden>
+                                                               
+                                                                <div class="form-group">
+                                                                    <label for="edit-categoryname">Category Name</label>
+                                                                    <input name="categoryIdStr" value="${c.getCaID()}" hidden>
+                                                                    <input oninput="checkCategory()" type="text" class="form-control" id="edit-categoryname" name="categoryName" placeholder="Edit Category Name" required>
+                                                                    <div style="color: red" id="eCategoryname"></div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit-description">Description</label>
+                                                                    <input name="categoryIdStr" value="${c.getCaID()}" hidden>
+                                                                    <input oninput="checkCategory()" type="text" class="form-control" id="edit-description" name="description" placeholder="Edit Category Description" required>
+                                                                </div>
+                                                                <div class="mt-4">
+                                                                    <button  id="edit-category-btn" class="btn btn-primary btn-block">Submit</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                               
+                                        </c:forEach>
+
+
                                     </table>
                                 </div>
                             </div>
@@ -119,6 +178,7 @@
                 </div>
             </div>
         </div>
+        <!-- Modal Add Category -->
         <div class="modal fade custom-modal" id="add-category">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -127,51 +187,19 @@
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form action="categoryAdmin" id="add-category-form" method="post">
+                        <form id="add-category-form">
                             <div class="form-group">
                                 <label for="categoryName">Category Name</label>
-                                <input  name="mod" value="add" hidden>
-                                <input  oninput="checkCategory()" type="text" class="form-control"  id="categoryname" name="categoryName"  placeholder="Enter Category Name" required>
-                                <div style="color: red" id="eCategoryname"></div>
+                                <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Category Name" required>
+                                <div style="color: red" class="error-message" id="eCategoryname"></div>
                             </div>
                             <div class="form-group">
-                                <label for="categoryName">Description</label>
-                                <input  name="mod" value="add" hidden>
-                                <input  oninput="checkCategory()" type="text" class="form-control"   name="description"  placeholder="Enter Category Desciption" required>
-                                <div style="color: red" id="eCategoryname"></div>
+                                <label for="categoryDescription">Description</label>
+                                <input type="text" class="form-control" id="categorydescription" name="description" placeholder="Enter Category Description" required>
+                                <div style="color: red" class="error-message" id="eCategorydescription"></div>
                             </div>
                             <div class="mt-4">
-                                <button type="submit" class="btn btn-primary btn-block" value="Add">Submit</button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade custom-modal" id="edit-category">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Category</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="categoryAdmin" id="edit-category-form" method="post">
-                            <input type="hidden" name="categoryId" id="edit-categoryId">
-                            <div class="form-group">
-                                <label for="edit-categoryname">Category Name</label>
-                                <input name="mod" value="edit" hidden>
-                                <input oninput="checkCategory()" type="text" class="form-control" id="edit-categoryname" name="categoryName" placeholder="Edit Category Name" required>
-                                <div style="color: red" id="eCategoryname"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-description">Description</label>
-                                <input name="mod" value="edit" hidden>
-                                <input oninput="checkCategory()" type="text" class="form-control" id="edit-description" name="description" placeholder="Edit Category Description" required>
-                            </div>
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary btn-block" value="Edit"> Submit</button>
+                                <button type="button" id="add-category-btn" class="btn btn-primary btn-block">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -180,35 +208,7 @@
         </div>
 
 
-        <div class="modal custom-modal fade" id="delete_category" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form action="categoryAdmin" method="post">
-                            <!--<input type="text" id="deletecategory" name="mod" value="delete" hidden>-->
-                            <div class="form-header">
-                                <h3>Delete</h3>
-                                <p>Are you sure want to delete?</p>
-                            </div>
-                            <div class="modal-btn delete-action">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <!--<a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>-->
-                                        <input  name="cate" value="${c.getCaID()}" hidden>
-                                        <input style="width: 100%" type="submit"  name="mod" class="btn btn-primary continue-btn" value="delete">
-
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        
 
         <script src="assets/js/jquery-3.7.1.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>

@@ -4,7 +4,6 @@ import Models.Categories;
 import dal.CategoriesDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,7 +24,7 @@ public class ViewCategoryAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+       
         String mod = request.getParameter("mod");
 
         if (mod != null) {
@@ -51,7 +50,7 @@ public class ViewCategoryAdmin extends HttpServlet {
     }
 
     private void handleDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String cate = request.getParameter("cate");
+        String cate = request.getParameter("cate"); 
         boolean isDeleted = categoryDAO.deleteCategory(cate);
 
         if (isDeleted) {
@@ -81,8 +80,8 @@ public class ViewCategoryAdmin extends HttpServlet {
 
     private void handleEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String categoryIdStr = request.getParameter("categoryId");
-            if (categoryIdStr == null || categoryIdStr.trim().isEmpty()) {
+            String categoryIdStr = request.getParameter("categoryIdStr");
+            if (categoryIdStr.trim().isEmpty()) {
                 throw new NumberFormatException("Category ID is missing or empty.");
             }
             int categoryId = Integer.parseInt(categoryIdStr);
