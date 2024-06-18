@@ -34,6 +34,8 @@ public class CategoriesDAO extends DBContext {
         }
         return list;
     }
+        
+        
 
     public Categories getCategoryByID(int categoryId) {
         String query = "select * from Categories where caID=?";

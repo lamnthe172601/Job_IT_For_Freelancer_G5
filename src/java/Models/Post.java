@@ -15,11 +15,14 @@ public class Post {
     Duration durationID;
     Recruiter recruiterID;
     Categories caID;
-
+    boolean status;
+    int checking;
+    
     public Post() {
     }
 
-    public Post(int postID,String title, String image, JobType jobTypeID, Duration durationID, Date datePost, int quantity, String description,int budget, String location, String skill, Recruiter recruiterID, Categories caID) {
+    public Post(int postID,String title, String image, JobType jobTypeID, Duration durationID, Date datePost, int quantity, String description,int budget, String location, String skill, Recruiter recruiterID, Categories caID, boolean status,
+    int checking) {
         this.postID = postID;
         this.image = image;
         this.quantity = quantity;
@@ -33,6 +36,8 @@ public class Post {
         this.durationID = durationID;
         this.recruiterID = recruiterID;
         this.caID = caID;
+        this.status=status;
+        this.checking=checking;
     }
 
     public String getImage() {
@@ -140,10 +145,28 @@ public class Post {
         this.caID = caID;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public int getChecking() {
+        return checking;
+    }
+
+    public void setChecking(int checking) {
+        this.checking = checking;
+    }
+
     @Override
     public String toString() {
-        return "Post{" + "postID=" + postID + ", quantity=" + quantity + ", budget=" + budget + ", title=" + title + ", description=" + description + ", location=" + location + ", skill=" + skill + ", image=" + image + ", datePost=" + datePost + ", jobTypeID=" + jobTypeID + ", durationID=" + durationID + ", recruiterID=" + recruiterID + ", caID=" + caID + '}';
+        return "Post{" + "postID=" + postID + ", quantity=" + quantity + ", budget=" + budget + ", title=" + title + ", description=" + description + ", location=" + location + ", skill=" + skill + ", image=" + image + ", datePost=" + datePost + ", jobTypeID=" + jobTypeID + ", durationID=" + durationID + ", recruiterID=" + recruiterID + ", caID=" + caID + ", status=" + status + ", checking=" + checking + '}';
     }
+
+   
 
  
     

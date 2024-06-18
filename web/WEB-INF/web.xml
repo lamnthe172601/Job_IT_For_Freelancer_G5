@@ -117,10 +117,6 @@
         <servlet-class>FreelancerControll.ListApplyControll</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListPostControll</servlet-name>
-        <servlet-class>CommonControll.ListPostControll</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Dashboard</servlet-name>
         <servlet-class>RecruiterControll.Dashboard</servlet-class>
     </servlet>
@@ -139,6 +135,18 @@
     <servlet>
         <servlet-name>ExpiredProjectsControll</servlet-name>
         <servlet-class>RecruiterControll.ExpiredProjectsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreatePostControll</servlet-name>
+        <servlet-class>RecruiterControll.CreatePostControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyListPostRecruiterControll</servlet-name>
+        <servlet-class>RecruiterControll.MyListPostRecruiterControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePostFavouritesControll</servlet-name>
+        <servlet-class>FreelancerControll.DeletePostFavouritesControll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -266,10 +274,6 @@
         <url-pattern>/ListApply</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ListPostControll</servlet-name>
-        <url-pattern>/ListPost</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
     </servlet-mapping>
@@ -288,5 +292,17 @@
     <servlet-mapping>
         <servlet-name>ExpiredProjectsControll</servlet-name>
         <url-pattern>/ExpiredProjects</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePostControll</servlet-name>
+        <url-pattern>/CreatePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyListPostRecruiterControll</servlet-name>
+        <url-pattern>/myListJobProject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePostFavouritesControll</servlet-name>
+        <url-pattern>/DeletePostFavourites</url-pattern>
     </servlet-mapping>
 </web-app>

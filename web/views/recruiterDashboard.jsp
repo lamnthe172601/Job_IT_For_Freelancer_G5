@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +28,64 @@
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+
+        <style>
+            /* Tùy chỉnh kích thước và màu sắc của các nút phân trang */
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                padding: 2px 6px; /* Giảm kích thước padding để nút nhỏ lại */
+                margin-left: 2px;
+                margin-right: 2px;
+                font-size: 12px;
+                color: #333;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+            /* Tùy chỉnh nút được chọn */
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                background-color: orange;
+                color: white !important;
+                border: 1px solid orange;
+            }
+
+            /* Thay đổi màu nút khi hover */
+            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                background-color: orange;
+                color: white;
+                border: 1px solid orange;
+            }
+
+            /* Đảm bảo chiều cao cố định cho bảng và phần phân trang */
+            .dataTables_wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                min-height: 400px; /* Đặt chiều cao tối thiểu phù hợp với nội dung của bạn */
+            }
+
+            .dataTables_wrapper .dataTables_info {
+                order: 2;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .dataTables_wrapper .dataTables_paginate {
+                order: 1;
+                margin-bottom: 10px;
+            }
+        </style>
+
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        <!-- DataTables JS -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     </head>
     <body class="dashboard-page">
 
@@ -44,7 +103,7 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
@@ -79,7 +138,7 @@
                                         <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="ListPost">Jobs List</a></li>                                        
+                                            <li><a href="myListJobProject">My List Post</a></li>                                        
                                             <li><a href="SreachJob">Find Jobs</a></li>  
                                             <li><a href="company">Company</a></li>
                                         </ul>
@@ -195,7 +254,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="post-project.html" class="login-btn">Post a Project <i class="feather-plus ms-1"></i></a></li>
+                            <li><a href="CreatePost" class="login-btn">Post a Project <i class="feather-plus ms-1"></i></a></li>
                             <li class="nav-item dropdown account-item">
                                 <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                     <span class="user-img">
@@ -260,7 +319,7 @@
                                                     <li><a href="ManageApplication">All applicants</a></li>
                                                     <li><a href="CompletedProjects">Completed Projects</a></li>
                                                     <li><a href="ExpiredProjects">Expired Projects</a></li>
-                                                    
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
@@ -424,77 +483,34 @@
                                     <div class="col-xl-12">
                                         <div class="card mb-4 ongoing-project-card">
                                             <div class="pro-head">
-                                                <h2>Recent Earnings</h2>
+                                                <h2>List News Post Projects</h2>
                                                 <a href="view-project-detail.html" class="btn fund-btn">View All</a>
                                             </div>
                                             <div class="table-responsive recent-earnings flex-fill">
-                                                <table class="table mb-0">
+                                                <table class="table mb-0 datatable">
                                                     <thead>
                                                         <tr>
-                                                            <th>Details</th>
+                                                            <th>Title</th>
                                                             <th>Job Type</th>
-                                                            <th>Budget</th>
+                                                            <th>Skill</th>
                                                             <th>Create On</th>
-                                                            <th>Expiring On</th>
+                                                            <th>Categories</th>
                                                             <th>Proposals</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Website Designer Required </td>
-                                                            <td>Hourly</td>
-                                                            <td>$2222</td>
-                                                            <td>29 Sep 2023</td>
-                                                            <td>10 Oct 2023</td>
-                                                            <td>47</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Create desktop applications </td>
-                                                            <td>Full time</td>
-                                                            <td>$5762</td>
-                                                            <td>25 Sep 2023</td>
-                                                            <td>05 Oct 2023</td>
-                                                            <td>15</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>PHP, Javascript Projects </td>
-                                                            <td>Part time</td>
-                                                            <td>$4879</td>
-                                                            <td>17 Sep 2023</td>
-                                                            <td>29 Sep 2023</td>
-                                                            <td>26</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Website Designer Required </td>
-                                                            <td>Hourly</td>
-                                                            <td>$2222</td>
-                                                            <td>29 Sep 2023</td>
-                                                            <td>10 Oct 2023</td>
-                                                            <td>47</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Swift / SwiftUI Developer</td>
-                                                            <td>Hourly</td>
-                                                            <td>$2789</td>
-                                                            <td>05 Sep 2023</td>
-                                                            <td>17 Sep 2023</td>
-                                                            <td>19</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Full-stack Developer </td>
-                                                            <td>Part time</td>
-                                                            <td>$7853</td>
-                                                            <td>01 Sep 2023</td>
-                                                            <td>13 Sep 2023</td>
-                                                            <td>38</td>
-                                                            <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                        </tr>
+                                                        <c:forEach items="${listpost}" var="listpost">
+                                                            <tr>
+                                                                <td>${listpost.title}</td>
+                                                                <td>${listpost.jobTypeID.jobName}</td>
+                                                                <td>${listpost.skill}</td>
+                                                                <td>${listpost.datePost}</td>
+                                                                <td>${listpost.caID.categoriesName}</td>
+                                                                <td style="text-align: center;">${listpost.quantity}</td>
+                                                                <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
+                                                            </tr>
+                                                        </c:forEach>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -612,6 +628,19 @@
             </footer>
 
         </div>
+
+        <script>
+            $(document).ready(function () {
+                $('.datatable').DataTable({
+                    "paging": true,
+                    "pageLength": 10, // Số lượng bài post mỗi trang
+                    "searching": true,
+                    "ordering": true,
+                    "info": true
+                   
+                });
+            });
+        </script>
 
 
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">

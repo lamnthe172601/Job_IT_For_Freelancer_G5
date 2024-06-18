@@ -70,19 +70,7 @@ public class SelectAccountTypeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String type=request.getParameter("typeaccount");
-        if(type.equals("1")){
-            DAO dao = new DAO();
-        ArrayList<SkillSet> listSkill = dao.listSkill();
-        request.setAttribute("listskill", listSkill);
-        request.getRequestDispatcher("views/inputFreelancerProfile.jsp").forward(request, response);
-        }else{
-            DAO dao = new DAO();
-        ArrayList<TeamNumber> listTeamSize=dao.listTeamNumber();
-        request.setAttribute("listTeamSize", listTeamSize);
-        request.getRequestDispatcher("views/inputRecruiterProfile.jsp").forward(request, response);
         }
-    }
 
     /** 
      * Returns a short description of the servlet.

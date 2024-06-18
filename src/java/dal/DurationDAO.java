@@ -4,10 +4,13 @@
  */
 package dal;
 
+import Models.Categories;
 import Models.Duration;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,5 +32,19 @@ public class DurationDAO extends DBContext{
         } catch (SQLException e) {
         }
         return null;
+    }
+     
+     public List<Duration> getAllDuration() {
+        List<Duration> list = new ArrayList<>();
+        String query = "select * from Duration";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add( new Duration(rs.getInt("durationID"), rs.getString("duration_name")));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
     }
 }

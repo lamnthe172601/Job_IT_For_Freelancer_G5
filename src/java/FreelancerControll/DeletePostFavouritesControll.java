@@ -3,20 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package CommonControll;
+package FreelancerControll;
 
+import Models.User;
+import MutiModels.PostBasic;
+import dal.DAO;
+import dal.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
- * @author Admin
+ * @author tanng
  */
-public class ListPostControll extends HttpServlet {
+public class DeletePostFavouritesControll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +39,10 @@ public class ListPostControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListPostControll</title>");  
+            out.println("<title>Servlet DeletePostFavouritesControll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListPostControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DeletePostFavouritesControll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,26 +59,34 @@ public class ListPostControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       request.getRequestDispatcher("views/listPost.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        DAO d = new DAO();
+        PostDAO p = new PostDAO();
+        Object user = session.getAttribute("account");
+        if (user == null) {
+            request.getRequestDispatcher("login").forward(request, response);
+        } else {
+            User u = (User) user;
+            int userId = u.getUserID();
+            int freelancerID = d.getFreelancerIDbyUserID(userId);
+            String postID=request.getParameter("postID");
+            p.deleteFavoPostByPostID(freelancerID, postID);
+            
+            
+            List<PostBasic> post = p.getAllFavPosts(freelancerID);
+            request.setAttribute("mess", "Delete success!");
+            request.setAttribute("post", post);
+            request.getRequestDispatcher("views/freelancerFavourites.jsp").forward(request, response);
+        }
     } 
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
