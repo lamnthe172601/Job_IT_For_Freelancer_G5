@@ -82,7 +82,12 @@
                 padding-right: 32px;
             }
             /* General styles */
-
+            .title{
+                max-width: 100px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         </style>
 
     </head>
@@ -100,10 +105,10 @@
                     <div class="page-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="page-title">Recruiter</h3>
+                                <h3 class="page-title">Project</h3>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="active">/ Recruiter</li>
+                                    <li class="active">/ Project</li>
                                 </ul>
                             </div>
 
@@ -114,8 +119,8 @@
                     <div class="page-header user-active">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="page-title">All Recruiter</h3>
-                                <p>Total <span>${totalRecruiter}</span> Recruiter account</p>
+                                <h3 class="page-title">All Projects</h3>
+                                <p>Total <span>${totalProject}</span> Projects</p>
                             </div>
                             <div class="col-auto">
                                 <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
@@ -172,69 +177,78 @@
                                         <table class="table table-center table-hover mb-0 datatable">
                                             <thead>
                                                 <tr>
-
                                                     <th>No.</th>
                                                     <th>Logo</th>
+                                                    <th>Title</th>
                                                     <th>Company name</th>
-                                                    <th>Primary contact</th> 
-                                                    <th>Website</th> 
-                                                    <th>Total projects</th>
-                                                    <th>Status</th>
+                                                    <th>Position</th>
+                                                    <th>Technology</th>                                                                                             
+                                                    <th>Date post</th>
+                                                    <th>Status</th>                                                    
                                                     <th class="text-end">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${listRecruiter}" var="recruiter" varStatus="loop">
+                                                <c:forEach items="${listProjects}" var="project" varStatus="loop">
                                                     <tr>
-
                                                         <td>${loop.index +1}</td>
                                                         <td>
                                                             <h2 class="table-avatar">
-                                                                <a href="javascript:void(0);"><img class="me-2" src="${recruiter.getCompany().getLogo()}" alt="User Image"></a>
+                                                                <a href="javascript:void(0);"><img class="me-2" src="${project.getImage()}" alt="User Image"></a>
                                                             </h2>
                                                         </td>
                                                         <td>
-                                                            <h2 class="table-avatar companyName">
-                                                                <a href="javascript:void(0);">${recruiter.getCompany().getCompanyName()}</a>
+                                                            <h2 class="table-avatar title">
+                                                                <a href="javascript:void(0);">${project.getTitle()}</a>
                                                             </h2>
                                                         </td>
                                                         <td>
-                                                            <h2 class="primaryContact">
-                                                                <a href="profile.html">
-                                                                    ${recruiter.getCompany().getRecruiID().fullName()}
-                                                                </a>
+                                                            <h2 class="companyName">                                                                
+                                                                ${project.getRecruiterID().getCompanyname()}                                                              
                                                             </h2>
                                                         </td>
-                                                        <td> ${recruiter.getCompany().getWebsite()}</td>
                                                         <td>
-                                                            <h2 class="totalPost">
-                                                                ${recruiter.getTotalPost()}
+                                                            <h2 class="table-avatar position">
+                                                                ${project.getCaID().getCategoriesName()}
+                                                            </h2>
+                                                        </td>
+                                                        <td>
+                                                            <h2 class="technology">
+                                                                ${project.getSkill()}
+                                                            </h2>
+                                                        </td>
+                                                        <td>
+                                                            <h2 class="datePost">
+                                                                ${project.getDatePost()}
                                                             </h2>
                                                         </td>
                                                         <td class="test1">
 
-                                                            <c:if test='${recruiter.getAccount().getStatus() == "active"}'>
-                                                                <a href="javascript:void(0);" class="user-active-btn status">${recruiter.getAccount().getStatus()}</a>
+                                                            <c:if test='${project.getChecking() == 0}'>
+                                                                <a href="javascript:void(0);" style="color: black" class="status">Pendding</a>
                                                             </c:if>
-
-                                                            <c:if test='${recruiter.getAccount().getStatus() == "inactive"}'>
-                                                                <a href="javascript:void(0);" class="user-inactive-btn status">${recruiter.getAccount().getStatus()}</a>
+                                                            <c:if test='${project.getChecking() == 1}'>
+                                                                <a href="javascript:void(0);" class="user-active-btn status">Approve</a>
+                                                            </c:if>
+                                                            <c:if test='${project.getChecking() == 2}'>
+                                                                <a href="javascript:void(0);" class="user-inactive-btn status">Suspend</a>
                                                             </c:if>
                                                         </td>                                                   
                                                         <td class="text-end three-dots">
-                                                            <input type="hidden" class="user-id" id="${recruiter.getAccount().getUserID()}">
-                                                            <a href="javascript:void(0);" class="dropdown-toggle nav-link three-dot " data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" ></i></a>
+                                                            <input type="hidden" class="post-id" id="${project.getPostID()}">
+                                                            <a href="javascript:void(0);" class="dropdown-toggle nav-link three-dot" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu user-menu-list">
-                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#view-details${recruiter.getAccount().getUserID()}"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                                    <c:if test='${recruiter.getAccount().getStatus() == "active"}'>
-                                                                    <a class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#view-details${project.getPostID()}"><img class="me-2" src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
+                                                                    <c:if test='${project.getChecking() == 0}'>
+                                                                    <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#handle"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Moderation Project</a>
                                                                     </c:if>
-                                                                    <c:if test='${recruiter.getAccount().getStatus() == "inactive"}'>
-                                                                    <a class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>
+                                                                    <c:if test='${project.getChecking() == 1}'>
+                                                                    <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend Project</a>
                                                                     </c:if>
-
-                                                            </div>                                                      
-
+                                                                    <c:if test='${project.getChecking() == 2}'>
+                                                                    <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Approve_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate Project</a>
+                                                                    </c:if>
+                                                            </div>
                                                         </td>
                                                 <div class="modal fade custom-modal" id="view-details${recruiter.getAccount().getUserID()}">
                                                     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -309,19 +323,19 @@
             </div>
 
         </div>
-        <div class="modal custom-modal fade" id="Suspend_user" role="dialog">
+        <div class="modal custom-modal fade" id="Suspend_Project" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="form-header">
-                            <input type="hidden" class="user-id1" id="${recruiter.getAccount().getUserID()}">
+                            <input type="hidden" class="post-id1" id="${project.getPostID()}">
                             <h3>Status</h3>
-                            <p>Are you sure want to Suspend user?</p>
+                            <p>Are you sure want to Suspend Project?</p>
                         </div>
                         <div class="modal-btn Suspend-action" >
                             <div class="row">
                                 <div class="col-6">
-                                    <a href="javascript:void(0);" class="user-suspend-link btn btn-primary continue-btn" >Suspend user</a>
+                                    <a href="javascript:void(0);" class="project-suspend-link btn btn-primary continue-btn" >Suspend Project</a>
                                 </div>
                                 <div class="col-6">
                                     <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -331,20 +345,45 @@
                     </div>
                 </div>
             </div>
-        </div>       
-        <div class="modal custom-modal fade" id="Activate_user" role="dialog">
+        </div>
+
+        <div class="modal custom-modal fade" id="handle" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="form-header">
-                            <input type="hidden" class="user-id1" id="${recruiter.getAccount().getUserID()}">
+                            <input type="hidden" class="post-id1" id="${project.getPostID()}">
                             <h3>Status</h3>
-                            <p>Are you sure want to Activate user?</p>
+                            <p>Choose option?</p>
+                        </div>
+                        <div class="modal-btn Suspend-action" >
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" class="project-suspend-link btn btn-primary continue-btn" >Suspend Project</a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" class="project-activate-link btn btn-primary continue-btn" >Activate Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal custom-modal fade" id="Approve_Project" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="form-header">
+                            <input type="hidden" class="post-id1" id="${project.getPostID()}">
+                            <h3>Status</h3>
+                            <p>Are you sure want to Approve Project?</p>
                         </div>
                         <div class="modal-btn Activate-action">
                             <div class="row">
                                 <div class="col-6">
-                                    <a href="javascript:void(0);" class="user-activate-link btn btn-primary continue-btn" >Activate user</a>
+                                    <a href="javascript:void(0);" class="project-activate-link btn btn-primary continue-btn" >Approve project</a>
                                 </div>
                                 <div class="col-6">
                                     <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -414,72 +453,72 @@
                 $('.typeChange').on('click', function (e) {
                     e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
 
-                    var userId = $(this).closest('tr').find('.user-id').attr('id');
+                    var postId = $(this).closest('tr').find('.post-id').attr('id');
                     var action = $(this).text().trim().toLowerCase();
 
-                    if (action === 'suspend user') {
-                        // Hiển thị popup xác nhận suspend user
-                        $('#Suspend_user').find('.user-id1').val(userId);
-                        $('#Suspend_user').modal('show');
-                    } else if (action === 'activate user') {
-                        // Hiển thị popup xác nhận activate user
-                        $('#Activate_user').find('.user-id1').val(userId);
-                        $('#Activate_user').modal('show');
+                    if (action === 'moderation project') {
+                        // Hiển thị popup cho phép suspend hoặc approve project
+                        $('#handle').find('.post-id1').val(postId);
+                        $('#handle').modal('show');
+                    } else if (action === 'suspend project') {
+                        // Hiển thị popup xác nhận suspend project
+                        $('#Suspend_Project').find('.post-id1').val(postId);
+                        $('#Suspend_Project').modal('show');
+                    } else if (action === 'activate project') {
+                        // Hiển thị popup xác nhận activate project
+                        $('#Approve_Project').find('.post-id1').val(postId);
+                        $('#Approve_Project').modal('show');
                     }
                 });
 
-                $('.user-suspend-link').on('click', function () {
-                    var userId = $(this).closest('.modal-body').find('.user-id1').val();
-                    suspendUser(userId);
+                $('.project-suspend-link').on('click', function () {
+                    var postId = $(this).closest('.modal-body').find('.post-id1').val();
+                    suspendProject(postId);
                 });
 
-                $('.user-activate-link').on('click', function () {
-                    var userId = $(this).closest('.modal-body').find('.user-id1').val();
-                    activateUser(userId);
+                $('.project-activate-link').on('click', function () {
+                    var postId = $(this).closest('.modal-body').find('.post-id1').val();
+                    approveProject(postId);
                 });
             });
 
-            function suspendUser(userId) {
+            function suspendProject(postId) {
                 $.ajax({
-                    url: '/Job_IT_For_Freelancer_G5/changeStatusUserAdmin', // URL của servlet xử lý suspend user
+                    url: '/path/to/suspend/project',
                     type: 'POST',
-                    data: {userId: userId, type: "suspend"},
+                    data: {postId: postId},
                     success: function (response) {
-                        // Xử lý khi suspend user thành công
-                        var statusCell = $('.user-id#' + userId).closest('tr').find('.test1');
-                        statusCell.html('<a href="javascript:void(0);" class="user-inactive-btn status">inactive</a>');
+                        var statusCell = $('.post-id#' + postId).closest('tr').find('.status');
+                        statusCell.html('<a href="javascript:void(0);" class="user-inactive-btn status">Suspend</a>');
 
-                        var threeDotCell = $('.user-id#' + userId).closest('tr').find('.three-dots');
-                        threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>');
+                        var threeDotCell = $('.post-id#' + postId).closest('tr').find('.three-dots');
+                        threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Approve_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate Project</a>');
 
-                        $('#Suspend_user').modal('hide');
-                        showSuccessNotification('Suspend user successfully!');
+                        $('#Suspend_Project').modal('hide');
+                        showSuccessNotification('Suspend project successfully!');
                     },
                     error: function (xhr, status, error) {
-                        // Xử lý khi có lỗi xảy ra
                         console.error(error);
                     }
                 });
             }
 
-            function activateUser(userId) {
+            function approveProject(postId) {
                 $.ajax({
-                    url: '/Job_IT_For_Freelancer_G5/changeStatusUserAdmin', // URL của servlet xử lý activate user
+                    url: '/path/to/approve/project',
                     type: 'POST',
-                    data: {userId: userId, type: "active"},
+                    data: {postId: postId},
                     success: function (response) {
-                        // Xử lý khi activate user thành công
-                        var statusCell = $('.user-id#' + userId).closest('tr').find('.test1');
-                        statusCell.html('<a href="javascript:void(0);" class="user-active-btn status">active</a>');
+                        var statusCell = $('.post-id#' + postId).closest('tr').find('.status');
+                        statusCell.html('<a href="javascript:void(0);" class="user-active-btn status">Approved</a>');
 
-                        var threeDotCell = $('.user-id#' + userId).closest('tr').find('.three-dots');
-                        threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>');
+                        var threeDotCell = $('.post-id#' + postId).closest('tr').find('.three-dots');
+                        threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend Project</a>');
 
-                        $('#Activate_user').modal('hide');
-                        showSuccessNotification('Activate user successfully!');
+                        $('#Approve_Project').modal('hide');
+                        showSuccessNotification('Approve project successfully!');
                     },
                     error: function (xhr, status, error) {
-                        // Xử lý khi có lỗi xảy ra
                         console.error(error);
                     }
                 });

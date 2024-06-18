@@ -5,6 +5,8 @@
 
 package AdminControlles;
 
+import dal.AdminDAO;
+import dal.DashboardDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -53,6 +55,10 @@ public class ProjectAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+             DashboardDAO dao = new DashboardDAO();
+             AdminDAO a = new AdminDAO();
+             request.setAttribute("totalProject",dao.getTotalPost());
+             request.setAttribute("listProjects",a.getAllProject() );
              request.getRequestDispatcher("adminViews/projectAdmin.jsp").forward(request, response);
 
     } 
