@@ -22,3 +22,4 @@ nbactions.xml
 # Web server directories
 tomcat/
 glassfish/
+DBContext.java

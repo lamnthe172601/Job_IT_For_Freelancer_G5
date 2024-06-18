@@ -6,10 +6,7 @@ package dal;
 
 import Models.Company;
 import Models.Recruiter;
-import Models.Role;
 import Models.TeamNumber;
-import Models.User;
-import com.sun.jdi.connect.spi.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

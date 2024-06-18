@@ -11,6 +11,9 @@ import Models.JobType;
 import Models.Post;
 
 import Models.Recruiter;
+
+import Models.TeamNumber;
+import MutiModels.JobApply;
 import Models.SkillSet;
 import MutiModels.PostBasic;
 import MutiModels.RecruiterBasic;
@@ -109,7 +112,7 @@ public class PostDAO extends DBContext {
             ps.setInt(1, pid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -137,7 +140,7 @@ public class PostDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -265,7 +268,7 @@ public class PostDAO extends DBContext {
                        	j.job_name,
                        	d.duration_name,
                        	c.categories_img,c.categories_name,c.description,c.statusCate,
-                       	r.first_name,r.last_name,r.email_contact,
+                       	r.first_name,r.last_name,r.email_contact,r.image,
                        	co.company_name
                        	from Post p 
                        	inner join FreelancerFavorites f on p.postID=f.postID 
@@ -281,28 +284,97 @@ public class PostDAO extends DBContext {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
-                RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"),rs.getString("company_name"));
+                RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString(25));
                 JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
-                posts.add(new PostBasic(rs.getInt("postID"),rs.getInt("quantity"),rs.getInt("budget"), rs.getString("title"), rs.getString("description"),rs.getString("location"),rs.getString("skill"),rs.getString("image"),rs.getDate("date_post"),
-                         job, du,    
-                          re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                posts.add(new PostBasic(rs.getInt("postID"), rs.getInt("quantity"), rs.getInt("budget"), rs.getString("title"), rs.getString("description"), rs.getString("location"), rs.getString("skill"), rs.getString(3), rs.getDate("date_post"),
+                        job, du,
+                        re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return posts;
     }
-    
-    
-        public void deleteFavoPostByPostID(int freelancerID, String postID) {
+
+    public PostBasic getPostsByID(int id) {
+        String query = """
+                       select p.postID,p.title,p.image,p.job_type_ID,p.durationID,p.date_post,p.quantity,p.description,p.budget,p.location,p.skill,p.recruiterID,p.status,p.caID,p.checking,
+                       	j.job_name,
+                       	d.duration_name,
+                       	c.categories_img,c.categories_name,c.description,c.statusCate,
+                       	r.first_name,r.last_name,r.email_contact,r.image,
+                       	co.company_name
+                       	from Post p                       	 
+                       	inner join JobType j on j.jobID=p.job_type_ID
+                       	inner join Duration d on d.durationID=p.durationID
+                       	inner join Categories c on c.caID=p.caID
+                       	inner join Recruiter r on r.recruiterID=p.recruiterID
+                       	inner join Company co on co.recruiterID=p.recruiterID
+                       	where p.postID=?;
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"),rs.getString("description"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"),rs.getString(25));
+                JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
+                return (new PostBasic(rs.getInt("postID"), rs.getInt("quantity"), rs.getInt("budget"), rs.getString("title"), rs.getString("description"), rs.getString("location"), rs.getString("skill"), rs.getString(3), rs.getDate("date_post"),
+                        job, du,
+                        re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<PostBasic> getTopPosts() {
+        List<PostBasic> posts = new ArrayList<>();
+        String query = """
+                       select top 5 p.postID,p.title,p.image,p.job_type_ID,p.durationID,p.date_post,p.quantity,p.description,p.budget,p.location,p.skill,p.recruiterID,p.status,p.caID,p.checking,
+                                              	j.job_name,
+                                              	d.duration_name,
+                                              	c.categories_img,c.categories_name,c.description,c.statusCate,
+                                              	r.first_name,r.last_name,r.email_contact,r.image,
+                                              	co.company_name
+                                              	from Post p                        	
+                                              	inner join JobType j on j.jobID=p.job_type_ID
+                                              	inner join Duration d on d.durationID=p.durationID
+                                              	inner join Categories c on c.caID=p.caID
+                                              	inner join Recruiter r on r.recruiterID=p.recruiterID
+                                              	inner join Company co on co.recruiterID=p.recruiterID
+                                              	order by p.postID desc;
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"),rs.getString("description"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"),rs.getString(25));
+                JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
+                posts.add(new PostBasic(rs.getInt("postID"), rs.getInt("quantity"), rs.getInt("budget"), rs.getString("title"), rs.getString("description"), rs.getString("location"), rs.getString("skill"), rs.getString(3), rs.getDate("date_post"),
+                        job, du,
+                        re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
+
+    public void deleteFavoPostByPostID(int freelancerID, String postID) {
         String sql = """
                      DELETE FROM FreelancerFavorites WHERE freelanceID=? AND postID=?;
                      """;
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            
+
             statement.setInt(1, freelancerID);
             statement.setString(2, postID);
             statement.executeUpdate();
@@ -311,12 +383,51 @@ public class PostDAO extends DBContext {
         }
     }
     
-    
-    public static void main(String[] args) {
-        PostDAO d= new PostDAO();
-        List<Post> post =  d.getAllPosts();
-        for (Post post1 : post) {
-            System.out.println(post1.toString());
+    public List<JobApply> getPostApply(int id) {
+        List<JobApply> posts = new ArrayList<>();
+        String query = """
+                       select p.postID,p.title,p.date_post,p.budget,c.categories_name,j.dateApply,j.status
+                                              	from Post p 
+                                              	inner join JobApply j on p.postID=j.postID   	
+                                              	inner join Categories c on c.caID=p.caID
+                                              	where j.freelanceID=?;
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                posts.add(new JobApply(rs.getInt("postID"),rs.getInt("budget"),rs.getDate("date_post"),rs.getDate("dateApply"),
+                        rs.getString("status"),rs.getString("title"),rs.getString("categories_name")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return posts;
+    }
+    
+    public void applyJob(int id, String postID, String date) {
+        String sql = """
+                     insert into JobApply
+                     values(?,?,'Pending',?)
+                     """;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.setString(2, postID);
+            statement.setString(3, date);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public static void main(String[] args) {
+        PostDAO d = new PostDAO();
+        PostBasic post = d.getPostsByID(6);
+
+        System.out.println(post.toString());
+
     }
 }

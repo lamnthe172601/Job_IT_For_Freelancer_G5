@@ -90,8 +90,9 @@ public class InputRecruiterProfileController extends HttpServlet {
         String phone = request.getParameter("phone");
         String date = request.getParameter("dob");
         String gender = request.getParameter("gender");
+        String img="IMG/chung.png";
 
-        dao.inputRecruiterInfo(firstname, lastname, gender, date, null, email, phone, userID);
+        dao.inputRecruiterInfo(firstname, lastname, gender, date, img, email, phone, userID);
 
         String companyname = request.getParameter("companyname");
         String established = request.getParameter("established").trim();

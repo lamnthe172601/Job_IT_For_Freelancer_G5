@@ -80,7 +80,7 @@
             <li><a href="company-details">Company Details</a></li>
             <li><a href="manage-projects">Projects</a></li>
             <li><a href="favourites">Favourites</a></li>                                                                                       
-            <li><a href="profile-settings">Settings</a></li>
+            <li><a href="recruitersetting">Settings</a></li>
             <li><a href="logout">Logout</a></li>
         </ul>
     </li>
