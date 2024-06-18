@@ -79,7 +79,7 @@
                                         <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="ListPost">Jobs List</a></li>                                        
+                                            <li><a href="myListJobProject">My List Post</a></li>                                       
                                             <li><a href="SreachJob">Find Jobs</a></li>  
                                             <li><a href="company">Company</a></li>
                                         </ul>

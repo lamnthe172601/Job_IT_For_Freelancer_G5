@@ -31,7 +31,7 @@
                     <a href="manageRecruiterAdmin"><i data-feather="user-check"></i> <span>Recuiter</span></a>
                 </li>                          
                 <li>
-                    <a href="categorieAdmin"><i data-feather="copy"></i> <span>Categories</span></a>
+                    <a href="categoryAdmin"><i data-feather="copy"></i> <span>Categories</span></a>
                 </li>                        
                 <li>
                     <a href="skillAdmin"><i data-feather="award"></i> <span>Skills</span></a>

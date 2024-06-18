@@ -17,7 +17,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -227,17 +226,17 @@ public class FreelancerDAO extends DBContext {
 
 
     public void updateFreelancer(String firstname, String lastname, String image, String gender, String dob, String describe, String email, String phone, int user, int freelancerID) {
-        String query = "UPDATE [dbo].[Freelancer]\n"
-                + "   SET [first_name] = ?\n"
-                + "      ,[last_name] = ?\n"
-                + "      ,[image] = ?\n"
-                + "      ,[gender] = ?\n"
-                + "      ,[dob] = ?\n"
-                + "      ,[describe] = ?\n"
-                + "      ,[email__contact] = ?\n"
-                + "      ,[phone_contact] = ?\n"
-                + "      ,[userID] = ?"
-                + " WHERE freelanceID = ?";
+        String query = """
+                       UPDATE [dbo].[Freelancer]
+                          SET [first_name] = ?
+                             ,[last_name] = ?
+                             ,[image] = ?
+                             ,[gender] = ?
+                             ,[dob] = ?
+                             ,[describe] = ?
+                             ,[email__contact] = ?
+                             ,[phone_contact] = ?
+                             ,[userID] = ? WHERE freelanceID = ?""";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, firstname);
             stmt.setString(2, lastname);
@@ -252,7 +251,7 @@ public class FreelancerDAO extends DBContext {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            
 
         }
     }
@@ -297,12 +296,13 @@ public class FreelancerDAO extends DBContext {
     }
 
     public void updateEducation(String educationName, String dateStart, String dateEnd, String degree, int freelanceID) {
-        String query = "UPDATE [dbo].[Education]\n"
-                + "   SET [university_name] = ?\n"
-                + "      ,[start_date] = ?\n"
-                + "      ,[end_date] = ?\n"
-                + "      ,[degreeID] = ?\n"
-                + " WHERE freelanceID = ?";
+        String query = """
+                       UPDATE [dbo].[Education]
+                          SET [university_name] = ?
+                             ,[start_date] = ?
+                             ,[end_date] = ?
+                             ,[degreeID] = ?
+                        WHERE freelanceID = ?""";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, educationName);
             stmt.setString(2, dateStart);

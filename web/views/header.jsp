@@ -41,7 +41,7 @@
             <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
             <ul class="submenu">
                 <li><a href="CreatePost">Create a new Post</a></li>
-                <li><a href="jobsList">List Post</a></li>
+                <li><a href="myListJobProject">My List Post</a></li>
                 <li><a href="newsJobs">Reviews</a></li>
 
             </ul>
@@ -80,7 +80,7 @@
             <li><a href="company-details">Company Details</a></li>
             <li><a href="manage-projects">Projects</a></li>
             <li><a href="favourites">Favourites</a></li>                                                                                       
-            <li><a href="profile-settings">Settings</a></li>
+            <li><a href="recruitersetting">Settings</a></li>
             <li><a href="logout">Logout</a></li>
         </ul>
     </li>

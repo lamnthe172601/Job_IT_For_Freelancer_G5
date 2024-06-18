@@ -112,4 +112,8 @@ public class Freelancer {
         return first_name +" "+last_name;
     }
     
+    public String name(){
+        return first_name +" "+last_name;
+    }
+    
 }

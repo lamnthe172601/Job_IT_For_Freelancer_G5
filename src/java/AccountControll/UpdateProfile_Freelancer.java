@@ -27,10 +27,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author DUC MINH
- */
+
 @MultipartConfig
 public class UpdateProfile_Freelancer extends HttpServlet {
 
@@ -66,7 +63,6 @@ public class UpdateProfile_Freelancer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String freelanceID = request.getParameter("freelanceID");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
@@ -101,15 +97,15 @@ public class UpdateProfile_Freelancer extends HttpServlet {
 
             try {
                 Part imgPart = request.getPart("profileImage");
-
+                imgPart.write(imgFilePath);
                 Freelancer freelan = freelancerDAO.getFreelancerById(userID);
                 freelancerDAO.updateFreelancer(firstname, lastname, linkDB, gender, date, decscribe, email, phone, userID, freelan.getFreelanceID());
                 freelancerDAO.updateskill(freelan.getFreelanceID(), skillList);
                 freelancerDAO.updateEducation(educationName, dateStart, dateEnd, degree, freelan.getFreelanceID());
                 freelancerDAO.updateExperience(experienceName, position, startDate, endDate, freelan.getFreelanceID());
-                imgPart.write(imgFilePath);
+                
                
-                Thread.sleep(2500);
+                Thread.sleep(2000);
 
                 response.sendRedirect("UpdateProfile?id=" + userID);
 
