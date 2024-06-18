@@ -113,7 +113,8 @@
                                                     <div class="modal-content">
                                                         <div class="modal-body">
                                                             <form id="delete-category-form-${c.getCaID()}" action="categoryAdmin" method="post">
-                                                                <input  name="mod" value="delete" hidden>
+                                                                <input name="mod" value="delete" type="hidden">
+                                                                <input name="cate" value="${c.getCaID()}" type="hidden">
                                                                 <div class="form-header">
                                                                     <h3>Delete</h3>
                                                                     <p>Are you sure you want to delete?</p>
@@ -121,19 +122,19 @@
                                                                 <div class="modal-btn delete-action">
                                                                     <div class="row">
                                                                         <div class="col-6">
-                                                                            <input  name="cate" value="${c.getCaID()}">
-                                                                            <button style="width: 100%" type="submit" class="btn btn-primary continue-btn delete-btn">Delete</button>
+                                                                            <button style="width: 100%" type="button" class="btn btn-primary continue-btn delete-btn-ajax">Delete</button>
                                                                         </div>
                                                                         <div class="col-6">
                                                                             <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </form>>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
 
 
 
@@ -145,9 +146,9 @@
                                                             <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form id="edit-category-${c.getCaID()} action="categoryAdmin" method="post">
+                                                            <form id="edit-category-${c.getCaID()}" action="categoryAdmin" method="post">
                                                                 <input  name="mod" value="edit" hidden>
-                                                               
+
                                                                 <div class="form-group">
                                                                     <label for="edit-categoryname">Category Name</label>
                                                                     <input name="categoryIdStr" value="${c.getCaID()}" hidden>
@@ -206,10 +207,75 @@
                 </div>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Bắt sự kiện click nút Submit
+                $('#add-category-btn').click(function (event) {
+                    // Ngăn chặn hành vi mặc định của nút Submit
+                    event.preventDefault();
+
+                    // Lấy dữ liệu từ form
+                    var categoryName = $('#categoryname').val();
+                    var categoryDescription = $('#categorydescription').val();
+
+                    // Gửi dữ liệu lên server bằng AJAX
+                    $.ajax({
+                        type: "POST",
+                        url: "/Job_IT_For_Freelancer_G5/categoryAdmin", // URL xử lý dữ liệu
+                        data: {
+                            categoryName: categoryName,
+                            description: categoryDescription,
+                            mod: 'add' // Tham số mod cho biết là thêm mới danh mục
+                        },
+                        success: function (response) {
+                            // Xử lý khi thêm thành công
+                            $('#add-category').modal('hide'); // Đóng modal
+                            // Không cần reload trang, thực hiện cập nhật dữ liệu ngay tại đây
+                            // Ví dụ: Hiển thị thông báo thành công, cập nhật danh sách danh mục, vv.
+                        },
+                        error: function (xhr, status, error) {
+                            // Xử lý khi có lỗi
+                            var errorMessage = xhr.status + ': ' + xhr.statusText;
+                            alert('Error - ' + errorMessage); // Thông báo lỗi cho người dùng
+                        }
+                    });
+                });
+            });
 
 
-        
 
+            $(document).ready(function () {
+                $('.delete-btn-ajax').click(function (event) {
+                    event.preventDefault();
+
+                    // Lấy id của modal và form
+                    var modalId = $(this).closest('.modal').attr('id');
+                    var formId = '#' + modalId + ' form';
+
+                    // Lấy dữ liệu từ form
+                    var formData = $(formId).serialize();
+
+                    // Gửi dữ liệu lên server bằng AJAX
+                    $.ajax({
+                        type: "POST",
+                        url: "/Job_IT_For_Freelancer_G5/categoryAdmin", // URL xử lý dữ liệu
+                        data: formData,
+                        success: function (response) {
+                            $('#' + modalId).modal('hide'); // Đóng modal
+                            // Cập nhật giao diện hoặc thông báo thành công tại đây
+                        },
+                        error: function (xhr, status, error) {
+                            alert('Error deleting category.'); // Thông báo lỗi khi xảy ra lỗi trong quá trình gửi yêu cầu
+                        }
+                    });
+                });
+            });
+
+
+
+
+        </script>
         <script src="assets/js/jquery-3.7.1.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/feather.min.js"></script>
