@@ -14,12 +14,18 @@ import java.util.Map;
 
 /**
  *
- * @author DUC MINH
+ * @author DUC LINH
  */
 public class SkillSetDAO extends DBContext{
-    public List<Map<String, String>> getAllSkillSets() {
+    public List<Map<String, String>> getAllSkillSets(int roleID) {
         List<Map<String, String>> skillSets = new ArrayList<>();
-        String sql = "SELECT skill_set_ID, skill_set_name, description FROM Skill_Set";
+        String sql;
+        
+        if (roleID == 1 || roleID == 2) {
+            sql = "SELECT skill_set_ID, skill_set_name, description FROM Skill_Set";
+        } else {
+            sql = "SELECT skill_set_ID, skill_set_name, description FROM Skill_Set WHERE statusSkill = 1";
+        }
         
         try (Connection conn = connection; 
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -33,6 +39,7 @@ public class SkillSetDAO extends DBContext{
                 skillSets.add(skillSet);
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
         return skillSets;
     }

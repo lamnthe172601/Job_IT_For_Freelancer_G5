@@ -14,8 +14,9 @@
         </group>
         <group>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/skillAdmin.jsp</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/dashboardAdmin.jsp</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/Models/Skills.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/skillAdmin.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/Models/User.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
         </group>
     </open-files>
 </project-private>
