@@ -152,6 +152,10 @@
         <servlet-name>AllListPostControll</servlet-name>
         <servlet-class>CommonControll.AllListPostControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProjectAdmin</servlet-name>
+        <servlet-class>AdminControlles.ProjectAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -267,8 +271,7 @@
     <servlet-mapping>
         <servlet-name>ViewCategoryAdmin</servlet-name>
         <url-pattern>/categoryAdmin</url-pattern>
-        
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PostFavouritesControll</servlet-name>
         <url-pattern>/PostFavourites</url-pattern>
@@ -312,5 +315,9 @@
     <servlet-mapping>
         <servlet-name>AllListPostControll</servlet-name>
         <url-pattern>/AllListPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProjectAdmin</servlet-name>
+        <url-pattern>/projectAdmin</url-pattern>
     </servlet-mapping>
 </web-app>
