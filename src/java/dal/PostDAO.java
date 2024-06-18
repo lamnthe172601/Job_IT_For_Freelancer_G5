@@ -130,7 +130,9 @@ public class PostDAO extends DBContext {
                                   JOIN Duration du ON p.durationID = du.durationID
                                    JOIN Recruiter re ON p.recruiterID = re.recruiterID
                                    JOIN Categories ca ON p.caID = ca.caID
-                                   JOIN Company co ON re.recruiterID = co.recruiterID""";
+                                   JOIN Company co ON re.recruiterID = co.recruiterID
+                       where p.status = 1 and p.checking = 1
+                       """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();

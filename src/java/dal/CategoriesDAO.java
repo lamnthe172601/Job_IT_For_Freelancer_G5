@@ -19,7 +19,7 @@ import java.util.Locale.Category;
 public class CategoriesDAO extends DBContext{
         public List<Categories> getAllCategory() {
         List<Categories> list = new ArrayList<>();
-        String query = "select * from Categories";
+        String query = "select * from Categories where statusCate = 1";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
