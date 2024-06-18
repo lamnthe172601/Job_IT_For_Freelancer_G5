@@ -22,7 +22,7 @@
             <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
             <ul class="submenu">
 
-                <li><a href="ListPost">Jobs List</a></li>                                        
+                <li><a href="AllListPost">Jobs List</a></li>                                        
                 <li><a href="SreachJob">Find Jobs</a></li>  
             </ul>
         </li>

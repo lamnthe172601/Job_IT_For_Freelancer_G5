@@ -12,7 +12,6 @@ import Models.Post;
 
 import Models.Recruiter;
 import Models.SkillSet;
-import Models.TeamNumber;
 import MutiModels.PostBasic;
 import MutiModels.RecruiterBasic;
 import java.sql.PreparedStatement;
@@ -125,29 +124,25 @@ public class PostDAO extends DBContext {
 
     public List<Post> getAllPosts() {
         List<Post> posts = new ArrayList<>();
-        String query = "SELECT * FROM Post";
+        String query = """
+                        SELECT *    FROM Post p
+                                  JOIN JobType j ON p.job_type_ID = j.jobID
+                                  JOIN Duration du ON p.durationID = du.durationID
+                                   JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                                   JOIN Categories ca ON p.caID = ca.caID
+                                   JOIN Company co ON re.recruiterID = co.recruiterID""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                // Create Post object from the result set and add to the list
-                Post post = new Post(
-                        rs.getInt("postID"),
-                        rs.getString("title"),
-                        rs.getString("image"),
-                        new JobType(rs.getInt("job_type_ID"), rs.getString("job_type_name")),
-                        new Duration(rs.getInt("durationID"), rs.getString("duration_name")),
-                        rs.getDate("date_post"),
-                        rs.getInt("quantity"),
-                        rs.getString("description"),
-                        rs.getInt("budget"),
-                        rs.getString("location"),
-                        rs.getString("skill"),
-                        new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID")),
-                        new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"),rs.getNString("description")),
-                        rs.getBoolean("status"), rs.getInt("checking")
-                );
-                posts.add(post);
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
+                JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+
+                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -317,8 +312,8 @@ public class PostDAO extends DBContext {
     
     public static void main(String[] args) {
         PostDAO d= new PostDAO();
-        List<PostBasic> post =  d.getAllFavPosts(97);
-        for (PostBasic post1 : post) {
+        List<Post> post =  d.getAllPosts();
+        for (Post post1 : post) {
             System.out.println(post1.toString());
         }
     }
