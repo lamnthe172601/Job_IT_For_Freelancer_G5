@@ -13,6 +13,7 @@ import Models.Post;
 import Models.Recruiter;
 
 import Models.TeamNumber;
+import MutiModels.JobApply;
 import MutiModels.PostBasic;
 import MutiModels.RecruiterBasic;
 import java.sql.Connection;
@@ -176,7 +177,7 @@ public class PostDAO extends DBContext {
             while (rs.next()) {
                 Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
-                RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString(25), rs.getString("company_name"));
+                RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString(25));
                 JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
                 posts.add(new PostBasic(rs.getInt("postID"), rs.getInt("quantity"), rs.getInt("budget"), rs.getString("title"), rs.getString("description"), rs.getString("location"), rs.getString("skill"), rs.getString(3), rs.getDate("date_post"),
                         job, du,
@@ -271,6 +272,46 @@ public class PostDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+    
+    public List<JobApply> getPostApply(int id) {
+        List<JobApply> posts = new ArrayList<>();
+        String query = """
+                       select p.postID,p.title,p.date_post,p.budget,c.categories_name,j.dateApply,j.status
+                                              	from Post p 
+                                              	inner join JobApply j on p.postID=j.postID   	
+                                              	inner join Categories c on c.caID=p.caID
+                                              	where j.freelanceID=?;
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                posts.add(new JobApply(rs.getInt("postID"),rs.getInt("budget"),rs.getDate("date_post"),rs.getDate("dateApply"),
+                        rs.getString("status"),rs.getString("title"),rs.getString("categories_name")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
+    
+    public void applyJob(int id, String postID, String date) {
+        String sql = """
+                     insert into JobApply
+                     values(?,?,'Pending',?)
+                     """;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.setString(2, postID);
+            statement.setString(3, date);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
     public static void main(String[] args) {

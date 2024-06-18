@@ -72,7 +72,7 @@
 
                                             <li><a href="PostFavourites">Jobs Favourites</a></li>
 
-                                            <li><a href="jobsApply">Jobs Apply</a></li>
+                                            <li><a href="ListApply">Jobs Apply</a></li>
                                             <li><a href="jobforyou">Jobs For you</a></li>
                                         </ul>
                                     </li>
@@ -280,7 +280,7 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-project-proposals.html" class="nav-link">
+                                                <a href="ListApply" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
@@ -390,7 +390,7 @@
                                                         <span> <i class="feather-clock me-1"></i>${p.datePost}</span>
                                                         <a  class="favourite color-active" onclick="confirmAction(${p.postID})"><i class="feather-heart"></i></a>
                                                     </div>
-                                                    
+
                                                     <div class="author-heading">
                                                         <div class="text-center1" >                                                                                                              
                                                             <img style="width: 100%; height: 100%;" src="${p.image}" alt="author">                                                       
@@ -427,7 +427,28 @@
                                                 </div>
                                                 <div class="cart-hover">
                                                     <a href="javascript:void(0);" onclick="openPopup(${p.postID})" class="btn-cart1" tabindex="-1">View Details</a>
-                                                    <a href="project-details.html" class="btn-cart1" tabindex="-1">Apply Now</a>
+                                                    <c:set var="applied" value="false" />
+                                                    <c:forEach items="${postApply}" var="j">
+                                                        <c:if test="${p.postID == j.postID}">
+                                                            <c:choose>
+                                                                <c:when test="${j.status == 'Pending' || j.status == 'Approve'}">
+                                                                    <c:set var="applied" value="true" />
+                                                                </c:when>
+                                                                <c:when test="${j.status == 'Reject'}">
+                                                                    <c:remove var="applied" />
+                                                                </c:when>
+                                                            </c:choose>
+                                                        </c:if>
+                                                    </c:forEach>
+
+                                                    <c:choose>
+                                                        <c:when test="${applied}">
+                                                            <a  class="btn-cart1" tabindex="-1">Applied</a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a href="ApplyJob?postID=${p.postID}" id="applyButton" class="btn-cart1" tabindex="-1">Apply Now</a>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </div>
                                             </div>
 
@@ -898,13 +919,15 @@
             function confirmAction(postID) {
                 var confirmResult = confirm("Deleting this will remove it permanently. Are you sure?");
                 if (confirmResult) {
-                    window.location.href = "DeletePostFavourites?postID="+postID;
+                    window.location.href = "DeletePostFavourites?postID=" + postID;
                 } else {
                     return false;
                 }
             }
 
         </script>
+
+
 
 
 

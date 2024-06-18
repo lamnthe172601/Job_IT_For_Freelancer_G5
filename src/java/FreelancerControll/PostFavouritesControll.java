@@ -5,6 +5,7 @@
 package FreelancerControll;
 
 import Models.User;
+import MutiModels.JobApply;
 import MutiModels.PostBasic;
 import dal.DAO;
 import dal.PostDAO;
@@ -73,6 +74,8 @@ public class PostFavouritesControll extends HttpServlet {
             int freelancerID = d.getFreelancerIDbyUserID(userId);
             List<PostBasic> post = p.getAllFavPosts(freelancerID);
             request.setAttribute("post", post);
+            List<JobApply> postAplly=p.getPostApply(freelancerID);
+            request.setAttribute("postApply", postAplly);
             request.getRequestDispatcher("views/freelancerFavourites.jsp").forward(request, response);
         }
 

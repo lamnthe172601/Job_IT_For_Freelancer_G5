@@ -149,9 +149,12 @@
                                             <!-- Hình ảnh -->
                                             <a href="project.html"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
                                             <!-- Biểu tượng trái tym -->
-                                            <div class="favorite-icon" onclick="toggleHeart(this)" >
-                                                <i class="far fa-heart"></i>
-                                            </div>
+
+                                            <a class="yeuthich" post-id="${list.postID}">
+                                                <div class="favorite-icon" onclick="toggleHeart(this)" >
+                                                    <i class="far fa-heart"></i>
+                                                </div>
+                                            </a>
                                         </div>
                                         <div class="feature-content">
                                             <!-- Các nội dung khác -->
@@ -288,41 +291,41 @@
                             </div>
                         </div>
                         <div class="row">
-                            
+
                             <c:forEach items="${freelancerSkill}" var="freelancerSkill">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="feature-develop-blk aos" data-aos="fade-up">
-                                    <div class="developer-sub-blk">
-                                        <div class="img-developer">
-                                            <a href="developer-details.html"><img src="assets/img/user/avatar-21.jpg" class="me-2" alt="Img"></a>
-                                        </div>
-                                        <div class="developer-content">
-                                            <h4><a href="developer-details.html">${freelancerSkill.freelancer.fullname()}</a></h4>
-                                            <p>${freelancerSkill.skills.skill_set_ID.skill_set_name}</p>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <span class="average-rating">5.0</span>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="feature-develop-blk aos" data-aos="fade-up">
+                                        <div class="developer-sub-blk">
+                                            <div class="img-developer">
+                                                <a href="developer-details.html"><img src="assets/img/user/avatar-21.jpg" class="me-2" alt="Img"></a>
+                                            </div>
+                                            <div class="developer-content">
+                                                <h4><a href="developer-details.html">${freelancerSkill.freelancer.fullname()}</a></h4>
+                                                <p>${freelancerSkill.skills.skill_set_ID.skill_set_name}</p>
+                                                <div class="rating">
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <span class="average-rating">5.0</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="hour-rate">
-                                        <ul class="nav">
-                                            <li><i class="feather-dollar-sign me-1"></i>$34 Hourly</li>
-                                            <li>
-                                                <div class="favorite-icon" onclick="toggleHeart(this)" >
-                                                <i class="far fa-heart"></i>
-                                            </div>
-                                            </li>
-                                        </ul>
+                                        <div class="hour-rate">
+                                            <ul class="nav">
+                                                <li><i class="feather-dollar-sign me-1"></i>$34 Hourly</li>
+                                                <li>
+                                                    <div class="favorite-icon" onclick="toggleHeart(this)" >
+                                                        <i class="far fa-heart"></i>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </c:forEach>
-                            
+
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
                                     <a href="developer-details.html" class="btn btn-primary">View More Freelancers</a>
@@ -746,27 +749,27 @@
                     </div>
                     <div class="row aos" data-aos="fade-up">
                         <c:forEach items="${listblogs}" var="listblogs">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="grid-blog blog-two aos" data-aos="fade-up">
-                                <div class="blog-image">
-                                    <a href="blog-details.html"><img style="width: 331px; height: 207px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
-                                </div>
-                                <div class="blog-content">
-                                    <div class="feature-time-blk">
-                                        <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
-                                        <span><i class="far fa-calendar me-1"></i>${listblogs.date_blog} 06 Oct, 2023</span>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="grid-blog blog-two aos" data-aos="fade-up">
+                                    <div class="blog-image">
+                                        <a href="blog-details.html"><img style="width: 331px; height: 207px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
                                     </div>
-                                    <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
-                                    <p>${listblogs.description}</p>
-                                    <div class="blog-read">
-                                        <a href="blog-details.html">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                                    <div class="blog-content">
+                                        <div class="feature-time-blk">
+                                            <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
+                                            <span><i class="far fa-calendar me-1"></i>${listblogs.date_blog} 06 Oct, 2023</span>
+                                        </div>
+                                        <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
+                                        <p>${listblogs.description}</p>
+                                        <div class="blog-read">
+                                            <a href="blog-details.html">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
-                        
+                        </c:forEach>
                     </div>
-                                    </c:forEach>
-                </div>
             </section>
 
 

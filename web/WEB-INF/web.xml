@@ -148,6 +148,10 @@
         <servlet-name>PostDetailsControll</servlet-name>
         <servlet-class>CommonControll.PostDetailsControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ApplyJobControll</servlet-name>
+        <servlet-class>FreelancerControll.ApplyJobControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -303,5 +307,9 @@
     <servlet-mapping>
         <servlet-name>PostDetailsControll</servlet-name>
         <url-pattern>/PostDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyJobControll</servlet-name>
+        <url-pattern>/ApplyJob</url-pattern>
     </servlet-mapping>
 </web-app>
