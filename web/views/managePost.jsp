@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +28,80 @@
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+
+
+
+        <style>
+            .filter-section {
+                background-color: #fff;
+                border: 1px solid #e0e0e0;
+                border-radius: 4px;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            }
+
+            .description::after {
+                content: '...';
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                padding: 2px 6px; /* Giảm kích thước padding để nút nhỏ lại */
+                margin-left: 2px;
+                margin-right: 2px;
+                font-size: 12px;
+                color: #333;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+            /* Tùy chỉnh nút được chọn */
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                background-color: orange;
+                color: white !important;
+                border: 1px solid orange;
+            }
+
+            /* Thay đổi màu nút khi hover */
+            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                background-color: orange;
+                color: white;
+                border: 1px solid orange;
+            }
+
+            /* Đảm bảo chiều cao cố định cho bảng và phần phân trang */
+            .dataTables_wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                min-height: 500px; /* Đặt chiều cao tối thiểu phù hợp với nội dung của bạn */
+            }
+
+            .dataTables_wrapper .dataTables_info {
+                order: 2;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .dataTables_wrapper .dataTables_paginate {
+                order: 1;
+                margin-bottom: 10px;
+            }
+
+
+
+        </style>
+
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        <!-- DataTables JS -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
     </head>
     <body class="dashboard-page">
 
@@ -44,7 +119,7 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
@@ -57,7 +132,7 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                           <ul class="main-nav">
+                            <ul class="main-nav">
                                 <li class="active has-submenu">
                                     <a href="home">Home <i class="fas "></i></a>
 
@@ -99,7 +174,7 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
                                             <li><a href="newsJobs">Reviews</a></li>
 
                                         </ul>
@@ -114,7 +189,7 @@
                                 </li>
                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
 
-                               
+
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
@@ -161,7 +236,7 @@
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="notification">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md">
                                                             <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-3.jpg">
@@ -175,7 +250,7 @@
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="notification">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md">
                                                             <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-4.jpg">
@@ -191,11 +266,11 @@
                                         </ul>
                                     </div>
                                     <div class="topnav-dropdown-footer text-center">
-                                        <a href="notification.html">View All Notification</a>
+                                        <a href="notification">View All Notification</a>
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="post-project.html" class="login-btn">Post a Project <i class="feather-plus ms-1"></i></a></li>
+                            <li><a href="CreatePost" class="login-btn">Post a Project <i class="feather-plus ms-1"></i></a></li>
                             <li class="nav-item dropdown account-item">
                                 <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                     <span class="user-img">
@@ -251,7 +326,7 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu active">
-                                                <a href="milestones.html" class="nav-link ">
+                                                <a href="manageJobsPosts" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
@@ -268,8 +343,8 @@
                                                     <li>
                                                         <a href="ExpiredProjects">Expired Projects</a>
                                                     </li>
-                                                    
-                                                    
+
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
@@ -325,7 +400,7 @@
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="index.html" class="nav-link">
+                                                <a href="logout" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-11.svg" alt="Img"> Logout
                                                 </a>
                                             </li>
@@ -340,14 +415,14 @@
                             </div>
                             <nav class="user-tabs mb-4">
                                 <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
-                                    
+
                                     <li class="nav-item">
                                         <a class="nav-link active" href="manageJobsPosts">Manage jobs</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link " href="ManageApplication">All applicants</a>
                                     </li>
-                                    
+
                                     <li class="nav-item">
                                         <a class="nav-link " href="CompletedProjects">Completed Projects</a>
                                     </li>
@@ -357,225 +432,286 @@
                                 </ul>
                             </nav>
 
+
+
+                            <div class="page-header user-active">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="page-title">All Post</h3>
+                                        <p>Total <span></span> Freelancer account</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
+                                            <i class="fas fa-filter"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div  class="filter-section" style="display: none;">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="nameFilter">Name</label>
+                                            <input type="text" class="form-control" id="nameFilter" placeholder="Enter name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="jobTypeFilter">Job type</label>
+                                            <select class="form-control" id="jobTypeFilter">
+                                                <option value="">All</option>
+                                                <c:forEach items="${alljobtype}" var="alljobtype">
+                                                    <option value="${alljobtype.jobName}">${alljobtype.jobName}</option>
+                                                </c:forEach>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="durationFilter">Duration</label>
+                                            <select class="form-control" id="durationFilter">
+                                                <option value="">All</option>
+                                                <c:forEach items="${allDuration}" var="allDuration">
+                                                    <option value="${allDuration.durationName}">${allDuration.durationName}</option>
+                                                </c:forEach>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="skillFlter">Skill</label>
+                                            <select class="form-control" id="skillFlter">
+
+                                                <option value="">All</option>
+                                                <c:forEach items="${skill}" var="skill">
+                                                    <option value="${skill.skill_set_name}">${skill.skill_set_name}</option>
+                                                </c:forEach>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="statusFilter">Status</label>
+                                            <select class="form-control" id="statusFilter">
+                                                <option value="">All</option>
+                                                <option value="ongoing">On going</option>
+                                                <option value="reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="checkingFilter">Checking</label>
+                                            <select class="form-control" id="checkingFilter">
+                                                <option value="">All</option>
+                                                <option value="pending">Pending</option>
+                                                <option value="approve">Approve</option>
+                                                <option value="reject">Reject</option>
+                                                <option value="suspended">Suspended</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
                             <div class="my-projects-view">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="title-head d-flex justify-content-between align-items-center mb-4">
-                                            <h4 class="mb-0">Milestones</h4>
-                                            <a href="#add-milestone" class="login-btn btn-primary" data-bs-toggle="modal">Add Milestone</a>
-                                        </div>
+
                                         <div class="table-responsive table-box manage-projects-table">
                                             <table class="table table-center table-hover datatable no-sort">
                                                 <thead class="thead-pink">
                                                     <tr>
-                                                        <th>Name</th>
-                                                        <th>Budget</th>
-                                                        <th>Progress</th>
+                                                        <th>Title</th>
+                                                        <th>Job Type</th>
                                                         <th>Start date</th>
-                                                        <th>Due date</th>
+
+                                                        <th>Skill</th>
+                                                        <th>Duration</th>
+                                                        <th>Proposals</th>
                                                         <th>Status</th>
-                                                        <th>Action</th>
+                                                        <th>Checking</th>
+                                                        <th style="text-align: center;">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Logo Design</td>
-                                                        <td>$2222</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <c:forEach items="${listpost}" var="list">
+                                                        <tr>
+                                                            <td class="titleList">
+                                                                <div class="title">${list.title}</div>
+                                                            </td>
+                                                            <td class="jobTypeList">
+                                                                <div class="jobType">${list.jobTypeID.jobName}</div>
+                                                            </td>
+                                                            <td > 
+                                                                <div class="datePost">${list.datePost}</div>
+                                                            </td>
+
+                                                            <td class="skillList" >
+                                                                <div class="skill">${list.skill}</div>
+                                                            </td>
+                                                            <td class="durationList ">
+                                                                <div class="duration">${list.durationID.durationName}</div>
+                                                            </td>
+                                                            <td > 
+                                                                <div class="quantity">${list.quantity}</div>
+                                                            </td>
+                                                            <td class="StatusList">
+                                                                <span class="badge status ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
+                                                                    ${list.status ? 'On going' : 'Reject'}
+                                                                </span>
+                                                            </td>
+                                                            <td class="CheckingList">
+                                                                <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
+                                                                    ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}
+                                                                </span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="action-table-data">
+                                                                    <div class="edit-delete-action">
+                                                                        <a href="#edit-milestone${list.postID}" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
+                                                                        <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
+                                                                    </div>
+                                                                    <div style="margin-left: 5px;">
+                                                                        <select class="select" style="background-color: white; transition: background-color 0.3s;">
+                                                                            <option hidden="" value="Select">Select</option>
+                                                                            <option value="Approved">Approved</option>
+                                                                            <option value="On Hold">On Hold</option>
+                                                                            <option value="Cancelled">Cancelled</option>
+                                                                        </select>
+                                                                    </div> 
                                                                 </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">45%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>29 Sep 2023</td>
-                                                        <td>29 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-danger-light">Unpaid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="javascript:void(0);" class="btn btn-request disabled">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
+                                                                <div class="modal fade edit-proposal-modal" id="edit-milestone${list.postID}">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-md">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title">Edit Post a new Jobs</h4>
+                                                                                <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+
+                                                                                <form action="manageJobsPosts" method="post" enctype="multipart/form-data" id="jobsForm">
+                                                                                    <div class="modal-info">
+                                                                                        <div class="row">
+                                                                                            <div hidden class="col-lg-6">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">Project ID</label>
+                                                                                                    <input type="text" name="postID" class="form-control" value="${list.postID}">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-6">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">Project Title</label>
+                                                                                                    <input type="text" name="title" class="form-control" value="${list.title}">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class=" col-lg-6  d-flex align-items-center">
+                                                                                                <div class="upload-images freelancer-pic-box">
+                                                                                                    <img style="width: 80px; height: 80px;" src="${list.image}" alt id="blah">
+                                                                                                </div>
+                                                                                                <div class="ms-3 freelancer-pic-upload">
+                                                                                                    <label class="image-upbtn">
+                                                                                                        Upload Image <input type="file" id="imgInp" name="profileImage">
+                                                                                                    </label>
+                                                                                                    <p>Max Image size 300*300</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="focus-label">Jobs Type</label>
+                                                                                                    <select name="jobsType" class="form-control select">
+                                                                                                        <c:forEach items="${alljobtype}" var="jobtype">
+                                                                                                            <option value="${jobtype.jobTypeID}" <c:if test="${jobtype.jobTypeID == list.jobTypeID.jobTypeID}">selected=""</c:if>>${jobtype.jobName}</option>
+                                                                                                        </c:forEach>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="focus-label">Project Duration</label>
+                                                                                                    <select name="Duration" class="form-control select">
+                                                                                                        <c:forEach items="${allDuration}" var="allDuration">
+                                                                                                            <option value="${allDuration.durationID}" <c:if test="${allDuration.durationID == list.durationID.durationID}">selected=""</c:if>>${allDuration.durationName}</option>
+                                                                                                        </c:forEach>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4">
+                                                                                                <div class="input-block">
+                                                                                                    <div class="mb-3">
+                                                                                                        <label class="focus-label">Target</label>
+                                                                                                        <input value="${list.quantity}" type="text" class="form-control" name="target">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-8">
+                                                                                                <div class="input-block">
+                                                                                                    <div class="mb-3">
+                                                                                                        <label class="focus-label">Location</label>
+                                                                                                        <input value="${list.location}" type="text" class="form-control" name="Location">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-3 ">
+                                                                                                <div class="input-block mb-3">
+                                                                                                    <label class="focus-label">From ($)</label>
+                                                                                                    <input type="text" class="form-control" name="budgetFrom" value="${list.budget}">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                <c:forEach items="${skill}" var="i">
+                                                                                                    <div class="col-md-4">
+                                                                                                        <div class="input-block">
+                                                                                                            <input type="radio" name="skill" value="${i.skill_set_name}" ${i.skill_set_name == list.skill ? 'checked' : ''}>
+                                                                                                            <label>${i.skill_set_name}</label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </c:forEach>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="focus-label">Categories Name</label>
+                                                                                                    <select class="form-control select" name="Categories">
+                                                                                                        <c:forEach items="${allCate}" var="allcate">
+                                                                                                            <option value="${allcate.caID}" <c:if test="${allcate.caID == list.caID.caID}">selected=""</c:if>>${allcate.categoriesName}</option>
+                                                                                                        </c:forEach>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-12">
+                                                                                                <div class="input-block">
+                                                                                                    <label class="form-label">Description</label>
+                                                                                                    <textarea name="description" class="form-control summernote">${list.description}</textarea>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="submit-section text-end">
+                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close" class="btn btn-cancel">Cancel</a>
+                                                                                        <button type="submit" class="btn btn-primary submit-btn">Update</button>
+                                                                                    </div>
+                                                                                </form>
+
+
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Create desktop applications</td>
-                                                        <td>$5762</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">50%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>25 Sep 2023</td>
-                                                        <td>25 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-danger-light">Unpaid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="#success-milestone" data-bs-toggle="modal" class="btn btn-request">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="javascript:void(0);" class="me-2"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>PHP, Javascript Projects </td>
-                                                        <td>$4879</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">100%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>17 Sep 2023</td>
-                                                        <td>17 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-success-light">Paid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="javascript:void(0);" class="btn btn-request disabled">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Website Designer Required </td>
-                                                        <td>$3651</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">50%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>11 Sep 2023</td>
-                                                        <td>11 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-danger-light">Unpaid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="javascript:void(0);" class="btn btn-request disabled">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Swift / SwiftUI Developer</td>
-                                                        <td>$2789</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">100%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>05 Sep 2023</td>
-                                                        <td>05 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-success-light">Paid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="javascript:void(0);" class="btn btn-request disabled">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Full-stack Developer </td>
-                                                        <td>$7853</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress progress-md mb-0">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                                <p class="mb-0 orange-text text-center ms-3">100%</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>01 Sep 2023</td>
-                                                        <td>01 Sep 2023</td>
-                                                        <td><span class="badge badge-pill bg-success-light">Paid</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <a href="javascript:void(0);" class="btn btn-request disabled">Initiate</a>
-                                                                <a href="#view-milestone" data-bs-toggle="modal" class="view-icon me-2"><i class="feather-eye me-1"></i>View</a>
-                                                                <div>
-                                                                    <select class="select">
-                                                                        <option value>Select</option>
-                                                                        <option value>Approved</option>
-                                                                        <option value>On Hold</option>
-                                                                        <option value>Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="edit-delete-action">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -587,6 +723,8 @@
                     </div>
                 </div>
             </div>
+
+
 
 
             <footer class="footer">
@@ -691,11 +829,109 @@
 
             </footer>
 
+
+
+
+
+
+
+
+
         </div>
 
+        <script>
+            document.getElementById('jobsForm').addEventListener('submit', function (event) {
+                // Prevent the default form submission
+                event.preventDefault();
 
-       <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
-                                        
+                // Show the notification
+                var notification = document.getElementById('notification');
+                notification.style.display = 'block';
+
+                // Hide the notification after 5 seconds
+                setTimeout(function () {
+                    notification.style.display = 'none';
+                    // Optionally submit the form after showing the notification
+                    event.target.submit();
+                }, 5000);
+            });
+        </script>
+
+
+        <script>
+            $(document).ready(function () {
+                $('#filter_search').click(function () {
+                    $('.filter-section').toggle();
+                });
+            });
+        </script>
+
+        <script>
+            // Lấy các phần tử lọc
+            const nameFilter = document.getElementById('nameFilter');
+            const jobTypeFilter = document.getElementById('jobTypeFilter');
+            const skillFilter = document.getElementById('skillFlter');
+            const durationFilter = document.getElementById('durationFilter');
+
+            const statusFilter = document.getElementById('statusFilter');
+            const checkingFilter = document.getElementById('checkingFilter');
+
+// Lấy danh sách các dòng trong bảng
+            const rows = document.querySelectorAll('.table tbody tr');
+
+// Hàm để lọc các dòng
+            function filterRows() {
+                const nameValue = nameFilter.value.toLowerCase();
+                const jobTypeValue = jobTypeFilter.value.toLowerCase();
+                const skillValue = skillFilter.value.toLowerCase();
+                const durationValue = durationFilter.value.toLowerCase();
+
+                const statusValue = statusFilter.value.toLowerCase();
+                const checkingValue = checkingFilter.value.toLowerCase();              
+                rows.forEach(row => {
+                    const title = row.querySelector('.title').textContent.toLowerCase();                 
+                    const jobType = row.querySelector('.jobType').textContent.toLowerCase();                    
+                    const skill = row.querySelector('.skill').textContent.toLowerCase();
+                    const duration = row.querySelector('.duration').textContent.toLowerCase();
+                    const status = row.querySelector('.status').textContent.toLowerCase();                   
+                    const checking = row.querySelector('.checked').textContent.toLowerCase();
+
+                    const showRow =
+                            (!nameValue || title.includes(nameValue)) &&
+                            (!jobTypeValue || jobType.includes(jobTypeValue)) &&
+                            (!durationValue || duration.includes(durationValue)) &&
+                            (!skillValue || skill.includes(skillValue)) &&
+                            (!statusValue || status.includes(statusValue)) &&
+                            (!checkingValue || checking.includes(checkingValue));
+
+                    row.style.display = showRow ? '' : 'none';
+                });
+            }
+
+// Gán sự kiện lọc cho các trường lọc
+            nameFilter.addEventListener('input', filterRows);
+            jobTypeFilter.addEventListener('change', filterRows);
+            durationFilter.addEventListener('change', filterRows);
+            skillFilter.addEventListener('change', filterRows);
+            statusFilter.addEventListener('change', filterRows);
+            checkingFilter.addEventListener('change', filterRows);
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('.datatable').DataTable({
+                    "paging": true,
+                    "pageLength": 10, // Số lượng bài post mặc định mỗi trang là 10
+                    "lengthMenu": [10, 25, 50, 100], // Các tùy chọn số lượng mục hiển thị mỗi trang
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "dom": '<"top"l>rt<"bottom"ip><"clear">' // Cấu trúc DOM để di chuyển phần hiển thị số lượng mục xuống dưới
+                });
+            });
+        </script>
+
+        <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+
         </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
@@ -709,5 +945,7 @@
         <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script></body>
 
+    <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+    <script src="assets/plugins/datatables/datatables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:31:10 GMT -->
 </html>

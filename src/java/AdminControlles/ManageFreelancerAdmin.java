@@ -6,6 +6,7 @@
 package AdminControlles;
 
 import MutiDAO.FreelancerInformationDAO;
+import dal.DAO;
 import dal.DashboardDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,9 +57,12 @@ public class ManageFreelancerAdmin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         DashboardDAO d = new DashboardDAO();
+        DAO dao = new DAO();
         FreelancerInformationDAO f = new FreelancerInformationDAO();
         request.setAttribute("totalFreelancer",d.getTotalFreelancer());
+        request.setAttribute("listSkill", dao.listSkill());
         request.setAttribute("listFreelancer",f.get_ListFreelancer());
+        
         
        request.getRequestDispatcher("adminViews/freelancerAdmin.jsp").forward(request, response);
     } 

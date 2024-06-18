@@ -4,10 +4,13 @@
  */
 package dal;
 
+import Models.Duration;
 import Models.JobType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -28,5 +31,19 @@ public class JobTypeDAO extends DBContext{
         } catch (SQLException e) {
         }
         return null;
+    }
+     
+     public List<JobType> getAllJobType() {
+        List<JobType> list = new ArrayList<>();
+        String query = "select * from JobType";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add( new JobType(rs.getInt("jobID"), rs.getString("job_name")));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
     }
 }

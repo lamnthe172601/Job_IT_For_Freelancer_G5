@@ -28,85 +28,8 @@
         <link rel="stylesheet" href="adminAssets/plugins/datatables/datatables.min.css">
 
         <link rel="stylesheet" href="adminAssets/css/style.css">
-        <style>
-            .filter-section {
-                background-color: #fff;
-                border: 1px solid #e0e0e0;
-                border-radius: 4px;
-                padding: 20px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-            }
+        <link rel="stylesheet" href="adminAssets/css/freelancer.css">
 
-            .form-group {
-                margin-bottom: 20px;
-            }
-
-            .form-group label {
-                font-weight: 600;
-                color: #444;
-                margin-bottom: 6px;
-                display: block;
-            }
-
-            .form-control {
-                border: 1px solid #d9d9d9;
-                border-radius: 3px;
-                padding: 8px 12px;
-                transition: border-color 0.3s ease;
-                font-size: 14px;
-                width: 100%;
-            }
-
-            .form-control:focus {
-                border-color: #8c8c8c;
-                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-                outline: none;
-            }
-
-            .form-control::placeholder {
-                color: #bbb;
-            }
-
-            #statusFilter {
-                cursor: pointer;
-                appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                background-image: url('data:image/svg+xml;utf8,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z" fill="%23333333"/></svg>');
-                background-repeat: no-repeat;
-                background-position: right 12px center;
-                padding-right: 32px;
-            }
-            .skill-icon {
-                padding: 10px;
-            }
-
-            .skill-list {
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-            }
-
-            .skill-item {
-                background-color: #f2f2f2;
-                color: #333;
-                padding: 5px 10px;
-                margin-right: 5px;
-                margin-bottom: 5px;
-                border-radius: 20px;
-                font-size: 14px;
-            }
-
-            .skill-more {
-                background-color: #e0e0e0;
-                color: #666;
-                padding: 5px 10px;
-                margin-right: 5px;
-                margin-bottom: 5px;
-                border-radius: 20px;
-                font-size: 14px;
-            }
-        </style>
     </head>
     <body>
 
@@ -150,19 +73,34 @@
 
                             <div  class="filter-section" style="display: none;">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="nameFilter">Name</label>
                                             <input type="text" class="form-control" id="nameFilter" placeholder="Enter name">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="emailFilter">Email</label>
                                             <input type="text" class="form-control" id="emailFilter" placeholder="Enter email">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="skillFilter">Skill</label>
+                                            <div class="skill-filter-container">
+                                                <input type="text" class="form-control skill-filter-input" placeholder="Select Skills">
+                                                <div class="skill-filter-dropdown">
+                                                    <c:forEach items="${listSkill}" var="skill">
+                                                        <div class="skill-filter-option" data-value="${skill.getSkill_set_name()}">${skill.getSkill_set_name()}</div>
+                                                    </c:forEach>
+                                                </div>
+                                                <div class="selected-skills"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="statusFilter">Status</label>
                                             <select class="form-control" id="statusFilter">
@@ -213,6 +151,9 @@
                                                                 <c:forEach items="${freelancer.listSkill}" var="skill" begin="0" end="2">
                                                                     <span class="skill-item">${skill.skill_set_name}</span>
                                                                 </c:forEach>
+                                                                <c:forEach items="${freelancer.listSkill}" var="skill" begin="3">
+                                                                    <span class="skill-item" hidden="">${skill.skill_set_name}</span>
+                                                                </c:forEach>
                                                                 <c:if test="${fn:length(freelancer.listSkill) > 3}">
                                                                     <span class="skill-more">...</span>
                                                                 </c:if>
@@ -232,7 +173,7 @@
                                                             <input type="hidden" class="user-id" id="${freelancer.getAccount().getUserID()}">
                                                             <a href="javascript:void(0);" class="dropdown-toggle nav-link three-dot " data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" ></i></a>
                                                             <div class="dropdown-menu user-menu-list">
-                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#view-details${freelancer.getAccount().getUserID()}"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
                                                                     <c:if test='${freelancer.getAccount().getStatus() == "active"}'>
                                                                     <a class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
                                                                     </c:if>
@@ -242,8 +183,55 @@
 
                                                             </div>                                                           
                                                         </td>
-                                                    </tr>     
-                                                </c:forEach>
+                                                <div class="modal fade custom-modal" id="view-details${freelancer.getAccount().getUserID()}">
+                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header flex-wrap">
+                                                                <h4 class="modal-title">Freelancer Details</h4>
+                                                                <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <img id="freelancerAvatar" src="${freelancer.getBasicInformation().getImage()}" alt="Freelancer Avatar" class="img-fluid rounded">
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <form>
+                                                                            <div class="form-group">
+                                                                                <label>Full Name</label>
+                                                                                <input type="text" class="form-control" value="${freelancer.getBasicInformation().fullname()}" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Email Contact</label>
+                                                                                <input type="text" class="form-control" value="${freelancer.getBasicInformation().getEmail()}" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Phone Contact</label>
+                                                                                <input type="text" class="form-control" value="${freelancer.getBasicInformation().getPhone()}" readonly="">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Skills</label>
+                                                                                <div class="skill-list">
+                                                                                    <c:forEach items="${freelancer.listSkill}" var="skill">
+                                                                                        <span class="skill-item badge badge-primary">${skill.skill_set_name}</span>
+                                                                                    </c:forEach>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Description</label>
+                                                                                <div class="description-box">
+                                                                                    <p>${freelancer.getBasicInformation().getDescribe()}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </tr>     
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
@@ -301,7 +289,7 @@
                 </div>
             </div>
         </div>
-       
+
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -389,45 +377,108 @@
             }
         </script>
         <script>
-            // Lấy các phần tử lọc
-            const nameFilter = document.getElementById('nameFilter');
-            const emailFilter = document.getElementById('emailFilter');
-            const statusFilter = document.getElementById('statusFilter');
+            $(document).ready(function () {
+                var skillFilterInput = $('.skill-filter-input');
+                var skillFilterDropdown = $('.skill-filter-dropdown');
+                var selectedSkills = new Set(); // Sử dụng Set để lưu trữ các kỹ năng đã chọn
+                var $selectedSkills = $('.selected-skills'); // Tạo một đối tượng jQuery cho phần tử hiển thị danh sách kỹ năng đã chọn
+                var nameFilter = document.getElementById('nameFilter');
+                var emailFilter = document.getElementById('emailFilter');
+                var statusFilter = document.getElementById('statusFilter');
+                var rows = document.querySelectorAll('.table tbody tr');
 
-            // Lấy danh sách các dòng trong bảng
-            const rows = document.querySelectorAll('.table tbody tr');
-
-            // Hàm để lọc các dòng
-            function filterRows() {
-                const nameValue = nameFilter.value.toLowerCase();
-                const emailValue = emailFilter.value.toLowerCase();
-                const statusValue = statusFilter.value;
-
-                rows.forEach(row => {
-                    const name = row.querySelector('.user-profile h5 a').textContent.toLowerCase();
-                    const email = row.querySelector('.verify-mail').textContent.toLowerCase();
-                    const status = row.querySelector('.status').textContent.toLowerCase();
-
-                    const showRow =
-                            (!nameValue || name.includes(nameValue)) &&
-                            (!emailValue || email.includes(emailValue)) &&
-                            (statusValue === '' || status === statusValue);
-
-                    row.style.display = showRow ? '' : 'none';
+                // Hiển thị/ẩn dropdown khi nhấp vào ô input
+                skillFilterInput.on('click', function () {
+                    skillFilterDropdown.toggle();
                 });
-            }
 
-            // Gán sự kiện lọc cho các trường lọc
-            nameFilter.addEventListener('input', filterRows);
-            emailFilter.addEventListener('input', filterRows);
-            statusFilter.addEventListener('change', filterRows);
+
+                // Xử lý sự kiện chọn kỹ năng
+                $('.skill-filter-option').on('click', function () {
+                    var skillId = $(this).data('value');
+                    var skillName = $(this).text();
+
+                    // Kiểm tra xem kỹ năng đã được chọn hay chưa
+                    if (selectedSkills.has(skillId)) {
+                        // Kỹ năng đã được chọn trước đó, không làm gì cả
+                        return;
+                    }
+
+                    // Thêm kỹ năng vào Set selectedSkills
+                    selectedSkills.add(skillId);
+
+                    // Tạo phần tử HTML để hiển thị kỹ năng đã chọn
+                    var $selectedSkill = $('<div class="selected-skill" data-skillid="' + skillId + '">' + skillName + '<span class="remove-skill">&times;</span></div>');
+                    $selectedSkills.append($selectedSkill);
+
+                    skillFilterInput.val('');
+                    skillFilterDropdown.hide();
+
+                    // Lọc danh sách freelancer
+                    filterRows();
+                });
+
+                // Xử lý sự kiện xóa kỹ năng đã chọn
+                $selectedSkills.on('click', '.remove-skill', function () {
+                    var $skillElement = $(this).parent();
+                    var skillId = $skillElement.data('skillid');
+
+                    // Xóa kỹ năng khỏi Set selectedSkills
+                    selectedSkills.delete(skillId);
+
+                    // Xóa phần tử HTML hiển thị kỹ năng đã chọn
+                    $skillElement.remove();
+
+                    // Lọc danh sách freelancer
+                    filterRows();
+                });
+
+                // Hàm lọc danh sách freelancer
+                function filterRows() {
+                    const nameValue = nameFilter.value.toLowerCase();
+                    const emailValue = emailFilter.value.toLowerCase();
+                    const statusValue = statusFilter.value;
+                    const selectedSkillsArray = Array.from(selectedSkills);
+
+                    rows.forEach(row => {
+                        const name = row.querySelector('.user-profile h5 a').textContent.toLowerCase();
+                        const email = row.querySelector('.verify-mail').textContent.toLowerCase();
+                        const status = row.querySelector('.status').textContent.toLowerCase();
+                        const skills = Array.from(row.querySelectorAll('.skill-item')).map(skill => skill.textContent);
+
+                        const showRow =
+                                (!nameValue || name.includes(nameValue)) &&
+                                (!emailValue || email.includes(emailValue)) &&
+                                (statusValue === '' || status === statusValue) &&
+                                selectedSkillsArray.every(skill => skills.includes(skill));
+
+                        row.style.display = showRow ? '' : 'none';
+                    });
+                }
+
+                // Gán sự kiện lọc cho các trường lọc
+                nameFilter.addEventListener('input', filterRows);
+                emailFilter.addEventListener('input', filterRows);
+                statusFilter.addEventListener('change', filterRows);
+            });
+
         </script>
         <script>
-            $(document).ready(function () {
-                $('.datatable').DataTable({
-                    lengthMenu: [10, 25, 50, 100] // Hiển thị tùy chọn 10, 25, 50 và 100 dòng trên mỗi trang
-                });
-            });
+          // Đóng dropdown khi click bên ngoài
+$(document).ready(function() {
+    handleOutsideClick();
+});
+
+function handleOutsideClick() {
+    $(document).click(function(event) {
+        var skillFilterContainer = $('.skill-filter-container');
+        var skillFilterDropdown = $('.skill-filter-dropdown');
+
+        if (!$(event.target).closest(skillFilterContainer).length) {
+            skillFilterDropdown.hide();
+        }
+    });
+}
         </script>
 
         <!--        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="adminAssets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>-->

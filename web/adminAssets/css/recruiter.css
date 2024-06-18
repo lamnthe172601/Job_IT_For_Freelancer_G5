@@ -1,0 +1,111 @@
+/* Modal */
+.custom-modal .modal-content {
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.custom-modal .modal-header {
+    background-color: #f8f9fa;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 20px;
+}
+
+.custom-modal .modal-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-modal .close {
+    font-size: 24px;
+    color: #888;
+    opacity: 1;
+}
+
+.custom-modal .modal-body {
+    padding: 30px;
+}
+
+/* Avatar */
+#freelancerAvatar {
+    max-width: 200px;
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Form */
+.custom-modal .form-group {
+    margin-bottom: 20px;
+}
+
+.custom-modal .form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-modal .form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.custom-modal .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Description */
+.custom-modal .form-group p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+}
+.filter-section {
+    display: none;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.filter-section .form-group {
+    margin-bottom: 20px;
+}
+
+.filter-section label {
+    font-weight: bold;
+}
+
+.filter-section .input-group {
+    width: 100%;
+}
+
+.filter-section .input-group input {
+    width: calc(50% - 25px);
+    border-radius: 0;
+}
+
+.filter-section .input-group .input-group-text {
+    border-radius: 0;
+}
+
+@media (max-width: 767px) {
+    .filter-section .input-group input {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+
+#statusFilter {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z" fill="%23333333"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+}

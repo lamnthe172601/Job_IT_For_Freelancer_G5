@@ -46,15 +46,16 @@ public class HomeContronller extends HttpServlet {
             out.println("</html>");
         }
     }
+     CategoriesDAO cDao = new CategoriesDAO();
+        HomeDAO pDAO = new HomeDAO();
+        FreelancerDAO free = new FreelancerDAO();
+        RecruiterDAO recrui = new RecruiterDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        CategoriesDAO cDao = new CategoriesDAO();
-        HomeDAO pDAO = new HomeDAO();
-        FreelancerDAO free = new FreelancerDAO();
-        RecruiterDAO recrui = new RecruiterDAO();
+       
         HttpSession session = request.getSession();
         User userID = (User) session.getAttribute("account");
 

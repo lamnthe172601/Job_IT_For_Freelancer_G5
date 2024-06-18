@@ -101,7 +101,7 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
                                             <li><a href="newsJobs">Reviews</a></li>
 
                                         </ul>

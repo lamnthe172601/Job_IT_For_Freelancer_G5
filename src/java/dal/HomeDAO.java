@@ -47,7 +47,7 @@ public class HomeDAO extends DBContext {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 TeamNumber tem = new TeamNumber(rs.getInt("team_numberID"), rs.getString("team_number"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
@@ -85,7 +85,7 @@ public class HomeDAO extends DBContext {
             ps.setInt(1, freelancerID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"),rs.getString("description"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -120,7 +120,7 @@ public class HomeDAO extends DBContext {
             ps.setInt(2, recruiterID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"),rs.getString("description"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -135,21 +135,22 @@ public class HomeDAO extends DBContext {
 
     public List<SkillFreelancer> getTop8FreelancersByLatestRecruiterPostSkill(int id) {
         List<SkillFreelancer> list = new ArrayList<>();
-        String query = "WITH LatestPostSkill AS (\n"
-                + "    SELECT TOP 1 p.skill\n"
-                + "    FROM Post p\n"
-                + "    WHERE p.recruiterID = ?\n"
-                + "    ORDER BY p.date_post DESC\n"
-                + "),\n"
-                + "FreelancerWithSkill AS (\n"
-                + "    SELECT DISTINCT f.*,s.skillID, s.skill_set_ID, ss.skill_set_name \n"
-                + "    FROM Freelancer f\n"
-                + "    JOIN Skills s ON f.freelanceID = s.freelancerID\n"
-                + "    JOIN Skill_Set ss ON s.skill_set_ID = ss.skill_set_ID\n"
-                + "    WHERE ss.skill_set_name IN (SELECT skill FROM LatestPostSkill)\n"
-                + ")\n"
-                + "SELECT TOP 8 *\n"
-                + "FROM FreelancerWithSkill;";
+        String query = """
+                       WITH LatestPostSkill AS (
+                           SELECT TOP 1 p.skill
+                           FROM Post p
+                           WHERE p.recruiterID = ?
+                            ORDER BY p.postID DESC
+                       ),
+                       FreelancerWithSkill AS (
+                           SELECT DISTINCT f.*,s.skillID, s.skill_set_ID, ss.skill_set_name 
+                           FROM Freelancer f
+                           JOIN Skills s ON f.freelanceID = s.freelancerID
+                           JOIN Skill_Set ss ON s.skill_set_ID = ss.skill_set_ID
+                           WHERE ss.skill_set_name IN (SELECT skill FROM LatestPostSkill)
+                       )
+                       SELECT TOP 8 *
+                       FROM FreelancerWithSkill;""";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -181,9 +182,10 @@ public class HomeDAO extends DBContext {
 
     public List<Blogs> getTopBlogs() {
     List<Blogs> blogs = new ArrayList<>();
-    String query = "SELECT TOP(3) blogID, title, image, date_blog, description, tag\n" +
-                   "FROM Blogs\n" +
-                   "ORDER BY date_blog DESC;";
+    String query = """
+                   SELECT TOP(3) blogID, title, image, date_blog, description, tag
+                   FROM Blogs
+                   ORDER BY date_blog DESC;""";
     try (PreparedStatement ps = connection.prepareStatement(query);
          ResultSet rs = ps.executeQuery()) {
         while (rs.next()) {
@@ -198,7 +200,6 @@ public class HomeDAO extends DBContext {
             blogs.add(blog);
         }
     } catch (SQLException e) {
-        e.printStackTrace();
     }
     return blogs;
 }
