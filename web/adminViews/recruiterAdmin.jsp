@@ -29,7 +29,7 @@
 
         <link rel="stylesheet" href="adminAssets/plugins/datatables/datatables.min.css">
 
-
+        <link rel="stylesheet" href="adminAssets/css/recruiter.css">
         <link rel="stylesheet" href="adminAssets/css/style.css">
         <style>
 
@@ -81,15 +81,14 @@
                 background-position: right 12px center;
                 padding-right: 32px;
             }
+            /* General styles */
+
         </style>
 
     </head>
     <body>
 
         <div class="main-wrapper">
-
-
-
 
             <%@ include file="headerAdmin.jsp" %>
             <%@ include file="sidebar.jsp" %>
@@ -226,108 +225,79 @@
                                                             <input type="hidden" class="user-id" id="${recruiter.getAccount().getUserID()}">
                                                             <a href="javascript:void(0);" class="dropdown-toggle nav-link three-dot " data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" ></i></a>
                                                             <div class="dropdown-menu user-menu-list">
-                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#view-details${recruiter.getAccount().getUserID()}"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
                                                                     <c:if test='${recruiter.getAccount().getStatus() == "active"}'>
                                                                     <a class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
                                                                     </c:if>
                                                                     <c:if test='${recruiter.getAccount().getStatus() == "inactive"}'>
                                                                     <a class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>
                                                                     </c:if>
-                                                              
-                                                            </div>
 
+                                                            </div>                                                      
 
-                                                            <div class="modal custom-modal fade" id="Suspend_user" role="dialog">
-                                                                <div class="modal-dialog modal-dialog-centered">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-body">
-                                                                            <div class="form-header">
-                                                                                <input type="hidden" class="user-id1" id="${recruiter.getAccount().getUserID()}">
-                                                                                <h3>Status</h3>
-                                                                                <p>Are you sure want to Suspend user?</p>
-                                                                            </div>
-                                                                            <div class="modal-btn Suspend-action" >
-                                                                                <div class="row">
-                                                                                    <div class="col-6">
-                                                                                        <a href="javascript:void(0);" class="user-suspend-link btn btn-primary continue-btn" >Suspend user</a>
-                                                                                    </div>
-                                                                                    <div class="col-6">
-                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>       
-                                                            <div class="modal custom-modal fade" id="Activate_user" role="dialog">
-                                                                <div class="modal-dialog modal-dialog-centered">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-body">
-                                                                            <div class="form-header">
-                                                                                <input type="hidden" class="user-id1" id="${recruiter.getAccount().getUserID()}">
-                                                                                <h3>Status</h3>
-                                                                                <p>Are you sure want to Activate user?</p>
-                                                                            </div>
-                                                                            <div class="modal-btn Activate-action">
-                                                                                <div class="row">
-                                                                                    <div class="col-6">
-                                                                                        <a href="javascript:void(0);" class="user-activate-link btn btn-primary continue-btn" >Activate user</a>
-                                                                                    </div>
-                                                                                    <div class="col-6">
-                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal fade custom-modal" id="add-category">
-                                                                <div class="modal-dialog modal-dialog-centered">
-                                                                    <div class="modal-content">
-
-                                                                        <div class="modal-header flex-wrap">
-                                                                            <h4 class="modal-title">Edit Provider</h4>
-                                                                            <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
-                                                                        </div>
-
-                                                                        <div class="modal-body">
-                                                                            <form>
-                                                                                <div class="form-group">
-                                                                                    <label>Company Name</label>
-                                                                                    <input type="text" class="form-control" value="Focused Holistic Hardware">
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label>Primary Contact</label>
-                                                                                    <input type="text" class="form-control" value="Emily Smith">
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label>Website</label>
-                                                                                    <input type="text" class="form-control" value="https://focusedhardware.de/">
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label>Total Projects</label>
-                                                                                    <input type="text" class="form-control" value="120">
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label>Status</label>
-                                                                                    <select class="form-control form-select">
-                                                                                        <option selected>Enabled</option>
-                                                                                        <option>Disable</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div class="mt-4">
-                                                                                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </td>
-                                                    </tr>     
-                                                </c:forEach>
+                                                <div class="modal fade custom-modal" id="view-details${recruiter.getAccount().getUserID()}">
+                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header flex-wrap">
+                                                                <h4 class="modal-title">Recuiter Details</h4>
+                                                                <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <img id="freelancerAvatar" src="${recruiter.getCompany().getLogo()}" alt="Freelancer Avatar" class="img-fluid rounded">
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <form>
+                                                                            <div class="form-group">
+                                                                                <label>Company Name</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getCompanyName()}" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Primary Contact</label>
+                                                                                <input type="text" class="form-control" value=" ${recruiter.getCompany().getRecruiID().fullName()}" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Total Projects</label>
+                                                                                <input type="text" class="form-control" value=" ${recruiter.getTotalPost()}" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Email Contact</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getRecruiID().getEmail()}" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Phone Contact</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getRecruiID().getPhone()}" readonly="">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Website</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getWebsite()}" readonly="">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Established On</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getEstablishedOn()}" readonly="">
+                                                                            </div>                                                                         
+
+                                                                            <div class="form-group">
+                                                                                <label>Location</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getLocation()}" readonly="">
+                                                                            </div>                                                                            
+                                                                            <div class="form-group">
+                                                                                <label>Description</label>
+                                                                                <div>
+                                                                                    <textarea style=" height: 150px " readonly="" class="form-control">${recruiter.getCompany().getDescribe()} </textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </tr>     
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
@@ -339,8 +309,53 @@
             </div>
 
         </div>
+        <div class="modal custom-modal fade" id="Suspend_user" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="form-header">
+                            <input type="hidden" class="user-id1" id="${recruiter.getAccount().getUserID()}">
+                            <h3>Status</h3>
+                            <p>Are you sure want to Suspend user?</p>
+                        </div>
+                        <div class="modal-btn Suspend-action" >
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" class="user-suspend-link btn btn-primary continue-btn" >Suspend user</a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+        <div class="modal custom-modal fade" id="Activate_user" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="form-header">
+                            <input type="hidden" class="user-id1" id="${recruiter.getAccount().getUserID()}">
+                            <h3>Status</h3>
+                            <p>Are you sure want to Activate user?</p>
+                        </div>
+                        <div class="modal-btn Activate-action">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" class="user-activate-link btn btn-primary continue-btn" >Activate user</a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-     
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             $(document).ready(function () {

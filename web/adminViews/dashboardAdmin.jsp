@@ -103,7 +103,7 @@
                         </div>
 
                     </div>
-                    <div class="row">
+<!--                    <div class="row">
                         <div class="col-lg-12">
                             <div class="card bg-white projects-card">
                                 <div class="card-body pt-0">
@@ -319,7 +319,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
 
             </div>

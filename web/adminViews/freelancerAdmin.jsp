@@ -392,10 +392,17 @@
                     skillFilterDropdown.toggle();
                 });
 
+
                 // Xử lý sự kiện chọn kỹ năng
                 $('.skill-filter-option').on('click', function () {
                     var skillId = $(this).data('value');
                     var skillName = $(this).text();
+
+                    // Kiểm tra xem kỹ năng đã được chọn hay chưa
+                    if (selectedSkills.has(skillId)) {
+                        // Kỹ năng đã được chọn trước đó, không làm gì cả
+                        return;
+                    }
 
                     // Thêm kỹ năng vào Set selectedSkills
                     selectedSkills.add(skillId);
@@ -431,7 +438,7 @@
                     const nameValue = nameFilter.value.toLowerCase();
                     const emailValue = emailFilter.value.toLowerCase();
                     const statusValue = statusFilter.value;
-                    const selectedSkillsArray = Array.from(selectedSkills); // Chuyển đổi Set thành mảng
+                    const selectedSkillsArray = Array.from(selectedSkills);
 
                     rows.forEach(row => {
                         const name = row.querySelector('.user-profile h5 a').textContent.toLowerCase();
@@ -443,7 +450,7 @@
                                 (!nameValue || name.includes(nameValue)) &&
                                 (!emailValue || email.includes(emailValue)) &&
                                 (statusValue === '' || status === statusValue) &&
-                                (selectedSkillsArray.length === 0 || skills.some(skill => selectedSkillsArray.includes(skill)));
+                                selectedSkillsArray.every(skill => skills.includes(skill));
 
                         row.style.display = showRow ? '' : 'none';
                     });
@@ -454,8 +461,25 @@
                 emailFilter.addEventListener('input', filterRows);
                 statusFilter.addEventListener('change', filterRows);
             });
-        </script>
 
+        </script>
+        <script>
+          // Đóng dropdown khi click bên ngoài
+$(document).ready(function() {
+    handleOutsideClick();
+});
+
+function handleOutsideClick() {
+    $(document).click(function(event) {
+        var skillFilterContainer = $('.skill-filter-container');
+        var skillFilterDropdown = $('.skill-filter-dropdown');
+
+        if (!$(event.target).closest(skillFilterContainer).length) {
+            skillFilterDropdown.hide();
+        }
+    });
+}
+        </script>
 
         <!--        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="adminAssets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>-->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

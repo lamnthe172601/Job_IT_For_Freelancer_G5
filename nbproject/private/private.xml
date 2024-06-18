@@ -14,13 +14,12 @@
         </group>
         <group>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/nbproject/build-impl.xml</file>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/Freelancer.java</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/freelancerAdmin.jsp</file>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/MutiModels/FreelancerInformation.java</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/freelancerAdmin.jsp</file>
         </group>
     </open-files>
 </project-private>
