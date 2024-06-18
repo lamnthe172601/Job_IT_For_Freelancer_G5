@@ -148,6 +148,10 @@
         <servlet-name>DeletePostFavouritesControll</servlet-name>
         <servlet-class>FreelancerControll.DeletePostFavouritesControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AllListPostControll</servlet-name>
+        <servlet-class>CommonControll.AllListPostControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -304,5 +308,9 @@
     <servlet-mapping>
         <servlet-name>DeletePostFavouritesControll</servlet-name>
         <url-pattern>/DeletePostFavourites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllListPostControll</servlet-name>
+        <url-pattern>/AllListPost</url-pattern>
     </servlet-mapping>
 </web-app>
