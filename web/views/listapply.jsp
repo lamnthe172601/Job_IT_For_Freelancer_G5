@@ -1,726 +1,524 @@
-
-
+<%-- 
+    Document   : PopularPost
+    Created on : May 28, 2024, 1:28:46 PM
+    Author     : DUC MINH
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/index-5.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:18:36 GMT -->
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/freelancer-favourites.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:46 GMT -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
         <title>KofeJob</title>
+
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="assets/plugins/feather/feather.css">
+
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-        <link rel="stylesheet" href="assets/plugins/feather/feather.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="assets/plugins/aos/aos.css">
+
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
+        <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
-    <body>
+    <body class="dashboard-page">
 
         <div class="main-wrapper">
 
-            <div class="header">
 
-                <div class="header-left">
-                    <a href="home" class="logo">
-                        <img src="assets/img/logo.png" alt="Logo">
-                    </a>
-                    <a href="home" class="logo logo-small">
-                        <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
-                    </a>
-
-                    <a href="javascript:void(0);" id="toggle_btn">
-                        <i class="feather-chevrons-left"></i>
-                    </a>
-
-
-                    <a class="mobile_btn" id="mobile_btn">
-                        <i class="feather-chevrons-left"></i>
-                    </a>
-
-                </div>
-
-
-                <div class="top-nav-search">
-                    <form>
-                        <input type="text" class="form-control" placeholder="Start typing your Search...">
-                        <button class="btn" type="submit"><i class="feather-search"></i></button>
-                    </form>
-                </div>
-
-
-                <ul class="nav user-menu">
-
-                    <li class="nav-item dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                            <i class="feather-bell"></i> <span class="badge badge-pill">5</span>
-                        </a>
-                        <div class="dropdown-menu notifications">
-                            <div class="topnav-dropdown-header">
-                                <span class="notification-title">Notifications</span>
-                                <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
-                            </div>
-                            <div class="noti-content">
-                                <ul class="notification-list">
-                                    <li class="notification-message">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex">
-                                                <span class="avatar avatar-sm flex-shrink-0">
-                                                    <img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-02.jpg">
-                                                </span>
-                                                <div class="media-body flex-grow-1">
-                                                    <p class="noti-details"><span class="noti-title">Brian Johnson</span> paid the invoice <span class="noti-title">#DF65485</span></p>
-                                                    <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex">
-                                                <span class="avatar avatar-sm flex-shrink-0">
-                                                    <img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-03.jpg">
-                                                </span>
-                                                <div class="media-body flex-grow-1">
-                                                    <p class="noti-details"><span class="noti-title">Marie Canales</span> has accepted your estimate <span class="noti-title">#GTR458789</span></p>
-                                                    <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex">
-                                                <div class="avatar avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title rounded-circle bg-primary-light"><i class="far fa-user"></i></span>
-                                                </div>
-                                                <div class="media-body flex-grow-1">
-                                                    <p class="noti-details"><span class="noti-title">New user registered</span></p>
-                                                    <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex">
-                                                <span class="avatar avatar-sm flex-shrink-0">
-                                                    <img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-04.jpg">
-                                                </span>
-                                                <div class="media-body flex-grow-1">
-                                                    <p class="noti-details"><span class="noti-title">Barbara Moore</span> declined the invoice <span class="noti-title">#RDW026896</span></p>
-                                                    <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex">
-                                                <div class="avatar avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title rounded-circle bg-info-light"><i class="far fa-comment"></i></span>
-                                                </div>
-                                                <div class="media-body flex-grow-1">
-                                                    <p class="noti-details"><span class="noti-title">You have received a new message</span></p>
-                                                    <p class="noti-time"><span class="notification-time">2 days ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="topnav-dropdown-footer">
-                                <a href="javascript:void(0);">View all Notifications</a>
-                            </div>
-                        </div>
-                    </li>
-
-
-                    <li class="nav-item dropdown has-arrow main-drop">
-                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                            <span class="user-img">
-                                <img src="assets/img/profiles/avatar-07.jpg" alt="Img">
-                                <span class="status online"></span>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profile.html"><i data-feather="user" class="me-1"></i> Profile</a>
-                            <a class="dropdown-item" href="settings.html"><i data-feather="settings" class="me-1"></i> Settings</a>
-                            <a class="dropdown-item" href="login.html"><i data-feather="log-out" class="me-1"></i> Logout</a>
-                        </div>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div class="sidebar" id="sidebar">
-                <div class="sidebar-inner slimscroll">
-                    <div id="sidebar-menu" class="sidebar-menu">
-                        <ul>
-                            <li class="menu-title"><span>Main</span></li>
-                            <li>
-                                <a href="index.html"><i data-feather="home"></i> <span>Dashboard</span></a>
-                            </li>
-                            <li>
-                                <a href="categories.html"><i data-feather="copy"></i> <span>Categories</span></a>
-                            </li>
-                            <li>
-                                <a href="projects.html"><i data-feather="database"></i> <span>Projects</span></a>
-                            </li>
-                            <li class="active">
-                                <a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>
-                            </li>
-                            <li>
-                                <a href="deposit.html"><i data-feather="user-check"></i> <span>Deposit</span></a>
-                            </li>
-                            <li>
-                                <a href="withdrawn.html"><i data-feather="user-check"></i> <span>Withdrawn</span></a>
-                            </li>
-                            <li>
-                                <a href="transaction.html"><i data-feather="clipboard"></i> <span>Transaction</span></a>
-                            </li>
-                            <li>
-                                <a href="providers.html"><i data-feather="user-check"></i> <span>Providers</span></a>
-                            </li>
-                            <li>
-                                <a href="subscription.html"><i data-feather="user-check"></i> <span>Subscription</span></a>
-                            </li>
-                            <li>
-                                <a href="reports.html"><i data-feather="pie-chart"></i> <span>Reports</span></a>
-                            </li>
-                            <li>
-                                <a href="roles.html"><i data-feather="clipboard"></i> <span>Roles</span></a>
-                            </li>
-                            <li>
-                                <a href="skills.html"><i data-feather="award"></i> <span>Skills</span></a>
-                            </li>
-                            <li>
-                                <a href="verify-identity.html"><i data-feather="user-check"></i> <span>Verify Identity</span></a>
-                            </li>
-                            <li>
-                                <a href="settings.html"><i data-feather="settings"></i> <span>Settings</span></a>
-                            </li>
-                            <li class="menu-title"><span>UI Interface</span></li>
-                            <li>
-                                <a href="components.html"><i data-feather="pocket"></i> <span>Components</span></a>
-                            </li>
-                            <li class="submenu">
-                                <a href="javascript:void(0);"><i data-feather="file-minus"></i> <span> Forms</span> <span class="menu-arrow"></span></a>
-                                <ul>
-                                    <li><a href="form-basic-inputs.html">Basic Inputs</a></li>
-                                    <li><a href="form-input-groups.html">Input Groups</a></li>
-                                    <li><a href="form-horizontal.html">Horizontal Form</a></li>
-                                    <li><a href="form-vertical.html">Vertical Form</a></li>
-                                    <li><a href="form-mask.html">Form Mask</a></li>
-                                    <li><a href="form-validation.html">Form Validation</a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="javascript:void(0);"><i data-feather="align-justify"></i> <span> Tables</span> <span class="menu-arrow"></span></a>
-                                <ul>
-                                    <li><a href="tables-basic.html">Basic Tables</a></li>
-                                    <li><a href="data-tables.html">Data Table</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="page-wrapper">
-                <div class="content report-box container-fluid">
-
-                    <div class="page-header subscribe-head">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="page-title">Freelancer</h3>
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active">Freelancer</li>
-                                </ul>
-                            </div>
-                            <div class="col-auto">
-                                <a class="btn  add-user" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add-category">
-                                    <i class="fas fa-plus "></i> Add Freelancer
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="subscribe-employe users-list">
-                                <ul>
-                                    <li class="active"><a href="users.html">All Freelancer </a></li>
-                                    <li><a href="user-active.html">Active Freelancer</a></li>
-                                    <li><a href="user-inactive.html">Inactive Freelancer</a></li>
-                                    <li><a href="user-suspended.html">Suspended</a></li>
-                                    <li><a href="user-administrator.html">Administrator</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="page-header user-active">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="page-title">All Freelancer</h3>
-                                        <p>Total <span>57</span> Freelancer account</p>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="javascript:void(0);" class="btn export-btn me-1">
-                                            <img src="assets/img/export.svg" alt="Img"> Export
-                                        </a>
-                                        <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
-                                            <i class="fas fa-filter"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="card filter-card" id="filter_inputs">
-                                <div class="card-body pb-0">
-                                    <form action="#" method="post">
-                                        <div class="row filter-row">
-                                            <div class="col-sm-6 col-md-3">
-                                                <div class="form-group">
-                                                    <label>Name</label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-3">
-                                                <div class="form-group">
-                                                    <label>Email</label>
-                                                    <input type="email" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-3">
-                                                <div class="form-group">
-                                                    <label>Expertise</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-3">
-                                                <div class="form-group">
-                                                    <button class="btn btn-primary btn-block" type="submit">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-center table-hover mb-0 datatable">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <div class="form-check custom-checkbox">
-                                                            <input type="checkbox" class="form-check-input" id="select-all">
-                                                            <label class="form-check-label"></label>
-                                                        </div>
-                                                    </th>
-                                                    <th>Freelancer</th>
-                                                    <th>Expertise</th>
-                                                    <th>Verified</th>
-                                                    <th>Account Balance </th>
-                                                    <th>Joined Date</th>
-                                                    <th>Last Login</th>
-                                                    <th>Status</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check custom-checkbox">
-                                                            <input type="checkbox" class="form-check-input">
-                                                            <label class="form-check-label"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="table-avatar user-profile">
-                                                            <a href="profile.html"><img class="avatar-img rounded-circle " src="assets/img/profiles/avatar-14.jpg" alt="User Image"></a>
-                                                            <div>
-                                                                <h5><a href="javascript:void(0);">Janet Paden</a></h5>
-                                                                <p> <a href="https://kofejob.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e191b110c191b091b12120d3e1b061f130e121b501d1113">[email&#160;protected]</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>Frontend Developer</td>
-                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>Email</td>
-                                                    <td>$7,763.05</td>
-                                                    <td>21 April 2022</td>
-                                                    <td>10 May 2022</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="user-active-btn">Active</a>
-                                                    </td>
-                                                    <td class="text-end three-dots">
-                                                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
-                                                        <div class="dropdown-menu user-menu-list">
-                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="assets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-02.svg" alt="Img"> Transaction</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-03.svg" alt="Img"> Reset Password</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i data-feather="edit" class="me-2"></i> Edit</a>
-                                                            <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check custom-checkbox">
-                                                            <input type="checkbox" class="form-check-input">
-                                                            <label class="form-check-label"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="table-avatar user-profile">
-                                                            <a href="profile.html"><img class="avatar-img rounded-circle " src="assets/img/profiles/avatar-15.jpg" alt="User Image"></a>
-                                                            <div>
-                                                                <h5><a href="profile.html">Floyd Lewis</a></h5>
-                                                                <p> <a href="https://kofejob.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa9c9695839e969f8d9389ba9f829b978a969fd4999597">[email&#160;protected]</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>Graphic Designer</td>
-                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 email-check"></i>Email</td>
-                                                    <td>$6,763.05</td>
-                                                    <td>11 Jun 2022</td>
-                                                    <td>25 Sep 2021</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="user-active-btn">Active</a>
-                                                    </td>
-                                                    <td class="text-end three-dots">
-                                                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
-                                                        <div class="dropdown-menu user-menu-list">
-                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="assets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><img class="me-2 " src="assets/img/icon/icon-02.svg" alt="Img"> Transaction</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><img class="me-2 " src="assets/img/icon/icon-03.svg" alt="Img"> Reset Password</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><img class="me-2 " src="assets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="edit" class="me-2"></i> Edit</a>
-                                                            <a class="dropdown-item mb-0" href="javascript:void(0)"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check custom-checkbox">
-                                                            <input type="checkbox" class="form-check-input">
-                                                            <label class="form-check-label"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="table-avatar user-profile">
-                                                            <a href="profile.html"><img class="avatar-img rounded-circle " src="assets/img/profiles/avatar-10.jpg" alt="User Image"></a>
-                                                            <div>
-                                                                <h5><a href="profile.html">Andrew Glover</a></h5>
-                                                                <p><a href="https://kofejob.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d594bbb1a7b0a2b2b9baa3b0a795b0adb4b8a5b9b0fbb6bab8">[email&#160;protected]</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>PHP Developer</td>
-                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>Email</td>
-                                                    <td>$2,763.05</td>
-                                                    <td>01 April 2022</td>
-                                                    <td>28 Dec 2022</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="user-inactive-btn">Inactive</a>
-                                                    </td>
-                                                    <td class="text-end three-dots">
-                                                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
-                                                        <div class="dropdown-menu user-menu-list">
-                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="assets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-02.svg" alt="Img"> Transaction</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-03.svg" alt="Img"> Reset Password</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i data-feather="edit" class="me-2"></i> Edit</a>
-                                                            <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check custom-checkbox">
-                                                            <input type="checkbox" class="form-check-input">
-                                                            <label class="form-check-label"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="table-avatar user-profile">
-                                                            <a href="profile.html"><img class="avatar-img rounded-circle " src="assets/img/profiles/avatar-14.jpg" alt="User Image"></a>
-                                                            <div>
-                                                                <h5><a href="javascript:void(0);">Janet Paden</a></h5>
-                                                                <p> <a href="https://kofejob.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6007050f12070517050c0c13200518010d100c054e030f0d">[email&#160;protected]</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>Frontend Developer</td>
-                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>Email</td>
-                                                    <td>$7,763.05</td>
-                                                    <td>21 April 2022</td>
-                                                    <td>10 May 2022</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="user-active-btn">Active</a>
-                                                    </td>
-                                                    <td class="text-end three-dots">
-                                                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
-                                                        <div class="dropdown-menu user-menu-list">
-                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="assets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-02.svg" alt="Img"> Transaction</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-03.svg" alt="Img"> Reset Password</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i data-feather="edit" class="me-2"></i> Edit</a>
-                                                            <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check custom-checkbox">
-                                                            <input type="checkbox" class="form-check-input">
-                                                            <label class="form-check-label"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="table-avatar user-profile">
-                                                            <a href="profile.html"><img class="avatar-img rounded-circle " src="assets/img/profiles/avatar-13.jpg" alt="User Image"></a>
-                                                            <div>
-                                                                <h5><a href="profile.html">Floyd Lewis</a></h5>
-                                                                <p> <a href="https://kofejob.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02646e6d7b666e67756b7142677a636f726e672c616d6f">[email&#160;protected]</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>Graphic Designer</td>
-                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 email-check"></i>Email</td>
-                                                    <td>$6,763.05</td>
-                                                    <td>11 Jun 2022</td>
-                                                    <td>25 Sep 2021</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="user-active-btn">Active</a>
-                                                    </td>
-                                                    <td class="text-end three-dots">
-                                                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
-                                                        <div class="dropdown-menu user-menu-list">
-                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="assets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><img class="me-2 " src="assets/img/icon/icon-02.svg" alt="Img"> Transaction</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><img class="me-2 " src="assets/img/icon/icon-03.svg" alt="Img"> Reset Password</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><img class="me-2 " src="assets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="edit" class="me-2"></i> Edit</a>
-                                                            <a class="dropdown-item mb-0" href="javascript:void(0)"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check custom-checkbox">
-                                                            <input type="checkbox" class="form-check-input">
-                                                            <label class="form-check-label"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="table-avatar user-profile">
-                                                            <a href="profile.html"><img class="avatar-img rounded-circle " src="assets/img/profiles/avatar-16.jpg" alt="User Image"></a>
-                                                            <div>
-                                                                <h5><a href="profile.html">Andrew Glover</a></h5>
-                                                                <p><a href="https://kofejob.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="76371812041301111a1900130436130e171b061a135815191b">[email&#160;protected]</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>PHP Developer</td>
-                                                    <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>Email</td>
-                                                    <td>$2,763.05</td>
-                                                    <td>01 April 2022</td>
-                                                    <td>28 Dec 2022</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="user-inactive-btn">Inactive</a>
-                                                    </td>
-                                                    <td class="text-end three-dots">
-                                                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
-                                                        <div class="dropdown-menu user-menu-list">
-                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="assets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-02.svg" alt="Img"> Transaction</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-03.svg" alt="Img"> Reset Password</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><img class="me-2 " src="assets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i data-feather="edit" class="me-2"></i> Edit</a>
-                                                            <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="modal fade transaction-modal" id="transaction-category">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header flex-wrap">
-                        <div class="transaction-group">
-                            <div class="head-transaction">
-                                <h4>Transaction</h4>
-                                <p> #TNX24586414</p>
-                            </div>
-                            <div class="complete-btn">
-                                <a href="javascript:void(0);" class="btn btn-primary">Completed</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <div class="table-avatar user-profile invest-acount">
-                            <a href="profile.html"><i class="fas fa-exchange-alt exchange"></i>
-                                <div>
-                                    <h5>Received from Investment Account</h5>
-                                    <p class="receive-date"> Mar 13, 2022<span>Completed</span></p>
-                                </div>
+            <header class="header header-bg">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg header-nav">
+                        <div class="navbar-header">
+                            <a id="mobile_btn" href="javascript:void(0);">
+                                <span class="bar-icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                            </a>
+                            <a href="home" class="navbar-brand logo">
+                                <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
-                        <div class="acount-transaction">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="basic-info ">
-                                        <h4>IN ACCOUNT</h4>
-                                        <div class="additional-info">
-                                            <p> Amount </p>
-                                            <h5>6,335.006 USD</h5>
+                        <div class="main-menu-wrapper">
+                            <div class="menu-header">
+                                <a href="home" class="menu-logo">
+                                    <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                                </a>
+                                <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </div>
+                            <ul class="main-nav">
+                                <li class="active has-submenu">
+                                    <a href="home">Home <i class="fas "></i></a>
+
+                                </li>
+
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu"> 
+
+                                            <li><a href="PostFavourites">Jobs Favourites</a></li>
+
+                                            <li><a href="jobsApply">Jobs Apply</a></li>
+                                            <li><a href="jobforyou">Jobs For you</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
+                                            <li><a href="SreachJob">Find Jobs</a></li>  
+                                            <li><a href="company">Company</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="jobsList">Top Freelancer</a></li>
+                                            <li><a href="newsJobs">Skills</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="newsJobs">Reviews</a></li>
+
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">                                                                           
+                                        <li><a href="About">About us</a></li>
+                                        <li><a href="ContactUs">Contact us</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
+
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="dashboard">Dashboard</a></li>
+                                            <li><a href="companydetail">My Profile</a></li>
+                                            <li><a href="company-details">Company Details</a></li>
+                                            <li><a href="manage-projects">Projects</a></li>
+                                            <li><a href="favourites">Favourites</a></li>                                                                                       
+                                            <li><a href="profile-settings">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
+                                    <li>
+                                        <a href="/admin/index.html" target="_blank">Admin</a>
+                                        <ul class="submenu">
+
+                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
+                                            <li><a href="profile-settings">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account == null}">
+                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
+                                        </c:if>
+                            </ul>
+                        </div>
+                        <ul class="nav header-navbar-rht">
+                            <li class="dropdown">
+                                <a data-bs-toggle="dropdown" href="javascript:void(0);"><img src="assets/img/icon/notification-bell-icon.svg" alt="Img"></a>
+                                <div class="dropdown-menu notifications">
+                                    <div class="topnav-dropdown-header">
+                                        <div class="notification-title">Notifications<span class="msg-count-badge">2</span></div>
+                                        <a href="javascript:void(0)" class="clear-noti d-flex align-items-center">Mark all as read <i class="fe fe-check-circle"></i></a>
+                                    </div>
+                                    <div class="noti-content">
+                                        <ul class="notification-list">
+                                            <li class="notification-message">
+                                                <a href="notification.html">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md active">
+                                                            <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-2.jpg">
+                                                        </span>
+                                                        <div class="media-body">
+                                                            <span class="noti-title">Edward Curr</span>
+                                                            <p class="noti-details">Notifications inform you when someone likes, reacts</p>
+                                                            <p class="noti-time"><span class="notification-time">Yesterday at 11:42 PM</span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="notification-message">
+                                                <a href="notification.html">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md active">
+                                                            <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-1.jpg">
+                                                        </span>
+                                                        <div class="media-body">
+                                                            <span class="noti-title">Maria Hill</span>
+                                                            <p class="noti-details"> Notifications alert you to new messages in your Kofejob inbox.</p>
+                                                            <div class="notification-btn">
+                                                                <span class="btn btn-primary">Accept</span>
+                                                                <span class="btn btn-outline-primary">Reject</span>
+                                                            </div>
+                                                            <p class="noti-time"><span class="notification-time">Today at 9:42 AM</span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="notification-message">
+                                                <a href="notification.html">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md">
+                                                            <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-3.jpg">
+                                                        </span>
+                                                        <div class="media-body">
+                                                            <span class="noti-title">Maria Hill</span>
+                                                            <p class="noti-details"> Notifications alert you to new messages in your Kofejob inbox.</p>
+                                                            <p class="noti-time"><span class="notification-time">Yesterday at 5:42 PM</span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="notification-message">
+                                                <a href="notification.html">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md">
+                                                            <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-4.jpg">
+                                                        </span>
+                                                        <div class="media-body">
+                                                            <span class="noti-title">Edward Curr</span>
+                                                            <p class="noti-details">Notifications inform you when someone likes, reacts</p>
+                                                            <p class="noti-time"><span class="notification-time">Last Wednesday at 11:15 AM</span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="topnav-dropdown-footer text-center">
+                                        <a href="notification.html">View All Notification</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                <li class="nav-item dropdown account-item">
+                                    <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                                        <span class="user-img">
+                                            <img src="${freelancer.image}" alt="Img">
+                                        </span>
+                                        <span>${freelancer.fullname()}</span>
+                                    </a>
+                                    <div class="dropdown-menu emp">
+                                        <div class="drop-head">
+                                            <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                                                <span class="user-img">
+                                                    <img src="${freelancer.image}" alt="Img">
+                                                </span>
+                                                <div>
+                                                    <span>${freelancer.fullname()}</span>
+                                                    <p><span  data-cfemail="81e8efe7eec1e3f3f4e2e4e3f4f2e9afe2eeec">@${sessionScope.account.username}</span></p>
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="additional-info">
-                                            <p>Fees </p>
-                                            <h5>0.00 USD</h5>
+                                        <a class="dropdown-item" href="MyProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
+                                        <a class="dropdown-item" href="MyProject?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
+
+                                        <a class="dropdown-item" href="freelancer-profile-settings"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                        <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                    </div>
+                                </li>
+                            </c:if>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+
+
+            <div class="content content-page bookmark">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 theiaStickySidebar">
+                            <div class="settings-widget">
+                                <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
+                                    <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/avatar-1.jpg" class="avatar-lg rounded-circle"></a>
+                                    <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
+                                        <h3 class="mb-0"><a href="freelancer-profile.html">Bruce Bush</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
+                                        <p class="mb-0">@brucebush</p>
+                                    </div>
+                                </div>
+                                <div class="settings-menu">
+                                    <div id="sidebar-menu" class="sidebar-menu">
+                                        <ul>
+                                            <li class="nav-item">
+                                                <a href="freelancer-dashboard.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
+                                                </a>
+                                            </li>
+                                            <li class="nav-item submenu">
+                                                <a href="freelancer-project-proposals.html" class="nav-link active">
+                                                    <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
+                                                    <span class="menu-arrow"></span>
+                                                </a>
+                                                <ul class="sub-menu-ul">
+                                                    <li>
+                                                        <a href="freelancer-project-proposals.html">My Proposal</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="freelancer-ongoing-projects.html">Ongoing Projects</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="freelancer-completed-projects.html">Completed Projects</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="freelancer-cancelled-projects.html">Cancelled Projects</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="nav-item submenu">
+                                                <a href="PostFavourites" class="nav-link ">
+                                                    <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
+                                                    <span class="menu-arrow"></span>
+                                                </a>
+                                                <ul class="sub-menu-ul">
+                                                    <li>
+                                                        <a class="active" href="freelancer-favourites.html">Bookmarked Projects</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="freelancer-invitations.html">Invitations</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="freelancer-review.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="freelancer-portfolio.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-05.svg" alt="Img"> Portfolio
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="freelancer-chats.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="freelancer-withdraw-money.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="freelancer-payout.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-08.svg" alt="Img"> Payout
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="freelancer-withdraw-money.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-09.svg" alt="Img"> Statement
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
+                                                    <span class="menu-arrow"></span>
+                                                </a>
+                                                <ul class="sub-menu-ul">
+                                                    <li>
+                                                        <a href="freelancer-profile-settings.html">Profile Setting</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="freelancer-membership.html">Plan & Billing</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="freelancer-verify-identity.html">Verify Identity</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="freelancer-change-password.html">Changes Password</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="freelancer-delete-account.html">Delete Account</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="index.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-11.svg" alt="Img"> Logout
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-8">
+                            <div class="dashboard-sec freelance-favourites">
+                                <form action="search" method="post" class="form-inline my-2 my-lg-0">
+                                    <div class="input-group input-group-sm">
+                                        <input name="searchName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-secondary btn-number">
+                                                <i class="fa fa-search"></i>
+                                            </button>
                                         </div>
-                                        <div class="additional-info">
-                                            <p> Total Investment </p>
-                                            <h5>6,335.006 USD</h5>
+                                    </div>
+                                </form>
+
+                                <div class="col-xl-12">
+                                    <div class="card mb-4 ongoing-project-card" style="border: none; padding-top: 30px; ">
+                                        <div class="pro-head">
+                                            <h2>List Job Apply</h2>
+
+                                        </div>
+                                        <div class="table-responsive recent-earnings flex-fill">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Position</th>
+                                                        <th>Budget</th>
+                                                        <th>Create On</th>
+                                                        <th>Apply On</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${post}" var="p">
+                                                        <tr>
+                                                            <td class="title">${p.title}</td>
+                                                            <td class="title">${p.category}</td>
+                                                            <td>$${p.budget}</td>
+                                                            <td>${p.datePost}</td>
+                                                            <td>${p.dateApply}</td>
+                                                            <c:if test="${p.status=='Reject'}">
+                                                                <td style="color: #FF0000">${p.status}</td>
+                                                            </c:if>
+                                                            <c:if test="${p.status=='Pending'}">
+                                                                <td style="color: #CC9900">${p.status}</td>
+                                                            </c:if>
+                                                            <c:if test="${p.status=='Approve'}">
+                                                                <td style="color: #009933">${p.status}</td>
+                                                            </c:if>
+                                                            
+                                                            <td><a style="padding-left: 25%" href="PostDetails?postID=${p.postID}"><i
+                                                                        class="feather-eye"></i></a></td>
+                                                        </tr>
+                                                    </c:forEach>     
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="basic-info">
-                                        <h4>IN TRANSACTION</h4>
-                                        <div class="additional-info">
-                                            <p> Amount </p>
-                                            <h5>6,335.006 USD</h5>
-                                        </div>
-                                        <div class="additional-info">
-                                            <p>Fees </p>
-                                            <h5>0.00 USD</h5>
-                                        </div>
-                                        <div class="additional-info">
-                                            <p> Total Investment </p>
-                                            <h5>6,335.006 USD</h5>
-                                        </div>
-                                        <div class="additional-info">
-                                            <p> Freelancer Account </p>
-                                            <h5>UID00003</h5>
-                                        </div>
-                                        <div class="additional-info">
-                                            <p> Freelancer Email </p>
-                                            <h5><a href="https://kofejob.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c0b151010151d113c19041d110c1019521f1311">[email&#160;protected]</a></h5>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <footer class="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class=" col-lg-4 col-md-12">
+                                <div class="footer-bottom-logo">
+                                    <a href="index.html" class="menu-logo">
+                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                                    </a>
+                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                    <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
+                                </div>
+                            </div>
+                            <div class=" col-lg-8 col-md-12">
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Useful Links</h2>
+                                            <ul>
+                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
+                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
+                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
+                                                <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
+                                                <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="basic-info additional-detail top-border">
-                                        <h4>Order Details</h4>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Order Date</p>
-                                                    <h5>Mar 13, 2022</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p> Placed By</p>
-                                                    <h5>UID00001 </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Completed At</p>
-                                                    <h5> Mar 13, 2022 07:00 PM</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Completed By</p>
-                                                    <h5> Super Admin</h5>
-                                                </div>
-                                            </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Help & Support</h2>
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="basic-info additional-detail">
-                                        <h4 class="mt-0">Additional Details</h4>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Transaction</p>
-                                                    <h5>Mar 13, 2022</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p> Payment Gateway</p>
-                                                    <h5>Paypal </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Payment From</p>
-                                                    <h5> Dean Jones</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="additional-info">
-                                                    <p>Payment To</p>
-                                                    <h5> Main Account</h5>
-                                                </div>
-                                            </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Other Links</h2>
+                                            <ul>
+                                                <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
+                                                <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
+                                                <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
+                                                <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
+                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="basic-info additional-detail">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="additional-info">
-                                                    <p>Updated Balance</p>
-                                                    <h5 class="active-balance">13,144.626 USD</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="basic-info additional-detail ">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="additional-info mb-0">
-                                                    <p>Transaction Details</p>
-                                                    <h5> Received from Investment Account</h5>
-                                                </div>
-                                            </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Connect With Us</h2>
+                                            <ul>
+                                                <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
+                                                <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
+                                                <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
+                                                <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
+                                                <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -728,48 +526,141 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
+
+                <div class="footer-bottom">
+                    <div class="container">
+
+                        <div class="copyright">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="copyright-text text-center">
+                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </footer>
+
         </div>
 
 
-        <div class="modal fade custom-modal" id="add-category">
-            <div class="modal-dialog modal-dialog-centered">
+        <div class="modal fade" id="bookmark">
+            <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content">
-                    <div class="modal-header flex-wrap">
-                        <div class="text-center w-100 mb-3">
-                            <img src="assets/img/logo-small.png" alt="Img">
-                        </div>
-                        <h4 class="modal-title">Add New Freelancer</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                    <div class="modal-header">
+                        <h4 class="modal-title">INVITE FREELANCER</h4>
+                        <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="far fa-times-circle orange-text"></i></a></span>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label>Full Name</label>
-                                <input type="text" class="form-control">
+                        <form action="#">
+                            <div class="modal-info">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="average-bids">
+                                            <p>Contact <span class="text-highlight">John Doe </span> about your Project</p>
+                                        </div>
+                                        <div class="input-block">
+                                            <label class="form-label">Invite title</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="input-block">
+                                            <label class="form-label">Send a private message</label>
+                                            <textarea class="form-control" rows="5">Hi  John Doe, I noticed your profile and would like to offer you my project. We can discuss any details over chat.</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-block">
+                                            <label class="form-label">Hire for</label>
+                                            <div class="radio">
+                                                <label class="custom_radio">
+                                                    <input type="radio" value="fix" name="fix" checked>
+                                                    <span class="checkmark"></span> Fixed Price
+                                                </label>
+                                                <label class="custom_radio">
+                                                    <input type="radio" value="fix" name="fix">
+                                                    <span class="checkmark"></span> Hourly Rate
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-block">
+                                            <label class="form-label">Hire for</label>
+                                            <div class="radio">
+                                                <label class="custom_radio">
+                                                    <input type="radio" value="fix" name="fix">
+                                                    <span class="checkmark"></span> Fixed Price
+                                                </label>
+                                                <label class="custom_radio">
+                                                    <input type="radio" value="fix" name="fix">
+                                                    <span class="checkmark"></span> Hourly Rate
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-block">
+                                            <label class="form-label">Budget</label>
+                                            <div class="form-row">
+                                                <div class="col-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend bg-pink">
+                                                            <span class="input-group-text" id="basic-add">$</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="20.00">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <select class="form-control select">
+                                                        <option value="0">USD</option>
+                                                        <option value="0">USD</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-block">
+                                            <label class="form-label">Budget</label>
+                                            <div class="form-row">
+                                                <div class="col-6">
+                                                    <div class="input-group form-inline">
+                                                        <div class="input-group-prepend bg-pink">
+                                                            <span class="input-group-text" id="basic-addon">$</span>
+                                                        </div>
+                                                        <input type="text" class="form-control me-1" placeholder="20.00"> <label class="form-label">/ hr</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <select class="form-control select">
+                                                        <option value="0">USD</option>
+                                                        <option value="0">USD</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="input-block">
+                                            <label class="form-label">Project</label>
+                                            <select class="form-control select">
+                                                <option value="0">3D Renders and Amazon Product Store images/Video</option>
+                                                <option value="0">3D Renders and Amazon Product Store Video</option>
+                                                <option value="0">3D Renders and Amazon Product Store images</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password</label>
-                                <input type="password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Freelancer Type</label>
-                                <select class="form-control form-select">
-                                    <option>Select</option>
-                                    <option>Frontend Developer</option>
-                                    <option>Graphic Designer</option>
-                                </select>
-                            </div>
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            <div class="submit-section text-end">
+                                <button type="submit" class="btn btn-primary submit-btn">Send Invite</button>
                             </div>
                         </form>
                     </div>
@@ -778,44 +669,22 @@
         </div>
 
 
-        <div class="modal fade custom-modal" id="edit-category">
-            <div class="modal-dialog modal-dialog-centered">
+        <div class="modal fade" id="rating">
+            <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content">
-                    <div class="modal-header flex-wrap">
-                        <div class="text-center w-100 mb-3">
-                            <img src="assets/img/logo-small.png" alt="Img">
-                        </div>
-                        <h4 class="modal-title">Edit User</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                    <div class="modal-header d-block b-0 pb-0">
+                        <span class="modal-close float-end"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="far fa-times-circle orange-text"></i></a></span>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label>Full Name</label>
-                                <input type="text" class="form-control" value=" George Wells">
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" value="georgewells@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" value="*******">
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password</label>
-                                <input type="password" class="form-control" value="********">
-                            </div>
-                            <div class="form-group">
-                                <label>User Type</label>
-                                <select class="form-control form-select">
-                                    <option>Select</option>
-                                    <option selected>Frontend Developer</option>
-                                    <option>Graphic Designer</option>
-                                </select>
-                            </div>
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        <form action="https://kofejob.dreamstechnologies.com/html/template/project.html">
+                            <div class="modal-info">
+                                <div class="text-center pt-0 mb-5">
+                                    <h3>Please login to Favourite Freelancers</h3>
+                                </div>
+                                <div class="submit-section text-center">
+                                    <button data-bs-dismiss="modal" class="btn btn-primary black-btn click-btn">Cancel</button>
+                                    <button type="submit" class="btn btn-primary click-btn">Submit</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -823,49 +692,59 @@
             </div>
         </div>
 
+        <style>
+            .form-inline {
+                margin-left: 60%;
+                margin-right: 50px;
+            }
 
-        <div class="modal custom-modal fade" id="delete_category" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="form-header">
-                            <h3>Delete</h3>
-                            <p>Are you sure want to delete?</p>
-                        </div>
-                        <div class="modal-btn delete-action">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
-                                </div>
-                                <div class="col-6">
-                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            /* Để căn chỉnh nút và icon */
+            .input-group {
+                position: relative;
+                width: calc(100% - 30px);
+            }
+
+            .btn.btn-secondary.btn-number {
+                position: absolute;
+                right: -50px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .title{
+                max-width: 120px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+        </style>
+
+        <script>
 
 
-        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        </script>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 
-        <script src="assets/js/feather.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 
-        <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 
-        <script src="assets/plugins/select2/js/select2.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 
-        <script src="assets/plugins/moment/moment.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-        <script src="assets/js/bootstrap-datetimepicker.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-        <script src="assets/plugins/datatables/datatables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 
-        <script src="assets/js/script.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
+        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/users.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:03 GMT -->
+        <script src="assets/js/bootstrap.bundle.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+
+        <script src="assets/plugins/select2/js/select2.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/plugins/datatables/datatables.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+
+        <script src="assets/js/script.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e07a54eb38ecbc80607f458c-|49" defer></script></body>
+
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/freelancer-favourites.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:46 GMT -->
 </html>
