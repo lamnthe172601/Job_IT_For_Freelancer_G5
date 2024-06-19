@@ -168,6 +168,10 @@
         <servlet-name>ModerationProjectAdmin</servlet-name>
         <servlet-class>AdminControlles.ModerationProjectAdmin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogsAdmin</servlet-name>
+        <servlet-class>AdminControlles.BlogsAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -343,5 +347,9 @@
     <servlet-mapping>
         <servlet-name>ModerationProjectAdmin</servlet-name>
         <url-pattern>/moderationProjectAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogsAdmin</servlet-name>
+        <url-pattern>/blogAdmin</url-pattern>
     </servlet-mapping>
 </web-app>

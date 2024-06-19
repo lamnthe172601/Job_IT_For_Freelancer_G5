@@ -362,7 +362,7 @@
                                     <a href="javascript:void(0);" class="project-suspend-link btn btn-primary continue-btn" >Suspend Project</a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="javascript:void(0);" class="project-activate-link btn btn-primary continue-btn" >Activate Project</a>
+                                    <a href="javascript:void(0);" class="project-activate-link btn btn-primary continue-btn" >Approve Project</a>
                                 </div>
                             </div>
                         </div>
@@ -487,7 +487,7 @@
                     url: '/Job_IT_For_Freelancer_G5/moderationProjectAdmin',
                     type: 'POST',
                     data: {postId: postId,
-                    type: "suspend"},
+                        type: "suspend"},
                     success: function (response) {
                         var statusCell = $('.post-id#' + postId).closest('tr').find('.status');
                         statusCell.html('<a href="javascript:void(0);" class="user-inactive-btn status">Suspend</a>');
@@ -496,7 +496,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Approve_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate Project</a>');
 
                         $('#Suspend_Project').modal('hide');
-                         $('#handle').modal('hide'); 
+                        $('#handle').modal('hide');
                         showSuccessNotification('Suspend project successfully!');
                     },
                     error: function (xhr, status, error) {
@@ -507,10 +507,10 @@
 
             function approveProject(postId) {
                 $.ajax({
-                     url: '/Job_IT_For_Freelancer_G5/moderationProjectAdmin',
+                    url: '/Job_IT_For_Freelancer_G5/moderationProjectAdmin',
                     type: 'POST',
                     data: {postId: postId,
-                    type: "approve"},
+                        type: "approve"},
                     success: function (response) {
                         var statusCell = $('.post-id#' + postId).closest('tr').find('.status');
                         statusCell.html('<a href="javascript:void(0);" class="user-active-btn status">Approved</a>');
@@ -519,7 +519,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend Project</a>');
 
                         $('#Approve_Project').modal('hide');
-                         $('#handle').modal('hide'); 
+                        $('#handle').modal('hide');
                         showSuccessNotification('Approve project successfully!');
                     },
                     error: function (xhr, status, error) {

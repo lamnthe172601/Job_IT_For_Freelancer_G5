@@ -183,7 +183,7 @@ public class HomeDAO extends DBContext {
     public List<Blogs> getTopBlogs() {
     List<Blogs> blogs = new ArrayList<>();
     String query = """
-                   SELECT TOP(3) blogID, title, image, date_blog, description, tag
+                   SELECT TOP(3) blogID, title, image, date_blog, description, tag,statusBlog
                    FROM Blogs
                    ORDER BY date_blog DESC;""";
     try (PreparedStatement ps = connection.prepareStatement(query);
@@ -195,8 +195,9 @@ public class HomeDAO extends DBContext {
             blog.setImage(rs.getString("image"));
             blog.setDate_blog(rs.getDate("date_blog"));
             String description = rs.getString("description");
-            blog.setDescription(getShortDescription(description, 10));
+            blog.setDescription(getShortDescription(description, 10));   
             blog.setTag(rs.getString("tag"));
+            blog.setStatus(rs.getBoolean("statusBlog"));
             blogs.add(blog);
         }
     } catch (SQLException e) {
