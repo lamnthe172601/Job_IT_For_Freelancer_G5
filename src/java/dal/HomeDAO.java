@@ -200,8 +200,10 @@ public class HomeDAO extends DBContext {
             blog.setStatus(rs.getBoolean("statusBlog"));
             blogs.add(blog);
         }
-        return blogs;
+    } catch (SQLException e) {
     }
+    return blogs;
+}
 
     public static String getShortDescription(String description, int wordLimit) {
         if (description == null || description.isEmpty()) {
