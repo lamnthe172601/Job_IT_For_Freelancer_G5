@@ -79,10 +79,10 @@ public class EditSkill extends HttpServlet {
 
         try {
             skillSetDAO.updateSkillSet(skillSetID, skillSetName, description);
-            request.getSession().setAttribute("message", "Skill updated successfully");
+            request.setAttribute("message", "Skill updated successfully");
         } catch (SQLException e) {
             e.printStackTrace();
-            request.getSession().setAttribute("message", "Error updating skill");
+            request.setAttribute("message", "Error updating skill");
         }
 
         response.sendRedirect("skillList.jsp");

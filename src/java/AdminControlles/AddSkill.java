@@ -76,7 +76,7 @@ public class AddSkill extends HttpServlet {
         SkillSetDAO skillSetDAO = new SkillSetDAO();
         try {
             skillSetDAO.addSkillSet(skillSetName, description);
-            request.getSession().setAttribute("message", "Skill added successfully!");
+            request.setAttribute("message", "Skill added successfully!");
             response.sendRedirect("skillList.jsp");
         } catch (SQLException e) {
             throw new ServletException("Cannot add skill set", e);

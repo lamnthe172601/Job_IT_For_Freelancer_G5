@@ -81,7 +81,6 @@ public class DeleteSkill extends HttpServlet {
         request.setAttribute("error", "Error deleting skill: " + ex.getMessage());
     }
     
-    // Redirect hoặc forward về trang danh sách kỹ năng sau khi xóa
     RequestDispatcher dispatcher = request.getRequestDispatcher("skillAdmin.jsp");
     dispatcher.forward(request, response);
     }

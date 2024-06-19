@@ -303,16 +303,23 @@
                             </form>
                         </div>
                     </div>
-                    <% 
-                                
-                                String message = (String) session.getAttribute("message");
-                                if (message != null) {
+                    <%
+        String message = (String) request.getAttribute("message");
+        if (message != null) {
                     %>
                     <div class="alert alert-success">
                         <%= message %>
                     </div>
-                    <% 
-                            session.removeAttribute("message"); 
+                    <%
+                        }
+        
+                        String error = (String) request.getAttribute("error");
+                        if (error != null) {
+                    %>
+                    <div class="alert alert-danger">
+                        <%= error %>
+                    </div>
+                    <%
                         }
                     %>
                     <div class="row">
@@ -338,8 +345,14 @@
                                                     <td><%= skillSet.get("skill_set_name") %></td>
                                                     <td><%= skillSet.get("description") %></td>
                                                     <td class="text-end">
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"
+                                                           onclick="editSkill('<%= skillSet.get("skill_set_ID") %>', '<%= skillSet.get("skill_set_name") %>', '<%= skillSet.get("description") %>')">
+                                                            <i class="far fa-edit"></i>
+                                                        </a>
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"
+                                                           onclick="document.getElementById('deleteSkillSetID').value = '<%= skillSet.get("skill_set_ID") %>'">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                                 <%
@@ -359,24 +372,22 @@
         </div>
 
 
-        <div class="modal fade custom-modal" id="add-category">
+        <div class="modal fade custom-modal" id="add-category" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-
                     <div class="modal-header">
                         <h4 class="modal-title">Add New Skill</h4>
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
-
                     <div class="modal-body">
-                        <form>
+                        <form action="AddSkill" method="post">
                             <div class="form-group">
                                 <label>Skill Name</label>
-                                <input type="text" class="form-control" placeholder="2D Design">
+                                <input type="text" name="skillSetName" class="form-control" placeholder="Skill Name">
                             </div>
                             <div class="form-group">
-                                <label>Slug</label>
-                                <input type="text" class="form-control" placeholder="2d-design">
+                                <label>Description</label>
+                                <textarea name="description" class="form-control" placeholder="Description"></textarea>
                             </div>
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -388,23 +399,23 @@
         </div>
 
 
-        <div class="modal fade custom-modal" id="edit-category">
+        <div class="modal fade custom-modal" id="edit-category" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header flex-wrap">
-                        <h4 class="modal-title">Edit Skills</h4>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Skill</h4>
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <input type="hidden" id="editSkillSetID">
+                        <form action="EditSkill" method="post">
+                            <input type="hidden" id="editSkillSetID" name="skillSetID">
                             <div class="form-group">
                                 <label>Skill Name</label>
-                                <input type="text" class="form-control" id="editSkillSetName">
+                                <input type="text" id="editSkillSetName" name="skillSetName" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" id="editDescription"></textarea>
+                                <textarea id="editDescription" name="description" class="form-control"></textarea>
                             </div>
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -422,12 +433,13 @@
                     <div class="modal-body">
                         <div class="form-header">
                             <h3>Delete</h3>
-                            <p>Are you sure want to delete?</p>
+                            <p>Are you sure you want to delete this skill?</p>
                         </div>
+                        <input type="hidden" id="deleteSkillSetID">
                         <div class="modal-btn delete-action">
                             <div class="row">
                                 <div class="col-6">
-                                    <a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
+                                    <a href="javascript:void(0);" class="btn btn-primary continue-btn" onclick="confirmDelete()">Delete</a>
                                 </div>
                                 <div class="col-6">
                                     <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -439,12 +451,34 @@
             </div>
         </div>
 
+
+
         <script>
             function editSkill(skillSetID, skillSetName, description) {
                 document.getElementById("editSkillSetID").value = skillSetID;
                 document.getElementById("editSkillSetName").value = skillSetName;
                 document.getElementById("editDescription").value = description;
-                $('#edit-category').modal('show');
+            }
+
+            function deleteSkill(skillSetID) {
+                if (confirm("Are you sure you want to delete this skill?")) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "DeleteSkillServlet", true);
+                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            alert(xhr.responseText);
+                            window.location.reload();
+                        }
+                    };
+                    xhr.send("skillSetID=" + skillSetID);
+                }
+            }
+
+            function confirmDelete() {
+                // Find the skillSetID from the modal and call deleteSkill
+                var skillSetID = document.getElementById("deleteSkillSetID").value;
+                deleteSkill(skillSetID);
             }
         </script>
         <script src="assets/js/jquery-3.7.1.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
