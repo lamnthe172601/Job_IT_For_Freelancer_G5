@@ -171,6 +171,8 @@
     <servlet>
         <servlet-name>BlogsAdmin</servlet-name>
         <servlet-class>AdminControlles.BlogsAdmin</servlet-class>
+        <servlet-name>EditSkill</servlet-name>
+        <servlet-class>AdminControlles.EditSkill</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -351,5 +353,7 @@
     <servlet-mapping>
         <servlet-name>BlogsAdmin</servlet-name>
         <url-pattern>/blogAdmin</url-pattern>
+        <servlet-name>EditSkill</servlet-name>
+        <url-pattern>/editSkill</url-pattern>
     </servlet-mapping>
 </web-app>
