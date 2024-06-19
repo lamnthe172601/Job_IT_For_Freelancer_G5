@@ -5,16 +5,25 @@ public class Categories {
     private String categoriesName;
     private String image;
     private String description;
-
+    private int statusCate;
     public Categories() {
         
     }
 
-    public Categories(int caID, String categoriesName, String image, String description) {
+    public Categories(int caID, String categoriesName, String image, String description , int statusCate) {
         this.caID = caID;
         this.categoriesName = categoriesName;
         this.image = image;
         this.description = description;
+        this.statusCate = statusCate;
+    }
+
+    public int getStatusCate() {
+        return statusCate;
+    }
+
+    public void setStatusCate(int statusCate) {
+        this.statusCate = statusCate;
     }
 
     
@@ -58,8 +67,9 @@ public class Categories {
 
     @Override
     public String toString() {
-        return "Categories{" + "caID=" + caID + ", categoriesName=" + categoriesName + ", image=" + image + ", description=" + description + '}';
+        return "Categories{" + "caID=" + caID + ", categoriesName=" + categoriesName + ", image=" + image + ", description=" + description + ", statusCate=" + statusCate + '}';
     }
 
+    
    
 }

@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -49,17 +50,23 @@ public class ViewCategoryAdmin extends HttpServlet {
         }
     }
 
-    private void handleDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String cate = request.getParameter("cate"); 
-        boolean isDeleted = categoryDAO.deleteCategory(cate);
+   private void handleDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String cate = request.getParameter("cate");
+    boolean isDeleted = categoryDAO.deleteCategory(cate);
 
-        if (isDeleted) {
-            response.sendRedirect(request.getContextPath() + "/categoryAdmin");
-        } else {
-            request.setAttribute("errorMessage", "Failed to delete category.");
-            request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
-        }
+    if (isDeleted) {
+        // Thêm thông báo vào session
+        HttpSession session = request.getSession();
+        session.setAttribute("message", "DELETE SUCCESSFUL");
+
+        // Chuyển hướng lại trang quản lý category
+        response.sendRedirect(request.getContextPath() + "/categoryAdmin");
+    } else {
+        request.setAttribute("errorMessage", "Failed to delete category.");
+        request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
     }
+}
+
 
     private void handleAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String categoryName = request.getParameter("categoryName");
@@ -67,7 +74,8 @@ public class ViewCategoryAdmin extends HttpServlet {
         Categories newCategory = new Categories();
         newCategory.setCategoriesName(categoryName);
         newCategory.setDescription(categoryDescription);
-
+        HttpSession session = request.getSession();
+        session.setAttribute("message", "ADD SUCCESSFUL");
         boolean isAdded = categoryDAO.addCategory(newCategory);
 
         if (isAdded) {
@@ -79,6 +87,8 @@ public class ViewCategoryAdmin extends HttpServlet {
     }
 
     private void handleEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.setAttribute("message", "UPDATE SUCCESSFUL");
         try {
             String categoryIdStr = request.getParameter("categoryIdStr");
             if (categoryIdStr.trim().isEmpty()) {

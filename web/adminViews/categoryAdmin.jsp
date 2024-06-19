@@ -15,6 +15,15 @@
         <link rel="stylesheet" href="adminAssets/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="adminAssets/plugins/datatables/datatables.min.css">
         <link rel="stylesheet" href="adminAssets/css/style.css">
+        <style>
+            .active-status {
+                color: green;
+            }
+            .trash-status {
+                color: red;
+            }
+        </style>
+
     </head>
     <body>
         <div class="main-wrapper">
@@ -91,23 +100,37 @@
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
-                                                <th>Category Name</th>                                             
-                                                <th>Description</th>          
+                                                <th>Category Name</th>
+                                                <th>Description</th>
+                                                <th>Status</th>
                                                 <th class="text-end">Actions</th>
-
                                             </tr>
                                         </thead>
-
-                                        <c:forEach var="c" items="${categories}">
-                                            <tr>
-                                                <td>${c.getCaID()}</td>
-                                                <td>${c.getCategoriesName()}</td>
-                                                <td>${c.getDescription()}</td>
-                                                <td class="text-end">
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category-${c.getCaID()}"><i class="far fa-edit"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category_${c.getCaID()}"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
+                                        <tbody>
+                                            <c:forEach var="c" items="${categories}">
+                                                <tr>
+                                                    <td>${c.getCaID()}</td>
+                                                    <td>${c.getCategoriesName()}</td>
+                                                    <td>${c.getDescription()}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${c.getStatusCate() == 1}">
+                                                                <span class="active-status">Active</span>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <span class="trash-status">Trash</span>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category-${c.getCaID()}">
+                                                            <i class="far fa-edit"></i>
+                                                        </a>
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category_${c.getCaID()}">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                             <div class="modal custom-modal fade" id="delete_category_${c.getCaID()}" role="dialog">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
@@ -122,7 +145,7 @@
                                                                 <div class="modal-btn delete-action">
                                                                     <div class="row">
                                                                         <div class="col-6">
-                                                                            <button style="width: 100%" type="button" class="btn btn-primary continue-btn delete-btn-ajax">Delete</button>
+                                                                            <button style="width: 100%" type="submit" class="btn btn-primary continue-btn delete-btn-ajax">Delete</button>
                                                                         </div>
                                                                         <div class="col-6">
                                                                             <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -134,12 +157,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
-
                                             <div class="modal fade custom-modal" id="edit-category-${c.getCaID()}">
-                                                <div class="modal-dialog modal-dialog-centered" >
+                                                <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title">Edit Category</h4>
@@ -147,30 +166,28 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form id="edit-category-${c.getCaID()}" action="categoryAdmin" method="post">
-                                                                <input  name="mod" value="edit" hidden>
-
+                                                                <input name="mod" value="edit" hidden>
                                                                 <div class="form-group">
                                                                     <label for="edit-categoryname">Category Name</label>
                                                                     <input name="categoryIdStr" value="${c.getCaID()}" hidden>
-                                                                    <input oninput="checkCategory()" type="text" class="form-control" id="edit-categoryname" name="categoryName" placeholder="Edit Category Name" required>
+                                                                    <input oninput="checkCategories(caID)" type="text" class="form-control" id="edit-categoryname" name="categoryName" value="${c.getCategoriesName()}" required>
                                                                     <div style="color: red" id="eCategoryname"></div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="edit-description">Description</label>
                                                                     <input name="categoryIdStr" value="${c.getCaID()}" hidden>
-                                                                    <input oninput="checkCategory()" type="text" class="form-control" id="edit-description" name="description" placeholder="Edit Category Description" required>
+                                                                    <input oninput="checkCategories(caID)" type="text" class="form-control" id="edit-description" name="description" value="${c.getDescription()}" required>
                                                                 </div>
                                                                 <div class="mt-4">
-                                                                    <button  id="edit-category-btn" class="btn btn-primary btn-block">Submit</button>
+                                                                    <button id="edit-category-btn" class="btn btn-primary btn-block">Submit</button>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>                               
+                                            </div>
                                         </c:forEach>
-
-
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -188,7 +205,8 @@
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form id="add-category-form">
+                        <form id="add-category-form" action="categoryAdmin" method="post">
+                            <input name="mod" value="add" hidden>
                             <div class="form-group">
                                 <label for="categoryName">Category Name</label>
                                 <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Category Name" required>
@@ -200,81 +218,27 @@
                                 <div style="color: red" class="error-message" id="eCategorydescription"></div>
                             </div>
                             <div class="mt-4">
-                                <button type="button" id="add-category-btn" class="btn btn-primary btn-block">Submit</button>
+                                <button type="submit" id="add-category-btn" class="btn btn-primary btn-block">Submit</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
             $(document).ready(function () {
-                // Bắt sự kiện click nút Submit
-                $('#add-category-btn').click(function (event) {
-                    // Ngăn chặn hành vi mặc định của nút Submit
-                    event.preventDefault();
-
-                    // Lấy dữ liệu từ form
-                    var categoryName = $('#categoryname').val();
-                    var categoryDescription = $('#categorydescription').val();
-
-                    // Gửi dữ liệu lên server bằng AJAX
-                    $.ajax({
-                        type: "POST",
-                        url: "/Job_IT_For_Freelancer_G5/categoryAdmin", // URL xử lý dữ liệu
-                        data: {
-                            categoryName: categoryName,
-                            description: categoryDescription,
-                            mod: 'add' // Tham số mod cho biết là thêm mới danh mục
-                        },
-                        success: function (response) {
-                            // Xử lý khi thêm thành công
-                            $('#add-category').modal('hide'); // Đóng modal
-                            // Không cần reload trang, thực hiện cập nhật dữ liệu ngay tại đây
-                            // Ví dụ: Hiển thị thông báo thành công, cập nhật danh sách danh mục, vv.
-                        },
-                        error: function (xhr, status, error) {
-                            // Xử lý khi có lỗi
-                            var errorMessage = xhr.status + ': ' + xhr.statusText;
-                            alert('Error - ' + errorMessage); // Thông báo lỗi cho người dùng
-                        }
-                    });
+            <% String message = (String) session.getAttribute("message"); %>
+            <% if (message != null) { %>
+                toastr.success('<%= message %>', 'Notification', {
+                    timeOut: 3000,
+                    positionClass: 'toast-top-right'
                 });
+            <% session.removeAttribute("message"); %>
+            <% } %>
             });
-
-
-
-            $(document).ready(function () {
-                $('.delete-btn-ajax').click(function (event) {
-                    event.preventDefault();
-
-                    // Lấy id của modal và form
-                    var modalId = $(this).closest('.modal').attr('id');
-                    var formId = '#' + modalId + ' form';
-
-                    // Lấy dữ liệu từ form
-                    var formData = $(formId).serialize();
-
-                    // Gửi dữ liệu lên server bằng AJAX
-                    $.ajax({
-                        type: "POST",
-                        url: "/Job_IT_For_Freelancer_G5/categoryAdmin", // URL xử lý dữ liệu
-                        data: formData,
-                        success: function (response) {
-                            $('#' + modalId).modal('hide'); // Đóng modal
-                            // Cập nhật giao diện hoặc thông báo thành công tại đây
-                        },
-                        error: function (xhr, status, error) {
-                            alert('Error deleting category.'); // Thông báo lỗi khi xảy ra lỗi trong quá trình gửi yêu cầu
-                        }
-                    });
-                });
-            });
-
-
-
-
         </script>
         <script src="assets/js/jquery-3.7.1.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
