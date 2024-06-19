@@ -155,7 +155,7 @@
     <servlet>
         <servlet-name>ApplyJobControll</servlet-name>
         <servlet-class>FreelancerControll.ApplyJobControll</servlet-class>
-        </servlet>
+    </servlet>
     <servlet>
         <servlet-name>AllListPostControll</servlet-name>
         <servlet-class>CommonControll.AllListPostControll</servlet-class>
@@ -163,6 +163,10 @@
     <servlet>
         <servlet-name>ProjectAdmin</servlet-name>
         <servlet-class>AdminControlles.ProjectAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModerationProjectAdmin</servlet-name>
+        <servlet-class>AdminControlles.ModerationProjectAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -327,7 +331,7 @@
     <servlet-mapping>
         <servlet-name>ApplyJobControll</servlet-name>
         <url-pattern>/ApplyJob</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AllListPostControll</servlet-name>
         <url-pattern>/AllListPost</url-pattern>
@@ -335,5 +339,9 @@
     <servlet-mapping>
         <servlet-name>ProjectAdmin</servlet-name>
         <url-pattern>/projectAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModerationProjectAdmin</servlet-name>
+        <url-pattern>/moderationProjectAdmin</url-pattern>
     </servlet-mapping>
 </web-app>

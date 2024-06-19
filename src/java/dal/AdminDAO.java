@@ -75,6 +75,22 @@ public class AdminDAO extends DBContext {
             System.out.println(e.getMessage());
         }
     }
+    
+      public void moderationProject(int postID, int checked) {
+        String query = """
+                       UPDATE [dbo].[Post]
+                           SET 
+                              [checking] = ?
+                         WHERE postID = ? """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, checked);
+            ps.setInt(2, postID);
+            ResultSet rs = ps.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public static void main(String[] args) {
         new AdminDAO().changeStatusUser(12, "inactive");
