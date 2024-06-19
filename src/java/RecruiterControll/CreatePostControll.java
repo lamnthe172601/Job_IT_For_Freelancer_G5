@@ -77,7 +77,8 @@ public class CreatePostControll extends HttpServlet {
             String description = request.getParameter("description");
             String budget_raw = request.getParameter("budgetFrom");
             String location = request.getParameter("location");
-            String skill = request.getParameter("skill");
+            String[] skill_raw = request.getParameterValues("skill");
+            String skills = String.join(", ", skill_raw);
             String caId_raw = request.getParameter("categoriesName");
 
             String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ProjectsPost";
@@ -94,7 +95,7 @@ public class CreatePostControll extends HttpServlet {
                 int duration = Integer.parseInt(duration_raw);
                 int caId = Integer.parseInt(caId_raw);
 
-                if (postDAO.createPost(projectTitle, linkDB, jobType, duration, target, description, budget, location, skill, re.getRecruiterID(), 1, caId, 0)) {
+                if (postDAO.createPost(projectTitle, linkDB, jobType, duration, target, description, budget, location, skills, re.getRecruiterID(), 1, caId, 0)) {
                 imgPart.write(imgFilePath);
                     response.getWriter().write("success");
                 } else {
