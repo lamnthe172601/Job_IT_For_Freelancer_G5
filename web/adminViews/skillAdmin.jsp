@@ -303,7 +303,18 @@
                             </form>
                         </div>
                     </div>
-
+                    <% 
+                                
+                                String message = (String) session.getAttribute("message");
+                                if (message != null) {
+                    %>
+                    <div class="alert alert-success">
+                        <%= message %>
+                    </div>
+                    <% 
+                            session.removeAttribute("message"); 
+                        }
+                    %>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -380,21 +391,20 @@
         <div class="modal fade custom-modal" id="edit-category">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-
                     <div class="modal-header flex-wrap">
                         <h4 class="modal-title">Edit Skills</h4>
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
-
                     <div class="modal-body">
                         <form>
+                            <input type="hidden" id="editSkillSetID">
                             <div class="form-group">
                                 <label>Skill Name</label>
-                                <input type="text" class="form-control" value="Graphics & Design">
+                                <input type="text" class="form-control" id="editSkillSetName">
                             </div>
                             <div class="form-group">
-                                <label>Slug</label>
-                                <input type="text" class="form-control" value="Design a Website Mockup">
+                                <label>Description</label>
+                                <textarea class="form-control" id="editDescription"></textarea>
                             </div>
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -429,7 +439,14 @@
             </div>
         </div>
 
-
+        <script>
+            function editSkill(skillSetID, skillSetName, description) {
+                document.getElementById("editSkillSetID").value = skillSetID;
+                document.getElementById("editSkillSetName").value = skillSetName;
+                document.getElementById("editDescription").value = description;
+                $('#edit-category').modal('show');
+            }
+        </script>
         <script src="assets/js/jquery-3.7.1.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>

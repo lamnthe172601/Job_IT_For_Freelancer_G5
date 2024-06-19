@@ -105,6 +105,10 @@
         <servlet-class>AccountControll.ViewProfile_Freelancer</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ViewCategoryAdmin</servlet-name>
+        <servlet-class>AdminControlles.ViewCategoryAdmin</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>PostFavouritesControll</servlet-name>
         <servlet-class>FreelancerControll.PostFavouritesControll</servlet-class>
     </servlet>
@@ -113,8 +117,52 @@
         <servlet-class>FreelancerControll.ListApplyControll</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListPostControll</servlet-name>
-        <servlet-class>CommonControll.ListPostControll</servlet-class>
+        <servlet-name>Dashboard</servlet-name>
+        <servlet-class>RecruiterControll.Dashboard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageJobsPostsControll</servlet-name>
+        <servlet-class>RecruiterControll.ManageJobsPostsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAllApplicationControll</servlet-name>
+        <servlet-class>RecruiterControll.ManageAllApplicationControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompletedProjectsControll</servlet-name>
+        <servlet-class>RecruiterControll.CompletedProjectsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExpiredProjectsControll</servlet-name>
+        <servlet-class>RecruiterControll.ExpiredProjectsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreatePostControll</servlet-name>
+        <servlet-class>RecruiterControll.CreatePostControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyListPostRecruiterControll</servlet-name>
+        <servlet-class>RecruiterControll.MyListPostRecruiterControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePostFavouritesControll</servlet-name>
+        <servlet-class>FreelancerControll.DeletePostFavouritesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostDetailsControll</servlet-name>
+        <servlet-class>CommonControll.PostDetailsControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApplyJobControll</servlet-name>
+        <servlet-class>FreelancerControll.ApplyJobControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllListPostControll</servlet-name>
+        <servlet-class>CommonControll.AllListPostControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSkill</servlet-name>
+        <servlet-class>AdminControlles.EditSkill</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -229,6 +277,10 @@
         <url-pattern>/MyProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ViewCategoryAdmin</servlet-name>
+        <url-pattern>/categoryAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>PostFavouritesControll</servlet-name>
         <url-pattern>/PostFavourites</url-pattern>
     </servlet-mapping>
@@ -237,7 +289,51 @@
         <url-pattern>/ListApply</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ListPostControll</servlet-name>
-        <url-pattern>/ListPost</url-pattern>
+        <servlet-name>Dashboard</servlet-name>
+        <url-pattern>/Dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageJobsPostsControll</servlet-name>
+        <url-pattern>/manageJobsPosts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAllApplicationControll</servlet-name>
+        <url-pattern>/ManageApplication</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompletedProjectsControll</servlet-name>
+        <url-pattern>/CompletedProjects</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExpiredProjectsControll</servlet-name>
+        <url-pattern>/ExpiredProjects</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePostControll</servlet-name>
+        <url-pattern>/CreatePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyListPostRecruiterControll</servlet-name>
+        <url-pattern>/myListJobProject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePostFavouritesControll</servlet-name>
+        <url-pattern>/DeletePostFavourites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDetailsControll</servlet-name>
+        <url-pattern>/PostDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyJobControll</servlet-name>
+        <url-pattern>/ApplyJob</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllListPostControll</servlet-name>
+        <url-pattern>/AllListPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSkill</servlet-name>
+        <url-pattern>/editSkill</url-pattern>
     </servlet-mapping>
 </web-app>
