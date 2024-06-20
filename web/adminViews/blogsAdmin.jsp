@@ -80,7 +80,32 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="filter-section" style="display: none">
+                        <div class="row">
+                            <div class="mb-6">
+                                <label for="filter-title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="filter-title" placeholder="Enter blog title">
+                            </div>
+                            <div class="mb-6">
+                                <label for="filter-status" class="form-label">Status</label>
+                                <select class="form-select" id="filter-status">
+                                    <option value="">All</option>
+                                    <option value="active">Active</option>
+                                    <option value="trash">Trash</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-6">
+                                <label for="filter-date-from" class="form-label">Date From</label>
+                                <input type="date" class="form-control" id="filter-date-from">
+                            </div>
+                            <div class="mb-6">
+                                <label for="filter-date-to" class="form-label">Date To</label>
+                                <input type="date" class="form-control" id="filter-date-to">
+                            </div>
+                        </div>
+                    </div>
 
 
                     <div class="row">
@@ -262,6 +287,59 @@
         </div>
         <script src="adminAssets/js/jquery-3.7.1.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
+        <script>
+            $(document).ready(function () {
+                $('#filter_search').click(function () {
+                    $('.filter-section').toggle();
+                });
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const filterTitle = document.getElementById('filter-title');
+                const filterDateFrom = document.getElementById('filter-date-from');
+                const filterDateTo = document.getElementById('filter-date-to');
+                const filterStatus = document.getElementById('filter-status');
+                const rows = document.querySelectorAll('.datatable tbody tr');
+
+                // Set default "Date To" as today
+                const today = new Date().toISOString().split('T')[0];
+                filterDateTo.value = today;
+
+                function filterRows() {
+                    const titleValue = filterTitle.value.toLowerCase();
+                    const dateFromValue = filterDateFrom.value;
+                    const dateToValue = filterDateTo.value || today;
+                    const statusValue = filterStatus.value.toLowerCase();
+
+                    rows.forEach(row => {
+                        const title = row.querySelector('.title a').textContent.toLowerCase();
+                        const date = row.querySelector('.datecreate').textContent.trim();
+                        const status = row.querySelector('.status').textContent.toLowerCase();
+
+                        const titleMatch = title.includes(titleValue);
+                        const dateMatch = (!dateFromValue || date >= dateFromValue) && (date <= dateToValue);
+                        const statusMatch = statusValue === '' || status.includes(statusValue);
+
+                        row.style.display = titleMatch && dateMatch && statusMatch ? '' : 'none';
+                    });
+                }
+
+                // Add event listeners for instant filtering
+                filterTitle.addEventListener('input', filterRows);
+                filterDateFrom.addEventListener('change', filterRows);
+                filterDateTo.addEventListener('change', filterRows);
+                filterStatus.addEventListener('change', filterRows);
+
+                // Initial filter application
+                filterRows();
+            });
+        </script>
+
         <script>
             $(document).ready(function () {
                 // Xử lý sự kiện click trên nút xóa
@@ -369,7 +447,7 @@
                 }
             }
 
-// Sử dụng hàm trên để cắt bỏ tiêu đề và mô tả dài hơn giới hạn
+            // Sử dụng hàm trên để cắt bỏ tiêu đề và mô tả dài hơn giới hạn
             var titles = document.querySelectorAll(".table-avatar.title a");
             var descriptions = document.querySelectorAll(".descripition");
             titles.forEach(function (title) {
@@ -400,6 +478,6 @@
         <script src="adminAssets/plugins/datatables/datatables.min.js" ></script>
 
         <script src="adminAssets/js/script.js" ></script>
-
-        <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/providers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:24 GMT -->
+    </body>
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/providers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:24 GMT -->
 </html>

@@ -91,7 +91,6 @@ public class BlogsAdmin extends HttpServlet {
                 case "add":
                     handleAdd(request, response);
                     break;
-
                 case "update":
                     handleUpdate(request, response);
                     break;
@@ -122,16 +121,16 @@ public class BlogsAdmin extends HttpServlet {
 
             String title = request.getParameter("title");
             String descripition = request.getParameter("descripition");
+           
             String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ImageBlog";
             String imgFileName = (d.getAllBlogs().size() + 1) + "_image.jpg";
             String imgFilePath = uploadDirectory + "\\" + imgFileName;
-            String linkDB = "FolderImages/ImageBlog/" + imgFileName;
+            String linkDB = "FolderImages/ImageBlog/" + imgFileName;            
             Part imgPart = request.getPart("image");
-            imgPart.write(imgFilePath);
+            imgPart.write(imgFilePath);            
             d.addBlog(title, linkDB, descripition);
             request.getSession().setAttribute("successMessage", "Add Blog successfull!");
             Thread.sleep(2000);
-
             response.sendRedirect("blogAdmin");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -195,7 +194,7 @@ public class BlogsAdmin extends HttpServlet {
                 response.getWriter().write("{\"success\":false,\"message\":\"Failed to activate blog.\"}");
             }
         } catch (Exception e) {
-          e.getMessage();
+            e.getMessage();
         }
     }
 
