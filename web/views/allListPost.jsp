@@ -71,6 +71,20 @@
                 background-color: #FF3300;
                 color: white;
             }
+            
+            .confirm-btn{
+
+                background: #E65425;
+                border-radius: 90px;
+                font-weight: bold;
+                font-size: 17px;
+                padding: 13px 50px;
+                color: #FFFFFF;
+                margin-right: 15px;
+                text-transform: uppercase;
+                
+            }
+
         </style>
     </head>
     <body>
@@ -357,22 +371,46 @@
 
                                                     <c:choose>
                                                         <c:when test="${applied}">
-                                                            <a  class="btn-cart1 apply" tabindex="-1">Applied</a>
+                                                            <a class="btn-cart1 apply" tabindex="-1">Applied</a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a href="ApplyJobInListPost?postID=${list.postID}" id="applyButton_${list.postID}" class="btn-cart1 apply-button classbtn" data-postid="${list.postID}" tabindex="-1">Apply Now</a>
-
+                                                            <a data-bs-toggle="modal" data-bs-target="#applyModal_${list.postID}" id="applyButton_${list.postID}" class="btn-cart1 apply-button classbtn" data-postid="${list.postID}" tabindex="-1">Apply Now</a>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </c:if> 
-                                                
-                                                            <c:if test="${postApply == null}">
-                                                               <a href="login" class="btn-cart1  classbtn"  tabindex="-1">Apply Now</a> 
-                                                            </c:if>
+
+                                                <c:if test="${postApply == null}">
+                                                    <a href="login" class="btn-cart1  classbtn"  tabindex="-1">Apply Now</a> 
+                                                </c:if>
                                             </div>
 
 
                                         </div>
+                                                <div class="modal custom-modal fade" id="applyModal_${list.postID}" role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <div class="form-header">
+                                                                <input type="hidden" class="user-id1" id="">
+                                                                <h3>Status</h3>
+                                                                <p>Are you sure you want to apply for this job?</p>
+                                                            </div>
+                                                            <div class="modal-btn Suspend-action">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <!-- Nút "Yes" để xử lý AJAX -->
+                                                                        <a href="javascript:void(0);" class="btn btn-primary confirm-btn" data-postid="${list.postID}">Yes</a>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <!-- Nút "Cancel" để đóng modal -->
+                                                                        <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
                                 </c:forEach>
                             </div>
@@ -594,37 +632,10 @@
                 });
             }
         </script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('.apply-button').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
 
-                    $.ajax({
-                        url: 'ApplyJobInListPost',
-                        type: 'GET',
-                        data: {
-                            postID: postID
-                        },
-                        success: function (response) {
-                            // Xử lý phản hồi thành công (nếu cần)
-
-                            // Đổi nút sang trạng thái "Applied"
-                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').css('background-color', '#FF3300')
-                                    .css('color', 'white');
-                        },
-                        error: function (xhr, status, error) {
-                            // Xử lý lỗi (nếu có)
-                            alert('Đã xảy ra lỗi: ' + error);
-                        }
-                    });
-                });
-            });
-        </script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
@@ -666,6 +677,45 @@
                 });
             }
         </script>
+        
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
+                $('.apply-button').on('click', function (e) {
+                    e.preventDefault();
+                    var postID = $(this).data('postid');
+                    // Hiển thị modal tương ứng
+                    $('#applyModal_' + postID).modal('show');
+                });
+
+                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
+                $('.confirm-btn').on('click', function (e) {
+                    e.preventDefault();
+                    var postID = $(this).data('postid');
+
+                    // Gửi yêu cầu AJAX để ứng tuyển công việc
+                    $.ajax({
+                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
+                        type: 'GET',
+                        data: {
+                            postID: postID
+                        },
+                        success: function (response) {
+                            // Xử lý phản hồi thành công (nếu cần)
+                            // Đổi nút sang trạng thái "Applied"
+                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').addClass('apply').css('background-color', '#FF3300').css('color', 'white');
+                            // Đóng modal sau khi xử lý thành công
+                            $('#applyModal_' + postID).modal('hide');
+                        },
+                        error: function (xhr, status, error) {
+                            // Xử lý lỗi (nếu có)
+                            alert('Đã xảy ra lỗi: ' + error);
+                        }
+                    });
+                });
+            });
+        </script>
 
 
         <script src="assets/js/filterMyListPost.js" type="text/javascript"></script>
@@ -681,6 +731,7 @@
         <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
         <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
         <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script></body>
-
+       <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
 </html>

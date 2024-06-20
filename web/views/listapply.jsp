@@ -72,7 +72,7 @@
 
                                             <li><a href="PostFavourites">Jobs Favourites</a></li>
 
-                                            <li><a href="jobsApply">Jobs Apply</a></li>
+                                            <li><a href="ListApply">Jobs Apply</a></li>
                                             <li><a href="jobforyou">Jobs For you</a></li>
                                         </ul>
                                     </li>

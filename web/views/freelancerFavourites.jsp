@@ -364,9 +364,9 @@
                                     </div>
                                 </div>
                             </div>
-                                    
+
                         </div>
-                                    
+
 
 
 
@@ -377,7 +377,7 @@
                                         <c:if test="${txtSearch != null}">
                                             <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
                                         </c:if>
-                                            <c:if test="${txtSearch == null}">
+                                        <c:if test="${txtSearch == null}">
                                             <input name="searchName" type="text"  class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
                                         </c:if>
                                         <div class="input-group-append">
@@ -442,6 +442,7 @@
                                                 </div>
                                                 <div class="cart-hover">
                                                     <a href="javascript:void(0);" onclick="openPopup(${p.postID})" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
+
                                                     <c:set var="applied" value="false" />
                                                     <c:forEach items="${postApply}" var="j">
                                                         <c:if test="${p.postID == j.postID}">
@@ -458,30 +459,33 @@
 
                                                     <c:choose>
                                                         <c:when test="${applied}">
-                                                            <a  class="btn-cart1 apply" tabindex="-1">Applied</a>
+                                                            <a class="btn-cart1 apply" tabindex="-1">Applied</a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a data-bs-toggle="modal" data-bs-target="#apply${p.postID}"  id="applyButton_${p.postID}" class="btn-cart1 apply-button classbtn" data-postid="${p.postID}" tabindex="-1">Apply Now</a>
+                                                            <a data-bs-toggle="modal" data-bs-target="#applyModal_${p.postID}" id="applyButton_${p.postID}" class="btn-cart1 apply-button classbtn" data-postid="${p.postID}" tabindex="-1">Apply Now</a>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </div>
                                             </div>
 
-                                            <div class="modal custom-modal fade" id="apply${p.postID}" role="dialog">
+                                            <div class="modal custom-modal fade" id="applyModal_${p.postID}" role="dialog">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-body">
                                                             <div class="form-header">
                                                                 <input type="hidden" class="user-id1" id="">
                                                                 <h3>Status</h3>
-                                                                <p>Successful application. Please go to page Job Apply to view the status of your application.</p>
+                                                                <p>Are you sure you want to apply for this job?</p>
                                                             </div>
-                                                            <div class="modal-btn Suspend-action" >
+                                                            <div class="modal-btn Suspend-action">
                                                                 <div class="row">
                                                                     <div class="col-6">
+                                                                        <!-- Nút "Yes" để xử lý AJAX -->
+                                                                        <a href="javascript:void(0);" class="btn btn-primary confirm-btn" data-postid="${p.postID}">Yes</a>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <a  data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                                                        <!-- Nút "Cancel" để đóng modal -->
+                                                                        <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -593,7 +597,7 @@
                                                                 <div class="class1">Description: </div>
                                                                 <h3>${p.description}</h3>
                                                             </div>
-                                                            <a href="PostDetails?postID=${p.postID}" class="btn-cart1" tabindex="-1">More Detail</a>
+                                                                <a href="PostDetails?postID=${p.postID}" class="btn-cart1 viewmore" style="text-align: center; margin-left: 32%; margin-top: 30px" tabindex="-1">More Detail</a>
                                                         </div>
                                                     </div>
                                                     <span class="close" onclick="closePopup(${p.postID})">&times;</span>
@@ -888,7 +892,7 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
-            
+
             .form-inline {
                 margin-left: 60%;
                 margin-right: 50px;
@@ -906,6 +910,24 @@
                 top: 50%;
                 transform: translateY(-50%);
             }
+
+            .confirm-btn{
+
+                background: #E65425;
+                border-radius: 90px;
+                font-weight: bold;
+                font-size: 17px;
+                padding: 13px 50px;
+                color: #FFFFFF;
+                margin-right: 15px;
+                text-transform: uppercase;
+                
+            }
+            .viewmore:hover {
+                background-color: #FF3300;
+                color: white;
+            }
+
 
 
 
@@ -938,22 +960,32 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
+                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
                 $('.apply-button').on('click', function (e) {
                     e.preventDefault();
                     var postID = $(this).data('postid');
+                    // Hiển thị modal tương ứng
+                    $('#applyModal_' + postID).modal('show');
+                });
 
+                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
+                $('.confirm-btn').on('click', function (e) {
+                    e.preventDefault();
+                    var postID = $(this).data('postid');
+
+                    // Gửi yêu cầu AJAX để ứng tuyển công việc
                     $.ajax({
-                        url: 'ApplyJob',
+                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
                         type: 'GET',
                         data: {
                             postID: postID
                         },
                         success: function (response) {
                             // Xử lý phản hồi thành công (nếu cần)
-
                             // Đổi nút sang trạng thái "Applied"
-                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').css('background-color', '#FF3300')
-                                    .css('color', 'white');
+                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').addClass('apply').css('background-color', '#FF3300').css('color', 'white');
+                            // Đóng modal sau khi xử lý thành công
+                            $('#applyModal_' + postID).modal('hide');
                         },
                         error: function (xhr, status, error) {
                             // Xử lý lỗi (nếu có)

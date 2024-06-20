@@ -537,7 +537,7 @@ public class PostDAO extends DBContext {
                                               	inner join Recruiter r on r.recruiterID=p.recruiterID
                                               	inner join Company co on co.recruiterID=p.recruiterID						
                                               	where f.freelanceID=?
-                       				ORDER BY f.favoritesID
+                       				ORDER BY f.favoritesID desc
                        				OFFSET ? rows fetch next 6 rows only;
                        """;
         try {
@@ -569,7 +569,7 @@ public class PostDAO extends DBContext {
                                                                      	inner join JobApply j on p.postID=j.postID   	
                                                                      	inner join Categories c on c.caID=p.caID
                                                                      	where j.freelanceID=?
-                       							ORDER BY j.applyID
+                       							ORDER BY j.applyID desc
                                               				OFFSET ? rows fetch next 8 rows only;
                        """;
         try {
