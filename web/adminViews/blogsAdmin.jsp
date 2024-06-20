@@ -68,7 +68,7 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <h3 class="page-title">All Blog</h3>
-                                <p>Total <span>${totalRecruiter}</span> Blog</p>
+                                <p>Total <span>${totalRecruiter}</span> Recruiter account</p>
                             </div>
                             <div class="col-auto">
                                 <a href="javascript:void(0);" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-blog">

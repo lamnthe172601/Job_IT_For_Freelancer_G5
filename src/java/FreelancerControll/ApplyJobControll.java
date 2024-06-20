@@ -63,26 +63,25 @@ public class ApplyJobControll extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    LocalDate currentDate = LocalDate.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    String formattedDate = currentDate.format(formatter);
-    try {
-        String postID = request.getParameter("postID");
-        HttpSession session = request.getSession();
-        Object u = session.getAttribute("account");
-        User user = (User) u;
-        PostDAO p = new PostDAO();
-        DAO d = new DAO();
-        int userId = user.getUserID();
-        int freelancerID = d.getFreelancerIDbyUserID(userId);
-        p.applyJob(freelancerID, postID, formattedDate);
-        
-        
-    } catch (Exception e) {
-        request.getRequestDispatcher("login").forward(request, response);
+            throws ServletException, IOException {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = currentDate.format(formatter);
+        try {
+            String postID = request.getParameter("postID");
+            HttpSession session = request.getSession();
+            Object u = session.getAttribute("account");
+            User user = (User) u;
+            PostDAO p = new PostDAO();
+            DAO d = new DAO();
+            int userId = user.getUserID();
+            int freelancerID = d.getFreelancerIDbyUserID(userId);
+            p.applyJob(freelancerID, postID, formattedDate);
+            request.getRequestDispatcher("PostFavourites").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("login").forward(request, response);
+        }
     }
-}
 
     /**
      * Handles the HTTP <code>POST</code> method.

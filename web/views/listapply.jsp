@@ -81,7 +81,7 @@
                                         <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="AllListPost">Jobs List</a></li>                                        
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
                                             <li><a href="SreachJob">Find Jobs</a></li>  
                                             <li><a href="company">Company</a></li>
                                         </ul>
@@ -265,37 +265,37 @@
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="${freelancer.image}" class="avatar-lg rounded-circle"></a>
+                                    <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/avatar-1.jpg" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
-                                        <h3 class="mb-0">${freelancer.fullname()}</h3>
-                                        <p class="mb-0">@${sessionScope.account.username}</p>
+                                        <h3 class="mb-0"><a href="freelancer-profile.html">Bruce Bush</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
+                                        <p class="mb-0">@brucebush</p>
                                     </div>
                                 </div>
                                 <div class="settings-menu">
                                     <div id="sidebar-menu" class="sidebar-menu">
                                         <ul>
                                             <li class="nav-item">
-                                                <a href="freelancer-dashboard" class="nav-link ">
+                                                <a href="freelancer-dashboard.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="ListApply" class="nav-link active">
+                                                <a href="freelancer-project-proposals.html" class="nav-link active">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="freelancer-project-proposals">My Proposal</a>
+                                                        <a href="freelancer-project-proposals.html">My Proposal</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-ongoing-projects">Ongoing Projects</a>
+                                                        <a href="freelancer-ongoing-projects.html">Ongoing Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-completed-projects">Completed Projects</a>
+                                                        <a href="freelancer-completed-projects.html">Completed Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-cancelled-projects">Cancelled Projects</a>
+                                                        <a href="freelancer-cancelled-projects.html">Cancelled Projects</a>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -306,37 +306,51 @@
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="freelancer-favourites">Bookmarked Projects</a>
+                                                        <a class="active" href="freelancer-favourites.html">Bookmarked Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-invitations">Invitations</a>
+                                                        <a href="freelancer-invitations.html">Invitations</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-review" class="nav-link">
+                                                <a href="freelancer-review.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-portfolio" class="nav-link">
+                                                <a href="freelancer-portfolio.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-05.svg" alt="Img"> Portfolio
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-chats" class="nav-link">
+                                                <a href="freelancer-chats.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
                                                 </a>
                                             </li>
-
-                                            <li class="nav-item submenu">
-                                                <a href="freelancer-profile-settings.html" class="nav-link ">
+                                            <li class="nav-item">
+                                                <a href="freelancer-withdraw-money.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="freelancer-payout.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-08.svg" alt="Img"> Payout
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="freelancer-withdraw-money.html" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-09.svg" alt="Img"> Statement
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a class="active" href="freelancer-profile-settings.html">Profile Setting</a>
+                                                        <a href="freelancer-profile-settings.html">Profile Setting</a>
                                                     </li>
                                                     <li>
                                                         <a href="freelancer-membership.html">Plan & Billing</a>
@@ -345,13 +359,15 @@
                                                         <a href="freelancer-verify-identity.html">Verify Identity</a>
                                                     </li>
                                                     <li>
-                                                        <a href="changePassword">Changes Password</a>
+                                                        <a href="freelancer-change-password.html">Changes Password</a>
                                                     </li>
-
+                                                    <li>
+                                                        <a href="freelancer-delete-account.html">Delete Account</a>
+                                                    </li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="logout" class="nav-link">
+                                                <a href="index.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-11.svg" alt="Img"> Logout
                                                 </a>
                                             </li>
@@ -362,14 +378,9 @@
                         </div>
                         <div class="col-xl-9 col-lg-8">
                             <div class="dashboard-sec freelance-favourites">
-                                <form action="ListApply" method="post" class="form-inline my-2 my-lg-0">
+                                <form action="search" method="post" class="form-inline my-2 my-lg-0">
                                     <div class="input-group input-group-sm">
-                                        <c:if test="${txtSearch != null}">
-                                            <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
-                                        </c:if>
-                                            <c:if test="${txtSearch == null}">
-                                            <input name="searchName" type="text"  class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
-                                        </c:if>
+                                        <input name="searchName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-secondary btn-number">
                                                 <i class="fa fa-search"></i>
@@ -414,7 +425,7 @@
                                                             <c:if test="${p.status=='Approve'}">
                                                                 <td style="color: #009933">${p.status}</td>
                                                             </c:if>
-
+                                                            
                                                             <td><a style="padding-left: 25%" href="PostDetails?postID=${p.postID}"><i
                                                                         class="feather-eye"></i></a></td>
                                                         </tr>
@@ -423,25 +434,10 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <c:if test="${endPage > 1}">
-                                    <div class="row">
-                                        <div class="col-md-12">                  
-                                            <ul class="paginations list-pagination">                                          
-                                                <!--<li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a></li>-->
-                                                <c:forEach begin="1" end="${endPage}" var="e">     
-                                                                <!--<li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>-->
-                                                    <li class="page-item" ><a class="${tag == e?"active":""}" href="ListApply?index=${e}">${e}</a></li>
-                                                                <!--<li class="page-item"><a href="javascript:void(0);">3</a></li>
-                                                                <li class="page-item"><a href="javascript:void(0);">...</a></li>
-                                                                <li class="page-item"><a href="javascript:void(0);">10</a></li>-->
-                                                </c:forEach>
-                                                                <!--<li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-right"></i></a></li>-->                                          
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    </c:if>
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                 </div>

@@ -76,7 +76,7 @@ public class DeletePostFavouritesControll extends HttpServlet {
             List<PostBasic> post = p.getAllFavPosts(freelancerID);
             request.setAttribute("mess", "Delete success!");
             request.setAttribute("post", post);
-            request.getRequestDispatcher("PostFavourites").forward(request, response);
+            request.getRequestDispatcher("views/freelancerFavourites.jsp").forward(request, response);
         }
     } 
 

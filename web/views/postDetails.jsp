@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -184,7 +183,7 @@
                                         <img src="${post.image}" class="img-fluid" alt="logo">
                                     </div>
                                     <div class="company-title">
-
+                                        
                                         <h4>${post.title}</h4>
                                     </div>
                                 </div>
@@ -236,24 +235,24 @@
                                                 <p class="mb-0">${post.quantity}</p>
                                             </div>
                                         </li>
-                                        <!--                                        <li>
-                                                                                    <div class="proposal-detail-img">
-                                                                                        <img src="assets/img/icon/translate-2.svg" alt="icons">
-                                                                                    </div>
-                                                                                    <div class="proposal-detail text-capitalize">
-                                                                                        <span class=" d-block">Languages</span>
-                                                                                        <p class="mb-0">English, Arabic</p>
-                                                                                    </div>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <div class="proposal-detail-img">
-                                                                                        <img src="assets/img/icon/translate.svg" alt="icons">
-                                                                                    </div>
-                                                                                    <div class="proposal-detail text-capitalize">
-                                                                                        <span class=" d-block">Language Fluency</span>
-                                                                                        <p class="mb-0">Conversational</p>
-                                                                                    </div>
-                                                                                </li>-->
+<!--                                        <li>
+                                            <div class="proposal-detail-img">
+                                                <img src="assets/img/icon/translate-2.svg" alt="icons">
+                                            </div>
+                                            <div class="proposal-detail text-capitalize">
+                                                <span class=" d-block">Languages</span>
+                                                <p class="mb-0">English, Arabic</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="proposal-detail-img">
+                                                <img src="assets/img/icon/translate.svg" alt="icons">
+                                            </div>
+                                            <div class="proposal-detail text-capitalize">
+                                                <span class=" d-block">Language Fluency</span>
+                                                <p class="mb-0">Conversational</p>
+                                            </div>
+                                        </li>-->
                                     </ul>
                                 </div>
                             </div>
@@ -264,56 +263,53 @@
                             <div class="company-detail-block company-description">
                                 <h4 class="company-detail-title">Skills Required</h4>
                                 <div class="tags">
-                                    <c:forEach items="${fn:split(post.skill, ',')}" var="skill">
-                                        <span  class="badge badge-pill badge-design ">${skill}</span>
-                                    </c:forEach>
-                                    <!--<a ><span class="badge badge-pill badge-design">${post.skill}</span></a>-->
+                                    <a ><span class="badge badge-pill badge-design">${post.skill}</span></a>
                                 </div>
                             </div>
-
+           
                             <div class="company-detail-block pb-0">
                                 <h4 class="company-detail-title">Other Post</h4>
                                 <c:forEach items="${lpost}" var="p" >
-                                    <div class="project-proposals-block ">
-                                        <div class="project-proposals-img">
-                                            <img src="${p.image}" class="img-fluid" alt="user">
-                                        </div>
-                                        <div class="project-proposals-description">
-                                            <div class="proposals-user-detail">
-                                                <div>
-                                                    <a href="PostDetails?postID=${p.postID}"><h5> ${p.title}</h5></a>
-                                                    <ul class="d-flex">
-
-                                                        <li>
-                                                            <div class="proposals-user-review">
-                                                                <span><i class="feather-calendar"></i>${p.datePost}</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="proposals-user-review">
-                                                                <span>${p.caID.categoriesName}</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="proposals-user-review">
-                                                                <span>$${p.budget}/hour</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <!--                                            <div>
-                                                                                                <div class="proposals-pricing">
-                                                                                                    <h5>$40-$500</h5>                                                   
-                                                                                                </div>
-                                                                                            </div>-->
-                                            </div>
-                                            <p class="mb-0">${p.description}</p>
-                                        </div>
+                                <div class="project-proposals-block ">
+                                    <div class="project-proposals-img">
+                                        <img src="${p.image}" class="img-fluid" alt="user">
                                     </div>
+                                    <div class="project-proposals-description">
+                                        <div class="proposals-user-detail">
+                                            <div>
+                                                <a href="PostDetails?postID=${p.postID}"><h5> ${p.title}</h5></a>
+                                                <ul class="d-flex">
+                                                    
+                                                    <li>
+                                                        <div class="proposals-user-review">
+                                                            <span><i class="feather-calendar"></i>${p.datePost}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="proposals-user-review">
+                                                            <span>${p.caID.categoriesName}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="proposals-user-review">
+                                                            <span>$${p.budget}/hour</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+<!--                                            <div>
+                                                <div class="proposals-pricing">
+                                                    <h5>$40-$500</h5>                                                   
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                        <p class="mb-0">${p.description}</p>
+                                    </div>
+                                </div>
                                 </c:forEach>
-
-
-
+                                
+                                
+                                
                             </div>
                         </div>
 
@@ -341,10 +337,10 @@
                                             <span>Contact</span>
                                             <p class="mb-0">${post.recruiterID.email}</p>
                                         </li>
-                                        <!--                                        <li>
-                                                                                    <span>Employees</span>
-                                                                                    <p class="mb-0">30-50</p>
-                                                                                </li>-->
+<!--                                        <li>
+                                            <span>Employees</span>
+                                            <p class="mb-0">30-50</p>
+                                        </li>-->
                                     </ul>
                                 </div>
                                 <div>

@@ -12,10 +12,7 @@ import Models.Post;
 import Models.Recruiter;
 import Models.SkillSet;
 import Models.User;
-import MutiModels.JobApply;
-import MutiModels.PostBasic;
 import dal.CategoriesDAO;
-import dal.DAO;
 import dal.DurationDAO;
 import dal.JobTypeDAO;
 import dal.PostDAO;
@@ -104,14 +101,6 @@ public class AllListPostControll extends HttpServlet {
         request.setAttribute("jobtype", jobtype);
         request.setAttribute("dura", dura);
         request.setAttribute("skill", skill);
-        
-        DAO d = new DAO();
-        int userId = user.getUserID();
-        int freelancerID = d.getFreelancerIDbyUserID(userId);
-        List<JobApply> postAplly=pDao.getPostApply(freelancerID);
-        List<PostBasic> postFavourites=pDao.getAllFavPosts(freelancerID);
-        request.setAttribute("postApply", postAplly);
-        request.setAttribute("postFavourites", postFavourites);
         request.getRequestDispatcher("views/allListPost.jsp").forward(request, response);
     } 
 
