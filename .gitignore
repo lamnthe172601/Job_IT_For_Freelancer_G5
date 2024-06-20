@@ -24,3 +24,5 @@ tomcat/
 glassfish/
 DBContext.java
 src/java/dal/DBContext.java
+*.properties
+*.xml

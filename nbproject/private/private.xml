@@ -15,21 +15,20 @@
             <file>file:/D:/SU24/A/web/views/completedProjects.jsp</file>
         </group>
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/AllListPostControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/PostFavouritesControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listapply.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/HomeContronller.java</file>
-        </group>
-        <group>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ListApplyControll.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/PostFavouritesControll.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/PostDAO.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listapply.jsp</file>
+        </group>
+        <group>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/nbproject/build-impl.xml</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/headerAdmin.jsp</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/sidebar.jsp</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/projectAdmin.jsp</file>
+            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/blogsAdmin.jsp</file>
         </group>
     </open-files>
 </project-private>
