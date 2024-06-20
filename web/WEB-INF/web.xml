@@ -161,6 +161,18 @@
         <servlet-class>CommonControll.AllListPostControll</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ApplyJobInListPostControll</servlet-name>
+        <servlet-class>FreelancerControll.ApplyJobInListPostControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddFavouritesControll</servlet-name>
+        <servlet-class>FreelancerControll.AddFavouritesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFavouritesControll</servlet-name>
+        <servlet-class>FreelancerControll.DeleteFavouritesControll</servlet-class>
+        </servlet>
+    <servlet>
         <servlet-name>ProjectAdmin</servlet-name>
         <servlet-class>AdminControlles.ProjectAdmin</servlet-class>
     </servlet>
@@ -344,6 +356,18 @@
         <servlet-name>AllListPostControll</servlet-name>
         <url-pattern>/AllListPost</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyJobInListPostControll</servlet-name>
+        <url-pattern>/ApplyJobInListPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFavouritesControll</servlet-name>
+        <url-pattern>/AddFavourites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFavouritesControll</servlet-name>
+        <url-pattern>/DeleteFavourites</url-pattern>
+        </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProjectAdmin</servlet-name>
         <url-pattern>/projectAdmin</url-pattern>
