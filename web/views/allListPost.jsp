@@ -47,6 +47,30 @@
             .pagination a:hover {
                 background-color: #ddd;
             }
+
+            .btn-cart1 {
+                width: 40%;
+                display: inline-block;
+                border-radius: 5px;
+                border-color: transparent;
+                text-transform: capitalize;
+                background: transparent;
+                border: 1px solid #E65425;
+                color: #E65425;
+                padding: 9px 15px;
+                font-weight: 700;
+                margin:0 10px 0;
+                font-size: 14px;
+            }
+
+            .classbtn:hover {
+                background-color: #FF3300;
+                color: white;
+            }
+            .apply{
+                background-color: #FF3300;
+                color: white;
+            }
         </style>
     </head>
     <body>
@@ -259,7 +283,23 @@
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
                                                 <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
-                                                <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
+
+                                                <c:set var="favo" value="false" />
+                                                <c:forEach items="${postFavourites}" var="post">
+                                                    <c:choose>
+                                                        <c:when test="${list.postID == post.postID}">
+                                                            <c:set var="favo" value="true" />
+                                                        </c:when>                                                                
+                                                    </c:choose>
+                                                </c:forEach>
+                                                <c:choose>
+                                                    <c:when test="${favo}">
+                                                        <a href="javascript:void(0);" onclick="removeFromFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite color-active"><i class="feather-heart"></i></a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                        <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite"><i class="feather-heart"></i></a>
+                                                        </c:otherwise>
+                                                </c:choose>
                                                 <div class="author-heading">
                                                     <div class="freelance-img">
                                                         <a href="javascript:void(0);">
@@ -295,9 +335,36 @@
                                                     </ul>
                                                 </div>
                                             </div>
+
+
                                             <div class="cart-hover">
-                                                <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
+                                                <a href="PostDetails?postID=${list.postID}" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
+                                                <c:set var="applied" value="false" />
+                                                <c:forEach items="${postApply}" var="j">
+                                                    <c:if test="${list.postID == j.postID}">
+                                                        <c:choose>
+                                                            <c:when test="${j.status == 'Pending' || j.status == 'Approve'}">
+                                                                <c:set var="applied" value="true" />
+                                                            </c:when>
+                                                            <c:when test="${j.status == 'Reject'}">
+                                                                <c:remove var="applied" />
+                                                            </c:when>
+                                                        </c:choose>
+                                                    </c:if>
+                                                </c:forEach>
+
+                                                <c:choose>
+                                                    <c:when test="${applied}">
+                                                        <a  class="btn-cart1 apply" tabindex="-1">Applied</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="ApplyJobInListPost?postID=${list.postID}" id="applyButton_${list.postID}" class="btn-cart1 apply-button classbtn" data-postid="${list.postID}" tabindex="-1">Apply Now</a>
+
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
+
+
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -521,6 +588,77 @@
             }
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.apply-button').on('click', function (e) {
+                    e.preventDefault();
+                    var postID = $(this).data('postid');
+
+                    $.ajax({
+                        url: 'ApplyJobInListPost',
+                        type: 'GET',
+                        data: {
+                            postID: postID
+                        },
+                        success: function (response) {
+                            // Xử lý phản hồi thành công (nếu cần)
+
+                            // Đổi nút sang trạng thái "Applied"
+                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').css('background-color', '#FF3300')
+                                    .css('color', 'white');
+                        },
+                        error: function (xhr, status, error) {
+                            // Xử lý lỗi (nếu có)
+                            alert('Đã xảy ra lỗi: ' + error);
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+                    function addToFavorites(postID) {
+                        $.ajax({
+                            url: 'AddFavourites',
+                            type: 'GET',
+                            data: {
+                                postID: postID
+                            },
+                            success: function (response) {
+                                // Xử lý phản hồi thành công (nếu cần)
+                                //alert('Đã thêm vào danh sách yêu thích!');
+                                $('#favourite_' + postID).addClass('color-active');
+                            },
+                            error: function (xhr, status, error) {
+                                // Xử lý lỗi (nếu có)
+                                alert('Đã xảy ra lỗi: ' + error);
+                            }
+                        });
+                    }
+
+                    function removeFromFavorites(postID) {
+                        $.ajax({
+                            url: 'DeleteFavourites',
+                            type: 'GET',
+                            data: {
+                                postID: postID
+                            },
+                            success: function (response) {
+                                // Xử lý phản hồi thành công (nếu cần)
+                                //alert('Đã xóa khỏi danh sách yêu thích!');
+                                $('#favourite_' + postID).removeClass('color-active');
+                            },
+                            error: function (xhr, status, error) {
+                                // Xử lý lỗi (nếu có)
+                                alert('Đã xảy ra lỗi: ' + error);
+                            }
+                        });
+                    }
+        </script>
 
 
         <script src="assets/js/filterMyListPost.js" type="text/javascript"></script>

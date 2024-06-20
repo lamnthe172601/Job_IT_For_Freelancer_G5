@@ -155,10 +155,22 @@
     <servlet>
         <servlet-name>ApplyJobControll</servlet-name>
         <servlet-class>FreelancerControll.ApplyJobControll</servlet-class>
-        </servlet>
+    </servlet>
     <servlet>
         <servlet-name>AllListPostControll</servlet-name>
         <servlet-class>CommonControll.AllListPostControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApplyJobInListPostControll</servlet-name>
+        <servlet-class>FreelancerControll.ApplyJobInListPostControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddFavouritesControll</servlet-name>
+        <servlet-class>FreelancerControll.AddFavouritesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFavouritesControll</servlet-name>
+        <servlet-class>FreelancerControll.DeleteFavouritesControll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -275,8 +287,7 @@
     <servlet-mapping>
         <servlet-name>ViewCategoryAdmin</servlet-name>
         <url-pattern>/categoryAdmin</url-pattern>
-        
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PostFavouritesControll</servlet-name>
         <url-pattern>/PostFavourites</url-pattern>
@@ -324,9 +335,21 @@
     <servlet-mapping>
         <servlet-name>ApplyJobControll</servlet-name>
         <url-pattern>/ApplyJob</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AllListPostControll</servlet-name>
         <url-pattern>/AllListPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyJobInListPostControll</servlet-name>
+        <url-pattern>/ApplyJobInListPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFavouritesControll</servlet-name>
+        <url-pattern>/AddFavourites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFavouritesControll</servlet-name>
+        <url-pattern>/DeleteFavourites</url-pattern>
     </servlet-mapping>
 </web-app>

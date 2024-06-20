@@ -21,9 +21,12 @@ import Models.Post;
 import Models.Recruiter;
 import Models.Skills;
 import Models.User;
+import MutiModels.PostBasic;
 import MutiModels.SkillFreelancer;
 import dal.CategoriesDAO;
+import dal.DAO;
 import dal.FreelancerDAO;
+import dal.PostDAO;
 import dal.RecruiterDAO;
 import jakarta.servlet.http.HttpSession;
 import java.util.Map;
@@ -102,6 +105,13 @@ public class HomeContronller extends HttpServlet {
         request.setAttribute("locations", locations);
         Map<String, Integer> categoriesPostCount = pDAO.getPostCountByCategories();
         request.setAttribute("categoriesPostCount", categoriesPostCount);
+        
+        PostDAO pDao=new PostDAO();
+        int id=userID.getUserID();
+        DAO d= new DAO();
+        int freelancerID=d.getFreelancerIDbyUserID(id);
+        List<PostBasic> postFavourites=pDao.getAllFavPosts(freelancerID);
+        request.setAttribute("postFavourites", postFavourites);
         request.getRequestDispatcher("views/home.jsp").forward(request, response);
     }
 
