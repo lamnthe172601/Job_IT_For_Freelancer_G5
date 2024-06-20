@@ -49,16 +49,15 @@ public class HomeContronller extends HttpServlet {
             out.println("</html>");
         }
     }
-     CategoriesDAO cDao = new CategoriesDAO();
-        HomeDAO pDAO = new HomeDAO();
-        FreelancerDAO free = new FreelancerDAO();
-        RecruiterDAO recrui = new RecruiterDAO();
+    CategoriesDAO cDao = new CategoriesDAO();
+    HomeDAO pDAO = new HomeDAO();
+    FreelancerDAO free = new FreelancerDAO();
+    RecruiterDAO recrui = new RecruiterDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-       
         HttpSession session = request.getSession();
         User userID = (User) session.getAttribute("account");
 
@@ -68,13 +67,19 @@ public class HomeContronller extends HttpServlet {
         request.setAttribute("listpost", listpost);
         List<Blogs> listBlogs = pDAO.getTopBlogs();
         request.setAttribute("listblogs", listBlogs);
-        
+
         if (userID != null && userID.getRoleID().getRoleID() == 3) {
             Freelancer freelancer = free.getFreelancerById(userID.getUserID());
             List<Post> getPostsByFreelancerSkill = pDAO.getPostsByFreelancerSkill(freelancer.getFreelanceID());
             request.setAttribute("getPostsByFreelancerSkill", getPostsByFreelancerSkill);
+            PostDAO pDao = new PostDAO();
+            int id = userID.getUserID();
+            DAO d = new DAO();
+            int freelancerID = d.getFreelancerIDbyUserID(id);
+            List<PostBasic> postFavourites = pDao.getAllFavPosts(freelancerID);
+            request.setAttribute("postFavourites", postFavourites);
         }
-        
+
         if (userID != null && userID.getRoleID().getRoleID() == 4) {
             Recruiter recruiter = recrui.getRecruiterProfile(userID.getUserID());
             List<Post> getOtherPostsBySimilarCategories = pDAO.getOtherPostsBySimilarCategories(recruiter.getRecruiterID());
@@ -82,7 +87,6 @@ public class HomeContronller extends HttpServlet {
             request.setAttribute("getOtherPostsBySimilarCategories", getOtherPostsBySimilarCategories);
             request.setAttribute("freelancerSkill", freelancerSkill);
         }
-        
 
         request.setAttribute("NumberUsers", pDAO.getNumberUsers());
         request.setAttribute("NumberPost", pDAO.getNumberPost());
@@ -105,13 +109,7 @@ public class HomeContronller extends HttpServlet {
         request.setAttribute("locations", locations);
         Map<String, Integer> categoriesPostCount = pDAO.getPostCountByCategories();
         request.setAttribute("categoriesPostCount", categoriesPostCount);
-        
-        PostDAO pDao=new PostDAO();
-        int id=userID.getUserID();
-        DAO d= new DAO();
-        int freelancerID=d.getFreelancerIDbyUserID(id);
-        List<PostBasic> postFavourites=pDao.getAllFavPosts(freelancerID);
-        request.setAttribute("postFavourites", postFavourites);
+
         request.getRequestDispatcher("views/home.jsp").forward(request, response);
     }
 
