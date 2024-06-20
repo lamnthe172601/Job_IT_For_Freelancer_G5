@@ -61,11 +61,20 @@ function checkdob() {
     var eDob = document.getElementById('eDob');
     if (dob === null || dob === '') {
         eDob.innerHTML = "Date of Birth are required fields.";
-    }else {
+    } else {
         eDob.innerHTML = '';
     }
 }
 
+   function checkCategory() {
+            var category = document.getElementById('categoryname').value.trim();
+            var eCategoryname = document.getElementById('eCategoryname');
+            if (category === null || category === '') {
+                eCategoryname.innerHTML = 'Category Name is a required field.';
+            } else {
+                eCategoryname.innerHTML = '';
+            }
+        }
 
 
 

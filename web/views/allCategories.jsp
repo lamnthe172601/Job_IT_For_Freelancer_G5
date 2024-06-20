@@ -1,8 +1,4 @@
-<%-- 
-    Document   : postProject
-    Created on : May 23, 2024, 10:08:44 AM
-    Author     : Admin
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -30,38 +26,9 @@
     </head>
     <body>
 
-        <div class="main-wrapper">
-
-
-            <header class="header">
-                <div class="container">
-                    <nav class="navbar navbar-expand-lg header-nav p-0">
-                        <div class="navbar-header">
-                            <a id="mobile_btn" href="javascript:void(0);">
-                                <span class="bar-icon">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </span>
-                            </a>
-                            <a href="home" class="navbar-brand logo">
-                                <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                            </a>
-                        </div>
-                        <div class="main-menu-wrapper">
-                            <div class="menu-header">
-                                <a href="home" class="menu-logo">
-                                    <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                                </a>
-                                <a id="menu_close" class="menu-close" href="javascript:void(0);">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </div>
+        <div class="main-wrapper">          
                            <jsp:include page="header.jsp" />
-                    </nav>
-                </div>
-            </header>
-
+           
 
             <div class="bread-crumb-bar">
                 <div class="container">

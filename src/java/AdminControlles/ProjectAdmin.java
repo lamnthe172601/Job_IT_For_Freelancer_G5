@@ -5,27 +5,21 @@
 
 package AdminControlles;
 
-import Models.User;
-import dal.SkillSetDAO;
-import dal.UserDAO;
+import dal.AdminDAO;
+import dal.DashboardDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 
 /**
  *
- * @author DUC MINH
+ * @author kudol
  */
-@WebServlet(name="skillAdmin", urlPatterns={"/skillAdmin"})
-public class skillAdmin extends HttpServlet {
-   private static final long serialVersionUID = 1L;
+public class ProjectAdmin extends HttpServlet {
+   
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -41,10 +35,10 @@ public class skillAdmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet skillAdmin</title>");  
+            out.println("<title>Servlet ProjectAdmin</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet skillAdmin at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ProjectAdmin at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,26 +53,14 @@ public class skillAdmin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer userID = (Integer) request.getSession().getAttribute("userID");
-        UserDAO userDAO = new UserDAO();
-        User user = null;
-        try {
-            user = userDAO.getUserByUserID(userID);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+             DashboardDAO dao = new DashboardDAO();
+             AdminDAO a = new AdminDAO();
+             request.setAttribute("totalProject",dao.getTotalPost());
+             request.setAttribute("listProjects",a.getAllProject() );
+             request.getRequestDispatcher("adminViews/projectAdmin.jsp").forward(request, response);
 
-        if (user == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
-        SkillSetDAO skillSetDAO = new SkillSetDAO();
-        List<Map<String, String>> skillSets = skillSetDAO.getAllSkillSets(user.getRoleID().getRoleID());
-
-        request.setAttribute("skillSets", skillSets);
-        request.getRequestDispatcher("skillAdmin.jsp").forward(request, response);
     } 
 
     /** 

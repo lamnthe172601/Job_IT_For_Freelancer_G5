@@ -1,3 +1,26 @@
 /build/
 /dist/
 /nbproject/private/
+# Compiled files
+*.class
+build/
+dist/
+
+# NetBeans files
+nbproject/private/
+build.xml
+*.nb-gradle/
+
+# Log and temporary files
+*.log
+*.tmp
+*.bak
+
+# Personal configuration
+nbactions.xml
+
+# Web server directories
+tomcat/
+glassfish/
+DBContext.java
+src/java/dal/DBContext.java

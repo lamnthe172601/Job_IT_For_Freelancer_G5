@@ -20,7 +20,9 @@ import Models.Recruiter;
 import Models.SkillSet;
 import Models.Skills;
 import Models.TeamNumber;
-import java.util.Date;
+import MutiModels.SkillFreelancer;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -30,26 +32,30 @@ public class HomeDAO extends DBContext {
 
     public List<Post> TopPost() {
         List<Post> list = new ArrayList<>();
-        String query = "    SELECT  top(3)* FROM Post p\n"
-                + "    join JobType j on p.job_type_ID =  j.jobID\n"
-                + "    join Duration du on p.durationID =  du.durationID\n"
-                + "                              join Recruiter re on p.recruiterID =  re.recruiterID\n"
-                + "                                join Categories ca on p.caID = ca.caID\n"
-                + "                               join Company co on re.recruiterID = co.recruiterID\n"
-                + "                                join Team_Number temp on temp.team_numberID= co.team_numberID\n"
-                + "                                ORDER BY date_post DESC;";
+        String query = """
+                           SELECT TOP 6 * 
+                           FROM Post p
+                           JOIN JobType j ON p.job_type_ID = j.jobID
+                           JOIN Duration du ON p.durationID = du.durationID
+                           JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                           JOIN Categories ca ON p.caID = ca.caID
+                           JOIN Company co ON re.recruiterID = co.recruiterID
+                           JOIN Team_Number temp ON temp.team_numberID = co.team_numberID
+                           ORDER BY p.date_post DESC;""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 TeamNumber tem = new TeamNumber(rs.getInt("team_numberID"), rs.getString("team_number"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 Company com = new Company(rs.getInt("companyID"), rs.getString("company_name"), tem, rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"), re);
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca));
+                int checking = rs.getInt("checking");
+                boolean status = rs.getBoolean("status");
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, status, checking));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,68 +63,34 @@ public class HomeDAO extends DBContext {
         return list;
     }
 
-    public List<Freelancer> TopFreelancer() {
-        List<Freelancer> list = new ArrayList<>();
-        String query = "    SELECT TOP (3) [freelanceID]\n"
-                + "      ,[first_name]\n"
-                + "      ,[last_name]\n"
-                + "      ,[image]\n"
-                + "      ,[gender]\n"
-                + "      ,[dob]\n"
-                + "      ,[describe]\n"
-                + "      ,[email]\n"
-                + "      ,[phone]      \n"
-                + "  FROM [freelancer].[dbo].[Freelancer]";
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Freelancer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getDate(6), rs.getString(7), rs.getString(8), rs.getString(9)));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    public List<Skills> TopSkill() {
-        List<Skills> list = new ArrayList<>();
+    public List<Post> getPostsByFreelancerSkill(int freelancerID) {
+        List<Post> list = new ArrayList<>();
         String query = """
-                          SELECT TOP(5) *
-                         FROM [freelancer].[dbo].[Skills] s
-                         join Freelancer fe on fe.freelanceID = s.freelancerID
-                         join Skill_Set ss on s.skill_set_ID = ss.skill_set_ID
-                        ORDER BY NEWID()""";
+                       SELECT top 6* 
+                       FROM Post p
+                       JOIN JobType j ON p.job_type_ID = j.jobID
+                       JOIN Duration du ON p.durationID = du.durationID
+                       JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                       JOIN Categories ca ON p.caID = ca.caID
+                       JOIN Company co ON re.recruiterID = co.recruiterID
+                       
+                       WHERE p.skill IN (
+                           SELECT ss.skill_set_name
+                           FROM Skills us
+                           JOIN Skill_Set ss ON us.skill_set_ID = ss.skill_set_ID
+                           WHERE us.freelancerID = ?
+                       )""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, freelancerID);
             ResultSet rs = ps.executeQuery();
-
             while (rs.next()) {
-                Freelancer fre = new Freelancer(rs.getInt("freelanceID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("image"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("describe"), rs.getString("email__contact"), rs.getString("phone_contact"));
-                SkillSet ss = new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name"));
-                list.add(new Skills(rs.getInt("skill_set_ID"), ss, fre));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    public List<Company> TopCompany() {
-        List<Company> list = new ArrayList<>();
-        String query = """
-                           SELECT TOP (5) *  FROM [freelancer].[dbo].[Company] com
-                                                 join recruiter re on com.recruiterID = re.recruiterID 
-                          					   join Team_Number te on te.team_numberID = com.team_numberID
-                          					   """;
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                TeamNumber tem = new TeamNumber(rs.getInt("team_numberID"), rs.getString("team_number"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
-                list.add(new Company(rs.getInt("companyID"), rs.getString("company_name"), tem, rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"), re));
+                JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -126,22 +98,130 @@ public class HomeDAO extends DBContext {
         return list;
     }
 
-    public List<Blogs> TopBlogs() {
-        List<Blogs> list = new ArrayList<>();
-        String query = "   SELECT TOP(3) blogID, title, image, date_blog, description, tag\n"
-                + "FROM Blogs\n"
-                + "ORDER BY date_blog DESC;";
+    public List<Post> getOtherPostsBySimilarCategories(int recruiterID) {
+        List<Post> list = new ArrayList<>();
+        String query = """
+                       SELECT  top 6 * FROM [Post] p
+                        JOIN JobType j ON p.job_type_ID = j.jobID
+                        JOIN Duration du ON p.durationID = du.durationID
+                        JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                        JOIN [Categories] c ON p.caID = c.caID
+                        JOIN Company co ON re.recruiterID = co.recruiterID
+                       
+                        WHERE p.recruiterID != ? AND EXISTS (
+                                                      SELECT 1
+                                                      FROM [Post] your_post
+                                                      WHERE your_post.recruiterID = ?
+                                                        AND your_post.caID = p.caID)
+                                              ORDER BY p.date_post DESC;""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recruiterID);
+            ps.setInt(2, recruiterID);
             ResultSet rs = ps.executeQuery();
-
             while (rs.next()) {
-                list.add(new Blogs(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getString(6)));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
+                JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public List<SkillFreelancer> getTop8FreelancersByLatestRecruiterPostSkill(int id) {
+        List<SkillFreelancer> list = new ArrayList<>();
+        String query = """
+                       					   WITH LatestPostSkill AS (
+                           SELECT TOP 1 p.skill
+                           FROM Post p
+                           WHERE p.recruiterID = ?
+                           ORDER BY p.postID DESC
+                       ),
+                       FreelancerWithSkill AS (
+                           SELECT DISTINCT f.*, s.skillID, s.skill_set_ID, ss.skill_set_name 
+                           FROM Freelancer f
+                           JOIN Skills s ON f.freelanceID = s.freelancerID
+                           JOIN Skill_Set ss ON s.skill_set_ID = ss.skill_set_ID
+                           JOIN LatestPostSkill lps ON CHARINDEX(ss.skill_set_name, lps.skill) > 0
+                       )
+                       SELECT TOP 8 *
+                       FROM FreelancerWithSkill;""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    SkillSet ss = new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name"));
+                    Freelancer free = new Freelancer(
+                            rs.getInt("freelanceID"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getString("image"),
+                            rs.getBoolean("gender"),
+                            rs.getDate("dob"),
+                            rs.getString("describe"),
+                            rs.getString("email__contact"),
+                            rs.getString("phone_contact"));
+
+                    Skills s = new Skills(rs.getInt("skillID"), ss, free);
+
+                    list.add(new SkillFreelancer(free, s));
+                }
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // In chi tiết lỗi ra console
+
+        }
+        return list;
+    }
+
+    public List<Blogs> getTopBlogs() {
+    List<Blogs> blogs = new ArrayList<>();
+    String query = """
+                   SELECT TOP(3) blogID, title, image, date_blog, description, tag,statusBlog
+                   FROM Blogs
+                   ORDER BY date_blog DESC;""";
+    try (PreparedStatement ps = connection.prepareStatement(query);
+         ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+            Blogs blog = new Blogs();
+            blog.setBlogID(rs.getInt("blogID"));
+            blog.setTitle(rs.getString("title"));
+            blog.setImage(rs.getString("image"));
+            blog.setDate_blog(rs.getDate("date_blog"));
+            String description = rs.getString("description");
+            blog.setDescription(getShortDescription(description, 10));   
+            blog.setTag(rs.getString("tag"));
+            blog.setStatus(rs.getBoolean("statusBlog"));
+            blogs.add(blog);
+        }
+    } catch (SQLException e) {
+    }
+    return blogs;
+}
+
+    public static String getShortDescription(String description, int wordLimit) {
+        if (description == null || description.isEmpty()) {
+            return description;
+        }
+
+        String[] words = description.split("\\s+");
+        if (words.length <= wordLimit) {
+            return description;
+        }
+
+        StringBuilder shortDescription = new StringBuilder();
+        for (int i = 0; i < wordLimit; i++) {
+            shortDescription.append(words[i]).append(" ");
+        }
+        shortDescription.append("...");
+
+        return shortDescription.toString().trim();
     }
 
     public int getNumberUsers() {
@@ -192,6 +272,54 @@ public class HomeDAO extends DBContext {
         return -1;
     }
 
-   
-   
+    public Map<String, Integer> getPostCountByLocation() {
+        Map<String, Integer> locationPostCount = new HashMap<>();
+        String sql = """
+                      SELECT  [location], COUNT([postID]) AS [post_count]
+                          FROM   [Post]
+                           GROUP BY [location]
+                            ORDER BY  [post_count] DESC;""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            // Lưu kết quả vào map
+            while (rs.next()) {
+                locationPostCount.put(rs.getString("location"), rs.getInt("post_count"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return locationPostCount;
+    }
+
+    public Map<String, Integer> getPostCountByCategories() {
+        Map<String, Integer> categoryPostCount = new HashMap<>();
+        String sql = """
+                      SELECT c.categories_name, COUNT(p.postID) AS post_count 
+                                                     FROM [Post] p
+                                                     JOIN [Categories] c ON p.caID = c.caID 
+                                                     GROUP BY c.categories_name""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            // Lưu kết quả vào map
+            while (rs.next()) {
+                categoryPostCount.put(rs.getString("categories_name"), rs.getInt("post_count"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return categoryPostCount;
+    }
+
+    public static void main(String[] args) {
+        HomeDAO p = new HomeDAO();
+        List<Blogs> s = p.getTopBlogs();
+        System.out.println(s.toString());
+    }
+
 }

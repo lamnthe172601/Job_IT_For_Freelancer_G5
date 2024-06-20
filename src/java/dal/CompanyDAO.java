@@ -6,10 +6,7 @@ package dal;
 
 import Models.Company;
 import Models.Recruiter;
-import Models.Role;
 import Models.TeamNumber;
-import Models.User;
-import com.sun.jdi.connect.spi.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -92,4 +89,28 @@ public class CompanyDAO extends DBContext {
         System.out.println(n.toString());
     }
 
+    public boolean updateCompany(Company company) throws SQLException {
+        String query = "UPDATE Company SET companyID = ?,company_name = ?,team_numberID = ?,established_on =?,logo = ? ,website = ?,describe = ?,[location] = ?,recruiterID = ?\n"
+                + "WHERE companyID ? ";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, company.getCompanyName());
+             TeamNumber teamnumber = company.getTeamNumber(); // Lấy thông tin Recruiter từ Company
+            stmt.setInt(9, teamnumber.getId());
+            stmt.setString(3, company.getLocation());
+            stmt.setString(4, company.getLogo());
+            stmt.setDate(5, (java.sql.Date) company.getEstablishedOn());
+
+            stmt.setString(6, company.getWebsite());
+            stmt.setString(7, company.getDescribe());
+            stmt.setInt(8, company.getCompanyID());
+            Recruiter recruiter = company.getRecruiID(); // Lấy thông tin Recruiter từ Company
+            stmt.setInt(9, recruiter.getRecruiterID());
+            stmt.setInt(10,company.getCompanyID() );
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Error while updating company", e);
+        }
+    }
 }

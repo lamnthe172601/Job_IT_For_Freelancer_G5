@@ -3,28 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package AdminControlles;
+package CommonControll;
 
-import dal.SkillSetDAO;
+import MutiModels.PostBasic;
+import dal.PostDAO;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
- * @author DUC MINH
+ * @author tanng
  */
-public class EditSkill extends HttpServlet {
-    private SkillSetDAO skillSetDAO;
-    
-    @Override
-    public void init(){
-        skillSetDAO = new SkillSetDAO();
-    }
+public class PostDetailsControll extends HttpServlet {
+   
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -40,10 +37,10 @@ public class EditSkill extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditSkill</title>");  
+            out.println("<title>Servlet PostDetailsControll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditSkill at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet PostDetailsControll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +57,15 @@ public class EditSkill extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String id=request.getParameter("postID");
+        int postID=Integer.parseInt(id);
+        PostDAO p= new PostDAO();
+        PostBasic post=p.getPostsByID(postID);
+        List<PostBasic> lpost=p.getTopPosts();
+        request.setAttribute("post", post);
+        request.setAttribute("lpost", lpost);
+        request.getRequestDispatcher("views/postDetails.jsp").forward(request, response);
+        
     } 
 
     /** 
@@ -73,19 +78,7 @@ public class EditSkill extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int skillSetID = Integer.parseInt(request.getParameter("skillSetID"));
-        String skillSetName = request.getParameter("skillSetName");
-        String description = request.getParameter("description");
-
-        try {
-            skillSetDAO.updateSkillSet(skillSetID, skillSetName, description);
-            request.setAttribute("message", "Skill updated successfully");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            request.setAttribute("message", "Error updating skill");
-        }
-
-        response.sendRedirect("skillList.jsp");
+        processRequest(request, response);
     }
 
     /** 

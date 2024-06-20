@@ -28,8 +28,8 @@
         <link rel="stylesheet" href="adminAssets/css/bootstrap-datetimepicker.min.css">
 
         <link rel="stylesheet" href="adminAssets/plugins/datatables/datatables.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+        <link rel="stylesheet" href="adminAssets/css/recruiter.css">
         <link rel="stylesheet" href="adminAssets/css/style.css">
         <style>
 
@@ -81,133 +81,17 @@
                 background-position: right 12px center;
                 padding-right: 32px;
             }
+            /* General styles */
+
         </style>
+
     </head>
     <body>
 
         <div class="main-wrapper">
 
-            <div class="header">
-
-                <div class="header-left">
-                    <a href="home" class="logo">
-                        <img src="adminAssets/img/logo.png" alt="Logo">
-                    </a>
-                    <a href="home" class="logo logo-small">
-                        <img src="adminAssets/img/logo-small.png" alt="Logo" width="30" height="30">
-                    </a>
-
-                    <a href="javascript:void(0);" id="toggle_btn">
-                        <i class="feather-chevrons-left"></i>
-                    </a>
-
-
-                    <a class="mobile_btn" id="mobile_btn">
-                        <i class="feather-chevrons-left"></i>
-                    </a>
-
-                </div>
-
-
-                <div class="top-nav-search">
-                    <form>
-                        <input type="text" class="form-control" placeholder="Start typing your Search...">
-                        <button class="btn" type="submit"><i class="feather-search"></i></button>
-                    </form>
-                </div>
-
-
-                <ul class="nav user-menu">
-
-                    <li class="nav-item dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                            <i class="feather-bell"></i> <span class="badge badge-pill">5</span>
-                        </a>
-                        <div class="dropdown-menu notifications">
-                            <div class="topnav-dropdown-header">
-                                <span class="notification-title">Notifications</span>
-                                <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
-                            </div>
-                            <div class="noti-content">
-                                <ul class="notification-list">
-                                    <li class="notification-message">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex">
-                                                <span class="avatar avatar-sm flex-shrink-0">
-                                                    <img class="avatar-img rounded-circle" alt="Img" src="adminAssets/img/profiles/avatar-02.jpg">
-                                                </span>
-                                                <div class="media-body flex-grow-1">
-                                                    <p class="noti-details"><span class="noti-title">Brian Johnson</span> paid the invoice <span class="noti-title">#DF65485</span></p>
-                                                    <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>                                   
-                                </ul>
-                            </div>
-                            <div class="topnav-dropdown-footer">
-                                <a href="javascript:void(0);">View all Notifications</a>
-                            </div>
-                        </div>
-                    </li>
-
-
-                    <li class="nav-item dropdown has-arrow main-drop">
-                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                            <span class="user-img">
-                                <img src="${adminProfile.image}" alt="Img">
-                                <span class="status online"></span>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profileAdmin"><i data-feather="user" class="me-1"></i> Profile</a>
-                            <a class="dropdown-item" href="settings.html"><i data-feather="settings" class="me-1"></i> Settings</a>
-                            <a class="dropdown-item" href="logout"><i data-feather="log-out" class="me-1"></i> Logout</a>
-                        </div>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div class="sidebar" id="sidebar">
-                <div class="sidebar-inner slimscroll">
-                    <div id="sidebar-menu" class="sidebar-menu">
-                        <ul>
-                            <li class="menu-title"><span>Main</span></li>
-                            <li >
-                                <a href="dashboardAdmin"><i data-feather="home"></i> <span>Dashboard</span></a>
-                            </li>                           
-                            <li>
-                                <a href="projectAdmin"><i data-feather="database"></i> <span>Projects</span></a>
-                            </li>
-                            <li>
-                                <a href="manageFreelancerAdmin"><i data-feather="users"></i> <span>Freelancer</span></a>
-                            </li>
-                            <li class="active">
-                                <a href="manageRecruiterAdmin"><i data-feather="user-check"></i> <span>Recuiter</span></a>
-                            </li>                          
-                            <li>
-                                <a href="categorieAdmin"><i data-feather="copy"></i> <span>Categories</span></a>
-                            </li>                        
-                            <li>
-                                <a href="skillAdmin"><i data-feather="award"></i> <span>Skills</span></a>
-                            </li>
-                            <li>
-                                <a href="blogAdmin"><i data-feather="clipboard"></i> <span>Blog</span></a>
-                            </li>
-                            <li>
-                                <a href="verifyIdentityAdmin"><i data-feather="user-check"></i> <span>Verify Identity</span></a>
-                            </li>
-                            <li>
-                                <a href="settingsAdmin"><i data-feather="settings"></i> <span>Settings</span></a>
-                            </li>                          
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <%@ include file="headerAdmin.jsp" %>
+            <%@ include file="sidebar.jsp" %>
 
 
             <div class="page-wrapper">
@@ -294,7 +178,7 @@
                                                     <th>Company name</th>
                                                     <th>Primary contact</th> 
                                                     <th>Website</th> 
-                                                    <th>Total post</th>
+                                                    <th>Total projects</th>
                                                     <th>Status</th>
                                                     <th class="text-end">Actions</th>
                                                 </tr>
@@ -341,109 +225,79 @@
                                                             <input type="hidden" class="user-id" id="${recruiter.getAccount().getUserID()}">
                                                             <a href="javascript:void(0);" class="dropdown-toggle nav-link three-dot " data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" ></i></a>
                                                             <div class="dropdown-menu user-menu-list">
-                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#view-details${recruiter.getAccount().getUserID()}"><img class="me-2 " src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
                                                                     <c:if test='${recruiter.getAccount().getStatus() == "active"}'>
                                                                     <a class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend user</a>
                                                                     </c:if>
                                                                     <c:if test='${recruiter.getAccount().getStatus() == "inactive"}'>
                                                                     <a class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2 " src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate user</a>
                                                                     </c:if>
-                                                                <a class="dropdown-item" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i data-feather="edit" class="me-2"></i> Edit</a>
-                                                                <a class="dropdown-item mb-0" href="javascript:void(0);"><i data-feather="trash-2" class="me-2 text-danger"></i> Delete</a>
-                                                            </div>
 
+                                                            </div>                                                      
 
-                                                            <div class="modal custom-modal fade" id="Suspend_user" role="dialog">
-                                                                <div class="modal-dialog modal-dialog-centered">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-body">
-                                                                            <div class="form-header">
-                                                                                <input type="hidden" class="user-id1" id="${recruiter.getAccount().getUserID()}">
-                                                                                <h3>Status</h3>
-                                                                                <p>Are you sure want to Suspend user?</p>
-                                                                            </div>
-                                                                            <div class="modal-btn Suspend-action" >
-                                                                                <div class="row">
-                                                                                    <div class="col-6">
-                                                                                        <a href="javascript:void(0);" class="user-suspend-link btn btn-primary continue-btn" >Suspend user</a>
-                                                                                    </div>
-                                                                                    <div class="col-6">
-                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>       
-                                                            <div class="modal custom-modal fade" id="Activate_user" role="dialog">
-                                                                <div class="modal-dialog modal-dialog-centered">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-body">
-                                                                            <div class="form-header">
-                                                                                <input type="hidden" class="user-id1" id="${recruiter.getAccount().getUserID()}">
-                                                                                <h3>Status</h3>
-                                                                                <p>Are you sure want to Activate user?</p>
-                                                                            </div>
-                                                                            <div class="modal-btn Activate-action">
-                                                                                <div class="row">
-                                                                                    <div class="col-6">
-                                                                                        <a href="javascript:void(0);" class="user-activate-link btn btn-primary continue-btn" >Activate user</a>
-                                                                                    </div>
-                                                                                    <div class="col-6">
-                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal fade custom-modal" id="add-category">
-                                                                <div class="modal-dialog modal-dialog-centered">
-                                                                    <div class="modal-content">
-
-                                                                        <div class="modal-header flex-wrap">
-                                                                            <h4 class="modal-title">Edit Provider</h4>
-                                                                            <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
-                                                                        </div>
-
-                                                                        <div class="modal-body">
-                                                                            <form>
-                                                                                <div class="form-group">
-                                                                                    <label>Company Name</label>
-                                                                                    <input type="text" class="form-control" value="Focused Holistic Hardware">
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label>Primary Contact</label>
-                                                                                    <input type="text" class="form-control" value="Emily Smith">
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label>Website</label>
-                                                                                    <input type="text" class="form-control" value="https://focusedhardware.de/">
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label>Total Projects</label>
-                                                                                    <input type="text" class="form-control" value="120">
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label>Status</label>
-                                                                                    <select class="form-control form-select">
-                                                                                        <option selected>Enabled</option>
-                                                                                        <option>Disable</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div class="mt-4">
-                                                                                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </td>
-                                                    </tr>     
-                                                </c:forEach>
+                                                <div class="modal fade custom-modal" id="view-details${recruiter.getAccount().getUserID()}">
+                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header flex-wrap">
+                                                                <h4 class="modal-title">Recuiter Details</h4>
+                                                                <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <img id="freelancerAvatar" src="${recruiter.getCompany().getLogo()}" alt="Freelancer Avatar" class="img-fluid rounded">
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <form>
+                                                                            <div class="form-group">
+                                                                                <label>Company Name</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getCompanyName()}" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Primary Contact</label>
+                                                                                <input type="text" class="form-control" value=" ${recruiter.getCompany().getRecruiID().fullName()}" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Total Projects</label>
+                                                                                <input type="text" class="form-control" value=" ${recruiter.getTotalPost()}" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Email Contact</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getRecruiID().getEmail()}" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Phone Contact</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getRecruiID().getPhone()}" readonly="">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Website</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getWebsite()}" readonly="">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Established On</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getEstablishedOn()}" readonly="">
+                                                                            </div>                                                                         
+
+                                                                            <div class="form-group">
+                                                                                <label>Location</label>
+                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getLocation()}" readonly="">
+                                                                            </div>                                                                            
+                                                                            <div class="form-group">
+                                                                                <label>Description</label>
+                                                                                <div>
+                                                                                    <textarea style=" height: 150px " readonly="" class="form-control">${recruiter.getCompany().getDescribe()} </textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </tr>     
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
@@ -455,43 +309,54 @@
             </div>
 
         </div>
-
-        <div class="modal fade custom-modal" id="add-category">
+        <div class="modal custom-modal fade" id="Suspend_user" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header flex-wrap">
-                        <div class="text-center w-100 mb-3">
-                            <img src="adminAssets/img/logo-small.png" alt="Img">
-                        </div>
-                        <h4 class="modal-title">Add New Freelancer</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
-                    </div>
                     <div class="modal-body">
-                        <form action="Register" method="post">
-                            <div class="form-group">
-                                <label>UserName</label>
-                                <input type="text" class="form-control" name="username">
+                        <div class="form-header">
+                            <input type="hidden" class="user-id1" id="${recruiter.getAccount().getUserID()}">
+                            <h3>Status</h3>
+                            <p>Are you sure want to Suspend user?</p>
+                        </div>
+                        <div class="modal-btn Suspend-action" >
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" class="user-suspend-link btn btn-primary continue-btn" >Suspend user</a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" name="email">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+        <div class="modal custom-modal fade" id="Activate_user" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="form-header">
+                            <input type="hidden" class="user-id1" id="${recruiter.getAccount().getUserID()}">
+                            <h3>Status</h3>
+                            <p>Are you sure want to Activate user?</p>
+                        </div>
+                        <div class="modal-btn Activate-action">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" class="user-activate-link btn btn-primary continue-btn" >Activate user</a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="pass">
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password</label>
-                                <input type="password" class="form-control" name="confirmpass">
-                            </div>                            
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
                 $('#filter_search').click(function () {
@@ -514,7 +379,7 @@
                 const totalPostsMinValue = parseInt(totalPostsMinFilter.value) || 0;
                 const totalPostsMaxValue = parseInt(totalPostsMaxFilter.value) || Infinity;
                 if (totalPostsMaxValue < totalPostsMinValue) {
-                    totalPostsMaxValue= Infinity;
+                    totalPostsMaxValue = Infinity;
                 }
                 const statusValue = statusFilter.value;
                 console.log(totalPostsMinValue);

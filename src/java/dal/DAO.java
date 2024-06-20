@@ -8,18 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Models.Role;
 import Models.SkillSet;
-import Models.TeamNumber;
-import Models.User;
 import Models.Admin;
-import java.util.List;
-import Models.Categories;
-import Models.Recruiter;
 import Models.Role;
 import Models.TeamNumber;
 import Models.User;
-import java.util.Date;
 
 /**
  *
@@ -254,14 +247,15 @@ public class DAO extends DBContext {
         return freelancerID;
     }
 
-    public void inputFreelancerSkill(String SkillID, int freelancerID) {
+    public void inputFreelancerSkill(String SkillID, int freelancerID, String level) {
         String sql = """
                      insert into [Skills]
-                     values(?,?)""";
+                     values(?,?,?)""";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, SkillID);
             statement.setInt(2, freelancerID);
+            statement.setString(3, level);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

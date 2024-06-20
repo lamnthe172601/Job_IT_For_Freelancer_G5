@@ -5,6 +5,7 @@
 package MutiModels;
 
 import Models.*;
+import java.util.List;
 
 
 
@@ -15,13 +16,14 @@ import Models.*;
 public class FreelancerInformation {
     private User account;
     private Freelancer basicInformation;
-
+    private List<SkillSet> listSkill; 
     public FreelancerInformation() {
     }
 
-    public FreelancerInformation(User account, Freelancer basicInformation) {
+    public FreelancerInformation(User account, Freelancer basicInformation, List<SkillSet> listSkill) {
         this.account = account;
         this.basicInformation = basicInformation;
+        this.listSkill = listSkill;
     }
 
     public User getAccount() {
@@ -39,7 +41,14 @@ public class FreelancerInformation {
     public void setBasicInformation(Freelancer basicInformation) {
         this.basicInformation = basicInformation;
     }
-    
-   
+
+    public List<SkillSet> getListSkill() {
+        return listSkill;
+    }
+
+    public void setListSkill(List<SkillSet> listSkill) {
+        this.listSkill = listSkill;
+    }
+
 
 }
