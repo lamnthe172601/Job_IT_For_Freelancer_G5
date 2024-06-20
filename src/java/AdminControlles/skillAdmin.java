@@ -5,7 +5,6 @@
 
 package AdminControlles;
 
-import Models.SkillSet;
 import Models.User;
 import dal.SkillSetDAO;
 import dal.UserDAO;
@@ -19,8 +18,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
