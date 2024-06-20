@@ -10,7 +10,6 @@ import Models.Duration;
 import Models.JobType;
 import MutiModels.PostBasic;
 import MutiModels.RecruiterBasic;
-import static dal.HomeDAO.getShortDescription;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,7 +64,10 @@ public class AdminDAO extends DBContext {
                    SELECT blogID, title, image, date_blog, description,tag,statusBlog
                    FROM Blogs
                    ORDER BY date_blog DESC;""";
-        try (PreparedStatement ps = connection.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Blogs blog = new Blogs();
                 blog.setBlogID(rs.getInt("blogID"));
@@ -79,6 +81,7 @@ public class AdminDAO extends DBContext {
                 blogs.add(blog);
             }
         } catch (SQLException e) {
+
         }
         return blogs;
     }
@@ -134,10 +137,10 @@ public class AdminDAO extends DBContext {
             ps.setString(1, title);
             ps.setString(2, image);
             ps.setString(3, currentDate.toString());
-            ps.setString(4,descripition);
-            ps.setString(5,null);
-            ps.setInt(6,1);
-            ps.setBoolean(7,true);
+            ps.setString(4, descripition);
+            ps.setString(5, null);
+            ps.setInt(6, 1);
+            ps.setBoolean(7, true);
 
             ResultSet rs = ps.executeQuery();
         } catch (SQLException e) {
@@ -145,8 +148,79 @@ public class AdminDAO extends DBContext {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(new AdminDAO().getAllBlogs().get(0).isStatus());
-        new AdminDAO().addBlog("ddd", "dd", "dd");
+    public Blogs getBlogByID(int blogid) {
+
+        Blogs blogs = new Blogs();
+        String query = """
+                   select * from Blogs where blogID = ?""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Blogs blog = new Blogs();
+                blog.setBlogID(rs.getInt("blogID"));
+                blog.setTitle(rs.getString("title"));
+                blog.setImage(rs.getString("image"));
+                blog.setDate_blog(rs.getDate("date_blog"));
+                String description = rs.getString("description");
+                blog.setDescription(description);
+                blog.setTag(rs.getString("tag"));
+                blog.setStatus(rs.getBoolean("statusBlog"));
+                return blogs;
+            }
+        } catch (SQLException e) {
+
+        }
+        return null;
     }
+
+    public void updateBlog(int blogId, String title, String linkDB, String description) {
+
+        String query = """
+                      UPDATE [dbo].[Blogs]
+                                       SET [title] = ?
+                                          ,[image] = ?
+                                          
+                                          ,[description] = ?
+                                         
+                                        
+                                     WHERE blogID=? """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            LocalDate currentDate = LocalDate.now();
+            ps.setString(1, title);
+            ps.setString(2, linkDB);
+            ps.setString(3, description);
+            ps.setInt(4, blogId);
+
+            ResultSet rs = ps.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public boolean changeBlogStatus(int blogId, boolean b) {
+        String query = """
+                  UPDATE [dbo].[Blogs]
+                  SET [statusBlog] = ?
+                  WHERE blogID = ?
+                  """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setBoolean(1, b);
+            ps.setInt(2, blogId);
+            int rowsAffected = ps.executeUpdate(); // Sử dụng executeUpdate thay vì executeQuery
+            return rowsAffected > 0; // Trả về true nếu có dòng bị ảnh hưởng
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new AdminDAO().changeBlogStatus(31, false));
+
+    }
+
 }

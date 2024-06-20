@@ -4,6 +4,7 @@
  */
 package AdminControlles;
 
+import Models.Blogs;
 import dal.AdminDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -83,6 +85,7 @@ public class BlogsAdmin extends HttpServlet {
             throws ServletException, IOException {
 
         String mode = request.getParameter("mode");
+
         if (mode != null) {
             switch (mode) {
                 case "add":
@@ -94,6 +97,9 @@ public class BlogsAdmin extends HttpServlet {
                     break;
                 case "delete":
                     handleDelete(request, response);
+                    break;
+                case "activate":
+                    handleActivate(request, response);
                     break;
 
             }
@@ -117,7 +123,7 @@ public class BlogsAdmin extends HttpServlet {
             String title = request.getParameter("title");
             String descripition = request.getParameter("descripition");
             String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ImageBlog";
-            String imgFileName = d.getAllBlogs().size() + 1 + "_image.jpg";
+            String imgFileName = (d.getAllBlogs().size() + 1) + "_image.jpg";
             String imgFilePath = uploadDirectory + "\\" + imgFileName;
             String linkDB = "FolderImages/ImageBlog/" + imgFileName;
             Part imgPart = request.getPart("image");
@@ -134,11 +140,63 @@ public class BlogsAdmin extends HttpServlet {
     }
 
     private void handleUpdate(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        try {
+            int blogId = Integer.parseInt(request.getParameter("blogId"));
+            String title = request.getParameter("title");
+            String description = request.getParameter("descripition");
+
+            String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ImageBlog";
+            String imgFileName = IntStream.range(0, d.getAllBlogs().size())
+                    .filter(i -> d.getAllBlogs().get(i).getBlogID() == blogId)
+                    .findFirst()
+                    .orElse(-1) + "_image.jpg";
+            String imgFilePath = uploadDirectory + "\\" + imgFileName;
+            String linkDB = "FolderImages/ImageBlog/" + imgFileName;
+            Part imgPart = request.getPart("image");
+            imgPart.write(imgFilePath);
+
+            d.updateBlog(blogId, title, linkDB, description);
+            request.getSession().setAttribute("successMessage", "Update Blog successfull!");
+            Thread.sleep(2000);
+            response.sendRedirect("blogAdmin");
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 
     private void handleDelete(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            int blogId = Integer.parseInt(request.getParameter("blogId"));
+            boolean success = d.changeBlogStatus(blogId, false);
+
+            // Trả về phản hồi dưới dạng JSON
+            response.setContentType("application/json");
+            if (success) {
+                response.getWriter().write("{\"success\":true,\"message\":\"Blog moved to trash successfully.\"}");
+            } else {
+                response.getWriter().write("{\"success\":false,\"message\":\"Failed to move blog to trash.\"}");
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    private void handleActivate(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            int blogId = Integer.parseInt(request.getParameter("blogId"));
+            boolean success = d.changeBlogStatus(blogId, true);
+
+            // Trả về phản hồi dưới dạng JSON
+            response.setContentType("application/json");
+            if (success) {
+                response.getWriter().write("{\"success\":true,\"message\":\"Blog activated successfully.\"}");
+            } else {
+                response.getWriter().write("{\"success\":false,\"message\":\"Failed to activate blog.\"}");
+            }
+        } catch (Exception e) {
+          e.getMessage();
+        }
     }
 
 }

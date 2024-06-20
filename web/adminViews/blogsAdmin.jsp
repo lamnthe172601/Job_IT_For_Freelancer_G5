@@ -102,7 +102,7 @@
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="${listBlog}" var="blog" varStatus="loop">
-                                                    <tr>
+                                                    <tr id="blog-row-${blog.getBlogID()}">
 
                                                         <td>${loop.index +1}</td>
                                                         <td>
@@ -135,14 +135,88 @@
                                                             <c:if test="${!blog.isStatus()}">
                                                                 <a href="javascript:void(0);" class="user-inactive-btn status">Trash</a>
                                                             </c:if>
-                                                                
+
                                                         </td>                                                   
                                                         <td class="text-end">
-                                                            <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" ><i class="far fa-edit"></i></a>
-                                                            <a href="javascript:void(0);" class="btn btn-sm btn-danger" ><i class="far fa-trash-alt"></i></a>
-                                                        </td>                                              
-                                                    </tr>     
-                                                </c:forEach>
+                                                            <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#update-blog-modal${blog.getBlogID()}"><i class="far fa-edit"></i></a>
+                                                                <c:if test="${blog.isStatus()}">
+                                                                <button   class="btn btn-sm btn-danger delete-blog-btn btn-status" data-blog-id="${blog.getBlogID()}"><i class="far fa-trash-alt"></i></button>
+                                                                <button style="display: none"class="btn btn-sm btn-success activate-blog-btn btn-status" data-blog-id="${blog.getBlogID()}"><i class="fas fa-check" ></i></button>
+
+                                                            </c:if>
+                                                            <c:if test="${!blog.isStatus()}">
+                                                                <button class="btn btn-sm btn-success activate-blog-btn btn-status" data-blog-id="${blog.getBlogID()}"><i class="fas fa-check"></i></button>
+                                                                <button style="display: none" class="btn btn-sm btn-danger delete-blog-btn btn-status" data-blog-id="${blog.getBlogID()}"><i class="far fa-trash-alt" hidden=""></i></button>
+
+                                                            </c:if>
+                                                            <a href="javascript:void(0);" class="btn btn-sm btn-info me-2 view-details-btn" data-bs-toggle="modal" data-bs-target="#view-blog-details-modal${blog.getBlogID()}"><i class="fas fa-eye"></i></a>
+                                                        </td>
+                                                        <!-- Modal for Viewing Blog Details -->
+                                                <div class="modal fade" id="view-blog-details-modal${blog.getBlogID()}" tabindex="-1" aria-labelledby="viewBlogDetailsModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="viewBlogDetailsModalLabel">Blog Details</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <img id="blog-details-image" src="${blog.getImage()}" alt="Blog Image" class="img-fluid">
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <h3 id="blog-details-title">${blog.getTitle()}</h3>
+
+                                                                        <p id="blog-details-date">Data create: ${blog.getDate_blog()}</p> 
+                                                                        <p id="blog-details-description">${blog.getDescription()} </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal for Updating Blog -->
+                                                <div class="modal fade" id="update-blog-modal${blog.getBlogID()}" tabindex="-1" aria-labelledby="updateBlogModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="updateBlogModalLabel">Update Blog</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form id="update-blog-form-${blog.getBlogID()}" method="post" action="blogAdmin" enctype="multipart/form-data">
+                                                                    <input type="hidden" name="blogId" value="${blog.getBlogID()}">
+                                                                    <div class="mb-3">
+                                                                        <label for="blog-image-${blog.getBlogID()}" class="form-label">Image</label>
+                                                                        <input type="file" class="form-control" name="image" id="blog-image-${blog.getBlogID()}" accept="image/*">
+                                                                        <img src="${blog.getImage()}" alt="Current Image" class="img-thumbnail mt-2" style="max-width: 200px;">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="blog-title-${blog.getBlogID()}" class="form-label">Title</label>
+                                                                        <input type="text" class="form-control" name="title" id="blog-title-${blog.getBlogID()}" value="${blog.getTitle()}" required>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="blog-description-${blog.getBlogID()}" class="form-label">Description</label>
+                                                                        <div class="description-editor border rounded p-2">
+                                                                            <textarea class="form-control border-0" id="blog-description-${blog.getBlogID()}" name="descripition" rows="10" style="height: 300px" required>${blog.getDescription()}</textarea>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" class="btn btn-primary" name="mode" value="update">Update Blog</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </tr>     
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
@@ -187,7 +261,91 @@
             </div>
         </div>
         <script src="adminAssets/js/jquery-3.7.1.min.js"></script>
-       
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Xử lý sự kiện click trên nút xóa
+                $('.delete-blog-btn').click(function () {
+                    var blogId = $(this).data('blog-id');
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'This will move the blog to the trash.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Delete'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Gọi AJAX để thay đổi trạng thái blog
+                            changeBlogStatus(blogId, false);
+                        }
+                    });
+                });
+
+                // Xử lý sự kiện click trên nút kích hoạt
+                $('.activate-blog-btn').click(function () {
+                    var blogId = $(this).data('blog-id');
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'This will activate the blog.',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Activate'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Gọi AJAX để thay đổi trạng thái blog
+                            changeBlogStatus(blogId, true);
+                        }
+                    });
+                });
+            });
+            function changeBlogStatus(blogId, isActive) {
+                $.ajax({
+                    url: 'blogAdmin', // Đường dẫn tới servlet xử lý yêu cầu
+                    type: 'POST',
+                    data: {
+                        mode: isActive ? 'activate' : 'delete',
+                        blogId: blogId
+                    },
+                    success: function (response) {
+                        // Xử lý phản hồi từ máy chủ
+                        if (response.success) {
+                            // Cập nhật giao diện tương ứng với trạng thái mới của blog
+                            updateBlogRowStatus(blogId, isActive);
+                            showSuccessNotification(response.message);
+                        } else {
+                            showErrorNotification(response.message);
+                        }
+                    },
+                    error: function () {
+                        showErrorNotification('An error occurred while changing the blog status.');
+                    }
+                });
+            }
+
+            function updateBlogRowStatus(blogId, isActive) {
+                var blogRow = $('#blog-row-' + blogId);
+                var statusCell = blogRow.find('.test1');
+                var statusBtn = blogRow.find('.btn-status');
+
+
+                if (isActive) {
+                    statusCell.html('<a href="javascript:void(0);" class="user-active-btn status">Active</a>');
+                    blogRow.find('.delete-blog-btn').show();
+                    blogRow.find('.activate-blog-btn').hide();
+                } else {
+                    statusCell.html('<a href="javascript:void(0);" class="user-inactive-btn status">Trash</a>');
+                    blogRow.find('.activate-blog-btn').show();
+                    blogRow.find('.delete-blog-btn').hide();
+                }
+            }
+
+        </script>
+
+
         <c:if test="${not empty successMessage}">
             <script>
                 var successMessage = "${successMessage}";
@@ -242,6 +400,6 @@
         <script src="adminAssets/plugins/datatables/datatables.min.js" ></script>
 
         <script src="adminAssets/js/script.js" ></script>
-        
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/providers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:24 GMT -->
+
+        <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/providers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:24 GMT -->
 </html>
