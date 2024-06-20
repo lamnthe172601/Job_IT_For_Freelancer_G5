@@ -161,16 +161,16 @@
         <servlet-class>CommonControll.AllListPostControll</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ApplyJobInListPostControll</servlet-name>
-        <servlet-class>FreelancerControll.ApplyJobInListPostControll</servlet-class>
+        <servlet-name>ProjectAdmin</servlet-name>
+        <servlet-class>AdminControlles.ProjectAdmin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddFavouritesControll</servlet-name>
-        <servlet-class>FreelancerControll.AddFavouritesControll</servlet-class>
+        <servlet-name>ModerationProjectAdmin</servlet-name>
+        <servlet-class>AdminControlles.ModerationProjectAdmin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteFavouritesControll</servlet-name>
-        <servlet-class>FreelancerControll.DeleteFavouritesControll</servlet-class>
+        <servlet-name>BlogsAdmin</servlet-name>
+        <servlet-class>AdminControlles.BlogsAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -341,15 +341,15 @@
         <url-pattern>/AllListPost</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ApplyJobInListPostControll</servlet-name>
-        <url-pattern>/ApplyJobInListPost</url-pattern>
+        <servlet-name>ProjectAdmin</servlet-name>
+        <url-pattern>/projectAdmin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddFavouritesControll</servlet-name>
-        <url-pattern>/AddFavourites</url-pattern>
+        <servlet-name>ModerationProjectAdmin</servlet-name>
+        <url-pattern>/moderationProjectAdmin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteFavouritesControll</servlet-name>
-        <url-pattern>/DeleteFavourites</url-pattern>
+        <servlet-name>BlogsAdmin</servlet-name>
+        <url-pattern>/blogAdmin</url-pattern>
     </servlet-mapping>
 </web-app>

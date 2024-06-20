@@ -252,15 +252,16 @@
                             <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
                             <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
 
+
                             <%-- Hiển thị danh sách bài đăng --%>
-                            <div class="row" id="listpostContainer">
+                            <div  class="row" id="listpostContainer">
                                 <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
-                                    <div class="col-xl-4 col-md-6 post-item">
+                                    <div  class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
-                                            <div class="freelance-content">
+                                            <div  class="freelance-content">
                                                 <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
                                                 <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                                <div class="author-heading">
+                                                <div  class="author-heading">
                                                     <div class="freelance-img">
                                                         <a href="javascript:void(0);">
                                                             <img src="${list.image}" alt="author">
@@ -268,15 +269,42 @@
                                                         </a>
                                                     </div>
                                                     <div class="profile-name">
-                                                        <div class="author-location">${list.title}</div>
+                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
                                                         <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${list.location}</div>
                                                     </div>
-                                                    <div class="freelance-tags">
-                                                        <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${list.skill}</span></a>
+                                                    <div class="skills-container">
+                                                        <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
+                                                            <c:if test="${loop.index % 3 == 0}">
+                                                                <div class="skills-row">
+                                                                </c:if>
+                                                                <div class="freelance-tags">
+                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
+                                                                </div>
+                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
+                                                                </div>
+                                                            </c:if>
+                                                        </c:forEach>
                                                     </div>
+
+                                                    <style>
+                                                        .skills-container {
+                                                            display: flex;
+                                                            flex-wrap: wrap;
+                                                            justify-content: center;
+                                                            align-items: center;
+                                                        }
+                                                        .freelance-tags {
+                                                            margin: 5px;
+                                                        }
+                                                        .skills-row {
+                                                            display: flex;
+                                                            justify-content: center;
+                                                            width: 100%;
+                                                        }
+                                                    </style>
                                                 </div>
                                                 <div class="counter-stats">
                                                     <ul>
@@ -505,12 +533,12 @@
                     let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
                     let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
-                    let postSkill = post.querySelector('.freelance-tags .badge').innerText.toLowerCase();
+                    let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
 
                     let matchCategory = selectedCategories.length === 0 || selectedCategories.includes(postCategory);
                     let matchProjectType = selectedProjectTypes.length === 0 || selectedProjectTypes.includes(postProjectType);
                     let matchDuration = selectedDurations.length === 0 || selectedDurations.includes(postDuration);
-                    let matchSkill = selectedSkills.length === 0 || selectedSkills.includes(postSkill);
+                    let matchSkill = selectedSkills.length === 0 || selectedSkills.every(skill => postSkills.includes(skill));
 
                     if (matchCategory && matchProjectType && matchDuration && matchSkill) {
                         post.style.display = 'block';
@@ -519,6 +547,25 @@
                     }
                 });
             }
+
+            // Định nghĩa hàm cắt chuỗi và thêm "..."
+            function truncateString(str, maxLength) {
+                if (str.length <= maxLength) {
+                    return str;
+                } else {
+                    return str.substring(0, maxLength) + "...";
+                }
+            }
+
+            // Lấy nội dung của element có id là 'title-list-post'
+            let titleElement = document.getElementById('title-list-post');
+
+            // Lấy nội dung ban đầu từ innerHTML của element
+            let originalTitle = titleElement.innerHTML;
+
+            // Sử dụng hàm truncateString để cắt chuỗi và gán lại vào innerHTML của element
+            let truncatedTitle = truncateString(originalTitle, 5);
+            titleElement.innerHTML = truncatedTitle;
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

@@ -141,8 +141,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
                         <div class="row">
                             <c:forEach items="${getPostsByFreelancerSkill}" var="list">
                                 <div class="col-lg-4 col-md-6 d-flex">
@@ -154,25 +152,8 @@
 
                                             <a class="yeuthich" post-id="${list.postID}">
                                                 <div class="favorite-icon" onclick="toggleHeart(this)" >
-                                                
-                                            
-                                            <c:set var="favo" value="false" />
-                                                <c:forEach items="${postFavourites}" var="post">
-                                                    <c:choose>
-                                                        <c:when test="${list.postID == post.postID}">
-                                                            <c:set var="favo" value="true" />
-                                                        </c:when>                                                                
-                                                    </c:choose>
-                                                </c:forEach>
-                                                <c:choose>
-                                                        <c:when test="${favo}">
-                                                        <a href="javascript:void(0);" onclick="removeFromFavorites(${list.postID})" ><i id="favourite_${list.postID}" class="fas fa-heart"></i></a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                        <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})"  ><i id="favourite_${list.postID}" class="far fa-heart"></i></a>
-                                                        </c:otherwise>
-                                                </c:choose>
-                                            </div>
+                                                    <i class="far fa-heart"></i>
+                                                </div>
                                             </a>
                                         </div>
                                         <div class="feature-content">
@@ -1001,47 +982,6 @@
                 icon.querySelector('i').classList.toggle('fas'); // Thêm hoặc xóa class 'fas' (đỏ)
 
             }
-        </script>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-                    function addToFavorites(postID) {
-                        $.ajax({
-                            url: 'AddFavourites',
-                            type: 'GET',
-                            data: {
-                                postID: postID
-                            },
-                            success: function (response) {
-                                // Xử lý phản hồi thành công (nếu cần)
-                                //alert('Đã thêm vào danh sách yêu thích!');
-                                $('#favourite_' + postID).remove('far').addClass('fas');
-                            },
-                            error: function (xhr, status, error) {
-                                // Xử lý lỗi (nếu có)
-                                alert('Đã xảy ra lỗi: ' + error);
-                            }
-                        });
-                    }
-
-                    function removeFromFavorites(postID) {
-                        $.ajax({
-                            url: 'DeleteFavourites',
-                            type: 'GET',
-                            data: {
-                                postID: postID
-                            },
-                            success: function (response) {
-                                // Xử lý phản hồi thành công (nếu cần)
-                                //alert('Đã xóa khỏi danh sách yêu thích!');
-                                $('#favourite_' + postID).remove('fas').addClass('far');
-                            },
-                            error: function (xhr, status, error) {
-                                // Xử lý lỗi (nếu có)
-                                alert('Đã xảy ra lỗi: ' + error);
-                            }
-                        });
-                    }
         </script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 

@@ -3,26 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package FreelancerControll;
+package AdminControlles;
 
-import Models.User;
-import dal.DAO;
-import dal.PostDAO;
+import dal.AdminDAO;
+import dal.DashboardDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  *
- * @author tanng
+ * @author kudol
  */
-public class ApplyJobInListPostControll extends HttpServlet {
+public class ProjectAdmin extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,10 +35,10 @@ public class ApplyJobInListPostControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ApplyJobInListPostControll</title>");  
+            out.println("<title>Servlet ProjectAdmin</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ApplyJobInListPostControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ProjectAdmin at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,23 +55,12 @@ public class ApplyJobInListPostControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedDate = currentDate.format(formatter);
-        try {
-            String postID = request.getParameter("postID");
-            HttpSession session = request.getSession();
-            Object u = session.getAttribute("account");
-            User user = (User) u;
-            PostDAO p = new PostDAO();
-            DAO d = new DAO();
-            int userId = user.getUserID();
-            int freelancerID = d.getFreelancerIDbyUserID(userId);
-            p.applyJob(freelancerID, postID, formattedDate);
-            
-        } catch (Exception e) {
-            request.getRequestDispatcher("login").forward(request, response);
-        }
+             DashboardDAO dao = new DashboardDAO();
+             AdminDAO a = new AdminDAO();
+             request.setAttribute("totalProject",dao.getTotalPost());
+             request.setAttribute("listProjects",a.getAllProject() );
+             request.getRequestDispatcher("adminViews/projectAdmin.jsp").forward(request, response);
+
     } 
 
     /** 

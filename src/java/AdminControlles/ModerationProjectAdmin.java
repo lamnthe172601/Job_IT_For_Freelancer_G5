@@ -3,24 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package FreelancerControll;
+package AdminControlles;
 
-import Models.User;
-import dal.DAO;
-import dal.PostDAO;
+import dal.AdminDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author tanng
+ * @author kudol
  */
-public class DeleteFavouritesControll extends HttpServlet {
+public class ModerationProjectAdmin extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,19 +28,18 @@ public class DeleteFavouritesControll extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DeleteFavouritesControll</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DeleteFavouritesControll at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+       AdminDAO d = new AdminDAO();
+        // Đọc userId từ yêu cầu AJAX
+        int postId = Integer.parseInt(request.getParameter("postId").trim());
+        String type = request.getParameter("type");
+       
+        if (type.equals("suspend")) {
+            d.moderationProject(postId,2);
+        } else {
+            d.moderationProject(postId, 1);
         }
+          response.setContentType("application/json");
+        response.getWriter().write("{\"success\": true}");
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,21 +53,7 @@ public class DeleteFavouritesControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try {
-            String postID = request.getParameter("postID");
-            HttpSession session = request.getSession();
-            Object u = session.getAttribute("account");
-            User user = (User) u;
-            PostDAO p = new PostDAO();
-            DAO d = new DAO();
-            int userId = user.getUserID();
-            int freelancerID = d.getFreelancerIDbyUserID(userId);
-            p.deleteFavoPostByPostID(freelancerID, postID);
-            request.getRequestDispatcher("AllListPost").forward(request, response);
-
-        } catch (Exception e) {
-            request.getRequestDispatcher("login").forward(request, response);
-        }
+        processRequest(request, response);
     } 
 
     /** 
