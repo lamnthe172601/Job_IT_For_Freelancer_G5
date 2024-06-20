@@ -79,8 +79,7 @@ public class ManageJobsPostsControll extends HttpServlet {
         String target = request.getParameter("target");
         String location = request.getParameter("Location");
         String budgetFrom = request.getParameter("budgetFrom");
-        String[] skill = request.getParameterValues("skill");
-        String skills = String.join(", ", skill);
+        String skill = request.getParameter("skill");
         String categories = request.getParameter("Categories");
         String description = request.getParameter("description");
 
@@ -95,7 +94,7 @@ public class ManageJobsPostsControll extends HttpServlet {
             imgPart.write(imgFilePath);
 
             PostDAO pDao = new PostDAO();
-            pDao.updatePost(title, linkDB, jobsType, duration, target, description, budgetFrom, location, skills, categories, postID);
+            pDao.updatePost(title, linkDB, jobsType, duration, target, description, budgetFrom, location, skill, categories, postID);
 
             Thread.sleep(1500);
             response.sendRedirect("manageJobsPosts");

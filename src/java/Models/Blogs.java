@@ -12,22 +12,30 @@ import java.util.Date;
  */
 public class Blogs {
     int BlogID;
-    String title, image, description,tag;
+    String title, image, description, tag;
     Date date_blog;
-    boolean status;
 
     public Blogs() {
     }
 
-    public Blogs(int BlogID, String title, String image, String description, String tag, Date date_blog, boolean status) {
+    public Blogs(int BlogID, String title, String image, Date date_blog, String description, String tag) {
+        this.date_blog = date_blog;
         this.BlogID = BlogID;
         this.title = title;
         this.image = image;
         this.description = description;
         this.tag = tag;
-        this.date_blog = date_blog;
-        this.status = status;
     }
+
+    public Date getDate_blog() {
+        return date_blog;
+    }
+
+    public void setDate_blog(Date date_blog) {
+        this.date_blog = date_blog;
+    }
+    
+    
 
     public int getBlogID() {
         return BlogID;
@@ -68,22 +76,6 @@ public class Blogs {
     public void setTag(String tag) {
         this.tag = tag;
     }
-
-    public Date getDate_blog() {
-        return date_blog;
-    }
-
-    public void setDate_blog(Date date_blog) {
-        this.date_blog = date_blog;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-   
+    
+    
 }

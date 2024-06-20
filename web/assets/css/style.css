@@ -26159,26 +26159,6 @@ ul.download-item li:last-child {
     .bid-btn {
         font-size: 10px;
     }
-
-    .continue-btn {
-        background-color: #fff;
-        border: 1px solid #ff5b33;
-        border-radius: 50px;
-        color: #ff5b33;
-        display: block;
-        font-size: 18px;
-        font-weight: 600;
-        padding: 10px 20px;
-        text-align: center;
-    }
-
-    .continue-btn:hover,
-    .continue-btn:focus,
-    .continue-btn:active {
-        background-color: #ff5b33;
-        border: 1px solid #ff5b33;
-        color: #fff;
-    }
     .star {
         font-size: 10px;
         width: 25px;

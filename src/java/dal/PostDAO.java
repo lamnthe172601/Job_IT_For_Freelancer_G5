@@ -117,9 +117,10 @@ public class PostDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), getShortDescription(rs.getString("title"), 5), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return list;
     }
@@ -132,9 +133,7 @@ public class PostDAO extends DBContext {
                                   JOIN Duration du ON p.durationID = du.durationID
                                    JOIN Recruiter re ON p.recruiterID = re.recruiterID
                                    JOIN Categories ca ON p.caID = ca.caID
-                                   JOIN Company co ON re.recruiterID = co.recruiterID
-                       where p.status = 1 and p.checking = 1
-                       """;
+                                   JOIN Company co ON re.recruiterID = co.recruiterID""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -144,7 +143,7 @@ public class PostDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                posts.add(new Post(rs.getInt("postID"), getShortDescription(rs.getString("title"), 5), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
                 
                 
             }
@@ -166,25 +165,6 @@ public class PostDAO extends DBContext {
         }
 
         return maxPostID;
-    }
-    
-     public static String getShortDescription(String description, int wordLimit) {
-        if (description == null || description.isEmpty()) {
-            return description;
-        }
-
-        String[] words = description.split("\\s+");
-        if (words.length <= wordLimit) {
-            return description;
-        }
-
-        StringBuilder shortDescription = new StringBuilder();
-        for (int i = 0; i < wordLimit; i++) {
-            shortDescription.append(words[i]).append(" ");
-        }
-        shortDescription.append("...");
-
-        return shortDescription.toString().trim();
     }
 
     public boolean createPost(String title, String image, int jobTypeId, int durationId,
@@ -272,7 +252,11 @@ public class PostDAO extends DBContext {
         }
     }
 
-
+//    public static void main(String[] args) {
+//        PostDAO dao = new PostDAO();
+//        dao.updatePost("Khuong", "abc", 2, 2, 100, "mota", "30", "HCM", "C++", 10, 21);
+//    }
+    
     
     //Tan task
     public List<PostBasic> getAllFavPosts(int id) {
@@ -342,6 +326,7 @@ public class PostDAO extends DBContext {
                         re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -376,6 +361,7 @@ public class PostDAO extends DBContext {
                         re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return posts;
     }
@@ -428,6 +414,7 @@ public class PostDAO extends DBContext {
                         rs.getString("status"),rs.getString("title"),rs.getString("categories_name")));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return posts;
     }
@@ -527,7 +514,7 @@ public class PostDAO extends DBContext {
             statement.setString(2, postID);
             statement.setString(3, date);
             statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
 

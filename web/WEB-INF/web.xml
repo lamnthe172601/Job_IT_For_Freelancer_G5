@@ -171,22 +171,6 @@
     <servlet>
         <servlet-name>DeleteFavouritesControll</servlet-name>
         <servlet-class>FreelancerControll.DeleteFavouritesControll</servlet-class>
-        </servlet>
-    <servlet>
-        <servlet-name>ProjectAdmin</servlet-name>
-        <servlet-class>AdminControlles.ProjectAdmin</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ModerationProjectAdmin</servlet-name>
-        <servlet-class>AdminControlles.ModerationProjectAdmin</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogsAdmin</servlet-name>
-        <servlet-class>AdminControlles.BlogsAdmin</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditSkill</servlet-name>
-        <servlet-class>AdminControlles.EditSkill</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -367,21 +351,5 @@
     <servlet-mapping>
         <servlet-name>DeleteFavouritesControll</servlet-name>
         <url-pattern>/DeleteFavourites</url-pattern>
-        </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProjectAdmin</servlet-name>
-        <url-pattern>/projectAdmin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ModerationProjectAdmin</servlet-name>
-        <url-pattern>/moderationProjectAdmin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogsAdmin</servlet-name>
-        <url-pattern>/blogAdmin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditSkill</servlet-name>
-        <url-pattern>/editSkill</url-pattern>
     </servlet-mapping>
 </web-app>
