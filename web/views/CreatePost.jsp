@@ -331,7 +331,7 @@
                                                             <c:forEach items="${skill}" var="i"> 
                                                                 <div class="col-md-4">
                                                                     <div class="input-block">
-                                                                        <input type="checkbox" name="skill"  value="${i.skill_set_name}">
+                                                                        <input type="radio" name="skill"  value="${i.skill_set_name}">
                                                                         <label ">${i.skill_set_name}</label>
                                                                     </div>
                                                                 </div>
