@@ -28,7 +28,8 @@ public class CategoriesDAO extends DBContext {
                 list.add(new Categories(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                            rs.getString(4)));
+                            rs.getString(4),
+             rs.getInt(5)));
             }
         } catch (SQLException e) {
         }
@@ -44,7 +45,7 @@ public class CategoriesDAO extends DBContext {
             ps.setInt(1, categoryId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Categories c = new Categories(categoryId, query, query, query);
+                Categories c = new Categories(categoryId, query, query, query, categoryId);
                 return c;
             }
         } catch (SQLException e) {
@@ -72,7 +73,7 @@ public boolean addCategory(Categories category) {
 
     public List<Categories> getCategory() {
         List<Categories> categoriesList = new ArrayList<>();
-        String sql = "SELECT caID, categories_name ,[description] FROM categories";
+        String sql = "SELECT caID, categories_name ,[description],statusCate FROM categories";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -83,6 +84,7 @@ public boolean addCategory(Categories category) {
                 category.setCaID(resultSet.getInt("caID"));
                 category.setCategoriesName(resultSet.getString("categories_name"));
                 category.setDescription(resultSet.getString("description"));
+                category.setStatusCate(resultSet.getInt("statusCate"));
                 categoriesList.add(category);
             }
         } catch (Exception e) {
@@ -102,7 +104,8 @@ public boolean addCategory(Categories category) {
                 list.add(new Categories(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getString(4)));
+                        rs.getString(4),
+                        rs.getInt(5)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
