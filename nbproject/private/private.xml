@@ -20,13 +20,15 @@
             <file>file:/D:/SU24/A/web/views/completedProjects.jsp</file>
         </group>
         <group>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/projectAdmin.jsp</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ProjectAdmin.java</file>
-        </group>
-        <group>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/blogsAdmin.jsp</file>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/BlogsAdmin.java</file>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/AdminDAO.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/skillAdmin.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/Models/User.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ProfileAdmin.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/dashboardAdmin.jsp</file>
         </group>
     </open-files>
 </project-private>
