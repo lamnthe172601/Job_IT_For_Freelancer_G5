@@ -464,24 +464,24 @@
 
         </script>
         <script>
-          // Đóng dropdown khi click bên ngoài
-$(document).ready(function() {
-    handleOutsideClick();
-});
+            // Đóng dropdown khi click bên ngoài
+            $(document).ready(function () {
+                handleOutsideClick();
+            });
 
-function handleOutsideClick() {
-    $(document).click(function(event) {
-        var skillFilterContainer = $('.skill-filter-container');
-        var skillFilterDropdown = $('.skill-filter-dropdown');
+            function handleOutsideClick() {
+                $(document).click(function (event) {
+                    var skillFilterContainer = $('.skill-filter-container');
+                    var skillFilterDropdown = $('.skill-filter-dropdown');
 
-        if (!$(event.target).closest(skillFilterContainer).length) {
-            skillFilterDropdown.hide();
-        }
-    });
-}
+                    if (!$(event.target).closest(skillFilterContainer).length) {
+                        skillFilterDropdown.hide();
+                    }
+                });
+            }
         </script>
 
-        <!--        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="adminAssets/js/jquery-3.7.1.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>-->
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
         <script src="adminAssets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>

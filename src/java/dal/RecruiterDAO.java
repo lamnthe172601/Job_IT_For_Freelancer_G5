@@ -138,7 +138,7 @@ public class RecruiterDAO extends DBContext {
             ps.setInt(1, recruiterID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -164,7 +164,7 @@ public class RecruiterDAO extends DBContext {
             ps.setInt(1, recruiterID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -197,7 +197,7 @@ public class RecruiterDAO extends DBContext {
             ps.setInt(1, recruiterID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -233,12 +233,47 @@ public class RecruiterDAO extends DBContext {
         }
         return list;
     }
+    
+    public int getNumberPostbyRecruiter(int recreuiterID) {
+        String query = """
+                          SELECT COUNT(postID) AS total_posts
+                                              FROM [Post] where recruiterID = ?;""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recreuiterID);
+            ResultSet rs = ps.executeQuery();
 
+            while (rs.next()) {
+                return rs.getInt("total_posts");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
+
+    
+    public int getNumberApplyPostbyRecruiter(int recreuiterID) {
+        String query = """
+                         SELECT COUNT(JA.applyID) AS TotalApplies
+                                              FROM Post P
+                                              LEFT JOIN JobApply JA ON P.postID = JA.postID
+                                              where recruiterID =?""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recreuiterID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("TotalApplies");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
+    
     public static void main(String[] args) {
         RecruiterDAO r = new RecruiterDAO();
-        List<Post> e = r.ListPostByDateTime(1);
-        for (Post post : e) {
-            System.out.println(post.toString());
-        }
+        int m = r.getNumberApplyPostbyRecruiter(1);
+        System.out.println(m);
     }
 }
