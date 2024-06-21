@@ -112,7 +112,7 @@ public class PostDAO extends DBContext {
             ps.setInt(1, pid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -138,7 +138,7 @@ public class PostDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -252,11 +252,24 @@ public class PostDAO extends DBContext {
         }
     }
 
-//    public static void main(String[] args) {
-//        PostDAO dao = new PostDAO();
-//        dao.updatePost("Khuong", "abc", 2, 2, 100, "mota", "30", "HCM", "C++", 10, 21);
-//    }
     
+        public void updateStatusPost( int postID, boolean status) {
+        String query = """
+                       UPDATE post SET status = ? WHERE postID = ?""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(2, postID);
+            stmt.setBoolean(1, status);
+            
+            
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+
     
     //Tan task
     public List<PostBasic> getAllFavPosts(int id) {
@@ -282,7 +295,7 @@ public class PostDAO extends DBContext {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString(25));
                 JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
@@ -317,7 +330,7 @@ public class PostDAO extends DBContext {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"),rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"),rs.getString(25));
                 JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
@@ -352,7 +365,7 @@ public class PostDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"),rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"),rs.getString(25));
                 JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
@@ -546,7 +559,7 @@ public class PostDAO extends DBContext {
             ps.setInt(2, (index-1)*6);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString(25));
                 JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
@@ -615,7 +628,7 @@ public class PostDAO extends DBContext {
             ps.setInt(3, (index-1)*6);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString(25));
                 JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
