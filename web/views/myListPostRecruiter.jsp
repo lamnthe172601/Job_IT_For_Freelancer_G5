@@ -78,7 +78,114 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                            <jsp:include page="header.jsp" />
+                            <ul class="main-nav">
+                                <li class="active has-submenu">
+                                    <a href="home">Home <i class="fas "></i></a>
+
+                                </li>
+
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu"> 
+
+                                            <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
+                                            <li><a href="ListApply">Jobs Apply</a></li>
+                                            <li><a href="jobforyou">Jobs For you</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="AllListPost">Jobs List</a></li>                                        
+                                            <li><a href="SreachJob">Find Jobs</a></li>  
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="jobsList">Top Freelancer</a></li>
+                                            <li><a href="newsJobs">Skills</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="CreatePost">Create a new Post</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
+                                            <li><a href="newsJobs">Reviews</a></li>
+
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">                                                                           
+
+                                        <li><a href="blogGrid">Blog</a></li>
+                                        <li><a href="About">About us</a></li>
+                                        <li><a href="ContactUs">Contact us</a></li>
+                                    </ul>
+                                </li>
+
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
+                                            <li><a href="Project">Projects</a></li>                        
+                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
+                                            <li><a href="profile-settings">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="Dashboard">Dashboard</a></li>
+                                            <li><a href="companydetail">My Profile</a></li>
+                                            <li><a href="company-details">Company Details</a></li>
+                                            <li><a href="manage-projects">Projects</a></li>
+                                            <li><a href="favourites">Favourites</a></li>                                                                                       
+                                            <li><a href="recruitersetting">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
+                                    <li>
+                                        <a href="home" target="_blank">Admin</a>
+                                        <ul class="submenu">
+
+                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
+                                            <li><a href="profile-settings">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account == null}">
+                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
+                                        </c:if>
+                            </ul>
+                        </div>
+                        <ul style="margin-left: 5px;" class="nav header-navbar-rht">
+
+
+                            
+
+
+                        </ul>
                     </nav>
                 </div>
             </header>
@@ -252,16 +359,15 @@
                             <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
                             <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
 
-
                             <%-- Hiển thị danh sách bài đăng --%>
-                            <div  class="row" id="listpostContainer">
+                            <div class="row" id="listpostContainer">
                                 <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
-                                    <div  class="col-xl-4 col-md-6 post-item">
+                                    <div class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
-                                            <div  class="freelance-content">
+                                            <div class="freelance-content">
                                                 <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
                                                 <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                                <div  class="author-heading">
+                                                <div class="author-heading">
                                                     <div class="freelance-img">
                                                         <a href="javascript:void(0);">
                                                             <img src="${list.image}" alt="author">
@@ -269,42 +375,15 @@
                                                         </a>
                                                     </div>
                                                     <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
+                                                        <div class="author-location">${list.title}</div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
                                                         <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${list.location}</div>
                                                     </div>
-                                                    <div class="skills-container">
-                                                        <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index % 3 == 0}">
-                                                                <div class="skills-row">
-                                                                </c:if>
-                                                                <div class="freelance-tags">
-                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                                </div>
-                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                                </div>
-                                                            </c:if>
-                                                        </c:forEach>
+                                                    <div class="freelance-tags">
+                                                        <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${list.skill}</span></a>
                                                     </div>
-
-                                                    <style>
-                                                        .skills-container {
-                                                            display: flex;
-                                                            flex-wrap: wrap;
-                                                            justify-content: center;
-                                                            align-items: center;
-                                                        }
-                                                        .freelance-tags {
-                                                            margin: 5px;
-                                                        }
-                                                        .skills-row {
-                                                            display: flex;
-                                                            justify-content: center;
-                                                            width: 100%;
-                                                        }
-                                                    </style>
                                                 </div>
                                                 <div class="counter-stats">
                                                     <ul>
@@ -533,12 +612,12 @@
                     let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
                     let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
-                    let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
+                    let postSkill = post.querySelector('.freelance-tags .badge').innerText.toLowerCase();
 
                     let matchCategory = selectedCategories.length === 0 || selectedCategories.includes(postCategory);
                     let matchProjectType = selectedProjectTypes.length === 0 || selectedProjectTypes.includes(postProjectType);
                     let matchDuration = selectedDurations.length === 0 || selectedDurations.includes(postDuration);
-                    let matchSkill = selectedSkills.length === 0 || selectedSkills.every(skill => postSkills.includes(skill));
+                    let matchSkill = selectedSkills.length === 0 || selectedSkills.includes(postSkill);
 
                     if (matchCategory && matchProjectType && matchDuration && matchSkill) {
                         post.style.display = 'block';
@@ -547,25 +626,6 @@
                     }
                 });
             }
-
-            // Định nghĩa hàm cắt chuỗi và thêm "..."
-            function truncateString(str, maxLength) {
-                if (str.length <= maxLength) {
-                    return str;
-                } else {
-                    return str.substring(0, maxLength) + "...";
-                }
-            }
-
-            // Lấy nội dung của element có id là 'title-list-post'
-            let titleElement = document.getElementById('title-list-post');
-
-            // Lấy nội dung ban đầu từ innerHTML của element
-            let originalTitle = titleElement.innerHTML;
-
-            // Sử dụng hàm truncateString để cắt chuỗi và gán lại vào innerHTML của element
-            let truncatedTitle = truncateString(originalTitle, 5);
-            titleElement.innerHTML = truncatedTitle;
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

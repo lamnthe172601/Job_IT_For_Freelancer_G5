@@ -12,10 +12,9 @@ import java.util.Date;
  */
 public class Blogs {
     int BlogID;
-    String title, image, description,tag;
+    String title, image, description, tag;
     Date date_blog;
     boolean status;
-
     public Blogs() {
     }
 
@@ -85,5 +84,5 @@ public class Blogs {
         this.status = status;
     }
 
-   
+  
 }

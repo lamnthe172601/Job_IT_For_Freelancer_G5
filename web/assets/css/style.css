@@ -20824,6 +20824,22 @@ header.header-three.sticky .top-header {
 .trend-projects-three .trend-project-item .project-img {
     margin-bottom: 0;
 }
+
+.change-status-btn {
+    background: #131135;
+    border-radius: 90px;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 13px 50px;
+    color: #fff;
+    margin-right: 15px;
+    text-transform: uppercase;
+}
+.change-status-btn:hover {
+    color: #fff;
+    background-color: #E65425;
+    border-color: #E65425;
+}
 .trend-project-content .star-rated {
     display: flex;
     align-items: center;
@@ -26159,26 +26175,6 @@ ul.download-item li:last-child {
     .bid-btn {
         font-size: 10px;
     }
-
-    .continue-btn {
-        background-color: #fff;
-        border: 1px solid #ff5b33;
-        border-radius: 50px;
-        color: #ff5b33;
-        display: block;
-        font-size: 18px;
-        font-weight: 600;
-        padding: 10px 20px;
-        text-align: center;
-    }
-
-    .continue-btn:hover,
-    .continue-btn:focus,
-    .continue-btn:active {
-        background-color: #ff5b33;
-        border: 1px solid #ff5b33;
-        color: #fff;
-    }
     .star {
         font-size: 10px;
         width: 25px;
@@ -26213,4 +26209,6 @@ ul.download-item li:last-child {
     .nav li a:hover {
         color: #004080; /* Màu xanh đậm khi di chuột qua */
     }
+    
+    
 }

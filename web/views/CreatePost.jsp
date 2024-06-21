@@ -331,7 +331,7 @@
                                                             <c:forEach items="${skill}" var="i"> 
                                                                 <div class="col-md-4">
                                                                     <div class="input-block">
-                                                                        <input type="checkbox" name="skill"  value="${i.skill_set_name}">
+                                                                        <input type="radio" name="skill"  value="${i.skill_set_name}">
                                                                         <label ">${i.skill_set_name}</label>
                                                                     </div>
                                                                 </div>
@@ -471,16 +471,16 @@
                         document.getElementById('error-target').textContent = 'Target is required.';
                         isValid = false;
                     } else {
-                        
+
                         if (isNaN(target)) {
                             document.getElementById('error-target').textContent = 'Target must be a number.';
-                        isValid = false;
-                           
+                            isValid = false;
+
                         } else if (target >= 1000000000) {
                             document.getElementById('error-target').textContent = 'Target must be less than 1,000,000,000.';
                             isValid = false;
                         } else {
-                           document.getElementById('error-target').textContent = ''; // Clear the error message if everything is valid
+                            document.getElementById('error-target').textContent = ''; // Clear the error message if everything is valid
                         }
                     }
 
@@ -490,10 +490,15 @@
                         isValid = false;
                     }
 
-                    var skill = document.querySelector('input[name="skill"]:checked');
-                    if (!skill) {
+                    var skills = document.querySelectorAll('input[name="skill"]:checked');
+                    if (skills.length === 0) {
                         document.getElementById('error-skill').textContent = 'Please select a Skill.';
                         isValid = false;
+                    } else if (skills.length < 3 || skills.length > 5) {
+                        document.getElementById('error-skill').textContent = 'Please select between 3 and 5 skills.';
+                        isValid = false;
+                    } else {
+                        document.getElementById('error-skill').textContent = ''; // Clear the error message if everything is valid
                     }
 
                     var budgetFrom = document.getElementById('budgetFrom').value;

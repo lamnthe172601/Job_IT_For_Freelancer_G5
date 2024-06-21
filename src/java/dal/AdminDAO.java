@@ -44,7 +44,7 @@ public class AdminDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString(25));
                 JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
@@ -63,7 +63,7 @@ public class AdminDAO extends DBContext {
         String query = """
                    SELECT blogID, title, image, date_blog, description,tag,statusBlog
                    FROM Blogs
-                   ORDER BY date_blog DESC;""";
+                   ORDER BY blogID DESC;""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
 
