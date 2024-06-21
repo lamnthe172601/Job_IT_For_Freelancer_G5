@@ -5,7 +5,10 @@
 
 package CommonControll;
 
+import Models.User;
+import MutiModels.JobApply;
 import MutiModels.PostBasic;
+import dal.DAO;
 import dal.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +16,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +61,8 @@ public class PostDetailsControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
         String id=request.getParameter("postID");
         int postID=Integer.parseInt(id);
         PostDAO p= new PostDAO();
@@ -64,6 +70,15 @@ public class PostDetailsControll extends HttpServlet {
         List<PostBasic> lpost=p.getTopPosts();
         request.setAttribute("post", post);
         request.setAttribute("lpost", lpost);
+        if (user != null) {
+            DAO d = new DAO();
+            int userId = user.getUserID();
+            int freelancerID = d.getFreelancerIDbyUserID(userId);
+            List<JobApply> postAplly = p.getPostApply(freelancerID);
+            List<PostBasic> postFavourites = p.getAllFavPosts(freelancerID);
+            request.setAttribute("postApply", postAplly);
+            request.setAttribute("postFavourites", postFavourites);
+        }
         request.getRequestDispatcher("views/postDetails.jsp").forward(request, response);
         
     } 
