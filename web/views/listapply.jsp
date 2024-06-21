@@ -246,9 +246,9 @@
                                             </a>
                                         </div>
                                         <a class="dropdown-item" href="MyProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                        <a class="dropdown-item" href="MyProject?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
+                                        <a class="dropdown-item" href="ListApply"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> Applied</a>
 
-                                        <a class="dropdown-item" href="freelancer-profile-settings"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                        <a class="dropdown-item" href="UpdateProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
                                         <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                     </div>
                                 </li>
@@ -265,7 +265,7 @@
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="${freelancer.image}" class="avatar-lg rounded-circle"></a>
+                                    <a href="MyProfile?id=${userID}"><img alt="profile image" src="${freelancer.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
                                         <h3 class="mb-0">${freelancer.fullname()}</h3>
                                         <p class="mb-0">@${sessionScope.account.username}</p>
@@ -275,14 +275,14 @@
                                     <div id="sidebar-menu" class="sidebar-menu">
                                         <ul>
                                             <li class="nav-item">
-                                                <a href="freelancer-dashboard" class="nav-link ">
-                                                    <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
+                                                <a href="MyProfile?id=${sessionScope.account.userID}" class="nav-link ">
+                                                    <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img">My Profile
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu">
                                                 <a href="ListApply" class="nav-link active">
-                                                    <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
-                                                    <span class="menu-arrow"></span>
+                                                    <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Applied
+                                                    <!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
@@ -302,7 +302,7 @@
                                             <li class="nav-item submenu">
                                                 <a href="PostFavourites" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
-                                                    <span class="menu-arrow"></span>
+                                                    <!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
@@ -313,7 +313,7 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li class="nav-item">
+<!--                                            <li class="nav-item">
                                                 <a href="freelancer-review" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
@@ -327,12 +327,12 @@
                                                 <a href="freelancer-chats" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
                                                 </a>
-                                            </li>
+                                            </li>-->
 
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-profile-settings.html" class="nav-link ">
+                                                <a href="UpdateProfile?id=${sessionScope.account.userID}" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
-                                                    <span class="menu-arrow"></span>
+                                                    <!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
@@ -367,7 +367,7 @@
                                         <c:if test="${txtSearch != null}">
                                             <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
                                         </c:if>
-                                            <c:if test="${txtSearch == null}">
+                                        <c:if test="${txtSearch == null}">
                                             <input name="searchName" type="text"  class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
                                         </c:if>
                                         <div class="input-group-append">
@@ -424,21 +424,21 @@
                                         </div>
                                     </div>
                                     <c:if test="${endPage > 1}">
-                                    <div class="row">
-                                        <div class="col-md-12">                  
-                                            <ul class="paginations list-pagination">                                          
-                                                <!--<li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a></li>-->
-                                                <c:forEach begin="1" end="${endPage}" var="e">     
-                                                                <!--<li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>-->
-                                                    <li class="page-item" ><a class="${tag == e?"active":""}" href="ListApply?index=${e}">${e}</a></li>
-                                                                <!--<li class="page-item"><a href="javascript:void(0);">3</a></li>
-                                                                <li class="page-item"><a href="javascript:void(0);">...</a></li>
-                                                                <li class="page-item"><a href="javascript:void(0);">10</a></li>-->
-                                                </c:forEach>
-                                                                <!--<li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-right"></i></a></li>-->                                          
-                                            </ul>
+                                        <div class="row">
+                                            <div class="col-md-12">                  
+                                                <ul class="paginations list-pagination">                                          
+                                                    <!--<li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a></li>-->
+                                                    <c:forEach begin="1" end="${endPage}" var="e">     
+                                                        <!--<li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>-->
+                                                        <li class="page-item" ><a class="${tag == e?"active":""}" href="ListApply?index=${e}">${e}</a></li>
+                                                        <!--<li class="page-item"><a href="javascript:void(0);">3</a></li>
+                                                        <li class="page-item"><a href="javascript:void(0);">...</a></li>
+                                                        <li class="page-item"><a href="javascript:void(0);">10</a></li>-->
+                                                    </c:forEach>
+                                                    <!--<li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-right"></i></a></li>-->                                          
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
                                     </c:if>
                                 </div>
                             </div>
@@ -748,7 +748,9 @@
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
         <script src="assets/js/script.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
-        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e07a54eb38ecbc80607f458c-|49" defer></script></body>
+        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e07a54eb38ecbc80607f458c-|49" defer></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/freelancer-favourites.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:46 GMT -->
 </html>

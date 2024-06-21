@@ -248,7 +248,7 @@
                                             </a>
                                         </div>
                                         <a class="dropdown-item" href="MyProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                        <a class="dropdown-item" href="MyProject?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
+                                        <a class="dropdown-item" href="ListApply"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> Applied</a>
 
                                         <a class="dropdown-item" href="freelancer-profile-settings"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
                                         <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
@@ -270,7 +270,7 @@
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="${freelancer.image}" class="avatar-lg rounded-circle"></a>
+                                    <a href="MyProfile?id=${sessionScope.account.userID}"><img alt="profile image" src="${freelancer.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
                                         <h3 class="mb-0">${freelancer.fullname()}</h3>
                                         <p class="mb-0">@${sessionScope.account.username}</p>
@@ -280,14 +280,14 @@
                                     <div id="sidebar-menu" class="sidebar-menu">
                                         <ul>
                                             <li class="nav-item">
-                                                <a href="freelancer-dashboard" class="nav-link ">
-                                                    <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
+                                                <a href="MyProfile?id=${sessionScope.account.userID}" class="nav-link ">
+                                                    <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> My Profile
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu">
                                                 <a href="ListApply" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
-                                                    <span class="menu-arrow"></span>
+                                                    <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Applied
+<!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
@@ -307,7 +307,7 @@
                                             <li class="nav-item submenu">
                                                 <a href="PostFavourites" class="nav-link active">
                                                     <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
-                                                    <span class="menu-arrow"></span>
+<!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
@@ -318,7 +318,7 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li class="nav-item">
+<!--                                            <li class="nav-item">
                                                 <a href="freelancer-review" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
@@ -332,12 +332,12 @@
                                                 <a href="freelancer-chats" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
                                                 </a>
-                                            </li>
+                                            </li>-->
 
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-profile-settings.html" class="nav-link ">
+                                                <a href="UpdateProfile?id=${sessionScope.account.userID}" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
-                                                    <span class="menu-arrow"></span>
+<!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>

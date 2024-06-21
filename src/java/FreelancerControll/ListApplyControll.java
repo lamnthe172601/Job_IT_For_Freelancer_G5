@@ -90,6 +90,7 @@ public class ListApplyControll extends HttpServlet {
             
             
             List<JobApply> post=p.getPostApplyPage(freelancerID, index);
+            request.setAttribute("userID", id);
             request.setAttribute("freelancer", freelancer);
             request.setAttribute("post", post);
             request.getRequestDispatcher("views/listapply.jsp").forward(request, response);

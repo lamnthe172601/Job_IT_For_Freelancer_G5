@@ -17,12 +17,18 @@
         <group>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/AdminDAO.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ChangeStatusUserAdmin.java</file>
-        </group>
-        <group>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/PostDAO.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listapply.jsp</file>
+        </group>
+        <group>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/ProfileFreelancer.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ListApplyControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/PostDetailsControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listapply.jsp</file>
         </group>
     </open-files>
