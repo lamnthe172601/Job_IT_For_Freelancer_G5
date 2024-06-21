@@ -63,7 +63,7 @@ public class AdminDAO extends DBContext {
         String query = """
                    SELECT blogID, title, image, date_blog, description,tag,statusBlog
                    FROM Blogs
-                   ORDER BY date_blog DESC;""";
+                   ORDER BY blogID DESC;""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
 

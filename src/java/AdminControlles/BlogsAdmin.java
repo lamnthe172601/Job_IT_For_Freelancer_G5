@@ -146,10 +146,10 @@ public class BlogsAdmin extends HttpServlet {
             String description = request.getParameter("descripition");
 
             String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ImageBlog";
-            String imgFileName = IntStream.range(0, d.getAllBlogs().size())
+            String imgFileName =(d.getAllBlogs().size()- IntStream.range(0, d.getAllBlogs().size())
                     .filter(i -> d.getAllBlogs().get(i).getBlogID() == blogId)
                     .findFirst()
-                    .orElse(-1) + "_image.jpg";
+                    .orElse(-1) )+ "_image.jpg";
             String imgFilePath = uploadDirectory + "\\" + imgFileName;
             String linkDB = "FolderImages/ImageBlog/" + imgFileName;
             Part imgPart = request.getPart("image");
