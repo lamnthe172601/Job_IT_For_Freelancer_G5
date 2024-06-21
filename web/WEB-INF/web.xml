@@ -187,6 +187,10 @@
     <servlet>
         <servlet-name>EditSkill</servlet-name>
         <servlet-class>AdminControlles.EditSkill</servlet-class>
+        </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusPostServlet</servlet-name>
+        <servlet-class>RecruiterControll.ChangeStatusPostServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -383,5 +387,9 @@
     <servlet-mapping>
         <servlet-name>EditSkill</servlet-name>
         <url-pattern>/editSkill</url-pattern>
+         </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusPostServlet</servlet-name>
+        <url-pattern>/ChangeStatusPost</url-pattern>
     </servlet-mapping>
 </web-app>

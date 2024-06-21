@@ -252,11 +252,24 @@ public class PostDAO extends DBContext {
         }
     }
 
-//    public static void main(String[] args) {
-//        PostDAO dao = new PostDAO();
-//        dao.updatePost("Khuong", "abc", 2, 2, 100, "mota", "30", "HCM", "C++", 10, 21);
-//    }
     
+        public void updateStatusPost( int postID, boolean status) {
+        String query = """
+                       UPDATE post SET status = ? WHERE postID = ?""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(2, postID);
+            stmt.setBoolean(1, status);
+            
+            
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+
     
     //Tan task
     public List<PostBasic> getAllFavPosts(int id) {
