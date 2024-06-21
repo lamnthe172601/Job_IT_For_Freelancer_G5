@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +33,7 @@
 
 
         <style>
+
             .filter-section {
                 background-color: #fff;
                 border: 1px solid #e0e0e0;
@@ -90,6 +92,10 @@
             }
 
 
+            .skill-container {
+                display: flex;
+                flex-wrap: wrap;
+            }
 
             .skill {
                 margin-right: 10px; /* Khoảng cách giữa các kỹ năng */
@@ -539,7 +545,6 @@
                                                         <th>Title</th>
                                                         <th>Job Type</th>
                                                         <th>Start date</th>
-
                                                         <th>Skill</th>
                                                         <th>Duration</th>
                                                         <th>Proposals</th>
@@ -562,7 +567,11 @@
                                                             </td>
 
                                                             <td class="skillList" >
-                                                                <div class="skill">${list.skill}</div>
+                                                                <div class="skill-container">
+                                                                    <c:forEach var="skill" items="${list.skill.split(',')}">
+                                                                        <div class="skill">${skill.trim()}</div>
+                                                                    </c:forEach>
+                                                                </div>
                                                             </td>
                                                             <td class="durationList ">
                                                                 <div class="duration">${list.durationID.durationName}</div>
@@ -581,11 +590,10 @@
                                                                 </span>
                                                             </td>
 
-                                                            <td>
+                                                            <td class="three-dots">
                                                                 <div class="action-table-data">
                                                                     <div class="edit-delete-action">
                                                                         <a href="#edit-milestone${list.postID}" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                        <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
                                                                     </div>
                                                                     <input type="hidden" class="user-id" id="${list.postID}">
                                                                     <a href="javascript:void(0);" class=" nav-link three-dot " data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" ></i></a>
@@ -617,90 +625,8 @@
                                                                                             <div class="col-6">
                                                                                                 <a href="javascript:void(0);" class="user-suspend-link btn btn-primary change-status-btn" > Reject Post</a>
                                                                                             </div>
-                                                                                            <div class="col-lg-6">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="form-label">Project Title</label>
-                                                                                                    <input type="text" name="title" class="form-control" value="${list.title}">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class=" col-lg-6  d-flex align-items-center">
-                                                                                                <div class="upload-images freelancer-pic-box">
-                                                                                                    <img style="width: 80px; height: 80px;" src="${list.image}" alt id="blah">
-                                                                                                </div>
-                                                                                                <div class="ms-3 freelancer-pic-upload">
-                                                                                                    <label class="image-upbtn">
-                                                                                                        Upload Image <input type="file" id="imgInp" name="profileImage">
-                                                                                                    </label>
-                                                                                                    <p>Max Image size 300*300</p>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-4">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="focus-label">Jobs Type</label>
-                                                                                                    <select name="jobsType" class="form-control select">
-                                                                                                        <c:forEach items="${alljobtype}" var="jobtype">
-                                                                                                            <option value="${jobtype.jobTypeID}" <c:if test="${jobtype.jobTypeID == list.jobTypeID.jobTypeID}">selected=""</c:if>>${jobtype.jobName}</option>
-                                                                                                        </c:forEach>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-4">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="focus-label">Project Duration</label>
-                                                                                                    <select name="Duration" class="form-control select">
-                                                                                                        <c:forEach items="${allDuration}" var="allDuration">
-                                                                                                            <option value="${allDuration.durationID}" <c:if test="${allDuration.durationID == list.durationID.durationID}">selected=""</c:if>>${allDuration.durationName}</option>
-                                                                                                        </c:forEach>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-4">
-                                                                                                <div class="input-block">
-                                                                                                    <div class="mb-3">
-                                                                                                        <label class="focus-label">Target</label>
-                                                                                                        <input value="${list.quantity}" type="text" class="form-control" name="target">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-8">
-                                                                                                <div class="input-block">
-                                                                                                    <div class="mb-3">
-                                                                                                        <label class="focus-label">Location</label>
-                                                                                                        <input value="${list.location}" type="text" class="form-control" name="Location">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-3 ">
-                                                                                                <div class="input-block mb-3">
-                                                                                                    <label class="focus-label">From ($)</label>
-                                                                                                    <input type="text" class="form-control" name="budgetFrom" value="${list.budget}">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="row">
-                                                                                                <c:forEach items="${skill}" var="i">
-                                                                                                    <div class="col-md-4">
-                                                                                                        <div class="input-block">
-                                                                                                            <input type="radio" name="skill" value="${i.skill_set_name}" ${i.skill_set_name == list.skill ? 'checked' : ''}>
-                                                                                                            <label>${i.skill_set_name}</label>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </c:forEach>
-                                                                                            </div>
-                                                                                            <div class="col-lg-4">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="focus-label">Categories Name</label>
-                                                                                                    <select class="form-control select" name="Categories">
-                                                                                                        <c:forEach items="${allCate}" var="allcate">
-                                                                                                            <option value="${allcate.caID}" <c:if test="${allcate.caID == list.caID.caID}">selected=""</c:if>>${allcate.categoriesName}</option>
-                                                                                                        </c:forEach>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-12">
-                                                                                                <div class="input-block">
-                                                                                                    <label class="form-label">Description</label>
-                                                                                                    <textarea name="description" class="form-control summernote">${list.description}</textarea>
-                                                                                                </div>
+                                                                                            <div class="col-6">
+                                                                                                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -850,7 +776,6 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
@@ -901,13 +826,13 @@
                 const durationValue = durationFilter.value.toLowerCase();
 
                 const statusValue = statusFilter.value.toLowerCase();
-                const checkingValue = checkingFilter.value.toLowerCase();              
+                const checkingValue = checkingFilter.value.toLowerCase();
                 rows.forEach(row => {
-                    const title = row.querySelector('.title').textContent.toLowerCase();                 
-                    const jobType = row.querySelector('.jobType').textContent.toLowerCase();                    
+                    const title = row.querySelector('.title').textContent.toLowerCase();
+                    const jobType = row.querySelector('.jobType').textContent.toLowerCase();
                     const skill = row.querySelector('.skill').textContent.toLowerCase();
                     const duration = row.querySelector('.duration').textContent.toLowerCase();
-                    const status = row.querySelector('.status').textContent.toLowerCase();                   
+                    const status = row.querySelector('.status').textContent.toLowerCase();
                     const checking = row.querySelector('.checked').textContent.toLowerCase();
 
                     const showRow =
@@ -993,7 +918,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img">Ongoing Post</a>');
 
                         $('#Suspend_user').modal('hide');
-                        showSuccessNotification('Suspend user successfully!');
+                        showSuccessNotification('Reject post successfully!');
                     },
                     error: function (xhr, status, error) {
                         // Xử lý khi có lỗi xảy ra
@@ -1016,7 +941,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Reject Post</a>');
 
                         $('#Activate_user').modal('hide');
-                        showSuccessNotification('Activate user successfully!');
+                        showSuccessNotification('On going successfully!');
                     },
                     error: function (xhr, status, error) {
                         

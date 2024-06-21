@@ -290,13 +290,12 @@
                             <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
                             <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
 
-
                             <%-- Hiển thị danh sách bài đăng --%>
-                            <div  class="row" id="listpostContainer">
+                            <div class="row" id="listpostContainer">
                                 <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
-                                    <div  class="col-xl-4 col-md-6 post-item">
+                                    <div class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
-                                            <div  class="freelance-content">
+                                            <div class="freelance-content">
                                                 <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
 
                                                 <c:set var="favo" value="false" />
@@ -647,9 +646,9 @@
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
                     let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
 
-                    let matchCategory = selectedCategories.length === 0 || selectedCategories.includes(postCategory);
-                    let matchProjectType = selectedProjectTypes.length === 0 || selectedProjectTypes.includes(postProjectType);
-                    let matchDuration = selectedDurations.length === 0 || selectedDurations.includes(postDuration);
+                    let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
+                    let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
+                    let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));
                     let matchSkill = selectedSkills.length === 0 || selectedSkills.every(skill => postSkills.includes(skill));
 
                     if (matchCategory && matchProjectType && matchDuration && matchSkill) {
@@ -679,10 +678,6 @@
             let truncatedTitle = truncateString(originalTitle, 5);
             titleElement.innerHTML = truncatedTitle;
         </script>
-
-
-
-
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
