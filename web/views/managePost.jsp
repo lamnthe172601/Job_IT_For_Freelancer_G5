@@ -424,7 +424,7 @@
                             </div>
                         </div>
                         <div class="col-xl-9 col-lg-8">
-
+                            
                             <nav class="user-tabs mb-4">
                                 <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
 
@@ -450,7 +450,7 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h3 class="page-title">All Post</h3>
-
+                                       
                                     </div>
                                     <div class="col-auto">
                                         <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
@@ -667,9 +667,7 @@
                                                                                     <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
                                                                                 </div>
                                                                                 <div class="modal-body">
-
-
-                                                                                    <form action="manageJobsPosts" method="post" enctype="multipart/form-data">
+                                                                                    <form action="manageJobsPosts" method="post" enctype="multipart/form-data" id="jobsForm">
                                                                                         <div class="modal-info">
                                                                                             <div class="row">
                                                                                                 <div hidden class="col-lg-6">
@@ -684,7 +682,7 @@
                                                                                                         <input type="text" name="title" class="form-control" value="${list.title}">
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-6 d-flex align-items-center">
+                                                                                                <div class=" col-lg-6  d-flex align-items-center">
                                                                                                     <div class="upload-images freelancer-pic-box">
                                                                                                         <img style="width: 80px; height: 80px;" src="${list.image}" alt id="blah">
                                                                                                     </div>
@@ -771,86 +769,7 @@
                                                                                         </div>
                                                                                     </form>
 
-                                                                                    <script>
-                                                                                        document.addEventListener('DOMContentLoaded', function () {
-                                                                                            const form = document.querySelector('form[action="manageJobsPosts"]');
 
-                                                                                            form.addEventListener('submit', function (event) {
-                                                                                                let isValid = true;
-
-                                                                                                // Clear previous error messages
-                                                                                                document.querySelectorAll('.error-message').forEach(el => el.remove());
-
-                                                                                                // Validate Project Title
-                                                                                                const title = form.querySelector('input[name="title"]');
-                                                                                                if (!title.value.trim()) {
-                                                                                                    isValid = false;
-                                                                                                    showError(title, 'Project Title is required');
-                                                                                                }
-
-                                                                                                // Validate Image
-                                                                                                const imageInput = form.querySelector('input[name="profileImage"]');
-                                                                                                if (imageInput.files.length > 0) {
-                                                                                                    const file = imageInput.files[0];
-                                                                                                    if (!['image/jpeg', 'image/png', 'image/gif'].includes(file.type)) {
-                                                                                                        isValid = false;
-                                                                                                        showError(imageInput, 'Please upload a valid image file (JPEG, PNG, or GIF)');
-                                                                                                    }
-                                                                                                    if (file.size > 5 * 1024 * 1024) { // 5MB limit
-                                                                                                        isValid = false;
-                                                                                                        showError(imageInput, 'Image size should be less than 5MB');
-                                                                                                    }
-                                                                                                }
-
-                                                                                                // Validate Target
-                                                                                                const target = form.querySelector('input[name="target"]');
-                                                                                                if (!target.value.trim() || isNaN(target.value)) {
-                                                                                                    isValid = false;
-                                                                                                    showError(target, 'Target must be a valid number');
-                                                                                                }
-
-                                                                                                // Validate Location
-                                                                                                const location = form.querySelector('input[name="Location"]');
-                                                                                                if (!location.value.trim()) {
-                                                                                                    isValid = false;
-                                                                                                    showError(location, 'Location is required');
-                                                                                                }
-
-                                                                                                // Validate Budget
-                                                                                                const budget = form.querySelector('input[name="budgetFrom"]');
-                                                                                                if (!budget.value.trim() || isNaN(budget.value)) {
-                                                                                                    isValid = false;
-                                                                                                    showError(budget, 'Budget must be a valid number');
-                                                                                                }
-
-                                                                                                // Validate Skills
-                                                                                                const skills = form.querySelectorAll('input[name="skill"]:checked');
-                                                                                                if (skills.length === 0) {
-                                                                                                    isValid = false;
-                                                                                                    showError(form.querySelector('input[name="skill"]'), 'Please select at least one skill');
-                                                                                                }
-
-                                                                                                // Validate Description
-                                                                                                const description = form.querySelector('textarea[name="description"]');
-                                                                                                if (!description.value.trim()) {
-                                                                                                    isValid = false;
-                                                                                                    showError(description, 'Description is required');
-                                                                                                }
-
-                                                                                                if (!isValid) {
-                                                                                                    event.preventDefault();
-                                                                                                }
-                                                                                            });
-
-                                                                                            function showError(element, message) {
-                                                                                                const errorDiv = document.createElement('div');
-                                                                                                errorDiv.className = 'error-message';
-                                                                                                errorDiv.textContent = message;
-                                                                                                errorDiv.style.color = 'red';
-                                                                                                element.parentNode.appendChild(errorDiv);
-                                                                                            }
-                                                                                        });
-                                                                                    </script>
 
 
                                                                                 </div>
@@ -875,7 +794,7 @@
 
 
 
-
+            
         </div>
 
         <script>
@@ -1025,7 +944,7 @@
                         showSuccessNotification('Activate user successfully!');
                     },
                     error: function (xhr, status, error) {
-
+                        
                         console.error(error);
                     }
                 });
@@ -1043,7 +962,7 @@
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" ></script>
 
         <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-
+       
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/datatables.min.js"></script>
     </body>
