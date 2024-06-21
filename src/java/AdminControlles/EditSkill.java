@@ -5,10 +5,11 @@
 
 package AdminControlles;
 
+import dal.SkillSetDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,9 +18,13 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DUC MINH
  */
-@WebServlet(name="EditSkill", urlPatterns={"/editSkill"})
 public class EditSkill extends HttpServlet {
-   
+    private SkillSetDAO skillSetDAO;
+
+    @Override
+    public void init(){
+        skillSetDAO = new SkillSetDAO();
+    }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -68,7 +73,34 @@ public class EditSkill extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+//        int skillSetID = Integer.parseInt(request.getParameter("skillSetID"));
+//        String skillSetName = request.getParameter("skillSetName");
+//        String description = request.getParameter("description");
+//
+//        try {
+//            skillSetDAO.updateSkillSet(skillSetID, skillSetName, description);
+//            request.getSession().setAttribute("message", "Skill updated successfully");
+//        } catch (SQLException e) {
+//            request.getSession().setAttribute("error", "Error updating skill");
+//        }
+//
+//        response.sendRedirect("skillAdmin");
+        int skillSetID = Integer.parseInt(request.getParameter("skillSetID"));
+        String skillSetName = request.getParameter("skillSetName");
+        String description = request.getParameter("description");
+
+        // Gọi DAO để cập nhật skill set
+        SkillSetDAO dao = new SkillSetDAO();
+        try {
+            dao.updateSkillSet(skillSetID, skillSetName, description);
+            // Chuyển hướng sau khi cập nhật thành công
+            response.sendRedirect("skillAdmin");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Lưu lỗi vào request để hiển thị trên trang lỗi
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+        }
     }
 
     /** 

@@ -4,7 +4,9 @@
  */
 
 package AdminControlles;
+
 import dal.SkillSetDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,16 +14,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Map;
+import java.sql.SQLException;
 
 /**
  *
  * @author DUC MINH
  */
-@WebServlet(name="ViewSkills", urlPatterns={"/viewSkills"})
-public class ViewSkills extends HttpServlet {
-   private static final long serialVersionUID = 1L;
+@WebServlet(name="DeleteSkill", urlPatterns={"/deleteSkill"})
+public class DeleteSkill extends HttpServlet {
+
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -37,10 +38,10 @@ public class ViewSkills extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewSkills</title>");  
+            out.println("<title>Servlet DeleteSkill</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewSkills at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DeleteSkill at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,11 +58,7 @@ public class ViewSkills extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        SkillSetDAO skillSetDAO = new SkillSetDAO();
-        List<Map<String, String>> skillSets = skillSetDAO.getAllSkillSets();
-
-        request.setAttribute("skillSets", skillSets);
-        request.getRequestDispatcher("skillAdmin.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -73,8 +70,33 @@ public class ViewSkills extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+        throws ServletException, IOException {
+            int skillSetID = Integer.parseInt(request.getParameter("skillSetID"));
+//            String skillSetName = request.getParameter("skillSetName");
+//            String description = request.getParameter("description");
+
+            SkillSetDAO skillSetDAO = new SkillSetDAO();
+            try {
+                skillSetDAO.deleteSkillSet(skillSetID);
+                request.getSession().setAttribute("message", "Skill updated successfully!");
+            } catch (SQLException e) {
+                request.getSession().setAttribute("error", "Error updating skill: " + e.getMessage());
+            }
+            response.sendRedirect("skillAdmin"); // Redirect to the JSP page to display the message
+//            int skillSetID = Integer.parseInt(request.getParameter("skillSetID"));
+//
+//            // Gọi DAO để xóa skill set
+//            SkillSetDAO dao = new SkillSetDAO();
+//            try {
+//                dao.deleteSkillSet(skillSetID);
+//                // Chuyển hướng sau khi xóa thành công
+//                response.sendRedirect("successPage.jsp");
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//                // Xử lý lỗi và chuyển hướng đến trang lỗi
+//                request.setAttribute("errorMessage", e.getMessage());
+//                request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+//            }
     }
 
     /** 

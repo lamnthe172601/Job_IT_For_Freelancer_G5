@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -303,25 +306,27 @@
                             </form>
                         </div>
                     </div>
-                    <%
-        String message = (String) request.getAttribute("message");
-        if (message != null) {
-                    %>
-                    <div class="alert alert-success">
-                        <%= message %>
-                    </div>
-                    <%
-                        }
-        
-                        String error = (String) request.getAttribute("error");
-                        if (error != null) {
-                    %>
-                    <div class="alert alert-danger">
-                        <%= error %>
-                    </div>
-                    <%
-                        }
-                    %>
+                    
+        <%
+            String message = (String) session.getAttribute("message");
+            if (message != null) {
+        %>
+            <div class="alert alert-success" role="alert">
+                <%= message %>
+            </div>
+        <%
+                session.removeAttribute("message");
+            }
+            String error = (String) session.getAttribute("error");
+            if (error != null) {
+        %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <%
+                session.removeAttribute("error");
+            }
+        %>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -380,7 +385,7 @@
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form action="AddSkill" method="post">
+                        <form action="addSkill" method="post">
                             <div class="form-group">
                                 <label>Skill Name</label>
                                 <input type="text" name="skillSetName" class="form-control" placeholder="Skill Name">
@@ -407,7 +412,7 @@
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form action="EditSkill" method="post">
+                        <form action="editSkill" method="post">
                             <input type="hidden" id="editSkillSetID" name="skillSetID">
                             <div class="form-group">
                                 <label>Skill Name</label>
@@ -432,20 +437,22 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="form-header">
-                            <h3>Delete</h3>
                             <p>Are you sure you want to delete this skill?</p>
+                            
                         </div>
-                        <input type="hidden" id="deleteSkillSetID">
-                        <div class="modal-btn delete-action">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="javascript:void(0);" class="btn btn-primary continue-btn" onclick="confirmDelete()">Delete</a>
-                                </div>
-                                <div class="col-6">
-                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                        <form action="deleteSkill" method="post">
+                            <input type="hidden" id="deleteSkillSetID" name="skillSetID">
+                            <div class="modal-btn delete-action">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-primary continue-btn">OK</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -461,9 +468,9 @@
             }
 
             function deleteSkill(skillSetID) {
-                if (confirm("Are you sure you want to delete this skill?")) {
+                if (confirm("Are you sure?")) {
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "DeleteSkillServlet", true);
+                    xhr.open("POST", "DeleteSkill", true);
                     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -496,7 +503,7 @@
         <script src="assets/plugins/datatables/datatables.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
 
         <script src="assets/js/script.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="../../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="a94573ecdb54ed8c1a4f750c-|49" defer></script></body>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="a94573ecdb54ed8c1a4f750c-|49" defer></script></body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/skills.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:41 GMT -->
 </html>

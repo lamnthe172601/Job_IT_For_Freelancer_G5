@@ -4,7 +4,6 @@
  */
 
 package AdminControlles;
-
 import dal.SkillSetDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,15 +12,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author DUC MINH
  */
-@WebServlet(name="AddSkill", urlPatterns={"/addSkill"})
-public class AddSkill extends HttpServlet {
-
+@WebServlet(name="skillAdmin", urlPatterns={"/skillAdmin"})
+public class skillAdmin extends HttpServlet {
+   private static final long serialVersionUID = 1L;
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -37,10 +37,10 @@ public class AddSkill extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddSkill</title>");  
+            out.println("<title>Servlet ViewSkills</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddSkill at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ViewSkills at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +57,11 @@ public class AddSkill extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        SkillSetDAO skillSetDAO = new SkillSetDAO();
+        List<Map<String, String>> skillSets = skillSetDAO.getAllSkillSets();
+
+        request.setAttribute("skillSets", skillSets);
+        request.getRequestDispatcher("adminViews/skillAdmin.jsp").forward(request, response);
     } 
 
     /** 
@@ -70,17 +74,7 @@ public class AddSkill extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String skillSetName = request.getParameter("skillSetName");
-        String description = request.getParameter("description");
-
-        SkillSetDAO skillSetDAO = new SkillSetDAO();
-        try {
-            skillSetDAO.addSkillSet(skillSetName, description);
-            request.getSession().setAttribute("message", "Skill added successfully!");
-            response.sendRedirect("skillAdmin");
-        } catch (SQLException e) {
-            throw new ServletException("Cannot add skill set", e);
-        }
+        processRequest(request, response);
     }
 
     /** 

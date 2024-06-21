@@ -256,6 +256,22 @@
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>com.example.ProfileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>skillAdmin</servlet-name>
+        <servlet-class>AdminControlles.skillAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSkill</servlet-name>
+        <servlet-class>AdminControlles.AddSkill</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSkill</servlet-name>
+        <servlet-class>AdminControlles.EditSkill</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSkill</servlet-name>
+        <servlet-class>AdminControlles.DeleteSkill</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/profile</url-pattern>
@@ -351,5 +367,21 @@
     <servlet-mapping>
         <servlet-name>BlogsAdmin</servlet-name>
         <url-pattern>/blogAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>skillAdmin</servlet-name>
+        <url-pattern>/skillAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSkill</servlet-name>
+        <url-pattern>/addSkill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSkill</servlet-name>
+        <url-pattern>/editSkill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSkill</servlet-name>
+        <url-pattern>/deleteSkill</url-pattern>
     </servlet-mapping>
 </web-app>
