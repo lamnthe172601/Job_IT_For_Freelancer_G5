@@ -21,7 +21,7 @@ import java.util.Map;
 public class SkillSetDAO extends DBContext{
      public List<Map<String, String>> getAllSkillSets() {
         List<Map<String, String>> skillSets = new ArrayList<>();
-        String sql = "SELECT skill_set_ID, skill_set_name, description FROM Skill_Set";
+        String sql = "SELECT skill_set_ID, skill_set_name, description FROM Skill_Set where statusSkill=1";
         
         try (Connection conn = connection; 
              PreparedStatement stmt = conn.prepareStatement(sql);

@@ -93,14 +93,16 @@ public class EditSkill extends HttpServlet {
         SkillSetDAO dao = new SkillSetDAO();
         try {
             dao.updateSkillSet(skillSetID, skillSetName, description);
+            request.getSession().setAttribute("message", "Skill updated successfully");
             // Chuyển hướng sau khi cập nhật thành công
-            response.sendRedirect("skillAdmin");
+            
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             // Lưu lỗi vào request để hiển thị trên trang lỗi
-            request.setAttribute("errorMessage", e.getMessage());
-            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+            request.getSession().setAttribute("error", "Error updating skill");
+//            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
         }
+        response.sendRedirect("skillAdmin");
     }
 
     /** 

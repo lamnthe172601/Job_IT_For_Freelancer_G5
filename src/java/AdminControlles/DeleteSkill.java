@@ -78,9 +78,9 @@ public class DeleteSkill extends HttpServlet {
             SkillSetDAO skillSetDAO = new SkillSetDAO();
             try {
                 skillSetDAO.deleteSkillSet(skillSetID);
-                request.getSession().setAttribute("message", "Skill updated successfully!");
+                request.getSession().setAttribute("message", "Skill deleted");
             } catch (SQLException e) {
-                request.getSession().setAttribute("error", "Error updating skill: " + e.getMessage());
+                request.getSession().setAttribute("error", "Error deleting skill: " + e.getMessage());
             }
             response.sendRedirect("skillAdmin"); // Redirect to the JSP page to display the message
 //            int skillSetID = Integer.parseInt(request.getParameter("skillSetID"));
