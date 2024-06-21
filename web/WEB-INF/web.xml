@@ -155,10 +155,14 @@
     <servlet>
         <servlet-name>ApplyJobControll</servlet-name>
         <servlet-class>FreelancerControll.ApplyJobControll</servlet-class>
-        </servlet>
+    </servlet>
     <servlet>
         <servlet-name>AllListPostControll</servlet-name>
         <servlet-class>CommonControll.AllListPostControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusPostServlet</servlet-name>
+        <servlet-class>RecruiterControll.ChangeStatusPostServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -275,8 +279,7 @@
     <servlet-mapping>
         <servlet-name>ViewCategoryAdmin</servlet-name>
         <url-pattern>/categoryAdmin</url-pattern>
-        
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PostFavouritesControll</servlet-name>
         <url-pattern>/PostFavourites</url-pattern>
@@ -324,9 +327,13 @@
     <servlet-mapping>
         <servlet-name>ApplyJobControll</servlet-name>
         <url-pattern>/ApplyJob</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AllListPostControll</servlet-name>
         <url-pattern>/AllListPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusPostServlet</servlet-name>
+        <url-pattern>/ChangeStatusPost</url-pattern>
     </servlet-mapping>
 </web-app>

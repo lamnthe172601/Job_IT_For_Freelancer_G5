@@ -233,12 +233,47 @@ public class RecruiterDAO extends DBContext {
         }
         return list;
     }
+    
+    public int getNumberPostbyRecruiter(int recreuiterID) {
+        String query = """
+                          SELECT COUNT(postID) AS total_posts
+                                              FROM [Post] where recruiterID = ?;""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recreuiterID);
+            ResultSet rs = ps.executeQuery();
 
+            while (rs.next()) {
+                return rs.getInt("total_posts");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
+
+    
+    public int getNumberApplyPostbyRecruiter(int recreuiterID) {
+        String query = """
+                         SELECT COUNT(JA.applyID) AS TotalApplies
+                                              FROM Post P
+                                              LEFT JOIN JobApply JA ON P.postID = JA.postID
+                                              where recruiterID =?""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recreuiterID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("TotalApplies");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
+    
     public static void main(String[] args) {
         RecruiterDAO r = new RecruiterDAO();
-        List<Post> e = r.ListPostByDateTime(1);
-        for (Post post : e) {
-            System.out.println(post.toString());
-        }
+        int m = r.getNumberApplyPostbyRecruiter(1);
+        System.out.println(m);
     }
 }

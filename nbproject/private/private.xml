@@ -4,20 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
         <group name="SWP391">
-            <file>file:/D:/SU24/A/web/adminViews/recruiterAdmin.jsp</file>
-            <file>file:/D:/SU24/A/web/views/freelancerFavourites.jsp</file>
-            <file>file:/D:/SU24/A/web/assets/js/jsvalidate.js</file>
+            <file>file:/D:/SU24/A/web/adminViews/freelancerAdmin.jsp</file>
+            <file>file:/D:/SU24/A/web/views/recruiterDashboard.jsp</file>
             <file>file:/D:/SU24/A/web/views/managePost.jsp</file>
+            <file>file:/D:/SU24/A/src/java/AccountControll/UpdateProfile_Freelancer.java</file>
             <file>file:/D:/SU24/A/web/views/CreatePost.jsp</file>
-            <file>file:/D:/SU24/A/src/java/dal/PostDAO.java</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/CreatePostControll.java</file>
-            <file>file:/D:/SU24/A/web/views/myListPostRecruiter.jsp</file>
-            <file>file:/D:/SU24/A/web/views/header.jsp</file>
-            <file>file:/D:/SU24/A/src/java/Models/JobType.java</file>
-            <file>file:/D:/SU24/A/src/java/CommonControll/AllListPostControll.java</file>
-            <file>file:/D:/SU24/A/src/java/Models/Post.java</file>
-            <file>file:/D:/SU24/A/web/views/home.jsp</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/MyListPostRecruiterControll.java</file>
         </group>
     </open-files>
 </project-private>

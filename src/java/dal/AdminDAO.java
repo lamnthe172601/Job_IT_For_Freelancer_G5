@@ -25,12 +25,13 @@ public class AdminDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, status);
             ps.setInt(2, userID);
- ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
     public static void main(String[] args) {
-        new AdminDAO().changeStatusUser(12,"inactive");
+        new AdminDAO().changeStatusUser(12, "inactive");
     }
 }

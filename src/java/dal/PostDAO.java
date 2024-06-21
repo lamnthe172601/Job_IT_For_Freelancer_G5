@@ -272,6 +272,23 @@ public class PostDAO extends DBContext {
         }
     }
 
+    
+        public void updateStatusPost( int postID, boolean status) {
+        String query = """
+                       UPDATE post SET status = ? WHERE postID = ?""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(2, postID);
+            stmt.setBoolean(1, status);
+            
+            
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
 
     
     //Tan task
