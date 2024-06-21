@@ -182,7 +182,7 @@
                         <ul style="margin-left: 5px;" class="nav header-navbar-rht">
 
 
-                            
+
 
 
                         </ul>
@@ -642,9 +642,9 @@
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
                     let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
 
-                    let matchCategory = selectedCategories.length === 0 || selectedCategories.includes(postCategory);
-                    let matchProjectType = selectedProjectTypes.length === 0 || selectedProjectTypes.includes(postProjectType);
-                    let matchDuration = selectedDurations.length === 0 || selectedDurations.includes(postDuration);
+                    let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
+                    let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
+                    let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));
                     let matchSkill = selectedSkills.length === 0 || selectedSkills.every(skill => postSkills.includes(skill));
 
                     if (matchCategory && matchProjectType && matchDuration && matchSkill) {

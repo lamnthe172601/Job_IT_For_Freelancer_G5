@@ -341,7 +341,7 @@
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>
-                                                    
+
                                                     <style>
                                                         .skills-container {
                                                             display: flex;
@@ -604,7 +604,7 @@
         </div>
 
 
-       <script>
+        <script>
             document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('showMoreBtn').addEventListener('click', function () {
                     let collapseOne = document.getElementById('collapseOne');
@@ -646,9 +646,9 @@
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
                     let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
 
-                    let matchCategory = selectedCategories.length === 0 || selectedCategories.includes(postCategory);
-                    let matchProjectType = selectedProjectTypes.length === 0 || selectedProjectTypes.includes(postProjectType);
-                    let matchDuration = selectedDurations.length === 0 || selectedDurations.includes(postDuration);
+                    let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
+                    let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
+                    let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));
                     let matchSkill = selectedSkills.length === 0 || selectedSkills.every(skill => postSkills.includes(skill));
 
                     if (matchCategory && matchProjectType && matchDuration && matchSkill) {
@@ -678,10 +678,6 @@
             let truncatedTitle = truncateString(originalTitle, 5);
             titleElement.innerHTML = truncatedTitle;
         </script>
-
-
-
-
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
