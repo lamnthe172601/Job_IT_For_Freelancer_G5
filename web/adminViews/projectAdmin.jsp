@@ -4,6 +4,7 @@
     Author     : kudol
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +32,7 @@
 
         <link rel="stylesheet" href="adminAssets/css/recruiter.css">
         <link rel="stylesheet" href="adminAssets/css/style.css">
+        <link rel="stylesheet" href="adminAssets/css/projectDetails.css">
         <style>
 
             .filter-section {
@@ -102,20 +104,6 @@
             <div class="page-wrapper">
                 <div class="content container-fluid">
 
-                    <div class="page-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="page-title">Project</h3>
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="active">/ Project</li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-
-
                     <div class="page-header user-active">
                         <div class="row align-items-center">
                             <div class="col">
@@ -129,46 +117,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="filter-section" style="display: none">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Company Name</label>
-                                    <input type="text" class="form-control" id="companyFilter" placeholder="Enter company name">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Primary Contact</label>
-                                    <input type="text" class="form-control" id="primaryContactFilter" placeholder="Enter primary contact">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select class="form-control" id="statusFilter">
-                                        <option value="">All</option>
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Total Posts</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" id="totalPostsMinFilter" placeholder="Min" min="0">
-                                        <span class="input-group-text">to</span>
-                                        <input type="number" class="form-control" id="totalPostsMaxFilter" placeholder="Max" min="0">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -180,9 +128,7 @@
                                                     <th>No.</th>
                                                     <th>Logo</th>
                                                     <th>Title</th>
-                                                    <th>Company name</th>
-                                                    <th>Position</th>
-                                                    <th>Technology</th>                                                                                             
+                                                    <th>Company name</th>                                                                                                                                                
                                                     <th>Date post</th>
                                                     <th>Status</th>                                                    
                                                     <th class="text-end">Actions</th>
@@ -206,17 +152,7 @@
                                                             <h2 class="companyName">                                                                
                                                                 ${project.getRecruiterID().getCompanyname()}                                                              
                                                             </h2>
-                                                        </td>
-                                                        <td>
-                                                            <h2 class="table-avatar position">
-                                                                ${project.getCaID().getCategoriesName()}
-                                                            </h2>
-                                                        </td>
-                                                        <td>
-                                                            <h2 class="technology">
-                                                                ${project.getSkill()}
-                                                            </h2>
-                                                        </td>
+                                                        </td>                                                        
                                                         <td>
                                                             <h2 class="datePost">
                                                                 ${project.getDatePost()}
@@ -250,60 +186,89 @@
                                                                     </c:if>
                                                             </div>
                                                         </td>
-                                                <div class="modal fade custom-modal" id="view-details${recruiter.getAccount().getUserID()}">
-                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal fade custom-modal " id="view-details${project.getPostID()}">
+                                                    <div class="modal-dialog modal-dialog-centered modal-lg-4">
                                                         <div class="modal-content">
                                                             <div class="modal-header flex-wrap">
-                                                                <h4 class="modal-title">Recuiter Details</h4>
+                                                                <h4 class="modal-title">Project Details</h4>
                                                                 <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class="col-md-4">
-                                                                        <img id="freelancerAvatar" src="${recruiter.getCompany().getLogo()}" alt="Freelancer Avatar" class="img-fluid rounded">
+                                                            <div class="modal-body">                                                                
+                                                                <div class="freelance-content">
+                                                                    <div class="freelance-top-content d-flex">
                                                                     </div>
-                                                                    <div class="col-md-8">
-                                                                        <form>
-                                                                            <div class="form-group">
-                                                                                <label>Company Name</label>
-                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getCompanyName()}" readonly>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Primary Contact</label>
-                                                                                <input type="text" class="form-control" value=" ${recruiter.getCompany().getRecruiID().fullName()}" readonly>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Total Projects</label>
-                                                                                <input type="text" class="form-control" value=" ${recruiter.getTotalPost()}" readonly>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Email Contact</label>
-                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getRecruiID().getEmail()}" readonly>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Phone Contact</label>
-                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getRecruiID().getPhone()}" readonly="">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Website</label>
-                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getWebsite()}" readonly="">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label>Established On</label>
-                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getEstablishedOn()}" readonly="">
-                                                                            </div>                                                                         
-
-                                                                            <div class="form-group">
-                                                                                <label>Location</label>
-                                                                                <input type="text" class="form-control" value="${recruiter.getCompany().getLocation()}" readonly="">
-                                                                            </div>                                                                            
-                                                                            <div class="form-group">
-                                                                                <label>Description</label>
-                                                                                <div>
-                                                                                    <textarea style=" height: 150px " readonly="" class="form-control">${recruiter.getCompany().getDescribe()} </textarea>
+                                                                    <div class="author-heading">
+                                                                        <div class="text-center2" > 
+                                                                            <a>
+                                                                                <img  style="width: 100%; height: 100%;" src="${project.image}" alt="author">                                                       
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="profile-name">
+                                                                         <div class="author-location" style="text-align: center">${p.title}</div>
+                                                                        </div>
+                                                                        <div class="freelance-info">
+                                                                            <div>
+                                                                                <div class="class1" style="display: inline-block;">Company:</div>
+                                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                                    ${project.recruiterID.companyname}
                                                                                 </div>
                                                                             </div>
-                                                                        </form>
+                                                                            <div>
+                                                                                <div class="class1" style="display: inline-block;">Position:</div>
+                                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                                  ${project.caID.categoriesName}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="class1" style="display: inline-block;">Date:</div>
+                                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                                 ${project.datePost}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="class1" style="display: inline-block;">Location:</div>
+                                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                                    ${project.location}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div  class="freelance-tags skill-list" style="margin: 0;padding: 0; margin-top: 10px;margin-right: 20px">Skill: 
+                                                                            <c:forEach items="${fn:split(project.skill, ',')}" var="skill">
+                                                                                <span  class="skill-item skill-item badge badge-primary">${skill}</span>
+                                                                            </c:forEach>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="freelance-info">
+                                                                        <div>
+                                                                            <div class="class1" style="display: inline-block;">Duration:</div>
+                                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                              ${project.durationID.durationName}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="class1" style="display: inline-block;">Quantity:</div>
+                                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                                ${project.quantity}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="class1" style="display: inline-block;">Jop Type:</div>
+                                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                                ${project.jobTypeID.jobName}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="class1" style="display: inline-block;">Email:</div>
+                                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
+                                                                                ${project.recruiterID.email}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="class1">Description: </div>
+                                                                            ${project.description}
+                                                                        </div>                                                                      
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -402,51 +367,6 @@
                     $('.filter-section').toggle();
                 });
             });
-        </script>
-        <script>
-
-            const companyFilter = document.getElementById('companyFilter');
-            const primaryContactFilter = document.getElementById('primaryContactFilter');
-            const totalPostsMinFilter = document.getElementById('totalPostsMinFilter');
-            const totalPostsMaxFilter = document.getElementById('totalPostsMaxFilter');
-            const statusFilter = document.getElementById('statusFilter');
-
-            const rows = document.querySelectorAll('.table tbody tr');
-            function filterRows() {
-                const companyValue = companyFilter.value.toLowerCase();
-                const primaryContactValue = primaryContactFilter.value.toLowerCase();
-                const totalPostsMinValue = parseInt(totalPostsMinFilter.value) || 0;
-                const totalPostsMaxValue = parseInt(totalPostsMaxFilter.value) || Infinity;
-                if (totalPostsMaxValue < totalPostsMinValue) {
-                    totalPostsMaxValue = Infinity;
-                }
-                const statusValue = statusFilter.value;
-                console.log(totalPostsMinValue);
-                console.log(totalPostsMaxValue);
-                console.log(totalPostsMaxValue - totalPostsMinValue);
-                rows.forEach(row => {
-                    const company = row.querySelector('.companyName a').textContent.toLowerCase();
-                    const primaryContact = row.querySelector('.primaryContact a').textContent.toLowerCase();
-                    const totalPosts = parseInt(row.querySelector('.totalPost').textContent);
-                    console.log(totalPosts);
-                    const status = row.querySelector('.status').textContent.toLowerCase();
-
-                    const showRow =
-                            (!companyValue || company.includes(companyValue)) &&
-                            (!primaryContactValue || primaryContact.includes(primaryContactValue)) &&
-                            (totalPosts >= totalPostsMinValue && totalPosts <= totalPostsMaxValue) &&
-                            (statusValue === '' || status === statusValue);
-
-                    row.style.display = showRow ? '' : 'none';
-                });
-
-            }
-            // Gán sự kiện lọc cho các trường lọc
-            companyFilter.addEventListener('input', filterRows);
-            primaryContactFilter.addEventListener('input', filterRows);
-            totalPostsMinFilter.addEventListener('input', filterRows);
-            totalPostsMaxFilter.addEventListener('input', filterRows);
-            statusFilter.addEventListener('change', filterRows);
         </script>
         <script>
             $(document).ready(function () {

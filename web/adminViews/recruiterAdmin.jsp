@@ -97,20 +97,6 @@
             <div class="page-wrapper">
                 <div class="content container-fluid">
 
-                    <div class="page-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="page-title">Recruiter</h3>
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="active">/ Recruiter</li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-
-
                     <div class="page-header user-active">
                         <div class="row align-items-center">
                             <div class="col">
