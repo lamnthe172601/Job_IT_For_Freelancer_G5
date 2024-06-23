@@ -193,7 +193,7 @@
 
             <div class="bread-crumb-bar">
                 <div class="container">
-                    <div class="row align-items-center inner-banner">
+                    <div style="padding: 10px;" class="row align-items-center ">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
                                 <h3>My List Post Project</h3>
@@ -210,9 +210,10 @@
             </div>
 
 
-            <div class="content">
+            <div style="padding: 20px 0 30px;" class="content">
                 <div class="container">
                     <div class="row">
+                       
                         <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
                             <div class="card search-filter">
@@ -220,6 +221,21 @@
                                     <h4 class="card-title mb-0">Search Filter</h4>
                                 </div>
                                 <div class="card-body">
+                                    <div class="filter-widget">
+                                        <div class="row">
+                                            <div class="col-xl-6  col-sm-6 d-flex ">
+                                                <div class="sort-by">
+                                                    <select class="select" id="sortSelect">
+                                                        <option value="default">Sort by (Default)</option>
+                                                        <option value="newest">Newest</option>
+                                                        <option value="oldest">Oldest</option>
+                                                        <option value="proposals">Proposals</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -332,21 +348,7 @@
 
 
                         <div class="col-md-12 col-lg-8 col-xl-9">
-                            <div class="sort-tab ">
-                                <div class="row">
-                                    <div class="col-xl-6  col-sm-6 d-flex ">
-                                        <div class="sort-by">
-                                            <select class="select" id="sortSelect">
-                                                <option value="default">Sort by (Default)</option>
-                                                <option value="newest">Newest</option>
-                                                <option value="oldest">Oldest</option>
-                                                <option value="proposals">Proposals</option>
-                                            </select>
-                                        </div>
-                                    </div>
 
-                                </div>
-                            </div>
 
                             <%-- Lấy danh sách bài đăng và thông tin phân trang từ request --%>
                             <c:set var="listpost" value="${requestScope.listpost}" />
