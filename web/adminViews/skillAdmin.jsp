@@ -384,11 +384,11 @@
                         <form action="addSkill" method="post">
                             <div class="form-group">
                                 <label>Skill Name</label>
-                                <input type="text" name="skillSetName" class="form-control" placeholder="Skill Name">
+                                <input type="text" name="skillSetName" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                                <textarea name="description" class="form-control"></textarea>
                             </div>
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -441,7 +441,7 @@
                             <div class="modal-btn delete-action">
                                 <div class="row">
                                     <div class="col-6">
-                                        <button type="submit" class="btn btn-primary continue-btn">OK</button>
+                                        <button type="submit" style="width: 100%" class="btn btn-primary continue-btn">Yes</button>
                                     </div>
                                     <div class="col-6">
                                         <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
