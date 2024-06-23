@@ -5,6 +5,8 @@
 
 package AdminControlles;
 
+import dal.SkillSetDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,13 +14,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+
 
 /**
  *
  * @author DUC MINH
  */
-@WebServlet(name="EditSkill", urlPatterns={"/editSkill"})
-public class EditSkill extends HttpServlet {
+public class DeleteSkill extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +38,10 @@ public class EditSkill extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditSkill</title>");  
+            out.println("<title>Servlet DeleteSkill</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditSkill at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DeleteSkill at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,7 +71,20 @@ public class EditSkill extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int skillSetID = Integer.parseInt(request.getParameter("skillSetID"));
+//            String skillSetName = request.getParameter("skillSetName");
+//            String description = request.getParameter("description");
+
+            SkillSetDAO skillSetDAO = new SkillSetDAO();
+            try {
+                skillSetDAO.deleteSkillSet(skillSetID);
+                request.getSession().setAttribute("message", "Skill deleted");
+            } catch (SQLException e) {
+                request.getSession().setAttribute("error", "Error deleting skill: " + e.getMessage());
+            }
+            response.sendRedirect("skillAdmin"); // Redirect to the JSP page to display the message
+
+
     }
 
     /** 

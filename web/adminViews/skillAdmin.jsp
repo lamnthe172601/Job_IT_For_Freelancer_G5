@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -380,7 +382,7 @@
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form action="AddSkill" method="post">
+                        <form action="addSkill" method="post">
                             <div class="form-group">
                                 <label>Skill Name</label>
                                 <input type="text" name="skillSetName" class="form-control" placeholder="Skill Name">
@@ -407,7 +409,7 @@
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form action="EditSkill" method="post">
+                        <form action="updateSkill" method="post">
                             <input type="hidden" id="editSkillSetID" name="skillSetID">
                             <div class="form-group">
                                 <label>Skill Name</label>
@@ -463,7 +465,7 @@
             function deleteSkill(skillSetID) {
                 if (confirm("Are you sure you want to delete this skill?")) {
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "DeleteSkillServlet", true);
+                    xhr.open("POST", "deleteSkill", true);
                     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -496,7 +498,7 @@
         <script src="assets/plugins/datatables/datatables.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
 
         <script src="assets/js/script.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="../../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="a94573ecdb54ed8c1a4f750c-|49" defer></script></body>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="a94573ecdb54ed8c1a4f750c-|49" defer></script></body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/skills.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:41 GMT -->
 </html>
