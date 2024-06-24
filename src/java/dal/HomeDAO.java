@@ -136,21 +136,26 @@ public class HomeDAO extends DBContext {
     public List<SkillFreelancer> getTop8FreelancersByLatestRecruiterPostSkill(int id) {
         List<SkillFreelancer> list = new ArrayList<>();
         String query = """
-                       WITH LatestPostSkill AS (
+                       WITH LatestPostSkills AS (
                            SELECT TOP 1 p.skill
-                           FROM Post p
+                           FROM [freelancer].[dbo].[Post] p
                            WHERE p.recruiterID = ?
-                            ORDER BY p.postID DESC
+                           ORDER BY p.postID DESC
                        ),
-                       FreelancerWithSkill AS (
-                           SELECT DISTINCT f.*,s.skillID, s.skill_set_ID, ss.skill_set_name 
-                           FROM Freelancer f
-                           JOIN Skills s ON f.freelanceID = s.freelancerID
-                           JOIN Skill_Set ss ON s.skill_set_ID = ss.skill_set_ID
-                           WHERE ss.skill_set_name IN (SELECT skill FROM LatestPostSkill)
+                       PostSkills AS (
+                           SELECT TRIM(value) AS skill_name
+                           FROM LatestPostSkills
+                           CROSS APPLY STRING_SPLIT(skill, ',')
+                       ),
+                       FreelancerWithMatchingSkills AS (
+                           SELECT DISTINCT f.*
+                           FROM [freelancer].[dbo].[Freelancer] f
+                           JOIN [freelancer].[dbo].[Skills] s ON f.freelanceID = s.freelancerID
+                           JOIN [freelancer].[dbo].[Skill_Set] ss ON s.skill_set_ID = ss.skill_set_ID
+                           JOIN PostSkills ps ON ss.skill_set_name = ps.skill_name
                        )
                        SELECT TOP 8 *
-                       FROM FreelancerWithSkill;""";
+                       FROM FreelancerWithMatchingSkills;""";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -168,7 +173,7 @@ public class HomeDAO extends DBContext {
                             rs.getString("phone_contact"));
 
                     Skills s = new Skills(rs.getInt("skillID"), ss, free);
-
+                    
                     list.add(new SkillFreelancer(free, s));
                 }
 
@@ -178,6 +183,13 @@ public class HomeDAO extends DBContext {
 
         }
         return list;
+    }
+    
+    
+    public static void main(String[] args) {
+        HomeDAO p = new HomeDAO();
+        List<SkillFreelancer> s = p.getTop8FreelancersByLatestRecruiterPostSkill(1);
+        System.out.println(s.toString());
     }
 
     public List<Blogs> getTopBlogs() {
@@ -316,10 +328,5 @@ public class HomeDAO extends DBContext {
         return categoryPostCount;
     }
 
-    public static void main(String[] args) {
-        HomeDAO p = new HomeDAO();
-        List<Blogs> s = p.getTopBlogs();
-        System.out.println(s.toString());
-    }
 
 }

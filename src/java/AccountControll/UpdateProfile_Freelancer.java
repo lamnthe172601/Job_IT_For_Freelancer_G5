@@ -4,7 +4,6 @@
  */
 package AccountControll;
 
-
 import Models.Dregee;
 import Models.Education;
 import Models.Experience;
@@ -26,7 +25,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 @MultipartConfig
 public class UpdateProfile_Freelancer extends HttpServlet {
@@ -85,17 +83,16 @@ public class UpdateProfile_Freelancer extends HttpServlet {
         User user = (User) session.getAttribute("account");
         int userID = user.getUserID();
 
-        String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ImagePost";
-        String imgFileName = userID + "_image.jpg";
-        String imgFilePath = uploadDirectory + "\\" + imgFileName;
-        String linkDB = "FolderImages/ImagePost/" + imgFileName;
-
         if (user != null) {
 
             String[] selectedSkills = request.getParameterValues("skill");
             List<String> skillList = (selectedSkills != null) ? Arrays.asList(selectedSkills) : null;
 
             try {
+                String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ImagePost";
+                String imgFileName = userID + "_image.jpg";
+                String imgFilePath = uploadDirectory + "\\" + imgFileName;
+                String linkDB = "FolderImages/ImagePost/" + imgFileName;
                 Part imgPart = request.getPart("profileImage");
                 imgPart.write(imgFilePath);
                 Freelancer freelan = freelancerDAO.getFreelancerById(userID);
@@ -103,8 +100,7 @@ public class UpdateProfile_Freelancer extends HttpServlet {
                 freelancerDAO.updateskill(freelan.getFreelanceID(), skillList);
                 freelancerDAO.updateEducation(educationName, dateStart, dateEnd, degree, freelan.getFreelanceID());
                 freelancerDAO.updateExperience(experienceName, position, startDate, endDate, freelan.getFreelanceID());
-                
-               
+
                 Thread.sleep(2000);
 
                 response.sendRedirect("UpdateProfile?id=" + userID);

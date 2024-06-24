@@ -232,27 +232,6 @@
                     </nav>
                 </div>
             </header>
-
-
-            <div class="bread-crumb-bar">
-                <div class="container">
-                    <div class="row align-items-center inner-banner">
-                        <div class="col-md-12 col-12 text-center">
-                            <div class="breadcrumb-list">
-                                <h3>Post a Project</h3>
-                                <nav aria-label="breadcrumb" class="page-breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="home">Home</a></li>
-                                        <li class="breadcrumb-item" aria-current="page">Post a Project</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
             <div class="content">
                 <div class="container">
                     <div class="row">
@@ -263,11 +242,9 @@
                                 <form id="jobForm" action="CreatePost" method="post" enctype="multipart/form-data">
                                     <div class="title-box widget-box">
                                         <div class="row">
-                                            <div class="col-lg-12">
-                                                <h4>Basic Details</h4>
-                                            </div>
+
                                             <div class="col-lg-6 col-md-6">
-                                                <div class="mb-3">
+                                                <div class="mb-2">
                                                     <label class="focus-label">Project Title</label>
                                                     <input type="text" class="form-control" name="projectTitle" id="projectTitle">
                                                     <div class="error" id="error-projectTitle"></div>
@@ -320,18 +297,16 @@
                                                     <div class="error" id="error-location"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12 my-3">
-                                                <h4>Skills</h4>
-                                            </div>
+                                           
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="title-content p-0">
                                                     <div class="title-detail">
                                                         <h3>Skill Set</h3>
                                                         <div class="row">
                                                             <c:forEach items="${skill}" var="i"> 
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-2">
                                                                     <div class="input-block">
-                                                                        <input type="radio" name="skill"  value="${i.skill_set_name}">
+                                                                        <input type="checkbox" name="skill"  value="${i.skill_set_name}">
                                                                         <label ">${i.skill_set_name}</label>
                                                                     </div>
                                                                 </div>
@@ -341,23 +316,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12 my-3">
-                                                <h4>Budget</h4>
-                                            </div>
-                                            <div class="hours-rates">
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-12">
-                                                        <div class="mb-3">
-                                                            <label class="focus-label">From ($)</label>
-                                                            <input type="text" class="form-control" name="budgetFrom" id="budgetFrom" placeholder="15">
-                                                            <div class="error" id="error-budgetFrom"></div>
-                                                        </div>
-                                                    </div>
+
+
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="focus-label">From ($)</label>
+                                                    <input type="text" class="form-control" name="budgetFrom" id="budgetFrom" placeholder="15">
+                                                    <div class="error" id="error-budgetFrom"></div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-12 my-3">
-                                                <h4>Categories</h4>
-                                            </div>
+                                            </div>                                                 
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="mb-3">
                                                     <label class="focus-label">Categories Name</label>
