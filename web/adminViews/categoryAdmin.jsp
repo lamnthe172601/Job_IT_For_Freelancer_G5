@@ -15,6 +15,8 @@
         <link rel="stylesheet" href="adminAssets/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="adminAssets/plugins/datatables/datatables.min.css">
         <link rel="stylesheet" href="adminAssets/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <style>
             .active-status {
                 color: green;
@@ -22,8 +24,48 @@
             .trash-status {
                 color: red;
             }
-        </style>
+            .filter-card {
+                display: none; /* Ẩn phần tử ban đầu */
+            }
+            .btn.filter-btn {
+                background-color: #FF5B37;
+                color: white;
+            }
+            .btn.filter-btn:hover {
+                background-color: darkorange;
+                color: white;
+            }
+            .btn-primary {
+                background-color: #FF5B37;
+                border-color: #FF5B37;
+            }
+            .btn-primary:hover {
+                background-color: darkorange;
+                border-color: darkorange;
+            }
+            .close {
+                font-size: inherit; /* Sử dụng kích thước font từ phần tử chứa */
+                position: absolute;
+                top: 15px; /* Điều chỉnh khoảng cách từ trên */
+                right: 15px; /* Điều chỉnh khoảng cách từ phải */
+                padding: 0;
+                margin: 0;
+                line-height: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: #f0f0f0;
+            }
+            .close span {
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 1.5rem;
+            }
 
+        </style>
     </head>
     <body>
         <div class="main-wrapper">
@@ -39,58 +81,45 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <h3 class="page-title">Categories</h3>
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item active">Categories</li>
-                                </ul>
                             </div>
                             <div class="col-auto">
-                                <a href="javascript:void(0);" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-category">
+                                <a href="javascript:void(0);" style="color: red; border: 1px solid black; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px;" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-category">
                                     <i class="fas fa-plus"></i>
-                                </a>
-                                <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
-                                    <i class="fas fa-filter"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card filter-card" id="filter_inputs">
-                    <div class="card-body pb-0">
-                        <form action="#" method="post">
-                            <div class="row filter-row">
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label>Add Categories</label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label>From Date</label>
-                                        <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label>To Date</label>
-                                        <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <button class="btn btn-primary btn-block" type="submit">Submit</button>
-                                    </div>
+                <div class="card-body pb-0">
+                    <form action="categoryAdmin" method="post">
+                        <div class="row filter-row">
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <label for="categoryname">Name Categories</label>
+                                    <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Category Name" required>
+                                    <div style="color: red" class="error-message" id="eCategoryname"></div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <label for="statusCate">StatusCate</label>
+                                    <select class="form-control" id="statusCate" name="statusCate">
+                                        <option value="">All</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Trash</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <div class="form-group">
+                                    <label>&nbsp;</label> 
+                                    <button class="btn btn-primary btn-block" type="submit" name="mod" value="filter">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card">
@@ -148,7 +177,7 @@
                                                                             <button style="width: 100%" type="submit" class="btn btn-primary continue-btn delete-btn-ajax">Delete</button>
                                                                         </div>
                                                                         <div class="col-6">
-                                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                                                            <a style="width: 100%" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -238,6 +267,15 @@
                 });
             <% session.removeAttribute("message"); %>
             <% } %>
+            });
+
+            document.getElementById('filter_search').addEventListener('click', function () {
+                var filterInputs = document.getElementById('filter_inputs');
+                if (filterInputs.style.display === 'none' || filterInputs.style.display === '') {
+                    filterInputs.style.display = 'block';
+                } else {
+                    filterInputs.style.display = 'none';
+                }
             });
         </script>
         <script src="assets/js/jquery-3.7.1.min.js"></script>
