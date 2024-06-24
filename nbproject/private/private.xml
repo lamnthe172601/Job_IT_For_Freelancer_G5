@@ -3,11 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/blogsAdmin.jsp</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/BlogsAdmin.java</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/AdminDAO.java</file>
-        </group>
-        <group>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/ProfileFreelancer.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ListApplyControll.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/PostDetailsControll.java</file>
@@ -39,6 +34,11 @@
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/DeleteSkill.java</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/SkillAdmin.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/changePasswordPrimary.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AccountControll/changePass.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/UserDAO.java</file>
         </group>
     </open-files>
 </project-private>
