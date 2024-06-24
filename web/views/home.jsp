@@ -193,7 +193,7 @@
                                                         <span>AMAZE TECH</span>
                                                     </a>
                                                 </div>
-                                                <a href="project-details.html" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
+                                                <a href="PostDetails?postID=${list.postID}" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -294,7 +294,7 @@
                                                         <span>AMAZE TECH</span>
                                                     </a>
                                                 </div>
-                                                <a href="project-details.html" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
+                                                <a href="PostDetails?postID=${list.postID}" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -426,7 +426,7 @@
                                                         <span>AMAZE TECH</span>
                                                     </a>
                                                 </div>
-                                                <a href="project-details.html" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
+                                                <a href="PostDetails?postID=${list.postID}" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
                                             </div>
                                         </div>
                                     </div>

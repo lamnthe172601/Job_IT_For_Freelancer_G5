@@ -29,7 +29,7 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
 
-        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <!-- DataTables CSS -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
@@ -400,8 +400,8 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="pro-body p-0">
-                                                <div id="chartprofile" ></div>
+                                            <div style="width: 600px; margin: 0 auto;">
+                                                <canvas id="applicationsChart"></canvas>
                                             </div>
                                         </div>
                                     </div>
@@ -592,12 +592,47 @@
                     "searching": true,
                     "ordering": true,
                     "info": true
-                   
+
                 });
             });
         </script>
 
+        <script>
+            const ctx = document.getElementById('applicationsChart').getContext('2d');
+            const applicationsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                            label: 'Applications',
+                            data: [70, 110, 210, 220, 190, 210, 180, 180, 180, 190, 260, 350],
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            fill: false,
+                            tension: 0.1,
+                            pointStyle: 'circle',
+                            pointRadius: 5,
+                            pointHoverRadius: 7
+                        }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 420
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
 
+        </script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
 
         </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>

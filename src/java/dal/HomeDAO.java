@@ -148,14 +148,17 @@ public class HomeDAO extends DBContext {
                            CROSS APPLY STRING_SPLIT(skill, ',')
                        ),
                        FreelancerWithMatchingSkills AS (
-                           SELECT DISTINCT f.*
+                           SELECT f.freelanceID, f.first_name, f.last_name, f.image, f.gender, f.dob, f.[describe], f.email__contact, f.phone_contact, f.userID,
+                                  ss.skill_set_ID, ss.skill_set_name, s.skillID,
+                                  ROW_NUMBER() OVER (PARTITION BY f.freelanceID ORDER BY ss.skill_set_name) AS rn
                            FROM [freelancer].[dbo].[Freelancer] f
                            JOIN [freelancer].[dbo].[Skills] s ON f.freelanceID = s.freelancerID
                            JOIN [freelancer].[dbo].[Skill_Set] ss ON s.skill_set_ID = ss.skill_set_ID
                            JOIN PostSkills ps ON ss.skill_set_name = ps.skill_name
                        )
-                       SELECT TOP 8 *
-                       FROM FreelancerWithMatchingSkills;""";
+                       SELECT TOP 8 f.*
+                       FROM FreelancerWithMatchingSkills f
+                       WHERE f.rn = 1;""";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -189,7 +192,10 @@ public class HomeDAO extends DBContext {
     public static void main(String[] args) {
         HomeDAO p = new HomeDAO();
         List<SkillFreelancer> s = p.getTop8FreelancersByLatestRecruiterPostSkill(1);
-        System.out.println(s.toString());
+        for (SkillFreelancer skillFreelancer : s) {
+            System.out.println(skillFreelancer.toString());
+        }
+        
     }
 
     public List<Blogs> getTopBlogs() {

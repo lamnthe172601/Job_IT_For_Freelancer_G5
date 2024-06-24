@@ -38,6 +38,11 @@ public class SkillFreelancer {
     public void setSkills(Skills skills) {
         this.skills = skills;
     }
+
+    @Override
+    public String toString() {
+        return "SkillFreelancer{" + "freelancer=" + freelancer + ", skills=" + skills + '}';
+    }
     
     
 }
