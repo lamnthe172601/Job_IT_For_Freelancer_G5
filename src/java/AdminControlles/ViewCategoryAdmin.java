@@ -10,8 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
-
 public class ViewCategoryAdmin extends HttpServlet {
+
     private CategoriesDAO categoryDAO = new CategoriesDAO();
 
     @Override
@@ -25,7 +25,7 @@ public class ViewCategoryAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
         String mod = request.getParameter("mod");
 
         if (mod != null) {
@@ -39,6 +39,9 @@ public class ViewCategoryAdmin extends HttpServlet {
                 case "edit":
                     handleEdit(request, response);
                     break;
+                case "filter":
+                    handleFilter(request, response); // Handle filter form submission
+                    break;
                 default:
                     request.setAttribute("errorMessage", "Invalid operation specified.");
                     request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
@@ -50,23 +53,22 @@ public class ViewCategoryAdmin extends HttpServlet {
         }
     }
 
-   private void handleDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String cate = request.getParameter("cate");
-    boolean isDeleted = categoryDAO.deleteCategory(cate);
+    private void handleDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cate = request.getParameter("cate");
+        boolean isDeleted = categoryDAO.deleteCategory(cate);
 
-    if (isDeleted) {
-        // Thêm thông báo vào session
-        HttpSession session = request.getSession();
-        session.setAttribute("message", "DELETE SUCCESSFUL");
+        if (isDeleted) {
+            // Thêm thông báo vào session
+            HttpSession session = request.getSession();
+            session.setAttribute("message", "DELETE SUCCESSFUL");
 
-        // Chuyển hướng lại trang quản lý category
-        response.sendRedirect(request.getContextPath() + "/categoryAdmin");
-    } else {
-        request.setAttribute("errorMessage", "Failed to delete category.");
-        request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
+            // Chuyển hướng lại trang quản lý category
+            response.sendRedirect(request.getContextPath() + "/categoryAdmin");
+        } else {
+            request.setAttribute("errorMessage", "Failed to delete category.");
+            request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
+        }
     }
-}
-
 
     private void handleAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String categoryName = request.getParameter("categoryName");
@@ -116,6 +118,34 @@ public class ViewCategoryAdmin extends HttpServlet {
             request.setAttribute("errorMessage", "Invalid category ID.");
             request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
         }
+    }
+
+    private void handleFilter(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String categoryName = request.getParameter("categoryName");
+        String statusCateStr = request.getParameter("statusCate");
+
+        if (categoryName == null || categoryName.isEmpty()) {
+            // Nếu không có tên category được cung cấp, hiển thị tất cả categories với statusCate tương ứng
+            List<Categories> categoriesList = categoryDAO.getCategory();
+            request.setAttribute("categories", categoriesList);
+        } else {
+            try {
+                int statusCate = -1; // Giá trị mặc định cho statusCate
+
+                if (statusCateStr != null && !statusCateStr.isEmpty()) {
+                    statusCate = Integer.parseInt(statusCateStr);
+                }
+
+                List<Categories> filteredCategories = categoryDAO.getCategoryByNameAndStatus(categoryName, statusCate);
+                request.setAttribute("categories", filteredCategories);
+            } catch (NumberFormatException e) {
+                request.setAttribute("errorMessage", "Invalid StatusCate parameter.");
+            }
+        }
+
+        // Forward the request back to categoryAdmin.jsp
+        request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
     }
 
     @Override

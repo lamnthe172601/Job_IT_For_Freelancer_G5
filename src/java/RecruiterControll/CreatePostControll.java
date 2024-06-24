@@ -42,7 +42,7 @@ public class CreatePostControll extends HttpServlet {
         DurationDAO duDao = new DurationDAO();
         List<Duration> du = duDao.getAllDuration();
         JobTypeDAO jobDao = new JobTypeDAO();
-        
+
         List<JobType> jobtype = jobDao.getAllJobType();
         List<Categories> allCate = caDao.getAllCategory();
         PostDAO postdao = new PostDAO();
@@ -64,7 +64,7 @@ public class CreatePostControll extends HttpServlet {
             User userInfor = (User) session.getAttribute("account");
             int id = userInfor.getUserID();
             RecruiterDAO reDAO = new RecruiterDAO();
-            
+
             Recruiter re = reDAO.getRecruiterProfile(id);
             PostDAO postDAO = new PostDAO();
             int postID = postDAO.getMaxPostID() + 1;
@@ -81,12 +81,11 @@ public class CreatePostControll extends HttpServlet {
             String skills = String.join(", ", skill_raw);
             String caId_raw = request.getParameter("categoriesName");
 
-            String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ProjectsPost";
-            String imgFileName = re.getRecruiterID() + "-" + postID + "_image.jpg";
-            String imgFilePath = uploadDirectory + "\\" + imgFileName;
-            String linkDB = "FolderImages/ProjectsPost/" + imgFileName;
-
             try {
+                String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ProjectsPost";
+                String imgFileName = re.getRecruiterID() + "-" + postID + "_image.jpg";
+                String imgFilePath = uploadDirectory + "\\" + imgFileName;
+                String linkDB = "FolderImages/ProjectsPost/" + imgFileName;
                 Part imgPart = request.getPart("profileImage");
 
                 int budget = Integer.parseInt(budget_raw);
@@ -96,7 +95,7 @@ public class CreatePostControll extends HttpServlet {
                 int caId = Integer.parseInt(caId_raw);
 
                 if (postDAO.createPost(projectTitle, linkDB, jobType, duration, target, description, budget, location, skills, re.getRecruiterID(), 1, caId, 0)) {
-                imgPart.write(imgFilePath);
+                    imgPart.write(imgFilePath);
                     response.getWriter().write("success");
                 } else {
                     response.getWriter().write("failed");

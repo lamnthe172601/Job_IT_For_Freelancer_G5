@@ -7924,7 +7924,7 @@ div#global-loader {
     padding-top: 84px;
 }
 .bread-crumb-bar .inner-banner {
-    padding: 60px 0;
+    padding: 10px 0;
     background: url(../img/bg/breadcrumb-bg.png);
     background-size: cover;
 }
@@ -7975,12 +7975,12 @@ label.file-upload.image-btn {
 }
 .content {
     min-height: 200px;
-    padding: 80px 0 30px;
+    padding: 50px 0 30px;
     background-color: #fff;
 
 }
 .inner-banner {
-    padding: 70px 0;
+    padding: 20px 0;
 }
 .rating i.filled {
     color: #FF9C07;

@@ -599,7 +599,25 @@ public class PostDAO extends DBContext {
         }
         return posts;
     }
-        
+         public String getImageByPostId(int postId) {
+       
+        String query = """
+                       select *
+                         from Post
+                       where postID = ?;                                                                     	
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1,postId);          
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString("image").trim().split("-")[1].trim();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
         
         public List<PostBasic> searchAllFavPosts(int id, String txtSearch,int index) {
         List<PostBasic> posts = new ArrayList<>();
@@ -669,11 +687,12 @@ public class PostDAO extends DBContext {
         return posts;
     }
 
+  
     public static void main(String[] args) {
         PostDAO d = new PostDAO();
         
 
-        System.out.println(d.getAllFavouritesByByFreelancerID(100));
+        System.out.println(d.getImageByPostId(54));
 
     }
 }

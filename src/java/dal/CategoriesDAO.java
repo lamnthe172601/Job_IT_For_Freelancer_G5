@@ -154,5 +154,29 @@ public boolean addCategory(Categories category) {
         return false;
     }
 }
+public List<Categories> getCategoryByNameAndStatus(String categoryName, int statusCate) {
+    List<Categories> categoriesList = new ArrayList<>();
+    String sql = "SELECT caID, categories_name, [description], statusCate FROM categories WHERE categories_name LIKE ? AND (statusCate = ? OR ? = -1)";
 
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, "%" + categoryName + "%");
+        statement.setInt(2, statusCate);
+        statement.setInt(3, statusCate);
+
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Categories category = new Categories();
+            category.setCaID(resultSet.getInt("caID"));
+            category.setCategoriesName(resultSet.getString("categories_name"));
+            category.setDescription(resultSet.getString("description"));
+            category.setStatusCate(resultSet.getInt("statusCate"));
+            categoriesList.add(category);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return categoriesList;
+}
 }

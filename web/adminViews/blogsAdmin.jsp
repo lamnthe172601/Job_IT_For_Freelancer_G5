@@ -49,21 +49,6 @@
 
             <div class="page-wrapper">
                 <div class="content container-fluid">
-
-                    <div class="page-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="page-title">Blog</h3>
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="">Home</a></li>
-                                    <li class="active">/ Blog</li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-
-
                     <div class="page-header user-active">
                         <div class="row align-items-center">
                             <div class="col">
@@ -389,9 +374,9 @@
                         blogId: blogId
                     },
                     success: function (response) {
-                        // Xử lý phản hồi từ máy chủ
+                        
                         if (response.success) {
-                            // Cập nhật giao diện tương ứng với trạng thái mới của blog
+                           
                             updateBlogRowStatus(blogId, isActive);
                             showSuccessNotification(response.message);
                         } else {
@@ -447,7 +432,7 @@
                 }
             }
 
-            // Sử dụng hàm trên để cắt bỏ tiêu đề và mô tả dài hơn giới hạn
+            
             var titles = document.querySelectorAll(".table-avatar.title a");
             var descriptions = document.querySelectorAll(".descripition");
             titles.forEach(function (title) {
@@ -479,5 +464,5 @@
 
         <script src="adminAssets/js/script.js" ></script>
     </body>
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/providers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:24 GMT -->
+    
 </html>

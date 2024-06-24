@@ -41,19 +41,6 @@
             <div class="page-wrapper">
                 <div class="content report-box container-fluid">
 
-                    <div class="page-header subscribe-head">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="page-title">Freelancer</h3>
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="home">Home</a></li>
-                                    <li class=" active">/ Freelancer</li>
-                                </ul>
-                            </div>                         
-
-                        </div>
-                    </div>
-
                     <div class="row">
                         <div class="col-sm-12">                           
 
