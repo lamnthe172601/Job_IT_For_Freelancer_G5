@@ -32,217 +32,6 @@
         <div class="main-wrapper">
             <%@ include file="headerAdmin.jsp" %>
             <%@ include file="sidebar.jsp" %>
-            <!--            <div class="header">
-            
-                            <div class="header-left">
-                                <a href="index.html" class="logo">
-                                    <img src="assets/img/logo.png" alt="Logo">
-                                </a>
-                                <a href="index.html" class="logo logo-small">
-                                    <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
-                                </a>
-            
-                                <a href="javascript:void(0);" id="toggle_btn">
-                                    <i class="feather-chevrons-left"></i>
-                                </a>
-            
-            
-                                <a class="mobile_btn" id="mobile_btn">
-                                    <i class="feather-chevrons-left"></i>
-                                </a>
-            
-                            </div>
-            
-            
-                            <div class="top-nav-search">
-                                <form>
-                                    <input type="text" class="form-control" placeholder="Start typing your Search...">
-                                    <button class="btn" type="submit"><i class="feather-search"></i></button>
-                                </form>
-                            </div>
-            
-            
-                            <ul class="nav user-menu">
-            
-                                <li class="nav-item dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                                        <i class="feather-bell"></i> <span class="badge badge-pill">5</span>
-                                    </a>
-                                    <div class="dropdown-menu notifications">
-                                        <div class="topnav-dropdown-header">
-                                            <span class="notification-title">Notifications</span>
-                                            <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
-                                        </div>
-                                        <div class="noti-content">
-                                            <ul class="notification-list">
-                                                <li class="notification-message">
-                                                    <a href="javascript:void(0);">
-                                                        <div class="media d-flex">
-                                                            <span class="avatar avatar-sm flex-shrink-0">
-                                                                <img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-02.jpg">
-                                                            </span>
-                                                            <div class="media-body flex-grow-1">
-                                                                <p class="noti-details"><span class="noti-title">Brian Johnson</span> paid the invoice <span class="noti-title">#DF65485</span></p>
-                                                                <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="notification-message">
-                                                    <a href="javascript:void(0);">
-                                                        <div class="media d-flex">
-                                                            <span class="avatar avatar-sm flex-shrink-0">
-                                                                <img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-03.jpg">
-                                                            </span>
-                                                            <div class="media-body flex-grow-1">
-                                                                <p class="noti-details"><span class="noti-title">Marie Canales</span> has accepted your estimate <span class="noti-title">#GTR458789</span></p>
-                                                                <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="notification-message">
-                                                    <a href="javascript:void(0);">
-                                                        <div class="media d-flex">
-                                                            <div class="avatar avatar-sm flex-shrink-0">
-                                                                <span class="avatar-title rounded-circle bg-primary-light"><i class="far fa-user"></i></span>
-                                                            </div>
-                                                            <div class="media-body flex-grow-1">
-                                                                <p class="noti-details"><span class="noti-title">New user registered</span></p>
-                                                                <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="notification-message">
-                                                    <a href="javascript:void(0);">
-                                                        <div class="media d-flex">
-                                                            <span class="avatar avatar-sm flex-shrink-0">
-                                                                <img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-04.jpg">
-                                                            </span>
-                                                            <div class="media-body flex-grow-1">
-                                                                <p class="noti-details"><span class="noti-title">Barbara Moore</span> declined the invoice <span class="noti-title">#RDW026896</span></p>
-                                                                <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="notification-message">
-                                                    <a href="javascript:void(0);">
-                                                        <div class="media d-flex">
-                                                            <div class="avatar avatar-sm flex-shrink-0">
-                                                                <span class="avatar-title rounded-circle bg-info-light"><i class="far fa-comment"></i></span>
-                                                            </div>
-                                                            <div class="media-body flex-grow-1">
-                                                                <p class="noti-details"><span class="noti-title">You have received a new message</span></p>
-                                                                <p class="noti-time"><span class="notification-time">2 days ago</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="topnav-dropdown-footer">
-                                            <a href="javascript:void(0);">View all Notifications</a>
-                                        </div>
-                                    </div>
-                                </li>
-            
-            
-                                <li class="nav-item dropdown has-arrow main-drop">
-                                    <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                                        <span class="user-img">
-                                            <img src="assets/img/profiles/avatar-07.jpg" alt="Img">
-                                            <span class="status online"></span>
-                                        </span>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="profile.html"><i data-feather="user" class="me-1"></i> Profile</a>
-                                        <a class="dropdown-item" href="settings.html"><i data-feather="settings" class="me-1"></i> Settings</a>
-                                        <a class="dropdown-item" href="login.html"><i data-feather="log-out" class="me-1"></i> Logout</a>
-                                    </div>
-                                </li>
-            
-                            </ul>
-            
-                        </div>
-            
-            
-                        <div class="sidebar" id="sidebar">
-                            <div class="sidebar-inner slimscroll">
-                                <div id="sidebar-menu" class="sidebar-menu">
-                                    <ul>
-                                        <li class="menu-title"><span>Main</span></li>
-                                        <li>
-                                            <a href="index.html"><i data-feather="home"></i> <span>Dashboard</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="categories.html"><i data-feather="copy"></i> <span>Categories</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="projects.html"><i data-feather="database"></i> <span>Projects</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="deposit.html"><i data-feather="user-check"></i> <span>Deposit</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="withdrawn.html"><i data-feather="user-check"></i> <span>Withdrawn</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="transaction.html"><i data-feather="clipboard"></i> <span>Transaction</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="providers.html"><i data-feather="user-check"></i> <span>Providers</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="subscription.html"><i data-feather="user-check"></i> <span>Subscription</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="reports.html"><i data-feather="pie-chart"></i> <span>Reports</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="roles.html"><i data-feather="clipboard"></i> <span>Roles</span></a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="skills.html"><i data-feather="award"></i> <span>Skills</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="verify-identity.html"><i data-feather="user-check"></i> <span>Verify Identity</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="settings.html"><i data-feather="settings"></i> <span>Settings</span></a>
-                                        </li>
-                                        <li class="menu-title"><span>UI Interface</span></li>
-                                        <li>
-                                            <a href="components.html"><i data-feather="pocket"></i> <span>Components</span></a>
-                                        </li>
-                                        <li class="submenu">
-                                            <a href="javascript:void(0);"><i data-feather="file-minus"></i> <span> Forms</span> <span class="menu-arrow"></span></a>
-                                            <ul>
-                                                <li><a href="form-basic-inputs.html">Basic Inputs</a></li>
-                                                <li><a href="form-input-groups.html">Input Groups</a></li>
-                                                <li><a href="form-horizontal.html">Horizontal Form</a></li>
-                                                <li><a href="form-vertical.html">Vertical Form</a></li>
-                                                <li><a href="form-mask.html">Form Mask</a></li>
-                                                <li><a href="form-validation.html">Form Validation</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="submenu">
-                                            <a href="javascript:void(0);"><i data-feather="align-justify"></i> <span> Tables</span> <span class="menu-arrow"></span></a>
-                                            <ul>
-                                                <li><a href="tables-basic.html">Basic Tables</a></li>
-                                                <li><a href="data-tables.html">Data Table</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>-->
-
-
             <div class="page-wrapper">
                 <div class="content container-fluid">
 
@@ -250,10 +39,6 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <h3 class="page-title">Skills</h3>
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active">Skills</li>
-                                </ul>
                             </div>
                             <div class="col-auto">
                                 <a href="javascript:void(0);" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-category">
@@ -381,7 +166,7 @@
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form action="addSkill" method="post">
+                        <form name="addSkillForm" action="addSkill" method="post" onsubmit="return validateAddForm();">                            
                             <div class="form-group">
                                 <label>Skill Name</label>
                                 <input type="text" name="skillSetName" class="form-control" required>
@@ -389,6 +174,9 @@
                             <div class="form-group">
                                 <label>Description</label>
                                 <textarea name="description" class="form-control" required></textarea>
+                            </div>
+                            <div id="addSkillError" class="error-message" style="color:red;">
+                                <%= request.getAttribute("addSkillError") != null ? request.getAttribute("addSkillError") : "" %>
                             </div>
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -408,7 +196,7 @@
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form action="updateSkill" method="post">
+                        <form name="editSkillForm" action="updateSkill" method="post" onsubmit="return validateEditForm();">
                             <input type="hidden" id="editSkillSetID" name="skillSetID" >
                             <div class="form-group">
                                 <label>Skill Name</label>
@@ -417,6 +205,9 @@
                             <div class="form-group">
                                 <label>Description</label>
                                 <textarea id="editDescription" name="description" class="form-control" required></textarea>
+                            </div>
+                            <div id="editSkillError" class="error-message" style="color:red;">
+                                <%= request.getAttribute("editSkillError") != null ? request.getAttribute("editSkillError") : "" %>
                             </div>
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -482,6 +273,31 @@
                 // Find the skillSetID from the modal and call deleteSkill
                 var skillSetID = document.getElementById("deleteSkillSetID").value;
                 deleteSkill(skillSetID);
+            }
+            function validateAddForm() {
+                var skillSetName = document.forms["addSkillForm"]["skillSetName"].value.trim();
+                var description = document.forms["addSkillForm"]["description"].value.trim();
+                var errorDiv = document.getElementById("addSkillError");
+
+                if (skillSetName === "" || description === "") {
+                    errorDiv.innerText = "Skill Name and Description cannot be empty or just spaces.";
+                    return false;
+                }
+                errorDiv.innerText = ""; // Clear the error message if validation passes
+                return true;
+            }
+
+            function validateEditForm() {
+                var skillSetName = document.forms["editSkillForm"]["skillSetName"].value.trim();
+                var description = document.forms["editSkillForm"]["description"].value.trim();
+                var errorDiv = document.getElementById("editSkillError");
+
+                if (skillSetName === "" || description === "") {
+                    errorDiv.innerText = "Skill Name and Description cannot be empty or just spaces.";
+                    return false;
+                }
+                errorDiv.innerText = ""; // Clear the error message if validation passes
+                return true;
             }
         </script>
         <script src="assets/js/jquery-3.7.1.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
