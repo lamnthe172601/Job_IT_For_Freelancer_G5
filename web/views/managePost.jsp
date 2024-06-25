@@ -310,7 +310,7 @@
                                     <a class="dropdown-item" href="deposit-funds.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
                                     <a class="dropdown-item" href="chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
                                     <a class="dropdown-item" href="profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                    <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                    <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -340,12 +340,12 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu active">
-                                                <a href="manageJobsPosts" class="nav-link ">
+                                                <a href="manageJobsPosts" class="nav-link active">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
-                                                <ul class="sub-menu-ul">
-                                                    <li>
+                                                <ul class="sub-menu-ul active">
+                                                    <li >
                                                         <a href="manageJobsPosts" class="active">Manage jobs</a>
                                                     </li>
                                                     <li>
@@ -450,7 +450,6 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h3 class="page-title">All Post</h3>
-
                                     </div>
                                     <div class="col-auto">
                                         <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
@@ -542,24 +541,20 @@
                                             <table class="table table-center table-hover datatable ">
                                                 <thead class="thead-pink">
                                                     <tr>
-                                                         <th style="text-align: center;">Action</th>
-                                                        <th>Preview</th>
-                                                        <th>Title</th>
-                                                        <th>Job Type</th>
-                                                        <th>Start date</th>
-                                                        <th>Skill</th>
-                                                        <th>Duration</th>
-
-                                                        <th>Status</th>
-                                                       
-                                                        <th>Checking</th>
-                                                        
+                                                        <th style="text-align: center;">Action</th>
+                                                        <th>PREVIEW</th>
+                                                        <th>TITLE</th>
+                                                        <th>APPLICANTS</th>
+                                                        <th>POSTED</th>
+                                                        <th>EXPIRED</th>
+                                                        <th>STATUS</th>
+                                                        <th>CHECKING</th>                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${listpost}" var="list">
                                                         <tr>
-                                                             <td class="three-dots">
+                                                            <td class="three-dots">
                                                                 <div class="action-table-data">
                                                                     <div class="edit-delete-action">
                                                                         <a href="#edit-milestone${list.postID}" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
@@ -752,33 +747,25 @@
                                                             <td class="titleList">
                                                                 <div class="title">${list.title}</div>
                                                             </td>
-                                                            <td class="jobTypeList">
-                                                                <div class="jobType">${list.jobTypeID.jobName}</div>
+                                                            <td style="text-align: center" class="jobTypeList">
+                                                                <div class="jobType">${list.quantity}</div>
                                                             </td>
                                                             <td > 
                                                                 <div class="datePost">${list.datePost}</div>
                                                             </td>
 
-                                                            <td class="skillList" >
-                                                                <div class="skill-container">
-                                                                    <c:forEach var="skill" items="${list.skill.split(',')}">
-                                                                        <div class="skill">${skill.trim()}</div>
-                                                                    </c:forEach>
-                                                                </div>
+                                                            <td> 
+                                                                <div class="datePost">${list.datePost}</div>
                                                             </td>
-                                                            <td class="durationList ">
-                                                                <div class="duration">${list.durationID.durationName}</div>
-                                                            </td>
-
                                                             <td class="StatusList">
                                                                 <span class="badge status ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
                                                                     ${list.status ? 'On going' : 'Reject'}
                                                                 </span>
                                                             </td>
-                                                            
 
-                                                           
-                                                            
+
+
+
                                                             <td class="CheckingList">
                                                                 <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
                                                                     ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}
@@ -987,12 +974,27 @@
         </script><script src="assets/js/jquery-3.7.1.min.js" ></script>
 
         <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" ></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" ></script>
+        
 
-        <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        
 
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/datatables.min.js"></script>
+        
+        
+        <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+                                        
+        </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+
+        <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+
+        <script src="assets/plugins/apexchart/apexcharts.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script src="assets/plugins/apexchart/chart-data.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+
+        <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script>
     </body>
 </html>

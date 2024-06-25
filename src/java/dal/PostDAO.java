@@ -519,18 +519,24 @@ public class PostDAO extends DBContext {
     public void applyJob(int id, String postID, String date) {
         String sql = """
                      insert into JobApply
-                     values(?,?,'Pending',?)
+                     values(?,?,'Pending',?,?)
                      """;
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             statement.setString(2, postID);
             statement.setString(3, date);
+            statement.setString(4, "");
             statement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
+    }
+    
+    public static void main(String[] args) {
+        PostDAO dao = new PostDAO();
+        dao.applyJob(1, "49", "2023-03-03");
     }
     
     public List<PostBasic> getFavPostsPage(int id, int index) {
@@ -688,11 +694,5 @@ public class PostDAO extends DBContext {
     }
 
   
-    public static void main(String[] args) {
-        PostDAO d = new PostDAO();
-        
-
-        System.out.println(d.getImageByPostId(54));
-
-    }
+    
 }
