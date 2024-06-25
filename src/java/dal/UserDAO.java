@@ -15,23 +15,30 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author DUC MINH
+ * @author DUC LINH
  */
 public class UserDAO extends DBContext{
     
 
-    public User getUserByUsername(String username) throws SQLException {
-        String query = "select * from [freelancer].[dbo].[User] where [username]= ?";
-        try (PreparedStatement stmt = getConnection().prepareStatement(query)) {
-            stmt.setString(1, username);
+    public User getUserByUserID(int userID) throws SQLException {
+        String query = "SELECT * FROM [freelancer].[dbo].[User] WHERE [userID] = ?";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
+                    // Lấy thông tin role từ cơ sở dữ liệu
+                    int roleID = rs.getInt("roleID");
+                    String roleName = rs.getString("roleName");
+
+                    
+                    Role role = new Role(roleID, roleName);
                     return new User(
                         rs.getInt("userID"),
                         rs.getString("username"),
                         rs.getString("password"),
                         rs.getString("email"),
                         rs.getString("status"),
+                        role,
                         rs.getBoolean("levelPass")
                     );
                 }
@@ -41,12 +48,12 @@ public class UserDAO extends DBContext{
     }
 
     
-    public void changePassword(String username, String newPassword) throws SQLException {
+    public void changePassword(int userID, String newPassword) throws SQLException {
             
-        String query = "UPDATE Users SET password = ? WHERE username = ?";
+        String query = "  UPDATE [freelancer].[dbo].[User] SET password = ? WHERE userID = ?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, newPassword);
-            stmt.setString(2, username);
+            stmt.setInt(2, userID);
             stmt.executeUpdate();
         }
     }

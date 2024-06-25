@@ -424,12 +424,12 @@
                             </div>
                         </div>
                         <div class="col-xl-9 col-lg-8">
-                            
+
                             <nav class="user-tabs mb-4">
                                 <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
 
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="manageJobsPosts">Manage jobs</a>
+                                        <a class="active nav-link" href="manageJobsPosts">Manage jobs</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link " href="ManageApplication">All applicants</a>
@@ -450,7 +450,7 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h3 class="page-title">All Post</h3>
-                                       
+
                                     </div>
                                     <div class="col-auto">
                                         <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
@@ -542,55 +542,24 @@
                                             <table class="table table-center table-hover datatable ">
                                                 <thead class="thead-pink">
                                                     <tr>
+                                                         <th style="text-align: center;">Action</th>
+                                                        <th>Preview</th>
                                                         <th>Title</th>
                                                         <th>Job Type</th>
                                                         <th>Start date</th>
                                                         <th>Skill</th>
                                                         <th>Duration</th>
-                                                        <th>Proposals</th>
+
                                                         <th>Status</th>
+                                                       
                                                         <th>Checking</th>
-                                                        <th style="text-align: center;">Action</th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${listpost}" var="list">
                                                         <tr>
-                                                            <td class="titleList">
-                                                                <div class="title">${list.title}</div>
-                                                            </td>
-                                                            <td class="jobTypeList">
-                                                                <div class="jobType">${list.jobTypeID.jobName}</div>
-                                                            </td>
-                                                            <td > 
-                                                                <div class="datePost">${list.datePost}</div>
-                                                            </td>
-
-                                                            <td class="skillList" >
-                                                                <div class="skill-container">
-                                                                    <c:forEach var="skill" items="${list.skill.split(',')}">
-                                                                        <div class="skill">${skill.trim()}</div>
-                                                                    </c:forEach>
-                                                                </div>
-                                                            </td>
-                                                            <td class="durationList ">
-                                                                <div class="duration">${list.durationID.durationName}</div>
-                                                            </td>
-                                                            <td > 
-                                                                <div class="quantity">${list.quantity}</div>
-                                                            </td>
-                                                            <td class="StatusList">
-                                                                <span class="badge status ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
-                                                                    ${list.status ? 'On going' : 'Reject'}
-                                                                </span>
-                                                            </td>
-                                                            <td class="CheckingList">
-                                                                <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
-                                                                    ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}
-                                                                </span>
-                                                            </td>
-
-                                                            <td class="three-dots">
+                                                             <td class="three-dots">
                                                                 <div class="action-table-data">
                                                                     <div class="edit-delete-action">
                                                                         <a href="#edit-milestone${list.postID}" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
@@ -777,6 +746,44 @@
                                                                         </div>
                                                                     </div>
                                                             </td>
+                                                            <td class="">
+                                                                <div class=""><img style="width: 60px; height: 40px;" src="${list.image}" alt="alt"/></div>
+                                                            </td>
+                                                            <td class="titleList">
+                                                                <div class="title">${list.title}</div>
+                                                            </td>
+                                                            <td class="jobTypeList">
+                                                                <div class="jobType">${list.jobTypeID.jobName}</div>
+                                                            </td>
+                                                            <td > 
+                                                                <div class="datePost">${list.datePost}</div>
+                                                            </td>
+
+                                                            <td class="skillList" >
+                                                                <div class="skill-container">
+                                                                    <c:forEach var="skill" items="${list.skill.split(',')}">
+                                                                        <div class="skill">${skill.trim()}</div>
+                                                                    </c:forEach>
+                                                                </div>
+                                                            </td>
+                                                            <td class="durationList ">
+                                                                <div class="duration">${list.durationID.durationName}</div>
+                                                            </td>
+
+                                                            <td class="StatusList">
+                                                                <span class="badge status ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
+                                                                    ${list.status ? 'On going' : 'Reject'}
+                                                                </span>
+                                                            </td>
+                                                            
+
+                                                           
+                                                            
+                                                            <td class="CheckingList">
+                                                                <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
+                                                                    ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}
+                                                                </span>
+                                                            </td>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>
@@ -794,7 +801,7 @@
 
 
 
-            
+
         </div>
 
         <script>
@@ -918,7 +925,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img">Ongoing Post</a>');
 
                         $('#Suspend_user').modal('hide');
-                        showSuccessNotification('Reject post successfully!');
+                        showSuccessNotification('Suspend user successfully!');
                     },
                     error: function (xhr, status, error) {
                         // Xử lý khi có lỗi xảy ra
@@ -941,16 +948,38 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Reject Post</a>');
 
                         $('#Activate_user').modal('hide');
-                        showSuccessNotification('On going successfully!');
+                        showSuccessNotification('Activate user successfully!');
                     },
                     error: function (xhr, status, error) {
-                        
+
                         console.error(error);
                     }
                 });
             }
         </script>
+        <script>
+// Hàm cắt ngắn chuỗi chỉ lấy 3 từ đầu tiên rồi thêm dấu ba chấm
+            function shortenTitle(title) {
+                // Tách chuỗi thành các từ
+                const words = title.split(' ');
 
+                // Kiểm tra nếu số lượng từ lớn hơn 3 thì cắt ngắn và thêm dấu ba chấm
+                if (words.length > 2) {
+                    return words.slice(0, 2).join(' ') + '...';
+                } else {
+                    return title; // Trường hợp chuỗi có ít hơn hoặc bằng 3 từ
+                }
+            }
+
+// Lấy tất cả các phần tử có class 'title' và áp dụng hàm cắt ngắn
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.title').forEach(function (element) {
+                    const originalTitle = element.textContent;
+                    const shortenedTitle = shortenTitle(originalTitle);
+                    element.textContent = shortenedTitle;
+                });
+            });
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
@@ -962,7 +991,7 @@
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" ></script>
 
         <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-       
+
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/datatables.min.js"></script>
     </body>

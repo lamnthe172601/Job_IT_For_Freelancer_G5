@@ -433,7 +433,7 @@
                                                 </div>
                                             </div>
                                             <div class="cart-hover">
-                                                <a href="project-details.html" class="btn-cart" tabindex="-1">View Project</a>
+                                                <a href="PostDetails?postID=${list.postID}" class="btn-cart" tabindex="-1">View Project</a>
                                             </div>
                                         </div>
                                     </div>

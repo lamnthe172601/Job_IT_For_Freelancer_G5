@@ -4,6 +4,7 @@
  */
 
 package AdminControlles;
+
 import dal.SkillSetDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,8 +20,7 @@ import java.util.Map;
  *
  * @author DUC MINH
  */
-@WebServlet(name="ViewSkills", urlPatterns={"/viewSkills"})
-public class ViewSkills extends HttpServlet {
+public class SkillAdmin extends HttpServlet {
    private static final long serialVersionUID = 1L;
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +37,10 @@ public class ViewSkills extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewSkills</title>");  
+            out.println("<title>Servlet SkillAdmin</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewSkills at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SkillAdmin at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +61,7 @@ public class ViewSkills extends HttpServlet {
         List<Map<String, String>> skillSets = skillSetDAO.getAllSkillSets();
 
         request.setAttribute("skillSets", skillSets);
-        request.getRequestDispatcher("skillAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("adminViews/skillAdmin.jsp").forward(request, response);
     } 
 
     /** 
