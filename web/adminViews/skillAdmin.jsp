@@ -384,11 +384,11 @@
                         <form action="addSkill" method="post">
                             <div class="form-group">
                                 <label>Skill Name</label>
-                                <input type="text" name="skillSetName" class="form-control" >
+                                <input type="text" name="skillSetName" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea name="description" class="form-control"></textarea>
+                                <textarea name="description" class="form-control" required></textarea>
                             </div>
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -408,15 +408,15 @@
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form action="editSkill" method="post">
-                            <input type="hidden" id="editSkillSetID" name="skillSetID">
+                        <form action="updateSkill" method="post">
+                            <input type="hidden" id="editSkillSetID" name="skillSetID" >
                             <div class="form-group">
                                 <label>Skill Name</label>
-                                <input type="text" id="editSkillSetName" name="skillSetName" class="form-control">
+                                <input type="text" id="editSkillSetName" name="skillSetName" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea id="editDescription" name="description" class="form-control"></textarea>
+                                <textarea id="editDescription" name="description" class="form-control" required></textarea>
                             </div>
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
