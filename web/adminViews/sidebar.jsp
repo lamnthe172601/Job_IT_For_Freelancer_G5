@@ -39,12 +39,7 @@
                 <li>
                     <a href="blogAdmin"><i data-feather="clipboard"></i> <span>Blog</span></a>
                 </li>
-                <li>
-                    <a href="verifyIdentityAdmin"><i data-feather="user-check"></i> <span>Verify Identity</span></a>
-                </li>
-                <li>
-                    <a href="settingsAdmin"><i data-feather="settings"></i> <span>Settings</span></a>
-                </li>                          
+               
 
             </ul>
         </div>

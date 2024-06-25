@@ -71,9 +71,8 @@
         <div class="main-wrapper">
 
 
-            <%@ include file="headerAdmin.jsp" %>
+           <%@ include file="headerAdmin.jsp" %>
             <%@ include file="sidebar.jsp" %>
-
 
             <div class="page-wrapper">
                 <div class="content container-fluid">
