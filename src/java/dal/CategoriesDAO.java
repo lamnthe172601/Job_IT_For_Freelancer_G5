@@ -179,4 +179,31 @@ public List<Categories> getCategoryByNameAndStatus(String categoryName, int stat
 
     return categoriesList;
 }
+
+ public boolean ActiveCategory(String categoryId) {
+    PreparedStatement statement = null;
+    try {
+        System.out.println("Deleting category with ID: " + categoryId);
+        String query = "UPDATE categories SET statusCate = 1 WHERE caID = ?";
+        statement = connection.prepareStatement(query);
+        statement.setString(1, categoryId);
+
+        int rowsDeleted = statement.executeUpdate();
+
+        if (rowsDeleted > 0) {
+            return true;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); 
+    } finally {
+        try {
+            if (statement != null) {
+                statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+    }
+    return false;
+}
 }

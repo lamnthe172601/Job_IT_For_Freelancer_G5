@@ -171,7 +171,7 @@
     <servlet>
         <servlet-name>DeleteFavouritesControll</servlet-name>
         <servlet-class>FreelancerControll.DeleteFavouritesControll</servlet-class>
-        </servlet>
+    </servlet>
     <servlet>
         <servlet-name>ProjectAdmin</servlet-name>
         <servlet-class>AdminControlles.ProjectAdmin</servlet-class>
@@ -187,10 +187,14 @@
     <servlet>
         <servlet-name>EditSkill</servlet-name>
         <servlet-class>AdminControlles.EditSkill</servlet-class>
-        </servlet>
+    </servlet>
     <servlet>
         <servlet-name>ChangeStatusPostServlet</servlet-name>
         <servlet-class>RecruiterControll.ChangeStatusPostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JobforFreelancer</servlet-name>
+        <servlet-class>FreelancerControll.JobforFreelancer</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -371,7 +375,7 @@
     <servlet-mapping>
         <servlet-name>DeleteFavouritesControll</servlet-name>
         <url-pattern>/DeleteFavourites</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProjectAdmin</servlet-name>
         <url-pattern>/projectAdmin</url-pattern>
@@ -387,9 +391,13 @@
     <servlet-mapping>
         <servlet-name>EditSkill</servlet-name>
         <url-pattern>/editSkill</url-pattern>
-         </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangeStatusPostServlet</servlet-name>
         <url-pattern>/ChangeStatusPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JobforFreelancer</servlet-name>
+        <url-pattern>/JobforFreelancer</url-pattern>
     </servlet-mapping>
 </web-app>
