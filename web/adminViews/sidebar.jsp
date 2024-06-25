@@ -39,9 +39,7 @@
                 <li>
                     <a href="blogAdmin"><i data-feather="clipboard"></i> <span>Blog</span></a>
                 </li>
-               
-
-            </ul>
+           </ul>
         </div>
     </div>
 </div>
