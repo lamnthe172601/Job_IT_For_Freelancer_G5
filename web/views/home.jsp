@@ -201,7 +201,7 @@
                             </c:forEach>
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="project.html" class="btn btn-primary">View More Projects</a>
+                                    <a href="JobforFreelancer" class="btn btn-primary">View More Projects</a>
                                 </div>
                             </div>
                         </div>

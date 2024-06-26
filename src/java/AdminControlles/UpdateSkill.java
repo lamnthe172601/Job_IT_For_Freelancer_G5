@@ -7,21 +7,28 @@ package AdminControlles;
 
 import dal.SkillSetDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 
 /**
  *
  * @author DUC MINH
  */
-public class AddSkill extends HttpServlet {
-   
+@WebServlet(name="UpdateSkill", urlPatterns={"/updateSkill"})
+public class UpdateSkill extends HttpServlet {
+   private SkillSetDAO skillSetDAO;
+
+    @Override
+    public void init(){
+        skillSetDAO = new SkillSetDAO();
+    }
+
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -37,10 +44,10 @@ public class AddSkill extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddSkill</title>");  
+            out.println("<title>Servlet UpdateSkill</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddSkill at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet UpdateSkill at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,17 +77,25 @@ public class AddSkill extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        int skillSetID = Integer.parseInt(request.getParameter("skillSetID"));
         String skillSetName = request.getParameter("skillSetName");
         String description = request.getParameter("description");
 
-        SkillSetDAO skillSetDAO = new SkillSetDAO();
+        // Gọi DAO để cập nhật skill set
+        SkillSetDAO dao = new SkillSetDAO();
         try {
-            skillSetDAO.addSkillSet(skillSetName, description);
-            request.getSession().setAttribute("message", "Skill added successfully!");
-            response.sendRedirect("skillAdmin");
+            dao.updateSkillSet(skillSetID, skillSetName, description);
+            request.getSession().setAttribute("message", "Skill updated successfully");
+            // Chuyển hướng sau khi cập nhật thành công
+            
         } catch (SQLException e) {
-            throw new ServletException("Cannot add skill set", e);
+//            e.printStackTrace();
+            // Lưu lỗi vào request để hiển thị trên trang lỗi
+            request.getSession().setAttribute("error", "Error updating skill");
+//            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
         }
+        response.sendRedirect("skillAdmin");
+
     }
 
     /** 
