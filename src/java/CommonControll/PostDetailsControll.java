@@ -10,6 +10,7 @@ import MutiModels.JobApply;
 import MutiModels.PostBasic;
 import dal.DAO;
 import dal.PostDAO;
+import dal.ReportDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,8 +18,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,13 +30,7 @@ import java.util.List;
  */
 public class PostDetailsControll extends HttpServlet {
    
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -83,18 +81,54 @@ public class PostDetailsControll extends HttpServlet {
         
     } 
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+ 
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    String action = request.getParameter("action");
+
+    if ("report".equals(action)) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+
+        if (user != null) {
+            String postIdStr = request.getParameter("postID");
+            if (postIdStr == null || postIdStr.trim().isEmpty()) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Post ID is missing");
+                return;
+            }
+
+            int postId;
+            try {
+                postId = Integer.parseInt(postIdStr);
+            } catch (NumberFormatException e) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Post ID");
+                return;
+            }
+
+            String[] reasons = request.getParameterValues("report_post_reason");
+            String message = request.getParameter("report_post_message");
+
+            ReportDAO reportDAO = new ReportDAO();
+
+            try {
+                reportDAO.reportPost(postId, postId, message);
+                // Set a success message in session to display on the redirected page
+                session.setAttribute("message", "Report submitted successfully.");
+                // Redirect back to PostDetails page with the corresponding postID
+                response.sendRedirect(request.getContextPath() + "/PostDetails?postID=" + postId);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
+            }
+        } else {
+            response.sendRedirect(request.getContextPath() + "/login.jsp"); // Redirect to login page if user is not logged in
+        }
+    } else {
+        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
     }
+}
+
 
     /** 
      * Returns a short description of the servlet.
