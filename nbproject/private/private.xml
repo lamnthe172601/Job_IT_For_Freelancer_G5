@@ -15,16 +15,40 @@
             <file>file:/D:/SU24/A/web/views/completedProjects.jsp</file>
         </group>
         <group>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/ReportDAO.java</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ViewCategoryAdmin.java</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/Categories.java</file>
+<<<<<<< Updated upstream
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/categoryAdmin.jsp</file>
+=======
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/Report.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/categoryAdmin.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/blogsAdmin.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CompanyDAO.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
+>>>>>>> Stashed changes
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CategoriesDAO.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/PostDetailsControll.java</file>
         </group>
         <group>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/ReportDAO.java</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ViewCategoryAdmin.java</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/Categories.java</file>
+<<<<<<< Updated upstream
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/categoryAdmin.jsp</file>
+=======
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/Report.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/categoryAdmin.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/blogsAdmin.jsp</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CompanyDAO.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
+>>>>>>> Stashed changes
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CategoriesDAO.java</file>
+            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/PostDetailsControll.java</file>
         </group>
     </open-files>
 </project-private>

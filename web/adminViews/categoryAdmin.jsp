@@ -79,9 +79,14 @@
                 <div class="content container-fluid">
                     <div class="page-header">
                         <div class="row align-items-center">
+<<<<<<< Updated upstream
                             <div class="col">
                                 <h3 class="page-title">Categories</h3>
                             </div>
+=======
+                            
+
+>>>>>>> Stashed changes
                             <div class="col-auto">
                                 <a href="javascript:void(0);" style="color: red; border: 1px solid black; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px;" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-category">
                                     <i class="fas fa-plus"></i>
@@ -102,7 +107,7 @@
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="statusCate">StatusCate</label>
+                                    <label for="statusCate">StatusCategory</label>
                                     <select class="form-control" id="statusCate" name="statusCate">
                                         <option value="">All</option>
                                         <option value="1">Active</option>
