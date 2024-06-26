@@ -11,6 +11,7 @@ public class Post {
     int postID, quantity,budget;
     String title, description, location, skill, image;
     Date datePost;
+    Date expired;
     JobType jobTypeID;
     Duration durationID;
     Recruiter recruiterID;
@@ -21,7 +22,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(int postID,String title, String image, JobType jobTypeID, Duration durationID, Date datePost, int quantity, String description,int budget, String location, String skill, Recruiter recruiterID, Categories caID, boolean status,
+    public Post(int postID,String title, String image, JobType jobTypeID, Duration durationID, Date datePost,Date expired, int quantity, String description,int budget, String location, String skill, Recruiter recruiterID, Categories caID, boolean status,
     int checking) {
         this.postID = postID;
         this.image = image;
@@ -32,6 +33,7 @@ public class Post {
         this.location = location;
         this.skill = skill;
         this.datePost = datePost;
+        this.expired = expired;
         this.jobTypeID = jobTypeID;
         this.durationID = durationID;
         this.recruiterID = recruiterID;
@@ -161,12 +163,21 @@ public class Post {
         this.checking = checking;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" + "postID=" + postID + ", quantity=" + quantity + ", budget=" + budget + ", title=" + title + ", description=" + description + ", location=" + location + ", skill=" + skill + ", image=" + image + ", datePost=" + datePost + ", jobTypeID=" + jobTypeID + ", durationID=" + durationID + ", recruiterID=" + recruiterID + ", caID=" + caID + ", status=" + status + ", checking=" + checking + '}';
+    public Date getExpired() {
+        return expired;
     }
 
-   
+    public void setExpired(Date expired) {
+        this.expired = expired;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" + "postID=" + postID + ", quantity=" + quantity + ", budget=" + budget + ", title=" + title + ", description=" + description + ", location=" + location + ", skill=" + skill + ", image=" + image + ", datePost=" + datePost + ", expired=" + expired + ", jobTypeID=" + jobTypeID + ", durationID=" + durationID + ", recruiterID=" + recruiterID + ", caID=" + caID + ", status=" + status + ", checking=" + checking + '}';
+    }
+    
+    
+    
 
  
     

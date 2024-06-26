@@ -55,7 +55,7 @@ public class HomeDAO extends DBContext {
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
                 int checking = rs.getInt("checking");
                 boolean status = rs.getBoolean("status");
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, status, checking));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("expired"),rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, status, checking));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,7 +82,8 @@ public class HomeDAO extends DBContext {
                                p.image AS post_postImg, 
                                p.job_type_ID, 
                                p.durationID AS post_durationID, 
-                               p.date_post, 
+                               p.date_post,
+                               p.expired,
                                p.quantity, 
                                p.description AS post_description, 
                                p.budget, 
@@ -128,7 +129,7 @@ public class HomeDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("re_recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -163,7 +164,7 @@ public class HomeDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"),  rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

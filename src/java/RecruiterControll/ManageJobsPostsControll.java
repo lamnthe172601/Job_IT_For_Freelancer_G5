@@ -6,6 +6,7 @@ package RecruiterControll;
 
 import Models.Categories;
 import Models.Duration;
+import Models.ExpertiseSkill;
 import Models.JobType;
 import Models.Post;
 import Models.Recruiter;
@@ -46,6 +47,8 @@ public class ManageJobsPostsControll extends HttpServlet {
         List<SkillSet> skill = postdao.getAllSkillSet();
         request.setAttribute("listpost", listpost);
         request.setAttribute("skill", skill);
+        List<ExpertiseSkill> ess = postdao.getAllExpertiseSkill();
+        request.setAttribute("ExpertiseSkill", ess);
 
         CategoriesDAO caDao = new CategoriesDAO();
         DurationDAO duDao = new DurationDAO();
