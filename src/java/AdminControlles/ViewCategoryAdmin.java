@@ -42,6 +42,9 @@ public class ViewCategoryAdmin extends HttpServlet {
                 case "filter":
                     handleFilter(request, response); // Handle filter form submission
                     break;
+                case "active":
+                    handleActive(request, response); 
+                    break;
                 default:
                     request.setAttribute("errorMessage", "Invalid operation specified.");
                     request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
@@ -122,32 +125,56 @@ public class ViewCategoryAdmin extends HttpServlet {
 
     private void handleFilter(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Lấy tham số từ request
         String categoryName = request.getParameter("categoryName");
         String statusCateStr = request.getParameter("statusCate");
 
-        if (categoryName == null || categoryName.isEmpty()) {
-            // Nếu không có tên category được cung cấp, hiển thị tất cả categories với statusCate tương ứng
-            List<Categories> categoriesList = categoryDAO.getCategory();
-            request.setAttribute("categories", categoriesList);
-        } else {
-            try {
-                int statusCate = -1; // Giá trị mặc định cho statusCate
-
-                if (statusCateStr != null && !statusCateStr.isEmpty()) {
-                    statusCate = Integer.parseInt(statusCateStr);
-                }
-
-                List<Categories> filteredCategories = categoryDAO.getCategoryByNameAndStatus(categoryName, statusCate);
-                request.setAttribute("categories", filteredCategories);
-            } catch (NumberFormatException e) {
-                request.setAttribute("errorMessage", "Invalid StatusCate parameter.");
+        try {
+            // Chuyển đổi statusCate từ String sang int
+            int statusCate = -1; // Giá trị mặc định cho statusCate nếu không có giá trị được cung cấp
+            if (statusCateStr != null && !statusCateStr.isEmpty()) {
+                statusCate = Integer.parseInt(statusCateStr);
             }
+
+            List<Categories> categoriesList;
+            // Kiểm tra nếu không có tên và trạng thái được cung cấp, hiển thị tất cả categories
+            if ((categoryName == null || categoryName.isEmpty()) && statusCate == -1) {
+                categoriesList = categoryDAO.getCategory();
+            } else {
+                // Nếu có tên hoặc trạng thái được cung cấp, lọc danh mục theo tên và trạng thái
+                categoriesList = categoryDAO.getCategoryByNameAndStatus(categoryName, statusCate);
+            }
+
+            // Lưu danh sách categories vào thuộc tính của request
+            request.setAttribute("categories", categoriesList);
+            // Lưu giá trị của categoryName và statusCate để hiển thị lại trên form
+            request.setAttribute("categoryName", categoryName);
+            request.setAttribute("statusCate", statusCateStr);
+        } catch (NumberFormatException e) {
+            // Xử lý nếu statusCate không phải là một số hợp lệ
+            request.setAttribute("errorMessage", "Invalid StatusCate parameter.");
         }
 
-        // Forward the request back to categoryAdmin.jsp
+        // Chuyển tiếp yêu cầu về cho categoryAdmin.jsp để hiển thị kết quả
         request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
     }
 
+     private void handleActive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+          HttpSession session = request.getSession();
+        session.setAttribute("message", "ACTIVE SUCCESSFUL");
+    String cat = request.getParameter("cat");
+    boolean isActive = categoryDAO.ActiveCategory(cat);
+
+    if (isActive) {
+        // Chuyển hướng lại trang quản lý category với cateId
+        response.sendRedirect(request.getContextPath() + "/categoryAdmin?activatedCateId=" + cat);
+    } else {
+        request.setAttribute("errorMessage", "Failed to activate category.");
+        request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
+    }
+}
+
+     
     @Override
     public String getServletInfo() {
         return "Handles adding, editing, and viewing categories";

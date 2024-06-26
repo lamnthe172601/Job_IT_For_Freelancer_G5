@@ -141,6 +141,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="row">
                             <c:forEach items="${getPostsByFreelancerSkill}" var="list">
                                 <div class="col-lg-4 col-md-6 d-flex">
@@ -149,9 +151,29 @@
                                             <!-- Hình ảnh -->
                                             <a href="project.html"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
                                             <!-- Biểu tượng trái tym -->
-                                            <div class="favorite-icon" onclick="toggleHeart(this)" >
-                                                <i class="far fa-heart"></i>
-                                            </div>
+
+                                            <a class="yeuthich" post-id="${list.postID}">
+                                                <div class="favorite-icon" onclick="toggleHeart(this)" >
+
+
+                                                    <c:set var="favo" value="false" />
+                                                    <c:forEach items="${postFavourites}" var="post">
+                                                        <c:choose>
+                                                            <c:when test="${list.postID == post.postID}">
+                                                                <c:set var="favo" value="true" />
+                                                            </c:when>                                                                
+                                                        </c:choose>
+                                                    </c:forEach>
+                                                    <c:choose>
+                                                        <c:when test="${favo}">
+                                                            <a href="javascript:void(0);" onclick="removeFromFavorites(${list.postID})" ><i id="favourite_${list.postID}" class="fas fa-heart"></i></a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})"  ><i id="favourite_${list.postID}" class="far fa-heart"></i></a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                </div>
+                                            </a>
                                         </div>
                                         <div class="feature-content">
                                             <!-- Các nội dung khác -->
@@ -171,7 +193,7 @@
                                                         <span>AMAZE TECH</span>
                                                     </a>
                                                 </div>
-                                                <a href="project-details.html" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
+                                                <a href="PostDetails?postID=${list.postID}" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +201,7 @@
                             </c:forEach>
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="project.html" class="btn btn-primary">View More Projects</a>
+                                    <a href="JobforFreelancer" class="btn btn-primary">View More Projects</a>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +258,22 @@
                                             <a href="project.html"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
                                             <!-- Biểu tượng trái tym -->
                                             <div class="favorite-icon" onclick="toggleHeart(this)" >
-                                                <i class="far fa-heart"></i>
+                                                <c:set var="favo" value="false" />
+                                                <c:forEach items="${postFavourites}" var="post">
+                                                    <c:choose>
+                                                        <c:when test="${list.postID == post.postID}">
+                                                            <c:set var="favo" value="true" />
+                                                        </c:when>                                                                
+                                                    </c:choose>
+                                                </c:forEach>
+                                                <c:choose>
+                                                    <c:when test="${favo}">
+                                                        <a href="javascript:void(0);" onclick="removeFromFavorites(${list.postID})" ><i id="favourite_${list.postID}" class="fas fa-heart"></i></a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                        <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})"  ><i id="favourite_${list.postID}" class="far fa-heart"></i></a>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                             </div>
                                         </div>
                                         <div class="feature-content">
@@ -257,7 +294,7 @@
                                                         <span>AMAZE TECH</span>
                                                     </a>
                                                 </div>
-                                                <a href="project-details.html" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
+                                                <a href="PostDetails?postID=${list.postID}" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -288,41 +325,41 @@
                             </div>
                         </div>
                         <div class="row">
-                            
+
                             <c:forEach items="${freelancerSkill}" var="freelancerSkill">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="feature-develop-blk aos" data-aos="fade-up">
-                                    <div class="developer-sub-blk">
-                                        <div class="img-developer">
-                                            <a href="developer-details.html"><img src="assets/img/user/avatar-21.jpg" class="me-2" alt="Img"></a>
-                                        </div>
-                                        <div class="developer-content">
-                                            <h4><a href="developer-details.html">${freelancerSkill.freelancer.fullname()}</a></h4>
-                                            <p>${freelancerSkill.skills.skill_set_ID.skill_set_name}</p>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <span class="average-rating">5.0</span>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="feature-develop-blk aos" data-aos="fade-up">
+                                        <div class="developer-sub-blk">
+                                            <div class="img-developer">
+                                                <a href="developer-details.html"><img src="assets/img/user/avatar-21.jpg" class="me-2" alt="Img"></a>
+                                            </div>
+                                            <div class="developer-content">
+                                                <h4><a href="developer-details.html">${freelancerSkill.freelancer.fullname()}</a></h4>
+                                                <p>${freelancerSkill.skills.skill_set_ID.skill_set_name}</p>
+                                                <div class="rating">
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <span class="average-rating">5.0</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="hour-rate">
-                                        <ul class="nav">
-                                            <li><i class="feather-dollar-sign me-1"></i>$34 Hourly</li>
-                                            <li>
-                                                <div class="favorite-icon" onclick="toggleHeart(this)" >
-                                                <i class="far fa-heart"></i>
-                                            </div>
-                                            </li>
-                                        </ul>
+                                        <div class="hour-rate">
+                                            <ul class="nav">
+                                                <li><i class="feather-dollar-sign me-1"></i>$34 Hourly</li>
+                                                <li>
+                                                    <div class="favorite-icon" onclick="toggleHeart(this)" >
+                                                        <i class="far fa-heart"></i>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </c:forEach>
-                            
+
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
                                     <a href="developer-details.html" class="btn btn-primary">View More Freelancers</a>
@@ -389,7 +426,7 @@
                                                         <span>AMAZE TECH</span>
                                                     </a>
                                                 </div>
-                                                <a href="project-details.html" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
+                                                <a href="PostDetails?postID=${list.postID}" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -746,27 +783,27 @@
                     </div>
                     <div class="row aos" data-aos="fade-up">
                         <c:forEach items="${listblogs}" var="listblogs">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="grid-blog blog-two aos" data-aos="fade-up">
-                                <div class="blog-image">
-                                    <a href="blog-details.html"><img style="width: 331px; height: 207px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
-                                </div>
-                                <div class="blog-content">
-                                    <div class="feature-time-blk">
-                                        <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
-                                        <span><i class="far fa-calendar me-1"></i>${listblogs.date_blog} 06 Oct, 2023</span>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="grid-blog blog-two aos" data-aos="fade-up">
+                                    <div class="blog-image">
+                                        <a href="blog-details.html"><img style="width: 331px; height: 207px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
                                     </div>
-                                    <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
-                                    <p>${listblogs.description}</p>
-                                    <div class="blog-read">
-                                        <a href="blog-details.html">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                                    <div class="blog-content">
+                                        <div class="feature-time-blk">
+                                            <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
+                                            <span><i class="far fa-calendar me-1"></i>${listblogs.date_blog} 06 Oct, 2023</span>
+                                        </div>
+                                        <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
+                                        <p>${listblogs.description}</p>
+                                        <div class="blog-read">
+                                            <a href="blog-details.html">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
-                        
+                        </c:forEach>
                     </div>
-                                    </c:forEach>
-                </div>
             </section>
 
 
@@ -978,6 +1015,47 @@
                 icon.querySelector('i').classList.toggle('far'); // Thêm hoặc xóa class 'far' (trắng)
                 icon.querySelector('i').classList.toggle('fas'); // Thêm hoặc xóa class 'fas' (đỏ)
 
+            }
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            function addToFavorites(postID) {
+                $.ajax({
+                    url: 'AddFavourites',
+                    type: 'GET',
+                    data: {
+                        postID: postID
+                    },
+                    success: function (response) {
+                        // Xử lý phản hồi thành công (nếu cần)
+                        //alert('Đã thêm vào danh sách yêu thích!');
+                        $('#favourite_' + postID).remove('far').addClass('fas');
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi (nếu có)
+                        alert('Đã xảy ra lỗi: ' + error);
+                    }
+                });
+            }
+
+            function removeFromFavorites(postID) {
+                $.ajax({
+                    url: 'DeleteFavourites',
+                    type: 'GET',
+                    data: {
+                        postID: postID
+                    },
+                    success: function (response) {
+                        // Xử lý phản hồi thành công (nếu cần)
+                        //alert('Đã xóa khỏi danh sách yêu thích!');
+                        $('#favourite_' + postID).remove('fas').addClass('far');
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi (nếu có)
+                        alert('Đã xảy ra lỗi: ' + error);
+                    }
+                });
             }
         </script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>

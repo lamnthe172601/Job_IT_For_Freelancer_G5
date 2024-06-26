@@ -4,8 +4,12 @@
  */
 package FreelancerControll;
 
+import Models.Freelancer;
 import Models.User;
+import MutiModels.JobApply;
 import dal.DAO;
+import dal.FreelancerDAO;
+import dal.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
@@ -62,9 +67,32 @@ public class ListApplyControll extends HttpServlet {
             HttpSession session = request.getSession();
             Object u = session.getAttribute("account");
             User user = (User) u;
+            FreelancerDAO f=new FreelancerDAO();
+            PostDAO p=new PostDAO();
             int id = user.getUserID();
             DAO d = new DAO();
+            Freelancer freelancer=f.getFreelancerById(id);
             int freelancerID = d.getFreelancerIDbyUserID(id);
+            
+            String indexPage= request.getParameter("index");
+            if(indexPage==null){
+                indexPage="1";
+            }
+            int index=Integer.parseInt(indexPage);
+            int count=p.getSumJobApplyByFreelancerID(freelancerID);
+            int endPage=count/8;
+            if(count%8!=0){
+                endPage++;
+            }
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("tag", index);
+            
+            
+            
+            List<JobApply> post=p.getPostApplyPage(freelancerID, index);
+            request.setAttribute("userID", id);
+            request.setAttribute("freelancer", freelancer);
+            request.setAttribute("post", post);
             request.getRequestDispatcher("views/listapply.jsp").forward(request, response);
         } catch (Exception e) {
             request.getRequestDispatcher("login").forward(request, response);
@@ -83,7 +111,45 @@ public class ListApplyControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            HttpSession session = request.getSession();
+            Object u = session.getAttribute("account");
+            User user = (User) u;
+            FreelancerDAO f=new FreelancerDAO();
+            PostDAO p=new PostDAO();
+            int id = user.getUserID();
+            DAO d = new DAO();
+            Freelancer freelancer=f.getFreelancerById(id);
+            int freelancerID = d.getFreelancerIDbyUserID(id);
+            
+            String txtSearch = request.getParameter("searchName");
+            if(txtSearch == null){
+                request.getRequestDispatcher("ListApply").forward(request, response);
+            }
+            
+            String indexPage= request.getParameter("index");
+            if(indexPage==null){
+                indexPage="1";
+            }
+            int index=Integer.parseInt(indexPage);
+            int count=p.getCountApplySearch(id, txtSearch);
+            int endPage=count/8;
+            if(count%8!=0){
+                endPage++;
+            }
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("tag", index);
+            
+            
+            
+            List<JobApply> post=p.SearchPostApply(freelancerID,txtSearch ,index);
+            request.setAttribute("freelancer", freelancer);
+            request.setAttribute("txtSearch", txtSearch);
+            request.setAttribute("post", post);
+            request.getRequestDispatcher("views/listapply.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("login").forward(request, response);
+        }
     }
 
     /**

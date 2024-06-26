@@ -4,9 +4,12 @@
  */
 package FreelancerControll;
 
+import Models.Freelancer;
 import Models.User;
+import MutiModels.JobApply;
 import MutiModels.PostBasic;
 import dal.DAO;
+import dal.FreelancerDAO;
 import dal.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -67,12 +70,30 @@ public class PostFavouritesControll extends HttpServlet {
         Object user = session.getAttribute("account");
         if (user == null) {
             request.getRequestDispatcher("login").forward(request, response);
-        } else {
+        } else {           
             User u = (User) user;
             int userId = u.getUserID();
             int freelancerID = d.getFreelancerIDbyUserID(userId);
-            List<PostBasic> post = p.getAllFavPosts(freelancerID);
+            
+            String indexPage= request.getParameter("index");
+            if(indexPage==null){
+                indexPage="1";
+            }
+            int index=Integer.parseInt(indexPage);
+            int count=p.getAllFavouritesByByFreelancerID(freelancerID);
+            int endPage=count/6;
+            if(count%6!=0){
+                endPage++;
+            }
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("tag", index);
+            FreelancerDAO f=new FreelancerDAO();
+            Freelancer freelancer=f.getFreelancerById(userId);
+            List<PostBasic> post = p.getFavPostsPage(freelancerID, index);
             request.setAttribute("post", post);
+            List<JobApply> postAplly=p.getPostApply(freelancerID);
+            request.setAttribute("postApply", postAplly);
+            request.setAttribute("freelancer", freelancer);
             request.getRequestDispatcher("views/freelancerFavourites.jsp").forward(request, response);
         }
 
@@ -89,7 +110,42 @@ public class PostFavouritesControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        DAO d = new DAO();
+        PostDAO p = new PostDAO();
+        Object user = session.getAttribute("account");
+        if (user == null) {
+            request.getRequestDispatcher("login").forward(request, response);
+        } else {           
+            User u = (User) user;
+            int userId = u.getUserID();
+            int freelancerID = d.getFreelancerIDbyUserID(userId);
+            String txtSearch = request.getParameter("searchName");
+            if(txtSearch == null){
+                request.getRequestDispatcher("PostFavourites").forward(request, response);
+            }
+            String indexPage= request.getParameter("index");
+            if(indexPage==null){
+                indexPage="1";
+            }
+            int index=Integer.parseInt(indexPage);
+            int count=p.getCountFavoSearch(index, txtSearch);
+            int endPage=count/6;
+            if(count%6!=0){
+                endPage++;
+            }
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("tag", index);
+            FreelancerDAO f=new FreelancerDAO();
+            Freelancer freelancer=f.getFreelancerById(userId);
+            List<PostBasic> post = p.searchAllFavPosts(freelancerID, txtSearch,index);
+            request.setAttribute("post", post);
+            List<JobApply> postAplly=p.getPostApply(freelancerID);
+            request.setAttribute("txtSearch", txtSearch);
+            request.setAttribute("postApply", postAplly);
+            request.setAttribute("freelancer", freelancer);
+            request.getRequestDispatcher("views/freelancerFavourites.jsp").forward(request, response);
+        }
     }
 
     /**

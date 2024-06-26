@@ -29,54 +29,7 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
 
-        <style>
-            /* Tùy chỉnh kích thước và màu sắc của các nút phân trang */
-            .dataTables_wrapper .dataTables_paginate .paginate_button {
-                padding: 2px 6px; /* Giảm kích thước padding để nút nhỏ lại */
-                margin-left: 2px;
-                margin-right: 2px;
-                font-size: 12px;
-                color: #333;
-                background-color: #fff;
-                border: 1px solid #ddd;
-                border-radius: 3px;
-                cursor: pointer;
-            }
-
-            /* Tùy chỉnh nút được chọn */
-            .dataTables_wrapper .dataTables_paginate .paginate_button.current,
-            .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-                background-color: orange;
-                color: white !important;
-                border: 1px solid orange;
-            }
-
-            /* Thay đổi màu nút khi hover */
-            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-                background-color: orange;
-                color: white;
-                border: 1px solid orange;
-            }
-
-            /* Đảm bảo chiều cao cố định cho bảng và phần phân trang */
-            .dataTables_wrapper {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                min-height: 400px; /* Đặt chiều cao tối thiểu phù hợp với nội dung của bạn */
-            }
-
-            .dataTables_wrapper .dataTables_info {
-                order: 2;
-                text-align: center;
-                margin-top: 10px;
-            }
-
-            .dataTables_wrapper .dataTables_paginate {
-                order: 1;
-                margin-bottom: 10px;
-            }
-        </style>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <!-- DataTables CSS -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
@@ -386,8 +339,8 @@
                                                 <div class="dash-widget-info">Posted Jobs</div>
                                             </div>
                                             <div class="dash-widget-more d-flex align-items-center justify-content-between">
-                                                <div class="dash-widget-count">30</div>
-                                                <a href="freelancer-completed-projects.html" class="d-flex">View Details</a>
+                                                <div class="dash-widget-count">${numberPost}</div>
+                                                <a href="manageJobsPosts" class="d-flex">View Details</a>
                                             </div>
                                         </div>
                                     </div>
@@ -400,8 +353,8 @@
                                                 <div class="dash-widget-info">Applicants</div>
                                             </div>
                                             <div class="dash-widget-more d-flex align-items-center justify-content-between">
-                                                <div class="dash-widget-count">5</div>
-                                                <a href="freelancer-completed-projects.html" class="d-flex">View Details</a>
+                                                <div class="dash-widget-count">${numberApply}</div>
+                                                <a href="ManageApplication" class="d-flex">View Details</a>
                                             </div>
                                         </div>
                                     </div>
@@ -447,8 +400,8 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="pro-body p-0">
-                                                <div id="chartprofile" ></div>
+                                            <div style="width: 600px; margin: 0 auto;">
+                                                <canvas id="applicationsChart"></canvas>
                                             </div>
                                         </div>
                                     </div>
@@ -504,7 +457,9 @@
                                                             <tr>
                                                                 <td>${listpost.title}</td>
                                                                 <td>${listpost.jobTypeID.jobName}</td>
-                                                                <td>${listpost.skill}</td>
+                                                                <td><c:forEach var="skill" items="${listpost.skill.split(',')}">
+                                                                        <div class="skill">${skill.trim()}</div>
+                                                                    </c:forEach></td>
                                                                 <td>${listpost.datePost}</td>
                                                                 <td>${listpost.caID.categoriesName}</td>
                                                                 <td style="text-align: center;">${listpost.quantity}</td>
@@ -637,12 +592,47 @@
                     "searching": true,
                     "ordering": true,
                     "info": true
-                   
+
                 });
             });
         </script>
 
+        <script>
+            const ctx = document.getElementById('applicationsChart').getContext('2d');
+            const applicationsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                            label: 'Applications',
+                            data: [70, 110, 210, 220, 190, 210, 180, 180, 180, 190, 260, 350],
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            fill: false,
+                            tension: 0.1,
+                            pointStyle: 'circle',
+                            pointRadius: 5,
+                            pointHoverRadius: 7
+                        }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 420
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
 
+        </script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
 
         </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>

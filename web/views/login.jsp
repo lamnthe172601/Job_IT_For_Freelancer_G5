@@ -48,6 +48,11 @@
                                     <h3>Welcome! Nice to see you again</h3>
                                 </div>
                                 <form action="login" method="post">
+                                    <!-- Display success message -->
+                                    <c:if test="${not empty sessionScope.successMessage}">
+                                        <div class="alert alert-success text-center">${sessionScope.successMessage}</div>
+                                        <c:remove var="successMessage" scope="session"/>
+                                    </c:if>
                                     <div class="input-block">
                                         <label class="focus-label">Username <span class="label-star"> *</span></label>
                                         <input required name="user" type="text" class="form-control floating" value="${username}" >
@@ -67,7 +72,7 @@
                                     <c:if test = "${username != null }" >
                                         <p style="text-align: center;" class="text-danger">${loginFaild}</p>
                                     </c:if>
-                                        <p style="text-align: center;" class="text-danger">${mess}</p>
+                                    <p style="text-align: center;" class="text-danger">${mess}</p>
                                     <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Login Now<i class="feather-arrow-right ms-2"></i></button>
                                     <div class="login-or">
                                         <p><span>OR</span></p>

@@ -4,8 +4,10 @@
     Author     : DUC MINH
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,7 +74,7 @@
 
                                             <li><a href="PostFavourites">Jobs Favourites</a></li>
 
-                                            <li><a href="jobsApply">Jobs Apply</a></li>
+                                            <li><a href="ListApply">Jobs Apply</a></li>
                                             <li><a href="jobforyou">Jobs For you</a></li>
                                         </ul>
                                     </li>
@@ -81,7 +83,7 @@
                                         <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="myListJobProject">My List Post</a></li>                                       
+                                            <li><a href="AllListPost">Jobs List</a></li>                                        
                                             <li><a href="SreachJob">Find Jobs</a></li>  
                                             <li><a href="company">Company</a></li>
                                         </ul>
@@ -101,7 +103,7 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
                                             <li><a href="newsJobs">Reviews</a></li>
 
                                         </ul>
@@ -246,7 +248,7 @@
                                             </a>
                                         </div>
                                         <a class="dropdown-item" href="MyProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                        <a class="dropdown-item" href="MyProject?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
+                                        <a class="dropdown-item" href="ListApply"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> Applied</a>
 
                                         <a class="dropdown-item" href="freelancer-profile-settings"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
                                         <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
@@ -262,95 +264,84 @@
             <div class="content content-page bookmark">
                 <div class="container">
                     <div class="row">
+
+
+
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/avatar-1.jpg" class="avatar-lg rounded-circle"></a>
+                                    <a href="MyProfile?id=${sessionScope.account.userID}"><img alt="profile image" src="${freelancer.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
-                                        <h3 class="mb-0"><a href="freelancer-profile.html">Bruce Bush</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
-                                        <p class="mb-0">@brucebush</p>
+                                        <h3 class="mb-0">${freelancer.fullname()}</h3>
+                                        <p class="mb-0">@${sessionScope.account.username}</p>
                                     </div>
                                 </div>
                                 <div class="settings-menu">
                                     <div id="sidebar-menu" class="sidebar-menu">
                                         <ul>
                                             <li class="nav-item">
-                                                <a href="freelancer-dashboard.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
+                                                <a href="MyProfile?id=${sessionScope.account.userID}" class="nav-link ">
+                                                    <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> My Profile
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-project-proposals.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
-                                                    <span class="menu-arrow"></span>
+                                                <a href="ListApply" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Applied
+<!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="freelancer-project-proposals.html">My Proposal</a>
+                                                        <a href="freelancer-project-proposals">My Proposal</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-ongoing-projects.html">Ongoing Projects</a>
+                                                        <a href="freelancer-ongoing-projects">Ongoing Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-completed-projects.html">Completed Projects</a>
+                                                        <a href="freelancer-completed-projects">Completed Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-cancelled-projects.html">Cancelled Projects</a>
+                                                        <a href="freelancer-cancelled-projects">Cancelled Projects</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-favourites.html" class="nav-link active">
+                                                <a href="PostFavourites" class="nav-link active">
                                                     <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
-                                                    <span class="menu-arrow"></span>
+<!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a class="active" href="freelancer-favourites.html">Bookmarked Projects</a>
+                                                        <a href="freelancer-favourites">Bookmarked Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-invitations.html">Invitations</a>
+                                                        <a href="freelancer-invitations">Invitations</a>
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-review.html" class="nav-link">
+<!--                                            <li class="nav-item">
+                                                <a href="freelancer-review" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-portfolio.html" class="nav-link">
+                                                <a href="freelancer-portfolio" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-05.svg" alt="Img"> Portfolio
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="freelancer-chats.html" class="nav-link">
+                                                <a href="freelancer-chats" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
                                                 </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-withdraw-money.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-payout.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-08.svg" alt="Img"> Payout
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-withdraw-money.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-09.svg" alt="Img"> Statement
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0);" class="nav-link">
+                                            </li>-->
+
+                                            <li class="nav-item submenu">
+                                                <a href="UpdateProfile?id=${sessionScope.account.userID}" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
-                                                    <span class="menu-arrow"></span>
+<!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="freelancer-profile-settings.html">Profile Setting</a>
+                                                        <a class="active" href="freelancer-profile-settings.html">Profile Setting</a>
                                                     </li>
                                                     <li>
                                                         <a href="freelancer-membership.html">Plan & Billing</a>
@@ -359,15 +350,13 @@
                                                         <a href="freelancer-verify-identity.html">Verify Identity</a>
                                                     </li>
                                                     <li>
-                                                        <a href="freelancer-change-password.html">Changes Password</a>
+                                                        <a href="changePassword">Changes Password</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="freelancer-delete-account.html">Delete Account</a>
-                                                    </li>
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="index.html" class="nav-link">
+                                                <a href="logout" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-11.svg" alt="Img"> Logout
                                                 </a>
                                             </li>
@@ -375,9 +364,29 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
+
+
+
                         <div class="col-xl-9 col-lg-8">
                             <div class="dashboard-sec freelance-favourites">
+                                <form action="PostFavourites" method="post" class="form-inline my-2 my-lg-0">
+                                    <div class="input-group input-group-sm">
+                                        <c:if test="${txtSearch != null}">
+                                            <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
+                                        </c:if>
+                                        <c:if test="${txtSearch == null}">
+                                            <input name="searchName" type="text"  class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
+                                        </c:if>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-secondary btn-number">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                                 <div class="page-title">
                                     <h3>Favourites</h3>
                                 </div>                               
@@ -388,24 +397,30 @@
                                                 <div class="freelance-content">
                                                     <div class="freelance-top-content d-flex">
                                                         <span> <i class="feather-clock me-1"></i>${p.datePost}</span>
-                                                        <a  class="favourite color-active" onclick="confirmAction(${p.postID})"><i class="feather-heart"></i></a>
+                                                        <a  class="favourite color-active" class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#delete${p.postID}"><i class="feather-heart"></i></a>
                                                     </div>
-                                                    
+
                                                     <div class="author-heading">
                                                         <div class="text-center1" >                                                                                                              
                                                             <img style="width: 100%; height: 100%;" src="${p.image}" alt="author">                                                       
                                                         </div>
                                                         <div class="profile-name">
 
-                                                            <div class="author-location"><a ">${p.title} </a></div>
+                                                            <div class="author-location titlepost"><a ">${p.title} </a></div>
                                                         </div>
                                                         <div class="freelance-info">
                                                             <h3><a href="javascript:void(0);">${p.caID.categoriesName}</a></h3>
                                                             <div class="freelance-location"><i class="feather-map-pin me-1"></i>${p.location}</div>
                                                         </div>
                                                         <div class="freelance-tags">
-                                                            <span class="badge badge-pill badge-design">${p.skill}</span>
-
+                                                            <c:forEach items="${fn:split(p.skill, ',')}" var="skill" varStatus="loop">
+                                                                <c:if test="${loop.index < 3}">
+                                                                    <span class="badge badge-pill badge-design">${skill}</span>
+                                                                </c:if>                                                              
+                                                                <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                                    <span class="badge badge-pill badge-design">...</span>
+                                                                </c:if>
+                                                            </c:forEach>
                                                         </div>
                                                     </div>
                                                     <div class="counter-stats">
@@ -426,8 +441,82 @@
                                                     </div>
                                                 </div>
                                                 <div class="cart-hover">
-                                                    <a href="javascript:void(0);" onclick="openPopup(${p.postID})" class="btn-cart1" tabindex="-1">View Details</a>
-                                                    <a href="project-details.html" class="btn-cart1" tabindex="-1">Apply Now</a>
+                                                    <a href="javascript:void(0);" onclick="openPopup(${p.postID})" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
+
+                                                    <c:set var="applied" value="false" />
+                                                    <c:forEach items="${postApply}" var="j">
+                                                        <c:if test="${p.postID == j.postID}">
+                                                            <c:choose>
+                                                                <c:when test="${j.status == 'Pending' || j.status == 'Approve'}">
+                                                                    <c:set var="applied" value="true" />
+                                                                </c:when>
+                                                                <c:when test="${j.status == 'Reject'}">
+                                                                    <c:remove var="applied" />
+                                                                </c:when>
+                                                            </c:choose>
+                                                        </c:if>
+                                                    </c:forEach>
+
+                                                    <c:choose>
+                                                        <c:when test="${applied}">
+                                                            <a class="btn-cart1 apply" tabindex="-1">Applied</a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a data-bs-toggle="modal" data-bs-target="#applyModal_${p.postID}" id="applyButton_${p.postID}" class="btn-cart1 apply-button classbtn" data-postid="${p.postID}" tabindex="-1">Apply Now</a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal custom-modal fade" id="applyModal_${p.postID}" role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <div class="form-header">
+                                                                <input type="hidden" class="user-id1" id="">
+                                                                <h3>Status</h3>
+                                                                <p>Are you sure you want to apply for this job?</p>
+                                                            </div>
+                                                            <div class="modal-btn Suspend-action">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <!-- Nút "Yes" để xử lý AJAX -->
+                                                                        <a href="javascript:void(0);" class="btn btn-primary confirm-btn" data-postid="${p.postID}">Yes</a>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <!-- Nút "Cancel" để đóng modal -->
+                                                                        <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="modal custom-modal fade" id="delete${p.postID}" role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <div class="form-header">
+                                                                <input type="hidden" class="user-id1" id="">
+                                                                <h3>Status</h3>
+                                                                <p>Deleting this will remove it permanently. Are you sure?</p>
+                                                            </div>
+                                                            <div class="modal-btn Suspend-action" >
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <a href="DeletePostFavourites?postID=${p.postID}" class="btn btn-primary cancel-btn" >Yes</a>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <a  data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -471,8 +560,11 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div  class="freelance-tags class1" style="margin: 0;padding: 0; margin-top: 10px">Skill: 
-                                                                <span  class="badge badge-pill badge-design class2">${p.skill}</span>
+                                                            <div  class="freelance-tags class1" style="margin: 0;padding: 0; margin-top: 10px;margin-right: 20px">Skill: 
+                                                                <c:forEach items="${fn:split(p.skill, ',')}" var="skill">
+                                                                    <span  class="badge badge-pill badge-design class4">${skill}</span>
+                                                                </c:forEach>
+
 
                                                             </div>
                                                         </div>
@@ -505,6 +597,7 @@
                                                                 <div class="class1">Description: </div>
                                                                 <h3>${p.description}</h3>
                                                             </div>
+                                                                <a href="PostDetails?postID=${p.postID}" class="btn-cart1 viewmore" style="text-align: center; margin-left: 32%; margin-top: 30px" tabindex="-1">More Detail</a>
                                                         </div>
                                                     </div>
                                                     <span class="close" onclick="closePopup(${p.postID})">&times;</span>
@@ -514,20 +607,24 @@
                                         </div>
                                     </c:forEach>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <ul class="paginations list-pagination">
-                                            <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a>
-                                            </li>
-                                            <li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
-                                            <li class="page-item"><a href="javascript:void(0);">2</a></li>
-                                            <li class="page-item"><a href="javascript:void(0);">3</a></li>
-                                            <li class="page-item"><a href="javascript:void(0);">...</a></li>
-                                            <li class="page-item"><a href="javascript:void(0);">10</a></li>
-                                            <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-right"></i></a></li>
-                                        </ul>
+                                <c:if test="${endPage > 1}">
+                                    <div class="row">
+                                        <div class="col-md-12">                  
+                                            <ul class="paginations list-pagination">                                          
+                                                <!--                                            <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a></li>-->
+                                                <c:forEach begin="1" end="${endPage}" var="e">     
+                                                    <!--                                            <li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>-->
+                                                    <li class="page-item" ><a class="${tag == e?"active":""}" href="PostFavourites?index=${e}">${e}</a></li>
+                                                    <!--                                            <li class="page-item"><a href="javascript:void(0);">3</a></li>
+                                                                                                <li class="page-item"><a href="javascript:void(0);">...</a></li>
+                                                                                                <li class="page-item"><a href="javascript:void(0);">10</a></li>-->
+                                                </c:forEach>
+                                                <!--                                            <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-right"></i></a></li>-->                                          
+                                            </ul>
+
+                                        </div>
                                     </div>
-                                </div>
+                                </c:if>
                             </div>
 
                         </div>
@@ -536,7 +633,7 @@
             </div>
 
 
-            <jsp:include page="footter.jsp" />
+
 
         </div>
 
@@ -779,6 +876,61 @@
                 padding-left: 15px
             }
 
+
+
+            .classbtn:hover {
+                background-color: #FF3300;
+                color: white;
+            }
+            .apply{
+                background-color: #FF3300;
+                color: white;
+            }
+            .titlepost{
+                max-width: 300px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .form-inline {
+                margin-left: 60%;
+                margin-right: 50px;
+            }
+
+            /* Để căn chỉnh nút và icon */
+            .input-group {
+                position: relative;
+                width: calc(100% - 30px);
+            }
+
+            .btn.btn-secondary.btn-number {
+                position: absolute;
+                right: -50px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .confirm-btn{
+
+                background: #E65425;
+                border-radius: 90px;
+                font-weight: bold;
+                font-size: 17px;
+                padding: 13px 50px;
+                color: #FFFFFF;
+                margin-right: 15px;
+                text-transform: uppercase;
+                
+            }
+            .viewmore:hover {
+                background-color: #FF3300;
+                color: white;
+            }
+
+
+
+
         </style>
 
         <script>
@@ -797,13 +949,54 @@
             function confirmAction(postID) {
                 var confirmResult = confirm("Deleting this will remove it permanently. Are you sure?");
                 if (confirmResult) {
-                    window.location.href = "DeletePostFavourites?postID="+postID;
+                    window.location.href = "DeletePostFavourites?postID=" + postID;
                 } else {
                     return false;
                 }
             }
 
         </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
+                $('.apply-button').on('click', function (e) {
+                    e.preventDefault();
+                    var postID = $(this).data('postid');
+                    // Hiển thị modal tương ứng
+                    $('#applyModal_' + postID).modal('show');
+                });
+
+                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
+                $('.confirm-btn').on('click', function (e) {
+                    e.preventDefault();
+                    var postID = $(this).data('postid');
+
+                    // Gửi yêu cầu AJAX để ứng tuyển công việc
+                    $.ajax({
+                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
+                        type: 'GET',
+                        data: {
+                            postID: postID
+                        },
+                        success: function (response) {
+                            // Xử lý phản hồi thành công (nếu cần)
+                            // Đổi nút sang trạng thái "Applied"
+                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').addClass('apply').css('background-color', '#FF3300').css('color', 'white');
+                            // Đóng modal sau khi xử lý thành công
+                            $('#applyModal_' + postID).modal('hide');
+                        },
+                        error: function (xhr, status, error) {
+                            // Xử lý lỗi (nếu có)
+                            alert('Đã xảy ra lỗi: ' + error);
+                        }
+                    });
+                });
+            });
+        </script>
+
+
 
         <jsp:include page="footter.jsp" />
         <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
@@ -819,7 +1012,10 @@
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
         <script src="assets/js/script.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
-        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e07a54eb38ecbc80607f458c-|49" defer></script></body>
+        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e07a54eb38ecbc80607f458c-|49" defer></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
+    </body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/freelancer-favourites.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:46 GMT -->
 </html>
