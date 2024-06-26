@@ -310,7 +310,7 @@
                                     <a class="dropdown-item" href="deposit-funds.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
                                     <a class="dropdown-item" href="chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
                                     <a class="dropdown-item" href="profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                    <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                    <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -340,12 +340,12 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu active">
-                                                <a href="manageJobsPosts" class="nav-link active">
+                                                <a href="manageJobsPosts" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
-                                                <ul class="sub-menu-ul active">
-                                                    <li >
+                                                <ul class="sub-menu-ul">
+                                                    <li>
                                                         <a href="manageJobsPosts" class="active">Manage jobs</a>
                                                     </li>
                                                     <li>
@@ -450,6 +450,7 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h3 class="page-title">All Post</h3>
+
                                     </div>
                                     <div class="col-auto">
                                         <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
@@ -548,7 +549,8 @@
                                                         <th>POSTED</th>
                                                         <th>EXPIRED</th>
                                                         <th>STATUS</th>
-                                                        <th>CHECKING</th>                                                        
+                                                        <th>CHECKING</th> 
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -699,16 +701,52 @@
                                                                                                         <input type="text" class="form-control" name="budgetFrom" value="${list.budget}">
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="row">
-                                                                                                    <c:forEach items="${skill}" var="skillSet">
-                                                                                                        <div class="col-md-4">
-                                                                                                            <div class="input-block">
-                                                                                                                <input type="checkbox" name="skill" value="${skillSet.skill_set_name}" ${fn:contains(list.skill, skillSet.skill_set_name) ? 'checked' : ''}>
-                                                                                                                <label>${skillSet.skill_set_name}</label>
+                                                                                                <div class="col-lg-4 col-md-12">
+                                                                                                    <div class="mb-3">
+                                                                                                        <label class="focus-label">Skill</label>
+                                                                                                        <div class="title-content p-0">
+                                                                                                            <div class="title-detail">
+                                                                                                                <c:forEach items="${ExpertiseSkill}" var="du">
+                                                                                                                    <div class="expertise-group">
+                                                                                                                        <h3>
+                                                                                                                            <input type="checkbox" id="expertise-${du.expertiseName}" class="form-check-input expertise-checkbox">
+                                                                                                                            <label class="form-check-label" for="expertise-${du.expertiseName}">${du.expertiseName}</label>
+                                                                                                                        </h3>
+                                                                                                                        <div class="d-flex flex-wrap skill-checkboxes d-none">
+                                                                                                                            <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i">
+                                                                                                                                <div class="form-check me-3 mb-2">
+                                                                                                                                    <input class="form-check-input" type="checkbox" id="skill-${i.skillSetID.skill_set_ID}" name="skill" value="${i.skillSetID.skill_set_ID}" ${fn:contains(list.skill, i.skillSetID.skill_set_ID) ? 'checked' : ''}>
+                                                                                                                                    <label class="form-check-label" for="skill-${i.skillSetID.skill_set_ID}">
+                                                                                                                                        ${i.skillSetID.skill_set_name}
+                                                                                                                                    </label>
+                                                                                                                                </div>
+                                                                                                                            </c:forEach>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </c:forEach>
+                                                                                                                <div class="error" id="error-skill"></div>
                                                                                                             </div>
                                                                                                         </div>
-                                                                                                    </c:forEach>
+                                                                                                    </div>
                                                                                                 </div>
+                                                                                                <script>
+                                                                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                                                                        var expertiseCheckboxes = document.querySelectorAll('.expertise-checkbox');
+
+                                                                                                        expertiseCheckboxes.forEach(function (checkbox) {
+                                                                                                            checkbox.addEventListener('change', function () {
+                                                                                                                var skillCheckboxes = this.closest('.expertise-group').querySelector('.skill-checkboxes');
+                                                                                                                if (this.checked) {
+                                                                                                                    skillCheckboxes.classList.remove('d-none');
+                                                                                                                    skillCheckboxes.classList.add('d-flex');
+                                                                                                                } else {
+                                                                                                                    skillCheckboxes.classList.remove('d-flex');
+                                                                                                                    skillCheckboxes.classList.add('d-none');
+                                                                                                                }
+                                                                                                            });
+                                                                                                        });
+                                                                                                    });
+                                                                                                </script>
                                                                                                 <div class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Categories Name</label>
@@ -747,25 +785,20 @@
                                                             <td class="titleList">
                                                                 <div class="title">${list.title}</div>
                                                             </td>
-                                                            <td style="text-align: center" class="jobTypeList">
-                                                                <div class="jobType">${list.quantity}</div>
+                                                            <td class="APPLICANTS">
+                                                                <div class="APPLICANTS">${list.quantity}</div>
                                                             </td>
-                                                            <td > 
-                                                                <div class="datePost">${list.datePost}</div>
-                                                            </td>
-
                                                             <td> 
                                                                 <div class="datePost">${list.datePost}</div>
                                                             </td>
+                                                            <td> 
+                                                                <div class="datePost">${list.expired}</div>
+                                                            </td>      
                                                             <td class="StatusList">
                                                                 <span class="badge status ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
                                                                     ${list.status ? 'On going' : 'Reject'}
                                                                 </span>
-                                                            </td>
-
-
-
-
+                                                            </td>                                                      
                                                             <td class="CheckingList">
                                                                 <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
                                                                     ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}
@@ -974,27 +1007,12 @@
         </script><script src="assets/js/jquery-3.7.1.min.js" ></script>
 
         <script src="assets/js/bootstrap.bundle.min.js"></script>
-        
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" ></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" ></script>
 
-        
+        <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
 
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/datatables.min.js"></script>
-        
-        
-        <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
-                                        
-        </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-
-        <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-
-        <script src="assets/plugins/apexchart/apexcharts.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/plugins/apexchart/chart-data.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-
-        <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script>
     </body>
 </html>
