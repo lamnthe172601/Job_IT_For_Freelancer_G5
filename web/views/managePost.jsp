@@ -542,24 +542,21 @@
                                             <table class="table table-center table-hover datatable ">
                                                 <thead class="thead-pink">
                                                     <tr>
-                                                         <th style="text-align: center;">Action</th>
-                                                        <th>Preview</th>
-                                                        <th>Title</th>
-                                                        <th>Job Type</th>
-                                                        <th>Start date</th>
-                                                        <th>Skill</th>
-                                                        <th>Duration</th>
+                                                        <th style="text-align: center;">Action</th>
+                                                        <th>PREVIEW</th>
+                                                        <th>TITLE</th>
+                                                        <th>APPLICANTS</th>
+                                                        <th>POSTED</th>
+                                                        <th>EXPIRED</th>
+                                                        <th>STATUS</th>
+                                                        <th>CHECKING</th> 
 
-                                                        <th>Status</th>
-                                                       
-                                                        <th>Checking</th>
-                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${listpost}" var="list">
                                                         <tr>
-                                                             <td class="three-dots">
+                                                            <td class="three-dots">
                                                                 <div class="action-table-data">
                                                                     <div class="edit-delete-action">
                                                                         <a href="#edit-milestone${list.postID}" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
@@ -704,16 +701,52 @@
                                                                                                         <input type="text" class="form-control" name="budgetFrom" value="${list.budget}">
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="row">
-                                                                                                    <c:forEach items="${skill}" var="skillSet">
-                                                                                                        <div class="col-md-4">
-                                                                                                            <div class="input-block">
-                                                                                                                <input type="checkbox" name="skill" value="${skillSet.skill_set_name}" ${fn:contains(list.skill, skillSet.skill_set_name) ? 'checked' : ''}>
-                                                                                                                <label>${skillSet.skill_set_name}</label>
+                                                                                                <div class="col-lg-4 col-md-12">
+                                                                                                    <div class="mb-3">
+                                                                                                        <label class="focus-label">Skill</label>
+                                                                                                        <div class="title-content p-0">
+                                                                                                            <div class="title-detail">
+                                                                                                                <c:forEach items="${ExpertiseSkill}" var="du">
+                                                                                                                    <div class="expertise-group">
+                                                                                                                        <h3>
+                                                                                                                            <input type="checkbox" id="expertise-${du.expertiseName}" class="form-check-input expertise-checkbox">
+                                                                                                                            <label class="form-check-label" for="expertise-${du.expertiseName}">${du.expertiseName}</label>
+                                                                                                                        </h3>
+                                                                                                                        <div class="d-flex flex-wrap skill-checkboxes d-none">
+                                                                                                                            <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i">
+                                                                                                                                <div class="form-check me-3 mb-2">
+                                                                                                                                    <input class="form-check-input" type="checkbox" id="skill-${i.skillSetID.skill_set_ID}" name="skill" value="${i.skillSetID.skill_set_ID}" ${fn:contains(list.skill, i.skillSetID.skill_set_ID) ? 'checked' : ''}>
+                                                                                                                                    <label class="form-check-label" for="skill-${i.skillSetID.skill_set_ID}">
+                                                                                                                                        ${i.skillSetID.skill_set_name}
+                                                                                                                                    </label>
+                                                                                                                                </div>
+                                                                                                                            </c:forEach>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </c:forEach>
+                                                                                                                <div class="error" id="error-skill"></div>
                                                                                                             </div>
                                                                                                         </div>
-                                                                                                    </c:forEach>
+                                                                                                    </div>
                                                                                                 </div>
+                                                                                                <script>
+                                                                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                                                                        var expertiseCheckboxes = document.querySelectorAll('.expertise-checkbox');
+
+                                                                                                        expertiseCheckboxes.forEach(function (checkbox) {
+                                                                                                            checkbox.addEventListener('change', function () {
+                                                                                                                var skillCheckboxes = this.closest('.expertise-group').querySelector('.skill-checkboxes');
+                                                                                                                if (this.checked) {
+                                                                                                                    skillCheckboxes.classList.remove('d-none');
+                                                                                                                    skillCheckboxes.classList.add('d-flex');
+                                                                                                                } else {
+                                                                                                                    skillCheckboxes.classList.remove('d-flex');
+                                                                                                                    skillCheckboxes.classList.add('d-none');
+                                                                                                                }
+                                                                                                            });
+                                                                                                        });
+                                                                                                    });
+                                                                                                </script>
                                                                                                 <div class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Categories Name</label>
@@ -752,33 +785,20 @@
                                                             <td class="titleList">
                                                                 <div class="title">${list.title}</div>
                                                             </td>
-                                                            <td class="jobTypeList">
-                                                                <div class="jobType">${list.jobTypeID.jobName}</div>
+                                                            <td class="APPLICANTS">
+                                                                <div class="APPLICANTS">${list.quantity}</div>
                                                             </td>
-                                                            <td > 
+                                                            <td> 
                                                                 <div class="datePost">${list.datePost}</div>
                                                             </td>
-
-                                                            <td class="skillList" >
-                                                                <div class="skill-container">
-                                                                    <c:forEach var="skill" items="${list.skill.split(',')}">
-                                                                        <div class="skill">${skill.trim()}</div>
-                                                                    </c:forEach>
-                                                                </div>
-                                                            </td>
-                                                            <td class="durationList ">
-                                                                <div class="duration">${list.durationID.durationName}</div>
-                                                            </td>
-
+                                                            <td> 
+                                                                <div class="datePost">${list.expired}</div>
+                                                            </td>      
                                                             <td class="StatusList">
                                                                 <span class="badge status ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
                                                                     ${list.status ? 'On going' : 'Reject'}
                                                                 </span>
-                                                            </td>
-                                                            
-
-                                                           
-                                                            
+                                                            </td>                                                      
                                                             <td class="CheckingList">
                                                                 <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
                                                                     ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}

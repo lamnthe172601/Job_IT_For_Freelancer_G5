@@ -6,10 +6,12 @@ package RecruiterControll;
 
 import Models.Categories;
 import Models.Duration;
+import Models.ExpertiseSkill;
 import Models.JobType;
 import Models.Recruiter;
 import Models.SkillSet;
 import Models.User;
+import MutiModels.ExpiredSkillSet;
 import dal.CategoriesDAO;
 import dal.DurationDAO;
 import dal.JobTypeDAO;
@@ -47,6 +49,8 @@ public class CreatePostControll extends HttpServlet {
         List<Categories> allCate = caDao.getAllCategory();
         PostDAO postdao = new PostDAO();
         List<SkillSet> skill = postdao.getAllSkillSet();
+        List<ExpertiseSkill> ess = postdao.getAllExpertiseSkill();
+        request.setAttribute("ExpertiseSkill", ess);
         request.setAttribute("skill", skill);
         request.setAttribute("allCate", allCate);
         request.setAttribute("allDuration", du);
@@ -73,7 +77,7 @@ public class CreatePostControll extends HttpServlet {
             String jobType_raw = request.getParameter("jobsType");
             String duration_raw = request.getParameter("projectDuration");
             String target_raw = request.getParameter("target");
-
+            String Expried = request.getParameter("expired");
             String description = request.getParameter("description");
             String budget_raw = request.getParameter("budgetFrom");
             String location = request.getParameter("location");
@@ -93,12 +97,13 @@ public class CreatePostControll extends HttpServlet {
                 int jobType = Integer.parseInt(jobType_raw);
                 int duration = Integer.parseInt(duration_raw);
                 int caId = Integer.parseInt(caId_raw);
-
-                if (postDAO.createPost(projectTitle, linkDB, jobType, duration, target, description, budget, location, skills, re.getRecruiterID(), 1, caId, 0)) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                if (postDAO.createPost(projectTitle, linkDB, jobType, duration, Expried, target, description, budget, location, skills, re.getRecruiterID(), 1, caId, 0)) {
                     imgPart.write(imgFilePath);
-                    response.getWriter().write("success");
+                    response.getWriter().write("{\"success\": true, \"message\": \"Job created successfully\"}");
                 } else {
-                    response.getWriter().write("failed");
+                    response.getWriter().write("{\"success\": false, \"message\": \"Failed to create job\"}");
                 }
             } catch (ServletException | IOException | NumberFormatException | SQLException e) {
                 response.getWriter().write(" " + e);
