@@ -93,7 +93,25 @@ public class PostDetailsControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        String id=request.getParameter("postID");
+        int postID=Integer.parseInt(id);
+        PostDAO p= new PostDAO();
+        PostBasic post=p.getPostsByID(postID);
+        List<PostBasic> lpost=p.getTopPosts();
+        request.setAttribute("post", post);
+        request.setAttribute("lpost", lpost);
+        if (user != null) {
+            DAO d = new DAO();
+            int userId = user.getUserID();
+            int freelancerID = d.getFreelancerIDbyUserID(userId);
+            List<JobApply> postAplly = p.getPostApply(freelancerID);
+            List<PostBasic> postFavourites = p.getAllFavPosts(freelancerID);
+            request.setAttribute("postApply", postAplly);
+            request.setAttribute("postFavourites", postFavourites);
+        }
+        request.getRequestDispatcher("views/postDetails.jsp").forward(request, response);
     }
 
     /** 

@@ -274,30 +274,38 @@
                             </div>
 
                             <div class="modal custom-modal fade" id="applyModal_${post.postID}" role="dialog">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="form-header">
-                                                <input type="hidden" class="user-id1" id="">
-                                                <h3>Status</h3>
-                                                <p>Are you sure you want to apply for this job?</p>
-                                            </div>
-                                            <div class="modal-btn Suspend-action">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <!-- Nút "Yes" để xử lý AJAX -->
-                                                        <a href="javascript:void(0);" class="btn btn-primary confirm-btn" data-postid="${post.postID}">Yes</a>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <!-- Nút "Cancel" để đóng modal -->
-                                                        <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <div class="form-header">
+                                                                <input type="hidden" class="user-id1" id="">
+                                                                <h3>Status</h3>
+                                                                <p>Submit your resume so employers can know more about you.</p>
+                                                            </div>
+                                                            <div class="modal-btn Suspend-action">
+                                                                <form id="jobApplicationForm_${post.postID}" action="ApplyJobFromPostDetail" method="post"  enctype="multipart/form-data" onsubmit="return validateForm('${post.postID}')" >
+                                                                    <div class="row">
+                                                                        <div style='margin-bottom: 30px'>
+                                                                            <input oninput="check('${post.postID}')" class='file' type='file' id='fileInput_${post.postID}' name="file"/>
+                                                                            <div style="color: red" id="error_${post.postID}"></div>
+                                                                            <input hidden="" name="postID" value="${post.postID}"/>
+                                                                            
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <!-- Nút "Yes" để xử lý AJAX -->
+                                                                            <button id="submitButton_${p.postID}" class="btn btn-primary confirm-btn" type="submit" onclick="submitForm('${post.postID}')">Submit</button>
+                                                                        </div>
+                                                                        <div class="col-6 " >
+                                                                            <!-- Nút "Cancel" để đóng modal -->
+                                                                            <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>    
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
 
                             <div class="card budget-widget">
@@ -618,48 +626,57 @@
                 text-transform: uppercase;
 
             }
+            
+            input.file {
+    border: 1px solid #000; /* Viền đen 2px */
+    color: black; /* Màu chữ đen */
+    padding: 8px; /* Khoảng cách giữa viền và nội dung */
+    border-radius: 5px; /* Bo tròn góc */
+    outline: none; /* Loại bỏ viền xung quanh khi focus */
+    
+}
         </style>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
-                $('.apply-button').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
-                    // Hiển thị modal tương ứng
-                    $('#applyModal_' + postID).modal('show');
-                });
+<script>
+    function validateForm(postID) {
+        var fileInput = document.getElementById('fileInput_' + postID);
+        var errorDiv = document.getElementById('error_' + postID);
+        if (fileInput.files.length === 0) {
+            errorDiv.innerHTML = 'Please select a file.';
+            return false; // Prevent form submission
+        } else {
+            errorDiv.innerHTML = ''; 
+            return true;
+        }
+    }
+    
+    function check(postID) {
+    var fileInput = document.getElementById('fileInput_' + postID);
+        var errorDiv = document.getElementById('error_' + postID);
+    if (fileInput.files.length === 0) {
+        errorDiv.innerHTML = 'Please select a file.';
+    } else {
+        errorDiv.innerHTML = '';
+    }
+}
+</script>
 
-                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
-                $('.confirm-btn').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
+<script>
+function submitForm(postID) {
+    if(validateForm(postID)===true){
+        event.preventDefault();
+    showSuccessNotification('Approve project successfully!');
+    setTimeout(function() {
+        document.getElementById('jobApplicationForm_' + postID).submit();
+    }, 1000);
+    }
+    
+}
+</script>
 
-                    // Gửi yêu cầu AJAX để ứng tuyển công việc
-                    $.ajax({
-                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
-                        type: 'GET',
-                        data: {
-                            postID: postID
-                        },
-                        success: function (response) {
-                            // Xử lý phản hồi thành công (nếu cần)
-                            // Đổi nút sang trạng thái "Applied"
-                            $('#applyButton_' + postID).text('Applied');
-                            // Đóng modal sau khi xử lý thành công
-                            $('#applyModal_' + postID).modal('hide');
-                        },
-                        error: function (xhr, status, error) {
-                            // Xử lý lỗi (nếu có)
-                            alert('Đã xảy ra lỗi: ' + error);
-                        }
-                    });
-                });
-            });
-        </script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
         <script src="assets/js/jquery-3.7.1.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
