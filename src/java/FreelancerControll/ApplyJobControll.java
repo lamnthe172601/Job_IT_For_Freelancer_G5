@@ -99,13 +99,16 @@ public class ApplyJobControll extends HttpServlet {
             
             String postID = request.getParameter("postID");
             Part part = request.getPart("file");
-            String realPath = request.getServletContext().getRealPath("/IMG");
+            String realPath = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\Rerume";
             String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
             if (!Files.exists(Path.of(realPath))) {
                 Files.createDirectory(Path.of(realPath));
             }
             String fullPath = realPath + "/" + filename;
+            String linkDB = "FolderImages/Rerume/" + filename;
             part.write(fullPath);
+            
+            
             HttpSession session = request.getSession();
             Object u = session.getAttribute("account");
             User user = (User) u;
@@ -113,7 +116,7 @@ public class ApplyJobControll extends HttpServlet {
             DAO d = new DAO();
             int userId = user.getUserID();
             int freelancerID = d.getFreelancerIDbyUserID(userId);
-            p.applyJob(freelancerID, postID, fullPath);
+            p.applyJob(freelancerID, postID, linkDB);
             String indexPage = request.getParameter("index");
             
             if(indexPage == null){

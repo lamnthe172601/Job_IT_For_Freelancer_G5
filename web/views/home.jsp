@@ -362,7 +362,7 @@
 
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="developer-details.html" class="btn btn-primary">View More Freelancers</a>
+                                    <a href="ListFreelancer" class="btn btn-primary">View More Freelancers</a>
                                 </div>
                                 <div class="review-bottom text-center aos" data-aos="fade-up">
                                     <div class="client-rate">
