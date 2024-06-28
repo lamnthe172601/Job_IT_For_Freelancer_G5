@@ -14,18 +14,27 @@
             <file>file:/D:/SU24/A/web/views/allListPost.jsp</file>
         </group>
         <group>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/Recruiter.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/ListFreelancerControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/FreelancerDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listFreelancer.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/adminViews/projectAdmin.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/CreatePostControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/RecruiterDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkinput.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/login.jsp</file>
         </group>
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/adminViews/projectAdmin.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/ListFreelancerControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/FreelancerDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/FavoritesDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listFreelancer.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/PostDAO.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkinput.js</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/RecruiterDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -47,27 +47,29 @@
                                     <a href="home"><img src="assets/img/logo.svg" alt="logo" class="img-fluid"></a>
                                     <h3>Welcome! Nice to see you again</h3>
                                 </div>
-                                <form action="login" method="post">
+                                <form action="login" method="post" onsubmit="return FormValidate();">
                                     <div class="input-block">
                                         <label class="focus-label">Username <span class="label-star"> *</span></label>
-                                        <input required name="user" type="text" class="form-control floating" value="${username}" >
+                                        <input  name="user" type="text" class="form-control floating" value="${username}" id="user">
+                                        <div  style="color: red;" id="error"></div>
                                     </div>
 
 
                                     <div class="input-block">
                                         <label class="focus-label">Password <span class="label-star"> *</span></label>
                                         <div class="position-relative">
-                                            <input required name="pass" type="password" class="form-control floating pass-input" value="${password}">
+                                            <input  name="pass" type="password" class="form-control floating pass-input" value="${password}" id="pass">
                                             <div class="password-icon">
-                                                <span style="cursor: pointer;" class="fas toggle-password fa-eye-slash"></span>
+                                                <span style="cursor: pointer;" class="fas toggle-password "></span>
                                             </div>
                                         </div>
+                                            <div  style="color: red;" id="error1"></div>
                                     </div>       
-
+                                    
                                     <c:if test = "${username != null }" >
                                         <p style="text-align: center;" class="text-danger">${loginFaild}</p>
                                     </c:if>
-                                        <p style="text-align: center;" class="text-danger">${mess}</p>
+                                    <p style="text-align: center;" class="text-danger">${mess}</p>
                                     <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Login Now<i class="feather-arrow-right ms-2"></i></button>
                                     <div class="login-or">
                                         <p><span>OR</span></p>
@@ -190,6 +192,41 @@
             </footer>
 
         </div>
+
+        <script>
+            function FormValidate() {
+            let checkusername = false;
+            let checkpass = false;
+
+            var username = document.getElementById('user').value.trim();
+            var password = document.getElementById('pass').value.trim();
+            var err = document.getElementById('error');
+            var err1 = document.getElementById('error1');
+            
+            if (password === null || password === '') {
+                err1.innerHTML = 'Password are required fields.';
+            }else {
+                checkpass = true;
+                err1.innerHTML = '';
+            }
+            if (username === null || username === '') {
+                err.innerHTML = 'Username are required fields.';
+            }else {
+                checkusername = true;
+                err.innerHTML = '';
+            }
+            
+            
+            if(checkusername && checkpass){
+                return true;
+            }else{
+                return false;
+            }
+            
+            
+            }  
+            
+        </script>
 
         <script src="assets/js/checkpass.js" type="text/javascript"></script>                                   
         <script src="assets/js/jquery-3.7.1.min.js" type="4bfb9e18a84f35f1be6270cc-text/javascript"></script>
