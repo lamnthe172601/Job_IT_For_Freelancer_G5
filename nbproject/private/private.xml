@@ -50,5 +50,19 @@
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CategoriesDAO.java</file>
             <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/PostDetailsControll.java</file>
         </group>
+        <group>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/adminViews/projectAdmin.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkinput.js</file>
+        </group>
+        <group>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/adminViews/projectAdmin.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/assets/js/checkinput.js</file>
+        </group>
     </open-files>
 </project-private>

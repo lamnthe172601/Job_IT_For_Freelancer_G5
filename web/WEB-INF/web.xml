@@ -207,6 +207,14 @@
     <servlet>
         <servlet-name>DeleteSkill</servlet-name>
         <servlet-class>AdminControlles.DeleteSkill</servlet-class>
+         </servlet>
+    <servlet>
+        <servlet-name>ApplyJobFormListPostControll</servlet-name>
+        <servlet-class>FreelancerControll.ApplyJobFormListPostControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApplyJobFromPostDetailControl</servlet-name>
+        <servlet-class>FreelancerControll.ApplyJobFromPostDetailControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -423,5 +431,13 @@
     <servlet-mapping>
         <servlet-name>DeleteSkill</servlet-name>
         <url-pattern>/deleteSkill</url-pattern>
+        </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyJobFormListPostControll</servlet-name>
+        <url-pattern>/ApplyJobFormListPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyJobFromPostDetailControl</servlet-name>
+        <url-pattern>/ApplyJobFromPostDetail</url-pattern>
     </servlet-mapping>
 </web-app>
