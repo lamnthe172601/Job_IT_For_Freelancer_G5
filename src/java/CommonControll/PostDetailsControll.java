@@ -14,6 +14,7 @@ import dal.ReportDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,11 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-/**
- *
- * @author tanng
- */
+@WebServlet("/PostDetailsControll")
 public class PostDetailsControll extends HttpServlet {
    
    
@@ -82,11 +79,9 @@ public class PostDetailsControll extends HttpServlet {
     } 
 
  
-@Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+ protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String action = request.getParameter("action");
-
+    
     if ("report".equals(action)) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
@@ -106,23 +101,28 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                 return;
             }
 
-            String[] reasons = request.getParameterValues("report_post_reason");
             String message = request.getParameter("report_post_message");
+            if ("Other".equals(message)) {
+                message = request.getParameter("report_post_message_additional");
+            }
 
             ReportDAO reportDAO = new ReportDAO();
 
             try {
-                reportDAO.reportPost(postId, postId, message);
-                // Set a success message in session to display on the redirected page
+                // Thực hiện gửi dữ liệu vào database
+                reportDAO.reportPost(user.getUserID(), postId, message);
+                
+                // Thiết lập thông báo thành công trong session để hiển thị trên trang được chuyển hướng
                 session.setAttribute("message", "Report submitted successfully.");
-                // Redirect back to PostDetails page with the corresponding postID
+                
+                // Chuyển hướng về trang chi tiết bài đăng với postID tương ứng
                 response.sendRedirect(request.getContextPath() + "/PostDetails?postID=" + postId);
             } catch (SQLException e) {
                 e.printStackTrace();
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
             }
         } else {
-            response.sendRedirect(request.getContextPath() + "/login.jsp"); // Redirect to login page if user is not logged in
+            response.sendRedirect(request.getContextPath() + "/login.jsp"); // Chuyển hướng đến trang đăng nhập nếu người dùng chưa đăng nhập
         }
     } else {
         response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");

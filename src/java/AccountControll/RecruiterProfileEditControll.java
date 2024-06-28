@@ -49,7 +49,7 @@ public class RecruiterProfileEditControll extends HttpServlet {
         recruiter.setFirstName(firstName);
         recruiter.setLastName(lastName);
         recruiter.setPhone(phone);
-        recruiter.setEmail(newEmail); // Cập nhật email mới
+        recruiter.setEmail(newEmail); 
 
         // Validate company information
         String companyName = req.getParameter("companyName");
@@ -63,7 +63,7 @@ public class RecruiterProfileEditControll extends HttpServlet {
             req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
             return;
         }
-        // Add more validation for other company fields as needed
+   
 
         // Update company information from form
         company.setCompanyName(companyName);
@@ -89,6 +89,8 @@ public class RecruiterProfileEditControll extends HttpServlet {
 
         req.setAttribute("recruiter", recruiter);
         req.setAttribute("company", company);
+         
+            session.setAttribute("message", "DELETE SUCCESSFUL");
         req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
     }
 

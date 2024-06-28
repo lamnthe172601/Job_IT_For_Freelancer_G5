@@ -679,40 +679,43 @@
    <div id="report-post-modal-container" class="custom-modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="reportPostModalLabel">Update Report</h5>
+            <h5 class="modal-title" id="reportPostModalLabel">Report</h5>
             <button type="button" class="close" id="closeModal">
                 <span>&times;</span>
             </button>
         </div>
         <div class="modal-body">
-        <form action="PostDetailsControll?action=report" method="post" id="report-post-form-content">
-    <input type="hidden" name="action" value="report">
-    <input type="hidden" name="postID" value="${post.postID}">
-    <div class="form-group">
-        <label for="report_post_reason">Select a reason for reporting:</label><br>
-        <div class="form-check">
-            <input type="radio" id="report_post_reason_spam" name="report_post_reason" value="Spam" class="form-check-input">
-            <label for="report_post_reason_spam" class="form-check-label">Spam</label>
+        <form action="PostDetailsControll" method="post" id="report-post-form-content">
+                    <input type="hidden" name="action" value="report">
+                    <input type="hidden" name="postID" value="${post.postID}">
+                    <div class="form-group">
+                        <label for="report_post_message">Select a reason for reporting:</label><br>
+                        <div class="form-check">
+                            <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
+                            <label for="report_post_reason_spam" class="form-check-label">Spam</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
+                            <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
+                            <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
+                        </div>
+
+                       <div class="form-check">
+            <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
+            <label for="report_post_message_other" class="form-check-label">Other</label>
         </div>
-        <div class="form-check">
-            <input type="radio" id="report_post_reason_inappropriate" name="report_post_reason" value="Inappropriate behavior" class="form-check-input">
-            <label for="report_post_reason_inappropriate" class="form-check-label">Inappropriate behavior</label>
-        </div>
-        <div class="form-check">
-            <input type="radio" id="report_post_reason_abuse" name="report_post_reason" value="Abuse" class="form-check-input">
-            <label for="report_post_reason_abuse" class="form-check-label">Abuse</label>
-        </div>
-        <div class="form-check">
-            <input type="radio" id="report_post_reason_other" name="report_post_reason" value="Other" class="form-check-input">
-            <label for="report_post_reason_other" class="form-check-label">Other</label>
-        </div>
-        <textarea id="report_post_message" name="report_post_message" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)"></textarea>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="cancelReportBtn">Cancel</button>
-        <button type="submit" class="btn btn-primary" id="submit-report-post-button">Submit Report</button>
-    </div>
-</form>
+        <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelReportBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="submit-report-post-button">Submit Report</button>
+                    </div>
+                </form>
 
         </div>
     </div>
@@ -723,22 +726,20 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var checkbox = document.getElementById('report_post_reason_other');
-            var textarea = document.getElementById('report_post_message');
+        document.addEventListener("DOMContentLoaded", function() {
+        const radioButtons = document.getElementsByName("report_post_message");
+        const textarea = document.getElementById("report_post_message_additional");
 
-            // Ẩn textarea khi trang được load
-            textarea.style.display = 'none';
-
-            // Bắt sự kiện thay đổi của checkbox
-            checkbox.addEventListener('change', function () {
-                if (checkbox.checked) {
-                    textarea.style.display = 'block'; // Hiển thị textarea nếu checkbox được chọn
+        radioButtons.forEach(radio => {
+            radio.addEventListener("click", function() {
+                if (radio.value === "Other") {
+                    textarea.style.display = "block";
                 } else {
-                    textarea.style.display = 'none'; // Ẩn textarea nếu checkbox không được chọn
+                    textarea.style.display = "none";
                 }
             });
         });
+    });
         document.addEventListener('DOMContentLoaded', (event) => {
             // Show the modal when the report post button is clicked
             document.getElementById('reportPostBtn').addEventListener('click', function (event) {

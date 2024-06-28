@@ -79,14 +79,6 @@
                 <div class="content container-fluid">
                     <div class="page-header">
                         <div class="row align-items-center">
-<<<<<<< Updated upstream
-                            <div class="col">
-                                <h3 class="page-title">Categories</h3>
-                            </div>
-=======
-                            
-
->>>>>>> Stashed changes
                             <div class="col-auto">
                                 <a href="javascript:void(0);" style="color: red; border: 1px solid black; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px;" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-category">
                                     <i class="fas fa-plus"></i>
@@ -157,14 +149,56 @@
                                                         </c:choose>
                                                     </td>
                                                     <td class="text-end">
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category-${c.getCaID()}">
+                                                          <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category-${c.getCaID()}">
                                                             <i class="far fa-edit"></i>
                                                         </a>
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category_${c.getCaID()}">
-                                                            <i class="far fa-trash-alt"></i>
+                                                      
+                                                        <c:if test="${c.getStatusCate() == 0}">
+                                                            <form action="categoryAdmin" method="post" style="display: inline;">
+                                                                <input name="mod" value="active" type="hidden">
+                                                                <input name="cat" value="${c.getCaID()}" type="hidden">
+                                                                <input type="hidden" name="mod" value="activateCategory">
+                                                                <input type="hidden" name="categoryId" value="${c.getCaID()}">
+                                                                <button type="submit" class="btn btn-sm btn-success activate-blog-btn btn-status" data-category-id="${c.getCaID()}">
+
+                                                                    <i class="fas fa-check"></i> 
+                                                                </button>
+                                                            </form>
+                                                        </c:if>
+                                                        <button type="button" class="btn btn-sm btn-danger delete-blog-btn btn-status" data-category-id="${c.getCaID()}" data-bs-toggle="modal" data-bs-target="#delete_category_${c.getCaID()}">
+                                                            <i class="far fa-trash-alt"></i> 
+                                                        </button>
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-info me-2 view-details-btn" data-bs-toggle="modal" data-bs-target="#view-category-details-modal${c.getCaID()}">
+                                                            <i class="fas fa-eye"></i> 
                                                         </a>
                                                     </td>
+                                                    
                                                 </tr>
+                                                  <!-- Modal for Viewing Category Details -->
+                                            <div class="modal fade" id="view-category-details-modal${c.getCaID()}" tabindex="-1" aria-labelledby="viewCategoryDetailsModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="viewCategoryDetailsModalLabel">Category Details</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <img id="category-details-image" src="${c.getImage()}" alt="Category Image" class="img-fluid">
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <h3 id="category-details-title">${c.getCategoriesName()}</h3>
+                                                                    <p id="category-details-description">${c.getDescription()}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="modal custom-modal fade" id="delete_category_${c.getCaID()}" role="dialog">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
