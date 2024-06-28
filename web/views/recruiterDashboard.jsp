@@ -277,11 +277,11 @@
                                             </li>
                                             <li class="nav-item submenu">
                                                 <a href="freelancer-favourites.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
+                                                    <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favorites
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
-                                                    <li><a href="favourites.html">Bookmarked Projects</a></li>
+                                                    <li><a href="RecruiterFavourites">Bookmarked Freelancer</a></li>
                                                     <li><a href="invited-favourites.html">Invitations</a></li>
                                                 </ul>
                                             </li>
@@ -401,7 +401,7 @@
                                                 </div>
                                             </div>
                                             <div style="width: 600px; margin: 0 auto;">
-                                                <canvas id="applicationsChart"></canvas>
+                                                <canvas id="applicationsPostsChart"></canvas>
                                             </div>
                                         </div>
                                     </div>
@@ -598,12 +598,13 @@
         </script>
 
         <script>
-            const ctx = document.getElementById('applicationsChart').getContext('2d');
-            const applicationsChart = new Chart(ctx, {
+            const ctx = document.getElementById('applicationsPostsChart').getContext('2d');
+            const applicationsPostsChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
+                    datasets: [
+                        {
                             label: 'Applications',
                             data: [70, 110, 210, 220, 190, 210, 180, 180, 180, 190, 260, 350],
                             borderColor: 'rgba(255, 99, 132, 1)',
@@ -613,7 +614,19 @@
                             pointStyle: 'circle',
                             pointRadius: 5,
                             pointHoverRadius: 7
-                        }]
+                        },
+                        {
+                            label: 'Posts',
+                            data: [50, 90, 170, 200, 160, 190, 170, 170, 170, 180, 240, 300],
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            fill: false,
+                            tension: 0.1,
+                            pointStyle: 'circle',
+                            pointRadius: 5,
+                            pointHoverRadius: 7
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,

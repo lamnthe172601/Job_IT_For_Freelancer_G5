@@ -380,10 +380,10 @@
 
                                 <div class="col-xl-12">
                                     <div class="card mb-4 ongoing-project-card" style="border: none; padding-top: 30px; ">
-                                        <div class="pro-head">
+<!--                                        <div class="pro-head">
                                             <h2>List Job Apply</h2>
 
-                                        </div>
+                                        </div>-->
                                         <div class="table-responsive recent-earnings flex-fill">
                                             <table class="table mb-0">
                                                 <thead>
