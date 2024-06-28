@@ -68,6 +68,7 @@ public class BlogsAdmin extends HttpServlet {
             request.setAttribute("successMessage", successMessage);
             request.getSession().removeAttribute("successMessage");
         }
+        request.setAttribute("totalBlog", d.getTotalBlog());
         request.setAttribute("listBlog", d.getAllBlogs());
         request.getRequestDispatcher("adminViews/blogsAdmin.jsp").forward(request, response);
     }
