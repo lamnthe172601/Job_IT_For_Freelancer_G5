@@ -3,52 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="SWP391">
-            <file>file:/D:/SU24/A/web/adminViews/recruiterAdmin.jsp</file>
-            <file>file:/D:/SU24/A/src/java/dal/PostDAO.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageAllApplicationControll.java</file>
+            <file>file:/D:/SU24/A/web/adminViews/freelancerAdmin.jsp</file>
             <file>file:/D:/SU24/A/src/java/RecruiterControll/CreatePostControll.java</file>
-            <file>file:/D:/SU24/A/web/views/freelancerFavourites.jsp</file>
-            <file>file:/D:/SU24/A/web/assets/js/jsvalidate.js</file>
-            <file>file:/D:/SU24/A/src/java/Models/JobType.java</file>
+            <file>file:/D:/SU24/A/web/views/myListPostRecruiter.jsp</file>
+            <file>file:/D:/SU24/A/web/views/header.jsp</file>
+            <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
             <file>file:/D:/SU24/A/web/views/managePost.jsp</file>
-            <file>file:/D:/SU24/A/web/views/home.jsp</file>
-            <file>file:/D:/SU24/A/src/java/Models/Recruiter.java</file>
-            <file>file:/D:/SU24/A/web/views/completedProjects.jsp</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageJobsPostsControll.java</file>
+            <file>file:/D:/SU24/A/web/views/allListPost.jsp</file>
         </group>
         <group>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/ReportDAO.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ViewCategoryAdmin.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/Categories.java</file>
-<<<<<<< Updated upstream
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/categoryAdmin.jsp</file>
-=======
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/Report.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/categoryAdmin.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/blogsAdmin.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CompanyDAO.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
->>>>>>> Stashed changes
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CategoriesDAO.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/PostDetailsControll.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/skillAdmin.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/SkillAdmin.java</file>
         </group>
         <group>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/ReportDAO.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ViewCategoryAdmin.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/Categories.java</file>
-<<<<<<< Updated upstream
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/categoryAdmin.jsp</file>
-=======
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/Report.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/categoryAdmin.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/blogsAdmin.jsp</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CompanyDAO.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
->>>>>>> Stashed changes
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/CategoriesDAO.java</file>
-            <file>file:/C:/SWP391/Job_IT_For_Freelancer_G5/src/java/CommonControll/PostDetailsControll.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/skillAdmin.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/SkillAdmin.java</file>
         </group>
     </open-files>
 </project-private>

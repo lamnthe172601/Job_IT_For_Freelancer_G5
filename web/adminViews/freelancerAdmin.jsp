@@ -280,14 +280,15 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+                <script>
+                    $(document).ready(function () {
+                        $('#filter_search').click(function () {
+                            $('.filter-section').toggle();
+                        });
+                    });
+                </script>
         <script>
-            $(document).ready(function () {
-                $('#filter_search').click(function () {
-                    $('.filter-section').toggle();
-                });
-            });
-        </script>
-        <script>
+            
             $(document).ready(function () {
                 $('.typeChange').on('click', function (e) {
                     e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết

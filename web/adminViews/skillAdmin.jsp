@@ -1,9 +1,3 @@
-<%-- 
-    Document   : skillAdmin
-    Created on : Jun 14, 2024, 1:14:36 AM
-    Author     : DUC MINH
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
@@ -26,10 +20,57 @@
         <link rel="stylesheet" href="adminAssets/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="adminAssets/plugins/datatables/datatables.min.css">
         <link rel="stylesheet" href="adminAssets/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!--        <script>
+            $(document).ready(function () {
+                $('#skill, #status').on('keyup change', function () {
+                    filterSkills();
+                });
+            });
+
+            function filterSkills() {
+                var skill = $('#skill').val();
+                var status = $('#status').val();
+
+                $.ajax({
+                    url: 'skillAdmin', // Make sure this URL is correct and points to your servlet/controller
+                    type: 'POST',
+                    data: {
+                        skill: skill,
+                        status: status
+                    },
+                    success: function (data) {
+                        $('#skillTableBody').html($(data).find('#skillTableBody').html());
+                    }
+                });
+            }
+        </script>-->
+<script>
+        $(document).ready(function() {
+            $('#skill, #status').on('keyup change', function() {
+                filterSkills();
+            });
+        });
+
+        function filterSkills() {
+            var skill = $('#skill').val();
+            var status = $('#status').val();
+            $.ajax({
+                url: 'skillAdmin',
+                type: 'POST',
+                data: { skill: skill, status: status },
+                success: function(data) {
+                    $('#skillTableBody').html($(data).find('#skillTableBody').html());
+                }
+            });
+        }
+    </script>
+
     </head>
     <body>
 
-        <div class="main-wrapper">
+<!--        <div class="main-wrapper">
             <%@ include file="headerAdmin.jsp" %>
             <%@ include file="sidebar.jsp" %>
             <div class="page-wrapper">
@@ -51,42 +92,123 @@
                         </div>
                     </div>
 
-
-                    <div class="card filter-card" id="filter_inputs">
+                    <div class="card filter-card" id="filter_inputs" style="display: none;">
                         <div class="card-body pb-0">
-                            <form action="SearchSkill" method="post">
+                            <form action="skillAdmin" method="post">
                                 <div class="row filter-row">
                                     <div class="col-sm-6 col-md-3">
                                         <div class="form-group">
                                             <label>Skill</label>
-                                            <input class="form-control" type="text" name="skill">
+                                            <input class="form-control" type="text" name="skill" id="skill">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-3">
                                         <div class="form-group">
-                                            <label>From Date</label>
-                                            <div class="cal-icon">
-                                                <input class="form-control datetimepicker" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-3">
-                                        <div class="form-group">
-                                            <label>To Date</label>
-                                            <div class="cal-icon">
-                                                <input class="form-control datetimepicker" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-3">
-                                        <div class="form-group">
-                                            <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                                            <label>Status</label>
+                                            <select class="form-control" name="status" id="status">
+                                                <option value="">All</option>
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-center table-hover mb-0 datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Skill</th>
+                                                <th>Description</th>
+                                                <th>Status</th>
+                                                <th class="text-end">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="skillTableBody">
+                                            <%-- Dữ liệu sẽ được cập nhật ở đây --%>
+                                            <%
+                                                    List<Map<String, String>> skillSets = (List<Map<String, String>>) request.getAttribute("skillSets");
+                                                    if (skillSets != null) {
+                                                        for (Map<String, String> skillSet : skillSets) {
+                                                            String status = skillSet.get("statusSkill").equals("1") ? "Active" : "Inactive";
+                                                            String statusClass = skillSet.get("statusSkill").equals("1") ? "text-success" : "text-danger";
+                                            %>
+                                            <tr>
+                                                <td><%= skillSet.get("skill_set_name") %></td>
+                                                <td><%= skillSet.get("description") %></td>
+                                                <td class="<%= statusClass %>"><%= status %></td>
+                                                <td class="text-end">
+                                                    <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"
+                                                       onclick="editSkill('<%= skillSet.get("skill_set_ID") %>', '<%= skillSet.get("skill_set_name") %>', '<%= skillSet.get("description") %>')">
+                                                        <i class="far fa-edit"></i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"
+                                                       onclick="document.getElementById('deleteSkillSetID').value = '<%= skillSet.get("skill_set_ID") %>'">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <% 
+                                                }
+                                            } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </form>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-center table-hover mb-0 datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Skill</th>
+                                                    <th>Description</th>
+                                                    <th>Status</th>
+                                                    <th class="text-end">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%
+                                                    //List<Map<String, String>> skillSets = (List<Map<String, String>>) request.getAttribute("skillSets");
+                                                    if (skillSets != null) {
+                                                        for (Map<String, String> skillSet : skillSets) {
+                                                            String status = skillSet.get("statusSkill").equals("1") ? "Active" : "Inactive";
+                                                            String statusClass = skillSet.get("statusSkill").equals("1") ? "text-success" : "text-danger";
+                                                %>
+                                                <tr>
+                                                    <td><%= skillSet.get("skill_set_name") %></td>
+                                                    <td><%= skillSet.get("description") %></td>
+                                                    <td class="<%= statusClass %>"><%= status %></td>  Thêm logic để hiển thị màu sắc 
+                                                    <td class="text-end">
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"
+                                                           onclick="editSkill('<%= skillSet.get("skill_set_ID") %>', '<%= skillSet.get("skill_set_name") %>', '<%= skillSet.get("description") %>')">
+                                                            <i class="far fa-edit"></i>
+                                                        </a>
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"
+                                                           onclick="document.getElementById('deleteSkillSetID').value = '<%= skillSet.get("skill_set_ID") %>'">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+
 
                     <%
                         String message = (String) session.getAttribute("message");
@@ -107,53 +229,102 @@
                     <%
                             session.removeAttribute("error");
                         }
-                    %>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-center table-hover mb-0 datatable">
-                                            <thead>
-                                                <tr>
-                                                    <th>Skill</th>
-                                                    <th>Description</th>
-                                                    <th class="text-end">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <%
-                                                    List<Map<String, String>> skillSets = (List<Map<String, String>>) request.getAttribute("skillSets");
-                                                    if (skillSets != null) {
-                                                        for (Map<String, String> skillSet : skillSets) {
-                                                %>
-                                                <tr>
-                                                    <td><%= skillSet.get("skill_set_name") %></td>
-                                                    <td><%= skillSet.get("description") %></td>
-                                                    <td class="text-end">
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"
-                                                           onclick="editSkill('<%= skillSet.get("skill_set_ID") %>', '<%= skillSet.get("skill_set_name") %>', '<%= skillSet.get("description") %>')">
-                                                            <i class="far fa-edit"></i>
-                                                        </a>
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"
-                                                           onclick="document.getElementById('deleteSkillSetID').value = '<%= skillSet.get("skill_set_ID") %>'">
-                                                            <i class="far fa-trash-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <%
-                                                        }
-                                                    }
-                                                %>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                    %>                   
+                </div>
+
+            </div>
+        </div>-->
+                    <div class="page-wrapper">
+            <div class="content container-fluid">
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Skills</h3>
+                        </div>
+                        <div class="col-auto">
+                            <a href="#" class="btn add-button" data-bs-toggle="modal" data-bs-target="#add-category">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                            <a class="btn filter-btn" href="#" id="filter_search">
+                                <i class="fas fa-filter"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-
+                <div class="card filter-card" id="filter_inputs" style="display: none;">
+                    <div class="card-body pb-0">
+                        <form action="skillAdmin" method="post">
+                            <div class="row filter-row">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label>Skill</label>
+                                        <input class="form-control" type="text" name="skill" id="skill">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control" name="status" id="status">
+                                            <option value="">All</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-center table-hover mb-0 datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>Skill</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                            <th class="text-end">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="skillTableBody">
+                                        <%-- Dữ liệu sẽ được cập nhật ở đây --%>
+                                        <%
+                                            List<Map<String, String>> skillSets = (List<Map<String, String>>) request.getAttribute("skillSets");
+                                            if (skillSets != null) {
+                                                for (Map<String, String> skillSet : skillSets) {
+                                                    String status = skillSet.get("statusSkill").equals("1") ? "Active" : "Inactive";
+                                                    String statusClass = skillSet.get("statusSkill").equals("1") ? "text-success" : "text-danger";
+                                        %>
+                                        <tr>
+                                            <td><%= skillSet.get("skill_set_name") %></td>
+                                            <td><%= skillSet.get("description") %></td>
+                                            <td class="<%= statusClass %>"><%= status %></td>
+                                            <td class="text-end">
+                                                <a href="#" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#edit-category"
+                                                   onclick="editSkill('<%= skillSet.get("skill_set_ID") %>', '<%= skillSet.get("skill_set_name") %>', '<%= skillSet.get("description") %>')">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"
+                                                   onclick="document.getElementById('deleteSkillSetID').value = '<%= skillSet.get("skill_set_ID") %>'">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <% 
+                                            }
+                                        } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <% String message = (String) session.getAttribute("message");
+                   if (message != null) { %>
+                <div class="alert alert-success" role="alert"><%= message %></div>
+                <% session.removeAttribute("message");
+                   }
+                   String error = (String) session.getAttribute("error");
+                   if (error != null) { %>
+                <div class="alert alert-danger" role="alert"><%= error %></div>
+                <% session.removeAttribute("error");
+                   } %>
             </div>
         </div>
 
@@ -300,6 +471,17 @@
                 return true;
             }
         </script>
+        <script>
+            document.getElementById("filter_search").addEventListener("click", function () {
+                var filterCard = document.getElementById("filter_inputs");
+                if (filterCard.style.display === "none" || filterCard.style.display === "") {
+                    filterCard.style.display = "block";
+                } else {
+                    filterCard.style.display = "none";
+                }
+            });
+        </script>
+
         <script src="assets/js/jquery-3.7.1.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
