@@ -561,7 +561,40 @@
 
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            function showSuccessNotification(message, redirectUrl) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Notification',
+                    text: message,
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = redirectUrl;
+                    }
+                });
+            }
 
+            function showErrorNotification(message) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Notification',
+                    text: message,
+                    confirmButtonText: 'OK'
+                });
+            }
+
+            <% if (request.getAttribute("emailStatus") != null) { %>
+            <% String emailStatus = (String) request.getAttribute("emailStatus"); %>
+            <% String message = (String) request.getAttribute("message"); %>
+            <% if ("success".equals(emailStatus)) { %>
+            showSuccessNotification('<%= message %>', 'ManageApplication');
+            <% } else { %>
+            showErrorNotification('<%= message %>');
+            <% } %>
+            <% } %>
+        </script>                           
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
         <script data-cfasync="false" src="assets/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>

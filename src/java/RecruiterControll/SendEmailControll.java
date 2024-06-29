@@ -68,11 +68,17 @@ public class SendEmailControll extends HttpServlet {
         boolean isSent = emailService.sendEmail(recipient, subject, content);
 
         if (isSent) {
-            response.getWriter().write("okw " );
+            request.setAttribute("emailStatus", "success");
+            request.setAttribute("message", "Email sent successfully.");
         } else {
-            response.getWriter().write("chua dc" );
+            request.setAttribute("emailStatus", "error");
+            request.setAttribute("message", "Failed to send email.");
         }
+
+        request.getRequestDispatcher("views/allApplication.jsp").forward(request, response);
     }
+
+    
 
     /** 
      * Returns a short description of the servlet.
