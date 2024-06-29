@@ -12,6 +12,7 @@ import Models.Post;
 import Models.Recruiter;
 import Models.SkillSet;
 import Models.User;
+import MutiModels.PostApplicationCount;
 import dal.CategoriesDAO;
 import dal.DurationDAO;
 import dal.JobTypeDAO;
@@ -59,6 +60,11 @@ public class ManageJobsPostsControll extends HttpServlet {
         request.setAttribute("allCate", allCate);
         request.setAttribute("allDuration", du);
         request.setAttribute("alljobtype", jobtype);
+        
+        
+        String id = request.getParameter("id1");
+        List<PostApplicationCount> PostApplicationCount = postdao.TotalApplyByPost(5);
+        request.setAttribute("PostApplicationCount", PostApplicationCount);
         request.getRequestDispatcher("views/managePost.jsp").forward(request, response);
     }
 

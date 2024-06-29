@@ -22380,6 +22380,17 @@ td.action-bg {
     flex-shrink: 0;
     margin-right: 10px;
 }
+
+.action-table-data .btn-request1 {
+    background: #E65425;
+    font-size: 12px;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
 .action-table-data .select2-container .select2-selection--single {
     height: 27px;
     width: 120px;
@@ -22407,11 +22418,14 @@ td.action-bg {
 .edit-delete-action a {
     display: inline-block;
 }
+
 .action-table-data .btn-request.disabled {
     background: #FFF6F1;
     color: #FFD9C3;
     opacity: 1;
 }
+
+
 .dashboard-page .select2-results {
     background: #FFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);

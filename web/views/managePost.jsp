@@ -372,7 +372,7 @@
                                         <div class="table-responsive table-box manage-projects-table">
                                             <table class="table table-center table-hover datatable no-sort">
                                                 <thead class="thead-pink">
-                                                    <tr>
+                                                    <tr>                                         
                                                         <th style="text-align: center;">Action</th>                                                       
                                                         <th>TITLE</th>
                                                         <th>APPLICANTS</th>
@@ -385,6 +385,7 @@
                                                 <tbody>
                                                     <c:forEach items="${listpost}" var="list">
                                                         <tr>
+                                                            
                                                             <td class="three-dots">
                                                                 <div class="action-table-data">
                                                                     <div class="edit-delete-action">
@@ -604,8 +605,10 @@
                                                             <td class="titleList">
                                                                 <div class="title">${list.title}</div>
                                                             </td>
-                                                            <td class="APPLICANTS">
-                                                                <div class="APPLICANTS">${list.quantity}</div>
+                                                            <td class="APPLICANTS">                      
+                                                                <c:forEach items="${PostApplicationCount}" var="PostApplicationCount">
+                                                                <div class="APPLICANTS">${PostApplicationCount.totalApplications}/${list.quantity}</div>
+                                                                </c:forEach>
                                                             </td>
                                                             <td> 
                                                                 <div class="datePost">${list.datePost}</div>

@@ -212,6 +212,10 @@
         <servlet-name>ChartControll</servlet-name>
         <servlet-class>RecruiterControll.ChartControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendEmailControll</servlet-name>
+        <servlet-class>RecruiterControll.SendEmailControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -432,4 +436,20 @@
         <servlet-name>ChartControll</servlet-name>
         <url-pattern>/Chart</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendEmailControll</servlet-name>
+        <url-pattern>/sendEmail</url-pattern>
+    </servlet-mapping>
+    
+    <dependency>
+        <groupId>javax.mail</groupId>
+        <artifactId>javax.mail-api</artifactId>
+        <version>1.6.2</version>
+    </dependency>
+    <dependency>
+        <groupId>com.sun.mail</groupId>
+        <artifactId>javax.mail</artifactId>
+        <version>1.6.2</version>
+    </dependency>
+
 </web-app>
