@@ -547,17 +547,16 @@ public class PostDAO extends DBContext {
         return 0;
     }
     
-    public void applyJob(int id, String postID, String date) {
+    public void applyJob(int id, String postID, String rerume) {
         String sql = """
                      insert into JobApply
-                     values(?,?,'Pending',?,?)
+                     values(?,?,'Pending',GETDATE(),?)
                      """;
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             statement.setString(2, postID);
-            statement.setString(3, date);
-            statement.setString(4, "");
+            statement.setString(3, rerume);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

@@ -166,10 +166,10 @@
                                                     </c:forEach>
                                                     <c:choose>
                                                         <c:when test="${favo}">
-                                                            <a href="javascript:void(0);" onclick="removeFromFavorites(${list.postID})" ><i id="favourite_${list.postID}" class="fas fa-heart"></i></a>
+                                                            <a href="javascript:void(0);" ><i onclick="toggleFavorite(${list.postID})" id="favourite_${list.postID}" class="fas fa-heart"></i></a>
                                                             </c:when>
                                                             <c:otherwise>
-                                                            <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})"  ><i id="favourite_${list.postID}" class="far fa-heart"></i></a>
+                                                            <a href="javascript:void(0);" ><i onclick="toggleFavorite(${list.postID})" id="favourite_${list.postID}" class="far fa-heart"></i></a>
                                                             </c:otherwise>
                                                         </c:choose>
                                                 </div>
@@ -362,7 +362,7 @@
 
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="developer-details.html" class="btn btn-primary">View More Freelancers</a>
+                                    <a href="ListFreelancer" class="btn btn-primary">View More Freelancers</a>
                                 </div>
                                 <div class="review-bottom text-center aos" data-aos="fade-up">
                                     <div class="client-rate">
@@ -1056,6 +1056,45 @@
                         alert('Đã xảy ra lỗi: ' + error);
                     }
                 });
+            }
+        </script>
+        <script>
+            function toggleFavorite(postId) {
+                var favouriteLink = $('#favourite_' + postId);
+
+                if (favouriteLink.hasClass('fas')) {
+                    // Remove from favorites
+                    $.ajax({
+                        url: 'DeleteFavourites', // Thay đổi đường dẫn phù hợp
+                        type: 'GET',
+                        data: {
+                            postID: postId
+                        },
+                        success: function (response) {
+                            favouriteLink.removeClass('fas').addClass('far');
+                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                } else {
+                    // Add to favorites
+                    $.ajax({
+                        url: 'AddFavourites', // Thay đổi đường dẫn phù hợp
+                        type: 'GET',
+                        data: {
+                            postID: postId
+                        },
+                        success: function (response) {
+                            favouriteLink.removeClass('far').addClass('fas');
+                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
             }
         </script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>

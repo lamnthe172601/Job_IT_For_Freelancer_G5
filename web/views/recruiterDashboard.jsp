@@ -278,11 +278,11 @@
                                             </li>
                                             <li class="nav-item submenu">
                                                 <a href="freelancer-favourites.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
+                                                    <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favorites
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
-                                                    <li><a href="favourites.html">Bookmarked Projects</a></li>
+                                                    <li><a href="RecruiterFavourites">Bookmarked Freelancer</a></li>
                                                     <li><a href="invited-favourites.html">Invitations</a></li>
                                                 </ul>
                                             </li>

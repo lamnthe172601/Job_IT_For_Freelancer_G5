@@ -53,7 +53,7 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <h3 class="page-title">All Blog</h3>
-                                <p>Total <span>${totalRecruiter}</span> Recruiter account</p>
+                                <p>Total <span>${totalBlog}</span> Blog</p>
                             </div>
                             <div class="col-auto">
                                 <a href="javascript:void(0);" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-blog">
@@ -198,12 +198,12 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form id="update-blog-form-${blog.getBlogID()}" method="post" action="blogAdmin" enctype="multipart/form-data">
+                                                                <form id="update-blog-form-${blog.getBlogID()}" data-validate="blog-form" method="post" action="blogAdmin" enctype="multipart/form-data">
                                                                     <input type="hidden" name="blogId" value="${blog.getBlogID()}">
                                                                     <div class="mb-3">
                                                                         <label for="blog-image-${blog.getBlogID()}" class="form-label">Image</label>
-                                                                        <input type="file" class="form-control" name="image" id="blog-image-${blog.getBlogID()}" accept="image/*">
-                                                                        <img src="${blog.getImage()}" alt="Current Image" class="img-thumbnail mt-2" style="max-width: 200px;">
+                                                                        <input type="file" class="form-control update-blog-image" name="image" id="blog-image-${blog.getBlogID()}" accept="image/*">
+                                                                        <img src="${blog.getImage()}" alt="Current Image" class="img-thumbnail mt-2 update-image-preview" style="max-width: 200px;">
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label for="blog-title-${blog.getBlogID()}" class="form-label">Title</label>
@@ -247,10 +247,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="add-blog-form" method="post" action="blogAdmin"  enctype="multipart/form-data">
+                        <form id="add-blog-form" data-validate="blog-form" method="post" action="blogAdmin"  enctype="multipart/form-data">
                             <div class="mb-3">
-                                <label for="blog-image" class="form-label" >Image</label>
-                                <input type="file" class="form-control"name="image" id="blog-image" accept="image/*" required>
+                                <label for="blog-image" class="form-label">Image</label>
+                                <input type="file" class="form-control" name="image" id="blog-image" accept="image/*" required>
+                                <img id="blog-image-preview" src="#" alt="Image preview" style="max-width: 200px; display: none; margin-top: 10px;">
                             </div>
                             <div class="mb-3">
                                 <label for="blog-title" class="form-label">Title</label>
@@ -258,10 +259,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="blog-description" class="form-label">Description</label>
-                                <textarea class="form-control" id="blog-description" name="descripition"rows="3" required></textarea>
+                                <div class="description-editor border rounded p-2">
+                                    <textarea class="form-control border-0" id="blog-description-${blog.getBlogID()}" name="descripition" rows="10" style="height: 300px" required>${blog.getDescription()}</textarea>
+
+                                </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>                               
+
                                 <button type="submit" class="btn btn-primary" name="mode" value="add" id="add-blog-btn">Add Blog</button>
                             </div>
                         </form>
@@ -280,6 +285,23 @@
             $(document).ready(function () {
                 $('#filter_search').click(function () {
                     $('.filter-section').toggle();
+                });
+            });
+            document.addEventListener('DOMContentLoaded', function () {
+                // For add blog form
+                document.getElementById('blog-image').addEventListener('change', function (event) {
+                    var output = document.getElementById('blog-image-preview');
+                    output.src = URL.createObjectURL(event.target.files[0]);
+                    output.style.display = 'block';
+                });
+
+                // For update blog forms
+                var updateImageInputs = document.querySelectorAll('.update-blog-image');
+                updateImageInputs.forEach(function (input) {
+                    input.addEventListener('change', function (event) {
+                        var preview = event.target.parentElement.querySelector('.update-image-preview');
+                        preview.src = URL.createObjectURL(event.target.files[0]);
+                    });
                 });
             });
         </script>
@@ -374,9 +396,9 @@
                         blogId: blogId
                     },
                     success: function (response) {
-                        
+
                         if (response.success) {
-                           
+
                             updateBlogRowStatus(blogId, isActive);
                             showSuccessNotification(response.message);
                         } else {
@@ -432,7 +454,7 @@
                 }
             }
 
-            
+
             var titles = document.querySelectorAll(".table-avatar.title a");
             var descriptions = document.querySelectorAll(".descripition");
             titles.forEach(function (title) {
@@ -442,12 +464,14 @@
                 description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
             });
         </script>
-
+    
+    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
         <script src="adminAssets/js/notification.js"></script>
 
-
+        <script src="adminAssets/js/validateBlogs.js"></script>
         <script src="adminAssets/js/bootstrap.bundle.min.js"></script>
 
         <script src="adminAssets/js/feather.min.js" ></script>
@@ -464,5 +488,5 @@
 
         <script src="adminAssets/js/script.js" ></script>
     </body>
-    
+
 </html>

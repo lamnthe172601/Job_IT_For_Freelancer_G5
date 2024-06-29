@@ -287,7 +287,7 @@
                                             <li class="nav-item submenu">
                                                 <a href="ListApply" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Applied
-<!--                                                    <span class="menu-arrow"></span>-->
+                                                    <!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
@@ -307,7 +307,7 @@
                                             <li class="nav-item submenu">
                                                 <a href="PostFavourites" class="nav-link active">
                                                     <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
-<!--                                                    <span class="menu-arrow"></span>-->
+                                                    <!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
@@ -318,26 +318,26 @@
                                                     </li>
                                                 </ul>
                                             </li>
-<!--                                            <li class="nav-item">
-                                                <a href="freelancer-review" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-portfolio" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-05.svg" alt="Img"> Portfolio
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="freelancer-chats" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
-                                                </a>
-                                            </li>-->
+                                            <!--                                            <li class="nav-item">
+                                                                                            <a href="freelancer-review" class="nav-link">
+                                                                                                <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="nav-item">
+                                                                                            <a href="freelancer-portfolio" class="nav-link">
+                                                                                                <img src="assets/img/icon/sidebar-icon-05.svg" alt="Img"> Portfolio
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="nav-item">
+                                                                                            <a href="freelancer-chats" class="nav-link">
+                                                                                                <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
+                                                                                            </a>
+                                                                                        </li>-->
 
                                             <li class="nav-item submenu">
                                                 <a href="UpdateProfile?id=${sessionScope.account.userID}" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
-<!--                                                    <span class="menu-arrow"></span>-->
+                                                    <!--                                                    <span class="menu-arrow"></span>-->
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
@@ -387,9 +387,9 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="page-title">
-                                    <h3>Favourites</h3>
-                                </div>                               
+                                <!--                                <div class="page-title">
+                                                                    <h3>Favourites</h3>
+                                                                </div>                               -->
                                 <div class="row row-gap">
                                     <c:forEach items="${post}" var="p" >
                                         <div class="col-md-6 col-lg-12 col-xl-4">
@@ -475,19 +475,27 @@
                                                             <div class="form-header">
                                                                 <input type="hidden" class="user-id1" id="">
                                                                 <h3>Status</h3>
-                                                                <p>Are you sure you want to apply for this job?</p>
+                                                                <p>Submit your resume so employers can know more about you.</p>
                                                             </div>
                                                             <div class="modal-btn Suspend-action">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                        <!-- Nút "Yes" để xử lý AJAX -->
-                                                                        <a href="javascript:void(0);" class="btn btn-primary confirm-btn" data-postid="${p.postID}">Yes</a>
+                                                                <form id="jobApplicationForm_${p.postID}" action="ApplyJob" method="post"  enctype="multipart/form-data" onsubmit="return validateForm('${p.postID}')" >
+                                                                    <div class="row">
+                                                                        <div style='margin-bottom: 30px'>
+                                                                            <input oninput="check('${p.postID}')" class='file' type='file' id='fileInput_${p.postID}' name="file"/>
+                                                                            <div style="color: red" id="error_${p.postID}"></div>
+                                                                            <input hidden="" name="postID" value="${p.postID}"/>
+                                                                            <input hidden="" name="index" value="${tag}"/>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <!-- Nút "Yes" để xử lý AJAX -->
+                                                                            <button id="submitButton_${p.postID}" class="btn btn-primary confirm-btn" type="submit" onclick="submitForm('${p.postID}')">Submit</button>
+                                                                        </div>
+                                                                        <div class="col-6 " >
+                                                                            <!-- Nút "Cancel" để đóng modal -->
+                                                                            <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="col-6">
-                                                                        <!-- Nút "Cancel" để đóng modal -->
-                                                                        <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
-                                                                    </div>
-                                                                </div>
+                                                                </form>    
                                                             </div>
                                                         </div>
                                                     </div>
@@ -597,7 +605,7 @@
                                                                 <div class="class1">Description: </div>
                                                                 <h3>${p.description}</h3>
                                                             </div>
-                                                                <a href="PostDetails?postID=${p.postID}" class="btn-cart1 viewmore" style="text-align: center; margin-left: 32%; margin-top: 30px" tabindex="-1">More Detail</a>
+                                                            <a href="PostDetails?postID=${p.postID}" class="btn-cart1 viewmore" style="text-align: center; margin-left: 32%; margin-top: 30px" tabindex="-1">More Detail</a>
                                                         </div>
                                                     </div>
                                                     <span class="close" onclick="closePopup(${p.postID})">&times;</span>
@@ -768,7 +776,7 @@
                         <form action="https://kofejob.dreamstechnologies.com/html/template/project.html">
                             <div class="modal-info">
                                 <div class="text-center pt-0 mb-5">
-                                    <h3>Please login to Favourite Freelancers</h3>
+                                    <h3>Please login to Favorite Freelancers</h3>
                                 </div>
                                 <div class="submit-section text-center">
                                     <button data-bs-dismiss="modal" class="btn btn-primary black-btn click-btn">Cancel</button>
@@ -911,6 +919,19 @@
                 transform: translateY(-50%);
             }
 
+            .confirm-btn1{
+
+                background: #E65425;
+                border-radius: 90px;
+                font-weight: bold;
+                font-size: 17px;
+                padding-left: 20px;
+                color: #FFFFFF;
+                margin-right: 15px;
+                text-transform: uppercase;
+
+            }
+            
             .confirm-btn{
 
                 background: #E65425;
@@ -921,12 +942,22 @@
                 color: #FFFFFF;
                 margin-right: 15px;
                 text-transform: uppercase;
-                
+
             }
             .viewmore:hover {
                 background-color: #FF3300;
                 color: white;
             }
+
+input.file {
+    border: 1px solid #000; /* Viền đen 2px */
+    color: black; /* Màu chữ đen */
+    padding: 8px; /* Khoảng cách giữa viền và nội dung */
+    border-radius: 5px; /* Bo tròn góc */
+    outline: none; /* Loại bỏ viền xung quanh khi focus */
+    
+}
+
 
 
 
@@ -957,48 +988,51 @@
 
         </script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
-                $('.apply-button').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
-                    // Hiển thị modal tương ứng
-                    $('#applyModal_' + postID).modal('show');
-                });
+        
+<script>
+    function validateForm(postID) {
+        var fileInput = document.getElementById('fileInput_' + postID);
+        var errorDiv = document.getElementById('error_' + postID);
+        if (fileInput.files.length === 0) {
+            errorDiv.innerHTML = 'Please select a file.';
+            return false; // Prevent form submission
+        } else {
+            errorDiv.innerHTML = ''; 
+            return true;
+        }
+    }
+    
+    function check(postID) {
+    var fileInput = document.getElementById('fileInput_' + postID);
+        var errorDiv = document.getElementById('error_' + postID);
+    if (fileInput.files.length === 0) {
+        errorDiv.innerHTML = 'Please select a file.';
+    } else {
+        errorDiv.innerHTML = '';
+    }
+}
+</script>
 
-                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
-                $('.confirm-btn').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
+<script>
+function submitForm(postID) {
+    if(validateForm(postID)===true){
+        event.preventDefault();
+    showSuccessNotification('Approve project successfully!');
+    setTimeout(function() {
+        document.getElementById('jobApplicationForm_' + postID).submit();
+    }, 1000);
+    }
+    
+}
+</script>
 
-                    // Gửi yêu cầu AJAX để ứng tuyển công việc
-                    $.ajax({
-                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
-                        type: 'GET',
-                        data: {
-                            postID: postID
-                        },
-                        success: function (response) {
-                            // Xử lý phản hồi thành công (nếu cần)
-                            // Đổi nút sang trạng thái "Applied"
-                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').addClass('apply').css('background-color', '#FF3300').css('color', 'white');
-                            // Đóng modal sau khi xử lý thành công
-                            $('#applyModal_' + postID).modal('hide');
-                        },
-                        error: function (xhr, status, error) {
-                            // Xử lý lỗi (nếu có)
-                            alert('Đã xảy ra lỗi: ' + error);
-                        }
-                    });
-                });
-            });
-        </script>
+
 
 
 
         <jsp:include page="footter.jsp" />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
         <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
