@@ -5,15 +5,12 @@
 package dal;
 
 import Models.Categories;
-import Models.Company;
 import Models.Duration;
 import Models.ExpertiseSkill;
 import Models.JobType;
 import Models.Post;
 
 import Models.Recruiter;
-
-import Models.TeamNumber;
 import MutiModels.JobApply;
 import Models.SkillSet;
 import MutiModels.ExpiredSkillSet;
@@ -23,7 +20,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +48,7 @@ public class PostDAO extends DBContext {
                             rs.getString("skill"),
                             new Recruiter(rs.getInt("recruiterID")), // Assumes Recruiter has a constructor that accepts an int
                             new Categories(rs.getInt("caID")), // Assumes Categories has a constructor that accepts an int
-                            rs.getBoolean("status"), rs.getInt("checking")
+                            rs.getInt("status"), rs.getInt("checking")
                     );
                     posts.add(post);
                 }
@@ -83,7 +79,7 @@ public class PostDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,7 +105,7 @@ public class PostDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
 
             }
         } catch (SQLException e) {

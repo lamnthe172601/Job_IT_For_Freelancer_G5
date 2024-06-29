@@ -333,7 +333,7 @@
                                                                     <div class="d-flex flex-wrap skill-checkboxes d-none">
                                                                         <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i">
                                                                             <div class="form-check me-3 mb-2">
-                                                                                <input class="form-check-input" type="checkbox" id="skill-${i.skillSetID.skill_set_ID}" name="skill" value="${i.skillSetID.skill_set_ID}">
+                                                                                <input class="form-check-input" type="checkbox" id="skill-${i.skillSetID.skill_set_ID}" name="skill" value="${i.skillSetID.skill_set_name}">
                                                                                 <label class="form-check-label" for="skill-${i.skillSetID.skill_set_ID}">
                                                                                     ${i.skillSetID.skill_set_name}
                                                                                 </label>

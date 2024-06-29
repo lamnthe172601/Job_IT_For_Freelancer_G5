@@ -235,7 +235,7 @@
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/table-avatar-03.jpg" class="avatar-lg rounded-circle"></a>
+                                    <a href="freelancer-profile.html"><img alt="profile image" src="${recruiter.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
                                         <h3 class="mb-0"><a href="profile-settings.html">${recruiter.fullName()}</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
                                         <p class="mb-0">@${sessionScope.account.username}</p>
@@ -279,27 +279,14 @@
                                                 <ul class="sub-menu-ul">
                                                     <li>
                                                         <a href="favourites.html">Bookmarked Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="invited-favourites.html">Invitations</a>
-                                                    </li>
+                                                    </li>                                                    
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="review.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="chats.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="deposit-funds.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
-                                                </a>
-                                            </li>
+                                            </li>                                         
                                             <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
@@ -309,18 +296,10 @@
                                                     <li>
                                                         <a href="profile-settings.html">Profile</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="membership-plans.html">Plan & Billing</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="verify-identity.html">Verify Identity</a>
-                                                    </li>
+                                                    
                                                     <li>
                                                         <a href="change-password.html">Change Password</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="delete-account.html">Delete Account</a>
-                                                    </li>
+                                                    </li>                                                    
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
@@ -377,7 +356,7 @@
                                                         <tr>
                                                             <td>
                                                                 ${listapply.freelancer.name()}<br>
-                                                                <div class="applied">Applied:<a href="https://civi.uxper.co/jobs/development-it/sr-backend-go-developer-crypto-industry/" target="_blank">
+                                                                <div class="applied">Applied:<a href="PostDetails?postID=${listapply.post.postID}" target="_blank">
                                                                         <span> ${listapply.post.title}</span>
                                                                         <i class="fas fa-external-link-alt"></i>
                                                                     </a>

@@ -16,13 +16,13 @@ public class Post {
     Duration durationID;
     Recruiter recruiterID;
     Categories caID;
-    boolean status;
+    int status;
     int checking;
     
     public Post() {
     }
 
-    public Post(int postID,String title, String image, JobType jobTypeID, Duration durationID, Date datePost,Date expired, int quantity, String description,int budget, String location, String skill, Recruiter recruiterID, Categories caID, boolean status,
+    public Post(int postID,String title, String image, JobType jobTypeID, Duration durationID, Date datePost,Date expired, int quantity, String description,int budget, String location, String skill, Recruiter recruiterID, Categories caID, int status,
     int checking) {
         this.postID = postID;
         this.image = image;
@@ -147,13 +147,15 @@ public class Post {
         this.caID = caID;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
+    
 
     public int getChecking() {
         return checking;

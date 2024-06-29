@@ -195,7 +195,7 @@
     <servlet>
         <servlet-name>JobforFreelancer</servlet-name>
         <servlet-class>FreelancerControll.JobforFreelancer</servlet-class>
-        </servlet>
+    </servlet>
     <servlet>
         <servlet-name>SkillAdmin</servlet-name>
         <servlet-class>AdminControlles.SkillAdmin</servlet-class>
@@ -207,6 +207,10 @@
     <servlet>
         <servlet-name>DeleteSkill</servlet-name>
         <servlet-class>AdminControlles.DeleteSkill</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChartControll</servlet-name>
+        <servlet-class>RecruiterControll.ChartControll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -411,7 +415,7 @@
     <servlet-mapping>
         <servlet-name>JobforFreelancer</servlet-name>
         <url-pattern>/JobforFreelancer</url-pattern>
-          </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SkillAdmin</servlet-name>
         <url-pattern>/skillAdmin</url-pattern>
@@ -423,5 +427,9 @@
     <servlet-mapping>
         <servlet-name>DeleteSkill</servlet-name>
         <url-pattern>/deleteSkill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChartControll</servlet-name>
+        <url-pattern>/Chart</url-pattern>
     </servlet-mapping>
 </web-app>
