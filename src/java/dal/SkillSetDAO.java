@@ -38,6 +38,35 @@ public class SkillSetDAO extends DBContext{
         }
         return skillSets;
     }
+    
+    public void addSkillSet(String skillSetName, String description) throws SQLException {
+        String query = "INSERT INTO Skill_Set (skill_set_name, description, statusSkill) VALUES (?, ?, 1)";
+        try (Connection conn = connection; PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, skillSetName);
+            stmt.setString(2, description);
+            stmt.executeUpdate();
+        }
+    }
+    
+     public void updateSkillSet(int skillSetID, String skillSetName, String description) throws SQLException {
+        String query = "UPDATE Skill_Set SET skill_set_name = ?, description = ? WHERE skill_set_ID = ?";
+        try (Connection conn = connection; PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, skillSetName);
+            stmt.setString(2, description);
+            stmt.setInt(3, skillSetID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException("Error updating skill", e);
+        }
+    }
+
+    public void deleteSkillSet(int skillSetID) throws SQLException {
+        String query = "UPDATE Skill_Set SET statusSkill = 0 WHERE skill_set_ID = ?";
+        try (Connection conn = connection; PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, skillSetID);
+            stmt.executeUpdate();
+        }
+    }
 
     //update skill when resgister
     // doing by TanNN

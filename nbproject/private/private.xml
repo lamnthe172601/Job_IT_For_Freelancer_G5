@@ -13,7 +13,6 @@
             <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageJobsPostsControll.java</file>
             <file>file:/D:/SU24/A/web/views/allListPost.jsp</file>
         </group>
-        <group/>
         <group>
             <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
         </group>
@@ -35,6 +34,10 @@
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/DeletePostFavouritesControll.java</file>
+        </group>
+        <group>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AdminControlles/DeleteSkill.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
         </group>
     </open-files>
 </project-private>
