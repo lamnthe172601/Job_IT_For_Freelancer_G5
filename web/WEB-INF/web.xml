@@ -228,6 +228,18 @@
         <servlet-name>ViewFreelancerProfileControll</servlet-name>
         <servlet-class>RecruiterControll.ViewFreelancerProfileControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddFreelancerFavoritesControll</servlet-name>
+        <servlet-class>RecruiterControll.AddFreelancerFavoritesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFreelancerFavoritesControll</servlet-name>
+        <servlet-class>RecruiterControll.DeleteFreelancerFavoritesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRecruiterFavouritesControll</servlet-name>
+        <servlet-class>RecruiterControll.DeleteRecruiterFavouritesControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -463,5 +475,17 @@
     <servlet-mapping>
         <servlet-name>ViewFreelancerProfileControll</servlet-name>
         <url-pattern>/ViewFreelancerProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFreelancerFavoritesControll</servlet-name>
+        <url-pattern>/AddFreelancerFavorites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFreelancerFavoritesControll</servlet-name>
+        <url-pattern>/DeleteFreelancerFavorites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRecruiterFavouritesControll</servlet-name>
+        <url-pattern>/DeleteRecruiterFavourites</url-pattern>
     </servlet-mapping>
 </web-app>
