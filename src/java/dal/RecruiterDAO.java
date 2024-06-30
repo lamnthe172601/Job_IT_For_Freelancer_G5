@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  *
@@ -191,7 +191,7 @@ public class RecruiterDAO extends DBContext {
                                                           join Duration du on du.durationID = p.durationID
                                                           
                                                           JOIN [Freelancer] free ON ja.freelanceID = free.freelanceID
-                               						   JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
+                                                          JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
                                                           WHERE 
                                                               p.recruiterID =?;
                            """;
@@ -358,12 +358,9 @@ public class RecruiterDAO extends DBContext {
 
     public static void main(String[] args) {
         RecruiterDAO r = new RecruiterDAO();
-        HashMap<Integer, String> map = r.getFreelancerSkills();
-        for (Map.Entry<Integer, String> entry : map.entrySet()) {
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
-
+        List<JobApply> p = r.ListAllApplyForFreelancerByRecruiterID(1);
+        for (JobApply jobApply : p) {
+            System.out.println(jobApply.toString());
         }
-        System.out.println(map.size());
     }
 }

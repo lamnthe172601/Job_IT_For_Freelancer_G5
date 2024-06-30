@@ -282,8 +282,6 @@ public class PostDAO extends DBContext {
             stmt.executeUpdate();
             
         } catch (SQLException e) {
-            e.printStackTrace();
-            
         }
     }
     
@@ -301,8 +299,28 @@ public class PostDAO extends DBContext {
             
         }
     }
+    
+    public void updateStatusApply(int ID, String status) {
+        String query = """
+                       UPDATE JobApply SET status = ? WHERE applyID = ?""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(2, ID);
+            stmt.setString(1, status);
+            
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+        }
+    }
 
-    //Tan task
+    
+    
+    
+    
+    
+    //Tan task--------------------------------------------------------------------------------------------------------------------
+    
+    
     public List<PostBasic> getAllFavPosts(int id) {
         List<PostBasic> posts = new ArrayList<>();
         String query = """
@@ -748,10 +766,7 @@ public class PostDAO extends DBContext {
     
     public static void main(String[] args) {
         PostDAO dao = new PostDAO();
-        List<PostApplicationCount> TotalApplyByPost = dao.TotalApplyByPost(4);
-        for (PostApplicationCount postApplicationCount : TotalApplyByPost) {
-            System.out.println(postApplicationCount.toString());
-        }
+        dao.updateStatusApply(1, "2");
     }
     
 }

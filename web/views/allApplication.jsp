@@ -370,9 +370,17 @@
 
                                                             </td>
                                                             <td>${listapply.dateApply}</td>
-                                                            <td><span class="badge checked  badge-pill ${listapply.status == 'Pending' ? 'bg-warning-light' : (listapply.status == 'Approve' ? 'bg-success-light' : 'bg-warning-light')}">
-                                                                    ${listapply.status}
-                                                                </span><br>
+                                                            <td>
+                                                                <span class="badge checked badge-pill ${
+                                                                      listapply.status == 0 ? 'bg-warning-light' : 
+                                                                          (listapply.status == 1 ? 'bg-success-light' : ' bg-danger-light')
+                                                                      }">
+                                                                    ${
+                                                                    listapply.status == 0 ? 'Pending' : 
+                                                                        (listapply.status == 1 ? 'Approve' : 'Reject')
+                                                                    }
+                                                                </span>                                                    
+                                                                <br>
                                                                 <span class="applied-time">Applied: ${listapply.dateApply}</span></td>
                                                             <td>${listapply.freelancer.phone}
                                                                 <br>${listapply.freelancer.email}</td>

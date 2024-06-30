@@ -753,41 +753,6 @@
 
             </footer>
 
-
-
-
-
-            <div class="modal fade edit-proposal-modal" id="view-milestone">
-                <div class="modal-dialog modal-dialog-centered modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">View Milestone</h4>
-                            <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
-                        </div>
-                        <div class="modal-body">
-                            <div class="d-flex justify-content-between milestone-view">
-                                <h5>Create desktop applications</h5>
-                                <span>Amount : $400</span>
-                            </div>
-                            <ul class="download-item">
-                                <li>
-                                    <a href="javascript:void(0);">Preview_Screens.zip <i class="feather-download"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">Finalupdate.zip <i class="feather-download"></i></a>
-                                </li>
-                            </ul>
-                            <div class="text-end">
-                                <a href="javascript:void(0);" class="btn btn-primary">Approve</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
         </div>
 
         <script>
