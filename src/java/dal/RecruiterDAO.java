@@ -5,6 +5,7 @@
 package dal;
 
 import Models.*;
+import MutiModels.SkillFreelancer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -138,7 +141,7 @@ public class RecruiterDAO extends DBContext {
             ps.setInt(1, recruiterID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -164,7 +167,7 @@ public class RecruiterDAO extends DBContext {
             ps.setInt(1, recruiterID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -197,7 +200,7 @@ public class RecruiterDAO extends DBContext {
             ps.setInt(1, recruiterID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
@@ -213,9 +216,9 @@ public class RecruiterDAO extends DBContext {
                         rs.getInt("budget"),
                         rs.getString("location"),
                         rs.getString("skill"),
-                       re, ca,
-                         rs.getBoolean("status"), rs.getInt("checking"));
-                
+                        re, ca,
+                        rs.getBoolean("status"), rs.getInt("checking"));
+
                 Freelancer en = new Freelancer(
                         rs.getInt("freelanceID"),
                         rs.getString("first_name"),
@@ -234,7 +237,7 @@ public class RecruiterDAO extends DBContext {
         }
         return list;
     }
-    
+
     public int getNumberPostbyRecruiter(int recreuiterID) {
         String query = """
                           SELECT COUNT(postID) AS total_posts
@@ -252,7 +255,6 @@ public class RecruiterDAO extends DBContext {
         return -1;
     }
 
-    
     public int getNumberApplyPostbyRecruiter(int recreuiterID) {
         String query = """
                          SELECT COUNT(JA.applyID) AS TotalApplies
@@ -271,10 +273,97 @@ public class RecruiterDAO extends DBContext {
         }
         return -1;
     }
-    
+
+    public List<Freelancer> getAllFreelancer() {
+        List<Freelancer> list = new ArrayList<>();
+        String query = """
+                        select f.freelanceID,f.first_name, f.last_name, f.gender,f.image,f.phone_contact, f.userID, f.dob,f.describe, f.email__contact,
+                         	s.skillID,s.skill_set_ID,ks.skill_set_name
+                         	from Freelancer f
+                         	inner join Skills s on f.freelanceID=s.freelancerID
+                         	inner join Skill_Set ks on ks.skill_set_ID=s.skill_set_ID""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SkillSet ss = new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name"));
+                Freelancer free = new Freelancer(
+                        rs.getInt("freelanceID"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("image"),
+                        rs.getBoolean("gender"),
+                        rs.getDate("dob"),
+                        rs.getString("describe"),
+                        rs.getString("email__contact"),
+                        rs.getString("phone_contact"));
+                Skills s = new Skills(rs.getInt("skillID"), ss, free);
+                list.add(free);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+
+    public List<Skills> getAllSkill() {
+        List<Skills> list = new ArrayList<>();
+        String query = """
+                        select f.freelanceID,f.first_name, f.last_name, f.gender,f.image,f.phone_contact, f.userID, f.dob,f.describe, f.email__contact,
+                         	s.skillID,s.skill_set_ID,ks.skill_set_name
+                         	from Freelancer f
+                         	inner join Skills s on f.freelanceID=s.freelancerID
+                         	inner join Skill_Set ks on ks.skill_set_ID=s.skill_set_ID""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SkillSet ss = new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name"));
+                Freelancer free = new Freelancer(
+                        rs.getInt("freelanceID"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("image"),
+                        rs.getBoolean("gender"),
+                        rs.getDate("dob"),
+                        rs.getString("describe"),
+                        rs.getString("email__contact"),
+                        rs.getString("phone_contact"));
+                Skills s = new Skills(rs.getInt("skillID"), ss, free);
+                list.add(s);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+
+    public HashMap<Integer, String> getFreelancerSkills() {
+        HashMap<Integer, String> map = new HashMap<>();
+        RecruiterDAO r = new RecruiterDAO();
+
+        List<Skills> listSkills = r.getAllSkill();
+        for (int i = 0; i < listSkills.size(); i++) {
+            int freelancerID = listSkills.get(i).getFreelancerID().getFreelanceID();
+            String skillName = listSkills.get(i).getSkill_set_ID().getSkill_set_name();
+
+            if (map.containsKey(freelancerID)) {
+                String existingSkills = map.get(freelancerID);
+                String updatedSkills = existingSkills + ", " + skillName;
+                map.put(freelancerID, updatedSkills);
+            } else {
+                map.put(freelancerID, skillName);
+            }
+        }
+        return map;
+    }
+
     public static void main(String[] args) {
         RecruiterDAO r = new RecruiterDAO();
-        int m = r.getNumberApplyPostbyRecruiter(1);
-        System.out.println(m);
+        HashMap<Integer, String> map = r.getFreelancerSkills();
+        for (Map.Entry<Integer, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue());
+
+        }
+        System.out.println(map.size());
     }
 }

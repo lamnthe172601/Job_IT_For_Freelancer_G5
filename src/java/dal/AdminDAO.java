@@ -218,9 +218,23 @@ public class AdminDAO extends DBContext {
         return false;
     }
 
+
+  public int getTotalBlog(){
+        String query = "  SELECT count(blogID) as totalblog FROM Blogs";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {               
+                return rs.getInt("totalblog");
+            }
+        } catch (SQLException e) {
+        }       
+       return -1;       
+   }
+
     public static void main(String[] args) {
         System.out.println(new AdminDAO().changeBlogStatus(31, false));
 
     }
-
 }

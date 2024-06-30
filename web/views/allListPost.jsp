@@ -84,7 +84,14 @@
                 text-transform: uppercase;
 
             }
-
+input.file {
+    border: 1px solid #000; /* Viền đen 2px */
+    color: black; /* Màu chữ đen */
+    padding: 8px; /* Khoảng cách giữa viền và nội dung */
+    border-radius: 5px; /* Bo tròn góc */
+    outline: none; /* Loại bỏ viền xung quanh khi focus */
+    
+}
         </style>
     </head>
     <body>
@@ -297,7 +304,6 @@
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
                                                 <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
-
                                                 <c:set var="favo" value="false" />
                                                 <c:forEach items="${postFavourites}" var="post">
                                                     <c:choose>
@@ -306,12 +312,15 @@
                                                         </c:when>                                                                
                                                     </c:choose>
                                                 </c:forEach>
+
+                                                <c:set var="postId" value="${list.postID}" />
+
                                                 <c:choose>
                                                     <c:when test="${favo}">
-                                                        <a href="javascript:void(0);" onclick="removeFromFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite color-active"><i class="feather-heart"></i></a>
+                                                        <a href="javascript:void(0);" onclick="toggleFavorite(${list.postID})" id="favourite_${postId}" class="favourite color-active"><i class="feather-heart"></i></a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                        <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite"><i class="feather-heart"></i></a>
+                                                        <a href="javascript:void(0);" onclick="toggleFavorite(${list.postID})" id="favourite_${postId}" class="favourite"><i class="feather-heart"></i></a>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 <div class="author-heading">
@@ -414,30 +423,41 @@
 
                                         </div>
                                         <div class="modal custom-modal fade" id="applyModal_${list.postID}" role="dialog">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <div class="form-header">
-                                                            <input type="hidden" class="user-id1" id="">
-                                                            <h3>Status</h3>
-                                                            <p>Are you sure you want to apply for this job?</p>
-                                                        </div>
-                                                        <div class="modal-btn Suspend-action">
-                                                            <div class="row">
-                                                                <div class="col-6">
-                                                                    <!-- Nút "Yes" để xử lý AJAX -->
-                                                                    <a href="javascript:void(0);" class="btn btn-primary confirm-btn" data-postid="${list.postID}">Yes</a>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <!-- Nút "Cancel" để đóng modal -->
-                                                                    <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
-                                                                </div>
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <div class="form-header">
+                                                                <input type="hidden" class="user-id1" id="">
+                                                                <h3>Status</h3>
+                                                                <p>Submit your resume so employers can know more about you.</p>
+                                                            </div>
+                                                            <div class="modal-btn Suspend-action">
+                                                                
+                                                                <form id="jobApplicationForm_${list.postID}" action="ApplyJobFormListPost" method="post"  enctype="multipart/form-data" onsubmit="return validateForm('${list.postID}')" >
+                                                                    <div class="row">
+                                                                        <div style='margin-bottom: 30px'>
+                                                                            <input oninput="check('${list.postID}')" class='file' type='file' id='fileInput_${list.postID}' name="file"/>
+                                                                            <div style="color: red" id="error_${list.postID}"></div>
+                                                                            <input hidden="" name="postID" value="${list.postID}"/>
+                                                                            <input hidden="" name="index" value="${i}"/>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <!-- Nút "Yes" để xử lý AJAX -->
+                                                                            <button id="submitButton_${list.postID}" class="btn btn-primary confirm-btn" type="submit" onclick="submitForm('${list.postID}')">Submit</button>
+                                                                        </div>
+                                                                        <div class="col-6 " >
+                                                                            <!-- Nút "Cancel" để đóng modal -->
+                                                                            <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>    
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                                                
+                                                                
                                     </div>
                                 </c:forEach>
                             </div>
@@ -448,19 +468,19 @@
                                         <ul class="pagination">
                                             <c:if test="${trangHienTai > 1}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="?page=${trangHienTai - 1}" aria-label="Trước">
+                                                    <a class="page-link" href="AllListPost?page=${trangHienTai - 1}" aria-label="Trước">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
                                             </c:if>
                                             <c:forEach var="i" begin="1" end="${tongSoTrang}">
                                                 <li class="page-item ${i == trangHienTai ? 'active' : ''}">
-                                                    <a class="page-link" href="?page=${i}">${i}</a>
+                                                    <a class="page-link" href="AllListPost?page=${i}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <c:if test="${trangHienTai < tongSoTrang}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="?page=${trangHienTai + 1}" aria-label="Sau">
+                                                    <a class="page-link" href="AllListPost?page=${trangHienTai + 1}" aria-label="Sau">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
@@ -721,45 +741,89 @@
         </script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function validateForm(postID) {
+        var fileInput = document.getElementById('fileInput_' + postID);
+        var errorDiv = document.getElementById('error_' + postID);
+        if (fileInput.files.length === 0) {
+            errorDiv.innerHTML = 'Please select a file.';
+            return false; // Prevent form submission
+        } else {
+            errorDiv.innerHTML = ''; 
+            return true;
+        }
+    }
+    
+    function check(postID) {
+    var fileInput = document.getElementById('fileInput_' + postID);
+        var errorDiv = document.getElementById('error_' + postID);
+    if (fileInput.files.length === 0) {
+        errorDiv.innerHTML = 'Please select a file.';
+    } else {
+        errorDiv.innerHTML = '';
+    }
+}
+
+
+</script>
+
+<script>
+function submitForm(postID) {
+    if(validateForm(postID)===true){
+        event.preventDefault();
+    showSuccessNotification('Approve project successfully!');
+    setTimeout(function() {
+        document.getElementById('jobApplicationForm_' + postID).submit();
+    }, 1000);
+    }
+    
+}
+</script>
+
         <script>
-            $(document).ready(function () {
-                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
-                $('.apply-button').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
-                    // Hiển thị modal tương ứng
-                    $('#applyModal_' + postID).modal('show');
-                });
+            function toggleFavorite(postId) {
+                var favouriteLink = $('#favourite_' + postId);
 
-                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
-                $('.confirm-btn').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
-
-                    // Gửi yêu cầu AJAX để ứng tuyển công việc
+                if (favouriteLink.hasClass('color-active')) {
+                    // Remove from favorites
                     $.ajax({
-                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
+                        url: 'DeleteFavourites', // Thay đổi đường dẫn phù hợp
                         type: 'GET',
                         data: {
-                            postID: postID
+                            postID: postId
                         },
                         success: function (response) {
-                            // Xử lý phản hồi thành công (nếu cần)
-                            // Đổi nút sang trạng thái "Applied"
-                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').addClass('apply').css('background-color', '#FF3300').css('color', 'white');
-                            // Đóng modal sau khi xử lý thành công
-                            $('#applyModal_' + postID).modal('hide');
+                            favouriteLink.removeClass('color-active');
+                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
                         },
                         error: function (xhr, status, error) {
-                            // Xử lý lỗi (nếu có)
-                            alert('Đã xảy ra lỗi: ' + error);
+                            console.error(error);
                         }
                     });
-                });
-            });
+                } else {
+                    // Add to favorites
+                    $.ajax({
+                        url: 'AddFavourites', // Thay đổi đường dẫn phù hợp
+                        type: 'GET',
+                        data: {
+                            postID: postId
+                        },
+                        success: function (response) {
+                            favouriteLink.addClass('color-active');
+                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
+            }
         </script>
 
-
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
+        
+            
         <script src="assets/js/filterMyListPost.js" type="text/javascript"></script>
         <script src="assets/js/jquery-3.7.1.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
 
@@ -772,8 +836,8 @@
 
         <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
         <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
-        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script></body>
-    <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-    <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
+        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
 </html>

@@ -3,28 +3,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package CommonControll;
+package RecruiterControll;
 
-import Models.User;
-import MutiModels.JobApply;
-import MutiModels.PostBasic;
-import dal.DAO;
-import dal.PostDAO;
+import AccountControll.ViewProfile_Freelancer;
+import Models.Education;
+import Models.Experience;
+import Models.Freelancer;
+import Models.Skills;
+import dal.FreelancerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author tanng
  */
-public class PostDetailsControll extends HttpServlet {
+public class ViewFreelancerProfileControll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +43,10 @@ public class PostDetailsControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PostDetailsControll</title>");  
+            out.println("<title>Servlet ViewFreelancerProfileControll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PostDetailsControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ViewFreelancerProfileControll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,26 +63,24 @@ public class PostDetailsControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("account");
-        String id=request.getParameter("postID");
-        int postID=Integer.parseInt(id);
-        PostDAO p= new PostDAO();
-        PostBasic post=p.getPostsByID(postID);
-        List<PostBasic> lpost=p.getTopPosts();
-        request.setAttribute("post", post);
-        request.setAttribute("lpost", lpost);
-        if (user != null) {
-            DAO d = new DAO();
-            int userId = user.getUserID();
-            int freelancerID = d.getFreelancerIDbyUserID(userId);
-            List<JobApply> postAplly = p.getPostApply(freelancerID);
-            List<PostBasic> postFavourites = p.getAllFavPosts(freelancerID);
-            request.setAttribute("postApply", postAplly);
-            request.setAttribute("postFavourites", postFavourites);
+        Freelancer freelancer = null;
+        FreelancerDAO f = new FreelancerDAO();
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            freelancer = f.getFreelancerByFreelancerId(id);
+            List<Education> education = f.getEducationById(freelancer.getFreelanceID());
+            List<Experience> experience = f.getExperienceById(freelancer.getFreelanceID());
+            List<Skills> skills = f.getSkillSetById(freelancer.getFreelanceID());
+            if (freelancer != null) {
+                request.setAttribute("freelancer", freelancer);
+                request.setAttribute("education", education);
+                request.setAttribute("experience", experience);
+                request.setAttribute("skills", skills);
+                request.getRequestDispatcher("views/FreelancerProfile.jsp").forward(request, response);
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewProfile_Freelancer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.getRequestDispatcher("views/postDetails.jsp").forward(request, response);
-        
     } 
 
     /** 
@@ -93,25 +93,7 @@ public class PostDetailsControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("account");
-        String id=request.getParameter("postID");
-        int postID=Integer.parseInt(id);
-        PostDAO p= new PostDAO();
-        PostBasic post=p.getPostsByID(postID);
-        List<PostBasic> lpost=p.getTopPosts();
-        request.setAttribute("post", post);
-        request.setAttribute("lpost", lpost);
-        if (user != null) {
-            DAO d = new DAO();
-            int userId = user.getUserID();
-            int freelancerID = d.getFreelancerIDbyUserID(userId);
-            List<JobApply> postAplly = p.getPostApply(freelancerID);
-            List<PostBasic> postFavourites = p.getAllFavPosts(freelancerID);
-            request.setAttribute("postApply", postAplly);
-            request.setAttribute("postFavourites", postFavourites);
-        }
-        request.getRequestDispatcher("views/postDetails.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 
