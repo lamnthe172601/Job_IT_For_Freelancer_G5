@@ -686,7 +686,7 @@ public class PostDAO extends DBContext {
         }
         return posts;
     }
-
+        
   
     public static void main(String[] args) {
         PostDAO d = new PostDAO();

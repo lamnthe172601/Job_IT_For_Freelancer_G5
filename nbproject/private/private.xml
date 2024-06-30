@@ -14,27 +14,23 @@
             <file>file:/D:/SU24/A/web/views/allListPost.jsp</file>
         </group>
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Models/Recruiter.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/ListFreelancerControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/FreelancerDAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listFreelancer.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/CreatePostControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/RecruiterDAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/login.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/CreatePost.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/AllListPostControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/managePost.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DashboardDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
         </group>
         <group>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/recruiterFavorites.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/DeleteFavouritesControll.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/ListFreelancerControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/FreelancerDAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/FavoritesDAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/DeleteFreelancerFavoritesControll.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listFreelancer.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/PostDAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/RecruiterDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/DeletePostFavouritesControll.java</file>
         </group>
     </open-files>
 </project-private>
