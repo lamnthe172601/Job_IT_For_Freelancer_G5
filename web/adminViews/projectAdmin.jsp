@@ -140,53 +140,53 @@
                                                         <td>${loop.index +1}</td>
                                                         <td>
                                                             <h2 class="table-avatar">
-                                                                <a href="javascript:void(0);"><img class="me-2" src="${project.getImage()}" alt="User Image"></a>
+                                                                <a href="javascript:void(0);"><img class="me-2" src="${project.getPostBasic().getImage()}" alt="User Image"></a>
                                                             </h2>
                                                         </td>
                                                         <td>
                                                             <h2 class="table-avatar title">
-                                                                <a href="javascript:void(0);">${project.getTitle()}</a>
+                                                                <a href="javascript:void(0);">${project.getPostBasic().getTitle()}</a>
                                                             </h2>
                                                         </td>
                                                         <td>
                                                             <h2 class="companyName">                                                                
-                                                                ${project.getRecruiterID().getCompanyname()}                                                              
+                                                                ${project.getPostBasic().getRecruiterID().getCompanyname()}                                                              
                                                             </h2>
                                                         </td>                                                        
                                                         <td>
                                                             <h2 class="datePost">
-                                                                ${project.getDatePost()}
+                                                                ${project.getPostBasic().getDatePost()}
                                                             </h2>
                                                         </td>
                                                         <td class="test1">
 
-                                                            <c:if test='${project.getChecking() == 0}'>
+                                                            <c:if test='${project.getListReport().size() >= 3}'>
                                                                 <a href="javascript:void(0);" style="color: black" class="status">Pendding</a>
                                                             </c:if>
-                                                            <c:if test='${project.getChecking() == 1}'>
+                                                            <c:if test='${project.getPostBasic().getChecking() == 1}'>
                                                                 <a href="javascript:void(0);" class="user-active-btn status">Approve</a>
                                                             </c:if>
-                                                            <c:if test='${project.getChecking() == 2}'>
+                                                            <c:if test='${project.getPostBasic().getChecking() == 2}'>
                                                                 <a href="javascript:void(0);" class="user-inactive-btn status">Suspend</a>
                                                             </c:if>
                                                         </td>                                                   
                                                         <td class="text-end three-dots">
-                                                            <input type="hidden" class="post-id" id="${project.getPostID()}">
+                                                            <input type="hidden" class="post-id" id="${project.getPostBasic().getPostID()}">
                                                             <a href="javascript:void(0);" class="dropdown-toggle nav-link three-dot" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu user-menu-list">
-                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#view-details${project.getPostID()}"><img class="me-2" src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                                    <c:if test='${project.getChecking() == 0}'>
+                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#view-details${project.getPostBasic().getPostID()}"><img class="me-2" src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
+                                                                    <c:if test='${project.getPostBasic().getChecking() == 0}'>
                                                                     <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#handle"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Moderation Project</a>
                                                                     </c:if>
-                                                                    <c:if test='${project.getChecking() == 1}'>
+                                                                    <c:if test='${project.getPostBasic().getChecking() == 1}'>
                                                                     <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend Project</a>
                                                                     </c:if>
-                                                                    <c:if test='${project.getChecking() == 2}'>
+                                                                    <c:if test='${project.getPostBasic().getChecking() == 2}'>
                                                                     <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Approve_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate Project</a>
                                                                     </c:if>
                                                             </div>
                                                         </td>
-                                                <div class="modal fade custom-modal " id="view-details${project.getPostID()}">
+                                                <div class="modal fade custom-modal " id="view-details${project.getPostBasic().getPostID()}">
                                                     <div class="modal-dialog modal-dialog-centered modal-lg-4">
                                                         <div class="modal-content">
                                                             <div class="modal-header flex-wrap">
@@ -200,7 +200,7 @@
                                                                     <div class="author-heading">
                                                                         <div class="text-center2" > 
                                                                             <a>
-                                                                                <img  style="width: 100%; height: 100%;" src="${project.image}" alt="author">                                                       
+                                                                                <img  style="width: 100%; height: 100%;" src="${project.getPostBasic().image}" alt="author">                                                       
                                                                             </a>
                                                                         </div>
                                                                         <div class="profile-name">
@@ -210,30 +210,30 @@
                                                                             <div>
                                                                                 <div class="class1" style="display: inline-block;">Company:</div>
                                                                                 <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                    ${project.recruiterID.companyname}
+                                                                                    ${project.getPostBasic().recruiterID.companyname}
                                                                                 </div>
                                                                             </div>
                                                                             <div>
                                                                                 <div class="class1" style="display: inline-block;">Position:</div>
                                                                                 <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                  ${project.caID.categoriesName}
+                                                                                  ${project.getPostBasic().caID.categoriesName}
                                                                                 </div>
                                                                             </div>
                                                                             <div>
                                                                                 <div class="class1" style="display: inline-block;">Date:</div>
                                                                                 <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                 ${project.datePost}
+                                                                                 ${project.getPostBasic().datePost}
                                                                                 </div>
                                                                             </div>
                                                                             <div>
                                                                                 <div class="class1" style="display: inline-block;">Location:</div>
                                                                                 <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                    ${project.location}
+                                                                                    ${project.getPostBasic().location}
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div  class="freelance-tags skill-list" style="margin: 0;padding: 0; margin-top: 10px;margin-right: 20px">Skill: 
-                                                                            <c:forEach items="${fn:split(project.skill, ',')}" var="skill">
+                                                                            <c:forEach items="${fn:split(project.getPostBasic().skill, ',')}" var="skill">
                                                                                 <span  class="skill-item skill-item badge badge-primary">${skill}</span>
                                                                             </c:forEach>
 
@@ -244,30 +244,30 @@
                                                                         <div>
                                                                             <div class="class1" style="display: inline-block;">Duration:</div>
                                                                             <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                              ${project.durationID.durationName}
+                                                                              ${project.getPostBasic().durationID.durationName}
                                                                             </div>
                                                                         </div>
                                                                         <div>
                                                                             <div class="class1" style="display: inline-block;">Quantity:</div>
                                                                             <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                ${project.quantity}
+                                                                                ${project.getPostBasic().quantity}
                                                                             </div>
                                                                         </div>
                                                                         <div>
                                                                             <div class="class1" style="display: inline-block;">Jop Type:</div>
                                                                             <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                ${project.jobTypeID.jobName}
+                                                                                ${project.getPostBasic().jobTypeID.jobName}
                                                                             </div>
                                                                         </div>
                                                                         <div>
                                                                             <div class="class1" style="display: inline-block;">Email:</div>
                                                                             <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                ${project.recruiterID.email}
+                                                                                ${project.getPostBasic().recruiterID.email}
                                                                             </div>
                                                                         </div>
                                                                         <div>
                                                                             <div class="class1">Description: </div>
-                                                                            ${project.description}
+                                                                            ${project.getPostBasic().description}
                                                                         </div>                                                                      
                                                                     </div>
                                                                 </div>
@@ -293,7 +293,7 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="form-header">
-                            <input type="hidden" class="post-id1" id="${project.getPostID()}">
+                            <input type="hidden" class="post-id1" id="${project.getPostBasic().getPostID()}">
                             <h3>Status</h3>
                             <p>Are you sure want to Suspend Project?</p>
                         </div>
@@ -317,7 +317,7 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="form-header">
-                            <input type="hidden" class="post-id1" id="${project.getPostID()}">
+                            <input type="hidden" class="post-id1" id="${project.getPostBasic().getPostID()}">
                             <h3>Status</h3>
                             <p>Choose option?</p>
                         </div>
@@ -341,7 +341,7 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="form-header">
-                            <input type="hidden" class="post-id1" id="${project.getPostID()}">
+                            <input type="hidden" class="post-id1" id="${project.getPostBasic().getPostID()}">
                             <h3>Status</h3>
                             <p>Are you sure want to Approve Project?</p>
                         </div>
