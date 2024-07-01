@@ -399,14 +399,14 @@
                                                             <td>$${p.budget}</td>
                                                             <td>${p.datePost}</td>
                                                             <td>${p.dateApply}</td>
-                                                            <c:if test="${p.status=='Reject'}">
-                                                                <td style="color: #FF0000">${p.status}</td>
+                                                            <c:if test="${p.status=='2'}">
+                                                                <td style="color: #FF0000">Reject</td>
                                                             </c:if>
-                                                            <c:if test="${p.status=='Pending'}">
-                                                                <td style="color: #CC9900">${p.status}</td>
+                                                            <c:if test="${p.status=='0'}">
+                                                                <td style="color: #CC9900">Pending</td>
                                                             </c:if>
-                                                            <c:if test="${p.status=='Approve'}">
-                                                                <td style="color: #009933">${p.status}</td>
+                                                            <c:if test="${p.status=='1'}">
+                                                                <td style="color: #009933">Approve</td>
                                                             </c:if>
 
                                                             <td><a style="padding-left: 25%" href="PostDetails?postID=${p.postID}"><i

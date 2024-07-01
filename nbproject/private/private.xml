@@ -16,13 +16,18 @@
         <group>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
-        </group>
-        <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listapply.jsp</file>
+        </group>
+        <group>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobFormListPostControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobFromPostDetailControl.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/PostDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -519,7 +519,7 @@ public class PostDAO extends DBContext {
     public void applyJob(int id, String postID, String rerume) {
         String sql = """
                      insert into JobApply
-                     values(?,?,'Pending',GETDATE(),?)
+                     values(?,?,'0',GETDATE(),?)
                      """;
         try {
             PreparedStatement statement = connection.prepareStatement(sql);

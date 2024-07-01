@@ -250,7 +250,7 @@
                                         <a class="dropdown-item" href="MyProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
                                         <a class="dropdown-item" href="ListApply"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> Applied</a>
 
-                                        <a class="dropdown-item" href="freelancer-profile-settings"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                        <a class="dropdown-item" href="UpdateProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
                                         <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                     </div>
                                 </li>
@@ -449,11 +449,11 @@
                                                     <c:forEach items="${postApply}" var="j">
                                                         <c:if test="${p.postID == j.postID}">
                                                             <c:choose>
-                                                                <c:when test="${j.status == 'Pending' || j.status == 'Approve'}">
+                                                                <c:when test="${j.status == '0' || j.status == '1'}">
                                                                     <c:set var="applied" value="true" />
                                                                 </c:when>
                                                                 <c:when test="${j.status == 'Reject'}">
-                                                                    <c:remove var="applied" />
+                                                                    <c:remove var="2" />
                                                                 </c:when>
                                                             </c:choose>
                                                         </c:if>
