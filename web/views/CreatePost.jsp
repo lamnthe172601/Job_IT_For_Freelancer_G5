@@ -32,7 +32,7 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
 
-<!--        <style>
+        <style>
             /* Modal CSS */
             .modal {
                 display: none;
@@ -93,7 +93,7 @@
                 margin-top: 5px;
                 font-size: 0.9em;
             }
-        </style>-->
+        </style>
     </head>
     <body>
 

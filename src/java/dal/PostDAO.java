@@ -22,8 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class PostDAO extends DBContext {
     
@@ -300,18 +299,7 @@ public class PostDAO extends DBContext {
         }
     }
     
-    public void updateStatusApply(int ID, String status) {
-        String query = """
-                       UPDATE JobApply SET status = ? WHERE applyID = ?""";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(2, ID);
-            stmt.setString(1, status);
-            
-            stmt.executeUpdate();
-            
-        } catch (SQLException e) {
-        }
-    }
+    
 
     
     
@@ -764,9 +752,6 @@ public class PostDAO extends DBContext {
         
     }
     
-    public static void main(String[] args) {
-        PostDAO dao = new PostDAO();
-        dao.updateStatusApply(1, "2");
-    }
+    
     
 }
