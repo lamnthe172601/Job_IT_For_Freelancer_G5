@@ -24,6 +24,12 @@
 
         <link rel="stylesheet" href="assets/plugins/feather/feather.css">
 
+        <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+        <link rel="stylesheet" href="assets/plugins/summernote/dist/summernote-lite.css">
+
+        <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
@@ -235,7 +241,7 @@
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/table-avatar-03.jpg" class="avatar-lg rounded-circle"></a>
+                                    <a href="freelancer-profile.html"><img alt="profile image" src="${recruiter.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
                                         <h3 class="mb-0"><a href="profile-settings.html">${recruiter.fullName()}</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
                                         <p class="mb-0">@${sessionScope.account.username}</p>
@@ -279,27 +285,14 @@
                                                 <ul class="sub-menu-ul">
                                                     <li>
                                                         <a href="favourites.html">Bookmarked Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="invited-favourites.html">Invitations</a>
-                                                    </li>
+                                                    </li>                                                    
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="review.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="chats.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="deposit-funds.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
-                                                </a>
-                                            </li>
+                                            </li>                                         
                                             <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
@@ -309,18 +302,10 @@
                                                     <li>
                                                         <a href="profile-settings.html">Profile</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="membership-plans.html">Plan & Billing</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="verify-identity.html">Verify Identity</a>
-                                                    </li>
+
                                                     <li>
                                                         <a href="change-password.html">Change Password</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="delete-account.html">Delete Account</a>
-                                                    </li>
+                                                    </li>                                                    
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
@@ -376,8 +361,8 @@
                                                     <c:forEach items="${listapply}" var="listapply">
                                                         <tr>
                                                             <td>
-                                                                ${listapply.freelancer.name()}<br>
-                                                                <div class="applied">Applied:<a href="https://civi.uxper.co/jobs/development-it/sr-backend-go-developer-crypto-industry/" target="_blank">
+                                                                <a href="PostDetails?postID=${listapply.post.postID}">${listapply.freelancer.name()}</a><br>
+                                                                <div class="applied">Applied:<a href="PostDetails?postID=${listapply.post.postID}" target="_blank">
                                                                         <span> ${listapply.post.title}</span>
                                                                         <i class="fas fa-external-link-alt"></i>
                                                                     </a>
@@ -385,21 +370,82 @@
 
                                                             </td>
                                                             <td>${listapply.dateApply}</td>
-                                                            <td><span class="badge checked  badge-pill ${listapply.status == 'Pending' ? 'bg-warning-light' : (listapply.status == 'Approve' ? 'bg-success-light' : 'bg-warning-light')}">
-                                                                    ${listapply.status}
-                                                                </span><br>
-                                                                <span class="applied-time">Applied:June 20, 2024</span></td>
+                                                            <td>
+                                                                <span class="badge checked badge-pill ${
+                                                                      listapply.status == 0 ? 'bg-warning-light' : 
+                                                                          (listapply.status == 1 ? 'bg-success-light' : ' bg-danger-light')
+                                                                      }">
+                                                                    ${
+                                                                    listapply.status == 0 ? 'Pending' : 
+                                                                        (listapply.status == 1 ? 'Approve' : 'Reject')
+                                                                    }
+                                                                </span>                                                    
+                                                                <br>
+                                                                <span class="applied-time">Applied: ${listapply.dateApply}</span></td>
                                                             <td>${listapply.freelancer.phone}
                                                                 <br>${listapply.freelancer.email}</td>
 
                                                             <td>
                                                                 <div class="action-table-data">
-                                                                    <div class="edit-delete-action m-0">
-                                                                        <a style="margin-right:  15px;" href="javascript:void(0);"><i class="far fa-eye"></i></a>
-                                                                        <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                        <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
-                                                                        
+                                                                    <a href="#success-milestone${listapply.freelancer.freelanceID}" data-bs-toggle="modal" class="btn btn-request">Connect</a>
+                                                                    <a style="background: blueviolet;" href="#Refuse${listapply.freelancer.freelanceID}" data-bs-toggle="modal" class="btn btn-request">Refuse</a>
+
+                                                                    <div class="modal fade edit-proposal-modal success-modal" id="success-milestone${listapply.freelancer.freelanceID}">
+                                                                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header justify-content-end">
+                                                                                    <span class="modal-close">
+                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close">
+                                                                                            <i class="feather-x"></i>
+                                                                                        </a>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <form id="emailForm" method="post" action="sendEmail">
+                                                                                        <div class="form-group">
+                                                                                            <label for="emailSubject">Subject</label>
+                                                                                            <input type="text" class="form-control" id="emailSubject" name="emailSubject" placeholder="Enter email subject" required>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="emailRecipient">Recipient</label>
+                                                                                            <input type="email" class="form-control" id="emailRecipient" name="emailRecipient" value="${listapply.freelancer.email}" required>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="emailContent">Content</label>
+                                                                                            <textarea class="form-control" id="emailContent" name="emailContent" rows="10" placeholder="Enter email content" required></textarea>
+                                                                                        </div>
+                                                                                        <div class="text-center">
+                                                                                            <button type="submit" class="btn btn-primary mt-3">Send Email</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
+
+
+                                                                    <div class="modal fade edit-proposal-modal success-modal" id="Refuse${listapply.freelancer.freelanceID}">
+                                                                        <div class="modal-dialog modal-dialog-centered modal-md">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header justify-content-end">
+                                                                                    <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div class="confirmation-msg-content text-center">
+                                                                                        <h4>Confirm Action</h4>
+                                                                                        <p>Are you sure you want to proceed with this action?</p>
+                                                                                        <div class="text-center">
+                                                                                            <a href="#success-milestone${listapply.freelancer.freelanceID}" data-bs-toggle="modal" class="btn btn-primary mt-3 ">Refuse</a>
+                                                                                            <a style="margin-left: 30px" href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary mt-3 " aria-label="Close">Center</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -415,6 +461,8 @@
                     </div>
                 </div>
             </div>
+
+
 
 
             <footer class="footer">
@@ -521,21 +569,61 @@
 
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            function showSuccessNotification(message, redirectUrl) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Notification',
+                    text: message,
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = redirectUrl;
+                    }
+                });
+            }
 
-        <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+            function showErrorNotification(message) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Notification',
+                    text: message,
+                    confirmButtonText: 'OK'
+                });
+            }
 
-        </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+            <% if (request.getAttribute("emailStatus") != null) { %>
+            <% String emailStatus = (String) request.getAttribute("emailStatus"); %>
+            <% String message = (String) request.getAttribute("message"); %>
+            <% if ("success".equals(emailStatus)) { %>
+            showSuccessNotification('<%= message %>', 'ManageApplication');
+            <% } else { %>
+            showErrorNotification('<%= message %>');
+            <% } %>
+            <% } %>
+        </script>                           
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
+        <script data-cfasync="false" src="assets/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/plugins/apexchart/apexcharts.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/plugins/apexchart/chart-data.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script src="assets/plugins/select2/js/select2.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script src="assets/js/moment.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/js/bootstrap-datetimepicker.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script></body>
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/plugins/datatables/datatables.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:31:10 GMT -->
+        <script src="assets/plugins/summernote/dist/summernote-lite.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/js/script.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="b9b8f1fa285a150b1a70a944-|49" defer></script></body></body>
+
+<!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:31:10 GMT -->
 </html>

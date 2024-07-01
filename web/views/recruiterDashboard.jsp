@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -394,9 +395,10 @@
                                             <div class="pro-head">
                                                 <h5 class="card-title mb-0">Overview</h5>
                                                 <div class="month-detail">
-                                                    <select class="form-control">
-                                                        <option value="0">Last 6 months</option>
-                                                        <option value="1">Last 2 months</option>
+                                                    <select class="form-control" id="yearSelect" onchange="handleYearChange()">
+                                                        <option value="2024">2024</option>
+                                                        <option value="2023">2023</option>
+                                                        <option value="2022">2022</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -405,6 +407,9 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
                                     <div class="col-xl-4 d-flex">
                                         <div class="flex-fill card ongoing-project-card">
                                             <div class="pro-head b-0">
@@ -579,86 +584,149 @@
 
                     </div>
                 </div>
-
             </footer>
 
-        </div>
+            <script>
+                $(document).ready(function () {
+                    $('.datatable').DataTable({
+                        "paging": true,
+                        "pageLength": 10, // Số lượng bài post mỗi trang
+                        "searching": true,
+                        "ordering": true,
+                        "info": true
 
-        <script>
-            $(document).ready(function () {
-                $('.datatable').DataTable({
-                    "paging": true,
-                    "pageLength": 10, // Số lượng bài post mỗi trang
-                    "searching": true,
-                    "ordering": true,
-                    "info": true
-
+                    });
                 });
-            });
-        </script>
+            </script>
 
-        <script>
-            const ctx = document.getElementById('applicationsPostsChart').getContext('2d');
-            const applicationsPostsChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [
-                        {
-                            label: 'Applications',
-                            data: [70, 110, 210, 220, 190, 210, 180, 180, 180, 190, 260, 350],
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            fill: false,
-                            tension: 0.1,
-                            pointStyle: 'circle',
-                            pointRadius: 5,
-                            pointHoverRadius: 7
-                        },
-                        {
-                            label: 'Posts',
-                            data: [50, 90, 170, 200, 160, 190, 170, 170, 170, 180, 240, 300],
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            fill: false,
-                            tension: 0.1,
-                            pointStyle: 'circle',
-                            pointRadius: 5,
-                            pointHoverRadius: 7
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 420
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        }
-                    }
+
+            <script>
+                let applicationsPostsChart;
+
+                function loadChartData(year) {
+                    fetch('Chart?action=getData&year=' + year)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                // Prepare data arrays for applications and posts counts
+                                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                                const applicationsData = new Array(12).fill(0);
+                                const postsData = new Array(12).fill(0);
+
+                                // Populate data arrays based on fetched data
+                                data.forEach(item => {
+                                    applicationsData[item.month - 1] = item.applyCount;
+                                    postsData[item.month - 1] = item.postCount;
+                                });
+
+                                // Update the chart with new data
+                                updateChart(applicationsData, postsData, months, year);
+                            })
+                            .catch(error => {
+                                console.error('Error fetching data:', error);
+                                // Handle error, e.g., show error message to user
+                            });
                 }
-            });
 
-        </script>
-        <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+                function updateChart(applicationsData, postsData, labels, year) {
+                    // Get the chart context from the canvas element
+                    const ctx = document.getElementById('applicationsPostsChart').getContext('2d');
 
-        </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+                    // Destroy existing chart if it exists
+                    if (applicationsPostsChart) {
+                        applicationsPostsChart.destroy();
+                    }
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+                    // Create new Chart.js instance
+                    applicationsPostsChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Applications',
+                                    data: applicationsData,
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                    fill: false,
+                                    tension: 0.5,
+                                    pointStyle: 'circle',
+                                    pointRadius: 5,
+                                    pointHoverRadius: 7
+                                },
+                                {
+                                    label: 'Posts',
+                                    data: postsData,
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    fill: false,
+                                    tension: 0.5,
+                                    pointStyle: 'circle',
+                                    pointRadius: 5,
+                                    pointHoverRadius: 7
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top'
+                                },
+                                title: {
+                                    display: true,
+                                    text: `Overview - Year ` + year
+                                }
+                            }
+                        }
+                    });
+                }
 
-        <script src="assets/plugins/apexchart/apexcharts.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/plugins/apexchart/chart-data.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+                function handleYearChange() {
+                    // Get the selected year from the dropdown
+                    const selectedYear = document.getElementById('yearSelect').value;
 
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+                    // Load chart data for the selected year
+                    loadChartData(selectedYear);
+                }
 
-        <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script></body>
+                document.addEventListener('DOMContentLoaded', () => {
+                    // Get the current year
+                    const currentYear = new Date().getFullYear();
+
+                    // Set the default selected year in the dropdown
+                    document.getElementById('yearSelect').value = currentYear;
+
+                    // Load chart data for the current year on page load
+                    loadChartData(currentYear);
+                });
+            </script>
+
+
+
+            <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+
+            </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+
+            <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+
+            <script src="assets/plugins/apexchart/apexcharts.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+            <script src="assets/plugins/apexchart/chart-data.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+
+            <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+            <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+
+            <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+            <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script></body>
 
 </html>
