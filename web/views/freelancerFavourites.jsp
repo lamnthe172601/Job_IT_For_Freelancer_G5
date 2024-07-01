@@ -363,16 +363,9 @@
                                         </ul>
                                     </div>
                                 </div>
+                                                    
                             </div>
-
-                        </div>
-
-
-
-
-                        <div class="col-xl-9 col-lg-8">
-                            <div class="dashboard-sec freelance-favourites">
-                                <form action="PostFavourites" method="post" class="form-inline my-2 my-lg-0">
+                                                    <div><form action="PostFavourites" method="post" class="form-inline my-2 my-lg-0">
                                     <div class="input-group input-group-sm">
                                         <c:if test="${txtSearch != null}">
                                             <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
@@ -386,7 +379,16 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                </form></div>
+
+                        </div>
+
+
+
+
+                        <div class="col-xl-9 col-lg-8">
+                            <div class="dashboard-sec freelance-favourites">
+                                
                                 <!--                                <div class="page-title">
                                                                     <h3>Favourites</h3>
                                                                 </div>                               -->
@@ -902,14 +904,14 @@
             }
 
             .form-inline {
-                margin-left: 60%;
+                
                 margin-right: 50px;
             }
 
             /* Để căn chỉnh nút và icon */
             .input-group {
                 position: relative;
-                width: calc(100% - 30px);
+                width: 100%;
             }
 
             .btn.btn-secondary.btn-number {
