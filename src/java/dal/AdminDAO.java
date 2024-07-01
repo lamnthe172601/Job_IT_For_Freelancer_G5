@@ -77,7 +77,7 @@ public class AdminDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Report r = new Report(rs.getInt(1), rs.getInt(3), rs.getInt(2), rs.getString(5), rs.getDate(4));
-                ReportDetails rd = new ReportDetails(r,fDAO.getFreelancerById(rs.getInt(2)));
+                ReportDetails rd = new ReportDetails(r, fDAO.getFreelancerById(rs.getInt(2)));
                 reports.add(rd);
             }
         } catch (SQLException e) {
@@ -277,8 +277,25 @@ public class AdminDAO extends DBContext {
         return -1;
     }
 
+    public boolean deleteReportByPostId(int postId) {
+        String query = """
+                         DELETE FROM [dbo].[Report]
+                             WHERE postID = ?""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, postId);
+            ResultSet rs = ps.executeQuery();
+            int rowsAffected = ps.executeUpdate(); // Sử dụng executeUpdate thay vì executeQuery
+            return rowsAffected > 0; // Trả về true nếu có dòng bị ảnh hưởng
+
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
-        System.out.println(new AdminDAO().getAllProject().get(0).getListReport().size());
+        new AdminDAO().deleteReportByPostId(2);
+        System.out.println(new AdminDAO().getAllProject().get(3).getPostBasic().getChecking());
 
     }
 }

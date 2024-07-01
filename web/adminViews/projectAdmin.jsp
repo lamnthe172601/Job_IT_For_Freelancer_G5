@@ -90,6 +90,20 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+
+
+            .flag-icon {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                margin-left: 5px;
+                vertical-align: middle;
+            }
+            .status-container {
+                display: flex;
+                align-items: center;
+            }
+
         </style>
 
     </head>
@@ -131,6 +145,7 @@
                                                     <th>Company name</th>                                                                                                                                                
                                                     <th>Date post</th>
                                                     <th>Status</th>                                                    
+                                                    <th>Reports</th>                                                    
                                                     <th class="text-end">Actions</th>
                                                 </tr>
                                             </thead>
@@ -158,34 +173,97 @@
                                                                 ${project.getPostBasic().getDatePost()}
                                                             </h2>
                                                         </td>
-                                                        <td class="test1">
-
-                                                            <c:if test='${project.getListReport().size() >= 3}'>
+                                                        <td class="test1">                                                          
+                                                            <c:if test='${project.getListReport().size() >= 5}'>
                                                                 <a href="javascript:void(0);" style="color: black" class="status">Pendding</a>
                                                             </c:if>
-                                                            <c:if test='${project.getPostBasic().getChecking() == 1}'>
-                                                                <a href="javascript:void(0);" class="user-active-btn status">Approve</a>
+                                                            <c:if test='${project.getListReport().size() < 5}'>
+                                                                <c:if test='${project.getPostBasic().getChecking() == 1}'>
+                                                                    <a href="javascript:void(0);" class="user-active-btn status">Approved</a>
+                                                                </c:if>
+                                                                <c:if test='${project.getPostBasic().getChecking() == 2}'>
+                                                                    <a href="javascript:void(0);" class="user-inactive-btn status">Suspend</a>
+                                                                </c:if>
                                                             </c:if>
-                                                            <c:if test='${project.getPostBasic().getChecking() == 2}'>
-                                                                <a href="javascript:void(0);" class="user-inactive-btn status">Suspend</a>
-                                                            </c:if>
-                                                        </td>                                                   
+
+                                                        </td>        
+                                                        <td class="totalReport">
+                                                            <h2 class="table-avatar title">
+                                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#reportListModal${project.getPostBasic().getPostID()}">
+                                                                    <div style="align-self:  center">
+                                                                        <h2 class="total">${project.getListReport().size()}</h2>
+                                                                        <svg class="flag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                                                                        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" fill="#FF5B37" stroke="#FF8C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                        <line x1="4" y1="22" x2="4" y2="15" stroke="#FF8C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                        </svg>
+                                                                    </div>  
+                                                                </a>
+                                                            </h2>
+                                                        </td>
                                                         <td class="text-end three-dots">
                                                             <input type="hidden" class="post-id" id="${project.getPostBasic().getPostID()}">
                                                             <a href="javascript:void(0);" class="dropdown-toggle nav-link three-dot" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu user-menu-list">
                                                                 <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#view-details${project.getPostBasic().getPostID()}"><img class="me-2" src="adminAssets/img/icon/icon-01.svg" alt="Img"> View Details</a>
-                                                                    <c:if test='${project.getPostBasic().getChecking() == 0}'>
+                                                                    <c:if test='${project.getListReport().size() >= 3}'>
                                                                     <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#handle"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Moderation Project</a>
                                                                     </c:if>
-                                                                    <c:if test='${project.getPostBasic().getChecking() == 1}'>
-                                                                    <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend Project</a>
-                                                                    </c:if>
-                                                                    <c:if test='${project.getPostBasic().getChecking() == 2}'>
-                                                                    <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Approve_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate Project</a>
+                                                                    <c:if test='${project.getListReport().size() < 3}'>
+                                                                        <c:if test='${project.getPostBasic().getChecking() == 1}'>
+                                                                        <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend Project</a>
+                                                                        </c:if>
+                                                                        <c:if test='${project.getPostBasic().getChecking() == 2}'>
+                                                                        <a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Approve_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate Project</a>
+                                                                        </c:if>
                                                                     </c:if>
                                                             </div>
                                                         </td>
+
+                                                <div class="modal fade" id="reportListModal${project.getPostBasic().getPostID()}" tabindex="-1" aria-labelledby="reportListModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="reportListModalLabel">Report List</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div id="reportListBody">
+                                                                    <div class="report-item">
+                                                                        <p><strong>Name:</strong> Nhat Tan</p>
+                                                                        <p><strong>Date Report:</strong> 2024/03/12</p>
+                                                                        <p><strong>Message report:</strong> This project seems to be a scam. The client is asking for free work.</p>
+                                                                    </div>
+                                                                    <div class="report-item">
+                                                                        <p><strong>Name:</strong> Minh Tuan</p>
+                                                                        <p><strong>Date Report:</strong> 2024/03/15</p>
+                                                                        <p><strong>Message report:</strong> The project description contains offensive language and inappropriate content.</p>
+                                                                    </div>
+                                                                    <div class="report-item">
+                                                                        <p><strong>Name:</strong> Thanh Huong</p>
+                                                                        <p><strong>Date Report:</strong> 2024/03/18</p>
+                                                                        <p><strong>Message report:</strong> This job posting violates copyright. The client is asking to copy an existing website.</p>
+                                                                    </div>
+                                                                    <div class="report-item">
+                                                                        <p><strong>Name:</strong> Duc Anh</p>
+                                                                        <p><strong>Date Report:</strong> 2024/03/20</p>
+                                                                        <p><strong>Message report:</strong> The budget for this project is unreasonably low for the amount of work required.</p>
+                                                                    </div>
+                                                                    <div class="report-item">
+                                                                        <p><strong>Name:</strong> Lan Anh</p>
+                                                                        <p><strong>Date Report:</strong> 2024/03/22</p>
+                                                                        <p><strong>Message report:</strong> This appears to be a duplicate posting. The same project was posted last week.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="modal fade custom-modal " id="view-details${project.getPostBasic().getPostID()}">
                                                     <div class="modal-dialog modal-dialog-centered modal-lg-4">
                                                         <div class="modal-content">
@@ -204,7 +282,7 @@
                                                                             </a>
                                                                         </div>
                                                                         <div class="profile-name">
-                                                                         <div class="author-location" style="text-align: center">${p.title}</div>
+                                                                            <div class="author-location" style="text-align: center">${p.title}</div>
                                                                         </div>
                                                                         <div class="freelance-info">
                                                                             <div>
@@ -216,13 +294,13 @@
                                                                             <div>
                                                                                 <div class="class1" style="display: inline-block;">Position:</div>
                                                                                 <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                  ${project.getPostBasic().caID.categoriesName}
+                                                                                    ${project.getPostBasic().caID.categoriesName}
                                                                                 </div>
                                                                             </div>
                                                                             <div>
                                                                                 <div class="class1" style="display: inline-block;">Date:</div>
                                                                                 <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                 ${project.getPostBasic().datePost}
+                                                                                    ${project.getPostBasic().datePost}
                                                                                 </div>
                                                                             </div>
                                                                             <div>
@@ -244,7 +322,7 @@
                                                                         <div>
                                                                             <div class="class1" style="display: inline-block;">Duration:</div>
                                                                             <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                              ${project.getPostBasic().durationID.durationName}
+                                                                                ${project.getPostBasic().durationID.durationName}
                                                                             </div>
                                                                         </div>
                                                                         <div>
@@ -327,7 +405,7 @@
                                     <a href="javascript:void(0);" class="project-suspend-link btn btn-primary continue-btn" >Suspend Project</a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="javascript:void(0);" class="project-activate-link btn btn-primary continue-btn" >Approve Project</a>
+                                    <a href="javascript:void(0);" class="project-activate-link btn btn-primary continue-btn" >Approved Project</a>
                                 </div>
                             </div>
                         </div>
@@ -343,12 +421,12 @@
                         <div class="form-header">
                             <input type="hidden" class="post-id1" id="${project.getPostBasic().getPostID()}">
                             <h3>Status</h3>
-                            <p>Are you sure want to Approve Project?</p>
+                            <p>Are you sure want to Approved Project?</p>
                         </div>
                         <div class="modal-btn Activate-action">
                             <div class="row">
                                 <div class="col-6">
-                                    <a href="javascript:void(0);" class="project-activate-link btn btn-primary continue-btn" >Approve project</a>
+                                    <a href="javascript:void(0);" class="project-activate-link btn btn-primary continue-btn" >Approved project</a>
                                 </div>
                                 <div class="col-6">
                                     <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -411,7 +489,8 @@
                     success: function (response) {
                         var statusCell = $('.post-id#' + postId).closest('tr').find('.status');
                         statusCell.html('<a href="javascript:void(0);" class="user-inactive-btn status">Suspend</a>');
-
+                        var reportCell = $('.post-id#' + postId).closest('tr').find('.total');
+                        reportCell.html('<h2 class="total">0</h2>');
                         var threeDotCell = $('.post-id#' + postId).closest('tr').find('.three-dots');
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Approve_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Activate Project</a>');
 
@@ -434,13 +513,14 @@
                     success: function (response) {
                         var statusCell = $('.post-id#' + postId).closest('tr').find('.status');
                         statusCell.html('<a href="javascript:void(0);" class="user-active-btn status">Approved</a>');
-
+                        var reportCell = $('.post-id#' + postId).closest('tr').find('.total');
+                        reportCell.html('<h2 class="total">0</h2>');
                         var threeDotCell = $('.post-id#' + postId).closest('tr').find('.three-dots');
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_Project"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Suspend Project</a>');
 
                         $('#Approve_Project').modal('hide');
                         $('#handle').modal('hide');
-                        showSuccessNotification('Approve project successfully!');
+                        showSuccessNotification('Approved project successfully!');
                     },
                     error: function (xhr, status, error) {
                         console.error(error);
