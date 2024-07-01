@@ -502,7 +502,7 @@
                                                                                                         <p>Max Image size 300*300</p>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-4">
+                                                                                                    <div style="margin-top: 30px" class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Level</label>
                                                                                                         <select name="jobsType" class="form-control select">
@@ -512,7 +512,7 @@
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-4">
+                                                                                                <div style="margin-top: 30px" class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Work Time</label>
                                                                                                         <select name="Duration" class="form-control select">
@@ -567,7 +567,7 @@
                                                                                                                         </div>
                                                                                                                     </div>
                                                                                                                 </c:forEach>
-                                                                                                                <div class="error" id="error-skill"></div>
+                                                                                                                
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>

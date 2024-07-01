@@ -207,7 +207,7 @@
     <servlet>
         <servlet-name>DeleteSkill</servlet-name>
         <servlet-class>AdminControlles.DeleteSkill</servlet-class>
-         </servlet>
+    </servlet>
     <servlet>
         <servlet-name>ApplyJobFormListPostControll</servlet-name>
         <servlet-class>FreelancerControll.ApplyJobFormListPostControll</servlet-class>
@@ -235,6 +235,10 @@
     <servlet>
         <servlet-name>SendEmailControll</servlet-name>
         <servlet-class>RecruiterControll.SendEmailControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConnectFreelancerControll</servlet-name>
+        <servlet-class>RecruiterControll.ConnectFreelancerControll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -451,7 +455,7 @@
     <servlet-mapping>
         <servlet-name>DeleteSkill</servlet-name>
         <url-pattern>/deleteSkill</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ApplyJobFormListPostControll</servlet-name>
         <url-pattern>/ApplyJobFormListPost</url-pattern>
@@ -480,7 +484,8 @@
         <servlet-name>SendEmailControll</servlet-name>
         <url-pattern>/sendEmail</url-pattern>
     </servlet-mapping>
-    
-   
-
+    <servlet-mapping>
+        <servlet-name>ConnectFreelancerControll</servlet-name>
+        <url-pattern>/ConnectFreelancer</url-pattern>
+    </servlet-mapping>
 </web-app>
