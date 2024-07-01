@@ -12,7 +12,6 @@ import Models.Post;
 import Models.Recruiter;
 import Models.SkillSet;
 import Models.User;
-import MutiModels.PostApplicationCount;
 import dal.CategoriesDAO;
 import dal.DurationDAO;
 import dal.JobTypeDAO;

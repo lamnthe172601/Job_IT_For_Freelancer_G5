@@ -250,7 +250,7 @@
                                         <a class="dropdown-item" href="MyProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
                                         <a class="dropdown-item" href="ListApply"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> Applied</a>
 
-                                        <a class="dropdown-item" href="freelancer-profile-settings"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                        <a class="dropdown-item" href="UpdateProfile?id=${sessionScope.account.userID}"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
                                         <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                     </div>
                                 </li>
@@ -363,16 +363,9 @@
                                         </ul>
                                     </div>
                                 </div>
+                                                    
                             </div>
-
-                        </div>
-
-
-
-
-                        <div class="col-xl-9 col-lg-8">
-                            <div class="dashboard-sec freelance-favourites">
-                                <form action="PostFavourites" method="post" class="form-inline my-2 my-lg-0">
+                                                    <div><form action="PostFavourites" method="post" class="form-inline my-2 my-lg-0">
                                     <div class="input-group input-group-sm">
                                         <c:if test="${txtSearch != null}">
                                             <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
@@ -386,7 +379,16 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                </form></div>
+
+                        </div>
+
+
+
+
+                        <div class="col-xl-9 col-lg-8">
+                            <div class="dashboard-sec freelance-favourites">
+                                
                                 <!--                                <div class="page-title">
                                                                     <h3>Favourites</h3>
                                                                 </div>                               -->
@@ -447,11 +449,11 @@
                                                     <c:forEach items="${postApply}" var="j">
                                                         <c:if test="${p.postID == j.postID}">
                                                             <c:choose>
-                                                                <c:when test="${j.status == 'Pending' || j.status == 'Approve'}">
+                                                                <c:when test="${j.status == '0' || j.status == '1'}">
                                                                     <c:set var="applied" value="true" />
                                                                 </c:when>
                                                                 <c:when test="${j.status == 'Reject'}">
-                                                                    <c:remove var="applied" />
+                                                                    <c:remove var="2" />
                                                                 </c:when>
                                                             </c:choose>
                                                         </c:if>
@@ -516,7 +518,7 @@
                                                             <div class="modal-btn Suspend-action" >
                                                                 <div class="row">
                                                                     <div class="col-6">
-                                                                        <a href="DeletePostFavourites?postID=${p.postID}" class="btn btn-primary cancel-btn" >Yes</a>
+                                                                        <a id="deleteLink_${p.postID}" href="DeletePostFavourites?postID=${p.postID}" class="btn btn-primary cancel-btn" >Yes</a>
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <a  data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -902,14 +904,14 @@
             }
 
             .form-inline {
-                margin-left: 60%;
+                
                 margin-right: 50px;
             }
 
             /* Để căn chỉnh nút và icon */
             .input-group {
                 position: relative;
-                width: calc(100% - 30px);
+                width: 100%;
             }
 
             .btn.btn-secondary.btn-number {
@@ -931,7 +933,7 @@
                 text-transform: uppercase;
 
             }
-            
+
             .confirm-btn{
 
                 background: #E65425;
@@ -949,14 +951,14 @@
                 color: white;
             }
 
-input.file {
-    border: 1px solid #000; /* Viền đen 2px */
-    color: black; /* Màu chữ đen */
-    padding: 8px; /* Khoảng cách giữa viền và nội dung */
-    border-radius: 5px; /* Bo tròn góc */
-    outline: none; /* Loại bỏ viền xung quanh khi focus */
-    
-}
+            input.file {
+                border: 1px solid #000; /* Viền đen 2px */
+                color: black; /* Màu chữ đen */
+                padding: 8px; /* Khoảng cách giữa viền và nội dung */
+                border-radius: 5px; /* Bo tròn góc */
+                outline: none; /* Loại bỏ viền xung quanh khi focus */
+
+            }
 
 
 
@@ -977,54 +979,70 @@ input.file {
                 document.getElementById(int).style.display = 'none';
             }
 
-            function confirmAction(postID) {
-                var confirmResult = confirm("Deleting this will remove it permanently. Are you sure?");
-                if (confirmResult) {
-                    window.location.href = "DeletePostFavourites?postID=" + postID;
-                } else {
-                    return false;
-                }
-            }
+//            function confirmAction(postID) {
+//                var confirmResult = confirm("Deleting this will remove it permanently. Are you sure?");
+//                if (confirmResult) {
+//                    window.location.href = "DeletePostFavourites?postID=" + postID;
+//                } else {
+//                    return false;
+//                }
+//            }
 
         </script>
 
-        
-<script>
-    function validateForm(postID) {
-        var fileInput = document.getElementById('fileInput_' + postID);
-        var errorDiv = document.getElementById('error_' + postID);
-        if (fileInput.files.length === 0) {
-            errorDiv.innerHTML = 'Please select a file.';
-            return false; // Prevent form submission
-        } else {
-            errorDiv.innerHTML = ''; 
-            return true;
-        }
-    }
-    
-    function check(postID) {
-    var fileInput = document.getElementById('fileInput_' + postID);
-        var errorDiv = document.getElementById('error_' + postID);
-    if (fileInput.files.length === 0) {
-        errorDiv.innerHTML = 'Please select a file.';
-    } else {
-        errorDiv.innerHTML = '';
-    }
-}
-</script>
 
-<script>
-function submitForm(postID) {
-    if(validateForm(postID)===true){
-        event.preventDefault();
-    showSuccessNotification('Approve project successfully!');
-    setTimeout(function() {
-        document.getElementById('jobApplicationForm_' + postID).submit();
-    }, 1000);
-    }
-    
-}
-</script>
+        <script>
+            function validateForm(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                    return false; // Prevent form submission
+                } else {
+                    errorDiv.innerHTML = '';
+                    return true;
+                }
+            }
+
+            function check(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                } else {
+                    errorDiv.innerHTML = '';
+                }
+            }
+        </script>
+
+        <script>
+            // Lắng nghe sự kiện click vào nút "Yes"
+            document.getElementById('deleteLink').addEventListener('click', function (event) {
+                // Ngăn chặn hành động mặc định của thẻ a (chuyển hướng ngay lập tức)
+                event.preventDefault();
+                showSuccessNotification('Delete successfully!');
+                // Delay 1 giây trước khi chuyển hướng
+                setTimeout(function () {
+                    // Lấy href từ nút "Yes" và chuyển hướng đến đường dẫn đó
+                    window.location.href = event.target.href;
+                }, 1000); // 1000 milliseconds = 1 giây
+            });
+        </script>
+        <script>
+            // Lắng nghe sự kiện click vào các nút có id bắt đầu là "deleteLink_"
+            document.querySelectorAll('[id^="deleteLink_"]').forEach(function (element) {
+                element.addEventListener('click', function (event) {
+                    // Ngăn chặn hành động mặc định của thẻ a (chuyển hướng ngay lập tức)
+                    event.preventDefault();
+                    showSuccessNotification('Delete successfully!');
+                    // Delay 1 giây trước khi chuyển hướng
+                    setTimeout(function () {
+                        // Lấy href từ nút "Yes" và chuyển hướng đến đường dẫn đó
+                        window.location.href = event.target.href;
+                    }, 1000); // 1000 milliseconds = 1 giây
+                });
+            });
+        </script>
 
 
 

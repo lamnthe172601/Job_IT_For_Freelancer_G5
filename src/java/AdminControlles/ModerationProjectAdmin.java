@@ -38,6 +38,7 @@ public class ModerationProjectAdmin extends HttpServlet {
         } else {
             d.moderationProject(postId, 1);
         }
+        d.deleteReportByPostId(postId);
           response.setContentType("application/json");
         response.getWriter().write("{\"success\": true}");
     } 
