@@ -248,6 +248,10 @@
         <servlet-name>SendEmailControll</servlet-name>
         <servlet-class>RecruiterControll.SendEmailControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchInHomeControll</servlet-name>
+        <servlet-class>CommonControll.SearchInHomeControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -504,7 +508,8 @@
         <servlet-name>SendEmailControll</servlet-name>
         <url-pattern>/sendEmail</url-pattern>
     </servlet-mapping>
-    
-   
-
+    <servlet-mapping>
+        <servlet-name>SearchInHomeControll</servlet-name>
+        <url-pattern>/SearchInHome</url-pattern>
+    </servlet-mapping>
 </web-app>

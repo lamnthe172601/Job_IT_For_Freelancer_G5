@@ -252,10 +252,10 @@
                                         <c:forEach items="${postApply}" var="j">
                                             <c:if test="${post.postID == j.postID}">
                                                 <c:choose>
-                                                    <c:when test="${j.status == 'Pending' || j.status == 'Approve'}">
+                                                    <c:when test="${j.status == '0' || j.status == '1'}">
                                                         <c:set var="applied" value="true" />
                                                     </c:when>
-                                                    <c:when test="${j.status == 'Reject'}">
+                                                    <c:when test="${j.status == '2'}">
                                                         <c:remove var="applied" />
                                                     </c:when>
                                                 </c:choose>
