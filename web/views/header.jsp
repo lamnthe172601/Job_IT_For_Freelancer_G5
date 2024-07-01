@@ -14,7 +14,7 @@
 
                 <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
                 <li><a href="ListApply">Jobs Apply</a></li>
-                <li><a href="jobforyou">Jobs For you</a></li>
+                <li><a href="JobForFree">Jobs For You</a></li>
             </ul>
         </li>
 
@@ -65,7 +65,7 @@
             <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
             <li><a href="Project">Projects</a></li>                        
             <li><a href="changePass">Change Password</a></li>                                                                                     
-            <li><a href="profile-settings">Settings</a></li>
+            <li><a href="ProfileSettingFreelancer">Settings</a></li>
             <li><a href="logout">Logout</a></li>
         </ul>
     </li>

@@ -116,8 +116,8 @@
                                                 <img src="assets/img/icon/time-line.svg" alt="icons">
                                             </div>
                                             <div class="proposal-detail text-capitalize">
-                                                <span class=" d-block">Website</span>
-                                                <p class="mb-0">${company.website}</p>
+                                                <span class=" d-block">Location</span>
+                                                <p class="mb-0">${company.location}</p>
                                             </div>
                                         </li>
 
@@ -125,50 +125,20 @@
                                             <div class="proposal-detail-img">
                                                 <img src="assets/img/icon/translate-2.svg" alt="icons">
                                             </div>
+
                                             <div class="proposal-detail text-capitalize">
-                                                <span class=" d-block">Location</span>
-                                                <p class="mb-0">${company.location}</p>
+                                                <span class=" d-block">Website</span>
+                                                <p class="mb-0">${company.website}</p>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Describe</label>
+                            <div class="company-detail-block company-description">
+                                <h4 class="form-label">Describe</h4>
                                 <textarea rows="4" class="form-control" name="describe">${company.describe}</textarea>
                             </div>
-                            <div class="company-detail-block company-description">
-                                <h4 class="company-detail-title">Skills Required</h4>
-                                <div class="tags">
-                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">After Effects</span></a>
-                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Illustrator</span></a>
-                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
-                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Whiteboard</span></a>
-                                </div>
-                            </div>
-                            <div class="company-detail-block">
-                                <h4 class="company-detail-title">Attachments</h4>
-                                <div class="row row-gap">
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <div class="attachment-file">
-                                            <div class="attachment-files-details">
-                                                <h6>sample.pdf</h6>
-                                                <span>file size 139 KB</span>
-                                            </div>
-                                            <a href="javascript:void(0);" class="file-download-btn">
-                                                <i class="feather-download"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="company-detail-block company-description">
-                                        <h4 class="company-detail-title">Tags</h4>
-                                        <div class="tags">
-                                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Machine Learning</span></a>
-                                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">AI Chatbot</span></a>
-                                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">Virtual Assistant</span></a>
-                                        </div>
-                                    </div>
+                           
 
                                 </div>
 
@@ -269,7 +239,9 @@
                             </div>
                         </div>
                     </div>
-
+</div>
+                </div>
+            </div>
 
                     <footer class="footer">
                         <div class="footer-top ">

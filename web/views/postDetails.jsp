@@ -29,7 +29,7 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+       
 
     </head>
 </head>
@@ -392,7 +392,8 @@
                                 </ul>
                             </div>
                             <div>
-                                <a href="javascript:void(0);" class="btn  btn-primary price-btn btn-block">View More</a>
+                                <a href="companydetail?recruiterID=${post.companyID.companyID}" class="btn btn-primary price-btn btn-block">View More</a>
+
                             </div>
                         </div>                          
                     </div>
@@ -676,16 +677,18 @@
             </div>
         </div>
     </div>
-   <div id="report-post-modal-container" class="custom-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="reportPostModalLabel">Report</h5>
-            <button type="button" class="close" id="closeModal">
-                <span>&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-        <form action="PostDetailsControll" method="post" id="report-post-form-content">
+    <div id="report-post-modal-container" class="custom-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reportPostModalLabel">Report</h5>
+                <button type="button" class="close" id="closeModal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            
+            <!-- report post  -->
+            <div class="modal-body">
+                <form action="PostDetailsControll" method="get" id="report-post-form-content">
                     <input type="hidden" name="action" value="report">
                     <input type="hidden" name="postID" value="${post.postID}">
                     <div class="form-group">
@@ -705,11 +708,11 @@
                             <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
                         </div>
 
-                       <div class="form-check">
-            <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
-            <label for="report_post_message_other" class="form-check-label">Other</label>
-        </div>
-        <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
+                        <div class="form-check">
+                            <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
+                            <label for="report_post_message_other" class="form-check-label">Other</label>
+                        </div>
+                        <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" id="cancelReportBtn">Cancel</button>
@@ -717,29 +720,29 @@
                     </div>
                 </form>
 
+            </div>
         </div>
     </div>
-</div>
 
 
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        const radioButtons = document.getElementsByName("report_post_message");
-        const textarea = document.getElementById("report_post_message_additional");
+        document.addEventListener("DOMContentLoaded", function () {
+            const radioButtons = document.getElementsByName("report_post_message");
+            const textarea = document.getElementById("report_post_message_additional");
 
-        radioButtons.forEach(radio => {
-            radio.addEventListener("click", function() {
-                if (radio.value === "Other") {
-                    textarea.style.display = "block";
-                } else {
-                    textarea.style.display = "none";
-                }
+            radioButtons.forEach(radio => {
+                radio.addEventListener("click", function () {
+                    if (radio.value === "Other") {
+                        textarea.style.display = "block";
+                    } else {
+                        textarea.style.display = "none";
+                    }
+                });
             });
         });
-    });
         document.addEventListener('DOMContentLoaded', (event) => {
             // Show the modal when the report post button is clicked
             document.getElementById('reportPostBtn').addEventListener('click', function (event) {
@@ -778,19 +781,19 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-       
-            $(document).ready(function () {
-            <% String message = (String) session.getAttribute("message"); %>
-            <% if (message != null) { %>
-                toastr.success('<%= message %>', 'Notification', {
-                    timeOut: 3000,
-                    positionClass: 'toast-top-right'
-                });
-            <% session.removeAttribute("message"); %>
-            <% } %>
-            });
 
-         
+        $(document).ready(function () {
+        <% String message = (String) session.getAttribute("message"); %>
+        <% if (message != null) { %>
+            toastr.success('<%= message %>', 'Notification', {
+                timeOut: 3000,
+                positionClass: 'toast-top-right'
+            });
+        <% session.removeAttribute("message"); %>
+        <% } %>
+        });
+
+
         $(document).ready(function () {
             // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
             $('.apply-button').on('click', function (e) {

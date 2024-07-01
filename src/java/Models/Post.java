@@ -40,6 +40,8 @@ public class Post {
         this.checking=checking;
     }
 
+
+
     public String getImage() {
         return image;
     }

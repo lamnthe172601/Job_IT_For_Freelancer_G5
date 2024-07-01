@@ -82,91 +82,91 @@
                 color: #FFFFFF;
                 margin-right: 15px;
                 text-transform: uppercase;
- .report-post {
-        margin-left: 400px;
-    }
-    .custom-flag {
-        
-        padding: 2px; /* Khoảng cách bên trong để nhìn đẹp hơn */
-        border-radius: 3px; /* Bo tròn các góc */
-    }
+                .report-post {
+                    margin-left: 400px;
+                }
+                .custom-flag {
+
+                    padding: 2px; /* Khoảng cách bên trong để nhìn đẹp hơn */
+                    border-radius: 3px; /* Bo tròn các góc */
+                }
             }
- .btn.report-post {
-        background-color: transparent; /* Làm nền nút trong suốt */
-        border: none; /* Bỏ viền nút */
-        padding: 0; /* Bỏ khoảng cách bên trong */
-         color: black;
-          margin-left: 170px;
-    }
-    .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
+            .btn.report-post {
+                background-color: transparent; /* Làm nền nút trong suốt */
+                border: none; /* Bỏ viền nút */
+                padding: 0; /* Bỏ khoảng cách bên trong */
+                color: black;
+                margin-left: 170px;
+            }
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.4);
+            }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
 
-.close-wrap {
-    float: right;
-    cursor: pointer;
-}
+            .close-wrap {
+                float: right;
+                cursor: pointer;
+            }
 
-.button {
-    cursor: pointer;
-}
+            .button {
+                cursor: pointer;
+            }
 
- .custom-modal-backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1040;
-        display: none;
-    }
+            .custom-modal-backdrop {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1040;
+                display: none;
+            }
 
-.custom-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1050;
-    width: 90%;
-    max-width: 500px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-}
+            .custom-modal {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1050;
+                width: 90%;
+                max-width: 500px;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            }
 
- #closeModal {
-        background-color: #FF5B37; /* Nền trong suốt */
-        color: white; /* Màu chữ */
-        border: 2px solid #333; /* Viền đậm */
-        width: 30px; /* Độ rộng */
-        height: 30px; /* Chiều cao */
-        border-radius: 50%; /* Để làm hình tròn */
-        display: flex; /* Sử dụng flexbox để căn giữa */
-        justify-content: center; /* Căn giữa theo chiều ngang */
-        align-items: center; /* Căn giữa theo chiều dọc */
-        cursor: pointer; /* Con trỏ khi di chuột vào */
-        outline: none; /* Loại bỏ đường viền khi được focus */
-        font-size: 20px; /* Kích thước chữ */
-        position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
-    }
+            #closeModal {
+                background-color: #FF5B37; /* Nền trong suốt */
+                color: white; /* Màu chữ */
+                border: 2px solid #333; /* Viền đậm */
+                width: 30px; /* Độ rộng */
+                height: 30px; /* Chiều cao */
+                border-radius: 50%; /* Để làm hình tròn */
+                display: flex; /* Sử dụng flexbox để căn giữa */
+                justify-content: center; /* Căn giữa theo chiều ngang */
+                align-items: center; /* Căn giữa theo chiều dọc */
+                cursor: pointer; /* Con trỏ khi di chuột vào */
+                outline: none; /* Loại bỏ đường viền khi được focus */
+                font-size: 20px; /* Kích thước chữ */
+                position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
+            }
 
         </style>
     </head>
@@ -210,11 +210,11 @@
                     <div class="row align-items-center inner-banner">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h3>My List Post Project</h3>
+                                <h3>My Post By Category</h3>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="home"> Home</a></li>
-                                        <li class="breadcrumb-item" aria-current="page">My List Post</li>
+                                        <li class="breadcrumb-item" aria-current="page">Post By Category</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -375,50 +375,48 @@
 
                             <%-- Hiển thị danh sách bài đăng --%>
                             <div class="row" id="listpostContainer">
-                                <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
+                                <c:forEach items="${posts}" var="post">
                                     <div class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
-                                                <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
+                                                <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${post.datePost}</div>
 
                                                 <c:set var="favo" value="false" />
-                                                <c:forEach items="${postFavourites}" var="post">
+                                                <c:forEach items="${postFavourites}" var="favPost">
                                                     <c:choose>
-                                                        <c:when test="${list.postID == post.postID}">
+                                                        <c:when test="${post.postID == favPost.postID}">
                                                             <c:set var="favo" value="true" />
                                                         </c:when>                                                                
                                                     </c:choose>
                                                 </c:forEach>
-                                              <c:choose>
-    <c:when test="${favo}">
-        <a href="javascript:void(0);" onclick="removeFromFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite color-active"><i class="feather-heart"></i></a>
-    </c:when>
-    <c:otherwise>
-        <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite"><i class="feather-heart"></i></a>
-    </c:otherwise>
-</c:choose>
-<a href="#" class="btn btn-danger ml-2 report-post" data-postid="${list.postID}" onclick="showReportModal(${list.postID})">
-    <i class="fas fa-flag custom-flag"></i>
-</a>
-
-
+                                                <c:choose>
+                                                    <c:when test="${favo}">
+                                                        <a href="javascript:void(0);" onclick="removeFromFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite color-active"><i class="feather-heart"></i></a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                        <a href="javascript:void(0);" onclick="addToFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite"><i class="feather-heart"></i></a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                <a href="#" class="btn btn-danger ml-2 report-post" data-postid="${post.postID}" onclick="showReportModal(${post.postID})">
+                                                    <i class="fas fa-flag custom-flag"></i>
+                                                </a>
 
                                                 <div class="author-heading">
                                                     <div class="freelance-img">
                                                         <a href="javascript:void(0);">
-                                                            <img src="${list.image}" alt="author">
+                                                            <img src="${post.image}" alt="author">
                                                             <span class="verified"><i class="fas fa-check-circle"></i></span>
                                                         </a>
                                                     </div>
                                                     <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
+                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${post.title}</div>
                                                     </div>
                                                     <div class="freelance-info">
-                                                        <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
-                                                        <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${list.location}</div>
+                                                        <h3><a href="javascript:void(0);">${post.caID.categoriesName}</a></h3>
+                                                        <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${post.location}</div>
                                                     </div>
                                                     <div class="skills-container">
-                                                        <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
+                                                        <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
                                                             <c:if test="${loop.index % 3 == 0}">
                                                                 <div class="skills-row">
                                                                 </c:if>
@@ -452,23 +450,25 @@
                                                     <ul>
                                                         <li>
                                                             <h5>Duration</h5>
-                                                            <h3 class="counter-value">${list.durationID.durationName}</h3>
+                                                            <h3 class="counter-value">${post.durationID.durationName}</h3>
                                                         </li>
                                                         <li>
                                                             <h5>Proposals</h5>
-                                                            <h3 class="counter-value">${list.quantity}</h3>
+                                                            <h3 class="counter-value">${post.quantity}</h3>
                                                         </li>
                                                         <li>
                                                             <h5>Job Type</h5>
-                                                            <h3 class="counter-value"><span class="jobtype">${list.jobTypeID.jobName}</span></h3>
+                                                            <h3 class="counter-value"><span class="jobtype">${post.jobTypeID.jobName}</span></h3>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
 
 
-                                            <div class="cart-hover">
-                                                <a href="PostDetails?postID=${list.postID}" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
+
+                                          <div class="cart-hover">
+                                                <a href="PostDetails?postID=${post.postID}" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
+
 
                                                 <c:if test="${postApply != null}">
                                                     <c:set var="applied" value="false" />
@@ -528,41 +528,41 @@
                                             </div>
                                         </div>
                                     </div>
-                                                                <div class="custom-modal-backdrop" id="customModalBackdrop"></div>
-<div class="custom-modal" id="report-post-modal-container">
-    <div class="modal-content">
-        <span id="closeModal" class="close-wrap">&times;</span>
-        <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
-         <form action="${pageContext.request.contextPath}/allListPost" method="post" id="report-post-form-content">
-            <input type="hidden" name="action" value="report">
-            <input type="hidden" name="postID" id="reportPostID">
-            <div class="form-group">
-                <label for="report_post_message">Select a reason for reporting:</label><br>
-                <div class="form-check">
-                    <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
-                    <label for="report_post_reason_spam" class="form-check-label">Spam</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
-                    <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
-                    <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
-                    <label for="report_post_message_other" class="form-check-label">Other</label>
-                </div>
-                <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="cancelReportBtn">Cancel</button>
-                <button type="submit" class="btn btn-primary">Submit Report</button>
-            </div>
-        </form>
-    </div>
-</div>
+                                    <div class="custom-modal-backdrop" id="customModalBackdrop"></div>
+                                    <div class="custom-modal" id="report-post-modal-container">
+                                        <div class="modal-content">
+                                            <span id="closeModal" class="close-wrap">&times;</span>
+                                            <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
+                                            <form action="${pageContext.request.contextPath}/allListPost" method="post" id="report-post-form-content">
+                                                <input type="hidden" name="action" value="report">
+                                                <input type="hidden" name="postID" id="reportPostID">
+                                                <div class="form-group">
+                                                    <label for="report_post_message">Select a reason for reporting:</label><br>
+                                                    <div class="form-check">
+                                                        <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
+                                                        <label for="report_post_reason_spam" class="form-check-label">Spam</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
+                                                        <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
+                                                        <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
+                                                        <label for="report_post_message_other" class="form-check-label">Other</label>
+                                                    </div>
+                                                    <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" id="cancelReportBtn">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary">Submit Report</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </c:forEach>
                             </div>
 
@@ -727,206 +727,206 @@
             </div>
         </div>
 
-                            
-                            
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-             
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 
         <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const radioButtons = document.getElementsByName("report_post_message");
-    const textarea = document.getElementById("report_post_message_additional");
+                            document.addEventListener("DOMContentLoaded", function () {
+                                const radioButtons = document.getElementsByName("report_post_message");
+                                const textarea = document.getElementById("report_post_message_additional");
 
-    radioButtons.forEach(radio => {
-        radio.addEventListener("click", function() {
-            if (radio.value === "Other") {
-                textarea.style.display = "block";
-            } else {
-                textarea.style.display = "none";
-            }
-        });
-    });
+                                radioButtons.forEach(radio => {
+                                    radio.addEventListener("click", function () {
+                                        if (radio.value === "Other") {
+                                            textarea.style.display = "block";
+                                        } else {
+                                            textarea.style.display = "none";
+                                        }
+                                    });
+                                });
 
-    document.querySelectorAll('.report-post').forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
-            const postID = this.getAttribute('data-postid');
-            document.getElementById('reportPostID').value = postID;
-            document.getElementById('customModalBackdrop').style.display = 'block';
-            document.getElementById('report-post-modal-container').style.display = 'block';
-        });
-    });
+                                document.querySelectorAll('.report-post').forEach(button => {
+                                    button.addEventListener('click', function (event) {
+                                        event.preventDefault();
+                                        const postID = this.getAttribute('data-postid');
+                                        document.getElementById('reportPostID').value = postID;
+                                        document.getElementById('customModalBackdrop').style.display = 'block';
+                                        document.getElementById('report-post-modal-container').style.display = 'block';
+                                    });
+                                });
 
-    document.getElementById('closeModal').addEventListener('click', function() {
-        document.getElementById('customModalBackdrop').style.display = 'none';
-        document.getElementById('report-post-modal-container').style.display = 'none';
-    });
+                                document.getElementById('closeModal').addEventListener('click', function () {
+                                    document.getElementById('customModalBackdrop').style.display = 'none';
+                                    document.getElementById('report-post-modal-container').style.display = 'none';
+                                });
 
-    document.getElementById('cancelReportBtn').addEventListener('click', function() {
-        document.getElementById('customModalBackdrop').style.display = 'none';
-        document.getElementById('report-post-modal-container').style.display = 'none';
-    });
-});
-
-
+                                document.getElementById('cancelReportBtn').addEventListener('click', function () {
+                                    document.getElementById('customModalBackdrop').style.display = 'none';
+                                    document.getElementById('report-post-modal-container').style.display = 'none';
+                                });
+                            });
 
 
-            document.addEventListener('DOMContentLoaded', function () {
-                document.getElementById('showMoreBtn').addEventListener('click', function () {
-                    let collapseOne = document.getElementById('collapseOne');
-                    let collapseOnes = document.getElementById('collapseOnes');
-                    let expanded = this.getAttribute('aria-expanded') === 'true';
-                    this.setAttribute('aria-expanded', !expanded);
-                    collapseOnes.classList.toggle('show');
-                    this.innerHTML = !expanded ? '<i class="feather-minus me-1"></i>Show Less' : '<i class="feather-plus me-1"></i>Show More';
-                    filterPosts(); // Gọi lại hàm lọc sau khi thay đổi
-                });
 
-                document.getElementById('showMoreBtn1').addEventListener('click', function () {
-                    let collapseOne1 = document.getElementById('collapseOne1');
-                    let collapseOnes1 = document.getElementById('collapseOnes1');
-                    let expanded = this.getAttribute('aria-expanded') === 'true';
-                    this.setAttribute('aria-expanded', !expanded);
-                    collapseOnes1.classList.toggle('show');
-                    this.innerHTML = !expanded ? '<i class="feather-minus me-1"></i>Show Less' : '<i class="feather-plus me-1"></i>Show More';
-                    filterPosts(); // Gọi lại hàm lọc sau khi thay đổi
-                });
 
-                let checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.addEventListener('change', filterPosts);
-                });
-            });
+                            document.addEventListener('DOMContentLoaded', function () {
+                                document.getElementById('showMoreBtn').addEventListener('click', function () {
+                                    let collapseOne = document.getElementById('collapseOne');
+                                    let collapseOnes = document.getElementById('collapseOnes');
+                                    let expanded = this.getAttribute('aria-expanded') === 'true';
+                                    this.setAttribute('aria-expanded', !expanded);
+                                    collapseOnes.classList.toggle('show');
+                                    this.innerHTML = !expanded ? '<i class="feather-minus me-1"></i>Show Less' : '<i class="feather-plus me-1"></i>Show More';
+                                    filterPosts(); // Gọi lại hàm lọc sau khi thay đổi
+                                });
 
-            function filterPosts() {
-                let selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(el => el.value.toLowerCase());
-                let selectedProjectTypes = Array.from(document.querySelectorAll('input[name="projectType"]:checked')).map(el => el.value.toLowerCase());
-                let selectedDurations = Array.from(document.querySelectorAll('input[name="projectDuration"]:checked')).map(el => el.value.toLowerCase());
-                let selectedSkills = Array.from(document.querySelectorAll('input[name="skills"]:checked')).map(el => el.value.toLowerCase());
+                                document.getElementById('showMoreBtn1').addEventListener('click', function () {
+                                    let collapseOne1 = document.getElementById('collapseOne1');
+                                    let collapseOnes1 = document.getElementById('collapseOnes1');
+                                    let expanded = this.getAttribute('aria-expanded') === 'true';
+                                    this.setAttribute('aria-expanded', !expanded);
+                                    collapseOnes1.classList.toggle('show');
+                                    this.innerHTML = !expanded ? '<i class="feather-minus me-1"></i>Show Less' : '<i class="feather-plus me-1"></i>Show More';
+                                    filterPosts(); // Gọi lại hàm lọc sau khi thay đổi
+                                });
 
-                let posts = document.querySelectorAll('.post-item');
+                                let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                                checkboxes.forEach(function (checkbox) {
+                                    checkbox.addEventListener('change', filterPosts);
+                                });
+                            });
 
-                posts.forEach(function (post) {
-                    let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
-                    let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
-                    let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
-                    let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
+                            function filterPosts() {
+                                let selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(el => el.value.toLowerCase());
+                                let selectedProjectTypes = Array.from(document.querySelectorAll('input[name="projectType"]:checked')).map(el => el.value.toLowerCase());
+                                let selectedDurations = Array.from(document.querySelectorAll('input[name="projectDuration"]:checked')).map(el => el.value.toLowerCase());
+                                let selectedSkills = Array.from(document.querySelectorAll('input[name="skills"]:checked')).map(el => el.value.toLowerCase());
 
-                    let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
-                    let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
-                    let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));
-                    let matchSkill = selectedSkills.length === 0 || selectedSkills.every(skill => postSkills.includes(skill));
+                                let posts = document.querySelectorAll('.post-item');
 
-                    if (matchCategory && matchProjectType && matchDuration && matchSkill) {
-                        post.style.display = 'block';
-                    } else {
-                        post.style.display = 'none';
-                    }
-                });
-            }
+                                posts.forEach(function (post) {
+                                    let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
+                                    let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
+                                    let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
+                                    let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
 
-            // Định nghĩa hàm cắt chuỗi và thêm "..."
-            function truncateString(str, maxLength) {
-                if (str.length <= maxLength) {
-                    return str;
-                } else {
-                    return str.substring(0, maxLength) + "...";
-                }
-            }
+                                    let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
+                                    let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
+                                    let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));
+                                    let matchSkill = selectedSkills.length === 0 || selectedSkills.every(skill => postSkills.includes(skill));
 
-            // Lấy nội dung của element có id là 'title-list-post'
-            let titleElement = document.getElementById('title-list-post');
+                                    if (matchCategory && matchProjectType && matchDuration && matchSkill) {
+                                        post.style.display = 'block';
+                                    } else {
+                                        post.style.display = 'none';
+                                    }
+                                });
+                            }
 
-            // Lấy nội dung ban đầu từ innerHTML của element
-            let originalTitle = titleElement.innerHTML;
+                            // Định nghĩa hàm cắt chuỗi và thêm "..."
+                            function truncateString(str, maxLength) {
+                                if (str.length <= maxLength) {
+                                    return str;
+                                } else {
+                                    return str.substring(0, maxLength) + "...";
+                                }
+                            }
 
-            // Sử dụng hàm truncateString để cắt chuỗi và gán lại vào innerHTML của element
-            let truncatedTitle = truncateString(originalTitle, 5);
-            titleElement.innerHTML = truncatedTitle;
+                            // Lấy nội dung của element có id là 'title-list-post'
+                            let titleElement = document.getElementById('title-list-post');
+
+                            // Lấy nội dung ban đầu từ innerHTML của element
+                            let originalTitle = titleElement.innerHTML;
+
+                            // Sử dụng hàm truncateString để cắt chuỗi và gán lại vào innerHTML của element
+                            let truncatedTitle = truncateString(originalTitle, 5);
+                            titleElement.innerHTML = truncatedTitle;
         </script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-            function addToFavorites(postID) {
-                $.ajax({
-                    url: 'AddFavourites',
-                    type: 'GET',
-                    data: {
-                        postID: postID
-                    },
-                    success: function (response) {
-                        // Xử lý phản hồi thành công (nếu cần)
-                        //alert('Đã thêm vào danh sách yêu thích!');
-                        $('#favourite_' + postID).addClass('color-active');
-                    },
-                    error: function (xhr, status, error) {
-                        // Xử lý lỗi (nếu có)
-                        alert('Đã xảy ra lỗi: ' + error);
-                    }
-                });
-            }
+                            function addToFavorites(postID) {
+                                $.ajax({
+                                    url: 'AddFavourites',
+                                    type: 'GET',
+                                    data: {
+                                        postID: postID
+                                    },
+                                    success: function (response) {
+                                        // Xử lý phản hồi thành công (nếu cần)
+                                        //alert('Đã thêm vào danh sách yêu thích!');
+                                        $('#favourite_' + postID).addClass('color-active');
+                                    },
+                                    error: function (xhr, status, error) {
+                                        // Xử lý lỗi (nếu có)
+                                        alert('Đã xảy ra lỗi: ' + error);
+                                    }
+                                });
+                            }
 
-            function removeFromFavorites(postID) {
-                $.ajax({
-                    url: 'DeleteFavourites',
-                    type: 'GET',
-                    data: {
-                        postID: postID
-                    },
-                    success: function (response) {
-                        // Xử lý phản hồi thành công (nếu cần)
-                        //alert('Đã xóa khỏi danh sách yêu thích!');
-                        $('#favourite_' + postID).removeClass('color-active');
-                    },
-                    error: function (xhr, status, error) {
-                        // Xử lý lỗi (nếu có)
-                        alert('Đã xảy ra lỗi: ' + error);
-                    }
-                });
-            }
+                            function removeFromFavorites(postID) {
+                                $.ajax({
+                                    url: 'DeleteFavourites',
+                                    type: 'GET',
+                                    data: {
+                                        postID: postID
+                                    },
+                                    success: function (response) {
+                                        // Xử lý phản hồi thành công (nếu cần)
+                                        //alert('Đã xóa khỏi danh sách yêu thích!');
+                                        $('#favourite_' + postID).removeClass('color-active');
+                                    },
+                                    error: function (xhr, status, error) {
+                                        // Xử lý lỗi (nếu có)
+                                        alert('Đã xảy ra lỗi: ' + error);
+                                    }
+                                });
+                            }
         </script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-            $(document).ready(function () {
-                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
-                $('.apply-button').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
-                    // Hiển thị modal tương ứng
-                    $('#applyModal_' + postID).modal('show');
-                });
+                            $(document).ready(function () {
+                                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
+                                $('.apply-button').on('click', function (e) {
+                                    e.preventDefault();
+                                    var postID = $(this).data('postid');
+                                    // Hiển thị modal tương ứng
+                                    $('#applyModal_' + postID).modal('show');
+                                });
 
-                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
-                $('.confirm-btn').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
+                                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
+                                $('.confirm-btn').on('click', function (e) {
+                                    e.preventDefault();
+                                    var postID = $(this).data('postid');
 
-                    // Gửi yêu cầu AJAX để ứng tuyển công việc
-                    $.ajax({
-                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
-                        type: 'GET',
-                        data: {
-                            postID: postID
-                        },
-                        success: function (response) {
-                            // Xử lý phản hồi thành công (nếu cần)
-                            // Đổi nút sang trạng thái "Applied"
-                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').addClass('apply').css('background-color', '#FF3300').css('color', 'white');
-                            // Đóng modal sau khi xử lý thành công
-                            $('#applyModal_' + postID).modal('hide');
-                        },
-                        error: function (xhr, status, error) {
-                            // Xử lý lỗi (nếu có)
-                            alert('Đã xảy ra lỗi: ' + error);
-                        }
-                    });
-                });
-            });
+                                    // Gửi yêu cầu AJAX để ứng tuyển công việc
+                                    $.ajax({
+                                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
+                                        type: 'GET',
+                                        data: {
+                                            postID: postID
+                                        },
+                                        success: function (response) {
+                                            // Xử lý phản hồi thành công (nếu cần)
+                                            // Đổi nút sang trạng thái "Applied"
+                                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').addClass('apply').css('background-color', '#FF3300').css('color', 'white');
+                                            // Đóng modal sau khi xử lý thành công
+                                            $('#applyModal_' + postID).modal('hide');
+                                        },
+                                        error: function (xhr, status, error) {
+                                            // Xử lý lỗi (nếu có)
+                                            alert('Đã xảy ra lỗi: ' + error);
+                                        }
+                                    });
+                                });
+                            });
         </script>
 
 

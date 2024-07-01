@@ -47,15 +47,15 @@ public class HomeDAO extends DBContext {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 TeamNumber tem = new TeamNumber(rs.getInt("team_numberID"), rs.getString("team_number"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 Company com = new Company(rs.getInt("companyID"), rs.getString("company_name"), tem, rs.getDate("established_on"), rs.getString("logo"), rs.getString("website"), rs.getString("describe"), rs.getString("location"), re);
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
-                int checking=rs.getInt("checking");
+                int checking = rs.getInt("checking");
                 boolean status = rs.getBoolean("status");
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca,status,checking));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, status, checking));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,12 +85,12 @@ public class HomeDAO extends DBContext {
             ps.setInt(1, freelancerID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"),rs.getString("description"),rs.getInt("statusCate"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca,rs.getBoolean("status"),rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,6 +98,7 @@ public class HomeDAO extends DBContext {
         return list;
     }
 
+   
     public List<Post> getOtherPostsBySimilarCategories(int recruiterID) {
         List<Post> list = new ArrayList<>();
         String query = """
@@ -120,12 +121,12 @@ public class HomeDAO extends DBContext {
             ps.setInt(2, recruiterID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"),rs.getString("description"),rs.getInt("statusCate"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca,rs.getBoolean("status"),rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -176,7 +177,7 @@ public class HomeDAO extends DBContext {
                             rs.getString("phone_contact"));
 
                     Skills s = new Skills(rs.getInt("skillID"), ss, free);
-                    
+
                     list.add(new SkillFreelancer(free, s));
                 }
 
@@ -187,41 +188,38 @@ public class HomeDAO extends DBContext {
         }
         return list;
     }
-    
-    
+
     public static void main(String[] args) {
         HomeDAO p = new HomeDAO();
         List<SkillFreelancer> s = p.getTop8FreelancersByLatestRecruiterPostSkill(1);
         for (SkillFreelancer skillFreelancer : s) {
             System.out.println(skillFreelancer.toString());
         }
-        
+
     }
 
     public List<Blogs> getTopBlogs() {
-    List<Blogs> blogs = new ArrayList<>();
-    String query = """
+        List<Blogs> blogs = new ArrayList<>();
+        String query = """
                    SELECT TOP(3) blogID, title, image, date_blog, description, tag
                    FROM Blogs
                    ORDER BY date_blog DESC;""";
-    try (PreparedStatement ps = connection.prepareStatement(query);
-         ResultSet rs = ps.executeQuery()) {
-        while (rs.next()) {
-            Blogs blog = new Blogs();
-            blog.setBlogID(rs.getInt("blogID"));
-            blog.setTitle(rs.getString("title"));
-            blog.setImage(rs.getString("image"));
-            blog.setDate_blog(rs.getDate("date_blog"));
-            String description = rs.getString("description");
-            blog.setDescription(getShortDescription(description, 10));
-            blog.setTag(rs.getString("tag"));
-            blogs.add(blog);
+        try (PreparedStatement ps = connection.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Blogs blog = new Blogs();
+                blog.setBlogID(rs.getInt("blogID"));
+                blog.setTitle(rs.getString("title"));
+                blog.setImage(rs.getString("image"));
+                blog.setDate_blog(rs.getDate("date_blog"));
+                String description = rs.getString("description");
+                blog.setDescription(getShortDescription(description, 10));
+                blog.setTag(rs.getString("tag"));
+                blogs.add(blog);
+            }
+        } catch (SQLException e) {
         }
-    } catch (SQLException e) {
+        return blogs;
     }
-    return blogs;
-}
-
 
     public static String getShortDescription(String description, int wordLimit) {
         if (description == null || description.isEmpty()) {
@@ -333,6 +331,5 @@ public class HomeDAO extends DBContext {
 
         return categoryPostCount;
     }
-
 
 }

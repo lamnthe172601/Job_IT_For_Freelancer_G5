@@ -24,6 +24,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
 
         <style>
+
             .pagination {
                 display: flex;
                 justify-content: center;
@@ -210,11 +211,11 @@
                     <div class="row align-items-center inner-banner">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h3>My List Post Project</h3>
+                                <h3>Job For You</h3>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="home"> Home</a></li>
-                                        <li class="breadcrumb-item" aria-current="page">My List Post</li>
+                                        <li class="breadcrumb-item" aria-current="page">Job For You</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -374,62 +375,58 @@
                             <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
 
                             <%-- Hiển thị danh sách bài đăng --%>
-                            <div class="row" id="listpostContainer">
-                                <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
-                                    <div class="col-xl-4 col-md-6 post-item">
-                                        <div class="freelance-widget widget-author position-relative">
-                                            <div class="freelance-content">
-                                                <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
+<div class="row" id="listpostContainer">
+    <c:forEach items="${posts}" var="post">
+        <div class="col-xl-4 col-md-6 post-item">
+            <div class="freelance-widget widget-author position-relative">
+                <div class="freelance-content">
+                    <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${post.datePost}</div>
 
-                                                <c:set var="favo" value="false" />
-                                                <c:forEach items="${postFavourites}" var="post">
-                                                    <c:choose>
-                                                        <c:when test="${list.postID == post.postID}">
-                                                            <c:set var="favo" value="true" />
-                                                        </c:when>                                                                
-                                                    </c:choose>
-                                                </c:forEach>
-                                              <c:choose>
-    <c:when test="${favo}">
-        <a href="javascript:void(0);" onclick="removeFromFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite color-active"><i class="feather-heart"></i></a>
-    </c:when>
-    <c:otherwise>
-        <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite"><i class="feather-heart"></i></a>
-    </c:otherwise>
-</c:choose>
-<a href="#" class="btn btn-danger ml-2 report-post" data-postid="${list.postID}" onclick="showReportModal(${list.postID})">
-    <i class="fas fa-flag custom-flag"></i>
-</a>
+                    <c:set var="favo" value="false" />
+                    <c:forEach items="${postFavourites}" var="favPost">
+                        <c:if test="${post.postID eq favPost.postID}">
+                            <c:set var="favo" value="true" />
+                        </c:if>
+                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${favo}">
+                            <a href="javascript:void(0);" onclick="removeFromFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite color-active"><i class="feather-heart"></i></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="javascript:void(0);" onclick="addToFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite"><i class="feather-heart"></i></a>
+                        </c:otherwise>
+                    </c:choose>
+                    <a href="#" class="btn btn-danger ml-2 report-post" data-postid="${post.postID}" onclick="showReportModal(${post.postID})">
+                        <i class="fas fa-flag custom-flag"></i>
+                    </a>
 
-
-
-                                                <div class="author-heading">
-                                                    <div class="freelance-img">
-                                                        <a href="javascript:void(0);">
-                                                            <img src="${list.image}" alt="author">
-                                                            <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
-                                                    </div>
-                                                    <div class="freelance-info">
-                                                        <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
-                                                        <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${list.location}</div>
-                                                    </div>
-                                                    <div class="skills-container">
-                                                        <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index % 3 == 0}">
-                                                                <div class="skills-row">
-                                                                </c:if>
-                                                                <div class="freelance-tags">
-                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                                </div>
-                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                                </div>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </div>
+                    <div class="author-heading">
+                        <div class="freelance-img">
+                            <a href="javascript:void(0);">
+                                <img src="${post.image}" alt="author">
+                                <span class="verified"><i class="fas fa-check-circle"></i></span>
+                            </a>
+                        </div>
+                        <div class="profile-name">
+                            <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${post.title}</div>
+                        </div>
+                        <div class="freelance-info">
+                            <h3><a href="javascript:void(0);">${post.caID.categoriesName}</a></h3>
+                            <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${post.location}</div>
+                        </div>
+                        <div class="skills-container">
+                            <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
+                                <c:if test="${loop.index % 3 == 0}">
+                                    <div class="skills-row">
+                                </c:if>
+                                <div class="freelance-tags">
+                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
+                                </div>
+                                <c:if test="${loop.index % 3 == 2 || loop.last}">
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+                        </div>
 
                                                     <style>
                                                         .skills-container {
@@ -467,8 +464,9 @@
                                             </div>
 
 
-                                            <div class="cart-hover">
-                                                <a href="PostDetails?postID=${list.postID}" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
+                                            
+                                          <div class="cart-hover">
+                                                <a href="PostDetails?postID=${post.postID}" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
 
                                                 <c:if test="${postApply != null}">
                                                     <c:set var="applied" value="false" />
@@ -533,7 +531,7 @@
     <div class="modal-content">
         <span id="closeModal" class="close-wrap">&times;</span>
         <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
-         <form action="${pageContext.request.contextPath}/allListPost" method="post" id="report-post-form-content">
+         <form action="${pageContext.request.contextPath}/JobForFree" method="post" id="report-post-form-content">
             <input type="hidden" name="action" value="report">
             <input type="hidden" name="postID" id="reportPostID">
             <div class="form-group">
@@ -729,10 +727,10 @@
 
                             
                             
-
+            
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<!-- Bootstrap JS -->
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
              
 

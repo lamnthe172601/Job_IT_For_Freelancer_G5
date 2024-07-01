@@ -656,77 +656,82 @@
                 </section>
             </c:if>
 
-            <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">      
-                <section class="section update-project">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-12 mx-auto">
-                                <div class="section-header section-header-two text-center aos" data-aos="fade-up">
-                                    <h2 class="header-title">Recently Updated <span>Projects for you</span></h2>
-                                    <p>Get work done in over 60 different categories</p>
+            
+            
+           <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+    <section class="section update-project">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-12 mx-auto">
+                    <div class="section-header section-header-two text-center aos" data-aos="fade-up">
+                        <h2 class="header-title">Recently Updated <span>Projects for you</span></h2>
+                        <p>Get work done in over 60 different categories</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <c:forEach items="${listCC}" var="categori">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="aos" data-aos="fade-up">
+                            <a href="postbycategory?categoryID=${categori.caID}" class="update-project-blk move-box">
+                                <div class="update-content">
+                                    <h6>${categori.categoriesName}</h6>
+                                    <p>${categoriesPostCount[categori.categoriesName]} Projects Available</p>
                                 </div>
-                            </div>
+                                <div class="update-icon-end">
+                                    <i class="feather-arrow-right"></i>
+                                </div>
+                            </a>
                         </div>
-                        <div class="row">
-                            <c:forEach items="${listCC}" var="categori">
-                                <div class="col-xl-3 col-md-6">
-                                    <div class="aos" data-aos="fade-up">
-                                        <a href="project.html" class="update-project-blk move-box ">
-                                            <div class="update-content">
-                                                <h6>${categori.categoriesName}</h6>
-                                                <p>${categoriesPostCount[categori.categoriesName]}  Projects Available</p>
-                                            </div>
-                                            <div class="update-icon-end">
-                                                <i class="feather-arrow-right"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </c:forEach>
+                    </div>
+                </c:forEach>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="more-project text-center aos" data-aos="fade-up">
+                        <a href="/Job_IT_For_Freelancer_G5/AllListPost" class="btn btn-primary">View More Projects</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</c:if>
 
+            
+            
+            
+          <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+    <section class="section job-location home-two-jobsec">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-12 mx-auto">
+                    <div class="section-header section-header-two d-block text-center section-locate aos" data-aos="fade-up">
+                        <h2 class="header-title">Jobs By <span>Locations</span></h2>
+                        <p>Find your favourite jobs and get the benefits of yourself</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <c:forEach var="location" items="${locations}">
+                    <div class="col-xl-3 col-md-4">
+                        <div class="job-locate-blk aos" data-aos="fade-up">
+                            <div class="location-img">
+                             <a href="postbylocation?location=${location[0]}"><img class="img-fluid" src="${location[1]}" alt="Img"></a>
 
-
-                            <div class="col-xl-12">
-                                <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="project.html" class="btn btn-primary">View More Projects</a>
-                                </div>
+                            </div>
+                            <div class="job-it-content">
+                                <h6>${location[0]}</h6>
+                                <ul class="nav job-locate-foot">
+                                    <li>${locationPostCount[location[0]] != null ? locationPostCount[location[0]] : 0} Companies</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </section>
-            </c:if>  
-
-            <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">           
-                <section class="section job-location home-two-jobsec">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-12 mx-auto">
-                                <div class="section-header section-header-two d-block text-center section-locate aos" data-aos="fade-up">
-                                    <h2 class="header-title">Jobs By <span>Locations</span></h2>
-                                    <p>Find your favourite jobs and get the benefits of yourself</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <c:forEach var="location" items="${locations}">
-                                <div class="col-xl-3 col-md-4">
-                                    <div class="job-locate-blk aos" data-aos="fade-up">
-                                        <div class="location-img">
-                                            <a href="project.html"><img class="img-fluid" src="${location[1]}" alt="Img"></a>
-                                        </div>
-                                        <div class="job-it-content">
-                                            <h6>${location[0]}</h6>
-                                            <ul class="nav job-locate-foot">
-                                                <li>${locationPostCount[location[0]] != null ? locationPostCount[location[0]] : 0} Companies</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </section>
-            </c:if> 
+                </c:forEach>
+            </div>
+        </div>
+    </section>
+</c:if>
 
 
 
