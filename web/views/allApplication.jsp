@@ -568,9 +568,8 @@
             </footer>
 
         </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script>
             function showSuccessNotification(message, redirectUrl) {
                 Swal.fire({
@@ -604,8 +603,8 @@
             <% } %>
             <% } %>
         </script>                           
-        
-        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
     <script>
@@ -613,14 +612,12 @@
         // Refuse Freelancer
         $('.refuse-freelancer').on('click', function () {
             var applyID = $(this).closest('.modal').find('.apply-id').val();
-            console.log(applyID);
             changeFreelancerStatus(applyID, "reject", $(this));
         });
 
         // Approve Freelancer
         $('.approve-freelancer').on('click', function () {
             var applyID = $(this).closest('.modal').find('.apply-id').val();
-            console.log(applyID);
             changeFreelancerStatus(applyID, "approve", $(this));
         });
 
@@ -630,11 +627,9 @@
                 type: 'POST',
                 data: {postID: applyID, type: actionType},
                 success: function (response) {
-                    
                     if (response.success) {
                         var statusBadge = $('#status-' + applyID);
                         var statusText = actionType === "reject" ? "Rejected" : "Approved";
-                        console.log(actionType);
                         var badgeClass = actionType === "reject" ? "bg-danger-light" : "bg-success-light";
 
                         statusBadge
