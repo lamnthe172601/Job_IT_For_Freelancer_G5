@@ -723,6 +723,8 @@ public class PostDAO extends DBContext {
         }
         return posts;
     }
+        
+  
     
     public List<PostApplicationCount> TotalApplyByPost(int ID) {
         List<PostApplicationCount> TotalApplyByPost = new ArrayList<>();

@@ -516,7 +516,7 @@
                                                             <div class="modal-btn Suspend-action" >
                                                                 <div class="row">
                                                                     <div class="col-6">
-                                                                        <a href="DeletePostFavourites?postID=${p.postID}" class="btn btn-primary cancel-btn" >Yes</a>
+                                                                        <a id="deleteLink_${p.postID}" href="DeletePostFavourites?postID=${p.postID}" class="btn btn-primary cancel-btn" >Yes</a>
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <a  data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -931,7 +931,7 @@
                 text-transform: uppercase;
 
             }
-            
+
             .confirm-btn{
 
                 background: #E65425;
@@ -949,14 +949,14 @@
                 color: white;
             }
 
-input.file {
-    border: 1px solid #000; /* Viền đen 2px */
-    color: black; /* Màu chữ đen */
-    padding: 8px; /* Khoảng cách giữa viền và nội dung */
-    border-radius: 5px; /* Bo tròn góc */
-    outline: none; /* Loại bỏ viền xung quanh khi focus */
-    
-}
+            input.file {
+                border: 1px solid #000; /* Viền đen 2px */
+                color: black; /* Màu chữ đen */
+                padding: 8px; /* Khoảng cách giữa viền và nội dung */
+                border-radius: 5px; /* Bo tròn góc */
+                outline: none; /* Loại bỏ viền xung quanh khi focus */
+
+            }
 
 
 
@@ -977,54 +977,70 @@ input.file {
                 document.getElementById(int).style.display = 'none';
             }
 
-            function confirmAction(postID) {
-                var confirmResult = confirm("Deleting this will remove it permanently. Are you sure?");
-                if (confirmResult) {
-                    window.location.href = "DeletePostFavourites?postID=" + postID;
-                } else {
-                    return false;
-                }
-            }
+//            function confirmAction(postID) {
+//                var confirmResult = confirm("Deleting this will remove it permanently. Are you sure?");
+//                if (confirmResult) {
+//                    window.location.href = "DeletePostFavourites?postID=" + postID;
+//                } else {
+//                    return false;
+//                }
+//            }
 
         </script>
 
-        
-<script>
-    function validateForm(postID) {
-        var fileInput = document.getElementById('fileInput_' + postID);
-        var errorDiv = document.getElementById('error_' + postID);
-        if (fileInput.files.length === 0) {
-            errorDiv.innerHTML = 'Please select a file.';
-            return false; // Prevent form submission
-        } else {
-            errorDiv.innerHTML = ''; 
-            return true;
-        }
-    }
-    
-    function check(postID) {
-    var fileInput = document.getElementById('fileInput_' + postID);
-        var errorDiv = document.getElementById('error_' + postID);
-    if (fileInput.files.length === 0) {
-        errorDiv.innerHTML = 'Please select a file.';
-    } else {
-        errorDiv.innerHTML = '';
-    }
-}
-</script>
 
-<script>
-function submitForm(postID) {
-    if(validateForm(postID)===true){
-        event.preventDefault();
-    showSuccessNotification('Approve project successfully!');
-    setTimeout(function() {
-        document.getElementById('jobApplicationForm_' + postID).submit();
-    }, 1000);
-    }
-    
-}
-</script>
+        <script>
+            function validateForm(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                    return false; // Prevent form submission
+                } else {
+                    errorDiv.innerHTML = '';
+                    return true;
+                }
+            }
+
+            function check(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                } else {
+                    errorDiv.innerHTML = '';
+                }
+            }
+        </script>
+
+        <script>
+            // Lắng nghe sự kiện click vào nút "Yes"
+            document.getElementById('deleteLink').addEventListener('click', function (event) {
+                // Ngăn chặn hành động mặc định của thẻ a (chuyển hướng ngay lập tức)
+                event.preventDefault();
+                showSuccessNotification('Delete successfully!');
+                // Delay 1 giây trước khi chuyển hướng
+                setTimeout(function () {
+                    // Lấy href từ nút "Yes" và chuyển hướng đến đường dẫn đó
+                    window.location.href = event.target.href;
+                }, 1000); // 1000 milliseconds = 1 giây
+            });
+        </script>
+        <script>
+            // Lắng nghe sự kiện click vào các nút có id bắt đầu là "deleteLink_"
+            document.querySelectorAll('[id^="deleteLink_"]').forEach(function (element) {
+                element.addEventListener('click', function (event) {
+                    // Ngăn chặn hành động mặc định của thẻ a (chuyển hướng ngay lập tức)
+                    event.preventDefault();
+                    showSuccessNotification('Delete successfully!');
+                    // Delay 1 giây trước khi chuyển hướng
+                    setTimeout(function () {
+                        // Lấy href từ nút "Yes" và chuyển hướng đến đường dẫn đó
+                        window.location.href = event.target.href;
+                    }, 1000); // 1000 milliseconds = 1 giây
+                });
+            });
+        </script>
 
 
 
