@@ -64,10 +64,25 @@ public class ManageAllApplicationControll extends HttpServlet {
     } 
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+    String subject = request.getParameter("emailSubject");
+    String recipient = request.getParameter("emailRecipient");
+    String content = request.getParameter("emailContent");
+
+    EmailService emailService = new EmailService();
+    boolean isSent = emailService.sendEmail(recipient, subject, content);
+
+    response.setContentType("application/json");
+    PrintWriter out = response.getWriter();
+    if (isSent) {
+        out.print("{\"success\": true, \"message\": \"Email sent successfully.\"}");
+    } else {
+        out.print("{\"success\": false, \"message\": \"Failed to send email.\"}");
     }
+    out.flush();
+}
+
 
   
     @Override

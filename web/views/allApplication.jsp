@@ -367,7 +367,57 @@
                                                                 </div>
 
                                                             </td>
-                                                            <td>${listapply.dateApply}</td>
+                                                            <td>
+                                                                <div class="action-table-data">
+                                                                    <a id="Download${listapply.applyID}" style="margin-left: 20px" href="https://ik.imagekit.io/tvlk/blog/2023/07/den-lanh-giang.jpg?tr=dpr-2,w-675" class="download-icon me-2" download>
+                                                                        <i class="feather-download"></i>
+                                                                    </a>
+                                                                </div>
+
+                                                                <script>
+                                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                                        document.querySelectorAll('.download-icon').forEach(function (element) {
+                                                                            element.addEventListener('click', function (e) {
+                                                                                e.preventDefault();
+                                                                                var href = this.getAttribute('href');
+                                                                                var filename = href.split('/').pop().split('?')[0];
+                                                                                var id = this.id; // Lấy ID của phần tử a
+
+                                                                                console.log('Starting download for:', filename);
+
+                                                                                fetch(href)
+                                                                                        .then(response => {
+                                                                                            if (!response.ok) {
+                                                                                                throw new Error('Network response was not ok');
+                                                                                            }
+                                                                                            return response.blob();
+                                                                                        })
+                                                                                        .then(blob => {
+                                                                                            var url = window.URL.createObjectURL(blob);
+                                                                                            var a = document.createElement('a');
+                                                                                            a.style.display = 'none';
+                                                                                            a.href = url;
+                                                                                            a.download = filename;
+                                                                                            document.body.appendChild(a);
+                                                                                            a.click();
+                                                                                            window.URL.revokeObjectURL(url);
+                                                                                            console.log('Download completed for:', filename);
+
+                                                                                            // Ghi log ID của phần tử đã tải xuống
+                                                                                            console.log('Download ID:', id);
+                                                                                        })
+                                                                                        .catch(error => {
+                                                                                            console.error('Failed to download file:', error);
+                                                                                            alert('Failed to download file.');
+                                                                                        });
+                                                                            });
+                                                                        });
+                                                                    });
+                                                                </script>
+
+
+
+                                                            </td>
                                                             <td>
                                                                 <span id="status-${listapply.applyID}" class="badge checked badge-pill ${listapply.status == 0 ? 'bg-warning-light' : (listapply.status == 1 ? 'bg-success-light' : 'bg-danger-light')}">
                                                                     ${listapply.status == 0 ? 'Pending' : (listapply.status == 1 ? 'Approved' : 'Rejected')}
@@ -379,22 +429,16 @@
 
                                                             <td>
                                                                 <div class="action-table-data">
-                                                                    <c:if test='${listapply.status == 0}'>
-                                                                    <a href="#Approve${listapply.freelancer.freelanceID}" data-bs-toggle="modal" class="btn btn-request">Connect</a>
-                                                                    <a style="background: blueviolet;" href="#Refuse${listapply.freelancer.freelanceID}" data-bs-toggle="modal" class="btn btn-request">Refuse</a>
-                                                                    </c:if>
-                                                                    
-                                                                    
-                                                                    <c:if test='${listapply.status == 2}'>         
-                                                                    <a style="background: blueviolet;margin-left: 30px;" href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-request">Refused</a>
-                                                                    </c:if>
-                                                                    
-                                                                    <c:if test='${listapply.status == 1}'>
-                                                                    
-                                                                    <a style="margin-left: 25px" "href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-request">Connected</a>
-                                                                    </c:if>
-                                                                    
-                                                                    <div class="modal fade edit-proposal-modal success-modal" id="success-milestone${listapply.freelancer.freelanceID}">
+                                                                    <div id="ApproveAndRefuse${listapply.applyID}">
+                                                                        <a href="#Approve${listapply.applyID}" data-bs-toggle="modal" class="btn btn-request">Connect</a>
+                                                                        <a style="background: blueviolet;" href="#Refuse${listapply.applyID}" data-bs-toggle="modal" class="btn btn-request">Refuse</a>
+                                                                    </div>
+
+                                                                    <div style="display: none;" id="connectedBtn${listapply.applyID}">        
+                                                                        <a style="background: blueviolet;margin-left: 30px;" href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-request">Connected</a>
+                                                                    </div>
+
+                                                                    <div class="modal fade edit-proposal-modal success-modal" id="success-milestone${listapply.applyID}">
                                                                         <div class="modal-dialog modal-dialog-centered modal-lg">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header justify-content-end">
@@ -405,7 +449,7 @@
                                                                                     </span>
                                                                                 </div>
                                                                                 <div class="modal-body">
-                                                                                    <form id="emailForm" method="post" action="sendEmail">
+                                                                                    <form id="emailForm${listapply.applyID}" method="post" action="ManageApplication">
                                                                                         <div class="form-group">
                                                                                             <label for="emailSubject">Subject</label>
                                                                                             <input type="text" class="form-control" id="emailSubject" name="emailSubject" placeholder="Enter email subject" required>
@@ -426,7 +470,10 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="modal fade edit-proposal-modal success-modal" id="Refuse${listapply.freelancer.freelanceID}">
+
+
+                                                                    <!-- Approve Freelancer Modal -->                    
+                                                                    <div class="modal fade edit-proposal-modal success-modal" id="Refuse${listapply.applyID}">
                                                                         <div class="modal-dialog modal-dialog-centered modal-md">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header justify-content-end">
@@ -452,7 +499,7 @@
                                                                     </div>
 
                                                                     <!-- Approve Freelancer Modal -->
-                                                                    <div class="modal fade edit-proposal-modal success-modal" id="Approve${listapply.freelancer.freelanceID}">
+                                                                    <div class="modal fade edit-proposal-modal success-modal" id="Approve${listapply.applyID}">
                                                                         <div class="modal-dialog modal-dialog-centered modal-md">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header justify-content-end">
@@ -476,10 +523,6 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
-
-
-
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -505,7 +548,7 @@
                         <div class="row">
                             <div class=" col-lg-4 col-md-12">
                                 <div class="footer-bottom-logo">
-                                    <a href="index.html" class="menu-logo">
+                                    <a href="home" class="menu-logo">
                                         <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                     </a>
                                     <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
@@ -602,111 +645,148 @@
             </footer>
 
         </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
         <script>
-            function showSuccessNotification(message, redirectUrl) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Notification',
-                    text: message,
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = redirectUrl;
-                    }
-                });
-            }
+                                                                    $(document).ready(function () {
+                                                                        // Lấy trạng thái từ localStorage khi tải trang
+                                                                        var appliedIDs = JSON.parse(localStorage.getItem('appliedIDs')) || {};
 
-            function showErrorNotification(message) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Notification',
-                    text: message,
-                    confirmButtonText: 'OK'
-                });
-            }
+                                                                        $.each(appliedIDs, function (applyID, status) {
+                                                                            if (status === 'connected') {
+                                                                                $('#ApproveAndRefuse' + applyID).hide();
+                                                                                $('#connectedBtn' + applyID).show();
+                                                                            }
+                                                                        });
 
-            <% if (request.getAttribute("emailStatus") != null) { %>
-            <% String emailStatus = (String) request.getAttribute("emailStatus"); %>
-            <% String message = (String) request.getAttribute("message"); %>
-            <% if ("success".equals(emailStatus)) { %>
-            showSuccessNotification('<%= message %>', 'ManageApplication');
-            <% } else { %>
-            showErrorNotification('<%= message %>');
-            <% } %>
-            <% } %>
-        </script>                           
-        
-        
+                                                                        // Xử lý khi nhấn nút Refuse Freelancer
+                                                                        $('.refuse-freelancer').on('click', function () {
+                                                                            var applyID = $(this).closest('.modal').find('.apply-id').val();
+                                                                            changeFreelancerStatus(applyID, "reject", $(this));
+                                                                        });
 
+                                                                        // Xử lý khi nhấn nút Approve Freelancer
+                                                                        $('.approve-freelancer').on('click', function () {
+                                                                            var applyID = $(this).closest('.modal').find('.apply-id').val();
+                                                                            changeFreelancerStatus(applyID, "approve", $(this));
+                                                                        });
 
-    <script>
-    $(document).ready(function () {
-        // Refuse Freelancer
-        $('.refuse-freelancer').on('click', function () {
-            var applyID = $(this).closest('.modal').find('.apply-id').val();
-            console.log(applyID);
-            changeFreelancerStatus(applyID, "reject", $(this));
-        });
+                                                                        // Hàm thay đổi trạng thái Freelancer
+                                                                        function changeFreelancerStatus(applyID, actionType, buttonClicked) {
+                                                                            $.ajax({
+                                                                                url: '/Job_IT_For_Freelancer_G5/ConnectFreelancer',
+                                                                                type: 'POST',
+                                                                                data: {postID: applyID, type: actionType},
+                                                                                success: function (response) {
+                                                                                    if (response.success) {
+                                                                                        var statusBadge = $('#status-' + applyID);
+                                                                                        var statusText = actionType === "reject" ? "Rejected" : "Approved";
+                                                                                        var badgeClass = actionType === "reject" ? "bg-danger-light" : "bg-success-light";
 
-        // Approve Freelancer
-        $('.approve-freelancer').on('click', function () {
-            var applyID = $(this).closest('.modal').find('.apply-id').val();
-            console.log(applyID);
-            changeFreelancerStatus(applyID, "approve", $(this));
-        });
+                                                                                        // Cập nhật badge trạng thái
+                                                                                        statusBadge
+                                                                                                .removeClass()
+                                                                                                .addClass('badge checked badge-pill ' + badgeClass)
+                                                                                                .text(statusText);
 
-        function changeFreelancerStatus(applyID, actionType, buttonClicked) {
-            $.ajax({
-                url: '/Job_IT_For_Freelancer_G5/ConnectFreelancer',
-                type: 'POST',
-                data: {postID: applyID, type: actionType},
-                success: function (response) {
-                    
-                    if (response.success) {
-                        var statusBadge = $('#status-' + applyID);
-                        var statusText = actionType === "reject" ? "Rejected" : "Approved";
-                        console.log(actionType);
-                        var badgeClass = actionType === "reject" ? "bg-danger-light" : "bg-success-light";
+                                                                                        // Ẩn modal hiện tại
+                                                                                        buttonClicked.closest('.modal').modal('hide');
 
-                        statusBadge
-                            .removeClass()
-                            .addClass('badge checked badge-pill ' + badgeClass)
-                            .text(statusText);
+                                                                                        // Hiển thị thông báo thành công và mở modal success-milestone
+                                                                                        showSuccessNotification(response.message, applyID);
+                                                                                    } else {
+                                                                                        console.error('Error:', response.message);
+                                                                                        showErrorNotification('Failed to update status.');
+                                                                                    }
+                                                                                },
+                                                                                error: function (xhr, status, error) {
+                                                                                    console.error('Error:', error);
+                                                                                    showErrorNotification('An error occurred while processing your request.');
+                                                                                }
+                                                                            });
+                                                                        }
 
-                        buttonClicked.closest('.modal').modal('hide');
+                                                                        // Hàm hiển thị thông báo thành công
+                                                                        function showSuccessNotification(message, applyID) {
+                                                                            Swal.fire({
+                                                                                icon: 'success',
+                                                                                title: 'Notification',
+                                                                                text: message,
+                                                                                confirmButtonText: 'OK'
+                                                                            }).then((result) => {
+                                                                                if (result.isConfirmed) {
+                                                                                    // Hiển thị modal success-milestone
+                                                                                    $('#success-milestone' + applyID).modal('show');
 
-                        // Show success notification and open email modal
-                        showSuccessNotification(response.message, applyID);
-                    } else {
-                        console.error('Error:', response.message);
-                        showErrorNotification('Failed to update status.');
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error:', error);
-                    showErrorNotification('An error occurred while processing your request.');
-                }
-            });
-        }
+                                                                                    // Ẩn nút Connect và Refuse, hiển thị nút Đã Connect
+                                                                                    $('#ApproveAndRefuse' + applyID).hide();
+                                                                                    $('#connectedBtn' + applyID).show();
 
-        function showSuccessNotification(message, applyID) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Notification',
-                text: message,
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Open the success milestone modal
-                    $('#success-milestone' + applyID).modal('show');
-                }
-            });
-        }
-    });
-</script>
+                                                                                    // Lưu trạng thái vào localStorage
+                                                                                    var appliedIDs = JSON.parse(localStorage.getItem('appliedIDs')) || {};
+                                                                                    appliedIDs[applyID] = 'connected';
+                                                                                    localStorage.setItem('appliedIDs', JSON.stringify(appliedIDs));
+                                                                                }
+                                                                            });
+                                                                        }
+
+                                                                        // Xử lý gửi email qua AJAX
+                                                                        $('form[id^="emailForm"]').on('submit', function (e) {
+                                                                            e.preventDefault();
+
+                                                                            var form = $(this);
+                                                                            var applyID = form.attr('id').replace('emailForm', '');
+
+                                                                            $.ajax({
+                                                                                url: form.attr('action'),
+                                                                                type: 'POST',
+                                                                                data: form.serialize(),
+                                                                                success: function (response) {
+                                                                                    if (response.success) {
+                                                                                        Swal.fire({
+                                                                                            icon: 'success',
+                                                                                            title: 'Email Sent',
+                                                                                            text: response.message
+                                                                                        }).then((result) => {
+                                                                                            if (result.isConfirmed) {
+                                                                                                // Đóng modal gửi email sau khi gửi thành công
+                                                                                                $('#success-milestone' + applyID).modal('hide');
+
+                                                                                                // Ẩn nút Connect và Refuse, hiển thị nút Đã Connect
+                                                                                                $('#ApproveAndRefuse' + applyID).hide();
+                                                                                                $('#connectedBtn' + applyID).show();
+
+                                                                                                // Lưu trạng thái vào localStorage
+                                                                                                var appliedIDs = JSON.parse(localStorage.getItem('appliedIDs')) || {};
+                                                                                                appliedIDs[applyID] = 'connected';
+                                                                                                localStorage.setItem('appliedIDs', JSON.stringify(appliedIDs));
+                                                                                            }
+                                                                                        });
+                                                                                    } else {
+                                                                                        Swal.fire({
+                                                                                            icon: 'error',
+                                                                                            title: 'Error',
+                                                                                            text: response.message
+                                                                                        });
+                                                                                    }
+                                                                                },
+                                                                                error: function (xhr, status, error) {
+                                                                                    Swal.fire({
+                                                                                        icon: 'error',
+                                                                                        title: 'Error',
+                                                                                        text: 'An error occurred while sending the email.'
+                                                                                    });
+                                                                                }
+                                                                            });
+                                                                        });
+                                                                    });
+
+        </script>
 
 
 

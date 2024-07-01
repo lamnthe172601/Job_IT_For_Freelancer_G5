@@ -5,7 +5,6 @@
 package dal;
 
 import Models.*;
-import MutiModels.SkillFreelancer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -231,7 +230,7 @@ public class RecruiterDAO extends DBContext {
                         rs.getString("phone_contact")
                 );
 
-                list.add(new JobApply(rs.getInt("applyID"), en, post, rs.getString("status"), rs.getDate("dateApply")));
+                list.add(new JobApply(rs.getInt("applyID"), en, post, rs.getString("status"), rs.getDate("dateApply"), rs.getString("Resume")));
             }
         } catch (SQLException e) {
         }
