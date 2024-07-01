@@ -57,7 +57,7 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                           <ul class="main-nav">
+                            <ul class="main-nav">
                                 <li class="active has-submenu">
                                     <a href="home">Home <i class="fas "></i></a>
 
@@ -114,11 +114,11 @@
                                 </li>
                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
 
-                               
+
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
-                            <li><a href="chats.html"><img src="assets/img/icon/message-chat-icon.svg" alt="Img"></a></li>
+
                             <li class="dropdown">
                                 <a data-bs-toggle="dropdown" href="javascript:void(0);"><img src="assets/img/icon/notification-bell-icon.svg" alt="Img"></a>
                                 <div class="dropdown-menu notifications">
@@ -175,7 +175,7 @@
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="notification">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md">
                                                             <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-4.jpg">
@@ -219,9 +219,8 @@
                                     <a class="dropdown-item" href="manage-projects.html"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
                                     <a class="dropdown-item" href="favourites.html"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Subscription</a>
                                     <a class="dropdown-item" href="deposit-funds.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
-                                    <a class="dropdown-item" href="chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
                                     <a class="dropdown-item" href="profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                    <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                    <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -268,8 +267,8 @@
                                                     <li>
                                                         <a href="ExpiredProjects">Expired Projects</a>
                                                     </li>
-                                                    
-                                                    
+
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
@@ -325,7 +324,7 @@
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="index.html" class="nav-link">
+                                                <a href="logout" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-11.svg" alt="Img"> Logout
                                                 </a>
                                             </li>
@@ -334,20 +333,18 @@
                                 </div>
                             </div>
                         </div>
-                         <div class="col-xl-9 col-lg-8">
-                            <div class="page-title">
-                                <h3>Manage Projects</h3>
-                            </div>
+                        <div class="col-xl-9 col-lg-8">
+
                             <nav class="user-tabs mb-4">
                                 <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
-                                    
+
                                     <li class="nav-item">
                                         <a class="nav-link " href="manageJobsPosts">Manage jobs</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" href="ManageApplication">All applicants</a>
                                     </li>
-                                    
+
                                     <li class="nav-item">
                                         <a class="nav-link " href="CompletedProjects">Completed Projects</a>
                                     </li>
@@ -361,40 +358,51 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="title-head d-flex justify-content-between align-items-center mb-4">
-                                            <h4 class="mb-0">Task</h4>
+
                                             <a href="#add-milestone" class="login-btn btn-primary" data-bs-toggle="modal">Add Task</a>
                                         </div>
                                         <div class="table-responsive table-box manage-projects-table">
                                             <table class="table table-center table-hover datatable no-sort">
                                                 <thead class="thead-pink">
                                                     <tr>
-                                                        <th>Name Freelancer</th>
-                                                        <th>Milestones</th>
-                                                        <th>Description</th>
-                                                        <th>Contact</th>
-                                                        <th>Status</th>
+                                                        <th>NAME</th>
+                                                        <th>RESUME</th>
+                                                        <th>STATUS</th>
+                                                        <th>INFORMATION</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${listapply}" var="listapply">
-                                                    <tr>
-                                                        <td>${listapply.freelancer.name()}</td>
-                                                        <td>${listapply.dateApply}</td>
-                                                        <td>
-                                                            ${listapply.post.title}
-                                                        </td>
-                                                        <td>${listapply.freelancer.email}</td>
-                                                        <td><span class="badge badge-pill bg-success-light">Completed</span></td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
-                                                                    <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
+                                                        <tr>
+                                                            <td>
+                                                                ${listapply.freelancer.name()}<br>
+                                                                <div class="applied">Applied:<a href="https://civi.uxper.co/jobs/development-it/sr-backend-go-developer-crypto-industry/" target="_blank">
+                                                                        <span> ${listapply.post.title}</span>
+                                                                        <i class="fas fa-external-link-alt"></i>
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+
+                                                            </td>
+                                                            <td>${listapply.dateApply}</td>
+                                                            <td><span class="badge checked  badge-pill ${listapply.status == 'Pending' ? 'bg-warning-light' : (listapply.status == 'Approve' ? 'bg-success-light' : 'bg-warning-light')}">
+                                                                    ${listapply.status}
+                                                                </span><br>
+                                                                <span class="applied-time">Applied:June 20, 2024</span></td>
+                                                            <td>${listapply.freelancer.phone}
+                                                                <br>${listapply.freelancer.email}</td>
+
+                                                            <td>
+                                                                <div class="action-table-data">
+                                                                    <div class="edit-delete-action m-0">
+                                                                        <a style="margin-right:  15px;" href="javascript:void(0);"><i class="far fa-eye"></i></a>
+                                                                        <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
+                                                                        <a href="javascript:void(0);"><i class="feather-trash-2"></i></a>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
                                                     </c:forEach>
                                                 </tbody>
                                             </table>
@@ -514,8 +522,8 @@
         </div>
 
 
-       <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
-                                        
+        <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+
         </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>

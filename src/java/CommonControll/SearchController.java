@@ -2,9 +2,7 @@ package CommonControll;
 
 import Models.*;
 import dal.FreelancerDAO;
-import dal.HomeDAO;
 import dal.PostDAO;
-import dal.RecruiterDAO;
 import java.io.IOException;
 import java.util.List;
 import jakarta.servlet.ServletException;
@@ -12,8 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
+
 
 @WebServlet(name = "SearchController", urlPatterns = {"/search"})
 public class SearchController extends HttpServlet {
@@ -30,9 +27,9 @@ public class SearchController extends HttpServlet {
 
 
         if ("post".equals(option)) {
-            List<Post> posts = postdao.getSearch(searchInput);
-            request.setAttribute("posts", posts);
-            request.getRequestDispatcher("views/searchpost.jsp").forward(request, response);
+//            List<Post> posts = postdao.getSearch(searchInput);
+//            request.setAttribute("posts", posts);
+//            request.getRequestDispatcher("views/searchpost.jsp").forward(request, response);
         } else {
 
             List<Freelancer> freelancers = freedao.getSearchFreebySkill(searchInput);

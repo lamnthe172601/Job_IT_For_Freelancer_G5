@@ -7,6 +7,7 @@ package dal;
 import Models.Categories;
 import Models.Company;
 import Models.Duration;
+import Models.ExpertiseSkill;
 import Models.JobType;
 import Models.Post;
 
@@ -15,6 +16,7 @@ import Models.Recruiter;
 import Models.TeamNumber;
 import MutiModels.JobApply;
 import Models.SkillSet;
+import MutiModels.ExpiredSkillSet;
 import MutiModels.PostBasic;
 import MutiModels.RecruiterBasic;
 import java.sql.PreparedStatement;
@@ -23,6 +25,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PostDAO extends DBContext {
 
@@ -40,6 +44,7 @@ public class PostDAO extends DBContext {
                             new JobType(rs.getInt("jobTypeID")), // Assumes JobType has a constructor that accepts an int
                             new Duration(rs.getInt("durationID")), // Assumes Duration has a constructor that accepts an int
                             rs.getDate("datePost"),
+                            rs.getDate("expired"),
                             rs.getInt("quantity"),
                             rs.getString("description"),
                             rs.getInt("budget"),
@@ -54,45 +59,6 @@ public class PostDAO extends DBContext {
             }
         }
         return posts;
-    }
-
-    public List<Post> getSearch(String title) {
-        List<Post> list = new ArrayList<>();
-        DAO teDao = new DAO();
-        RecruiterDAO reDao = new RecruiterDAO();
-        DurationDAO duDAO = new DurationDAO();
-        JobTypeDAO joDAO = new JobTypeDAO();
-        CategoriesDAO catDAO = new CategoriesDAO();
-
-        String query = """
-                       select postID,title,[image], job_type_ID, durationID,date_post,quantity,[description],budget, [location] ,skill, recruiterID,caID
-                                      from Post
-                                   where title like ?'""";
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, "%" + title + "%");
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                String tt = rs.getString(3);
-                String Im = rs.getString(2);
-                int pid = rs.getInt(1);
-                int qtt = rs.getInt(4);
-                int bg = rs.getInt(6);
-                Date dp = rs.getDate(5);
-                String loc = rs.getString(7);
-                String des = rs.getString(8);
-                String sk = rs.getString(9);
-
-                Recruiter recruiterID = reDao.getRecruiterProfileByRecruiterID(rs.getInt(10));
-                Duration durationID = duDAO.getDurationByDRid(rs.getInt(11));
-                JobType job_type_ID = joDAO.getJobTypeByJTID(rs.getInt(12));
-                Categories caID = catDAO.getCategoryByID(rs.getInt(13));
-                list.add(new Post(pid, tt, Im, job_type_ID, durationID, dp, qtt, des, bg, loc, sk, recruiterID, caID, rs.getBoolean("status"), rs.getInt("checking")));
-            }
-        } catch (SQLException e) {
-        }
-        return null;
     }
 
     public List<Post> getPostByRecruiterID(int pid) {
@@ -117,7 +83,7 @@ public class PostDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -143,7 +109,7 @@ public class PostDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
 
             }
         } catch (SQLException e) {
@@ -166,29 +132,102 @@ public class PostDAO extends DBContext {
         return maxPostID;
     }
 
-    public boolean createPost(String title, String image, int jobTypeId, int durationId,
+    public List<ExpiredSkillSet> getAllExpertiseSkillSet(int id) {
+        List<ExpiredSkillSet> posts = new ArrayList<>();
+        String query = """
+                      SELECT s.skill_set_ID, s.skill_set_name, ex.ExpertiseID, ex.ExpertiseName
+                           FROM Skill_Set s
+                           join Expertise ex on s.ExpertiID = ex.ExpertiseID
+                           where ExpertiID =?""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ExpertiseSkill es = new ExpertiseSkill(rs.getInt("ExpertiseID"), rs.getString("ExpertiseName"));
+                SkillSet ss = new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name"));
+                posts.add(new ExpiredSkillSet(ss, es));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
+
+    public List<ExpertiseSkill> getAllExpertiseSkill() {
+        List<ExpertiseSkill> posts = new ArrayList<>();
+        String query = """
+                       SELECT *
+                         FROM Expertise""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                posts.add(new ExpertiseSkill(rs.getInt("ExpertiseID"), rs.getString("ExpertiseName")));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
+
+    public boolean createPost(String title, String image, int jobTypeId, int durationId, String expired,
             int quantity, String description, int budget, String location, String skill,
             int recruiterId, int status, int caId, int checking) throws SQLException {
-        String sql = "INSERT INTO [dbo].[Post] ([title], [image], [job_type_ID], [durationID], [date_post], [quantity], [description], [budget], [location], [skill], [recruiterID], [status], [caID], [checking]) "
-                + "VALUES (?, ?, ?, ?, GETDATE(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = """
+                     INSERT INTO [dbo].[Post]
+                                ([title]
+                                ,[image]
+                                ,[job_type_ID]
+                                ,[durationID]
+                                ,[date_post]
+                                ,[expired]
+                                ,[quantity]
+                                ,[description]
+                                ,[budget]
+                                ,[location]
+                                ,[skill]
+                                ,[recruiterID]
+                                ,[status]
+                                ,[caID]
+                                ,[checking])
+                          VALUES
+                                (?
+                                ,?
+                                ,?
+                                ,?
+                                ,GETDATE()
+                                ,?
+                                ,?
+                                ,?
+                                ,?
+                                ,?
+                                ,?
+                                ,?
+                                ,?
+                                ,?
+                                ,?)""";
 
         try {
 
             PreparedStatement statement = connection.prepareStatement(sql);
-
             statement.setString(1, title);
             statement.setString(2, image);
             statement.setInt(3, jobTypeId);
             statement.setInt(4, durationId);
-            statement.setInt(5, quantity);
-            statement.setString(6, description);
-            statement.setInt(7, budget);
-            statement.setString(8, location);
-            statement.setString(9, skill);
-            statement.setInt(10, recruiterId);
-            statement.setInt(11, status);
-            statement.setInt(12, caId);
-            statement.setInt(13, checking);
+            statement.setString(5, expired);
+            statement.setInt(6, quantity);
+            statement.setString(7, description);
+            statement.setInt(8, budget);
+            statement.setString(9, location);
+            statement.setString(10, skill);
+            statement.setInt(11, recruiterId);
+            statement.setInt(12, status);
+            statement.setInt(13, caId);
+            statement.setInt(14, checking);
 
             int rowsInserted = statement.executeUpdate();
             return rowsInserted > 0;
@@ -510,19 +549,19 @@ public class PostDAO extends DBContext {
         }
         return 0;
     }
-
-    public void applyJob(int id, String postID, String date) {
+    
+    public void applyJob(int id, String postID, String rerume) {
         String sql = """
                      insert into JobApply
-                     values(?,?,'Pending',?)
+                     values(?,?,'Pending',GETDATE(),?)
                      """;
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             statement.setString(2, postID);
-            statement.setString(3, date);
+            statement.setString(3, rerume);
             statement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
@@ -703,8 +742,8 @@ public class PostDAO extends DBContext {
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
-
-                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                
+                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -762,6 +801,7 @@ public class PostDAO extends DBContext {
                             job,
                             du,
                             rs.getDate("date_post"),
+                            rs.getDate("expired"),
                             rs.getInt("quantity"),
                             rs.getString("description"),
                             rs.getInt("budget"),
@@ -849,7 +889,7 @@ public class PostDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("re_recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getBoolean("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -857,10 +897,6 @@ public class PostDAO extends DBContext {
         return list;
     }
 
-    public static void main(String[] args) {
-        PostDAO d = new PostDAO();
+  
 
-        System.out.println(d.getImageByPostId(54));
-
-    }
 }

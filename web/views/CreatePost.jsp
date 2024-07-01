@@ -232,7 +232,25 @@
                     </nav>
                 </div>
             </header>
-            <div class="content">
+
+            <div class="bread-crumb-bar">
+                <div class="container">
+                    <div style="padding: 10px;" class="row align-items-center ">
+                        <div class="col-md-12 col-12 text-center">
+                            <div class="breadcrumb-list">
+                                <h3>My List Post Project</h3>
+                                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="home"> Home</a></li>
+                                        <li class="breadcrumb-item" aria-current="page">My List Post</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:0px 0 30px" class="content">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -242,26 +260,23 @@
                                 <form id="jobForm" action="CreatePost" method="post" enctype="multipart/form-data">
                                     <div class="title-box widget-box">
                                         <div class="row">
-
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="mb-2">
-                                                    <label class="focus-label">Project Title</label>
+                                                    <label class="focus-label" for="projectTitle">Project Title</label>
                                                     <input type="text" class="form-control" name="projectTitle" id="projectTitle">
                                                     <div class="error" id="error-projectTitle"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="ms-3">
-                                                    <label class="image-upbtn focus-label">
-                                                        Upload Image
-                                                    </label>
-                                                    <input class="form-control" type="file" id="imgInp" name="profileImage">
+                                                    <label class="image-upbtn focus-label" for="imgInp">Upload Image</label>
+                                                    <input class="form-control" type="file" id="imgInp" name="profileImage" accept="image/*">
                                                     <p>Max Image size 600*300</p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label">Jobs Type</label>
+                                                    <label class="focus-label" for="jobsType">Jobs Type</label>
                                                     <select class="form-control select" name="jobsType" id="jobsType">
                                                         <option value="0">Select</option>
                                                         <c:forEach items="${alljobtype}" var="jobtype">
@@ -273,7 +288,7 @@
                                             </div>
                                             <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label">Project Duration</label>
+                                                    <label class="focus-label" for="projectDuration">Project Duration</label>
                                                     <select class="form-control select" name="projectDuration" id="projectDuration">
                                                         <option value="0">Select</option>
                                                         <c:forEach items="${allDuration}" var="du">
@@ -283,51 +298,65 @@
                                                     <div class="error" id="error-projectDuration"></div>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-4 col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="focus-label" for="expired">Expired</label>
+                                                    <input type="date" name="expired" id="expired" class="form-control">
+                                                    <div class="error" id="error-expired"></div>
+                                                </div>
+                                            </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label">Target</label>
-                                                    <input type="text" class="form-control" name="target" id="target">
+                                                    <label class="focus-label" for="target">Quantity</label>
+                                                    <input type="number" class="form-control" name="target" id="target">
                                                     <div class="error" id="error-target"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label">Location</label>
+                                                    <label class="focus-label" for="location">Location</label>
                                                     <input type="text" class="form-control" name="location" id="location">
                                                     <div class="error" id="error-location"></div>
                                                 </div>
                                             </div>
-                                           
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="title-content p-0">
-                                                    <div class="title-detail">
-                                                        <h3>Skill Set</h3>
-                                                        <div class="row">
-                                                            <c:forEach items="${skill}" var="i"> 
-                                                                <div class="col-md-2">
-                                                                    <div class="input-block">
-                                                                        <input type="checkbox" name="skill"  value="${i.skill_set_name}">
-                                                                        <label ">${i.skill_set_name}</label>
+                                            <div class="col-lg-4 col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="focus-label">Skill</label>
+                                                    <div class="title-content p-0">
+                                                        <div class="title-detail">
+                                                            <c:forEach items="${ExpertiseSkill}" var="du">
+                                                                <div class="expertise-group">
+                                                                    <h3>
+                                                                        <input type="checkbox" id="expertise-${du.expertiseName}" class="form-check-input expertise-checkbox">
+                                                                        <label class="form-check-label" for="expertise-${du.expertiseName}">${du.expertiseName}</label>
+                                                                    </h3>
+                                                                    <div class="d-flex flex-wrap skill-checkboxes d-none">
+                                                                        <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i">
+                                                                            <div class="form-check me-3 mb-2">
+                                                                                <input class="form-check-input" type="checkbox" id="skill-${i.skillSetID.skill_set_ID}" name="skill" value="${i.skillSetID.skill_set_ID}">
+                                                                                <label class="form-check-label" for="skill-${i.skillSetID.skill_set_ID}">
+                                                                                    ${i.skillSetID.skill_set_name}
+                                                                                </label>
+                                                                            </div>
+                                                                        </c:forEach>
                                                                     </div>
                                                                 </div>
                                                             </c:forEach>
+                                                            <div class="error" id="error-skill"></div>
                                                         </div>
-                                                        <div class="error" id="error-skill"></div>
                                                     </div>
                                                 </div>
                                             </div>
-
-
-                                            <div class="col-lg-3 col-md-12">
+                                            <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label">From ($)</label>
-                                                    <input type="text" class="form-control" name="budgetFrom" id="budgetFrom" placeholder="15">
+                                                    <label class="focus-label" for="budgetFrom">From ($)</label>
+                                                    <input type="number" class="form-control" name="budgetFrom" id="budgetFrom" placeholder="15">
                                                     <div class="error" id="error-budgetFrom"></div>
                                                 </div>
-                                            </div>                                                 
-                                            <div class="col-lg-6 col-md-12">
+                                            </div>
+                                            <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label">Categories Name</label>
+                                                    <label class="focus-label" for="categoriesName">Categories Name</label>
                                                     <select class="form-control select" name="categoriesName" id="categoriesName">
                                                         <option value="0">Select</option>
                                                         <c:forEach items="${allCate}" var="allcate">
@@ -339,7 +368,7 @@
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label">Description of Projects</label>
+                                                    <label class="focus-label" for="description">Description of Projects</label>
                                                     <textarea class="form-control" name="description" id="description"></textarea>
                                                     <div class="error" id="error-description"></div>
                                                 </div>
@@ -356,6 +385,25 @@
                                     </div>
                                 </form>
 
+
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        var expertiseCheckboxes = document.querySelectorAll('.expertise-checkbox');
+
+                                        expertiseCheckboxes.forEach(function (checkbox) {
+                                            checkbox.addEventListener('change', function () {
+                                                var skillCheckboxes = this.closest('.expertise-group').querySelector('.skill-checkboxes');
+                                                if (this.checked) {
+                                                    skillCheckboxes.classList.remove('d-none');
+                                                    skillCheckboxes.classList.add('d-flex');
+                                                } else {
+                                                    skillCheckboxes.classList.remove('d-flex');
+                                                    skillCheckboxes.classList.add('d-none');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
 
                             </div>
                         </div>
@@ -378,153 +426,220 @@
                 </div>
             </div>
 
+
             <script>
-                document.getElementById('jobForm').addEventListener('submit', function (event) {
-                    event.preventDefault(); // Prevent the default form submission
-
-                    // Clear previous error messages
-                    clearErrors();
-
-                    // Validate the form
-                    var isValid = validateForm();
-
-                    if (isValid) {
-                        var formData = new FormData(this);
-
-                        // Send the form data using AJAX
-                        var xhr = new XMLHttpRequest();
-                        xhr.open("POST", this.action, true);
-                        xhr.onload = function () {
-                            if (xhr.status === 200) {
-                                showModal();
-                            } else {
-                                console.error('Form submission failed.');
-                            }
-                        };
-                        xhr.send(formData);
+                document.addEventListener('DOMContentLoaded', function () {
+                    function validateProjectTitle() {
+                        var projectTitle = document.getElementById('projectTitle').value;
+                        if (projectTitle.trim() === '') {
+                            document.getElementById('error-projectTitle').textContent = 'Project Title is required.';
+                            return false;
+                        } else {
+                            document.getElementById('error-projectTitle').textContent = '';
+                            return true;
+                        }
                     }
+
+                    function validateJobsType() {
+                        var jobsType = document.getElementById('jobsType').value;
+                        if (jobsType === '0') {
+                            document.getElementById('error-jobsType').textContent = 'Please select a Job Type.';
+                            return false;
+                        } else {
+                            document.getElementById('error-jobsType').textContent = '';
+                            return true;
+                        }
+                    }
+
+                    function validateProjectDuration() {
+                        var projectDuration = document.getElementById('projectDuration').value;
+                        if (projectDuration === '0') {
+                            document.getElementById('error-projectDuration').textContent = 'Please select a Project Duration.';
+                            return false;
+                        } else {
+                            document.getElementById('error-projectDuration').textContent = '';
+                            return true;
+                        }
+                    }
+
+                    function validateTarget() {
+                        var target = document.getElementById('target').value;
+                        if (target.trim() === '') {
+                            document.getElementById('error-target').textContent = 'Target is required.';
+                            return false;
+                        } else if (isNaN(target)) {
+                            document.getElementById('error-target').textContent = 'Target must be a number.';
+                            return false;
+                        } else if (target >= 1000000000) {
+                            document.getElementById('error-target').textContent = 'Target must be less than 1,000,000,000.';
+                            return false;
+                        } else {
+                            document.getElementById('error-target').textContent = '';
+                            return true;
+                        }
+                    }
+
+                    function validateLocation() {
+                        var location = document.getElementById('location').value;
+                        if (location.trim() === '') {
+                            document.getElementById('error-location').textContent = 'Location is required.';
+                            return false;
+                        } else {
+                            document.getElementById('error-location').textContent = '';
+                            return true;
+                        }
+                    }
+
+                    function validateSkills() {
+                        var skills = document.querySelectorAll('input[name="skill"]:checked');
+                        if (skills.length === 0) {
+                            document.getElementById('error-skill').textContent = 'Please select a Skill.';
+                            return false;
+                        } else if (skills.length < 3 || skills.length > 5) {
+                            document.getElementById('error-skill').textContent = 'Please select between 3 and 5 skills.';
+                            return false;
+                        } else {
+                            document.getElementById('error-skill').textContent = '';
+                            return true;
+                        }
+                    }
+
+                    function validateBudgetFrom() {
+                        var budgetFrom = document.getElementById('budgetFrom').value;
+                        if (budgetFrom.trim() === '' || isNaN(budgetFrom) || budgetFrom <= 0) {
+                            document.getElementById('error-budgetFrom').textContent = 'Please enter a valid budget amount.';
+                            return false;
+                        } else {
+                            document.getElementById('error-budgetFrom').textContent = '';
+                            return true;
+                        }
+                    }
+
+                    function validateCategoriesName() {
+                        var categoriesName = document.getElementById('categoriesName').value;
+                        if (categoriesName === '0') {
+                            document.getElementById('error-categoriesName').textContent = 'Please select a Category.';
+                            return false;
+                        } else {
+                            document.getElementById('error-categoriesName').textContent = '';
+                            return true;
+                        }
+                    }
+
+                    function validateDescription() {
+                        var description = document.getElementById('description').value;
+                        if (description.trim() === '') {
+                            document.getElementById('error-description').textContent = 'Description is required.';
+                            return false;
+                        } else {
+                            document.getElementById('error-description').textContent = '';
+                            return true;
+                        }
+                    }
+
+                    function validateExpired() {
+                        var expired = document.getElementById('expired').value;
+                        var today = new Date().toISOString().split('T')[0];
+                        if (expired.trim() === '') {
+                            document.getElementById('error-expired').textContent = 'Expired date is required.';
+                            return false;
+                        } else if (expired < today) {
+                            document.getElementById('error-expired').textContent = 'Expired date cannot be before today.';
+                            return false;
+                        } else {
+                            document.getElementById('error-expired').textContent = '';
+                            return true;
+                        }
+                    }
+
+                    document.getElementById('projectTitle').addEventListener('input', validateProjectTitle);
+                    document.getElementById('jobsType').addEventListener('change', validateJobsType);
+                    document.getElementById('projectDuration').addEventListener('change', validateProjectDuration);
+                    document.getElementById('target').addEventListener('input', validateTarget);
+                    document.getElementById('location').addEventListener('input', validateLocation);
+                    document.querySelectorAll('input[name="skill"]').forEach(function (checkbox) {
+                        checkbox.addEventListener('change', validateSkills);
+                    });
+                    document.getElementById('budgetFrom').addEventListener('input', validateBudgetFrom);
+                    document.getElementById('categoriesName').addEventListener('change', validateCategoriesName);
+                    document.getElementById('description').addEventListener('input', validateDescription);
+                    document.getElementById('expired').addEventListener('change', validateExpired);
+
+                    document.getElementById('jobForm').addEventListener('submit', function (event) {
+                        event.preventDefault(); // Prevent default form submission to handle via JavaScript
+
+                        var isValid = true;
+                        isValid &= validateProjectTitle();
+                        isValid &= validateJobsType();
+                        isValid &= validateProjectDuration();
+                        isValid &= validateTarget();
+                        isValid &= validateLocation();
+                        isValid &= validateSkills();
+                        isValid &= validateBudgetFrom();
+                        isValid &= validateCategoriesName();
+                        isValid &= validateDescription();
+                        isValid &= validateExpired();
+
+                        if (isValid) {
+                            var formData = new FormData(this);
+
+                            // Perform AJAX request to submit form data
+                            fetch(this.action, {
+                                method: 'POST',
+                                body: formData
+                            })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Network response was not ok');
+                                        }
+                                        return response.text();
+                                    })
+                                    .then(text => {
+                                        
+                                        try {
+                                            return JSON.parse(text);
+                                        } catch (error) {
+                                            
+                                            throw new Error('Invalid JSON response: ' + text);
+                                        }
+                                    })
+                                    .then(data => {
+                                        if (data.success) {
+                                            showSuccessNotification('Job created successfully!', '/Job_IT_For_Freelancer_G5/manageJobsPosts'); 
+                                            this.reset(); 
+                                        } else {
+                                            
+                                            throw new Error(data.message || 'An error occurred while creating the job.');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: error.message || 'An error occurred while creating the job.',
+                                            confirmButtonText: 'OK'
+                                        });
+                                    });
+                        }
+                    });
                 });
 
-                function clearErrors() {
-                    var errorElements = document.querySelectorAll('.error');
-                    errorElements.forEach(function (element) {
-                        element.textContent = '';
+                function showSuccessNotification(message, redirectUrl) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Notification',
+                        text: message,
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = redirectUrl;
+                        }
                     });
                 }
 
-                function validateForm() {
-                    var isValid = true;
-
-                    var projectTitle = document.getElementById('projectTitle').value;
-                    if (projectTitle.trim() === '') {
-                        document.getElementById('error-projectTitle').textContent = 'Project Title is required.';
-                        isValid = false;
-                    }
-
-                    var jobsType = document.getElementById('jobsType').value;
-                    if (jobsType === '0') {
-                        document.getElementById('error-jobsType').textContent = 'Please select a Job Type.';
-                        isValid = false;
-                    }
-
-                    var projectDuration = document.getElementById('projectDuration').value;
-                    if (projectDuration === '0') {
-                        document.getElementById('error-projectDuration').textContent = 'Please select a Project Duration.';
-                        isValid = false;
-                    }
-
-                    var target = document.getElementById('target').value;
-                    if (target.trim() === '') {
-                        document.getElementById('error-target').textContent = 'Target is required.';
-                        isValid = false;
-                    } else {
-
-                        if (isNaN(target)) {
-                            document.getElementById('error-target').textContent = 'Target must be a number.';
-                            isValid = false;
-
-                        } else if (target >= 1000000000) {
-                            document.getElementById('error-target').textContent = 'Target must be less than 1,000,000,000.';
-                            isValid = false;
-                        } else {
-                            document.getElementById('error-target').textContent = ''; // Clear the error message if everything is valid
-                        }
-                    }
-
-                    var location = document.getElementById('location').value;
-                    if (location.trim() === '') {
-                        document.getElementById('error-location').textContent = 'Location is required.';
-                        isValid = false;
-                    }
-
-                    var skills = document.querySelectorAll('input[name="skill"]:checked');
-                    if (skills.length === 0) {
-                        document.getElementById('error-skill').textContent = 'Please select a Skill.';
-                        isValid = false;
-                    } else if (skills.length < 3 || skills.length > 5) {
-                        document.getElementById('error-skill').textContent = 'Please select between 3 and 5 skills.';
-                        isValid = false;
-                    } else {
-                        document.getElementById('error-skill').textContent = ''; // Clear the error message if everything is valid
-                    }
-
-                    var budgetFrom = document.getElementById('budgetFrom').value;
-                    if (budgetFrom.trim() === '' || isNaN(budgetFrom) || budgetFrom <= 0) {
-                        document.getElementById('error-budgetFrom').textContent = 'Please enter a valid budget amount.';
-                        isValid = false;
-                    }
-
-                    var categoriesName = document.getElementById('categoriesName').value;
-                    if (categoriesName === '0') {
-                        document.getElementById('error-categoriesName').textContent = 'Please select a Category.';
-                        isValid = false;
-                    }
-
-                    var description = document.getElementById('description').value;
-                    if (description.trim() === '') {
-                        document.getElementById('error-description').textContent = 'Description is required.';
-                        isValid = false;
-                    }
-
-                    return isValid;
-                }
-
-                function showModal() {
-                    var modal = document.getElementById('successModal');
-                    var span = document.getElementsByClassName('close-btn')[0];
-                    var okButton = document.getElementById('okButton');
-                    var viewPostsButton = document.getElementById('viewPostsButton');
-
-                    modal.style.display = 'block';
-
-                    // When the user clicks on <span> (x), close the modal
-                    span.onclick = function () {
-                        modal.style.display = 'none';
-                        window.location.href = 'home'; // Redirect to home
-                    }
-
-                    // When the user clicks on OK button, close the modal and redirect to home
-                    okButton.onclick = function () {
-                        modal.style.display = 'none';
-                        window.location.href = 'manageJobsPosts'; // Redirect to home
-                    }
-
-                    // When the user clicks on View Posts button, redirect to manageJobsPosts
-                    viewPostsButton.onclick = function () {
-                        window.location.href = 'myListJobProrect'; // Redirect to manageJobsPosts
-                    }
-
-                    // When the user clicks anywhere outside of the modal, close it
-                    window.onclick = function (event) {
-                        if (event.target == modal) {
-                            modal.style.display = 'none';
-                            window.location.href = 'home'; // Redirect to home
-                        }
-                    }
-                }
             </script>
-
-
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
             <footer class="footer">
                 <div class="footer-top">
                     <div class="container">

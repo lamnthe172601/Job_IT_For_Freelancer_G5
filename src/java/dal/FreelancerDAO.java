@@ -50,6 +50,32 @@ public class FreelancerDAO extends DBContext {
         }
         return null;
     }
+    
+    public Freelancer getFreelancerByFreelancerId(int id) {
+        String query = "SELECT * FROM freelancer WHERE freelanceID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Freelancer(
+                            rs.getInt("freelanceID"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getString("image"),
+                            rs.getBoolean("gender"),
+                            rs.getDate("dob"),
+                            rs.getString("describe"),
+                            rs.getString("email__contact"),
+                            rs.getString("phone_contact")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // In chi tiết lỗi ra console
+
+        }
+        return null;
+    }
 
     public List<Experience> getExperienceById(int id) {
         List<Experience> list = new ArrayList<>();

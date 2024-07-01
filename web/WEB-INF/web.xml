@@ -207,6 +207,26 @@
     <servlet>
         <servlet-name>DeleteSkill</servlet-name>
         <servlet-class>AdminControlles.DeleteSkill</servlet-class>
+         </servlet>
+    <servlet>
+        <servlet-name>ApplyJobFormListPostControll</servlet-name>
+        <servlet-class>FreelancerControll.ApplyJobFormListPostControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApplyJobFromPostDetailControl</servlet-name>
+        <servlet-class>FreelancerControll.ApplyJobFromPostDetailControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RecruiterFavouritesControll</servlet-name>
+        <servlet-class>RecruiterControll.RecruiterFavouritesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListFreelancerControll</servlet-name>
+        <servlet-class>RecruiterControll.ListFreelancerControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewFreelancerProfileControll</servlet-name>
+        <servlet-class>RecruiterControll.ViewFreelancerProfileControll</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ReportPost</servlet-name>
@@ -435,6 +455,26 @@
     <servlet-mapping>
         <servlet-name>DeleteSkill</servlet-name>
         <url-pattern>/deleteSkill</url-pattern>
+        </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyJobFormListPostControll</servlet-name>
+        <url-pattern>/ApplyJobFormListPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyJobFromPostDetailControl</servlet-name>
+        <url-pattern>/ApplyJobFromPostDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecruiterFavouritesControll</servlet-name>
+        <url-pattern>/RecruiterFavourites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListFreelancerControll</servlet-name>
+        <url-pattern>/ListFreelancer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewFreelancerProfileControll</servlet-name>
+        <url-pattern>/ViewFreelancerProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ReportPost</servlet-name>
