@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:30:15 GMT -->
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/milestones.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:32:13 GMT -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -26,96 +26,15 @@
 
         <link rel="stylesheet" href="assets/plugins/feather/feather.css">
 
+        <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+        <link rel="stylesheet" href="assets/plugins/summernote/dist/summernote-lite.css">
+
+        <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
-
-
-
-        <style>
-
-            .filter-section {
-                background-color: #fff;
-                border: 1px solid #e0e0e0;
-                border-radius: 4px;
-                padding: 20px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-            }
-
-            .description::after {
-                content: '...';
-            }
-            .dataTables_wrapper .dataTables_paginate .paginate_button {
-                padding: 2px 6px; /* Giảm kích thước padding để nút nhỏ lại */
-                margin-left: 2px;
-                margin-right: 2px;
-                font-size: 12px;
-                color: #333;
-                background-color: #fff;
-                border: 1px solid #ddd;
-                border-radius: 3px;
-                cursor: pointer;
-            }
-
-            /* Tùy chỉnh nút được chọn */
-            .dataTables_wrapper .dataTables_paginate .paginate_button.current,
-            .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-                background-color: orange;
-                color: white !important;
-                border: 1px solid orange;
-            }
-
-            /* Thay đổi màu nút khi hover */
-            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-                background-color: orange;
-                color: white;
-                border: 1px solid orange;
-            }
-
-            /* Đảm bảo chiều cao cố định cho bảng và phần phân trang */
-            .dataTables_wrapper {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                min-height: 500px; /* Đặt chiều cao tối thiểu phù hợp với nội dung của bạn */
-            }
-
-            .dataTables_wrapper .dataTables_info {
-                order: 2;
-                text-align: center;
-                margin-top: 10px;
-            }
-
-            .dataTables_wrapper .dataTables_paginate {
-                order: 1;
-                margin-bottom: 10px;
-            }
-
-
-            .skill-container {
-                display: flex;
-                flex-wrap: wrap;
-            }
-
-            .skill {
-                margin-right: 10px; /* Khoảng cách giữa các kỹ năng */
-                padding: 5px 10px;
-                background-color: #f1f1f1;
-                border-radius: 3px;
-            }
-
-
-        </style>
-
-        <!-- DataTables CSS -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-
-        <!-- jQuery -->
-        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-        <!-- DataTables JS -->
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-
     </head>
     <body class="dashboard-page">
 
@@ -207,7 +126,7 @@
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
-                            <li><a href="chats.html"><img src="assets/img/icon/message-chat-icon.svg" alt="Img"></a></li>
+
                             <li class="dropdown">
                                 <a data-bs-toggle="dropdown" href="javascript:void(0);"><img src="assets/img/icon/notification-bell-icon.svg" alt="Img"></a>
                                 <div class="dropdown-menu notifications">
@@ -319,13 +238,14 @@
             </header>
 
 
-            <div class="content content-page">
+            <div class="content">
                 <div class="container">
                     <div class="row">
+
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/table-avatar-03.jpg" class="avatar-lg rounded-circle"></a>
+                                    <a href="freelancer-profile.html"><img alt="profile image" src="${recruiter.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
                                         <h3 class="mb-0"><a href="profile-settings.html">${recruiter.fullName()}</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
                                         <p class="mb-0">@${sessionScope.account.username}</p>
@@ -423,6 +343,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-xl-9 col-lg-8">
 
                             <nav class="user-tabs mb-4">
@@ -444,118 +365,27 @@
                                 </ul>
                             </nav>
 
-
-
-                            <div class="page-header user-active">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="page-title">All Post</h3>
-
-                                    </div>
-                                    <div class="col-auto">
-                                        <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
-                                            <i class="fas fa-filter"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div  class="filter-section" style="display: none;">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="nameFilter">Name</label>
-                                            <input type="text" class="form-control" id="nameFilter" placeholder="Enter name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="jobTypeFilter">Job type</label>
-                                            <select class="form-control" id="jobTypeFilter">
-                                                <option value="">All</option>
-                                                <c:forEach items="${alljobtype}" var="alljobtype">
-                                                    <option value="${alljobtype.jobName}">${alljobtype.jobName}</option>
-                                                </c:forEach>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="durationFilter">Duration</label>
-                                            <select class="form-control" id="durationFilter">
-                                                <option value="">All</option>
-                                                <c:forEach items="${allDuration}" var="allDuration">
-                                                    <option value="${allDuration.durationName}">${allDuration.durationName}</option>
-                                                </c:forEach>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="skillFlter">Skill</label>
-                                            <select class="form-control" id="skillFlter">
-
-                                                <option value="">All</option>
-                                                <c:forEach items="${skill}" var="skill">
-                                                    <option value="${skill.skill_set_name}">${skill.skill_set_name}</option>
-                                                </c:forEach>
-                                            </select>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="statusFilter">Status</label>
-                                            <select class="form-control" id="statusFilter">
-                                                <option value="">All</option>
-                                                <option value="ongoing">On going</option>
-                                                <option value="reject">Reject</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="checkingFilter">Checking</label>
-                                            <select class="form-control" id="checkingFilter">
-                                                <option value="">All</option>
-                                                <option value="pending">Pending</option>
-                                                <option value="approve">Approve</option>
-                                                <option value="reject">Reject</option>
-                                                <option value="suspended">Suspended</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-
                             <div class="my-projects-view">
                                 <div class="row">
                                     <div class="col-lg-12">
 
                                         <div class="table-responsive table-box manage-projects-table">
-                                            <table class="table table-center table-hover datatable ">
+                                            <table class="table table-center table-hover datatable no-sort">
                                                 <thead class="thead-pink">
-                                                    <tr>
-                                                        <th style="text-align: center;">Action</th>
-                                                        <th>PREVIEW</th>
+                                                    <tr>                                         
+                                                        <th style="text-align: center;">Action</th>                                                       
                                                         <th>TITLE</th>
                                                         <th>APPLICANTS</th>
                                                         <th>POSTED</th>
                                                         <th>EXPIRED</th>
                                                         <th>STATUS</th>
-                                                        <th>CHECKING</th> 
-
+                                                        <th>kkk</th>                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${listpost}" var="list">
                                                         <tr>
+                                                            
                                                             <td class="three-dots">
                                                                 <div class="action-table-data">
                                                                     <div class="edit-delete-action">
@@ -564,17 +394,30 @@
                                                                     <input type="hidden" class="user-id" id="${list.postID}">
                                                                     <a href="javascript:void(0);" class=" nav-link three-dot " data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" ></i></a>
                                                                     <div class="dropdown-menu user-menu-list typeChange">                                                                      
-                                                                        <c:if test='${list.status == true}'>
-                                                                            <a class="dropdown-item typeChange btn btn-sm " data-bs-toggle="modal" data-bs-target="#Suspend_user">
+                                                                        <c:if test='${list.status == 1}'>
+                                                                            <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Suspend_user">
                                                                                 <img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Reject Post
                                                                             </a>
+                                                                            
                                                                         </c:if>
-                                                                        <c:if test='${list.status == false}'>
-                                                                            <a class="dropdown-item typeChange btn btn-sm " data-bs-toggle="modal" data-bs-target="#Activate_user">
+                                                                        <c:if test='${list.status == 0}'>
+                                                                            <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Activate_user">
                                                                                 <img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Ongoing Post
                                                                             </a>
                                                                         </c:if>
+                                                                        <c:if test='${list.status == 3}'>
+                                                                            <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Activate_user">
+                                                                                <img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Ongoing Post
+                                                                            </a>
+                                                                        </c:if>
+                                                                        <c:if test='${list.status == 2}'>
+                                                                            <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Activate_user">
+                                                                                <img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Ongoing Post
+                                                                            </a>
+                                                                        </c:if>
+                                                              
                                                                     </div>
+
 
 
                                                                     <div class="modal custom-modal fade" id="Suspend_user" role="dialog">
@@ -661,7 +504,7 @@
                                                                                                 </div>
                                                                                                 <div class="col-lg-4">
                                                                                                     <div class="input-block">
-                                                                                                        <label class="focus-label">Jobs Type</label>
+                                                                                                        <label class="focus-label">Level</label>
                                                                                                         <select name="jobsType" class="form-control select">
                                                                                                             <c:forEach items="${alljobtype}" var="jobtype">
                                                                                                                 <option value="${jobtype.jobTypeID}" <c:if test="${jobtype.jobTypeID == list.jobTypeID.jobTypeID}">selected=""</c:if>>${jobtype.jobName}</option>
@@ -671,7 +514,7 @@
                                                                                                 </div>
                                                                                                 <div class="col-lg-4">
                                                                                                     <div class="input-block">
-                                                                                                        <label class="focus-label">Project Duration</label>
+                                                                                                        <label class="focus-label">Work Time</label>
                                                                                                         <select name="Duration" class="form-control select">
                                                                                                             <c:forEach items="${allDuration}" var="allDuration">
                                                                                                                 <option value="${allDuration.durationID}" <c:if test="${allDuration.durationID == list.durationID.durationID}">selected=""</c:if>>${allDuration.durationName}</option>
@@ -697,7 +540,7 @@
                                                                                                 </div>
                                                                                                 <div class="col-lg-3 ">
                                                                                                     <div class="input-block mb-3">
-                                                                                                        <label class="focus-label">From ($)</label>
+                                                                                                        <label class="focus-label">From($)/hours</label>
                                                                                                         <input type="text" class="form-control" name="budgetFrom" value="${list.budget}">
                                                                                                     </div>
                                                                                                 </div>
@@ -729,27 +572,10 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <script>
-                                                                                                    document.addEventListener('DOMContentLoaded', function () {
-                                                                                                        var expertiseCheckboxes = document.querySelectorAll('.expertise-checkbox');
 
-                                                                                                        expertiseCheckboxes.forEach(function (checkbox) {
-                                                                                                            checkbox.addEventListener('change', function () {
-                                                                                                                var skillCheckboxes = this.closest('.expertise-group').querySelector('.skill-checkboxes');
-                                                                                                                if (this.checked) {
-                                                                                                                    skillCheckboxes.classList.remove('d-none');
-                                                                                                                    skillCheckboxes.classList.add('d-flex');
-                                                                                                                } else {
-                                                                                                                    skillCheckboxes.classList.remove('d-flex');
-                                                                                                                    skillCheckboxes.classList.add('d-none');
-                                                                                                                }
-                                                                                                            });
-                                                                                                        });
-                                                                                                    });
-                                                                                                </script>
                                                                                                 <div class="col-lg-4">
                                                                                                     <div class="input-block">
-                                                                                                        <label class="focus-label">Categories Name</label>
+                                                                                                        <label class="focus-label">Position</label>
                                                                                                         <select class="form-control select" name="Categories">
                                                                                                             <c:forEach items="${allCate}" var="allcate">
                                                                                                                 <option value="${allcate.caID}" <c:if test="${allcate.caID == list.caID.caID}">selected=""</c:if>>${allcate.categoriesName}</option>
@@ -770,23 +596,19 @@
                                                                                             <button type="submit" class="btn btn-primary submit-btn">Update</button>
                                                                                         </div>
                                                                                     </form>
-
-
-
-
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                             </td>
-                                                            <td class="">
-                                                                <div class=""><img style="width: 60px; height: 40px;" src="${list.image}" alt="alt"/></div>
-                                                            </td>
+
                                                             <td class="titleList">
                                                                 <div class="title">${list.title}</div>
                                                             </td>
-                                                            <td class="APPLICANTS">
-                                                                <div class="APPLICANTS">${list.quantity}</div>
+                                                            <td class="APPLICANTS">                      
+                                                                <c:forEach items="${PostApplicationCount}" var="PostApplicationCount">
+                                                                <div class="APPLICANTS">${PostApplicationCount.totalApplications}/${list.quantity}</div>
+                                                                </c:forEach>
                                                             </td>
                                                             <td> 
                                                                 <div class="datePost">${list.datePost}</div>
@@ -795,10 +617,20 @@
                                                                 <div class="datePost">${list.expired}</div>
                                                             </td>      
                                                             <td class="StatusList">
-                                                                <span class="badge status ${list.status ? 'badge-pill bg-success-light' : 'badge-pill bg-danger-light'}">
-                                                                    ${list.status ? 'On going' : 'Reject'}
+                                                                <span class="badge status ${
+                                                                      list.status == 0 ? 'badge-pill bg-warning-light' :
+                                                                          list.status == 1 ? 'badge-pill bg-success-light' :
+                                                                          list.status == 2 ? 'badge-pill bg-purple-light' :
+                                                                          list.status == 3 ? 'badge-pill bg-warning-light' : ''
+                                                                      }">
+                                                                    ${
+                                                                    list.status == 0 ? 'Delete' :
+                                                                        list.status == 1 ? 'On-going' :
+                                                                        list.status == 2 ? 'Completed' :
+                                                                        list.status == 3 ? 'Expired' : ''
+                                                                    }
                                                                 </span>
-                                                            </td>                                                      
+                                                            </td>                                                     
                                                             <td class="CheckingList">
                                                                 <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
                                                                     ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}
@@ -819,82 +651,128 @@
             </div>
 
 
+            <footer class="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class=" col-lg-4 col-md-12">
+                                <div class="footer-bottom-logo">
+                                    <a href="index.html" class="menu-logo">
+                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                                    </a>
+                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                    <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
+                                </div>
+                            </div>
+                            <div class=" col-lg-8 col-md-12">
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Useful Links</h2>
+                                            <ul>
+                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
+                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
+                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
+                                                <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
+                                                <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Help & Support</h2>
+                                            <ul>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Other Links</h2>
+                                            <ul>
+                                                <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
+                                                <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
+                                                <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
+                                                <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
+                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="footer-widget footer-menu">
+                                            <h2 class="footer-title">Connect With Us</h2>
+                                            <ul>
+                                                <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
+                                                <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
+                                                <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
+                                                <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
+                                                <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
+                <div class="footer-bottom">
+                    <div class="container">
+
+                        <div class="copyright">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="copyright-text text-center">
+                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </footer>
 
         </div>
 
         <script>
-            $(document).ready(function () {
-                $('#filter_search').click(function () {
-                    $('.filter-section').toggle();
+            document.addEventListener('DOMContentLoaded', function () {
+                var expertiseCheckboxes = document.querySelectorAll('.expertise-checkbox');
+
+                expertiseCheckboxes.forEach(function (checkbox) {
+                    checkbox.addEventListener('change', function () {
+                        var skillCheckboxes = this.closest('.expertise-group').querySelector('.skill-checkboxes');
+                        if (this.checked) {
+                            skillCheckboxes.classList.remove('d-none');
+                            skillCheckboxes.classList.add('d-flex');
+                        } else {
+                            skillCheckboxes.classList.remove('d-flex');
+                            skillCheckboxes.classList.add('d-none');
+                        }
+                    });
                 });
             });
-        </script>
-
-        <script>
-            // Lấy các phần tử lọc
-            const nameFilter = document.getElementById('nameFilter');
-            const jobTypeFilter = document.getElementById('jobTypeFilter');
-            const skillFilter = document.getElementById('skillFlter');
-            const durationFilter = document.getElementById('durationFilter');
-
-            const statusFilter = document.getElementById('statusFilter');
-            const checkingFilter = document.getElementById('checkingFilter');
-
-// Lấy danh sách các dòng trong bảng
-            const rows = document.querySelectorAll('.table tbody tr');
-
-// Hàm để lọc các dòng
-            function filterRows() {
-                const nameValue = nameFilter.value.toLowerCase();
-                const jobTypeValue = jobTypeFilter.value.toLowerCase();
-                const skillValue = skillFilter.value.toLowerCase();
-                const durationValue = durationFilter.value.toLowerCase();
-
-                const statusValue = statusFilter.value.toLowerCase();
-                const checkingValue = checkingFilter.value.toLowerCase();
-                rows.forEach(row => {
-                    const title = row.querySelector('.title').textContent.toLowerCase();
-                    const jobType = row.querySelector('.jobType').textContent.toLowerCase();
-                    const skill = row.querySelector('.skill').textContent.toLowerCase();
-                    const duration = row.querySelector('.duration').textContent.toLowerCase();
-                    const status = row.querySelector('.status').textContent.toLowerCase();
-                    const checking = row.querySelector('.checked').textContent.toLowerCase();
-
-                    const showRow =
-                            (!nameValue || title.includes(nameValue)) &&
-                            (!jobTypeValue || jobType.includes(jobTypeValue)) &&
-                            (!durationValue || duration.includes(durationValue)) &&
-                            (!skillValue || skill.includes(skillValue)) &&
-                            (!statusValue || status.includes(statusValue)) &&
-                            (!checkingValue || checking.includes(checkingValue));
-
-                    row.style.display = showRow ? '' : 'none';
-                });
-            }
-
-// Gán sự kiện lọc cho các trường lọc
-            nameFilter.addEventListener('input', filterRows);
-            jobTypeFilter.addEventListener('change', filterRows);
-            durationFilter.addEventListener('change', filterRows);
-            skillFilter.addEventListener('change', filterRows);
-            statusFilter.addEventListener('change', filterRows);
-            checkingFilter.addEventListener('change', filterRows);
-        </script>
-        <script>
-            $(document).ready(function () {
-                $('.datatable').DataTable({
-                    "paging": true,
-                    "pageLength": 10, // Số lượng bài post mặc định mỗi trang là 10
-                    "lengthMenu": [10, 25, 50, 100], // Các tùy chọn số lượng mục hiển thị mỗi trang
-                    "searching": true,
-                    "ordering": true,
-                    "info": true,
-                    "dom": '<"top"l>rt<"bottom"ip><"clear">' // Cấu trúc DOM để di chuyển phần hiển thị số lượng mục xuống dưới
-                });
-            });
-        </script>
+        </script>   
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
@@ -977,6 +855,8 @@
                 });
             }
         </script>
+
+
         <script>
 // Hàm cắt ngắn chuỗi chỉ lấy 3 từ đầu tiên rồi thêm dấu ba chấm
             function shortenTitle(title) {
@@ -1002,17 +882,25 @@
         </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
-        <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+        <script data-cfasync="false" src="assets/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        </script><script src="assets/js/jquery-3.7.1.min.js" ></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" ></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" ></script>
+        <script src="assets/plugins/select2/js/select2.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script src="assets/js/moment.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/js/bootstrap-datetimepicker.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="assets/plugins/datatables/datatables.min.js"></script>
-    </body>
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/plugins/datatables/datatables.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/plugins/summernote/dist/summernote-lite.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/js/script.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="b9b8f1fa285a150b1a70a944-|49" defer></script></body>
+
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/milestones.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:32:21 GMT -->
 </html>

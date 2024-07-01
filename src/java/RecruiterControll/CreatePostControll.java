@@ -11,7 +11,6 @@ import Models.JobType;
 import Models.Recruiter;
 import Models.SkillSet;
 import Models.User;
-import MutiModels.ExpiredSkillSet;
 import dal.CategoriesDAO;
 import dal.DurationDAO;
 import dal.JobTypeDAO;
