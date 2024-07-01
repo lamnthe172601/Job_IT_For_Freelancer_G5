@@ -8,7 +8,11 @@ import Models.Blogs;
 import Models.Categories;
 import Models.Duration;
 import Models.JobType;
+import Models.Report;
+import MutiDAO.FreelancerInformationDAO;
+import MutiModels.ReportDetails;
 import MutiModels.PostBasic;
+import MutiModels.Project;
 import MutiModels.RecruiterBasic;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,8 +27,8 @@ import java.util.List;
  */
 public class AdminDAO extends DBContext {
 
-    public List<PostBasic> getAllProject() {
-        List<PostBasic> posts = new ArrayList<>();
+    public List<Project> getAllProject() {
+        List<Project> project = new ArrayList<>();
         String query = """
                        select p.postID,p.title,p.image,p.job_type_ID,p.durationID,p.date_post,p.quantity,p.description,p.budget,p.location,p.skill,p.recruiterID,p.status,p.caID,p.checking,
                                               	j.job_name,
@@ -44,20 +48,61 @@ public class AdminDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"),rs.getInt("statusCate"));
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString(25));
                 JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
-                posts.add(new PostBasic(rs.getInt("postID"), rs.getInt("quantity"), rs.getInt("budget"), rs.getString("title"), rs.getString("description"), rs.getString("location"), rs.getString("skill"), rs.getString(3), rs.getDate("date_post"),
-                        job, du,
-                        re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+                PostBasic posts
+                        = new PostBasic(rs.getInt("postID"), rs.getInt("quantity"), rs.getInt("budget"), rs.getString("title"), rs.getString("description"), rs.getString("location"), rs.getString("skill"), rs.getString(3), rs.getDate("date_post"),
+                                job, du,
+                                re, ca, rs.getBoolean("status"), rs.getInt("checking"));
+                project.add(new Project(posts, getReportsByPostId(rs.getInt("postID"))));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return posts;
+        return project;
+    }
+    FreelancerInformationDAO fDAO = new FreelancerInformationDAO();
+
+    public List<ReportDetails> getReportsByPostId(int postId) {
+        List<ReportDetails> reports = new ArrayList<>();
+        String query = """
+                     SELECT *
+                   FROM Report where postID = ?
+                       order by  dateReport desc""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, postId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Report r = new Report(rs.getInt(1), rs.getInt(3), rs.getInt(2), rs.getString(5), rs.getDate(4));
+                ReportDetails rd = new ReportDetails(r, fDAO.getFreelancerById(rs.getInt(2)));
+                reports.add(rd);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reports;
     }
 
+//    public List<Report> getReportsByFreelancerId(int freelancerId) {
+//        List<Report> reports = new ArrayList<>();
+//        String query = """
+//                   select * from Report where freelancerID= ?""";
+//        try {
+//            PreparedStatement ps = connection.prepareStatement(query);
+//            ps.setInt(1, freelancerId);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                Report r = new Report(rs.getInt(1), rs.getInt(3), rs.getInt(2), rs.getString(5), rs.getDate(4));
+//                reports.add(r);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return reports;
+//    }
     public List<Blogs> getAllBlogs() {
         List<Blogs> blogs = new ArrayList<>();
         String query = """
@@ -218,23 +263,39 @@ public class AdminDAO extends DBContext {
         return false;
     }
 
-
-  public int getTotalBlog(){
+    public int getTotalBlog() {
         String query = "  SELECT count(blogID) as totalblog FROM Blogs";
         try {
-            PreparedStatement ps = connection.prepareStatement(query);           
+            PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {               
+            while (rs.next()) {
                 return rs.getInt("totalblog");
             }
         } catch (SQLException e) {
-        }       
-       return -1;       
-   }
+        }
+        return -1;
+    }
+
+    public boolean deleteReportByPostId(int postId) {
+        String query = """
+                         DELETE FROM [dbo].[Report]
+                             WHERE postID = ?""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, postId);
+            ResultSet rs = ps.executeQuery();
+            int rowsAffected = ps.executeUpdate(); // Sử dụng executeUpdate thay vì executeQuery
+            return rowsAffected > 0; // Trả về true nếu có dòng bị ảnh hưởng
+
+        } catch (SQLException e) {
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
-        System.out.println(new AdminDAO().changeBlogStatus(31, false));
+        new AdminDAO().deleteReportByPostId(2);
+        System.out.println(new AdminDAO().getAllProject().get(3).getPostBasic().getChecking());
 
     }
 }

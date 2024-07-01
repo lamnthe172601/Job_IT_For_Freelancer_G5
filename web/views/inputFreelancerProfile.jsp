@@ -5,6 +5,7 @@
 --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,22 +129,24 @@
                     <div class="col-md-12">
                         <h4>Skill<span class="label-star"> *</span></h4>
                     </div>
-
-                    <c:forEach items="${listskill}" var="i" > 
-                        <div class="col-md-4" >
-                            <div class="input-block  input-block1" >
-                                <input  type="checkbox" name="skill" id="skill" value="${i.skill_set_ID}" >${i.skill_set_name}   
-                                <div class="level1" >                                  
-                                    <select name="level" class="select1">
+                    <c:forEach var="entry" items="${map}">
+                        <br>
+                        <h4  style="padding-top: 30px; padding-left: 30px" >${entry.key}</h4> 
+                        <div class="skill-container">
+                            <c:forEach items="${fn:split(entry.value, ',')}" var="skill" varStatus="loop">
+                                <div class="skill-item">
+                                    <label class="skill-label">
+                                        <input style="margin-left: 20px" type="checkbox" name="skill" value="${skill}" class="skill-checkbox">${skill}                                       
+                                    </label>
+                                    <select name="level" class="select1" style="display: none;">
                                         <option value="1">Basic</option>
                                         <option value="2">Medium</option>
                                         <option value="3">Good</option>
                                     </select>
                                 </div>
-                            </div>
+                            </c:forEach>
                         </div>
-
-                    </c:forEach> 
+                    </c:forEach>
                     <div style="color: red" id="eSkill"></div>
                     <div class="col-md-6">
                         <div class="input-block">
@@ -280,32 +283,44 @@
             background-color: white;
             color: black;
         }
-        .input-block1 {
+
+
+
+        .skill-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-item {
             position: relative;
+            flex-basis: calc(25% - 7.5px);
+            display: flex;
+            align-items: center;
         }
 
-        .level1 {
-
-            display: inline-block;
-            position: absolute;
-            left: 40%;
-            margin-left: 10px;
-            top: 0;
+        .skill-label {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
         }
 
-        .level1 select {
-            display: none;
+        .select1 {
+            width: 90px;
+            position: absolute; 
+            right: 15px;
+            bottom: 8px;
         }
 
     </style>
 
     <script>
-        window.onload = function () {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkboxes = document.querySelectorAll('.skill-checkbox');
 
-            checkboxes.forEach(checkbox => {
+            checkboxes.forEach(function (checkbox) {
                 checkbox.addEventListener('change', function () {
-                    const select = this.closest('.input-block').querySelector('.level1 select');
+                    var select = this.parentNode.nextElementSibling;
                     if (this.checked) {
                         select.style.display = 'inline-block';
                     } else {
@@ -313,7 +328,7 @@
                     }
                 });
             });
-        };
+        });
     </script>
 
 

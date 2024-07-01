@@ -4,20 +4,27 @@
  */
 package RecruiterControll;
 
-import dal.PostDAO;
-import dal.RecruiterDAO;
+import Models.Freelancer;
+import Models.User;
+import dal.DAO;
+import dal.FavoritesDAO;
+import dal.FreelancerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  *
- * @author Admin
+ * @author tanng
  */
-public class ConnectFreelancerControll extends HttpServlet {
+public class DeleteRecruiterFavouritesControll extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +43,10 @@ public class ConnectFreelancerControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConnectFreelancerControll</title>");
+            out.println("<title>Servlet DeleteRecruiterFavouritesControll</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ConnectFreelancerControll at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteRecruiterFavouritesControll at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +64,22 @@ public class ConnectFreelancerControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String freelancerID = request.getParameter("freelanceID");
+            HttpSession session = request.getSession();
+            Object u = session.getAttribute("account");
+            User user = (User) u;
+            DAO d = new DAO();
+            int userId = user.getUserID();
+            int recruiterID = d.getRecruiterIDbyUserID(userId);
+            FavoritesDAO fDao = new FavoritesDAO();
+            fDao.deleteFreelancerFavoriter(freelancerID, recruiterID);
+
+            request.getRequestDispatcher("RecruiterFavourites").forward(request, response);
+
+        } catch (Exception e) {
+            request.getRequestDispatcher("login").forward(request, response);
+        }
     }
 
     /**
@@ -71,32 +93,17 @@ public class ConnectFreelancerControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RecruiterDAO d = new RecruiterDAO();
-        try {
-            int applyID = Integer.parseInt(request.getParameter("postID").trim());
-            String type = request.getParameter("type");
-            int status = type.equals("approve") ? 1 : 2;
-
-            d.updateStatusApply(applyID, status);
-
-            response.setContentType("application/json");
-            response.getWriter().write("{\"success\": true, \"message\": \"" + (status == 1 ? "Freelancer approved successfully!" : "Freelancer rejected successfully!") + "\"}");
-        } catch (Exception e) {
-            response.setContentType("application/json");
-            response.getWriter().write("{\"success\": false, \"message\": \"An error occurred.\"}");
-        }
+        processRequest(request, response);
     }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
-        }// </editor-fold>
+    }// </editor-fold>
 
-    }
+}
