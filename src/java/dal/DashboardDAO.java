@@ -15,61 +15,64 @@ import java.util.List;
  *
  * @author kudol
  */
-public class DashboardDAO extends DBContext{
-   public int getTotalUsers(){
+public class DashboardDAO extends DBContext {
+
+    public int getTotalUsers() {
         String query = " SELECT COUNT(DISTINCT username) AS total_user FROM [user]";
         try {
-            PreparedStatement ps = connection.prepareStatement(query);           
+            PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {               
+            while (rs.next()) {
                 return rs.getInt("total_user");
             }
         } catch (SQLException e) {
-        }       
-       return -1;       
-   }
-    public int getTotalPost(){
+        }
+        return -1;
+    }
+
+    public int getTotalPost() {
         String query = "  SELECT count(postID) as totalpost FROM post";
         try {
-            PreparedStatement ps = connection.prepareStatement(query);           
+            PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {               
+            while (rs.next()) {
                 return rs.getInt("totalpost");
             }
         } catch (SQLException e) {
-        }       
-       return -1;       
-   }
-     public int getTotalJobApply(){
+        }
+        return -1;
+    }
+
+    public int getTotalJobApply() {
         String query = "  SELECT count(applyID) as totaljobapply FROM JobApply";
         try {
-            PreparedStatement ps = connection.prepareStatement(query);           
+            PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {               
+            while (rs.next()) {
                 return rs.getInt("totaljobapply");
             }
         } catch (SQLException e) {
-        }       
-       return -1;       
-   }
-   
-      public int getTotalFreelancer(){
+        }
+        return -1;
+    }
+
+    public int getTotalFreelancer() {
         String query = "   SELECT count(freelanceID) as totalFreelancer FROM freelancer";
         try {
-            PreparedStatement ps = connection.prepareStatement(query);           
+            PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {               
+            while (rs.next()) {
                 return rs.getInt("totalFreelancer");
             }
         } catch (SQLException e) {
-        }       
-       return -1;       
-   }
-      
+        }
+        return -1;
+    }
+
 //      public List<Integer> getApplicationsData(){
 //        List<Integer> applicationsData = new ArrayList<>();
 //        try {
@@ -109,39 +112,65 @@ public class DashboardDAO extends DBContext{
 //        }
 //        return postsData;
 //    }
-      
-      public List<ChartData> getChartDataForYear(int year) {
+    public List<ChartData> getChartDataForYear(int id, int year) {
         List<ChartData> chartDataList = new ArrayList<>();
-        String sql = "WITH PostCounts AS (" +
-                     "    SELECT " +
-                     "        YEAR(date_post) AS Year, " +
-                     "        MONTH(date_post) AS Month, " +
-                     "        COUNT(*) AS PostCount " +
-                     "    FROM [freelancer].[dbo].[Post] " +
-                     "    GROUP BY YEAR(date_post), MONTH(date_post) " +
-                     "), " +
-                     "ApplyCounts AS ( " +
-                     "    SELECT " +
-                     "        YEAR(dateApply) AS Year, " +
-                     "        MONTH(dateApply) AS Month, " +
-                     "        COUNT(*) AS ApplyCount " +
-                     "    FROM [freelancer].[dbo].[JobApply] " +
-                     "    GROUP BY YEAR(dateApply), MONTH(dateApply) " +
-                     ") " +
-                     "SELECT " +
-                     "    COALESCE(p.Year, a.Year) AS Year, " +
-                     "    COALESCE(p.Month, a.Month) AS Month, " +
-                     "    COALESCE(p.PostCount, 0) AS PostCount, " +
-                     "    COALESCE(a.ApplyCount, 0) AS ApplyCount " +
-                     "FROM PostCounts p " +
-                     "FULL OUTER JOIN ApplyCounts a ON p.Year = a.Year AND p.Month = a.Month " +
-                     "WHERE COALESCE(p.Year, a.Year) = ? " +
-                     "ORDER BY Month";
+        String sql = "DECLARE @Year INT = ?; \n"
+                + "\n"
+                + "WITH Months AS (\n"
+                + "    SELECT 1 AS Month UNION ALL\n"
+                + "    SELECT 2 UNION ALL\n"
+                + "    SELECT 3 UNION ALL\n"
+                + "    SELECT 4 UNION ALL\n"
+                + "    SELECT 5 UNION ALL\n"
+                + "    SELECT 6 UNION ALL\n"
+                + "    SELECT 7 UNION ALL\n"
+                + "    SELECT 8 UNION ALL\n"
+                + "    SELECT 9 UNION ALL\n"
+                + "    SELECT 10 UNION ALL\n"
+                + "    SELECT 11 UNION ALL\n"
+                + "    SELECT 12\n"
+                + "),\n"
+                + "RecruiterPosts AS (\n"
+                + "    SELECT \n"
+                + "        p.recruiterID,\n"
+                + "        YEAR(p.date_post) AS Year, \n"
+                + "        MONTH(p.date_post) AS Month,\n"
+                + "        p.postID\n"
+                + "    FROM [freelancer].[dbo].[Post] p\n"
+                + "    WHERE p.recruiterID = ? -- Replace with the desired recruiterID\n"
+                + "), \n"
+                + "PostCounts AS (\n"
+                + "    SELECT \n"
+                + "        rp.Year, \n"
+                + "        rp.Month,\n"
+                + "        COUNT(*) AS PostCount \n"
+                + "    FROM RecruiterPosts rp\n"
+                + "    GROUP BY rp.Year, rp.Month\n"
+                + "),\n"
+                + "ApplyCounts AS (\n"
+                + "    SELECT \n"
+                + "        rp.Year, \n"
+                + "        rp.Month, \n"
+                + "        COUNT(*) AS ApplyCount \n"
+                + "    FROM [freelancer].[dbo].[JobApply] a\n"
+                + "    INNER JOIN RecruiterPosts rp ON a.postID = rp.postID\n"
+                + "    GROUP BY rp.Year, rp.Month\n"
+                + ")\n"
+                + "SELECT \n"
+                + "    @Year AS Year, \n"
+                + "    m.Month, \n"
+                + "    COALESCE(pc.PostCount, 0) AS PostCount, \n"
+                + "    COALESCE(ac.ApplyCount, 0) AS ApplyCount\n"
+                + "FROM Months m\n"
+                + "LEFT JOIN PostCounts pc ON m.Month = pc.Month AND pc.Year = @Year\n"
+                + "LEFT JOIN ApplyCounts ac ON m.Month = ac.Month AND ac.Year = @Year\n"
+                + "ORDER BY m.Month;";
 
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);         
-            
+            PreparedStatement ps = connection.prepareStatement(sql);
+
             ps.setInt(1, year);
+            ps.setInt(2, id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -156,11 +185,14 @@ public class DashboardDAO extends DBContext{
 
         return chartDataList;
     }
-      
-     public static void main(String[] args) {
+
+    public static void main(String[] args) {
         DashboardDAO dao = new DashboardDAO();
-        List<ChartData> m = dao.getChartDataForYear(2024);
-         System.out.println(m);
+        List<ChartData> m = dao.getChartDataForYear(1, 2024);
+        for (ChartData chartData : m) {
+            System.out.println(chartData.toString());
+        }
+        
     }
-   
+
 }

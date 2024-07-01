@@ -62,9 +62,7 @@ public class ManageJobsPostsControll extends HttpServlet {
         request.setAttribute("alljobtype", jobtype);
         
         
-        String id = request.getParameter("id1");
-        List<PostApplicationCount> PostApplicationCount = postdao.TotalApplyByPost(5);
-        request.setAttribute("PostApplicationCount", PostApplicationCount);
+        
         request.getRequestDispatcher("views/managePost.jsp").forward(request, response);
     }
 

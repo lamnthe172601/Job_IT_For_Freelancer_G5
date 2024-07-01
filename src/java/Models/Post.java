@@ -1,7 +1,10 @@
 
 package Models;
 
+import MutiModels.PostApplicationCount;
+import dal.PostDAO;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -171,6 +174,12 @@ public class Post {
 
     public void setExpired(Date expired) {
         this.expired = expired;
+    }
+    
+    
+    public int cout(){
+        PostDAO m = new PostDAO();
+        return m.TotalApplyByPost(postID);
     }
 
     @Override

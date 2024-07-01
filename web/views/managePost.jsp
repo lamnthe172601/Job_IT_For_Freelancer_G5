@@ -606,9 +606,9 @@
                                                                 <div class="title">${list.title}</div>
                                                             </td>
                                                             <td class="APPLICANTS">                      
-                                                                <c:forEach items="${PostApplicationCount}" var="PostApplicationCount">
-                                                                <div class="APPLICANTS">${PostApplicationCount.totalApplications}/${list.quantity}</div>
-                                                                </c:forEach>
+                                                                
+                                                                <div class="APPLICANTS">${list.cout()}/${list.quantity}</div>
+                                                                
                                                             </td>
                                                             <td> 
                                                                 <div class="datePost">${list.datePost}</div>

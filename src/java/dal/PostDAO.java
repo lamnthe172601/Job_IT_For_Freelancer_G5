@@ -556,7 +556,7 @@ public class PostDAO extends DBContext {
     public void applyJob(int id, String postID, String rerume) {
         String sql = """
                      insert into JobApply
-                     values(?,?,'Pending',GETDATE(),?)
+                     values(?,?,'0',GETDATE(),?)
                      """;
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -724,34 +724,36 @@ public class PostDAO extends DBContext {
         return posts;
     }
     
-    public List<PostApplicationCount> TotalApplyByPost(int ID) {
-        List<PostApplicationCount> TotalApplyByPost = new ArrayList<>();
+    public int TotalApplyByPost(int ID) {
+        
         String sql = """
-                     SELECT p.postID, COUNT(j.applyID) AS TotalApplications
+                     SELECT COUNT(j.applyID) AS TotalApplications
                      FROM Post p
                      LEFT JOIN JobApply j ON p.postID = j.postID
                      where p.postID = ?
-                     GROUP BY p.postID;""";
+                     """;
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, ID);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                int postID = rs.getInt("postID");
                 
-                int totalApplications = rs.getInt("TotalApplications");
+                
+                return  rs.getInt("TotalApplications");
 
-                // Create PostApplicationCount object and add to list
-                PostApplicationCount applicationCount = new PostApplicationCount(postID, totalApplications);
-                TotalApplyByPost.add(applicationCount);
+                
             }
         } catch (SQLException e) {
         }        
-        return TotalApplyByPost;        
+        return -1;        
         
     }
     
     
-    
+    public static void main(String[] args) {
+        PostDAO dao = new PostDAO();
+        
+        System.out.println(dao.TotalApplyByPost(4));
+    }
 }

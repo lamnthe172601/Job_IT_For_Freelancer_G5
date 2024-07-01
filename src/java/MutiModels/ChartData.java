@@ -46,6 +46,11 @@ public class ChartData {
     public void setApplyCount(int applyCount) {
         this.applyCount = applyCount;
     }
+
+    @Override
+    public String toString() {
+        return "ChartData{" + "month=" + month + ", postCount=" + postCount + ", applyCount=" + applyCount + '}';
+    }
     
     
 }
