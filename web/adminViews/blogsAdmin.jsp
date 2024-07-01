@@ -198,7 +198,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form id="update-blog-form-${blog.getBlogID()}" method="post" action="blogAdmin" enctype="multipart/form-data">
+                                                                <form id="update-blog-form-${blog.getBlogID()}" data-validate="blog-form" method="post" action="blogAdmin" enctype="multipart/form-data">
                                                                     <input type="hidden" name="blogId" value="${blog.getBlogID()}">
                                                                     <div class="mb-3">
                                                                         <label for="blog-image-${blog.getBlogID()}" class="form-label">Image</label>
@@ -247,7 +247,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="add-blog-form" method="post" action="blogAdmin"  enctype="multipart/form-data">
+                        <form id="add-blog-form" data-validate="blog-form" method="post" action="blogAdmin"  enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="blog-image" class="form-label">Image</label>
                                 <input type="file" class="form-control" name="image" id="blog-image" accept="image/*" required>
@@ -259,11 +259,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="blog-description" class="form-label">Description</label>
-                                <textarea class="form-control" id="blog-description" name="descripition"rows="3" required></textarea>
+                                <div class="description-editor border rounded p-2">
+                                    <textarea class="form-control border-0" id="blog-description-${blog.getBlogID()}" name="descripition" rows="10" style="height: 300px" required>${blog.getDescription()}</textarea>
+
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>                               
-                                
+
                                 <button type="submit" class="btn btn-primary" name="mode" value="add" id="add-blog-btn">Add Blog</button>
                             </div>
                         </form>
@@ -461,12 +464,14 @@
                 description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
             });
         </script>
-
+    
+    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
         <script src="adminAssets/js/notification.js"></script>
 
-
+        <script src="adminAssets/js/validateBlogs.js"></script>
         <script src="adminAssets/js/bootstrap.bundle.min.js"></script>
 
         <script src="adminAssets/js/feather.min.js" ></script>
