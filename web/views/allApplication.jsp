@@ -343,6 +343,8 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="title-head d-flex justify-content-between align-items-center mb-4">
+
+                                            <a href="#add-milestone" class="login-btn btn-primary" data-bs-toggle="modal">Add Task</a>
                                         </div>
                                         <div class="table-responsive table-box manage-projects-table">
                                             <table class="table table-center table-hover datatable no-sort">
@@ -369,8 +371,14 @@
                                                             </td>
                                                             <td>${listapply.dateApply}</td>
                                                             <td>
-                                                                <span id="status-${listapply.applyID}" class="badge checked badge-pill ${listapply.status == 0 ? 'bg-warning-light' : (listapply.status == 1 ? 'bg-success-light' : 'bg-danger-light')}">
-                                                                    ${listapply.status == 0 ? 'Pending' : (listapply.status == 1 ? 'Approved' : 'Rejected')}
+                                                                <span class="badge checked badge-pill ${
+                                                                      listapply.status == 0 ? 'bg-warning-light' : 
+                                                                          (listapply.status == 1 ? 'bg-success-light' : ' bg-danger-light')
+                                                                      }">
+                                                                    ${
+                                                                    listapply.status == 0 ? 'Pending' : 
+                                                                        (listapply.status == 1 ? 'Approve' : 'Reject')
+                                                                    }
                                                                 </span>                                                    
                                                                 <br>
                                                                 <span class="applied-time">Applied: ${listapply.dateApply}</span></td>
@@ -379,21 +387,9 @@
 
                                                             <td>
                                                                 <div class="action-table-data">
-                                                                    <c:if test='${listapply.status == 0}'>
-                                                                    <a href="#Approve${listapply.freelancer.freelanceID}" data-bs-toggle="modal" class="btn btn-request">Connect</a>
+                                                                    <a href="#success-milestone${listapply.freelancer.freelanceID}" data-bs-toggle="modal" class="btn btn-request">Connect</a>
                                                                     <a style="background: blueviolet;" href="#Refuse${listapply.freelancer.freelanceID}" data-bs-toggle="modal" class="btn btn-request">Refuse</a>
-                                                                    </c:if>
-                                                                    
-                                                                    
-                                                                    <c:if test='${listapply.status == 2}'>         
-                                                                    <a style="background: blueviolet;margin-left: 30px;" href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-request">Refused</a>
-                                                                    </c:if>
-                                                                    
-                                                                    <c:if test='${listapply.status == 1}'>
-                                                                    
-                                                                    <a style="margin-left: 25px" "href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-request">Connected</a>
-                                                                    </c:if>
-                                                                    
+
                                                                     <div class="modal fade edit-proposal-modal success-modal" id="success-milestone${listapply.freelancer.freelanceID}">
                                                                         <div class="modal-dialog modal-dialog-centered modal-lg">
                                                                             <div class="modal-content">
@@ -426,57 +422,27 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+
+
                                                                     <div class="modal fade edit-proposal-modal success-modal" id="Refuse${listapply.freelancer.freelanceID}">
                                                                         <div class="modal-dialog modal-dialog-centered modal-md">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header justify-content-end">
-                                                                                    <span class="modal-close">
-                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close">
-                                                                                            <i class="feather-x"></i>
-                                                                                        </a>
-                                                                                    </span>
+                                                                                    <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <div class="confirmation-msg-content text-center">
-                                                                                        <input type="hidden" class="apply-id" value="${listapply.applyID}">
                                                                                         <h4>Confirm Action</h4>
-                                                                                        <p>Are you sure you want to refuse this freelancer?</p>
+                                                                                        <p>Are you sure you want to proceed with this action?</p>
                                                                                         <div class="text-center">
-                                                                                            <a href="javascript:void(0);" class="btn btn-primary mt-3 refuse-freelancer">Refuse</a>
-                                                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-secondary mt-3" style="margin-left: 30px;" aria-label="Close">Cancel</a>
+                                                                                            <a href="#success-milestone${listapply.freelancer.freelanceID}" data-bs-toggle="modal" class="btn btn-primary mt-3 ">Refuse</a>
+                                                                                            <a style="margin-left: 30px" href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary mt-3 " aria-label="Close">Center</a>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
-                                                                    <!-- Approve Freelancer Modal -->
-                                                                    <div class="modal fade edit-proposal-modal success-modal" id="Approve${listapply.freelancer.freelanceID}">
-                                                                        <div class="modal-dialog modal-dialog-centered modal-md">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header justify-content-end">
-                                                                                    <span class="modal-close">
-                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close">
-                                                                                            <i class="feather-x"></i>
-                                                                                        </a>
-                                                                                    </span>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <div class="confirmation-msg-content text-center">
-                                                                                        <input type="hidden" class="apply-id" value="${listapply.applyID}">
-                                                                                        <h4>Confirm Action</h4>
-                                                                                        <p>Are you sure you want to approve this freelancer?</p>
-                                                                                        <div class="text-center">
-                                                                                            <a href="javascript:void(0);" class="btn btn-primary mt-3 approve-freelancer">Approve</a>
-                                                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-secondary mt-3" style="margin-left: 30px;" aria-label="Close">Cancel</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
 
 
 
@@ -638,80 +604,8 @@
             <% } %>
         </script>                           
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-    <script>
-    $(document).ready(function () {
-        // Refuse Freelancer
-        $('.refuse-freelancer').on('click', function () {
-            var applyID = $(this).closest('.modal').find('.apply-id').val();
-            changeFreelancerStatus(applyID, "reject", $(this));
-        });
-
-        // Approve Freelancer
-        $('.approve-freelancer').on('click', function () {
-            var applyID = $(this).closest('.modal').find('.apply-id').val();
-            changeFreelancerStatus(applyID, "approve", $(this));
-        });
-
-        function changeFreelancerStatus(applyID, actionType, buttonClicked) {
-            $.ajax({
-                url: '/Job_IT_For_Freelancer_G5/ConnectFreelancer',
-                type: 'POST',
-                data: {postID: applyID, type: actionType},
-                success: function (response) {
-                    if (response.success) {
-                        var statusBadge = $('#status-' + applyID);
-                        var statusText = actionType === "reject" ? "Rejected" : "Approved";
-                        var badgeClass = actionType === "reject" ? "bg-danger-light" : "bg-success-light";
-
-                        statusBadge
-                            .removeClass()
-                            .addClass('badge checked badge-pill ' + badgeClass)
-                            .text(statusText);
-
-                        buttonClicked.closest('.modal').modal('hide');
-
-                        // Show success notification and open email modal
-                        showSuccessNotification(response.message, applyID);
-                    } else {
-                        console.error('Error:', response.message);
-                        showErrorNotification('Failed to update status.');
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error:', error);
-                    showErrorNotification('An error occurred while processing your request.');
-                }
-            });
-        }
-
-        function showSuccessNotification(message, applyID) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Notification',
-                text: message,
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Open the success milestone modal
-                    $('#success-milestone' + applyID).modal('show');
-                }
-            });
-        }
-    });
-</script>
-
-
-
-
-
-
-
-
         <script src="adminAssets/js/notification.js"></script>
-        <script src="assets/js/jquery-3.7.1.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script data-cfasync="false" src="assets/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
