@@ -461,7 +461,7 @@ public class PostDAO extends DBContext {
     public List<JobApply> getPostApply(int id) {
         List<JobApply> posts = new ArrayList<>();
         String query = """
-                       select p.postID,p.title,p.date_post,p.budget,c.categories_name,j.dateApply,j.status
+                       select p.postID,p.title,p.date_post,p.budget,c.categories_name,j.dateApply,j.status,j.Resume
                                               	from Post p 
                                               	inner join JobApply j on p.postID=j.postID   	
                                               	inner join Categories c on c.caID=p.caID
@@ -473,7 +473,7 @@ public class PostDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 posts.add(new JobApply(rs.getInt("postID"), rs.getInt("budget"), rs.getDate("date_post"), rs.getDate("dateApply"),
-                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name")));
+                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name"),rs.getString("Resume")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -505,13 +505,14 @@ public class PostDAO extends DBContext {
         String sql = """
                      select count(*) from FreelancerFavorites f 
                      		inner join Post p on f.postID=p.postID
-                     		where f.freelanceID=? and p.title like ?;
+                     		where f.freelanceID=? and (p.title like ? or p.skill like ?);
                      
                      """;
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             statement.setString(2, "%" + txtSearch + "%");
+            statement.setString(3, "%" + txtSearch + "%");
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
@@ -625,7 +626,7 @@ public class PostDAO extends DBContext {
     public List<JobApply> getPostApplyPage(int id, int index) {
         List<JobApply> posts = new ArrayList<>();
         String query = """
-                       select p.postID,p.title,p.date_post,p.budget,c.categories_name,j.dateApply,j.status
+                       select p.postID,p.title,p.date_post,p.budget,c.categories_name,j.dateApply,j.status,j.Resume
                                                                      	from Post p 
                                                                      	inner join JobApply j on p.postID=j.postID   	
                                                                      	inner join Categories c on c.caID=p.caID
@@ -640,7 +641,7 @@ public class PostDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 posts.add(new JobApply(rs.getInt("postID"), rs.getInt("budget"), rs.getDate("date_post"), rs.getDate("dateApply"),
-                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name")));
+                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name"),rs.getString("Resume")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -684,7 +685,7 @@ public class PostDAO extends DBContext {
                        	inner join Categories c on c.caID=p.caID
                        	inner join Recruiter r on r.recruiterID=p.recruiterID
                        	inner join Company co on co.recruiterID=p.recruiterID
-                       	where f.freelanceID=? and p.title like ?
+                       	where f.freelanceID=? and (p.title like ? or p.skill like ?)
                         ORDER BY f.favoritesID
                         OFFSET ? rows fetch next 6 rows only;
                        """;
@@ -692,7 +693,8 @@ public class PostDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, id);
             ps.setString(2, "%" + txtSearch + "%");
-            ps.setInt(3, (index - 1) * 6);
+            ps.setString(3, "%" + txtSearch + "%");
+            ps.setInt(4, (index - 1) * 6);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
@@ -712,12 +714,12 @@ public class PostDAO extends DBContext {
     public List<JobApply> SearchPostApply(int id, String txtSearch, int index) {
         List<JobApply> posts = new ArrayList<>();
         String query = """
-                       select p.postID,p.title,p.date_post,p.budget,c.categories_name,j.dateApply,j.status
+                       select p.postID,p.title,p.date_post,p.budget,c.categories_name,j.dateApply,j.status,j.Resume
                                               	from Post p 
                                               	inner join JobApply j on p.postID=j.postID   	
                                               	inner join Categories c on c.caID=p.caID
                                               	where j.freelanceID=? and p.title like ?
-                                                ORDER BY j.applyID
+                                                ORDER BY j.applyID desc
                                                 OFFSET ? rows fetch next 8 rows only;
                        """;
         try {
@@ -728,7 +730,7 @@ public class PostDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 posts.add(new JobApply(rs.getInt("postID"), rs.getInt("budget"), rs.getDate("date_post"), rs.getDate("dateApply"),
-                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name")));
+                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name"),rs.getString("Resume")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -766,9 +768,6 @@ public class PostDAO extends DBContext {
         
     }
     
-    public static void main(String[] args) {
-        PostDAO dao = new PostDAO();
-        dao.updateStatusApply(1, "2");
-    }
+
     
 }

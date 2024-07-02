@@ -365,7 +365,7 @@
                                 </div>
                                                     
                             </div>
-                                <div><form action="SearchInPostFavo" method="get" class="form-inline my-2 my-lg-0">
+                                                    <div><form action="PostFavourites" method="post" class="form-inline my-2 my-lg-0">
                                     <div class="input-group input-group-sm">
                                         <c:if test="${txtSearch != null}">
                                             <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
@@ -480,7 +480,7 @@
                                                                 <p>Submit your resume so employers can know more about you.</p>
                                                             </div>
                                                             <div class="modal-btn Suspend-action">
-                                                                <form id="jobApplicationForm_${p.postID}" action="ApplyJob" method="post"  enctype="multipart/form-data" onsubmit="return validateForm('${p.postID}')" >
+                                                                <form id="jobApplicationForm_${p.postID}" action="ApplyJobFormSearch" method="post"  enctype="multipart/form-data" onsubmit="return validateForm('${p.postID}')" >
                                                                     <div class="row">
                                                                         <div style='margin-bottom: 30px'>
                                                                             <input oninput="check('${p.postID}')" class='file' type='file' id='fileInput_${p.postID}' name="file"/>
@@ -640,19 +640,19 @@
                                         <ul class="pagination list-pagination">
                                             <c:if test="${tag > 1}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="PostFavourites?index=${tag-1}" aria-label="Trước">
+                                                    <a class="page-link" href="SearchInPostFavo?index=${tag-1}" aria-label="Trước">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
                                             </c:if>
                                             <c:forEach var="i" begin="1" end="${endPage}">
                                                 <li class="page-item ${i == tag ? 'active' : ''}">
-                                                    <a class="page-link" href="PostFavourites?index=${i}">${i}</a>
+                                                    <a class="page-link" href="SearchInPostFavo?index=${i}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <c:if test="${tag < endPage}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="PostFavourites?index=${tag + 1}" aria-label="Sau">
+                                                    <a class="page-link" href="SearchInPostFavo?index=${tag + 1}" aria-label="Sau">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
@@ -1093,19 +1093,6 @@
                 });
             });
         </script>
-        
-        <script>
-function submitForm(postID) {
-    if(validateForm(postID)===true){
-        event.preventDefault();
-    showSuccessNotification('Approve project successfully!');
-    setTimeout(function() {
-        document.getElementById('jobApplicationForm_' + postID).submit();
-    }, 1000);
-    }
-    
-}
-</script>
 
 
 

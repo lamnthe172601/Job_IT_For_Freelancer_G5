@@ -292,20 +292,9 @@
                                 </div>
                             </div>
 
-                            <%-- Lấy danh sách bài đăng và thông tin phân trang từ request --%>
-                            <c:set var="listpost" value="${requestScope.listpost}" />
-                            <c:set var="tongSoBaiDang" value="${requestScope.tongSoBaiDang}" />
-                            <c:set var="baiDangTrenMotTrang" value="${requestScope.baiDangTrenMotTrang}" />
-                            <c:set var="tongSoTrang" value="${requestScope.tongSoTrang}" />
-                            <c:set var="trangHienTai" value="${requestScope.trangHienTai}" />
-
-                            <%-- Tính chỉ số bắt đầu và kết thúc cho danh sách bài đăng hiển thị trên trang hiện tại --%>
-                            <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
-                            <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
-
                             <%-- Hiển thị danh sách bài đăng --%>
                             <div class="row" id="listpostContainer">
-                                <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
+                                <c:forEach items="${listpost}" var="list">
                                     <div class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
@@ -352,39 +341,39 @@
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>
-<!--
-                                                    <div class="skills-container">
-                                                        <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index % 3 == 0}">
-                                                                <div class="skills-row">
-                                                                </c:if>
-                                                                <div class="freelance-tags">
-                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                                </div>
-                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                                </div>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </div>-->
+                                                    <!--
+                                                                                                        <div class="skills-container">
+                                                    <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
+                                                        <c:if test="${loop.index % 3 == 0}">
+                                                            <div class="skills-row">
+                                                        </c:if>
+                                                        <div class="freelance-tags">
+                                                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
+                                                        </div>
+                                                        <c:if test="${loop.index % 3 == 2 || loop.last}">
+                                                        </div>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </div>-->
 
-<!--                                                    <style>
-
-
-                                                        .skills-container {
-                                                            display: flex;
-                                                            flex-wrap: wrap;
-                                                            justify-content: center;
-                                                            align-items: center;
-                                                        }
-                                                        .freelance-tags {
-                                                            margin: 5px;
-                                                        }
-                                                        .skills-row {
-                                                            display: flex;
-                                                            justify-content: center;
-                                                            width: 100%;
-                                                        }
-                                                    </style>-->
+                                                    <!--                                                    <style>
+                                                    
+                                                    
+                                                                                                            .skills-container {
+                                                                                                                display: flex;
+                                                                                                                flex-wrap: wrap;
+                                                                                                                justify-content: center;
+                                                                                                                align-items: center;
+                                                                                                            }
+                                                                                                            .freelance-tags {
+                                                                                                                margin: 5px;
+                                                                                                            }
+                                                                                                            .skills-row {
+                                                                                                                display: flex;
+                                                                                                                justify-content: center;
+                                                                                                                width: 100%;
+                                                                                                            }
+                                                                                                        </style>-->
                                                 </div>
                                                 <div class="counter-stats">
                                                     <ul>
@@ -481,30 +470,29 @@
                             </div>
 
                             <div class="pagination-container">
-                                <c:if test="${tongSoTrang > 1}">
-                                    <nav>
-                                        <ul class="pagination">
-                                            <c:if test="${trangHienTai > 1}">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="AllListPost?page=${trangHienTai - 1}" aria-label="Trước">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                            </c:if>
-                                            <c:forEach var="i" begin="1" end="${tongSoTrang}">
-                                                <li class="page-item ${i == trangHienTai ? 'active' : ''}">
-                                                    <a class="page-link" href="AllListPost?page=${i}">${i}</a>
-                                                </li>
-                                            </c:forEach>
-                                            <c:if test="${trangHienTai < tongSoTrang}">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="AllListPost?page=${trangHienTai + 1}" aria-label="Sau">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </li>
-                                            </c:if>
-                                        </ul>
-                                    </nav>
+                                <c:if test="${endPage > 1}">
+                                    <ul class="pagination list-pagination">
+                                        <c:if test="${tag > 1}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="SearchInHome?index=${tag-1}" aria-label="Trước">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                        <c:forEach var="i" begin="1" end="${endPage}">
+                                            <li class="page-item ${i == tag ? 'active' : ''}">
+                                                <a class="page-link" href="SearchInHome?index=${i}">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:if test="${tag < endPage}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="SearchInHome?index=${tag + 1}" aria-label="Sau">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
+
                                 </c:if>
                             </div>
                         </div>
@@ -683,7 +671,7 @@
                     let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
                     let postSkills = Array.from(post.querySelectorAll('.badge')).map(el => el.innerText.toLowerCase());
-                            //.freelance-tags 
+                    //.freelance-tags 
                     let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
                     let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
                     let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));
