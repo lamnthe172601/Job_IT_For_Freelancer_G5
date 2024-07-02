@@ -1,19 +1,28 @@
 
 package CommonControll;
 
+import Models.Blogs;
+import dal.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
 public class blogGridControll extends HttpServlet {
-   
+   private static final long serialVersionUID = 1L;
+    private BlogDAO blogDAO;
+
+   @Override
+    public void init() {
+        blogDAO = new BlogDAO();
+    }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -42,6 +51,8 @@ public class blogGridControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        List<Blogs> listBlog = blogDAO.selectAllBlogs();
+        request.setAttribute("listBlog", listBlog);
         request.getRequestDispatcher("views/blogGrid.jsp").forward(request, response);
     } 
 
