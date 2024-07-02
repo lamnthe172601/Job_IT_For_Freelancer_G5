@@ -5,7 +5,6 @@
 package dal;
 
 import Models.*;
-import MutiModels.SkillFreelancer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,6 +49,19 @@ public class RecruiterDAO extends DBContext {
         } catch (SQLException e) {
         }
         return null;
+    }
+    
+    public void updateStatusApply(int ID, int status) {
+        String query = """
+                       UPDATE JobApply SET status = ? WHERE applyID = ?""";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(2, ID);
+            stmt.setInt(1, status);
+            
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+        }
     }
 
     public String convertDateTimeFormat(String inputDateTime) {
@@ -231,7 +243,7 @@ public class RecruiterDAO extends DBContext {
                         rs.getString("phone_contact")
                 );
 
-                list.add(new JobApply(rs.getInt("applyID"), en, post, rs.getString("status"), rs.getDate("dateApply")));
+                list.add(new JobApply(rs.getInt("applyID"), en, post, rs.getString("status"), rs.getDate("dateApply"), rs.getString("Resume")));
             }
         } catch (SQLException e) {
         }

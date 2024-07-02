@@ -16,18 +16,31 @@ public class JobApply {
     Post post;
     String status; 
     Date dateApply;
+    String resume;
+    
 
     public JobApply() {
     }
 
-    public JobApply(int applyID, Freelancer freelancer, Post post, String status, Date dateApply) {
+    public JobApply(int applyID, Freelancer freelancer, Post post, String status, Date dateApply, String resume) {
         this.applyID = applyID;
         this.freelancer = freelancer;
         this.post = post;
         this.status = status;
         this.dateApply = dateApply;
+        this.resume = resume;
     }
 
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    
+    
     public int getApplyID() {
         return applyID;
     }

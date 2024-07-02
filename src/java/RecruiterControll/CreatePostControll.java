@@ -98,7 +98,7 @@ public class CreatePostControll extends HttpServlet {
                 int caId = Integer.parseInt(caId_raw);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                if (postDAO.createPost(projectTitle, linkDB, jobType, duration, Expried, target, description, budget, location, skills, re.getRecruiterID(), 1, caId, 0)) {
+                if (postDAO.createPost(projectTitle, linkDB, jobType, duration, Expried, target, description, budget, location, skills, re.getRecruiterID(), 1, caId, 1)) {
                     imgPart.write(imgFilePath);
                     response.getWriter().write("{\"success\": true, \"message\": \"Job created successfully\"}");
                 } else {

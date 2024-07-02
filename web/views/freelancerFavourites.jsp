@@ -1,9 +1,3 @@
-<%-- 
-    Document   : PopularPost
-    Created on : May 28, 2024, 1:28:46 PM
-    Author     : DUC MINH
---%>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>

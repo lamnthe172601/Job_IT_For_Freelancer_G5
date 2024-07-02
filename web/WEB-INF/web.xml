@@ -263,6 +263,10 @@
     <servlet>
         <servlet-name>ApplyJobFormSearchControll</servlet-name>
         <servlet-class>FreelancerControll.ApplyJobFormSearchControll</servlet-class>
+        </servlet>
+    <servlet>
+        <servlet-name>ConnectFreelancerControll</servlet-name>
+        <servlet-class>RecruiterControll.ConnectFreelancerControll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -535,5 +539,9 @@
     <servlet-mapping>
         <servlet-name>ApplyJobFormSearchControll</servlet-name>
         <url-pattern>/ApplyJobFormSearch</url-pattern>
+          </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConnectFreelancerControll</servlet-name>
+        <url-pattern>/ConnectFreelancer</url-pattern>
     </servlet-mapping>
 </web-app>

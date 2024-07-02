@@ -5,6 +5,7 @@
 
 package RecruiterControll;
 
+import dal.RecruiterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class SendEmailControll extends HttpServlet {
+public class ConnectFreelancerControll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +34,10 @@ public class SendEmailControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SendEmailControll</title>");  
+            out.println("<title>Servlet ConnectFreelancerControll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SendEmailControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ConnectFreelancerControll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,14 +57,31 @@ public class SendEmailControll extends HttpServlet {
         processRequest(request, response);
     } 
 
-    
+    /** 
+     * Handles the HTTP <code>POST</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
-    }
+        RecruiterDAO d = new RecruiterDAO();
+        try {
+            int applyID = Integer.parseInt(request.getParameter("postID").trim());
+            String type = request.getParameter("type");
+            int status = type.equals("approve") ? 1 : 2;
 
-    
+            d.updateStatusApply(applyID, status);
+
+            response.setContentType("application/json");
+            response.getWriter().write("{\"success\": true, \"message\": \"" + (status == 1 ? "Freelancer approved successfully!" : "Freelancer rejected successfully!") + "\"}");
+        } catch (Exception e) {
+            response.setContentType("application/json");
+            response.getWriter().write("{\"success\": false, \"message\": \"An error occurred.\"}");
+        }
+    }
 
     /** 
      * Returns a short description of the servlet.
