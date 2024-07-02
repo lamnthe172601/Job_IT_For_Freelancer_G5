@@ -372,21 +372,21 @@
 
                         <div class="col-xl-9 col-lg-8">
                             <div class="dashboard-sec freelance-favourites">
-                                <form action="PostFavourites" method="post" class="form-inline my-2 my-lg-0">
-                                    <div class="input-group input-group-sm">
-                                        <c:if test="${txtSearch != null}">
-                                            <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
-                                        </c:if>
-                                        <c:if test="${txtSearch == null}">
-                                            <input name="searchName" type="text"  class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
-                                        </c:if>
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-secondary btn-number">
-                                                <i class="fa fa-search"></i>
-                                            </button>
+                                    <form action="PostFavourites" method="post" class="form-inline my-2 my-lg-0">
+                                        <div class="input-group input-group-sm">
+                                            <c:if test="${txtSearch != null}">
+                                                <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
+                                            </c:if>
+                                            <c:if test="${txtSearch == null}">
+                                                <input name="searchName" type="text"  class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
+                                            </c:if>
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-secondary btn-number">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
                                 <!--                                <div class="page-title">
                                                                     <h3>Favourites</h3>
                                                                 </div>                               -->

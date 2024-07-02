@@ -576,34 +576,7 @@
 
                         </div>
                         <div class="col-md-12 col-lg-8 col-xl-9">
-                            <div class="sort-tab develop-list-select">
-                                <div class="row align-items-center">
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                        <div class="d-flex align-items-center">
-                                            <div class="freelance-view">
-                                                <h4>Found 9 Results</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-sm-end">
-                                        <div class="sort-by">
-                                            <select class="select ">
-                                                <option>Sort by (Default)</option>
-                                                <option>Relevance</option>
-                                                <option>Rating</option>
-                                                <option>Popular</option>
-                                                <option>Latest</option>
-                                                <option>Free</option>
-                                            </select>
-                                        </div>
-                                        <ul class="list-grid d-flex align-items-center">
-                                            <li><a href="developer.html" class="favour-active"><i
-                                                        class="fas fa-th-large"></i></a></li>
-                                            <li><a href="developer-list.html"><i class="fas fa-list"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            
 
 
                             <div class="row">
