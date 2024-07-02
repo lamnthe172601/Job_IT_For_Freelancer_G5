@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +48,24 @@
             .pagination a:hover {
                 background-color: #ddd;
             }
+
+            .skills-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            .freelance-tags {
+                margin: 5px;
+            }
+            .skills-row {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+
         </style>
+
     </head>
     <body>
 
@@ -213,7 +231,7 @@
             <div style="padding: 20px 0 30px;" class="content">
                 <div class="container">
                     <div class="row">
-                       
+
                         <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
                             <div class="card search-filter">
@@ -367,15 +385,20 @@
                                 <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
                                     <div  class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
-                                            <div  class="freelance-content">
-                                                <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
-                                                <a data-bs-toggle="modal" href="#rating" class="favourite"><i class="feather-heart"></i></a>
-                                                <div  class="author-heading">
-                                                    <div class="freelance-img">
-                                                        <a href="javascript:void(0);">
-                                                            <img src="${list.image}" alt="author">
-                                                            <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                        </a>
+                                            <div id="noPostsMessage" style="display:none; text-align:center; margin-top:20px;">
+                                                Không tìm thấy project nào phù hợp
+                                            </div>
+                                            <div class="freelance-content">
+                                                <div style="padding-bottom: 30px; padding-top: 16px">
+                                                    <div style="margin-top: 10px;" class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
+                                                    
+                                                    
+
+                                                    
+                                                </div>
+                                                <div class="author-heading">
+                                                    <div class="text-center1" >                                                                                                              
+                                                        <img style="width: 239px; height: 139px;" src="${list.image}" alt="author">                                                       
                                                     </div>
                                                     <div class="profile-name">
                                                         <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
@@ -385,20 +408,18 @@
                                                         <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${list.location}</div>
                                                     </div>
                                                     <div class="skills-container">
-                                                        <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index % 3 == 0}">
-                                                                <div class="skills-row">
-                                                                </c:if>
-                                                                <div class="freelance-tags">
-                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                                </div>
-                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                                </div>
+                                                        <c:forEach items="${fn:split(list.skill, ',')}" var="skill" varStatus="loop">
+                                                            <c:if test="${loop.index < 2}">
+                                                                <span class="badge badge-pill badge-design">${skill}</span>
+                                                            </c:if>                                                              
+                                                            <c:if test="${loop.index == 1 and not loop.last}">                                                                 
+                                                                <span class="badge badge-pill badge-design">...</span>
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>
-
                                                     <style>
+
+
                                                         .skills-container {
                                                             display: flex;
                                                             flex-wrap: wrap;
@@ -642,7 +663,7 @@
                     let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
                     let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
-                    let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
+                    let postSkills = Array.from(post.querySelectorAll(' .badge')).map(el => el.innerText.toLowerCase());
 
                     let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
                     let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));

@@ -338,6 +338,8 @@
                                 </div>
                             </div>
                         </div>
+                                    
+                                    
                         <div class="col-xl-9 col-lg-8">
 
                             <nav class="user-tabs mb-4">
@@ -425,7 +427,7 @@
                                                                     </div>
 
                                                                     <div style="display: none;" id="connectedBtn${listapply.applyID}">        
-                                                                        <a style="background: blueviolet;margin-left: 30px;" href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-request">Refused</a>
+                                                                        <a style="background: violet;margin-left: 30px;" href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-request">Connected</a>
                                                                     </div>
 
                                                                     <div class="modal fade edit-proposal-modal success-modal" id="success-milestone${listapply.applyID}">
@@ -829,15 +831,6 @@
 
 
         </script>
-
-
-
-
-
-
-
-
-
 
         <script src="adminAssets/js/notification.js"></script>
         <script src="assets/js/jquery-3.7.1.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>

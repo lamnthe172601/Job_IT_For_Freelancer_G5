@@ -140,11 +140,11 @@
                     <div class="row align-items-center inner-banner">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h3>My List Post Project</h3>
+                                <h3>All Project</h3>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="home"> Home</a></li>
-                                        <li class="breadcrumb-item" aria-current="page">My List Post</li>
+                                        <li class="breadcrumb-item" aria-current="page">All Project</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -157,6 +157,7 @@
             <div class="content">
                 <div class="container">
                     <div class="row">
+
                         <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
                             <div class="card search-filter">
@@ -164,6 +165,21 @@
                                     <h4 class="card-title mb-0">Search Filter</h4>
                                 </div>
                                 <div class="card-body">
+                                    <div class="filter-widget">
+                                        <div class="row">
+                                            <div class="col-xl-6  col-sm-6 d-flex ">
+                                                <div class="sort-by">
+                                                    <select class="select" id="sortSelect">
+                                                        <option value="default">Sort by (Default)</option>
+                                                        <option value="newest">Newest</option>
+                                                        <option value="oldest">Oldest</option>
+                                                        <option value="proposals">Proposals</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -198,45 +214,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" id="projectTypeLink" data-bs-toggle="collapse" data-bs-target="#collapsproject" aria-expanded="true" aria-controls="collapsproject">
-                                                Project Type
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${jobtype}" var="jobtype">
-                                                <div class="project-type-item">
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="projectType" value="${jobtype.jobName}" data-filter="projectType">
-                                                        <span class="checkmark"></span>${jobtype.jobName}
-                                                    </label>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" id="projectDurationLink" data-bs-toggle="collapse" data-bs-target="#collapseOneDuration" aria-expanded="true" aria-controls="collapseOneDuration">
-                                                Project Duration
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapseOneDuration" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${dura}" var="dura">
-                                                <div class="duration-item">
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="projectDuration" value="${dura.durationName}" data-filter="projectDuration">
-                                                        <span class="checkmark"></span>${dura.durationName}
-                                                    </label>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" id="skillsLink" data-bs-toggle="collapse" data-bs-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
@@ -270,27 +247,53 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="filter-widget">
+                                        <h4 class="filter-title">
+                                            <a href="javascript:void(0);" class="w-100" id="projectTypeLink" data-bs-toggle="collapse" data-bs-target="#collapsproject" aria-expanded="true" aria-controls="collapsproject">
+                                                Level
+                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                                            </a>
+                                        </h4>
+                                        <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
+                                            <c:forEach items="${jobtype}" var="jobtype">
+                                                <div class="project-type-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="projectType" value="${jobtype.jobName}" data-filter="projectType">
+                                                        <span class="checkmark"></span>${jobtype.jobName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-widget">
+                                        <h4 class="filter-title">
+                                            <a href="javascript:void(0);" class="w-100" id="projectDurationLink" data-bs-toggle="collapse" data-bs-target="#collapseOneDuration" aria-expanded="true" aria-controls="collapseOneDuration">
+                                                Work time
+                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                                            </a>
+                                        </h4>
+                                        <div id="collapseOneDuration" class="collapse show" data-bs-parent="#accordionExample1">
+                                            <c:forEach items="${dura}" var="dura">
+                                                <div class="duration-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="projectDuration" value="${dura.durationName}" data-filter="projectDuration">
+                                                        <span class="checkmark"></span>${dura.durationName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
 
 
                         <div class="col-md-12 col-lg-8 col-xl-9">
-                            <div class="sort-tab ">
-                                <div class="row">
-                                    <div class="col-xl-6  col-sm-6 d-flex ">
-                                        <div class="sort-by">
-                                            <select class="select" id="sortSelect">
-                                                <option value="default">Sort by (Default)</option>
-                                                <option value="newest">Newest</option>
-                                                <option value="oldest">Oldest</option>
-                                                <option value="proposals">Proposals</option>
-                                            </select>
-                                        </div>
-                                    </div>
 
-                                </div>
-                            </div>
 
                             <%-- Lấy danh sách bài đăng và thông tin phân trang từ request --%>
                             <c:set var="listpost" value="${requestScope.listpost}" />
@@ -310,27 +313,27 @@
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
                                                 <div style="padding-bottom: 30px; padding-top: 16px">
-                                                <div style="margin-top: 10px;" class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
-                                                <c:set var="favo" value="false" />
-                                                <c:forEach items="${postFavourites}" var="post">
+                                                    <div style="margin-top: 10px;" class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
+                                                    <c:set var="favo" value="false" />
+                                                    <c:forEach items="${postFavourites}" var="post">
+                                                        <c:choose>
+                                                            <c:when test="${list.postID == post.postID}">
+                                                                <c:set var="favo" value="true" />
+                                                            </c:when>                                                                
+                                                        </c:choose>
+                                                    </c:forEach>
+
+                                                    <c:set var="postId" value="${list.postID}" />
+
                                                     <c:choose>
-                                                        <c:when test="${list.postID == post.postID}">
-                                                            <c:set var="favo" value="true" />
-                                                        </c:when>                                                                
-                                                    </c:choose>
-                                                </c:forEach>
-
-                                                <c:set var="postId" value="${list.postID}" />
-
-                                                <c:choose>
-                                                    <c:when test="${favo}">
-                                                        <a href="javascript:void(0);" onclick="toggleFavorite(${list.postID})" id="favourite_${postId}" class="favourite color-active"><i class="feather-heart"></i></a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                        <a href="javascript:void(0);" onclick="toggleFavorite(${list.postID})" id="favourite_${postId}" class="favourite"><i class="feather-heart"></i></a>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                        </div>
+                                                        <c:when test="${favo}">
+                                                            <a href="javascript:void(0);" onclick="toggleFavorite(${list.postID})" id="favourite_${postId}" class="favourite color-active"><i class="feather-heart"></i></a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            <a href="javascript:void(0);" onclick="toggleFavorite(${list.postID})" id="favourite_${postId}" class="favourite"><i class="feather-heart"></i></a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                </div>
                                                 <div class="author-heading">
                                                     <div class="text-center1" >                                                                                                              
                                                         <img style="width: 100%; height: 100%;" src="${list.image}" alt="author">                                                       
@@ -667,7 +670,7 @@
                     let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
                     let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
-                    let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
+                    let postSkills = Array.from(post.querySelectorAll(' .badge')).map(el => el.innerText.toLowerCase());
 
                     let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
                     let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
@@ -704,123 +707,123 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-            function addToFavorites(postID) {
-                $.ajax({
-                    url: 'AddFavourites',
-                    type: 'GET',
-                    data: {
-                        postID: postID
-                    },
-                    success: function (response) {
-                        // Xử lý phản hồi thành công (nếu cần)
-                        //alert('Đã thêm vào danh sách yêu thích!');
-                        $('#favourite_' + postID).addClass('color-active');
-                    },
-                    error: function (xhr, status, error) {
-                        // Xử lý lỗi (nếu có)
-                        alert('Đã xảy ra lỗi: ' + error);
-                    }
-                });
-            }
-
-            function removeFromFavorites(postID) {
-                $.ajax({
-                    url: 'DeleteFavourites',
-                    type: 'GET',
-                    data: {
-                        postID: postID
-                    },
-                    success: function (response) {
-                        // Xử lý phản hồi thành công (nếu cần)
-                        //alert('Đã xóa khỏi danh sách yêu thích!');
-                        $('#favourite_' + postID).removeClass('color-active');
-                    },
-                    error: function (xhr, status, error) {
-                        // Xử lý lỗi (nếu có)
-                        alert('Đã xảy ra lỗi: ' + error);
-                    }
-                });
-            }
-        </script>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            function validateForm(postID) {
-                var fileInput = document.getElementById('fileInput_' + postID);
-                var errorDiv = document.getElementById('error_' + postID);
-                if (fileInput.files.length === 0) {
-                    errorDiv.innerHTML = 'Please select a file.';
-                    return false; // Prevent form submission
-                } else {
-                    errorDiv.innerHTML = '';
-                    return true;
-                }
-            }
-
-            function check(postID) {
-                var fileInput = document.getElementById('fileInput_' + postID);
-                var errorDiv = document.getElementById('error_' + postID);
-                if (fileInput.files.length === 0) {
-                    errorDiv.innerHTML = 'Please select a file.';
-                } else {
-                    errorDiv.innerHTML = '';
-                }
-            }
-
-
-        </script>
-
-        <script>
-            function submitForm(postID) {
-                if (validateForm(postID) === true) {
-                    event.preventDefault();
-                    showSuccessNotification('Approve project successfully!');
-                    setTimeout(function () {
-                        document.getElementById('jobApplicationForm_' + postID).submit();
-                    }, 1000);
-                }
-
-            }
-        </script>
-
-        <script>
-            function toggleFavorite(postId) {
-                var favouriteLink = $('#favourite_' + postId);
-
-                if (favouriteLink.hasClass('color-active')) {
-                    // Remove from favorites
+                function addToFavorites(postID) {
                     $.ajax({
-                        url: 'DeleteFavourites', // Thay đổi đường dẫn phù hợp
+                        url: 'AddFavourites',
                         type: 'GET',
                         data: {
-                            postID: postId
+                            postID: postID
                         },
                         success: function (response) {
-                            favouriteLink.removeClass('color-active');
-                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
+                            // Xử lý phản hồi thành công (nếu cần)
+                            //alert('Đã thêm vào danh sách yêu thích!');
+                            $('#favourite_' + postID).addClass('color-active');
                         },
                         error: function (xhr, status, error) {
-                            console.error(error);
-                        }
-                    });
-                } else {
-                    // Add to favorites
-                    $.ajax({
-                        url: 'AddFavourites', // Thay đổi đường dẫn phù hợp
-                        type: 'GET',
-                        data: {
-                            postID: postId
-                        },
-                        success: function (response) {
-                            favouriteLink.addClass('color-active');
-                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(error);
+                            // Xử lý lỗi (nếu có)
+                            alert('Đã xảy ra lỗi: ' + error);
                         }
                     });
                 }
-            }
+
+                function removeFromFavorites(postID) {
+                    $.ajax({
+                        url: 'DeleteFavourites',
+                        type: 'GET',
+                        data: {
+                            postID: postID
+                        },
+                        success: function (response) {
+                            // Xử lý phản hồi thành công (nếu cần)
+                            //alert('Đã xóa khỏi danh sách yêu thích!');
+                            $('#favourite_' + postID).removeClass('color-active');
+                        },
+                        error: function (xhr, status, error) {
+                            // Xử lý lỗi (nếu có)
+                            alert('Đã xảy ra lỗi: ' + error);
+                        }
+                    });
+                }
+        </script>
+
+
+        <script>
+                function validateForm(postID) {
+                    var fileInput = document.getElementById('fileInput_' + postID);
+                    var errorDiv = document.getElementById('error_' + postID);
+                    if (fileInput.files.length === 0) {
+                        errorDiv.innerHTML = 'Please select a file.';
+                        return false; // Prevent form submission
+                    } else {
+                        errorDiv.innerHTML = '';
+                        return true;
+                    }
+                }
+
+                function check(postID) {
+                    var fileInput = document.getElementById('fileInput_' + postID);
+                    var errorDiv = document.getElementById('error_' + postID);
+                    if (fileInput.files.length === 0) {
+                        errorDiv.innerHTML = 'Please select a file.';
+                    } else {
+                        errorDiv.innerHTML = '';
+                    }
+                }
+
+
+        </script>
+
+        <script>
+                function submitForm(postID) {
+                    if (validateForm(postID) === true) {
+                        event.preventDefault();
+                        showSuccessNotification('Approve project successfully!');
+                        setTimeout(function () {
+                            document.getElementById('jobApplicationForm_' + postID).submit();
+                        }, 1000);
+                    }
+
+                }
+        </script>
+
+        <script>
+                function toggleFavorite(postId) {
+                    var favouriteLink = $('#favourite_' + postId);
+
+                    if (favouriteLink.hasClass('color-active')) {
+                        // Remove from favorites
+                        $.ajax({
+                            url: 'DeleteFavourites', // Thay đổi đường dẫn phù hợp
+                            type: 'GET',
+                            data: {
+                                postID: postId
+                            },
+                            success: function (response) {
+                                favouriteLink.removeClass('color-active');
+                                favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    } else {
+                        // Add to favorites
+                        $.ajax({
+                            url: 'AddFavourites', // Thay đổi đường dẫn phù hợp
+                            type: 'GET',
+                            data: {
+                                postID: postId
+                            },
+                            success: function (response) {
+                                favouriteLink.addClass('color-active');
+                                favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    }
+                }
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -839,7 +842,7 @@
 
         <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
         <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
-        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script>
+
         <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
