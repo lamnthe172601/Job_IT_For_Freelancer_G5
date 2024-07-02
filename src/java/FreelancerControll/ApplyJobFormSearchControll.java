@@ -30,7 +30,7 @@ import java.util.List;
  * @author tanng
  */
 @MultipartConfig
-public class ApplyJobFormListPostControll extends HttpServlet {
+public class ApplyJobFormSearchControll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -47,10 +47,10 @@ public class ApplyJobFormListPostControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ApplyJobFormListPostControll</title>");  
+            out.println("<title>Servlet ApplyJobFormSearchControll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ApplyJobFormListPostControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ApplyJobFormSearchControll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,7 +67,7 @@ public class ApplyJobFormListPostControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        processRequest(request, response);
     } 
 
     /** 
@@ -93,6 +93,7 @@ public class ApplyJobFormListPostControll extends HttpServlet {
             String linkDB = "FolderImages/Rerume/" + filename;
             part.write(fullPath);
             
+            
             HttpSession session = request.getSession();
             Object u = session.getAttribute("account");
             User user = (User) u;
@@ -102,8 +103,28 @@ public class ApplyJobFormListPostControll extends HttpServlet {
             int freelancerID = d.getFreelancerIDbyUserID(userId);
             p.applyJob(freelancerID, postID, linkDB);
             
-            String link="AllListPost";
-            request.getRequestDispatcher(link).forward(request, response); 
+             String   txtSearch = (String) session.getAttribute("Search3");
+            String indexPage= request.getParameter("index");
+            if(indexPage==null){
+                indexPage="1";
+            }
+            int index=Integer.parseInt(indexPage);
+            int count=p.getCountFavoSearch(freelancerID, txtSearch);
+            int endPage=count/6;
+            if(count%6!=0){
+                endPage++;
+            }
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("tag", index);
+            FreelancerDAO f=new FreelancerDAO();
+            Freelancer freelancer=f.getFreelancerById(userId);
+            List<PostBasic> post = p.searchAllFavPosts(freelancerID, txtSearch,index);
+            request.setAttribute("post", post);
+            List<JobApply> postAplly=p.getPostApply(freelancerID);
+            request.setAttribute("txtSearch", txtSearch);
+            request.setAttribute("postApply", postAplly);
+            request.setAttribute("freelancer", freelancer);
+            request.getRequestDispatcher("views/listPostFavoritesSearch.jsp").forward(request, response);          
 
         } catch (Exception e) {
             request.getRequestDispatcher("login").forward(request, response);
