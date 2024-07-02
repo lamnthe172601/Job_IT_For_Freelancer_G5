@@ -4,13 +4,10 @@
  */
 package RecruiterControll;
 
-import Models.Freelancer;
-import Models.Skills;
 import Models.User;
 import dal.DAO;
 import dal.FavoritesDAO;
-import dal.FreelancerDAO;
-import dal.RecruiterDAO;
+import dal.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,16 +15,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
 /**
  *
  * @author tanng
  */
-public class ListFreelancerControll extends HttpServlet {
+public class AddFreelancerFavoritesControll extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +39,10 @@ public class ListFreelancerControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListFreelancerControll</title>");
+            out.println("<title>Servlet AddFreelancerFavoritesControll</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListFreelancerControll at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddFreelancerFavoritesControll at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,38 +60,22 @@ public class ListFreelancerControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Object u = session.getAttribute("account");
-        User user = (User) u;
-        int userId = user.getUserID();
-        DAO d= new DAO();
-        int recruiterID=d.getRecruiterIDbyUserID(userId);
-        
-        RecruiterDAO r = new RecruiterDAO();
-        ArrayList<Freelancer> list = new ArrayList<>();
-        HashMap<Integer, String> map = r.getFreelancerSkills();
-        Set<Integer> keys = map.keySet();
-        FreelancerDAO f = new FreelancerDAO();
-        for (Integer key : keys) {
-            Freelancer free = f.getFreelancerByFreelancerId(key);
-            list.add(free);
+        try {
+            String freelancerID = request.getParameter("freelancerID");
+            HttpSession session = request.getSession();
+            Object u = session.getAttribute("account");
+            User user = (User) u;
+            DAO d = new DAO();
+            int userId = user.getUserID();
+            int recruiterID = d.getRecruiterIDbyUserID(userId);
+            FavoritesDAO fDao = new FavoritesDAO();
+            fDao.AddFreelancerFavoriter(freelancerID, recruiterID);
+            
+            request.getRequestDispatcher("ListFreelancer").forward(request, response);
+            
+        } catch (Exception e) {
+            request.getRequestDispatcher("login").forward(request, response);
         }
-        request.setAttribute("list", list);
-        request.setAttribute("map", map);
-        
-        FavoritesDAO fDao = new FavoritesDAO();
-        ArrayList<Freelancer> listFavorites = new ArrayList<>();
-        HashMap<Integer, String> mapFavorites = fDao.getFreelancerByRecruiterFavorites(recruiterID);
-        Set<Integer> key = mapFavorites.keySet();
-        for (Integer k : key) {
-            Freelancer free = f.getFreelancerByFreelancerId(k);
-            listFavorites.add(free);
-        }
-        request.setAttribute("list2", listFavorites);
-
-        
-        
-        request.getRequestDispatcher("views/listFreelancer.jsp").forward(request, response);
     }
 
     /**
@@ -112,12 +89,7 @@ public class ListFreelancerControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RecruiterDAO r = new RecruiterDAO();
-        List<Freelancer> list = r.getAllFreelancer();
-        HashMap<Integer, String> map = r.getFreelancerSkills();
-        request.setAttribute("list", list);
-        request.setAttribute("map", map);
-        request.getRequestDispatcher("views/listFreelancer.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

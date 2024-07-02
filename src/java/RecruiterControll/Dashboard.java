@@ -8,6 +8,8 @@ package RecruiterControll;
 import Models.Post;
 import Models.Recruiter;
 import Models.User;
+import MutiModels.ChartData;
+import dal.DashboardDAO;
 import dal.RecruiterDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -16,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+
 
 /**
  *
@@ -32,14 +35,18 @@ public class Dashboard extends HttpServlet {
         RecruiterDAO reDAO = new RecruiterDAO();
         Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
         int numberPost = reDAO.getNumberPostbyRecruiter(re.getRecruiterID());
-         int numberApply = reDAO.getNumberApplyPostbyRecruiter(re.getRecruiterID());
+        int numberApply = reDAO.getNumberApplyPostbyRecruiter(re.getRecruiterID());
         request.setAttribute("numberPost", numberPost);
         request.setAttribute("recruiter", re);
         request.setAttribute("numberApply", numberApply);
         List<Post> listpost = reDAO.ListPostByDateTime(re.getRecruiterID());
         request.setAttribute("listpost", listpost);
+        
+        
         request.getRequestDispatcher("views/recruiterDashboard.jsp").forward(request, response);
     } 
+    
+    
 
    
     @Override

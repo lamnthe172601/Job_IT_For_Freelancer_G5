@@ -612,7 +612,25 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="freelance-widget">
                                             <div class="freelance-content">
-                                                <a data-bs-toggle="modal" href="" class="favourite"><i class="feather-heart"></i></a>
+                                                <c:set var="favo" value="false" />
+                                                <c:forEach items="${list2}" var="list">
+                                                    <c:choose>
+                                                        <c:when test="${l.freelanceID == list.freelanceID}">
+                                                            <c:set var="favo" value="true" />
+                                                        </c:when>                                                                
+                                                    </c:choose>
+                                                </c:forEach>
+
+                                                <c:set var="ID" value="${l.freelanceID}" />
+
+                                                <c:choose>
+                                                    <c:when test="${favo}">
+                                                        <a href="javascript:void(0);" onclick="toggleFavorite(${l.freelanceID})" id="favourite_${ID}" class="favourite color-active"><i class="feather-heart"></i></a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                        <a href="javascript:void(0);" onclick="toggleFavorite(${l.freelanceID})" id="favourite_${ID}" class="favourite"><i class="feather-heart"></i></a>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 <div class="freelance-img">
                                                     <a href="developer-details.html">
                                                         <img src="${l.image}" alt="User Image">
@@ -625,8 +643,8 @@
                                                     <c:set var="year" value="${fn:substring(dob, 0, 4)}" />
                                                     <div class="freelance-specific">${year}</div>
                                                     <div class="freelance-location"><i class="feather-map-pin me-1"></i>${l.email}</div>
-                                                    <c:forEach var="entry" items="${map}">
-                                                        <c:if test="${l.freelanceID == entry.key}">
+                                                        <c:forEach var="entry" items="${map}">
+                                                            <c:if test="${l.freelanceID == entry.key}">
                                                             <div class="freelance-tags">
                                                                 <!--                                                                <a href="">
                                                                                                                                     <span class="badge badge-pill badge-design">${entry.value}</span>
@@ -828,6 +846,47 @@
             </div>
         </div>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>                                        
+
+        <script>
+                                                            function toggleFavorite(postId) {
+                                                                var favouriteLink = $('#favourite_' + postId);
+
+                                                                if (favouriteLink.hasClass('color-active')) {
+                                                                    // Remove from favorites
+                                                                    $.ajax({
+                                                                        url: 'DeleteFreelancerFavorites', // Thay đổi đường dẫn phù hợp
+                                                                        type: 'GET',
+                                                                        data: {
+                                                                            freelancerID: postId
+                                                                        },
+                                                                        success: function (response) {
+                                                                            favouriteLink.removeClass('color-active');
+                                                                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
+                                                                        },
+                                                                        error: function (xhr, status, error) {
+                                                                            console.error(error);
+                                                                        }
+                                                                    });
+                                                                } else {
+                                                                    // Add to favorites
+                                                                    $.ajax({
+                                                                        url: 'AddFreelancerFavorites', // Thay đổi đường dẫn phù hợp
+                                                                        type: 'GET',
+                                                                        data: {
+                                                                            freelancerID: postId
+                                                                        },
+                                                                        success: function (response) {
+                                                                            favouriteLink.addClass('color-active');
+                                                                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
+                                                                        },
+                                                                        error: function (xhr, status, error) {
+                                                                            console.error(error);
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
+        </script>
 
         <script src="assets/js/jquery-3.7.1.min.js" type="6afd00299c64b072e6c7887a-text/javascript"></script>
 
@@ -844,6 +903,22 @@
         <script src="assets/js/script.js" type="6afd00299c64b072e6c7887a-text/javascript"></script>
         <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
         data-cf-settings="6afd00299c64b072e6c7887a-|49" defer></script>
+        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+
+        <script src="assets/js/bootstrap.bundle.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+
+        <script src="assets/plugins/select2/js/select2.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/plugins/datatables/datatables.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+
+        <script src="assets/js/script.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e07a54eb38ecbc80607f458c-|49" defer></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
     </body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/developer.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:29:56 GMT -->

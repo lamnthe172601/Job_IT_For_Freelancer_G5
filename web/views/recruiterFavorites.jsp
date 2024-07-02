@@ -1,17 +1,17 @@
 <%-- 
-    Document   : dashboard
-    Created on : Jun 8, 2024, 11:05:23 PM
-    Author     : Admin
+    Document   : recruiterFavourites
+    Created on : Jun 26, 2024, 4:15:08 PM
+    Author     : tanng
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:30:15 GMT -->
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/developer.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:29:40 GMT -->
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -24,24 +24,14 @@
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
-        <link rel="stylesheet" href="assets/plugins/feather/feather.css">
-
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
+        <link rel="stylesheet" href="assets/plugins/feather/feather.css">
+
         <link rel="stylesheet" href="assets/css/style.css">
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-        <!-- DataTables CSS -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-
-        <!-- jQuery -->
-        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-        <!-- DataTables JS -->
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     </head>
-    <body class="dashboard-page">
+
+    <body>
 
         <div class="main-wrapper">
 
@@ -81,7 +71,7 @@
                                         <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu"> 
 
-                                            <li><a href="PostFavourites">Jobs Favourites</a></li>
+                                            <li><a href="PostFavourites">Jobs Favurites</a></li>
 
                                             <li><a href="jobsApply">Jobs Apply</a></li>
                                             <li><a href="jobforyou">Jobs For you</a></li>
@@ -243,7 +233,13 @@
             </header>
 
 
-            <div class="content content-page">
+            <div class="bread-crumb-bar">
+                <div class="container">
+                </div>
+            </div>
+
+
+            <div class="content">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
@@ -259,7 +255,7 @@
                                     <div id="sidebar-menu" class="sidebar-menu">
                                         <ul>
                                             <li class="nav-item">
-                                                <a href="Dashboard" class="nav-link active">
+                                                <a href="Dashboard" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
                                                 </a>
                                             </li>
@@ -277,7 +273,7 @@
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-favourites.html" class="nav-link">
+                                                <a href="freelancer-favourites.html" class="nav-link active">
                                                     <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favorites
                                                     <span class="menu-arrow"></span>
                                                 </a>
@@ -325,158 +321,91 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-9 col-lg-8">
-                            <div class="dashboard-sec">
-                                <div class="page-title">
-                                    <h3>Dashboard</h3>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="dash-widget">
-                                            <div class="dash-info">
-                                                <div class="dashboard-icon">
-                                                    <img src="assets/img/icon/freelancer-dashboard-icon-01.svg" alt="Img">
-                                                </div>
-                                                <div class="dash-widget-info">Posted Jobs</div>
-                                            </div>
-                                            <div class="dash-widget-more d-flex align-items-center justify-content-between">
-                                                <div class="dash-widget-count">${numberPost}</div>
-                                                <a href="manageJobsPosts" class="d-flex">View Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="dash-widget">
-                                            <div class="dash-info">
-                                                <div class="dashboard-icon dashboard-icon-two">
-                                                    <img src="assets/img/icon/freelancer-dashboard-icon-02.svg" alt="Img">
-                                                </div>
-                                                <div class="dash-widget-info">Applicants</div>
-                                            </div>
-                                            <div class="dash-widget-more d-flex align-items-center justify-content-between">
-                                                <div class="dash-widget-count">${numberApply}</div>
-                                                <a href="ManageApplication" class="d-flex">View Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="dash-widget">
-                                            <div class="dash-info">
-                                                <div class="dashboard-icon dashboard-icon-three">
-                                                    <img src="assets/img/icon/freelancer-dashboard-icon-03.svg" alt="Img">
-                                                </div>
-                                                <div class="dash-widget-info">Views Profile</div>
-                                            </div>
-                                            <div class="dash-widget-more d-flex align-items-center justify-content-between">
-                                                <div class="dash-widget-count">25</div>
-                                                <a href="freelancer-completed-projects.html" class="d-flex">View Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="dash-widget">
-                                            <div class="dash-info">
-                                                <div class="dashboard-icon dashboard-icon-four">
-                                                    <img src="assets/img/icon/freelancer-dashboard-icon-04.svg" alt="Img">
-                                                </div>
-                                                <div class="dash-widget-info">Reviews</div>
-                                            </div>
-                                            <div class="dash-widget-more d-flex align-items-center justify-content-between">
-                                                <div class="dash-widget-count">5962</div>
-                                                <a href="freelancer-completed-projects.html" class="d-flex">View Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-xl-8 d-flex">
-                                        <div class="card flex-fill ongoing-project-card">
-                                            <div class="pro-head">
-                                                <h5 class="card-title mb-0">Overview</h5>
-                                                <div class="month-detail">
-                                                    <select class="form-control" id="yearSelect" onchange="handleYearChange()">
-                                                        <option value="2024">2024</option>
-                                                        <option value="2023">2023</option>
-                                                        <option value="2022">2022</option>
-                                                    </select>
+
+                        <div class="col-md-12 col-lg-8 col-xl-9">
+                            <div class="row">
+                                <c:forEach items="${list}" var="l">
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="freelance-widget">
+                                            <div class="freelance-content">
+                                                <a  class="favourite color-active" class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#delete${l.freelanceID}"><i class="feather-heart"></i></a>
+                                                <div class="freelance-img">
+                                                    <a href="developer-details.html">
+                                                        <img src="${l.image}" alt="User Image">
+                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
+                                                    </a>
+                                                </div>
+                                                <div class="freelance-info">
+                                                    <h3><a href="developer-details.html">${l.first_name} ${l.last_name}</a></h3>
+                                                    <c:set var="dob" value="${l.dob}" />
+                                                    <c:set var="year" value="${fn:substring(dob, 0, 4)}" />
+                                                    <div class="freelance-specific">${year}</div>
+                                                    <div class="freelance-location"><i class="feather-map-pin me-1"></i>${l.email}</div>
+                                                        <c:forEach var="entry" items="${map}">
+                                                            <c:if test="${l.freelanceID == entry.key}">
+                                                            <div class="freelance-tags">
+                                                                <!--                                                                <a href="">
+                                                                                                                                    <span class="badge badge-pill badge-design">${entry.value}</span>
+                                                                                                                                </a>-->
+                                                                <c:forEach items="${fn:split(entry.value, ',')}" var="skill" varStatus="loop">
+                                                                    <c:if test="${loop.index < 3}">
+                                                                        <span class="badge badge-pill badge-design">${skill}</span>
+                                                                    </c:if>                                                              
+                                                                    <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                                        <span class="badge badge-pill badge-design">...</span>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </div>
+                                                        </c:if>
+                                                    </c:forEach>
                                                 </div>
                                             </div>
-                                            <div style="width: 600px; margin: 0 auto;">
-                                                <canvas id="applicationsPostsChart"></canvas>
+                                            <div class="cart-hover">
+                                                <a href="javascript:void(0);" class="btn-invite mb-2 w-100 d-block" tabindex="-1">Connect</a>
+                                                <a href="ViewFreelancerProfile?id=${l.freelanceID}" class="btn-cart" tabindex="-1">View Profile</a>
                                             </div>
                                         </div>
-                                    </div>
-
-
-
-                                    <div class="col-xl-4 d-flex">
-                                        <div class="flex-fill card ongoing-project-card">
-                                            <div class="pro-head b-0">
-                                                <h5 class="card-title mb-0">Static Analytics</h5>
-                                            </div>
-                                            <div class="pro-body p-0">
-                                                <div id="chartradial"></div>
-                                                <div class="d-flex flex-wrap justify-content-between">
-                                                    <ul class="static-list">
-                                                        <li><span><i class="fas fa-circle text-violet me-1"></i>Jobs</span></li>
-
-                                                        <li><span><i class="fas fa-circle text-yellow me-1"></i>Proposals</span></li>
-
-                                                    </ul>
-                                                    <ul class="static-list">
-
-                                                        <li><span><i class="fas fa-circle text-pink me-1"></i> Applied Proposals</span></li>
-
-                                                        <li><span><i class="fas fa-circle text-blue me-1"></i>Bookmarked Projects</span></li>
-                                                    </ul>
+                                        <div class="modal custom-modal fade" id="delete${l.freelanceID}" role="dialog">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="form-header">
+                                                            <input type="hidden" class="user-id1" id="">
+                                                            <h3>Status</h3>
+                                                            <p>Deleting this will remove it permanently. Are you sure?</p>
+                                                        </div>
+                                                        <div class="modal-btn Suspend-action" >
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <a id="deleteLink_${l.freelanceID}" href="DeleteRecruiterFavourites?freelanceID=${l.freelanceID}" class="btn btn-primary cancel-btn" >Yes</a>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <a  data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-xl-12">
-                                        <div class="card mb-4 ongoing-project-card">
-                                            <div class="pro-head">
-                                                <h2>List News Post Projects</h2>
-                                                <a href="view-project-detail.html" class="btn fund-btn">View All</a>
-                                            </div>
-                                            <div class="table-responsive recent-earnings flex-fill">
-                                                <table class="table mb-0 datatable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Title</th>
-                                                            <th>Job Type</th>
-                                                            <th>Skill</th>
-                                                            <th>Create On</th>
-                                                            <th>Categories</th>
-                                                            <th>Proposals</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <c:forEach items="${listpost}" var="listpost">
-                                                            <tr>
-                                                                <td>${listpost.title}</td>
-                                                                <td>${listpost.jobTypeID.jobName}</td>
-                                                                <td><c:forEach var="skill" items="${listpost.skill.split(',')}">
-                                                                        <div class="skill">${skill.trim()}</div>
-                                                                    </c:forEach></td>
-                                                                <td>${listpost.datePost}</td>
-                                                                <td>${listpost.caID.categoriesName}</td>
-                                                                <td style="text-align: center;">${listpost.quantity}</td>
-                                                                <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
-                                                            </tr>
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                </c:forEach>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="paginations list-pagination">
+                                        <li class="page-item"><a href="javascript:void(0);"><i
+                                                    class="feather-chevron-left"></i></a>
+                                        </li>
+                                        <li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
+                                        <li class="page-item"><a href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a href="javascript:void(0);">...</a></li>
+                                        <li class="page-item"><a href="javascript:void(0);">10</a></li>
+                                        <li class="page-item"><a href="javascript:void(0);"><i
+                                                    class="feather-chevron-right"></i></a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -494,19 +423,24 @@
                                     <a href="index.html" class="menu-logo">
                                         <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                     </a>
-                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
+                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce
+                                        yourself!</p>
                                     <ul>
                                         <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f"
+                                                                             aria-hidden="true"></i></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter"
+                                                                             aria-hidden="true"></i></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram"
+                                                                             aria-hidden="true"></i></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin"
+                                                                             aria-hidden="true"></i></a>
                                         </li>
                                     </ul>
                                     <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
@@ -518,11 +452,16 @@
                                         <div class="footer-widget footer-menu">
                                             <h2 class="footer-title">Useful Links</h2>
                                             <ul>
-                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
-                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
-                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
-                                                <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
-                                                <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
+                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a>
+                                                </li>
+                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a>
+                                                </li>
+                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a>
+                                                </li>
+                                                <li><a href="register.html"><i
+                                                            class="fas fa-angle-right me-1"></i>Register</a></li>
+                                                <li><a href="forgot-password.html"><i
+                                                            class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -530,11 +469,16 @@
                                         <div class="footer-widget footer-menu">
                                             <h2 class="footer-title">Help & Support</h2>
                                             <ul>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
+                                                <li><a href="javascript:void(0);"><i
+                                                            class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
+                                                <li><a href="javascript:void(0);"><i
+                                                            class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job
+                                                        Packages</a></li>
+                                                <li><a href="javascript:void(0);"><i
+                                                            class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
+                                                <li><a href="javascript:void(0);"><i
+                                                            class="fas fa-angle-right me-1"></i>Post A Job</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -542,11 +486,16 @@
                                         <div class="footer-widget footer-menu">
                                             <h2 class="footer-title">Other Links</h2>
                                             <ul>
-                                                <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
-                                                <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
-                                                <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
-                                                <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
-                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
+                                                <li><a href="freelancer-dashboard.html"><i
+                                                            class="fas fa-angle-right me-1"></i>Freelancers</a></li>
+                                                <li><a href="freelancer-portfolio.html"><i
+                                                            class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
+                                                <li><a href="project.html"><i
+                                                            class="fas fa-angle-right me-1"></i>Project</a></li>
+                                                <li><a href="project-details.html"><i
+                                                            class="fas fa-angle-right me-1"></i>Project Details</a></li>
+                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post
+                                                        Project</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -554,11 +503,15 @@
                                         <div class="footer-widget footer-menu">
                                             <h2 class="footer-title">Connect With Us</h2>
                                             <ul>
-                                                <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
+                                                <li><a href="freelancer-chats.html"><i
+                                                            class="fas fa-angle-right me-1"></i>Chat</a></li>
                                                 <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
-                                                <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
-                                                <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
-                                                <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
+                                                <li><a href="freelancer-review.html"><i
+                                                            class="fas fa-angle-right me-1"></i>Reviews</a></li>
+                                                <li><a href="privacy-policy.html"><i
+                                                            class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
+                                                <li><a href="term-condition.html"><i
+                                                            class="fas fa-angle-right me-1"></i>Terms of use</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -584,149 +537,98 @@
 
                     </div>
                 </div>
+
             </footer>
 
-            <script>
-                $(document).ready(function () {
-                    $('.datatable').DataTable({
-                        "paging": true,
-                        "pageLength": 10, // Số lượng bài post mỗi trang
-                        "searching": true,
-                        "ordering": true,
-                        "info": true
+        </div>
 
-                    });
+
+        <div class="modal fade" id="rating">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content">
+                    <div class="modal-header d-block b-0 pb-0">
+                        <span class="modal-close float-end"><a href="javascript:void(0);" data-bs-dismiss="modal"
+                                                               aria-label="Close"><i class="far fa-times-circle orange-text"></i></a></span>
+                    </div>
+                    <div class="modal-body">
+                        <form action="https://kofejob.dreamstechnologies.com/html/template/project.html">
+                            <div class="modal-info">
+                                <div class="text-center pt-0 mb-5">
+                                    <h3>Please login to Favourite Freelancer</h3>
+                                </div>
+                                <div class="submit-section text-center">
+                                    <button data-bs-dismiss="modal"
+                                            class="btn btn-primary black-btn click-btn">Cancel</button>
+                                    <button type="submit" class="btn btn-primary click-btn">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            function openPopup(int) {
+                document.getElementById(int).style.display = 'block';
+                document.getElementById(int).style.display = 'block';
+            }
+
+
+            function closePopup(int) {
+                document.getElementById(int).style.display = 'none';
+                document.getElementById(int).style.display = 'none';
+            }
+
+//            function confirmAction(postID) {
+//                var confirmResult = confirm("Deleting this will remove it permanently. Are you sure?");
+//                if (confirmResult) {
+//                    window.location.href = "DeleteRecruiterFavourites?freelanceID=" + postID;
+//                } else {
+//                    return false;
+//                }
+//            }
+
+        </script>
+
+        <script>
+            // Lắng nghe sự kiện click vào các nút có id bắt đầu là "deleteLink_"
+            document.querySelectorAll('[id^="deleteLink_"]').forEach(function (element) {
+                element.addEventListener('click', function (event) {
+                    // Ngăn chặn hành động mặc định của thẻ a (chuyển hướng ngay lập tức)
+                    event.preventDefault();
+                    showSuccessNotification('Delete successfully!');
+                    // Delay 1 giây trước khi chuyển hướng
+                    setTimeout(function () {
+                        // Lấy href từ nút "Yes" và chuyển hướng đến đường dẫn đó
+                        window.location.href = event.target.href;
+                    }, 1000); // 1000 milliseconds = 1 giây
                 });
-            </script>
+            });
+        </script>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>                                        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
+        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
-            <script>
-                let applicationsPostsChart;
+        <script src="assets/js/bootstrap.bundle.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
-                function loadChartData(year) {
-                    fetch('Chart?action=getData&year=' + year)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Network response was not ok');
-                                }
-                                return response.json();
-                            })
-                            .then(data => {
-                                // Prepare data arrays for applications and posts counts
-                                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                                const applicationsData = new Array(12).fill(0);
-                                const postsData = new Array(12).fill(0);
+        <script src="assets/plugins/select2/js/select2.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
-                                // Populate data arrays based on fetched data
-                                data.forEach(item => {
-                                    applicationsData[item.month - 1] = item.applyCount;
-                                    postsData[item.month - 1] = item.postCount;
-                                });
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/plugins/datatables/datatables.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
-                                // Update the chart with new data
-                                updateChart(applicationsData, postsData, months, year);
-                            })
-                            .catch(error => {
-                                console.error('Error fetching data:', error);
-                                // Handle error, e.g., show error message to user
-                            });
-                }
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
-                function updateChart(applicationsData, postsData, labels, year) {
-                    // Get the chart context from the canvas element
-                    const ctx = document.getElementById('applicationsPostsChart').getContext('2d');
+        <script src="assets/js/script.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e07a54eb38ecbc80607f458c-|49" defer></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
+    </body>
 
-                    // Destroy existing chart if it exists
-                    if (applicationsPostsChart) {
-                        applicationsPostsChart.destroy();
-                    }
-
-                    // Create new Chart.js instance
-                    applicationsPostsChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [
-                                {
-                                    label: 'Applications',
-                                    data: applicationsData,
-                                    borderColor: 'rgba(255, 99, 132, 1)',
-                                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                    fill: false,
-                                    tension: 0.5,
-                                    pointStyle: 'circle',
-                                    pointRadius: 5,
-                                    pointHoverRadius: 7
-                                },
-                                {
-                                    label: 'Posts',
-                                    data: postsData,
-                                    borderColor: 'rgba(54, 162, 235, 1)',
-                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                    fill: false,
-                                    tension: 0.5,
-                                    pointStyle: 'circle',
-                                    pointRadius: 5,
-                                    pointHoverRadius: 7
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    display: true,
-                                    position: 'top'
-                                },
-                                title: {
-                                    display: true,
-                                    text: `Overview - Year ` + year
-                                }
-                            }
-                        }
-                    });
-                }
-
-                function handleYearChange() {
-                    // Get the selected year from the dropdown
-                    const selectedYear = document.getElementById('yearSelect').value;
-
-                    // Load chart data for the selected year
-                    loadChartData(selectedYear);
-                }
-
-                document.addEventListener('DOMContentLoaded', () => {
-                    // Get the current year
-                    const currentYear = new Date().getFullYear();
-
-                    // Set the default selected year in the dropdown
-                    document.getElementById('yearSelect').value = currentYear;
-
-                    // Load chart data for the current year on page load
-                    loadChartData(currentYear);
-                });
-            </script>
-
-
-
-            <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
-
-            </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-
-            <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-
-            <script src="assets/plugins/apexchart/apexcharts.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-            <script src="assets/plugins/apexchart/chart-data.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-
-            <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-            <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-
-            <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-            <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script></body>
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/developer.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:29:56 GMT -->
 
 </html>

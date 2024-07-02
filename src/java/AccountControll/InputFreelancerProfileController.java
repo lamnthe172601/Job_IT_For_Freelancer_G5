@@ -7,6 +7,7 @@ package AccountControll;
 import Models.SkillSet;
 import Models.User;
 import dal.DAO;
+import dal.SkillSetDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,6 +23,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -70,6 +72,9 @@ public class InputFreelancerProfileController extends HttpServlet {
         DAO dao = new DAO();
         ArrayList<SkillSet> listSkill = dao.listSkill();
         request.setAttribute("listskill", listSkill);
+        SkillSetDAO s= new SkillSetDAO();
+        HashMap<String, String> map = s.getAllSkill();
+        request.setAttribute("map", map);
         request.getRequestDispatcher("views/inputFreelancerProfile.jsp").forward(request, response);
 
     }
@@ -100,21 +105,24 @@ public class InputFreelancerProfileController extends HttpServlet {
         User user = (User) session.getAttribute("user");
         if (user != null) {
             int userID = user.getUserID();
-            dao.UpdateRole(userID, 3);
+            
             dao.inputFreelancerInfo(firstname, lastname, img, gender, date, decscribe, email, phone, userID);
             int freelancerID = dao.getFreelancerIDbyUserID(userID);
             String[] skills = request.getParameterValues("skill");
             String[] level=request.getParameterValues("level");
+            SkillSetDAO skill = new SkillSetDAO();
+
             if (skills != null) {
                 int s=skills.length;
                 int index=0;
                 while(s>index){
-                    dao.inputFreelancerSkill(skills[index], freelancerID,level[index]);
+                    int skillID=skill.getSkillIDBySkillName(skills[index].trim());
+                    dao.inputFreelancerSkill(skillID, freelancerID,level[index]);
                     index++;
                 }
                 
             }
-
+            dao.UpdateRole(userID, 3);
             String position = request.getParameter("position");
             String datestart = request.getParameter("datestart");
             String dateend = request.getParameter("dateend");
