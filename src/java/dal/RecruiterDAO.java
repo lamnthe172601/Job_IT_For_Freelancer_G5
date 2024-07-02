@@ -354,20 +354,6 @@ public class RecruiterDAO extends DBContext {
         }
         return map;
     }
-    
-    
-    public void updateStatusApply(int ID, int status) {
-        String query = """
-                       UPDATE JobApply SET status = ? WHERE applyID = ?""";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(2, ID);
-            stmt.setInt(1, status);
-            
-            stmt.executeUpdate();
-            
-        } catch (SQLException e) {
-        }
-    }
 
     public static void main(String[] args) {
         RecruiterDAO r = new RecruiterDAO();

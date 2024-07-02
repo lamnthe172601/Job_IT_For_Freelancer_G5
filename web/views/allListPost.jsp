@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +24,12 @@
         <link rel="stylesheet" href="assets/css/style.css">
 
         <style>
+            .text-center1 {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto 15px;
+            }
+
             .pagination {
                 display: flex;
                 justify-content: center;
@@ -84,14 +90,14 @@
                 text-transform: uppercase;
 
             }
-input.file {
-    border: 1px solid #000; /* Viền đen 2px */
-    color: black; /* Màu chữ đen */
-    padding: 8px; /* Khoảng cách giữa viền và nội dung */
-    border-radius: 5px; /* Bo tròn góc */
-    outline: none; /* Loại bỏ viền xung quanh khi focus */
-    
-}
+            input.file {
+                border: 1px solid #000; /* Viền đen 2px */
+                color: black; /* Màu chữ đen */
+                padding: 8px; /* Khoảng cách giữa viền và nội dung */
+                border-radius: 5px; /* Bo tròn góc */
+                outline: none; /* Loại bỏ viền xung quanh khi focus */
+
+            }
         </style>
     </head>
     <body>
@@ -303,7 +309,8 @@ input.file {
                                     <div class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
-                                                <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
+                                                <div style="padding-bottom: 30px; padding-top: 16px">
+                                                <div style="margin-top: 10px;" class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
                                                 <c:set var="favo" value="false" />
                                                 <c:forEach items="${postFavourites}" var="post">
                                                     <c:choose>
@@ -323,12 +330,10 @@ input.file {
                                                         <a href="javascript:void(0);" onclick="toggleFavorite(${list.postID})" id="favourite_${postId}" class="favourite"><i class="feather-heart"></i></a>
                                                         </c:otherwise>
                                                     </c:choose>
+                                                        </div>
                                                 <div class="author-heading">
-                                                    <div class="freelance-img">
-                                                        <a href="javascript:void(0);">
-                                                            <img src="${list.image}" alt="author">
-                                                            <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                        </a>
+                                                    <div class="text-center1" >                                                                                                              
+                                                        <img style="width: 100%; height: 100%;" src="${list.image}" alt="author">                                                       
                                                     </div>
                                                     <div class="profile-name">
                                                         <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
@@ -338,20 +343,18 @@ input.file {
                                                         <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${list.location}</div>
                                                     </div>
                                                     <div class="skills-container">
-                                                        <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index % 3 == 0}">
-                                                                <div class="skills-row">
-                                                                </c:if>
-                                                                <div class="freelance-tags">
-                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                                </div>
-                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                                </div>
+                                                        <c:forEach items="${fn:split(list.skill, ',')}" var="skill" varStatus="loop">
+                                                            <c:if test="${loop.index < 3}">
+                                                                <span class="badge badge-pill badge-design">${skill}</span>
+                                                            </c:if>                                                              
+                                                            <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                                <span class="badge badge-pill badge-design">...</span>
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>
-
                                                     <style>
+
+
                                                         .skills-container {
                                                             display: flex;
                                                             flex-wrap: wrap;
@@ -395,10 +398,10 @@ input.file {
                                                     <c:forEach items="${postApply}" var="j">
                                                         <c:if test="${list.postID == j.postID}">
                                                             <c:choose>
-                                                                <c:when test="${j.status == 'Pending' || j.status == 'Approve'}">
+                                                                <c:when test="${j.status == '0' || j.status == '1'}">
                                                                     <c:set var="applied" value="true" />
                                                                 </c:when>
-                                                                <c:when test="${j.status == 'Reject'}">
+                                                                <c:when test="${j.status == '2'}">
                                                                     <c:remove var="applied" />
                                                                 </c:when>
                                                             </c:choose>
@@ -423,41 +426,41 @@ input.file {
 
                                         </div>
                                         <div class="modal custom-modal fade" id="applyModal_${list.postID}" role="dialog">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-body">
-                                                            <div class="form-header">
-                                                                <input type="hidden" class="user-id1" id="">
-                                                                <h3>Status</h3>
-                                                                <p>Submit your resume so employers can know more about you.</p>
-                                                            </div>
-                                                            <div class="modal-btn Suspend-action">
-                                                                
-                                                                <form id="jobApplicationForm_${list.postID}" action="ApplyJobFormListPost" method="post"  enctype="multipart/form-data" onsubmit="return validateForm('${list.postID}')" >
-                                                                    <div class="row">
-                                                                        <div style='margin-bottom: 30px'>
-                                                                            <input oninput="check('${list.postID}')" class='file' type='file' id='fileInput_${list.postID}' name="file"/>
-                                                                            <div style="color: red" id="error_${list.postID}"></div>
-                                                                            <input hidden="" name="postID" value="${list.postID}"/>
-                                                                            <input hidden="" name="index" value="${i}"/>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <!-- Nút "Yes" để xử lý AJAX -->
-                                                                            <button id="submitButton_${list.postID}" class="btn btn-primary confirm-btn" type="submit" onclick="submitForm('${list.postID}')">Submit</button>
-                                                                        </div>
-                                                                        <div class="col-6 " >
-                                                                            <!-- Nút "Cancel" để đóng modal -->
-                                                                            <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
-                                                                        </div>
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="form-header">
+                                                            <input type="hidden" class="user-id1" id="">
+                                                            <h3>Status</h3>
+                                                            <p>Submit your resume so employers can know more about you.</p>
+                                                        </div>
+                                                        <div class="modal-btn Suspend-action">
+
+                                                            <form id="jobApplicationForm_${list.postID}" action="ApplyJobFormListPost" method="post"  enctype="multipart/form-data" onsubmit="return validateForm('${list.postID}')" >
+                                                                <div class="row">
+                                                                    <div style='margin-bottom: 30px'>
+                                                                        <input oninput="check('${list.postID}')" class='file' type='file' id='fileInput_${list.postID}' name="file"/>
+                                                                        <div style="color: red" id="error_${list.postID}"></div>
+                                                                        <input hidden="" name="postID" value="${list.postID}"/>
+                                                                        <input hidden="" name="index" value="${i}"/>
                                                                     </div>
-                                                                </form>    
-                                                            </div>
+                                                                    <div class="col-6">
+                                                                        <!-- Nút "Yes" để xử lý AJAX -->
+                                                                        <button id="submitButton_${list.postID}" class="btn btn-primary confirm-btn" type="submit" onclick="submitForm('${list.postID}')">Submit</button>
+                                                                    </div>
+                                                                    <div class="col-6 " >
+                                                                        <!-- Nút "Cancel" để đóng modal -->
+                                                                        <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
+                                                                    </div>
+                                                                </div>
+                                                            </form>    
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                                                
-                                                                
+                                        </div>
+
+
                                     </div>
                                 </c:forEach>
                             </div>
@@ -741,44 +744,44 @@ input.file {
         </script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    function validateForm(postID) {
-        var fileInput = document.getElementById('fileInput_' + postID);
-        var errorDiv = document.getElementById('error_' + postID);
-        if (fileInput.files.length === 0) {
-            errorDiv.innerHTML = 'Please select a file.';
-            return false; // Prevent form submission
-        } else {
-            errorDiv.innerHTML = ''; 
-            return true;
-        }
-    }
-    
-    function check(postID) {
-    var fileInput = document.getElementById('fileInput_' + postID);
-        var errorDiv = document.getElementById('error_' + postID);
-    if (fileInput.files.length === 0) {
-        errorDiv.innerHTML = 'Please select a file.';
-    } else {
-        errorDiv.innerHTML = '';
-    }
-}
+        <script>
+            function validateForm(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                    return false; // Prevent form submission
+                } else {
+                    errorDiv.innerHTML = '';
+                    return true;
+                }
+            }
+
+            function check(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                } else {
+                    errorDiv.innerHTML = '';
+                }
+            }
 
 
-</script>
+        </script>
 
-<script>
-function submitForm(postID) {
-    if(validateForm(postID)===true){
-        event.preventDefault();
-    showSuccessNotification('Approve project successfully!');
-    setTimeout(function() {
-        document.getElementById('jobApplicationForm_' + postID).submit();
-    }, 1000);
-    }
-    
-}
-</script>
+        <script>
+            function submitForm(postID) {
+                if (validateForm(postID) === true) {
+                    event.preventDefault();
+                    showSuccessNotification('Approve project successfully!');
+                    setTimeout(function () {
+                        document.getElementById('jobApplicationForm_' + postID).submit();
+                    }, 1000);
+                }
+
+            }
+        </script>
 
         <script>
             function toggleFavorite(postId) {
@@ -820,10 +823,10 @@ function submitForm(postID) {
             }
         </script>
 
-       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
-        
-            
+
+
         <script src="assets/js/filterMyListPost.js" type="text/javascript"></script>
         <script src="assets/js/jquery-3.7.1.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
 

@@ -207,7 +207,7 @@
     <servlet>
         <servlet-name>DeleteSkill</servlet-name>
         <servlet-class>AdminControlles.DeleteSkill</servlet-class>
-    </servlet>
+         </servlet>
     <servlet>
         <servlet-name>ApplyJobFormListPostControll</servlet-name>
         <servlet-class>FreelancerControll.ApplyJobFormListPostControll</servlet-class>
@@ -229,6 +229,18 @@
         <servlet-class>RecruiterControll.ViewFreelancerProfileControll</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AddFreelancerFavoritesControll</servlet-name>
+        <servlet-class>RecruiterControll.AddFreelancerFavoritesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFreelancerFavoritesControll</servlet-name>
+        <servlet-class>RecruiterControll.DeleteFreelancerFavoritesControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRecruiterFavouritesControll</servlet-name>
+        <servlet-class>RecruiterControll.DeleteRecruiterFavouritesControll</servlet-class>
+        </servlet>
+    <servlet>
         <servlet-name>ChartControll</servlet-name>
         <servlet-class>RecruiterControll.ChartControll</servlet-class>
     </servlet>
@@ -237,8 +249,8 @@
         <servlet-class>RecruiterControll.SendEmailControll</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ConnectFreelancerControll</servlet-name>
-        <servlet-class>RecruiterControll.ConnectFreelancerControll</servlet-class>
+        <servlet-name>SearchInHomeControll</servlet-name>
+        <servlet-class>CommonControll.SearchInHomeControll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -455,7 +467,7 @@
     <servlet-mapping>
         <servlet-name>DeleteSkill</servlet-name>
         <url-pattern>/deleteSkill</url-pattern>
-    </servlet-mapping>
+        </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ApplyJobFormListPostControll</servlet-name>
         <url-pattern>/ApplyJobFormListPost</url-pattern>
@@ -477,6 +489,18 @@
         <url-pattern>/ViewFreelancerProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AddFreelancerFavoritesControll</servlet-name>
+        <url-pattern>/AddFreelancerFavorites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFreelancerFavoritesControll</servlet-name>
+        <url-pattern>/DeleteFreelancerFavorites</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRecruiterFavouritesControll</servlet-name>
+        <url-pattern>/DeleteRecruiterFavourites</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
         <servlet-name>ChartControll</servlet-name>
         <url-pattern>/Chart</url-pattern>
     </servlet-mapping>
@@ -485,7 +509,7 @@
         <url-pattern>/sendEmail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ConnectFreelancerControll</servlet-name>
-        <url-pattern>/ConnectFreelancer</url-pattern>
+        <servlet-name>SearchInHomeControll</servlet-name>
+        <url-pattern>/SearchInHome</url-pattern>
     </servlet-mapping>
 </web-app>

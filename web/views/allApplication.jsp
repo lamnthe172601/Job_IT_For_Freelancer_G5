@@ -468,20 +468,15 @@
                                                                         <div class="modal-dialog modal-dialog-centered modal-md">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header justify-content-end">
-                                                                                    <span class="modal-close">
-                                                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close">
-                                                                                            <i class="feather-x"></i>
-                                                                                        </a>
-                                                                                    </span>
+                                                                                    <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <div class="confirmation-msg-content text-center">
-                                                                                        <input type="hidden" class="apply-id" value="${listapply.applyID}">
                                                                                         <h4>Confirm Action</h4>
-                                                                                        <p>Are you sure you want to refuse this freelancer?</p>
+                                                                                        <p>Are you sure you want to proceed with this action?</p>
                                                                                         <div class="text-center">
-                                                                                            <a href="javascript:void(0);" class="btn btn-primary mt-3 refuse-freelancer">Refuse</a>
-                                                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-secondary mt-3" style="margin-left: 30px;" aria-label="Close">Cancel</a>
+                                                                                            <a href="#success-milestone${listapply.freelancer.freelanceID}" data-bs-toggle="modal" class="btn btn-primary mt-3 ">Refuse</a>
+                                                                                            <a style="margin-left: 30px" href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary mt-3 " aria-label="Close">Center</a>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -827,8 +822,9 @@
 
 
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
-        <script src="assets/js/jquery-3.7.1.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script data-cfasync="false" src="assets/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 

@@ -3,34 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package FreelancerControll;
+package CommonControll;
 
-import Models.Freelancer;
-import Models.User;
-import MutiModels.JobApply;
-import MutiModels.PostBasic;
-import dal.DAO;
-import dal.FreelancerDAO;
-import dal.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 
 /**
  *
  * @author tanng
  */
-@MultipartConfig
-public class ApplyJobFormListPostControll extends HttpServlet {
+public class SearchInHomeControll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -47,10 +33,10 @@ public class ApplyJobFormListPostControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ApplyJobFormListPostControll</title>");  
+            out.println("<title>Servlet SearchInHomeControll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ApplyJobFormListPostControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SearchInHomeControll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,7 +53,7 @@ public class ApplyJobFormListPostControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        processRequest(request, response);
     } 
 
     /** 
@@ -80,38 +66,7 @@ public class ApplyJobFormListPostControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try {
-            
-            String postID = request.getParameter("postID");
-            Part part = request.getPart("file");
-            String realPath = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\Rerume";
-            String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
-            if (!Files.exists(Path.of(realPath))) {
-                Files.createDirectory(Path.of(realPath));
-            }
-            String fullPath = realPath + "/" + filename;
-            String linkDB = "FolderImages/Rerume/" + filename;
-            part.write(fullPath);
-            
-            HttpSession session = request.getSession();
-            Object u = session.getAttribute("account");
-            User user = (User) u;
-            PostDAO p = new PostDAO();
-            DAO d = new DAO();
-            int userId = user.getUserID();
-            int freelancerID = d.getFreelancerIDbyUserID(userId);
-            p.applyJob(freelancerID, postID, linkDB);
-            String indexPage = request.getParameter("page");
-            
-            if(indexPage == null){
-                indexPage="1";
-            }
-            String link="AllListPost?page="+indexPage;
-            request.getRequestDispatcher(link).forward(request, response); 
-
-        } catch (Exception e) {
-            request.getRequestDispatcher("login").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /** 

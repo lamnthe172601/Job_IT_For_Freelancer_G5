@@ -18,10 +18,9 @@ import java.util.List;
  *
  * @author tanng
  */
-public class FavoritesDAO extends DBContext{
+public class FavoritesDAO extends DBContext {
 
-    
-     public List<Skills> getAllRecruiterFavorites(String recruiterID) {
+    public List<Skills> getAllRecruiterFavorites(int recruiterID) {
         List<Skills> list = new ArrayList<>();
         String query = """
                         select f.freelanceID,f.first_name, f.last_name, f.gender,f.image,f.phone_contact, f.userID, f.dob,f.describe, f.email__contact,
@@ -30,10 +29,11 @@ public class FavoritesDAO extends DBContext{
                                                  	inner join Skills s on f.freelanceID=s.freelancerID
                                                  	inner join Skill_Set ks on ks.skill_set_ID=s.skill_set_ID
                         				inner join Mark m on m.FreelancerID=f.freelanceID
-                        				where m.RecruiterID=?""";
+                        				where m.RecruiterID=?
+                                                        order by m.MarkID desc""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, recruiterID);
+            ps.setInt(1, recruiterID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 SkillSet ss = new SkillSet(rs.getInt("skill_set_ID"), rs.getString("skill_set_name"));
@@ -54,8 +54,8 @@ public class FavoritesDAO extends DBContext{
         }
         return list;
     }
-     
-         public HashMap<Integer, String> getFreelancerByRecruiterFavorites(String recruiterID) {
+
+    public HashMap<Integer, String> getFreelancerByRecruiterFavorites(int recruiterID) {
         HashMap<Integer, String> map = new HashMap<>();
         FavoritesDAO f = new FavoritesDAO();
 
@@ -73,5 +73,34 @@ public class FavoritesDAO extends DBContext{
             }
         }
         return map;
+    }
+
+    public void deleteFreelancerFavoriter(String freelancerID, int recruiterID) {
+        String sql = """
+                     DELETE FROM Mark WHERE FreelancerID=? AND RecruiterID=?;
+                     """;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, freelancerID);
+            statement.setInt(2, recruiterID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void AddFreelancerFavoriter(String freelancerID, int recruiterID) {
+        String sql = """
+                     insert into Mark values(?,?);;
+                     """;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, freelancerID);
+            statement.setInt(2, recruiterID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }

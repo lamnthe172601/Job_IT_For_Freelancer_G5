@@ -262,7 +262,7 @@
             <div class="content content-page bookmark">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xl-3 col-lg-4 theiaStickySidebar">
+                        <div style="margin-bottom: 30px" class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
                                     <a href="MyProfile?id=${userID}"><img alt="profile image" src="${freelancer.image}" class="avatar-lg rounded-circle"></a>
@@ -359,10 +359,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-9 col-lg-8">
-                            <div class="dashboard-sec freelance-favourites">
-                                <form action="ListApply" method="post" class="form-inline my-2 my-lg-0">
+                                                                                    <form action="ListApply" method="post" class="form-inline my-2 my-lg-0">
                                     <div class="input-group input-group-sm">
                                         <c:if test="${txtSearch != null}">
                                             <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
@@ -377,13 +374,10 @@
                                         </div>
                                     </div>
                                 </form>
-
+                        </div>
+                        <div  class="col-xl-9 col-lg-8">
+                            <div class="dashboard-sec freelance-favourites">
                                 <div class="col-xl-12">
-                                    <div class="card mb-4 ongoing-project-card" style="border: none; padding-top: 30px; ">
-<!--                                        <div class="pro-head">
-                                            <h2>List Job Apply</h2>
-
-                                        </div>-->
                                         <div class="table-responsive recent-earnings flex-fill">
                                             <table class="table mb-0">
                                                 <thead>
@@ -392,7 +386,7 @@
                                                         <th>Position</th>
                                                         <th>Budget</th>
                                                         <th>Create On</th>
-                                                        <th>Apply On</th>
+                                                        <th>Apply On <i class="fas fa-filter filter-btn"></i></th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -405,14 +399,14 @@
                                                             <td>$${p.budget}</td>
                                                             <td>${p.datePost}</td>
                                                             <td>${p.dateApply}</td>
-                                                            <c:if test="${p.status=='Reject'}">
-                                                                <td style="color: #FF0000">${p.status}</td>
+                                                            <c:if test="${p.status=='2'}">
+                                                                <td style="color: #FF0000">Reject</td>
                                                             </c:if>
-                                                            <c:if test="${p.status=='Pending'}">
-                                                                <td style="color: #CC9900">${p.status}</td>
+                                                            <c:if test="${p.status=='0'}">
+                                                                <td style="color: #CC9900">Pending</td>
                                                             </c:if>
-                                                            <c:if test="${p.status=='Approve'}">
-                                                                <td style="color: #009933">${p.status}</td>
+                                                            <c:if test="${p.status=='1'}">
+                                                                <td style="color: #009933">Approve</td>
                                                             </c:if>
 
                                                             <td><a style="padding-left: 25%" href="PostDetails?postID=${p.postID}"><i
@@ -422,10 +416,10 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
+                                    
                                     <c:if test="${endPage > 1}">
                                         <div class="row">
-                                            <div class="col-md-12">                  
+                                            <div style="padding-bottom: 20px" class="col-md-12">                  
                                                 <ul class="paginations list-pagination">                                          
                                                     <!--<li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a></li>-->
                                                     <c:forEach begin="1" end="${endPage}" var="e">     
@@ -440,7 +434,7 @@
                                             </div>
                                         </div>
                                     </c:if>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -698,14 +692,13 @@
 
         <style>
             .form-inline {
-                margin-left: 60%;
                 margin-right: 50px;
             }
 
             /* Để căn chỉnh nút và icon */
             .input-group {
                 position: relative;
-                width: calc(100% - 30px);
+                width: 100%
             }
 
             .btn.btn-secondary.btn-number {
@@ -723,17 +716,6 @@
             }
 
         </style>
-
-        <script>
-
-
-        </script>
-
-
-
-
-
-
 
         <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
