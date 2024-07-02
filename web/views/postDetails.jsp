@@ -29,7 +29,7 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-       
+
 
     </head>
 </head>
@@ -392,8 +392,7 @@
                                 </ul>
                             </div>
                             <div>
-                                <a href="companydetail?recruiterID=${post.companyID.companyID}" class="btn btn-primary price-btn btn-block">View More</a>
-
+                                <a href="companydetailcommon?recruiterID=${post.recruiterID.recruiterID}" class="btn btn-primary price-btn btn-block">View More</a>
                             </div>
                         </div>                          
                     </div>
@@ -685,7 +684,7 @@
                     <span>&times;</span>
                 </button>
             </div>
-            
+
             <!-- report post  -->
             <div class="modal-body">
                 <form action="PostDetailsControll" method="get" id="report-post-form-content">
@@ -730,38 +729,35 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const radioButtons = document.getElementsByName("report_post_message");
-            const textarea = document.getElementById("report_post_message_additional");
-
-            radioButtons.forEach(radio => {
-                radio.addEventListener("click", function () {
-                    if (radio.value === "Other") {
-                        textarea.style.display = "block";
-                    } else {
-                        textarea.style.display = "none";
-                    }
-                });
-            });
+        const radioButtons = document.getElementsByName("report_post_message");
+        const textarea = document.getElementById("report_post_message_additional");
+        radioButtons.forEach(radio => {
+        radio.addEventListener("click", function () {
+        if (radio.value === "Other") {
+        textarea.style.display = "block";
+        } else {
+        textarea.style.display = "none";
+        }
+        });
+        });
         });
         document.addEventListener('DOMContentLoaded', (event) => {
-            // Show the modal when the report post button is clicked
-            document.getElementById('reportPostBtn').addEventListener('click', function (event) {
-                event.preventDefault(); // Prevent default action to stop following href
-                $('#customModalBackdrop').fadeIn();
-                $('#report-post-modal-container').fadeIn();
-            });
-
-            // Hide the modal when the close button is clicked
-            document.getElementById('closeModal').addEventListener('click', function () {
-                $('#customModalBackdrop').fadeOut();
-                $('#report-post-modal-container').fadeOut();
-            });
-
-            // Hide the modal when the cancel button is clicked
-            document.getElementById('cancelReportBtn').addEventListener('click', function () {
-                $('#customModalBackdrop').fadeOut();
-                $('#report-post-modal-container').fadeOut();
-            });
+        // Show the modal when the report post button is clicked
+        document.getElementById('reportPostBtn').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default action to stop following href
+        $('#customModalBackdrop').fadeIn();
+        $('#report-post-modal-container').fadeIn();
+        });
+        // Hide the modal when the close button is clicked
+        document.getElementById('closeModal').addEventListener('click', function () {
+        $('#customModalBackdrop').fadeOut();
+        $('#report-post-modal-container').fadeOut();
+        });
+        // Hide the modal when the cancel button is clicked
+        document.getElementById('cancelReportBtn').addEventListener('click', function () {
+        $('#customModalBackdrop').fadeOut();
+        $('#report-post-modal-container').fadeOut();
+        });
         });
     </script>
     <style>
@@ -775,94 +771,92 @@
             color: #FFFFFF;
             margin-right: 15px;
             text-transform: uppercase;
-<<<<<<< Updated upstream
+            <<<<<<< Updated upstream
 
-=======
- </style>
+            =======
+        </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    function validateForm(postID) {
+        <script>
+        function validateForm(postID) {
         var fileInput = document.getElementById('fileInput_' + postID);
         var errorDiv = document.getElementById('error_' + postID);
         if (fileInput.files.length === 0) {
-            errorDiv.innerHTML = 'Please select a file.';
-            return false; // Prevent form submission
+        errorDiv.innerHTML = 'Please select a file.';
+        return false; // Prevent form submission
         } else {
-            errorDiv.innerHTML = ''; 
-            return true;
->>>>>>> Stashed changes
+        errorDiv.innerHTML = '';
+        return true;
+        >>> >>> > Stashed changes
         }
-    </style>
+        </style>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+        
         $(document).ready(function () {
         <% String message = (String) session.getAttribute("message"); %>
         <% if (message != null) { %>
-            toastr.success('<%= message %>', 'Notification', {
-                timeOut: 3000,
-                positionClass: 'toast-top-right'
-            });
+        toastr.success('<%= message %>', 'Notification', {
+        timeOut: 3000,
+            positionClass: 'toast-top-right'
+        });
         <% session.removeAttribute("message"); %>
         <% } %>
         });
-
-
-        $(document).ready(function () {
-            // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
-            $('.apply-button').on('click', function (e) {
-                e.preventDefault();
-                var postID = $(this).data('postid');
-                // Hiển thị modal tương ứng
-                $('#applyModal_' + postID).modal('show');
-            });
-
-            // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
-            $('.confirm-btn').on('click', function (e) {
-                e.preventDefault();
-                var postID = $(this).data('postid');
-
-                // Gửi yêu cầu AJAX để ứng tuyển công việc
-                $.ajax({
-                    url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
-                    type: 'GET',
-                    data: {
-                        postID: postID
-                    },
-                    success: function (response) {
-                        // Xử lý phản hồi thành công (nếu cần)
-                        // Đổi nút sang trạng thái "Applied"
-                        $('#applyButton_' + postID).text('Applied');
-                        // Đóng modal sau khi xử lý thành công
-                        $('#applyModal_' + postID).modal('hide');
-                    },
-                    error: function (xhr, status, error) {
-                        // Xử lý lỗi (nếu có)
-                        alert('Đã xảy ra lỗi: ' + error);
-                    }
-                });
-            });
+        
+    
+    $(document).ready(function () {
+                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
+                $('.apply-button').on('click', function (e) {
+        e.preventDefault();
+        var postID = $(this).data('postid');
+            // Hiển thị modal tương ứng
+        $('#applyModal_' + postID).modal('show');
         });
-    </script>
+        // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
+        $('.confirm-btn').on('click', function (e) {
+        e.preventDefault();
+        var postID = $(this).data('postid');
+        // Gửi yêu cầu AJAX để ứng tuyển công việc
+        $.ajax({
+        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
+                type: 'GET',
+                data: {
+                postID: postID
+                },
+                success: function (response) {
+                // Xử lý phản hồi thành công (nếu cần)
+                // Đổi nút sang trạng thái "Applied"
+                $('#applyButton_' + postID).text('Applied');
+                // Đóng modal sau khi xử lý thành công
+                $('#applyModal_' + postID).modal('hide');
+                },
+                error: function (xhr, status, error) {
+                // Xử lý lỗi (nếu có)
+                alert('Đã xảy ra lỗi: ' + error);
+                }
+        });
+        });
+});
+</script>
 
 
-    <script src="assets/js/jquery-3.7.1.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
+<script src="assets/js/jquery-3.7.1.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
 
-    <script src="assets/js/bootstrap.bundle.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
+<script src="assets/js/bootstrap.bundle.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
 
-    <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
-    <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
+<script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
+<script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
 
-    <script src="assets/plugins/select2/js/select2.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
+<script src="assets/plugins/select2/js/select2.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
 
-    <script src="assets/plugins/moment/moment.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
-    <script src="assets/js/bootstrap-datetimepicker.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
+<script src="assets/plugins/moment/moment.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
+<script src="assets/js/bootstrap-datetimepicker.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
 
-    <script src="assets/plugins/summernote/dist/summernote-lite.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
+<script src="assets/plugins/summernote/dist/summernote-lite.min.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
 
-    <script src="assets/js/script.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
-    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="0a1db4c0d422528b05e327a5-|49" defer></script></body>
+<script src="assets/js/script.js" type="0a1db4c0d422528b05e327a5-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="0a1db4c0d422528b05e327a5-|49" defer></script></body>
 <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
 <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
 <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->

@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="statusCate">StatusCategory</label>
+                                    <label for="statusCate">Status Category</label>
                                     <select class="form-control" id="statusCate" name="statusCate">
                                         <option value="">All</option>
                                         <option value="1">Active</option>
@@ -137,7 +137,8 @@
                                                 <tr>
                                                     <td>${c.getCaID()}</td>
                                                     <td>${c.getCategoriesName()}</td>
-                                                    <td>${c.getDescription()}</td>
+                                                    <td>....</td>
+                                                    
                                                     <td>
                                                         <c:choose>
                                                             <c:when test="${c.getStatusCate() == 1}">
@@ -188,8 +189,8 @@
                                                                     <img id="category-details-image" src="${c.getImage()}" alt="Category Image" class="img-fluid">
                                                                 </div>
                                                                 <div class="col-md-8">
-                                                                    <h3 id="category-details-title">${c.getCategoriesName()}</h3>
-                                                                    <p id="category-details-description">${c.getDescription()}</p>
+                                                                    <p id="category-details-title">Category Name : ${c.getCategoriesName()}</p>
+                                                                    <p id="category-details-description">Description : ${c.getDescription()}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -316,6 +317,27 @@
                     filterInputs.style.display = 'none';
                 }
             });
+            
+            <script>
+            // Hàm cắt bỏ văn bản dài hơn giới hạn
+            function truncateText(text, maxLength) {
+                if (text.length <= maxLength) {
+                    return text;
+                } else {
+                    return text.substring(0, maxLength) + "...";
+                }
+            }
+
+
+            var titles = document.querySelectorAll(".table-avatar.title a");
+            var descriptions = document.querySelectorAll(".descripition");
+            titles.forEach(function (title) {
+                title.textContent = truncateText(title.textContent, 20); // Giới hạn 20 ký tự cho tiêu đề
+            });
+            descriptions.forEach(function (description) {
+                description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
+            });
+        </script>
         </script>
         <script src="assets/js/jquery-3.7.1.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>

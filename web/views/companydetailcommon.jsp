@@ -141,9 +141,8 @@
                             </div>
                             <div class="company-detail-block company-description">
                                 <h4 class="form-label">Describe</h4>
-                                <textarea rows="4" class="form-control" name="describe" readonly>${company.describe}</textarea>
+                                <textarea rows="4" class="form-control" name="describe">${company.describe}</textarea>
                             </div>
-
 
 
                         </div>
