@@ -74,6 +74,7 @@ public class LoginController extends HttpServlet {
                     Categories ca = cat.getCategoryByID(c.getUserID());
                     Recruiter rec = re.getRecruiterProfile(c.getUserID());
                     Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
+                    
                     session.setAttribute("company", co);
                     session.setAttribute("recruiter", rec);
                     session.setAttribute("categories", ca);

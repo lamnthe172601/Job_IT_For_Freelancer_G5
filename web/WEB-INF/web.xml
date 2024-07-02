@@ -207,7 +207,7 @@
     <servlet>
         <servlet-name>DeleteSkill</servlet-name>
         <servlet-class>AdminControlles.DeleteSkill</servlet-class>
-         </servlet>
+    </servlet>
     <servlet>
         <servlet-name>ApplyJobFormListPostControll</servlet-name>
         <servlet-class>FreelancerControll.ApplyJobFormListPostControll</servlet-class>
@@ -239,6 +239,10 @@
     <servlet>
         <servlet-name>PostByCategory</servlet-name>
         <servlet-class>FreelancerControll.PostByCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompanyDetailCommon</servlet-name>
+        <servlet-class>CommonControll.CompanyDetailCommon</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -455,7 +459,7 @@
     <servlet-mapping>
         <servlet-name>DeleteSkill</servlet-name>
         <url-pattern>/deleteSkill</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ApplyJobFormListPostControll</servlet-name>
         <url-pattern>/ApplyJobFormListPost</url-pattern>
@@ -484,7 +488,8 @@
         <servlet-name>JobForFreelancer</servlet-name>
         <url-pattern>/JobForFree</url-pattern>
     </servlet-mapping>
-    
-
-
+    <servlet-mapping>
+        <servlet-name>CompanyDetailCommon</servlet-name>
+        <url-pattern>/companydetailcommon</url-pattern>
+    </servlet-mapping>
 </web-app>
