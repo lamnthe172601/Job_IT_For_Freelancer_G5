@@ -157,6 +157,7 @@
             <div class="content">
                 <div class="container">
                     <div class="row">
+
                         <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
                             <div class="card search-filter">
@@ -164,6 +165,21 @@
                                     <h4 class="card-title mb-0">Search Filter</h4>
                                 </div>
                                 <div class="card-body">
+                                    <div class="filter-widget">
+                                        <div class="row">
+                                            <div class="col-xl-6  col-sm-6 d-flex ">
+                                                <div class="sort-by">
+                                                    <select class="select" id="sortSelect">
+                                                        <option value="default">Sort by (Default)</option>
+                                                        <option value="newest">Newest</option>
+                                                        <option value="oldest">Oldest</option>
+                                                        <option value="proposals">Proposals</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -198,45 +214,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" id="projectTypeLink" data-bs-toggle="collapse" data-bs-target="#collapsproject" aria-expanded="true" aria-controls="collapsproject">
-                                                Project Type
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${jobtype}" var="jobtype">
-                                                <div class="project-type-item">
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="projectType" value="${jobtype.jobName}" data-filter="projectType">
-                                                        <span class="checkmark"></span>${jobtype.jobName}
-                                                    </label>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" id="projectDurationLink" data-bs-toggle="collapse" data-bs-target="#collapseOneDuration" aria-expanded="true" aria-controls="collapseOneDuration">
-                                                Project Duration
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapseOneDuration" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${dura}" var="dura">
-                                                <div class="duration-item">
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="projectDuration" value="${dura.durationName}" data-filter="projectDuration">
-                                                        <span class="checkmark"></span>${dura.durationName}
-                                                    </label>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" id="skillsLink" data-bs-toggle="collapse" data-bs-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
@@ -270,27 +247,52 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="filter-widget">
+                                        <h4 class="filter-title">
+                                            <a href="javascript:void(0);" class="w-100" id="projectTypeLink" data-bs-toggle="collapse" data-bs-target="#collapsproject" aria-expanded="true" aria-controls="collapsproject">
+                                                Level
+                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                                            </a>
+                                        </h4>
+                                        <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
+                                            <c:forEach items="${jobtype}" var="jobtype">
+                                                <div class="project-type-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="projectType" value="${jobtype.jobName}" data-filter="projectType">
+                                                        <span class="checkmark"></span>${jobtype.jobName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-widget">
+                                        <h4 class="filter-title">
+                                            <a href="javascript:void(0);" class="w-100" id="projectDurationLink" data-bs-toggle="collapse" data-bs-target="#collapseOneDuration" aria-expanded="true" aria-controls="collapseOneDuration">
+                                                Work time
+                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                                            </a>
+                                        </h4>
+                                        <div id="collapseOneDuration" class="collapse show" data-bs-parent="#accordionExample1">
+                                            <c:forEach items="${dura}" var="dura">
+                                                <div class="duration-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="projectDuration" value="${dura.durationName}" data-filter="projectDuration">
+                                                        <span class="checkmark"></span>${dura.durationName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
 
 
                         <div class="col-md-12 col-lg-8 col-xl-9">
-                            <div class="sort-tab ">
-                                <div class="row">
-                                    <div class="col-xl-6  col-sm-6 d-flex ">
-                                        <div class="sort-by">
-                                            <select class="select" id="sortSelect">
-                                                <option value="default">Sort by (Default)</option>
-                                                <option value="newest">Newest</option>
-                                                <option value="oldest">Oldest</option>
-                                                <option value="proposals">Proposals</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
 
                             <%-- Hiển thị danh sách bài đăng --%>
                             <div class="row" id="listpostContainer">
@@ -440,13 +442,13 @@
                                                         </div>
                                                         <div class="modal-btn Suspend-action">
 
-                                                            <form id="jobApplicationForm_${list.postID}" action="ApplyJobFormListPost" method="post"  enctype="multipart/form-data" onsubmit="return validateForm('${list.postID}')" >
+                                                            <form id="jobApplicationForm_${list.postID}" action="ApplyJobInListPost" method="post"  enctype="multipart/form-data" onsubmit="return validateForm('${list.postID}')" >
                                                                 <div class="row">
                                                                     <div style='margin-bottom: 30px'>
                                                                         <input oninput="check('${list.postID}')" class='file' type='file' id='fileInput_${list.postID}' name="file"/>
                                                                         <div style="color: red" id="error_${list.postID}"></div>
                                                                         <input hidden="" name="postID" value="${list.postID}"/>
-                                                                        <input hidden="" name="index" value="${i}"/>
+                                                                        <input hidden="" name="index" value="${tag}"/>
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <!-- Nút "Yes" để xử lý AJAX -->
@@ -670,8 +672,7 @@
                     let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
                     let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
-                    let postSkills = Array.from(post.querySelectorAll('.badge')).map(el => el.innerText.toLowerCase());
-                    //.freelance-tags 
+                    let postSkills = Array.from(post.querySelectorAll(' .badge')).map(el => el.innerText.toLowerCase());
                     let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
                     let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
                     let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));

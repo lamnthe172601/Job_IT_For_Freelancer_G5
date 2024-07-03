@@ -609,11 +609,11 @@
                         </div>
                         <div class="col-md-12 col-lg-8 col-xl-9">
 
-                            <c:set var="list" value="${requestScope.list}" />
-                            <c:set var="tongSoBaiDang" value="${requestScope.countFreelancer}" />
-                            <c:set var="baiDangTrenMotTrang" value="${requestScope.freelancerInPgae}" />
-                            <c:set var="tongSoTrang" value="${requestScope.totalPage}" />
-                            <c:set var="trangHienTai" value="${requestScope.index}" />
+                            <c:set var="list" value="${requestScope.listSearch}" />
+                            <c:set var="tongSoBaiDang" value="${requestScope.count}" />
+                            <c:set var="baiDangTrenMotTrang" value="${requestScope.NumberInPgae}" />
+                            <c:set var="tongSoTrang" value="${requestScope.totalFavoritesPage}" />
+                            <c:set var="trangHienTai" value="${requestScope.indexSearch}" />
 
                             <%-- Tính chỉ số bắt đầu và kết thúc cho danh sách bài đăng hiển thị trên trang hiện tại --%>
                             <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
@@ -691,19 +691,19 @@
                                         <ul class="pagination">
                                             <c:if test="${trangHienTai > 1}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="ListFreelancer?page=${trangHienTai - 1}" aria-label="Trước">
+                                                    <a class="page-link" href="SearchInHome?page=${trangHienTai - 1}" aria-label="Trước">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
                                             </c:if>
                                             <c:forEach var="i" begin="1" end="${tongSoTrang}">
                                                 <li class="page-item ${i == trangHienTai ? 'active' : ''}">
-                                                    <a class="page-link" href="ListFreelancer?page=${i}">${i}</a>
+                                                    <a class="page-link" href="SearchInHome?page=${i}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <c:if test="${trangHienTai < tongSoTrang}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="ListFreelancer?page=${trangHienTai + 1}" aria-label="Sau">
+                                                    <a class="page-link" href="SearchInHome?page=${trangHienTai + 1}" aria-label="Sau">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
