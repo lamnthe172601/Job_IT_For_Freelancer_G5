@@ -13,7 +13,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Kofejob - Bootstrap Admin HTML Template</title>
+        <title>Kofejob</title>
 
         <link rel="shortcut icon" href="adminAssets/img/favicon.png">
 
@@ -100,35 +100,35 @@
                                     <i class="fas fa-filter"></i>
                                 </a>
                             </div>
-                            <div id="filter-section" style="display: none;">
+                            <div id="filter-section" style="display: none">
                                 <div class="card mt-3">
                                     <div class="card-body">
                                         <form id="filterForm">
                                             <div class="row">
                                                 <div class="col-md-3 mb-3">
-                                                    <label for="titleFilter" class="form-label">Title</label>
-                                                    <input type="text" class="form-control" id="titleFilter">
-                                                </div>
-                                                <div class="col-md-3 mb-3">
                                                     <label for="companyFilter" class="form-label">Company Name</label>
                                                     <input type="text" class="form-control" id="companyFilter">
                                                 </div>
                                                 <div class="col-md-3 mb-3">
-                                                    <label for="dateFilter" class="form-label">Date Post</label>
-                                                    <input type="date" class="form-control" id="dateFilter">
+                                                    <label for="startDateFilter" class="form-label">Start Date</label>
+                                                    <input type="date" class="form-control" id="startDateFilter">
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="endDateFilter" class="form-label">End Date</label>
+                                                    <input type="date" class="form-control" id="endDateFilter">
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                     <label for="statusFilter" class="form-label">Status</label>
                                                     <select class="form-select" id="statusFilter">
                                                         <option value="">All</option>
-                                                        <option value="Pendding">Pending</option>
+                                                        <option value="Pending">Pending</option>
                                                         <option value="Approved">Approved</option>
                                                         <option value="Suspend">Suspend</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-12">                                                   
+                                                <div class="col-12">
                                                     <button type="button" class="btn btn-secondary" id="resetFilter">Reset</button>
                                                 </div>
                                             </div>
@@ -182,7 +182,7 @@
                                                         </td>
                                                         <td class="test1">                                                          
                                                             <c:if test='${project.getListReport().size() >= 5}'>
-                                                                <a href="javascript:void(0);" style="color: black" class="status">Pendding</a>
+                                                                <a href="javascript:void(0);" style="color: black" class="status">Pending</a>
                                                             </c:if>
                                                             <c:if test='${project.getListReport().size() < 5}'>
                                                                 <c:if test='${project.getPostBasic().getChecking() == 1}'>
@@ -235,31 +235,22 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div id="reportListBody">
-                                                                    <div class="report-item">
-                                                                        <p><strong>Name:</strong> Nhat Tan</p>
-                                                                        <p><strong>Date Report:</strong> 2024/03/12</p>
-                                                                        <p><strong>Message report:</strong> This project seems to be a scam. The client is asking for free work.</p>
-                                                                    </div>
-                                                                    <div class="report-item">
-                                                                        <p><strong>Name:</strong> Minh Tuan</p>
-                                                                        <p><strong>Date Report:</strong> 2024/03/15</p>
-                                                                        <p><strong>Message report:</strong> The project description contains offensive language and inappropriate content.</p>
-                                                                    </div>
-                                                                    <div class="report-item">
-                                                                        <p><strong>Name:</strong> Thanh Huong</p>
-                                                                        <p><strong>Date Report:</strong> 2024/03/18</p>
-                                                                        <p><strong>Message report:</strong> This job posting violates copyright. The client is asking to copy an existing website.</p>
-                                                                    </div>
-                                                                    <div class="report-item">
-                                                                        <p><strong>Name:</strong> Duc Anh</p>
-                                                                        <p><strong>Date Report:</strong> 2024/03/20</p>
-                                                                        <p><strong>Message report:</strong> The budget for this project is unreasonably low for the amount of work required.</p>
-                                                                    </div>
-                                                                    <div class="report-item">
-                                                                        <p><strong>Name:</strong> Lan Anh</p>
-                                                                        <p><strong>Date Report:</strong> 2024/03/22</p>
-                                                                        <p><strong>Message report:</strong> This appears to be a duplicate posting. The same project was posted last week.</p>
-                                                                    </div>
+                                                                    <c:if test="${project.getListReport().size()==0}">
+                                                                        <div class="report-item">
+                                                                            <p></p>
+                                                                            <p style="text-align: center"><strong>No report!</strong> </p>
+                                                                            <p></p>
+                                                                        </div>
+                                                                    </c:if>
+                                                                    <c:if test="${project.getListReport().size()!=0}">
+                                                                        <c:forEach items="${project.getListReport()}" var="report">
+                                                                            <div class="report-item">
+                                                                                <p><strong>Name:</strong> ${report.getFreelancerInformation().getBasicInformation().fullname()}</p>
+                                                                                <p><strong>Date Report:</strong> ${report.getReport().getDateReport()}</p>
+                                                                                <p><strong>Message report:</strong> ${report.getReport().getMesseage()}</p>
+                                                                            </div>  
+                                                                        </c:forEach>
+                                                                    </c:if>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -413,66 +404,68 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>        
         <script>
             $(document).ready(function () {
+                var table = $('.datatable').DataTable();
+
+                // Toggle filter section visibility
                 $('#filter_search').click(function () {
                     $('#filter-section').toggle();
                 });
-            });
-        </script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const filterBtn = document.getElementById('filter_search');
-                const filterSection = document.getElementById('filter-section');
-                const applyFilterBtn = document.getElementById('applyFilter');
-                const resetFilterBtn = document.getElementById('resetFilter');
-                const table = document.querySelector('.datatable');
 
-                filterBtn.addEventListener('click', function () {
-                    filterSection.style.display = filterSection.style.display === 'none' ? 'block' : 'none';
+                // Apply filter on input change
+                $('#companyFilter, #startDateFilter, #endDateFilter, #statusFilter').on('input change', function () {
+                    applyFilter();
                 });
 
-                function filterTable() {
-                    const titleFilter = document.getElementById('titleFilter').value.toLowerCase();
-                    const companyFilter = document.getElementById('companyFilter').value.toLowerCase();
-                    const dateFilter = document.getElementById('dateFilter').value;
-                    const statusFilter = document.getElementById('statusFilter').value;
+                // Reset filter
+                $('#resetFilter').click(function () {
+                    $('#filterForm')[0].reset();
+                    resetFilter();
+                });
 
-                    const rows = table.querySelectorAll('tbody tr');
+                function applyFilter() {
+                    var companyFilter = $('#companyFilter').val().toLowerCase();
+                    var startDate = $('#startDateFilter').val();
+                    var endDate = $('#endDateFilter').val();
+                    var statusFilter = $('#statusFilter').val().toLowerCase();
 
-                    rows.forEach(row => {
-                        const title = row.querySelector('.title').textContent.toLowerCase();
-                        const company = row.querySelector('.companyName').textContent.toLowerCase();
-                        const date = row.querySelector('.datePost').textContent;
-                        const status = row.querySelector('.status').textContent;
+                    // Clear any existing search function
+                    $.fn.dataTable.ext.search.pop();
 
-                        const titleMatch = title.includes(titleFilter);
-                        const companyMatch = company.includes(companyFilter);
-                        const dateMatch = dateFilter === '' || date === dateFilter;
-                        const statusMatch = statusFilter === '' || status === statusFilter;
+                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                        var company = data[3].toLowerCase(); // Assuming company name is in the 4th column
+                        var date = new Date(data[4]); // Assuming date is in the 5th column
+                        var status = data[5].toLowerCase(); // Assuming status is in the 6th column
 
-                        if (titleMatch && companyMatch && dateMatch && statusMatch) {
-                            row.style.display = '';
-                        } else {
-                            row.style.display = 'none';
+                        if (
+                                (companyFilter === '' || company.includes(companyFilter)) &&
+                                (startDate === '' || date >= new Date(startDate)) &&
+                                (endDate === '' || date <= new Date(endDate)) &&
+                                (statusFilter === '' || status.includes(statusFilter))
+                                ) {
+                            return true;
                         }
+                        return false;
                     });
+
+                    table.draw();
                 }
 
-                applyFilterBtn.addEventListener('click', filterTable);
+                function resetFilter() {
+                    // Remove custom search function
+                    $.fn.dataTable.ext.search.pop();
 
-                resetFilterBtn.addEventListener('click', function () {
-                    document.getElementById('filterForm').reset();
-                    const rows = table.querySelectorAll('tbody tr');
-                    rows.forEach(row => row.style.display = '');
-                });
+                    // Clear all column searches
+                    table.columns().search('');
 
-                // Add event listeners for real-time filtering
-                document.getElementById('titleFilter').addEventListener('input', filterTable);
-                document.getElementById('companyFilter').addEventListener('input', filterTable);
-                document.getElementById('dateFilter').addEventListener('change', filterTable);
-                document.getElementById('statusFilter').addEventListener('change', filterTable);
+                    // Clear global search
+                    table.search('');
+
+                    // Redraw the table
+                    table.draw();
+                }
             });
         </script>
         <script>
@@ -560,24 +553,22 @@
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
-        <script src="adminAssets/js/jquery-3.7.1.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/jquery-3.7.1.min.js" ></script>
 
-        <script src="adminAssets/js/bootstrap.bundle.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/bootstrap.bundle.min.js" ></script>
 
-        <script src="adminAssets/js/feather.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/feather.min.js" ></script>
 
-        <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" ></script>
 
-        <script src="adminAssets/plugins/select2/js/select2.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/select2/js/select2.min.js" ></script>
 
-        <script src="adminAssets/plugins/moment/moment.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
-        <script src="adminAssets/js/bootstrap-datetimepicker.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/moment/moment.min.js" ></script>
+        <script src="adminAssets/js/bootstrap-datetimepicker.min.js" ></script>
 
-        <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
-        <script src="adminAssets/plugins/datatables/datatables.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" ></script>
+        <script src="adminAssets/plugins/datatables/datatables.min.js" ></script>
 
-        <script src="adminAssets/js/script.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/script.js" ></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="89331437dcc86709a93430b9-|49" defer></script></body>
-
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/providers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:24 GMT -->
 </html>

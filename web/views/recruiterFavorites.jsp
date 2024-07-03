@@ -1,17 +1,10 @@
-<%-- 
-    Document   : recruiterFavourites
-    Created on : Jun 26, 2024, 4:15:08 PM
-    Author     : tanng
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/developer.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:29:40 GMT -->
-
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:30:15 GMT -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -24,14 +17,73 @@
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
-        <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
-
         <link rel="stylesheet" href="assets/plugins/feather/feather.css">
 
-        <link rel="stylesheet" href="assets/css/style.css">
-    </head>
+        <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
 
-    <body>
+        <link rel="stylesheet" href="assets/plugins/summernote/dist/summernote-lite.css">
+
+        <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+
+        <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
+        <link rel="stylesheet" href="assets/css/style.css">
+        <style>
+                                    .text-center1 {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto 15px;
+            }
+
+            .pagination {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .pagination a, .pagination span {
+                margin: 0 5px;
+                padding: 10px 20px;
+                border: 1px solid #ddd;
+                text-decoration: none;
+                color: #333;
+            }
+
+            .pagination .current-page {
+                background-color: #007bff;
+                color: white;
+                border: 1px solid #007bff;
+            }
+
+            .pagination a:hover {
+                background-color: #ddd;
+            }
+
+
+            .search-form {
+                margin-bottom: 20px;
+            }
+
+            .search-form input[type="text"] {
+                padding: 10px;
+                width: 300px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 10px;
+            }
+
+            .search-form button {
+                padding: 10px 20px;
+                background-color: #E65425;
+                color: white;
+                border: none;
+                cursor: pointer;
+                border-radius: 4px;
+                font-size: 10px;
+            }
+        </style>
+    </head>
+    <body class="dashboard-page">
 
         <div class="main-wrapper">
 
@@ -71,7 +123,7 @@
                                         <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu"> 
 
-                                            <li><a href="PostFavourites">Jobs Favurites</a></li>
+                                            <li><a href="PostFavourites">Jobs Favourites</a></li>
 
                                             <li><a href="jobsApply">Jobs Apply</a></li>
                                             <li><a href="jobforyou">Jobs For you</a></li>
@@ -82,7 +134,7 @@
                                         <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="myListJobProject">My List Post</a></li>                                        
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
                                             <li><a href="SreachJob">Find Jobs</a></li>  
                                             <li><a href="company">Company</a></li>
                                         </ul>
@@ -102,7 +154,7 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
                                             <li><a href="newsJobs">Reviews</a></li>
 
                                         </ul>
@@ -121,7 +173,7 @@
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
-                            <li><a href="chats.html"><img src="assets/img/icon/message-chat-icon.svg" alt="Img"></a></li>
+
                             <li class="dropdown">
                                 <a data-bs-toggle="dropdown" href="javascript:void(0);"><img src="assets/img/icon/notification-bell-icon.svg" alt="Img"></a>
                                 <div class="dropdown-menu notifications">
@@ -164,7 +216,7 @@
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="notification">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md">
                                                             <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-3.jpg">
@@ -178,7 +230,7 @@
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="notification">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md">
                                                             <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-4.jpg">
@@ -194,7 +246,7 @@
                                         </ul>
                                     </div>
                                     <div class="topnav-dropdown-footer text-center">
-                                        <a href="notification.html">View All Notification</a>
+                                        <a href="notification">View All Notification</a>
                                     </div>
                                 </div>
                             </li>
@@ -233,19 +285,13 @@
             </header>
 
 
-            <div class="bread-crumb-bar">
-                <div class="container">
-                </div>
-            </div>
-
-
-            <div class="content">
+            <div class="content content-page">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/table-avatar-03.jpg" class="avatar-lg rounded-circle"></a>
+                                    <a href="freelancer-profile.html"><img alt="profile image" src="${recruiter.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
                                         <h3 class="mb-0"><a href="profile-settings.html">${recruiter.fullName()}</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
                                         <p class="mb-0">@${sessionScope.account.username}</p>
@@ -259,73 +305,82 @@
                                                     <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
                                                 </a>
                                             </li>
-                                            <li class="nav-item submenu">
-                                                <a href="milestones.html" class="nav-link">
+                                            <li class="nav-item submenu ">
+                                                <a href="milestones.html" class="nav-link ">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
-                                                    <li><a href="manageJobsPosts">Manage jobs</a></li>
-                                                    <li><a href="ManageApplication">All applicants</a></li>
-                                                    <li><a href="CompletedProjects">Completed Projects</a></li>
-                                                    <li><a href="ExpiredProjects">Expired Projects</a></li>
+                                                    <li>
+                                                        <a href="manageJobsPosts" >Manage jobs</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="ManageApplication" >All applicants</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="CompletedProjects">Completed Projects</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="ExpiredProjects">Expired Projects</a>
+                                                    </li>
+
 
                                                 </ul>
                                             </li>
-                                            <li class="nav-item submenu">
+                                            <li class="nav-item submenu active">
                                                 <a href="freelancer-favourites.html" class="nav-link active">
-                                                    <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favorites
+                                                    <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
                                                     <span class="menu-arrow"></span>
                                                 </a>
-                                                <ul class="sub-menu-ul">
-                                                    <li><a href="RecruiterFavourites">Bookmarked Freelancer</a></li>
-                                                    <li><a href="invited-favourites.html">Invitations</a></li>
+                                                <ul class="sub-menu-ul active">
+                                                    <li>
+                                                        <a href="RecruiterFavourites" class="active">Bookmarked Projects</a>
+                                                    </li>                                                    
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="review.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="chats.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="deposit-funds.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
-                                                </a>
-                                            </li>
+                                            </li>                                         
                                             <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
-                                                    <li><a href="profile-settings.html">Profile</a></li>
-                                                    <li><a href="membership-plans.html">Plan & Billing</a></li>
-                                                    <li><a href="verify-identity.html">Verify Identity</a></li>
-                                                    <li><a href="change-password.html">Change Password</a></li>
-                                                    <li><a href="delete-account.html">Delete Account</a></li>
+                                                    <li>
+                                                        <a href="profile-settings.html">Profile</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="change-password.html">Change Password</a>
+                                                    </li>                                                    
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="index.html" class="nav-link">
+                                                <a href="logout" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-11.svg" alt="Img"> Logout
                                                 </a>
                                             </li>
                                         </ul>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
                         <div class="col-md-12 col-lg-8 col-xl-9">
+                            <c:set var="list" value="${requestScope.listFavorites}" />
+                            <c:set var="tongSoBaiDang" value="${requestScope.countFavorites}" />
+                            <c:set var="baiDangTrenMotTrang" value="${requestScope.FavoritesInPgae}" />
+                            <c:set var="tongSoTrang" value="${requestScope.totalFavoritesPage}" />
+                            <c:set var="trangHienTai" value="${requestScope.indexFvr}" />
+
+                            <%-- Tính chỉ số bắt đầu và kết thúc cho danh sách bài đăng hiển thị trên trang hiện tại --%>
+                            <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
+                            <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
                             <div class="row">
-                                <c:forEach items="${list}" var="l">
+                                <c:forEach items="${list}" var="l" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="freelance-widget">
                                             <div class="freelance-content">
@@ -349,10 +404,10 @@
                                                                                                                                     <span class="badge badge-pill badge-design">${entry.value}</span>
                                                                                                                                 </a>-->
                                                                 <c:forEach items="${fn:split(entry.value, ',')}" var="skill" varStatus="loop">
-                                                                    <c:if test="${loop.index < 3}">
+                                                                    <c:if test="${loop.index < 2}">
                                                                         <span class="badge badge-pill badge-design">${skill}</span>
                                                                     </c:if>                                                              
-                                                                    <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                                    <c:if test="${loop.index == 1 and not loop.last}">                                                                 
                                                                         <span class="badge badge-pill badge-design">...</span>
                                                                     </c:if>
                                                                 </c:forEach>
@@ -392,21 +447,32 @@
                                     </div>
                                 </c:forEach>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="paginations list-pagination">
-                                        <li class="page-item"><a href="javascript:void(0);"><i
-                                                    class="feather-chevron-left"></i></a>
-                                        </li>
-                                        <li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">2</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">3</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">...</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">10</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);"><i
-                                                    class="feather-chevron-right"></i></a></li>
-                                    </ul>
-                                </div>
+                            <div class="pagination-container">
+                                <c:if test="${tongSoTrang > 1}">
+                                    <nav>
+                                        <ul class="pagination">
+                                            <c:if test="${trangHienTai > 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="RecruiterFavourites?page=${trangHienTai - 1}" aria-label="Trước">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach var="i" begin="1" end="${tongSoTrang}">
+                                                <li class="page-item ${i == trangHienTai ? 'active' : ''}">
+                                                    <a class="page-link" href="RecruiterFavourites?page=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <c:if test="${trangHienTai < tongSoTrang}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="RecruiterFavourites?page=${trangHienTai + 1}" aria-label="Sau">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </ul>
+                                    </nav>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -543,30 +609,7 @@
         </div>
 
 
-        <div class="modal fade" id="rating">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content">
-                    <div class="modal-header d-block b-0 pb-0">
-                        <span class="modal-close float-end"><a href="javascript:void(0);" data-bs-dismiss="modal"
-                                                               aria-label="Close"><i class="far fa-times-circle orange-text"></i></a></span>
-                    </div>
-                    <div class="modal-body">
-                        <form action="https://kofejob.dreamstechnologies.com/html/template/project.html">
-                            <div class="modal-info">
-                                <div class="text-center pt-0 mb-5">
-                                    <h3>Please login to Favourite Freelancer</h3>
-                                </div>
-                                <div class="submit-section text-center">
-                                    <button data-bs-dismiss="modal"
-                                            class="btn btn-primary black-btn click-btn">Cancel</button>
-                                    <button type="submit" class="btn btn-primary click-btn">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <script>
 
@@ -611,24 +654,25 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>                                        
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
-        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/plugins/select2/js/select2.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/plugins/select2/js/select2.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
-        <script src="assets/plugins/datatables/datatables.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/js/moment.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/js/bootstrap-datetimepicker.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/plugins/datatables/datatables.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-        <script src="assets/js/script.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
-        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e07a54eb38ecbc80607f458c-|49" defer></script>
-        <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
-    </body>
+        <script src="assets/plugins/summernote/dist/summernote-lite.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/developer.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:29:56 GMT -->
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/js/script.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="b9b8f1fa285a150b1a70a944-|49" defer></script></body>
+
 
 </html>

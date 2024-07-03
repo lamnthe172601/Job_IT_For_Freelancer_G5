@@ -3,34 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package FreelancerControll;
+package RecruiterControll;
 
-import Models.Freelancer;
-import Models.User;
-import MutiModels.JobApply;
-import MutiModels.PostBasic;
-import dal.DAO;
-import dal.FreelancerDAO;
-import dal.PostDAO;
+import dal.RecruiterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 
 /**
  *
- * @author tanng
+ * @author Admin
  */
-@MultipartConfig
-public class ApplyJobFormListPostControll extends HttpServlet {
+public class ConnectFreelancerControll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -47,10 +34,10 @@ public class ApplyJobFormListPostControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ApplyJobFormListPostControll</title>");  
+            out.println("<title>Servlet ConnectFreelancerControll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ApplyJobFormListPostControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ConnectFreelancerControll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,7 +54,7 @@ public class ApplyJobFormListPostControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        processRequest(request, response);
     } 
 
     /** 
@@ -80,33 +67,19 @@ public class ApplyJobFormListPostControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        RecruiterDAO d = new RecruiterDAO();
         try {
-            
-            String postID = request.getParameter("postID");
-            Part part = request.getPart("file");
-            String realPath = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\Rerume";
-            String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
-            if (!Files.exists(Path.of(realPath))) {
-                Files.createDirectory(Path.of(realPath));
-            }
-            String fullPath = realPath + "/" + filename;
-            String linkDB = "FolderImages/Rerume/" + filename;
-            part.write(fullPath);
-            
-            HttpSession session = request.getSession();
-            Object u = session.getAttribute("account");
-            User user = (User) u;
-            PostDAO p = new PostDAO();
-            DAO d = new DAO();
-            int userId = user.getUserID();
-            int freelancerID = d.getFreelancerIDbyUserID(userId);
-            p.applyJob(freelancerID, postID, linkDB);
-            
-            String link="AllListPost";
-            request.getRequestDispatcher(link).forward(request, response); 
+            int applyID = Integer.parseInt(request.getParameter("postID").trim());
+            String type = request.getParameter("type");
+            int status = type.equals("approve") ? 1 : 2;
 
+            d.updateStatusApply(applyID, status);
+
+            response.setContentType("application/json");
+            response.getWriter().write("{\"success\": true, \"message\": \"" + (status == 1 ? "Freelancer approved successfully!" : "Freelancer rejected successfully!") + "\"}");
         } catch (Exception e) {
-            request.getRequestDispatcher("login").forward(request, response);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"success\": false, \"message\": \"An error occurred.\"}");
         }
     }
 

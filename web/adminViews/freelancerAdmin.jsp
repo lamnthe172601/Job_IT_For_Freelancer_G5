@@ -60,19 +60,19 @@
 
                             <div  class="filter-section" style="display: none;">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3 mb-3">
                                         <div class="form-group">
                                             <label for="nameFilter">Name</label>
                                             <input type="text" class="form-control" id="nameFilter" placeholder="Enter name">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3 mb-3">
                                         <div class="form-group">
                                             <label for="emailFilter">Email</label>
                                             <input type="text" class="form-control" id="emailFilter" placeholder="Enter email">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3 mb-3">
                                         <div class="form-group">
                                             <label for="skillFilter">Skill</label>
                                             <div class="skill-filter-container">
@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-3 mb-3">
                                         <div class="form-group">
                                             <label for="statusFilter">Status</label>
                                             <select class="form-control" id="statusFilter">
@@ -96,6 +96,11 @@
                                                 <option value="inactive">Inactive</option>
                                             </select>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-secondary" id="resetFilter">Reset</button>
                                     </div>
                                 </div>
                             </div>
@@ -365,90 +370,97 @@
         </script>
         <script>
             $(document).ready(function () {
+                var table = $('.table').DataTable();
                 var skillFilterInput = $('.skill-filter-input');
                 var skillFilterDropdown = $('.skill-filter-dropdown');
-                var selectedSkills = new Set(); // Sử dụng Set để lưu trữ các kỹ năng đã chọn
-                var $selectedSkills = $('.selected-skills'); // Tạo một đối tượng jQuery cho phần tử hiển thị danh sách kỹ năng đã chọn
-                var nameFilter = document.getElementById('nameFilter');
-                var emailFilter = document.getElementById('emailFilter');
-                var statusFilter = document.getElementById('statusFilter');
-                var rows = document.querySelectorAll('.table tbody tr');
+                var selectedSkills = new Set();
+                var $selectedSkills = $('.selected-skills');
 
-                // Hiển thị/ẩn dropdown khi nhấp vào ô input
+                var nameFilter = $('#nameFilter');
+                var emailFilter = $('#emailFilter');
+                var statusFilter = $('#statusFilter');
+
+                // Skill dropdown toggle
                 skillFilterInput.on('click', function () {
                     skillFilterDropdown.toggle();
                 });
 
-
-                // Xử lý sự kiện chọn kỹ năng
+                // Skill selection
                 $('.skill-filter-option').on('click', function () {
-                    var skillId = $(this).data('value');
-                    var skillName = $(this).text();
-
-                    // Kiểm tra xem kỹ năng đã được chọn hay chưa
-                    if (selectedSkills.has(skillId)) {
-                        // Kỹ năng đã được chọn trước đó, không làm gì cả
-                        return;
+                    var skillName = $(this).data('value');
+                    if (!selectedSkills.has(skillName)) {
+                        selectedSkills.add(skillName);
+                        var $selectedSkill = $('<div class="selected-skill" data-skill="' + skillName + '">' + skillName + '<span class="remove-skill">&times;</span></div>');
+                        $selectedSkills.append($selectedSkill);
                     }
-
-                    // Thêm kỹ năng vào Set selectedSkills
-                    selectedSkills.add(skillId);
-
-                    // Tạo phần tử HTML để hiển thị kỹ năng đã chọn
-                    var $selectedSkill = $('<div class="selected-skill" data-skillid="' + skillId + '">' + skillName + '<span class="remove-skill">&times;</span></div>');
-                    $selectedSkills.append($selectedSkill);
-
                     skillFilterInput.val('');
                     skillFilterDropdown.hide();
-
-                    // Lọc danh sách freelancer
-                    filterRows();
+                    applyFilter();
                 });
 
-                // Xử lý sự kiện xóa kỹ năng đã chọn
+                // Remove selected skill
                 $selectedSkills.on('click', '.remove-skill', function () {
                     var $skillElement = $(this).parent();
-                    var skillId = $skillElement.data('skillid');
-
-                    // Xóa kỹ năng khỏi Set selectedSkills
-                    selectedSkills.delete(skillId);
-
-                    // Xóa phần tử HTML hiển thị kỹ năng đã chọn
+                    var skillName = $skillElement.data('skill');
+                    selectedSkills.delete(skillName);
                     $skillElement.remove();
-
-                    // Lọc danh sách freelancer
-                    filterRows();
+                    applyFilter();
                 });
 
-                // Hàm lọc danh sách freelancer
-                function filterRows() {
-                    const nameValue = nameFilter.value.toLowerCase();
-                    const emailValue = emailFilter.value.toLowerCase();
-                    const statusValue = statusFilter.value;
-                    const selectedSkillsArray = Array.from(selectedSkills);
+                // Custom filtering function
+                $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                    var name = data[1].toLowerCase();
+                    var email = data[2].toLowerCase();
+                    var skillsString = data[3] ? data[3].toLowerCase() : '';
+                    var status = data[4].toLowerCase();
 
-                    rows.forEach(row => {
-                        const name = row.querySelector('.user-profile h5 a').textContent.toLowerCase();
-                        const email = row.querySelector('.verify-mail').textContent.toLowerCase();
-                        const status = row.querySelector('.status').textContent.toLowerCase();
-                        const skills = Array.from(row.querySelectorAll('.skill-item')).map(skill => skill.textContent);
+                    var nameValue = nameFilter.val().toLowerCase();
+                    var emailValue = emailFilter.val().toLowerCase();
+                    var statusValue = statusFilter.val().toLowerCase();
+                    var selectedSkillsArray = Array.from(selectedSkills).map(s => s.toLowerCase());
 
-                        const showRow =
-                                (!nameValue || name.includes(nameValue)) &&
-                                (!emailValue || email.includes(emailValue)) &&
-                                (statusValue === '' || status === statusValue) &&
-                                selectedSkillsArray.every(skill => skills.includes(skill));
+                    var nameMatch = !nameValue || name.includes(nameValue);
+                    var emailMatch = !emailValue || email.includes(emailValue);
+                    var statusMatch = statusValue === '' || status.includes(statusValue);
 
-                        row.style.display = showRow ? '' : 'none';
-                    });
+                    // New skill matching logic
+                    var skillsMatch = true;
+                    if (selectedSkillsArray.length > 0) {
+                        var rowSkills = skillsString.split(',').map(s => s.trim());
+                        skillsMatch = selectedSkillsArray.every(selectedSkill =>
+                            rowSkills.some(rowSkill => rowSkill.includes(selectedSkill))
+                        );
+                    }
+
+                    return nameMatch && emailMatch && statusMatch && skillsMatch;
+                });
+
+                function applyFilter() {
+                    table.draw();
                 }
 
-                // Gán sự kiện lọc cho các trường lọc
-                nameFilter.addEventListener('input', filterRows);
-                emailFilter.addEventListener('input', filterRows);
-                statusFilter.addEventListener('change', filterRows);
-            });
+                // Assign filter event to filter fields
+                nameFilter.on('input', applyFilter);
+                emailFilter.on('input', applyFilter);
+                statusFilter.on('change', applyFilter);
 
+                // Reset filter
+                $('#resetFilter').click(function () {
+                    nameFilter.val('');
+                    emailFilter.val('');
+                    statusFilter.val('');
+                    selectedSkills.clear();
+                    $selectedSkills.empty();
+                    applyFilter();
+                });
+
+                // Close skill dropdown when clicking outside
+                $(document).on('click', function (event) {
+                    if (!$(event.target).closest('.skill-filter-container').length) {
+                        skillFilterDropdown.hide();
+                    }
+                });
+            });
         </script>
         <script>
             // Đóng dropdown khi click bên ngoài
@@ -471,21 +483,21 @@
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
-        <script src="adminAssets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="adminAssets/js/bootstrap.bundle.min.js" ></script>
 
-        <script src="adminAssets/js/feather.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="adminAssets/js/feather.min.js" ></script>
 
-        <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" ></script>
 
-        <script src="adminAssets/plugins/select2/js/select2.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="adminAssets/plugins/select2/js/select2.min.js" ></script>
 
-        <script src="adminAssets/plugins/moment/moment.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-        <script src="adminAssets/js/bootstrap-datetimepicker.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="adminAssets/plugins/moment/moment.min.js" ></script>
+        <script src="adminAssets/js/bootstrap-datetimepicker.min.js" ></script>
 
-        <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-        <script src="adminAssets/plugins/datatables/datatables.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" ></script>
+        <script src="adminAssets/plugins/datatables/datatables.min.js" ></script>
 
-        <script src="adminAssets/js/script.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="adminAssets/js/script.js" ></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/users.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:03 GMT -->

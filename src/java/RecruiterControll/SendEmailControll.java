@@ -60,22 +60,7 @@ public class SendEmailControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String subject = request.getParameter("emailSubject");
-        String recipient = request.getParameter("emailRecipient");
-        String content = request.getParameter("emailContent");
-
-        EmailService emailService = new EmailService();
-        boolean isSent = emailService.sendEmail(recipient, subject, content);
-
-        if (isSent) {
-            request.setAttribute("emailStatus", "success");
-            request.setAttribute("message", "Email sent successfully.");
-        } else {
-            request.setAttribute("emailStatus", "error");
-            request.setAttribute("message", "Failed to send email.");
-        }
-
-        request.getRequestDispatcher("views/allApplication.jsp").forward(request, response);
+        
     }
 
     

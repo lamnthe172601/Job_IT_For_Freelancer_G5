@@ -29,8 +29,6 @@
         <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
-
-
     </head>
     <body class="dashboard-page">
 
@@ -361,7 +359,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form action="SearchInListApply" method="get" class="form-inline my-2 my-lg-0">
+                            <form action="ListApply" method="post" class="form-inline my-2 my-lg-0">
                                 <div class="input-group input-group-sm">
                                     <c:if test="${txtSearch != null}">
                                         <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
@@ -416,7 +414,7 @@
                                                     <tr>
                                                         <td class="title">${p.title}</td>
                                                         <td class="title">${p.category}</td>
-                                                        <td><a href="${p.resume}">View</a></td>
+                                                        <td ><a href="${p.resume}">View</a></td>
                                                         <td>${p.datePost}</td>
                                                         <td>${p.dateApply}</td>
                                                         <c:if test="${p.status=='2'}">
@@ -441,19 +439,19 @@
                                         <ul class="pagination list-pagination">
                                             <c:if test="${tag > 1}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="ListApply?index=${tag-1}" aria-label="Trước">
+                                                    <a class="page-link" href="SearchInListApply?index=${tag-1}" aria-label="Trước">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
                                             </c:if>
                                             <c:forEach var="i" begin="1" end="${endPage}">
                                                 <li class="page-item ${i == tag ? 'active' : ''}">
-                                                    <a class="page-link" href="ListApply?index=${i}">${i}</a>
+                                                    <a class="page-link" href="SearchInListApply?index=${i}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <c:if test="${tag < endPage}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="ListApply?index=${tag + 1}" aria-label="Sau">
+                                                    <a class="page-link" href="SearchInListApply?index=${tag + 1}" aria-label="Sau">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
@@ -765,71 +763,69 @@
                 .pagination a:hover {
                     background-color: #ddd;
                 }
-
-
             </style>
-            <!-- jQuery (replace with your preferred version or remove if not using jQuery) -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    // Toggle filter container visibility
-                    $('#filterIcon').click(function () {
-                        $('#filterContainer').toggle();
-                    });
-
-                    // Close filter when clicking outside of it
-                    $(document).click(function (event) {
-                        if (!$(event.target).closest('#filterIcon, #filterContainer').length) {
-                            $('#filterContainer').hide();
-                        }
-                    });
-
-                    // Filter by date input
-                    $('#filterInput').change(function () {
-                        var selectedDate = $(this).val();
-                        $('tbody tr').each(function () {
-                            var applyDate = $(this).find('td:eq(4)').text(); // Assuming Apply On column is the fifth column (index 4)
-                            if (applyDate === selectedDate || selectedDate === '') {
-                                $(this).show();
-                            } else {
-                                $(this).hide();
-                            }
-                        });
-                    });
-                });
-            </script>
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    // Toggle filter container visibility
-                    $('#filterIcon1').click(function () {
-                        $('#filterContainer1').toggle();
-                    });
-
-                    // Close filter when clicking outside of it
-                    $(document).click(function (event) {
-                        if (!$(event.target).closest('#filterIcon1, #filterContainer1').length) {
-                            $('#filterContainer1').hide();
-                        }
-                    });
-
-                    // Filter by date input
-                    $('#filterInput1').change(function () {
-                        var selectedDate = $(this).val();
-                        $('tbody tr').each(function () {
-                            var applyDate = $(this).find('td:eq(3)').text(); // Assuming Apply On column is the fifth column (index 4)
-                            if (applyDate === selectedDate || selectedDate === '') {
-                                $(this).show();
-                            } else {
-                                $(this).hide();
-                            }
-                        });
-                    });
-                });
-            </script>
             
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Toggle filter container visibility
+            $('#filterIcon').click(function() {
+                $('#filterContainer').toggle();
+            });
+
+            // Close filter when clicking outside of it
+            $(document).click(function(event) {
+                if (!$(event.target).closest('#filterIcon, #filterContainer').length) {
+                    $('#filterContainer').hide();
+                }
+            });
+
+            // Filter by date input
+            $('#filterInput').change(function() {
+                var selectedDate = $(this).val();
+                $('tbody tr').each(function() {
+                    var applyDate = $(this).find('td:eq(4)').text(); // Assuming Apply On column is the fifth column (index 4)
+                    if (applyDate === selectedDate || selectedDate === '') {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    </script>
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Toggle filter container visibility
+            $('#filterIcon1').click(function() {
+                $('#filterContainer1').toggle();
+            });
+
+            // Close filter when clicking outside of it
+            $(document).click(function(event) {
+                if (!$(event.target).closest('#filterIcon1, #filterContainer1').length) {
+                    $('#filterContainer1').hide();
+                }
+            });
+
+            // Filter by date input
+            $('#filterInput1').change(function() {
+                var selectedDate = $(this).val();
+                $('tbody tr').each(function() {
+                    var applyDate = $(this).find('td:eq(3)').text(); // Assuming Apply On column is the fifth column (index 4)
+                    if (applyDate === selectedDate || selectedDate === '') {
+                         $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    </script>
+    
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
             // Toggle filter container visibility
@@ -858,9 +854,19 @@
             });
         });
     </script>
-
-
-
+    
+    <script>
+function submitForm(postID) {
+    if(validateForm(postID)===true){
+        event.preventDefault();
+    showSuccessNotification('Approve project successfully!');
+    setTimeout(function() {
+        document.getElementById('jobApplicationForm_' + postID).submit();
+    }, 1000);
+    }
+    
+}
+</script>
 
             <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 

@@ -113,21 +113,19 @@
 
                     <div class="filter-section" style="display: none">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-3 mb-3">
                                 <div class="form-group">
                                     <label>Company Name</label>
                                     <input type="text" class="form-control" id="companyFilter" placeholder="Enter company name">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3 mb-3">
                                 <div class="form-group">
                                     <label>Primary Contact</label>
                                     <input type="text" class="form-control" id="primaryContactFilter" placeholder="Enter primary contact">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-3 mb-3">
                                 <div class="form-group">
                                     <label>Status</label>
                                     <select class="form-control" id="statusFilter">
@@ -137,7 +135,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3 mb-3">
                                 <div class="form-group">
                                     <label>Total Posts</label>
                                     <div class="input-group">
@@ -146,6 +144,11 @@
                                         <input type="number" class="form-control" id="totalPostsMaxFilter" placeholder="Max" min="0">
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary" id="resetFilter">Reset</button>
                             </div>
                         </div>
                     </div>
@@ -351,49 +354,66 @@
             });
         </script>
         <script>
+            $(document).ready(function () {
+                var table = $('.table').DataTable();
 
-            const companyFilter = document.getElementById('companyFilter');
-            const primaryContactFilter = document.getElementById('primaryContactFilter');
-            const totalPostsMinFilter = document.getElementById('totalPostsMinFilter');
-            const totalPostsMaxFilter = document.getElementById('totalPostsMaxFilter');
-            const statusFilter = document.getElementById('statusFilter');
+                const companyFilter = document.getElementById('companyFilter');
+                const primaryContactFilter = document.getElementById('primaryContactFilter');
+                const totalPostsMinFilter = document.getElementById('totalPostsMinFilter');
+                const totalPostsMaxFilter = document.getElementById('totalPostsMaxFilter');
+                const statusFilter = document.getElementById('statusFilter');
 
-            const rows = document.querySelectorAll('.table tbody tr');
-            function filterRows() {
-                const companyValue = companyFilter.value.toLowerCase();
-                const primaryContactValue = primaryContactFilter.value.toLowerCase();
-                const totalPostsMinValue = parseInt(totalPostsMinFilter.value) || 0;
-                const totalPostsMaxValue = parseInt(totalPostsMaxFilter.value) || Infinity;
-                if (totalPostsMaxValue < totalPostsMinValue) {
-                    totalPostsMaxValue = Infinity;
+                function applyFilter() {
+                    $.fn.dataTable.ext.search.pop();
+
+                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                        const company = data[2].toLowerCase(); // Company name is in the 3rd column (index 2)
+                        const primaryContact = data[3].toLowerCase(); // Primary contact is in the 4th column (index 3)
+                        const totalPosts = parseInt(data[5]); // Total posts is in the 6th column (index 5)
+                        const status = data[6].toLowerCase(); // Status is in the 7th column (index 6)
+
+                        const companyValue = companyFilter.value.toLowerCase();
+                        const primaryContactValue = primaryContactFilter.value.toLowerCase();
+                        const totalPostsMinValue = parseInt(totalPostsMinFilter.value) || 0;
+                        let totalPostsMaxValue = parseInt(totalPostsMaxFilter.value) || Infinity;
+                        if (totalPostsMaxValue < totalPostsMinValue) {
+                            totalPostsMaxValue = Infinity;
+                        }
+                        const statusValue = statusFilter.value.toLowerCase();
+
+                        return (!companyValue || company.includes(companyValue)) &&
+                                (!primaryContactValue || primaryContact.includes(primaryContactValue)) &&
+                                (totalPosts >= totalPostsMinValue && totalPosts <= totalPostsMaxValue) &&
+                                (statusValue === '' || status.includes(statusValue));
+                    });
+
+                    table.draw();
                 }
-                const statusValue = statusFilter.value;
-                console.log(totalPostsMinValue);
-                console.log(totalPostsMaxValue);
-                console.log(totalPostsMaxValue - totalPostsMinValue);
-                rows.forEach(row => {
-                    const company = row.querySelector('.companyName a').textContent.toLowerCase();
-                    const primaryContact = row.querySelector('.primaryContact a').textContent.toLowerCase();
-                    const totalPosts = parseInt(row.querySelector('.totalPost').textContent);
-                    console.log(totalPosts);
-                    const status = row.querySelector('.status').textContent.toLowerCase();
 
-                    const showRow =
-                            (!companyValue || company.includes(companyValue)) &&
-                            (!primaryContactValue || primaryContact.includes(primaryContactValue)) &&
-                            (totalPosts >= totalPostsMinValue && totalPosts <= totalPostsMaxValue) &&
-                            (statusValue === '' || status === statusValue);
+                // Assign filter event to filter fields
+                companyFilter.addEventListener('input', applyFilter);
+                primaryContactFilter.addEventListener('input', applyFilter);
+                totalPostsMinFilter.addEventListener('input', applyFilter);
+                totalPostsMaxFilter.addEventListener('input', applyFilter);
+                statusFilter.addEventListener('change', applyFilter);
 
-                    row.style.display = showRow ? '' : 'none';
+                // Reset filter
+                $('#resetFilter').click(function () {
+                    companyFilter.value = '';
+                    primaryContactFilter.value = '';
+                    totalPostsMinFilter.value = '';
+                    totalPostsMaxFilter.value = '';
+                    statusFilter.value = '';
+                    resetFilter();
                 });
 
-            }
-            // Gán sự kiện lọc cho các trường lọc
-            companyFilter.addEventListener('input', filterRows);
-            primaryContactFilter.addEventListener('input', filterRows);
-            totalPostsMinFilter.addEventListener('input', filterRows);
-            totalPostsMaxFilter.addEventListener('input', filterRows);
-            statusFilter.addEventListener('change', filterRows);
+                function resetFilter() {
+                    $.fn.dataTable.ext.search.pop();
+                    table.columns().search('');
+                    table.search('');
+                    table.draw();
+                }
+            });
         </script>
         <script>
             $(document).ready(function () {
@@ -478,24 +498,23 @@
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
-        <script src="adminAssets/js/jquery-3.7.1.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/jquery-3.7.1.min.js" ></script>
 
-        <script src="adminAssets/js/bootstrap.bundle.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/bootstrap.bundle.min.js" ></script>
 
-        <script src="adminAssets/js/feather.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/feather.min.js" ></script>
 
-        <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" ></script>
 
-        <script src="adminAssets/plugins/select2/js/select2.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/select2/js/select2.min.js" ></script>
 
-        <script src="adminAssets/plugins/moment/moment.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
-        <script src="adminAssets/js/bootstrap-datetimepicker.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/moment/moment.min.js" ></script>
+        <script src="adminAssets/js/bootstrap-datetimepicker.min.js" ></script>
 
-        <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
-        <script src="adminAssets/plugins/datatables/datatables.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" ></script>
+        <script src="adminAssets/plugins/datatables/datatables.min.js" ></script>
 
-        <script src="adminAssets/js/script.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/script.js" ></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="89331437dcc86709a93430b9-|49" defer></script></body>
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/providers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:24 GMT -->
 </html>
