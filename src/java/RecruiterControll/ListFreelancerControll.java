@@ -95,6 +95,21 @@ public class ListFreelancerControll extends HttpServlet {
             listFavorites.add(free);
         }
         request.setAttribute("list2", listFavorites);
+        
+        int countFreelancer = list.size();
+        int freelancerInPgae = 9;
+        int totalPage = (int) Math.ceil((double) countFreelancer / freelancerInPgae);
+        int index = 1;
+
+        String indexPage = request.getParameter("page");
+        if (indexPage != null && !indexPage.isEmpty()) {
+            index = Integer.parseInt(indexPage);
+        }
+        
+        request.setAttribute("countFreelancer", countFreelancer);
+        request.setAttribute("freelancerInPgae", freelancerInPgae);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("index", index);
 
         
         

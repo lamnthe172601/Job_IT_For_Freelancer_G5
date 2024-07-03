@@ -268,10 +268,10 @@
                                                 </c:forEach>
                                                 <c:choose>
                                                     <c:when test="${favo}">
-                                                        <a href="javascript:void(0);" onclick="removeFromFavorites(${list.postID})" ><i id="favourite_${list.postID}" class="fas fa-heart"></i></a>
+                                                        <a href="javascript:void(0);" ><i onclick="toggleFavorite(${list.postID})" id="favourite_${list.postID}" class="fas fa-heart"></i></a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                        <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})"  ><i id="favourite_${list.postID}" class="far fa-heart"></i></a>
+                                                        <a href="javascript:void(0);" ><i onclick="toggleFavorite(${list.postID})" id="favourite_${list.postID}" class="far fa-heart"></i></a>
                                                         </c:otherwise>
                                                     </c:choose>
                                             </div>

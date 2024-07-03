@@ -201,7 +201,7 @@ public class SearchInHomeControll extends HttpServlet {
                         session.removeAttribute("Search1");
                         session.setAttribute("Search1", txtSearch_1);
                     } else {
-                        session.setAttribute("Search", txtSearch_1);
+                        session.setAttribute("Search1", txtSearch_1);
                     }
 
                 }
@@ -218,8 +218,24 @@ public class SearchInHomeControll extends HttpServlet {
                         list.add(free);
                     }
                 }
-                request.setAttribute("list", list);
+                request.setAttribute("listSearch", list);
                 request.setAttribute("map", map);
+
+                int count = list.size();
+                int NumberInPgae = 9;
+                int totalFavoritesPage = (int) Math.ceil((double) count / NumberInPgae);
+                int indexSearch = 1;
+
+                String indexPage = request.getParameter("page");
+                if (indexPage != null && !indexPage.isEmpty()) {
+                    indexSearch = Integer.parseInt(indexPage);
+                }
+
+                request.setAttribute("count", count);
+                request.setAttribute("NumberInPgae", NumberInPgae);
+                request.setAttribute("totalFavoritesPage", totalFavoritesPage);
+                request.setAttribute("indexSearch", indexSearch);
+                
 
                 FavoritesDAO fDao = new FavoritesDAO();
                 ArrayList<Freelancer> listFavorites = new ArrayList<>();
@@ -231,7 +247,7 @@ public class SearchInHomeControll extends HttpServlet {
                 }
                 request.setAttribute("list2", listFavorites);
 
-                request.getRequestDispatcher("views/listFreelancer.jsp").forward(request, response);
+                request.getRequestDispatcher("views/allListFreelancerSearch.jsp").forward(request, response);
 
             }
         }
