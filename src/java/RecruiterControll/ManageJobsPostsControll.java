@@ -26,7 +26,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,31 +41,39 @@ public class ManageJobsPostsControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("account");
-        RecruiterDAO reDAO = new RecruiterDAO();
-        Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
-        List<Post> listpost = reDAO.ListAllPostByRecruiter(re.getRecruiterID());
-        PostDAO postdao = new PostDAO();
-        List<SkillSet> skill = postdao.getAllSkillSet();
-        request.setAttribute("listpost", listpost);
-        request.setAttribute("skill", skill);
-        List<ExpertiseSkill> ess = postdao.getAllExpertiseSkill();
-        request.setAttribute("ExpertiseSkill", ess);
-
-        CategoriesDAO caDao = new CategoriesDAO();
-        DurationDAO duDao = new DurationDAO();
-        List<Duration> du = duDao.getAllDuration();
-        JobTypeDAO jobDao = new JobTypeDAO();
-        List<JobType> jobtype = jobDao.getAllJobType();
-        List<Categories> allCate = caDao.getAllCategory();
-        request.setAttribute("allCate", allCate);
-        request.setAttribute("allDuration", du);
-        request.setAttribute("alljobtype", jobtype);
-        
-        
-        
-        request.getRequestDispatcher("views/managePost.jsp").forward(request, response);
+        try {
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("account");
+            RecruiterDAO reDAO = new RecruiterDAO();
+            Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
+            PostDAO postdao = new PostDAO();
+            
+            postdao.updatePostStatus();
+            postdao.updatePostStatusByQuantity();
+            List<Post> listpost = reDAO.ListAllPostByRecruiter(re.getRecruiterID());
+            
+            List<SkillSet> skill = postdao.getAllSkillSet();
+            request.setAttribute("listpost", listpost);
+            request.setAttribute("skill", skill);
+            List<ExpertiseSkill> ess = postdao.getAllExpertiseSkill();
+            request.setAttribute("ExpertiseSkill", ess);
+            
+            CategoriesDAO caDao = new CategoriesDAO();
+            DurationDAO duDao = new DurationDAO();
+            List<Duration> du = duDao.getAllDuration();
+            JobTypeDAO jobDao = new JobTypeDAO();
+            List<JobType> jobtype = jobDao.getAllJobType();
+            List<Categories> allCate = caDao.getAllCategory();
+            request.setAttribute("allCate", allCate);
+            request.setAttribute("allDuration", du);
+            request.setAttribute("alljobtype", jobtype);
+            
+            
+            
+            request.getRequestDispatcher("views/managePost.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManageJobsPostsControll.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
