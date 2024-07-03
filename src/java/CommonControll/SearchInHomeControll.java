@@ -222,7 +222,7 @@ public class SearchInHomeControll extends HttpServlet {
                 request.setAttribute("map", map);
 
                 int count = list.size();
-                int NumberInPgae = 6;
+                int NumberInPgae = 9;
                 int totalFavoritesPage = (int) Math.ceil((double) count / NumberInPgae);
                 int indexSearch = 1;
 
