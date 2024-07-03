@@ -100,18 +100,18 @@
                                     <i class="fas fa-filter"></i>
                                 </a>
                             </div>
-                            <div id="filter-section" style="display: none" >
+                            <div id="filter-section" style="display: none">
                                 <div class="card mt-3">
                                     <div class="card-body">
                                         <form id="filterForm">
-                                            <div class="row">                                                
+                                            <div class="row">
                                                 <div class="col-md-3 mb-3">
                                                     <label for="companyFilter" class="form-label">Company Name</label>
                                                     <input type="text" class="form-control" id="companyFilter">
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                     <label for="startDateFilter" class="form-label">Start Date</label>
-                                                    <input type="date" class="form-control" id="startDateFilter" >
+                                                    <input type="date" class="form-control" id="startDateFilter">
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                     <label for="endDateFilter" class="form-label">End Date</label>
@@ -121,14 +121,14 @@
                                                     <label for="statusFilter" class="form-label">Status</label>
                                                     <select class="form-select" id="statusFilter">
                                                         <option value="">All</option>
-                                                        <option value="Pendding">Pending</option>
+                                                        <option value="Pending">Pending</option>
                                                         <option value="Approved">Approved</option>
                                                         <option value="Suspend">Suspend</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-12">                                                   
+                                                <div class="col-12">
                                                     <button type="button" class="btn btn-secondary" id="resetFilter">Reset</button>
                                                 </div>
                                             </div>
@@ -182,7 +182,7 @@
                                                         </td>
                                                         <td class="test1">                                                          
                                                             <c:if test='${project.getListReport().size() >= 5}'>
-                                                                <a href="javascript:void(0);" style="color: black" class="status">Pendding</a>
+                                                                <a href="javascript:void(0);" style="color: black" class="status">Pending</a>
                                                             </c:if>
                                                             <c:if test='${project.getListReport().size() < 5}'>
                                                                 <c:if test='${project.getPostBasic().getChecking() == 1}'>
@@ -404,71 +404,70 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>        
         <script>
             $(document).ready(function () {
+                var table = $('.datatable').DataTable();
+
+                // Toggle filter section visibility
                 $('#filter_search').click(function () {
                     $('#filter-section').toggle();
                 });
-            });
-        </script>
-        <script>
-            // Wait for the DOM to be fully loaded
-            document.addEventListener('DOMContentLoaded', function () {
-                // Get filter form elements
-                const companyFilter = document.getElementById('companyFilter');
-                const startDateFilter = document.getElementById('startDateFilter');
-                const endDateFilter = document.getElementById('endDateFilter');
-                const statusFilter = document.getElementById('statusFilter');
-                const resetFilterBtn = document.getElementById('resetFilter');
 
-                // Get all table rows
-                const tableRows = document.querySelectorAll('.datatable tbody tr');
+                // Apply filter on input change
+                $('#companyFilter, #startDateFilter, #endDateFilter, #statusFilter').on('input change', function () {
+                    applyFilter();
+                });
 
-                // Function to filter table rows
-                function filterTable() {
-                    const companyValue = companyFilter.value.toLowerCase();
-                    const startDate = startDateFilter.value ? new Date(startDateFilter.value) : null;
-                    const endDate = endDateFilter.value ? new Date(endDateFilter.value) : null;
-                    const statusValue = statusFilter.value.toLowerCase();
+                // Reset filter
+                $('#resetFilter').click(function () {
+                    $('#filterForm')[0].reset();
+                    resetFilter();
+                });
 
-                    tableRows.forEach(row => {
-                        const companyName = row.querySelector('.companyName').textContent.toLowerCase();
-                        const datePost = new Date(row.querySelector('.datePost').textContent);
-                        const status = row.querySelector('.status').textContent.toLowerCase();
+                function applyFilter() {
+                    var companyFilter = $('#companyFilter').val().toLowerCase();
+                    var startDate = $('#startDateFilter').val();
+                    var endDate = $('#endDateFilter').val();
+                    var statusFilter = $('#statusFilter').val().toLowerCase();
 
-                        const companyMatch = companyName.includes(companyValue);
-                        const dateMatch = (!startDate || datePost >= startDate) && (!endDate || datePost <= endDate);
-                        const statusMatch = statusValue === '' || status.includes(statusValue);
+                    // Clear any existing search function
+                    $.fn.dataTable.ext.search.pop();
 
-                        if (companyMatch && dateMatch && statusMatch) {
-                            row.style.display = '';
-                        } else {
-                            row.style.display = 'none';
+                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                        var company = data[3].toLowerCase(); // Assuming company name is in the 4th column
+                        var date = new Date(data[4]); // Assuming date is in the 5th column
+                        var status = data[5].toLowerCase(); // Assuming status is in the 6th column
+
+                        if (
+                                (companyFilter === '' || company.includes(companyFilter)) &&
+                                (startDate === '' || date >= new Date(startDate)) &&
+                                (endDate === '' || date <= new Date(endDate)) &&
+                                (statusFilter === '' || status.includes(statusFilter))
+                                ) {
+                            return true;
                         }
+                        return false;
                     });
+
+                    table.draw();
                 }
 
-                // Add event listeners to filter inputs
-                companyFilter.addEventListener('input', filterTable);
-                startDateFilter.addEventListener('change', filterTable);
-                endDateFilter.addEventListener('change', filterTable);
-                statusFilter.addEventListener('change', filterTable);
-
-                // Reset filter function
                 function resetFilter() {
-                    companyFilter.value = '';
-                    startDateFilter.value = '';
-                    endDateFilter.value = '';
-                    statusFilter.value = '';
-                    tableRows.forEach(row => row.style.display = '');
-                }
+                    // Remove custom search function
+                    $.fn.dataTable.ext.search.pop();
 
-                // Add event listener to reset button
-                resetFilterBtn.addEventListener('click', resetFilter);
+                    // Clear all column searches
+                    table.columns().search('');
+
+                    // Clear global search
+                    table.search('');
+
+                    // Redraw the table
+                    table.draw();
+                }
             });
         </script>
-
         <script>
             $(document).ready(function () {
                 $('.typeChange').on('click', function (e) {
@@ -572,6 +571,4 @@
 
         <script src="adminAssets/js/script.js" ></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="89331437dcc86709a93430b9-|49" defer></script></body>
-
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/providers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:24 GMT -->
 </html>
