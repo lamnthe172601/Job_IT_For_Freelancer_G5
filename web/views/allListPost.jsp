@@ -355,7 +355,22 @@
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>
-                                                    <style>
+<!--
+                                                    <div class="skills-container">
+                                                        <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
+                                                            <c:if test="${loop.index % 3 == 0}">
+                                                                <div class="skills-row">
+                                                                </c:if>
+                                                                <div class="freelance-tags">
+                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
+                                                                </div>
+                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
+                                                                </div>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>-->
+
+<!--                                                    <style>
 
 
                                                         .skills-container {
@@ -372,7 +387,7 @@
                                                             justify-content: center;
                                                             width: 100%;
                                                         }
-                                                    </style>
+                                                    </style>-->
                                                 </div>
                                                 <div class="counter-stats">
                                                     <ul>
@@ -671,7 +686,6 @@
                     let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
                     let postSkills = Array.from(post.querySelectorAll(' .badge')).map(el => el.innerText.toLowerCase());
-
                     let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
                     let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
                     let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));

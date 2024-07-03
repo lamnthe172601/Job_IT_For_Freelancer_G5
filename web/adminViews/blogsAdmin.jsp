@@ -67,11 +67,11 @@
                     </div>
                     <div class="filter-section" style="display: none">
                         <div class="row">
-                            <div class="mb-6">
+                            <div class="col-md-3 mb-3">
                                 <label for="filter-title" class="form-label">Title</label>
                                 <input type="text" class="form-control" id="filter-title" placeholder="Enter blog title">
                             </div>
-                            <div class="mb-6">
+                            <div class="col-md-3 mb-3">
                                 <label for="filter-status" class="form-label">Status</label>
                                 <select class="form-select" id="filter-status">
                                     <option value="">All</option>
@@ -79,15 +79,18 @@
                                     <option value="trash">Trash</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="mb-6">
+                            <div class="col-md-3 mb-3">
                                 <label for="filter-date-from" class="form-label">Date From</label>
                                 <input type="date" class="form-control" id="filter-date-from">
                             </div>
-                            <div class="mb-6">
+                            <div class="col-md-3 mb-3">
                                 <label for="filter-date-to" class="form-label">Date To</label>
                                 <input type="date" class="form-control" id="filter-date-to">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary" id="resetFilter">Reset</button>
                             </div>
                         </div>
                     </div>
@@ -306,44 +309,73 @@
             });
         </script>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            $(document).ready(function () {
+                var table = $('.datatable').DataTable();
+
                 const filterTitle = document.getElementById('filter-title');
                 const filterDateFrom = document.getElementById('filter-date-from');
                 const filterDateTo = document.getElementById('filter-date-to');
                 const filterStatus = document.getElementById('filter-status');
-                const rows = document.querySelectorAll('.datatable tbody tr');
 
                 // Set default "Date To" as today
                 const today = new Date().toISOString().split('T')[0];
                 filterDateTo.value = today;
 
-                function filterRows() {
+                function applyFilter() {
                     const titleValue = filterTitle.value.toLowerCase();
                     const dateFromValue = filterDateFrom.value;
                     const dateToValue = filterDateTo.value || today;
                     const statusValue = filterStatus.value.toLowerCase();
 
-                    rows.forEach(row => {
-                        const title = row.querySelector('.title a').textContent.toLowerCase();
-                        const date = row.querySelector('.datecreate').textContent.trim();
-                        const status = row.querySelector('.status').textContent.toLowerCase();
+                    // Clear any existing search function
+                    $.fn.dataTable.ext.search.pop();
+
+                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                        const title = data[2].toLowerCase(); // Assuming title is in the 3rd column
+                        const date = data[4]; // Assuming date is in the 5th column
+                        const status = data[5].toLowerCase(); // Assuming status is in the 6th column
 
                         const titleMatch = title.includes(titleValue);
                         const dateMatch = (!dateFromValue || date >= dateFromValue) && (date <= dateToValue);
                         const statusMatch = statusValue === '' || status.includes(statusValue);
 
-                        row.style.display = titleMatch && dateMatch && statusMatch ? '' : 'none';
+                        return titleMatch && dateMatch && statusMatch;
                     });
+
+                    table.draw();
                 }
 
                 // Add event listeners for instant filtering
-                filterTitle.addEventListener('input', filterRows);
-                filterDateFrom.addEventListener('change', filterRows);
-                filterDateTo.addEventListener('change', filterRows);
-                filterStatus.addEventListener('change', filterRows);
+                filterTitle.addEventListener('input', applyFilter);
+                filterDateFrom.addEventListener('change', applyFilter);
+                filterDateTo.addEventListener('change', applyFilter);
+                filterStatus.addEventListener('change', applyFilter);
+
+                // Reset filter
+                $('#resetFilter').click(function () {
+                    filterTitle.value = '';
+                    filterDateFrom.value = '';
+                    filterDateTo.value = today;
+                    filterStatus.value = '';
+                    resetFilter();
+                });
+
+                function resetFilter() {
+                    // Remove custom search function
+                    $.fn.dataTable.ext.search.pop();
+
+                    // Clear all column searches
+                    table.columns().search('');
+
+                    // Clear global search
+                    table.search('');
+
+                    // Redraw the table
+                    table.draw();
+                }
 
                 // Initial filter application
-                filterRows();
+                applyFilter();
             });
         </script>
 
@@ -464,11 +496,11 @@
                 description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
             });
         </script>
-    
-    
+
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
+
         <script src="adminAssets/js/notification.js"></script>
 
         <script src="adminAssets/js/validateBlogs.js"></script>

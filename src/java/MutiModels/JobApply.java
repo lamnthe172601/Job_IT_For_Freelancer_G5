@@ -13,12 +13,12 @@ import java.util.Date;
 public class JobApply {
     int postID, budget;
     Date datePost, dateApply;
-    String status,title,category;
+    String status,title,category,Resume;
 
     public JobApply() {
     }
 
-    public JobApply(int postID, int budget, Date datePost, Date dateApply, String status, String title, String category) {
+    public JobApply(int postID, int budget, Date datePost, Date dateApply, String status, String title, String category, String Resume) {
         this.postID = postID;
         this.budget = budget;
         this.datePost = datePost;
@@ -26,6 +26,7 @@ public class JobApply {
         this.status = status;
         this.title = title;
         this.category = category;
+        this.Resume = Resume;
     }
 
     public int getPostID() {
@@ -84,10 +85,20 @@ public class JobApply {
         this.category = category;
     }
 
+    public String getResume() {
+        return Resume;
+    }
+
+    public void setResume(String Resume) {
+        this.Resume = Resume;
+    }
+
     @Override
     public String toString() {
-        return "JobApply{" + "postID=" + postID + ", budget=" + budget + ", datePost=" + datePost + ", dateApply=" + dateApply + ", status=" + status + ", title=" + title + ", category=" + category + '}';
+        return "JobApply{" + "postID=" + postID + ", budget=" + budget + ", datePost=" + datePost + ", dateApply=" + dateApply + ", status=" + status + ", title=" + title + ", category=" + category + ", Resume=" + Resume + '}';
     }
+
+    
     
     
 }

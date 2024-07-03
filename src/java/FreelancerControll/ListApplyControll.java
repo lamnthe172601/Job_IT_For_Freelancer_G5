@@ -4,9 +4,11 @@
  */
 package FreelancerControll;
 
+import Models.Categories;
 import Models.Freelancer;
 import Models.User;
 import MutiModels.JobApply;
+import dal.CategoriesDAO;
 import dal.DAO;
 import dal.FreelancerDAO;
 import dal.PostDAO;
@@ -86,13 +88,15 @@ public class ListApplyControll extends HttpServlet {
             }
             request.setAttribute("endPage", endPage);
             request.setAttribute("tag", index);
+            CategoriesDAO caDAO = new CategoriesDAO();
             
-            
-            
+            List<Categories> cate = caDAO.getAllCategory();
+            request.setAttribute("cate", cate);
             List<JobApply> post=p.getPostApplyPage(freelancerID, index);
             request.setAttribute("userID", id);
             request.setAttribute("freelancer", freelancer);
             request.setAttribute("post", post);
+            
             request.getRequestDispatcher("views/listapply.jsp").forward(request, response);
         } catch (Exception e) {
             request.getRequestDispatcher("login").forward(request, response);
@@ -122,29 +126,27 @@ public class ListApplyControll extends HttpServlet {
             Freelancer freelancer=f.getFreelancerById(id);
             int freelancerID = d.getFreelancerIDbyUserID(id);
             
-            String txtSearch = request.getParameter("searchName");
-            if(txtSearch == null){
-                request.getRequestDispatcher("ListApply").forward(request, response);
-            }
-            
             String indexPage= request.getParameter("index");
             if(indexPage==null){
                 indexPage="1";
             }
             int index=Integer.parseInt(indexPage);
-            int count=p.getCountApplySearch(id, txtSearch);
+            int count=p.getSumJobApplyByFreelancerID(freelancerID);
             int endPage=count/8;
             if(count%8!=0){
                 endPage++;
             }
             request.setAttribute("endPage", endPage);
             request.setAttribute("tag", index);
+            CategoriesDAO caDAO = new CategoriesDAO();
+            
+            List<Categories> cate = caDAO.getAllCategory();
+            request.setAttribute("cate", cate);
             
             
-            
-            List<JobApply> post=p.SearchPostApply(freelancerID,txtSearch ,index);
+            List<JobApply> post=p.getPostApplyPage(freelancerID, index);
+            request.setAttribute("userID", id);
             request.setAttribute("freelancer", freelancer);
-            request.setAttribute("txtSearch", txtSearch);
             request.setAttribute("post", post);
             request.getRequestDispatcher("views/listapply.jsp").forward(request, response);
         } catch (Exception e) {

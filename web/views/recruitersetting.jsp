@@ -238,11 +238,7 @@
                                                     <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
                                                 </a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="deposit-funds.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
-                                                </a>
-                                            </li>
+                                            
                                             <li class="nav-item submenu">
                                                 <a href="javascript:void(0);" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
@@ -352,11 +348,12 @@
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Website</label>
-                                                                        <input type="url" class="form-control" name="website" value="${company.website}" required>
+                                                                       <input type="text" class="form-control" name="website" value="${company.website}" required>
+
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Describe</label>
-                                                                        <textarea rows="4" class="form-control" name="describe" required>${company.describe}</textarea>
+                                                                        <textarea rows="1" class="form-control" name="describe" required>${company.describe}</textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>

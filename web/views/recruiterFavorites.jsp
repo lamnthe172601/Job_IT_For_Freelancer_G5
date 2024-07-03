@@ -29,6 +29,35 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
         <style>
+                                    .text-center1 {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto 15px;
+            }
+
+            .pagination {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .pagination a, .pagination span {
+                margin: 0 5px;
+                padding: 10px 20px;
+                border: 1px solid #ddd;
+                text-decoration: none;
+                color: #333;
+            }
+
+            .pagination .current-page {
+                background-color: #007bff;
+                color: white;
+                border: 1px solid #007bff;
+            }
+
+            .pagination a:hover {
+                background-color: #ddd;
+            }
 
 
             .search-form {
@@ -341,8 +370,17 @@
                         </div>
 
                         <div class="col-md-12 col-lg-8 col-xl-9">
+                            <c:set var="list" value="${requestScope.listFavorites}" />
+                            <c:set var="tongSoBaiDang" value="${requestScope.countFavorites}" />
+                            <c:set var="baiDangTrenMotTrang" value="${requestScope.FavoritesInPgae}" />
+                            <c:set var="tongSoTrang" value="${requestScope.totalFavoritesPage}" />
+                            <c:set var="trangHienTai" value="${requestScope.indexFvr}" />
+
+                            <%-- Tính chỉ số bắt đầu và kết thúc cho danh sách bài đăng hiển thị trên trang hiện tại --%>
+                            <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
+                            <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
                             <div class="row">
-                                <c:forEach items="${list}" var="l">
+                                <c:forEach items="${list}" var="l" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="freelance-widget">
                                             <div class="freelance-content">
@@ -366,10 +404,10 @@
                                                                                                                                     <span class="badge badge-pill badge-design">${entry.value}</span>
                                                                                                                                 </a>-->
                                                                 <c:forEach items="${fn:split(entry.value, ',')}" var="skill" varStatus="loop">
-                                                                    <c:if test="${loop.index < 3}">
+                                                                    <c:if test="${loop.index < 2}">
                                                                         <span class="badge badge-pill badge-design">${skill}</span>
                                                                     </c:if>                                                              
-                                                                    <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                                    <c:if test="${loop.index == 1 and not loop.last}">                                                                 
                                                                         <span class="badge badge-pill badge-design">...</span>
                                                                     </c:if>
                                                                 </c:forEach>
@@ -409,21 +447,32 @@
                                     </div>
                                 </c:forEach>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="paginations list-pagination">
-                                        <li class="page-item"><a href="javascript:void(0);"><i
-                                                    class="feather-chevron-left"></i></a>
-                                        </li>
-                                        <li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">2</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">3</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">...</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);">10</a></li>
-                                        <li class="page-item"><a href="javascript:void(0);"><i
-                                                    class="feather-chevron-right"></i></a></li>
-                                    </ul>
-                                </div>
+                            <div class="pagination-container">
+                                <c:if test="${tongSoTrang > 1}">
+                                    <nav>
+                                        <ul class="pagination">
+                                            <c:if test="${trangHienTai > 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="RecruiterFavourites?page=${trangHienTai - 1}" aria-label="Trước">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach var="i" begin="1" end="${tongSoTrang}">
+                                                <li class="page-item ${i == trangHienTai ? 'active' : ''}">
+                                                    <a class="page-link" href="RecruiterFavourites?page=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <c:if test="${trangHienTai < tongSoTrang}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="RecruiterFavourites?page=${trangHienTai + 1}" aria-label="Sau">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </ul>
+                                    </nav>
+                                </c:if>
                             </div>
                         </div>
                     </div>

@@ -183,11 +183,11 @@
                                     <c:forEach var="entry" items="${map}">
                                         <br>
                                         <h5 >${entry.key}</h5>
-                                        
+
                                         <c:forEach items="${fn:split(entry.value, ',')}" var="skill" varStatus="loop">
                                             <span  class="badge badge-pill badge-design ">${skill}</span>
                                         </c:forEach>
-                                            <br>
+                                        <br>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -333,8 +333,7 @@
                                     </ul>
                                 </div>
                                 <div>
-                                    <a href="javascript:void(0);" class="btn  btn-primary price-btn btn-block">View More</a>
-                                </div>
+                                    <a href="companydetailcommon?recruiterID=${post.recruiterID.recruiterID}" class="btn btn-primary price-btn btn-block">View More</a>                                </div>
                             </div>                          
                         </div>
 
@@ -644,27 +643,27 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-                                                                                        function validateForm(postID) {
-                                                                                            var fileInput = document.getElementById('fileInput_' + postID);
-                                                                                            var errorDiv = document.getElementById('error_' + postID);
-                                                                                            if (fileInput.files.length === 0) {
-                                                                                                errorDiv.innerHTML = 'Please select a file.';
-                                                                                                return false; // Prevent form submission
-                                                                                            } else {
-                                                                                                errorDiv.innerHTML = '';
-                                                                                                return true;
-                                                                                            }
-                                                                                        }
+                                                                function validateForm(postID) {
+                                                                    var fileInput = document.getElementById('fileInput_' + postID);
+                                                                    var errorDiv = document.getElementById('error_' + postID);
+                                                                    if (fileInput.files.length === 0) {
+                                                                        errorDiv.innerHTML = 'Please select a file.';
+                                                                        return false; // Prevent form submission
+                                                                    } else {
+                                                                        errorDiv.innerHTML = '';
+                                                                        return true;
+                                                                    }
+                                                                }
 
-                                                                                        function check(postID) {
-                                                                                            var fileInput = document.getElementById('fileInput_' + postID);
-                                                                                            var errorDiv = document.getElementById('error_' + postID);
-                                                                                            if (fileInput.files.length === 0) {
-                                                                                                errorDiv.innerHTML = 'Please select a file.';
-                                                                                            } else {
-                                                                                                errorDiv.innerHTML = '';
-                                                                                            }
-                                                                                        }
+                                                                function check(postID) {
+                                                                    var fileInput = document.getElementById('fileInput_' + postID);
+                                                                    var errorDiv = document.getElementById('error_' + postID);
+                                                                    if (fileInput.files.length === 0) {
+                                                                        errorDiv.innerHTML = 'Please select a file.';
+                                                                    } else {
+                                                                        errorDiv.innerHTML = '';
+                                                                    }
+                                                                }
         </script>
 
         <script>

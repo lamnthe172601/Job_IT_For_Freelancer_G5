@@ -120,16 +120,13 @@ public class PostFavouritesControll extends HttpServlet {
             User u = (User) user;
             int userId = u.getUserID();
             int freelancerID = d.getFreelancerIDbyUserID(userId);
-            String txtSearch = request.getParameter("searchName");
-            if(txtSearch == null){
-                request.getRequestDispatcher("PostFavourites").forward(request, response);
-            }
+            
             String indexPage= request.getParameter("index");
             if(indexPage==null){
                 indexPage="1";
             }
             int index=Integer.parseInt(indexPage);
-            int count=p.getCountFavoSearch(index, txtSearch);
+            int count=p.getAllFavouritesByByFreelancerID(freelancerID);
             int endPage=count/6;
             if(count%6!=0){
                 endPage++;
@@ -138,10 +135,9 @@ public class PostFavouritesControll extends HttpServlet {
             request.setAttribute("tag", index);
             FreelancerDAO f=new FreelancerDAO();
             Freelancer freelancer=f.getFreelancerById(userId);
-            List<PostBasic> post = p.searchAllFavPosts(freelancerID, txtSearch,index);
+            List<PostBasic> post = p.getFavPostsPage(freelancerID, index);
             request.setAttribute("post", post);
             List<JobApply> postAplly=p.getPostApply(freelancerID);
-            request.setAttribute("txtSearch", txtSearch);
             request.setAttribute("postApply", postAplly);
             request.setAttribute("freelancer", freelancer);
             request.getRequestDispatcher("views/freelancerFavourites.jsp").forward(request, response);

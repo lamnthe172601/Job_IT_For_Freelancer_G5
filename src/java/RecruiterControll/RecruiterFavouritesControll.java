@@ -81,7 +81,23 @@ public class RecruiterFavouritesControll extends HttpServlet {
             Freelancer free = f.getFreelancerByFreelancerId(k);
             listFavorites.add(free);
         }
-        request.setAttribute("list", listFavorites);
+        
+        int countFavorites = listFavorites.size();
+        int FavoritesInPgae = 9;
+        int totalFavoritesPage = (int) Math.ceil((double) countFavorites / FavoritesInPgae);
+        int indexFvr = 1;
+
+        String indexPage = request.getParameter("page");
+        if (indexPage != null && !indexPage.isEmpty()) {
+            indexFvr = Integer.parseInt(indexPage);
+        }
+        
+        request.setAttribute("countFavorites", countFavorites);
+        request.setAttribute("FavoritesInPgae", FavoritesInPgae);
+        request.setAttribute("totalFavoritesPage", totalFavoritesPage);
+        request.setAttribute("indexFvr", indexFvr);
+        request.setAttribute("listFavorites", listFavorites);
+        
         request.setAttribute("map", mapFavorites);
 
         request.getRequestDispatcher("views/recruiterFavorites.jsp").forward(request, response);

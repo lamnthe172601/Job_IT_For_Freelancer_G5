@@ -13,7 +13,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Kofejob - Bootstrap Admin HTML Template</title>
+        <title>Kofejob</title>
 
         <link rel="shortcut icon" href="adminAssets/img/favicon.png">
 
@@ -35,54 +35,7 @@
         <link rel="stylesheet" href="adminAssets/css/projectDetails.css">
         <style>
 
-            .filter-section {
-                display: none;
-                padding: 20px;
-                background-color: #f9f9f9;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                margin-bottom: 20px;
-            }
 
-            .filter-section .form-group {
-                margin-bottom: 20px;
-            }
-
-            .filter-section label {
-                font-weight: bold;
-            }
-
-            .filter-section .input-group {
-                width: 100%;
-            }
-
-            .filter-section .input-group input {
-                width: calc(50% - 25px);
-                border-radius: 0;
-            }
-
-            .filter-section .input-group .input-group-text {
-                border-radius: 0;
-            }
-
-            @media (max-width: 767px) {
-                .filter-section .input-group input {
-                    width: 100%;
-                    margin-top: 10px;
-                }
-            }
-
-
-            #statusFilter {
-                cursor: pointer;
-                appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                background-image: url('data:image/svg+xml;utf8,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z" fill="%23333333"/></svg>');
-                background-repeat: no-repeat;
-                background-position: right 12px center;
-                padding-right: 32px;
-            }
             /* General styles */
             .title{
                 max-width: 100px;
@@ -103,7 +56,25 @@
                 display: flex;
                 align-items: center;
             }
-
+            #reportListBody {
+                max-height: 400px;
+                overflow-y: auto;
+                padding: 15px;
+            }
+            .report-item {
+                background-color: #f8f9fa;
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .report-item p {
+                margin-bottom: 5px;
+            }
+            .report-item strong {
+                color: #495057;
+            }
         </style>
 
     </head>
@@ -128,6 +99,42 @@
                                 <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
                                     <i class="fas fa-filter"></i>
                                 </a>
+                            </div>
+                            <div id="filter-section" style="display: none">
+                                <div class="card mt-3">
+                                    <div class="card-body">
+                                        <form id="filterForm">
+                                            <div class="row">
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="companyFilter" class="form-label">Company Name</label>
+                                                    <input type="text" class="form-control" id="companyFilter">
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="startDateFilter" class="form-label">Start Date</label>
+                                                    <input type="date" class="form-control" id="startDateFilter">
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="endDateFilter" class="form-label">End Date</label>
+                                                    <input type="date" class="form-control" id="endDateFilter">
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="statusFilter" class="form-label">Status</label>
+                                                    <select class="form-select" id="statusFilter">
+                                                        <option value="">All</option>
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="Approved">Approved</option>
+                                                        <option value="Suspend">Suspend</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <button type="button" class="btn btn-secondary" id="resetFilter">Reset</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -175,7 +182,7 @@
                                                         </td>
                                                         <td class="test1">                                                          
                                                             <c:if test='${project.getListReport().size() >= 5}'>
-                                                                <a href="javascript:void(0);" style="color: black" class="status">Pendding</a>
+                                                                <a href="javascript:void(0);" style="color: black" class="status">Pending</a>
                                                             </c:if>
                                                             <c:if test='${project.getListReport().size() < 5}'>
                                                                 <c:if test='${project.getPostBasic().getChecking() == 1}'>
@@ -219,136 +226,93 @@
                                                             </div>
                                                         </td>
 
-                                                <div class="modal fade" id="reportListModal${project.getPostBasic().getPostID()}" tabindex="-1" aria-labelledby="reportListModalLabel" aria-hidden="true">
+                                                <div class="modal fade custom-modal" id="reportListModal${project.getPostBasic().getPostID()}" tabindex="-1" aria-labelledby="reportListModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="reportListModalLabel">Report List</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
+                                                                <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div id="reportListBody">
-                                                                    <div class="report-item">
-                                                                        <p><strong>Name:</strong> Nhat Tan</p>
-                                                                        <p><strong>Date Report:</strong> 2024/03/12</p>
-                                                                        <p><strong>Message report:</strong> This project seems to be a scam. The client is asking for free work.</p>
-                                                                    </div>
-                                                                    <div class="report-item">
-                                                                        <p><strong>Name:</strong> Minh Tuan</p>
-                                                                        <p><strong>Date Report:</strong> 2024/03/15</p>
-                                                                        <p><strong>Message report:</strong> The project description contains offensive language and inappropriate content.</p>
-                                                                    </div>
-                                                                    <div class="report-item">
-                                                                        <p><strong>Name:</strong> Thanh Huong</p>
-                                                                        <p><strong>Date Report:</strong> 2024/03/18</p>
-                                                                        <p><strong>Message report:</strong> This job posting violates copyright. The client is asking to copy an existing website.</p>
-                                                                    </div>
-                                                                    <div class="report-item">
-                                                                        <p><strong>Name:</strong> Duc Anh</p>
-                                                                        <p><strong>Date Report:</strong> 2024/03/20</p>
-                                                                        <p><strong>Message report:</strong> The budget for this project is unreasonably low for the amount of work required.</p>
-                                                                    </div>
-                                                                    <div class="report-item">
-                                                                        <p><strong>Name:</strong> Lan Anh</p>
-                                                                        <p><strong>Date Report:</strong> 2024/03/22</p>
-                                                                        <p><strong>Message report:</strong> This appears to be a duplicate posting. The same project was posted last week.</p>
-                                                                    </div>
+                                                                    <c:if test="${project.getListReport().size()==0}">
+                                                                        <div class="report-item">
+                                                                            <p></p>
+                                                                            <p style="text-align: center"><strong>No report!</strong> </p>
+                                                                            <p></p>
+                                                                        </div>
+                                                                    </c:if>
+                                                                    <c:if test="${project.getListReport().size()!=0}">
+                                                                        <c:forEach items="${project.getListReport()}" var="report">
+                                                                            <div class="report-item">
+                                                                                <p><strong>Name:</strong> ${report.getFreelancerInformation().getBasicInformation().fullname()}</p>
+                                                                                <p><strong>Date Report:</strong> ${report.getReport().getDateReport()}</p>
+                                                                                <p><strong>Message report:</strong> ${report.getReport().getMesseage()}</p>
+                                                                            </div>  
+                                                                        </c:forEach>
+                                                                    </c:if>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="modal fade custom-modal " id="view-details${project.getPostBasic().getPostID()}">
-                                                    <div class="modal-dialog modal-dialog-centered modal-lg-4">
+                                                <div class="modal fade custom-modal" id="view-details${project.getPostBasic().getPostID()}" tabindex="-1" aria-labelledby="projectDetailsModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
                                                         <div class="modal-content">
-                                                            <div class="modal-header flex-wrap">
-                                                                <h4 class="modal-title">Project Details</h4>
+                                                            <div class="modal-header">
+                                                                <h5 class=" modal-title" id="projectDetailsModalLabel">Project Details</h5>
                                                                 <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                                                             </div>
-                                                            <div class="modal-body">                                                                
-                                                                <div class="freelance-content">
-                                                                    <div class="freelance-top-content d-flex">
-                                                                    </div>
-                                                                    <div class="author-heading">
-                                                                        <div class="text-center2" > 
-                                                                            <a>
-                                                                                <img  style="width: 100%; height: 100%;" src="${project.getPostBasic().image}" alt="author">                                                       
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="profile-name">
-                                                                            <div class="author-location" style="text-align: center">${p.title}</div>
-                                                                        </div>
-                                                                        <div class="freelance-info">
-                                                                            <div>
-                                                                                <div class="class1" style="display: inline-block;">Company:</div>
-                                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                    ${project.getPostBasic().recruiterID.companyname}
-                                                                                </div>
-                                                                            </div>
-                                                                            <div>
-                                                                                <div class="class1" style="display: inline-block;">Position:</div>
-                                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                    ${project.getPostBasic().caID.categoriesName}
-                                                                                </div>
-                                                                            </div>
-                                                                            <div>
-                                                                                <div class="class1" style="display: inline-block;">Date:</div>
-                                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                    ${project.getPostBasic().datePost}
-                                                                                </div>
-                                                                            </div>
-                                                                            <div>
-                                                                                <div class="class1" style="display: inline-block;">Location:</div>
-                                                                                <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                    ${project.getPostBasic().location}
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div  class="freelance-tags skill-list" style="margin: 0;padding: 0; margin-top: 10px;margin-right: 20px">Skill: 
-                                                                            <c:forEach items="${fn:split(project.getPostBasic().skill, ',')}" var="skill">
-                                                                                <span  class="skill-item skill-item badge badge-primary">${skill}</span>
-                                                                            </c:forEach>
-
-
+                                                            <div class="modal-body">
+                                                                <div class="container-fluid" >
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <img src="${project.getPostBasic().image}" style="width: 100%; height: 100%;"  alt="Project Image" class="project-image">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="freelance-info">
-                                                                        <div>
-                                                                            <div class="class1" style="display: inline-block;">Duration:</div>
-                                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                ${project.getPostBasic().durationID.durationName}
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <h5 class="project-title text-center">${p.title}</h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <p class="info-item"><strong>Company:</strong> ${project.getPostBasic().recruiterID.companyname}</p>
+                                                                            <p class="info-item"><strong>Position:</strong> ${project.getPostBasic().caID.categoriesName}</p>
+                                                                            <p class="info-item"><strong>Date:</strong> ${project.getPostBasic().datePost}</p>
+                                                                            <p class="info-item"><strong>Location:</strong> ${project.getPostBasic().location}</p>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <p class="info-item"><strong>Duration:</strong> ${project.getPostBasic().durationID.durationName}</p>
+                                                                            <p class="info-item"><strong>Quantity:</strong> ${project.getPostBasic().quantity}</p>
+                                                                            <p class="info-item"><strong>Job Type:</strong> ${project.getPostBasic().jobTypeID.jobName}</p>
+                                                                            <p class="info-item"><strong>Email:</strong> ${project.getPostBasic().recruiterID.email}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <p class="info-item"><strong>Skills:</strong></p>
+                                                                            <div class="d-flex flex-wrap">
+                                                                                <c:forEach items="${fn:split(project.getPostBasic().skill, ',')}" var="skill">
+                                                                                    <span class="badge bg-primary skill-item">${skill}</span>
+                                                                                </c:forEach>
                                                                             </div>
                                                                         </div>
-                                                                        <div>
-                                                                            <div class="class1" style="display: inline-block;">Quantity:</div>
-                                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                ${project.getPostBasic().quantity}
-                                                                            </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-12 description">
+                                                                            <p><strong>Description:</strong></p>
+                                                                            <p>${project.getPostBasic().description}</p>
                                                                         </div>
-                                                                        <div>
-                                                                            <div class="class1" style="display: inline-block;">Jop Type:</div>
-                                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                ${project.getPostBasic().jobTypeID.jobName}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div>
-                                                                            <div class="class1" style="display: inline-block;">Email:</div>
-                                                                            <div class="class2" style="display: inline-block; margin-left: 5px;">
-                                                                                ${project.getPostBasic().recruiterID.email}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div>
-                                                                            <div class="class1">Description: </div>
-                                                                            ${project.getPostBasic().description}
-                                                                        </div>                                                                      
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -439,11 +403,69 @@
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>        
         <script>
             $(document).ready(function () {
+                var table = $('.datatable').DataTable();
+
+                // Toggle filter section visibility
                 $('#filter_search').click(function () {
-                    $('.filter-section').toggle();
+                    $('#filter-section').toggle();
                 });
+
+                // Apply filter on input change
+                $('#companyFilter, #startDateFilter, #endDateFilter, #statusFilter').on('input change', function () {
+                    applyFilter();
+                });
+
+                // Reset filter
+                $('#resetFilter').click(function () {
+                    $('#filterForm')[0].reset();
+                    resetFilter();
+                });
+
+                function applyFilter() {
+                    var companyFilter = $('#companyFilter').val().toLowerCase();
+                    var startDate = $('#startDateFilter').val();
+                    var endDate = $('#endDateFilter').val();
+                    var statusFilter = $('#statusFilter').val().toLowerCase();
+
+                    // Clear any existing search function
+                    $.fn.dataTable.ext.search.pop();
+
+                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                        var company = data[3].toLowerCase(); // Assuming company name is in the 4th column
+                        var date = new Date(data[4]); // Assuming date is in the 5th column
+                        var status = data[5].toLowerCase(); // Assuming status is in the 6th column
+
+                        if (
+                                (companyFilter === '' || company.includes(companyFilter)) &&
+                                (startDate === '' || date >= new Date(startDate)) &&
+                                (endDate === '' || date <= new Date(endDate)) &&
+                                (statusFilter === '' || status.includes(statusFilter))
+                                ) {
+                            return true;
+                        }
+                        return false;
+                    });
+
+                    table.draw();
+                }
+
+                function resetFilter() {
+                    // Remove custom search function
+                    $.fn.dataTable.ext.search.pop();
+
+                    // Clear all column searches
+                    table.columns().search('');
+
+                    // Clear global search
+                    table.search('');
+
+                    // Redraw the table
+                    table.draw();
+                }
             });
         </script>
         <script>
@@ -529,29 +551,24 @@
             }
         </script>
 
-
-
-
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
-        <script src="adminAssets/js/jquery-3.7.1.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/jquery-3.7.1.min.js" ></script>
 
-        <script src="adminAssets/js/bootstrap.bundle.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/bootstrap.bundle.min.js" ></script>
 
-        <script src="adminAssets/js/feather.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/feather.min.js" ></script>
 
-        <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" ></script>
 
-        <script src="adminAssets/plugins/select2/js/select2.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/select2/js/select2.min.js" ></script>
 
-        <script src="adminAssets/plugins/moment/moment.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
-        <script src="adminAssets/js/bootstrap-datetimepicker.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/moment/moment.min.js" ></script>
+        <script src="adminAssets/js/bootstrap-datetimepicker.min.js" ></script>
 
-        <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
-        <script src="adminAssets/plugins/datatables/datatables.min.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" ></script>
+        <script src="adminAssets/plugins/datatables/datatables.min.js" ></script>
 
-        <script src="adminAssets/js/script.js" type="89331437dcc86709a93430b9-text/javascript"></script>
+        <script src="adminAssets/js/script.js" ></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="89331437dcc86709a93430b9-|49" defer></script></body>
-
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/providers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:24 GMT -->
 </html>

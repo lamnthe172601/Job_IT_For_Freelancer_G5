@@ -5,32 +5,28 @@
 
 package FreelancerControll;
 
+import Models.Categories;
 import Models.Freelancer;
 import Models.User;
 import MutiModels.JobApply;
-import MutiModels.PostBasic;
+import dal.CategoriesDAO;
 import dal.DAO;
 import dal.FreelancerDAO;
 import dal.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
 /**
  *
  * @author tanng
  */
-@MultipartConfig
-public class ApplyJobFormListPostControll extends HttpServlet {
+public class SearchInListApplyControll extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -47,10 +43,10 @@ public class ApplyJobFormListPostControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ApplyJobFormListPostControll</title>");  
+            out.println("<title>Servlet SearchInListApplyControll</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ApplyJobFormListPostControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SearchInListApplyControll at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,7 +63,62 @@ public class ApplyJobFormListPostControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+                try {
+            HttpSession session = request.getSession();
+            Object u = session.getAttribute("account");
+            User user = (User) u;
+            FreelancerDAO f=new FreelancerDAO();
+            PostDAO p=new PostDAO();
+            int id = user.getUserID();
+            DAO d = new DAO();
+            Freelancer freelancer=f.getFreelancerById(id);
+            int freelancerID = d.getFreelancerIDbyUserID(id);
+            
+            String txtSearch = request.getParameter("searchName");
+            if (txtSearch == null) {
+                txtSearch = (String) session.getAttribute("Search2");
+            } else {
+                String txt = (String) session.getAttribute("Search2");
+                if (txt != null) {
+                    session.removeAttribute("Search2");
+                    session.setAttribute("Search2", txtSearch);
+                } else {
+                    session.setAttribute("Search2", txtSearch);
+                }
+
+            }
+            
+            if(txtSearch == null){
+                request.getRequestDispatcher("ListApply").forward(request, response);
+            }
+            
+            String indexPage= request.getParameter("index");
+            if(indexPage==null){
+                indexPage="1";
+            }
+            int index=Integer.parseInt(indexPage);
+            int count=p.getCountApplySearch(freelancerID, txtSearch);
+            int endPage=count/8;
+            if(count%8!=0){
+                endPage++;
+            }
+            
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("tag", index);
+            
+            CategoriesDAO caDAO = new CategoriesDAO();
+            
+            List<Categories> cate = caDAO.getAllCategory();
+            request.setAttribute("cate", cate);
+            
+            List<JobApply> post=p.SearchPostApply(freelancerID,txtSearch ,index);
+            request.setAttribute("freelancer", freelancer);
+            request.setAttribute("txtSearch", txtSearch);
+            request.setAttribute("post", post);
+            request.getRequestDispatcher("views/listApplySearch.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("login").forward(request, response);
+        }
     } 
 
     /** 
@@ -80,34 +131,7 @@ public class ApplyJobFormListPostControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try {
-            
-            String postID = request.getParameter("postID");
-            Part part = request.getPart("file");
-            String realPath = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\Rerume";
-            String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
-            if (!Files.exists(Path.of(realPath))) {
-                Files.createDirectory(Path.of(realPath));
-            }
-            String fullPath = realPath + "/" + filename;
-            String linkDB = "FolderImages/Rerume/" + filename;
-            part.write(fullPath);
-            
-            HttpSession session = request.getSession();
-            Object u = session.getAttribute("account");
-            User user = (User) u;
-            PostDAO p = new PostDAO();
-            DAO d = new DAO();
-            int userId = user.getUserID();
-            int freelancerID = d.getFreelancerIDbyUserID(userId);
-            p.applyJob(freelancerID, postID, linkDB);
-            
-            String link="AllListPost";
-            request.getRequestDispatcher(link).forward(request, response); 
-
-        } catch (Exception e) {
-            request.getRequestDispatcher("login").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /** 
