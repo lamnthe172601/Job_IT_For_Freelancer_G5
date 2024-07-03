@@ -671,7 +671,7 @@
                             <c:forEach items="${listCC}" var="categori">
                                 <div class="col-xl-3 col-md-6">
                                     <div class="aos" data-aos="fade-up">
-                                        <a href="project.html" class="update-project-blk move-box ">
+                                        <a href="postbycategory?categoryID=${categori.caID}" class="update-project-blk move-box ">
                                             <div class="update-content">
                                                 <h6>${categori.categoriesName}</h6>
                                                 <p>${categoriesPostCount[categori.categoriesName]}  Projects Available</p>
@@ -688,7 +688,7 @@
 
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="project.html" class="btn btn-primary">View More Projects</a>
+                                    <a href="/Job_IT_For_Freelancer_G5/AllListPost" class="btn btn-primary">View More Projects</a>
                                 </div>
                             </div>
                         </div>
@@ -712,7 +712,7 @@
                                 <div class="col-xl-3 col-md-4">
                                     <div class="job-locate-blk aos" data-aos="fade-up">
                                         <div class="location-img">
-                                            <a href="project.html"><img class="img-fluid" src="${location[1]}" alt="Img"></a>
+                                            <a href="postbylocation?location=${location[0]}"><img class="img-fluid" src="${location[1]}" alt="Img"></a>
                                         </div>
                                         <div class="job-it-content">
                                             <h6>${location[0]}</h6>

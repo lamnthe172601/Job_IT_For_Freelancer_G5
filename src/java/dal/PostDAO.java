@@ -737,6 +737,107 @@ public class PostDAO extends DBContext {
     }
         
   
+    public List<Post> getPostsByCategory(int categoryID) {
+        List<Post> posts = new ArrayList<>();
+        String query = """
+                    SELECT * 
+                    FROM Post p
+                    JOIN JobType j ON p.job_type_ID = j.jobID
+                    JOIN Duration du ON p.durationID = du.durationID
+                    JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                    JOIN Categories ca ON p.caID = ca.caID
+                    JOIN Company co ON re.recruiterID = co.recruiterID
+                    WHERE p.caID = ?""";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, categoryID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
+                JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+                
+                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
+
+    public List<Post> getPostsByLocation(String location) {
+        List<Post> posts = new ArrayList<>();
+        String query = """
+                    SELECT p.*, j.*, du.*, re.*, ca.*, co.*
+                    FROM Post p
+                    JOIN JobType j ON p.job_type_ID = j.jobID
+                    JOIN Duration du ON p.durationID = du.durationID
+                    JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                    JOIN Categories ca ON p.caID = ca.caID
+                    JOIN Company co ON re.recruiterID = co.recruiterID
+                    WHERE p.location = ?""";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, location);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Categories ca = new Categories(
+                            rs.getInt("caID"),
+                            rs.getString("categories_name"),
+                            rs.getString("categories_img"),
+                            rs.getString("description"),
+                            rs.getInt("statusCate")
+                    );
+                    Duration du = new Duration(
+                            rs.getInt("durationID"),
+                            rs.getString("duration_name")
+                    );
+                    Recruiter re = new Recruiter(
+                            rs.getInt("recruiterID"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getBoolean("gender"),
+                            rs.getDate("dob"),
+                            rs.getString("image"),
+                            rs.getString("email_contact"),
+                            rs.getString("phone_contact"),
+                            rs.getInt("UserID")
+                    );
+                    JobType job = new JobType(
+                            rs.getInt("jobID"),
+                            rs.getString("job_name")
+                    );
+
+                    Post post = new Post(
+                            rs.getInt("postID"),
+                            rs.getString("title"),
+                            rs.getString("image"),
+                            job,
+                            du,
+                            rs.getDate("date_post"),
+                            rs.getDate("expired"),
+                            rs.getInt("quantity"),
+                            rs.getString("description"),
+                            rs.getInt("budget"),
+                            rs.getString("location"),
+                            rs.getString("skill"),
+                            re,
+                            ca,
+                            rs.getInt("status"),
+                            rs.getInt("checking")
+                    );
+
+                    posts.add(post);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Consider logging the error or throwing a custom exception
+        }
+
+        return posts;
+    }
     
     public int TotalApplyByPost(int ID) {
         

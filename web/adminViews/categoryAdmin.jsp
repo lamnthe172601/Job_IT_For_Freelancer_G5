@@ -76,7 +76,17 @@
 
 
             <div class="page-wrapper">
-               
+                <div class="content container-fluid">
+                    <div class="page-header">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <a href="javascript:void(0);" style="color: red; border: 1px solid black; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px;" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-category">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body pb-0">
                     <form action="categoryAdmin" method="post">
                         <div class="row filter-row">
@@ -89,7 +99,7 @@
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="statusCate">StatusCategory</label>
+                                    <label for="statusCate">Status Category</label>
                                     <select class="form-control" id="statusCate" name="statusCate">
                                         <option value="">All</option>
                                         <option value="1">Active</option>
@@ -127,7 +137,8 @@
                                                 <tr>
                                                     <td>${c.getCaID()}</td>
                                                     <td>${c.getCategoriesName()}</td>
-                                                    <td>${c.getDescription()}</td>
+                                                    <td>....</td>
+                                                    
                                                     <td>
                                                         <c:choose>
                                                             <c:when test="${c.getStatusCate() == 1}">
@@ -139,14 +150,56 @@
                                                         </c:choose>
                                                     </td>
                                                     <td class="text-end">
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category-${c.getCaID()}">
+                                                          <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category-${c.getCaID()}">
                                                             <i class="far fa-edit"></i>
                                                         </a>
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category_${c.getCaID()}">
-                                                            <i class="far fa-trash-alt"></i>
+                                                      
+                                                        <c:if test="${c.getStatusCate() == 0}">
+                                                            <form action="categoryAdmin" method="post" style="display: inline;">
+                                                                <input name="mod" value="active" type="hidden">
+                                                                <input name="cat" value="${c.getCaID()}" type="hidden">
+                                                                <input type="hidden" name="mod" value="activateCategory">
+                                                                <input type="hidden" name="categoryId" value="${c.getCaID()}">
+                                                                <button type="submit" class="btn btn-sm btn-success activate-blog-btn btn-status" data-category-id="${c.getCaID()}">
+
+                                                                    <i class="fas fa-check"></i> 
+                                                                </button>
+                                                            </form>
+                                                        </c:if>
+                                                        <button type="button" class="btn btn-sm btn-danger delete-blog-btn btn-status" data-category-id="${c.getCaID()}" data-bs-toggle="modal" data-bs-target="#delete_category_${c.getCaID()}">
+                                                            <i class="far fa-trash-alt"></i> 
+                                                        </button>
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-info me-2 view-details-btn" data-bs-toggle="modal" data-bs-target="#view-category-details-modal${c.getCaID()}">
+                                                            <i class="fas fa-eye"></i> 
                                                         </a>
                                                     </td>
+                                                    
                                                 </tr>
+                                                  <!-- Modal for Viewing Category Details -->
+                                            <div class="modal fade" id="view-category-details-modal${c.getCaID()}" tabindex="-1" aria-labelledby="viewCategoryDetailsModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="viewCategoryDetailsModalLabel">Category Details</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <img id="category-details-image" src="${c.getImage()}" alt="Category Image" class="img-fluid">
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <p id="category-details-title">Category Name : ${c.getCategoriesName()}</p>
+                                                                    <p id="category-details-description">Description : ${c.getDescription()}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="modal custom-modal fade" id="delete_category_${c.getCaID()}" role="dialog">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
@@ -264,6 +317,27 @@
                     filterInputs.style.display = 'none';
                 }
             });
+            
+            <script>
+            // Hàm cắt bỏ văn bản dài hơn giới hạn
+            function truncateText(text, maxLength) {
+                if (text.length <= maxLength) {
+                    return text;
+                } else {
+                    return text.substring(0, maxLength) + "...";
+                }
+            }
+
+
+            var titles = document.querySelectorAll(".table-avatar.title a");
+            var descriptions = document.querySelectorAll(".descripition");
+            titles.forEach(function (title) {
+                title.textContent = truncateText(title.textContent, 20); // Giới hạn 20 ký tự cho tiêu đề
+            });
+            descriptions.forEach(function (description) {
+                description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
+            });
+        </script>
         </script>
         <script src="assets/js/jquery-3.7.1.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
