@@ -1,9 +1,3 @@
-<%-- 
-    Document   : blogGrid
-    Created on : May 23, 2024, 11:09:21 PM
-    Author     : Admin
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
