@@ -190,7 +190,7 @@
                                                 <div class="logo-company">
                                                     <a href="project.html">
                                                         <img src="assets/img/icon/logo-icon-01.svg" class="me-1" alt="icon">
-                                                        <span>AMAZE TECH</span>
+                                                        <span>${list.recruiterID.fullName()}</span>
                                                     </a>
                                                 </div>
                                                 <a href="PostDetails?postID=${list.postID}" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
@@ -255,7 +255,7 @@
                                     <div class="project-item feature-project-item aos" data-aos="fade-up">
                                         <div class="project-img position-relative">
                                             <!-- Hình ảnh -->
-                                            <a href="project.html"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
+                                            <a href="PostDetails?postID=${list.postID}"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
                                             <!-- Biểu tượng trái tym -->
                                             <div class="favorite-icon" onclick="toggleHeart(this)" >
                                                 <c:set var="favo" value="false" />
@@ -282,16 +282,16 @@
                                                 <a href="javascript:void(0);" class="btn btn-primary green-active">${list.durationID.durationName}</a>
                                                 <span><i class="far fa-clock me-1"></i> ${list.datePost}</span>
                                             </div>
-                                            <h4><a href="project.html">${list.getTitle()}</a></h4>
+                                            <h4><a href="PostDetails?postID=${list.postID}">${list.getTitle()}</a></h4>
                                             <ul class="feature-project-list nav">
                                                 <li><i class="feather-user me-1"></i>${list.caID.categoriesName}</li>
                                                 <li><i class="feather-map-pin me-1"></i>${list.location}</li>
                                             </ul>
                                             <div class="feature-foot">
                                                 <div class="logo-company">
-                                                    <a href="project.html">
+                                                    <a href="PostDetails?postID=${list.postID}">
                                                         <img src="assets/img/icon/logo-icon-01.svg" class="me-1" alt="icon">
-                                                        <span>AMAZE TECH</span>
+                                                        <span>${list.recruiterID.fullName()}</span>
                                                     </a>
                                                 </div>
                                                 <a href="PostDetails?postID=${list.postID}" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
@@ -303,7 +303,7 @@
 
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="project.html" class="btn btn-primary">View More Projects</a>
+                                    <a href="" class="btn btn-primary">View More Projects</a>
                                 </div>
                             </div>
                         </div> 
@@ -331,10 +331,10 @@
                                     <div class="feature-develop-blk aos" data-aos="fade-up">
                                         <div class="developer-sub-blk">
                                             <div class="img-developer">
-                                                <a href="developer-details.html"><img src="assets/img/user/avatar-21.jpg" class="me-2" alt="Img"></a>
+                                                <a href=""><img src="${freelancerSkill.freelancer.getImage()}" class="me-2" alt="Img"></a>
                                             </div>
                                             <div class="developer-content">
-                                                <h4><a href="developer-details.html">${freelancerSkill.freelancer.fullname()}</a></h4>
+                                                <h4><a href="ViewFreelancerProfile?id=${freelancerSkill.freelancer.getFreelanceID()}">${freelancerSkill.freelancer.fullname()}</a></h4>
                                                 <p>${freelancerSkill.skills.skill_set_ID.skill_set_name}</p>
                                                 <div class="rating">
                                                     <i class="fas fa-star filled"></i>
@@ -348,7 +348,26 @@
                                         </div>
                                         <div class="hour-rate">
                                             <ul class="nav">
-                                                <li><i class="feather-dollar-sign me-1"></i>$34 Hourly</li>
+                                                <li><i class="  me-1"></i><span id="describe-text">${freelancerSkill.freelancer.describe}</span></li>
+
+                                                <script>
+                                                    // Function to truncate text to the first 5 words followed by '...'
+                                                    function truncateText(selector, maxWords) {
+                                                        const element = document.querySelector(selector);
+                                                        if (element) {
+                                                            let text = element.textContent;
+                                                            let words = text.split(' ');
+                                                            if (words.length > maxWords) {
+                                                                text = words.slice(0, maxWords).join(' ') + '...';
+                                                            }
+                                                            element.textContent = text;
+                                                        }
+                                                    }
+
+                                                    // Usage
+                                                    truncateText('#describe-text', 5); // Truncate to 5 words
+                                                </script>
+
                                                 <li>
                                                     <div class="favorite-icon" onclick="toggleHeart(this)" >
                                                         <i class="far fa-heart"></i>
@@ -402,7 +421,7 @@
                                     <div class="project-item feature-project-item aos" data-aos="fade-up">
                                         <div class="project-img position-relative">
                                             <!-- Hình ảnh -->
-                                            <a href="project.html"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
+                                            <a href="PostDetails?postID=${list.postID}"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
                                             <!-- Biểu tượng trái tym -->
                                             <div class="favorite-icon" onclick="toggleHeart(this)" >
                                                 <i class="far fa-heart"></i>
@@ -414,19 +433,19 @@
                                                 <a href="javascript:void(0);" class="btn btn-primary green-active">${list.durationID.durationName}</a>
                                                 <span><i class="far fa-clock me-1"></i> ${list.datePost}</span>
                                             </div>
-                                            <h4><a href="project.html">${list.getTitle()}</a></h4>
+                                            <h4><a href="PostDetails?postID=${list.postID}">${list.getTitle()}</a></h4>
                                             <ul class="feature-project-list nav">
                                                 <li><i class="feather-user me-1"></i>${list.caID.categoriesName}</li>
                                                 <li><i class="feather-map-pin me-1"></i>${list.location}</li>
                                             </ul>
                                             <div class="feature-foot">
                                                 <div class="logo-company">
-                                                    <a href="project.html">
+                                                    <a href="PostDetails?postID=${list.postID}">
                                                         <img src="assets/img/icon/logo-icon-01.svg" class="me-1" alt="icon">
-                                                        <span>AMAZE TECH</span>
+                                                        <span>${list.recruiterID.fullName()}</span>
                                                     </a>
                                                 </div>
-                                                <a href="PostDetails?postID=${list.postID}" class="bid-now">Bid Now <i class="feather-arrow-right ms-1"></i></a>
+                                                <a href="PostDetails?postID=${list.postID}" class="bid-now">View<i class="feather-arrow-right ms-1"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -435,7 +454,7 @@
 
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="project.html" class="btn btn-primary">View More Projects</a>
+                                    <a href="PostDetails?postID=${list.postID}" class="btn btn-primary">View More Projects</a>
                                 </div>
                             </div>
                         </div> 

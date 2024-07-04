@@ -32,16 +32,15 @@
             <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
             <ul class="submenu">
 
-                <li><a href="jobsList">Top Freelancer</a></li>
-                <li><a href="newsJobs">Skills</a></li>
-
+                <li><a href="ListFreelancer">List Freelancer</a></li>
+                
             </ul>
         </li>
         <li class="has-submenu">
             <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
             <ul class="submenu">
-                <li><a href="CreatePost">Create a new Post</a></li>
-                <li><a href="myListJobProject">My List Post</a></li>
+                <li><a href="CreatePost">Create a new Project</a></li>
+                <li><a href="myListJobProject">My list project</a></li>
                 <li><a href="newsJobs">Reviews</a></li>
 
             </ul>
@@ -76,9 +75,8 @@
 
                 <li><a href="Dashboard">Dashboard</a></li>
                 <li><a href="companydetail">My Profile</a></li>
-                <li><a href="company-details">Company Details</a></li>
-                <li><a href="manage-projects">Projects</a></li>
-                <li><a href="favourites">Favourites</a></li>                                                                                       
+                <li><a href="manageJobsPosts">Projects</a></li>
+                <li><a href="RecruiterFavourites">Favourites</a></li>                                                                                       
                 <li><a href="recruitersetting">Settings</a></li>
                 <li><a href="logout">Logout</a></li>
             </ul>

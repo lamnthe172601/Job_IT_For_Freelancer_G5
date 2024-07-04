@@ -901,9 +901,5 @@ public class PostDAO extends DBContext {
     }
     
 
-    public static void main(String[] args) {
-        PostDAO dao = new PostDAO();
-        dao.updateStatusApply(1, "2");
-    }
     
 }
