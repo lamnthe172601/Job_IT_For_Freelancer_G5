@@ -500,6 +500,7 @@ public class PostDAO extends DBContext {
         return 0;
     }
     
+    
     public int getCountFavoSearch(int id, String txtSearch) {
         
         String sql = """
@@ -873,4 +874,79 @@ public class PostDAO extends DBContext {
         dao.updateStatusApply(1, "2");
     }
     
+    
+    public List<Post> getPostsByFreelancerSkill(int freelancerID) {
+        List<Post> list = new ArrayList<>();
+        String query = """
+                       
+                       
+                                              WITH FreelancerSkills AS (
+                                                  SELECT ss.skill_set_name
+                                                  FROM [freelancer].[dbo].[Skills] us
+                                                  JOIN [freelancer].[dbo].[Skill_Set] ss ON us.skill_set_ID = ss.skill_set_ID
+                                                  WHERE us.freelancerID =?
+                                              ),
+                                              
+                                              MatchingPosts AS (
+                                                  SELECT 
+                                                      p.postID, 
+                                                      p.title, 
+                                                      p.image AS post_postImg, 
+                                                      p.job_type_ID, 
+                                                      p.durationID AS post_durationID, 
+                                                      p.date_post,
+                                                      p.expired,
+                                                      p.quantity, 
+                                                      p.description AS post_description, 
+                                                      p.budget, 
+                                                      p.location, 
+                                                      p.skill, 
+                                                      p.recruiterID AS post_recruiterID, 
+                                                      p.status, 
+                                                      p.caID, 
+                                                      p.checking,
+                                                      j.jobID, 
+                                                      j.job_name, 
+                                                      du.durationID AS du_durationID, 
+                                                      du.duration_name, 
+                                                      re.recruiterID AS re_recruiterID, 
+                                                      re.first_name,
+                                              		re.last_name, re.dob, re.email_contact, re.gender,re.image, re.phone_contact, re.UserID,
+                                                      ca.caID AS ca_caID, 
+                                                      ca.categories_name, 
+                                              		ca.categories_img,
+                                              		ca.description,
+                                              		ca.statusCate,
+                                                      co.companyID, 
+                                                      co.company_name
+                                                  FROM [freelancer].[dbo].[Post] p
+                                                  JOIN [freelancer].[dbo].[JobType] j ON p.job_type_ID = j.jobID
+                                                  JOIN [freelancer].[dbo].[Duration] du ON p.durationID = du.durationID
+                                                  JOIN [freelancer].[dbo].[Recruiter] re ON p.recruiterID = re.recruiterID
+                                                  JOIN [freelancer].[dbo].[Categories] ca ON p.caID = ca.caID
+                                                  JOIN [freelancer].[dbo].[Company] co ON re.recruiterID = co.recruiterID
+                                                  CROSS APPLY STRING_SPLIT(p.skill, ',') ps
+                                                  WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills)
+                                              )
+                                              
+                                              SELECT *
+                                              FROM MatchingPosts;""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, freelancerID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
+                Duration du = new Duration(rs.getInt("du_durationID"), rs.getString("duration_name"));
+                Recruiter re = new Recruiter(rs.getInt("re_recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
+                JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

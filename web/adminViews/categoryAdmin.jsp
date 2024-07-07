@@ -80,7 +80,7 @@
                     <div class="page-header">
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <a href="javascript:void(0);" style="color: red; border: 1px solid black; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px;" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-category">
+                                <a href="javascript:void(0);" style="color: red; border: 1px solid black; display: flex; margin-left: 1460px; align-items: center; justify-content: center; width: 50px; height: 50px;" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-category">
                                     <i class="fas fa-plus"></i>
                                 </a>
                             </div>
@@ -138,7 +138,7 @@
                                                     <td>${c.getCaID()}</td>
                                                     <td>${c.getCategoriesName()}</td>
                                                     <td>....</td>
-                                                    
+
                                                     <td>
                                                         <c:choose>
                                                             <c:when test="${c.getStatusCate() == 1}">
@@ -150,10 +150,10 @@
                                                         </c:choose>
                                                     </td>
                                                     <td class="text-end">
-                                                          <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category-${c.getCaID()}">
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category-${c.getCaID()}">
                                                             <i class="far fa-edit"></i>
                                                         </a>
-                                                      
+
                                                         <c:if test="${c.getStatusCate() == 0}">
                                                             <form action="categoryAdmin" method="post" style="display: inline;">
                                                                 <input name="mod" value="active" type="hidden">
@@ -173,9 +173,11 @@
                                                             <i class="fas fa-eye"></i> 
                                                         </a>
                                                     </td>
-                                                    
+
                                                 </tr>
-                                                  <!-- Modal for Viewing Category Details -->
+
+
+                                                <!-- Viewing Category Details -->
                                             <div class="modal fade" id="view-category-details-modal${c.getCaID()}" tabindex="-1" aria-labelledby="viewCategoryDetailsModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
@@ -200,6 +202,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <!-- DELETE -->
                                             <div class="modal custom-modal fade" id="delete_category_${c.getCaID()}" role="dialog">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
@@ -226,6 +230,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- eDIT -->
                                             <div class="modal fade custom-modal" id="edit-category-${c.getCaID()}">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
@@ -239,13 +244,13 @@
                                                                 <div class="form-group">
                                                                     <label for="edit-categoryname">Category Name</label>
                                                                     <input name="categoryIdStr" value="${c.getCaID()}" hidden>
-                                                                    <input oninput="checkCategories(caID)" type="text" class="form-control" id="edit-categoryname" name="categoryName" value="${c.getCategoriesName()}" required>
+                                                                    <input oninput="checkDuplicateCategoryName(caID)" type="text" class="form-control" id="edit-categoryname" name="categoryName" value="${c.getCategoriesName()}" >
                                                                     <div style="color: red" id="eCategoryname"></div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="edit-description">Description</label>
                                                                     <input name="categoryIdStr" value="${c.getCaID()}" hidden>
-                                                                    <input oninput="checkCategories(caID)" type="text" class="form-control" id="edit-description" name="description" value="${c.getDescription()}" required>
+                                                                    <input oninput="checkDuplicateCategoryName(caID)" type="text" class="form-control" id="edit-description" name="description" value="${c.getDescription()}">
                                                                 </div>
                                                                 <div class="mt-4">
                                                                     <button id="edit-category-btn" class="btn btn-primary btn-block">Submit</button>
@@ -265,6 +270,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Modal Add Category -->
         <div class="modal fade custom-modal" id="add-category">
             <div class="modal-dialog modal-dialog-centered">
@@ -278,12 +284,12 @@
                             <input name="mod" value="add" hidden>
                             <div class="form-group">
                                 <label for="categoryName">Category Name</label>
-                                <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Category Name" required>
+                                <input oninput="checkCategory()" type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Category Name" required>
                                 <div style="color: red" class="error-message" id="eCategoryname"></div>
                             </div>
                             <div class="form-group">
                                 <label for="categoryDescription">Description</label>
-                                <input type="text" class="form-control" id="categorydescription" name="description" placeholder="Enter Category Description" required>
+                                <input oninput="checkCategory()" type="text" class="form-control" id="categorydescription" name="description" placeholder="Enter Category Description" required>
                                 <div style="color: red" class="error-message" id="eCategorydescription"></div>
                             </div>
                             <div class="mt-4">
@@ -301,43 +307,42 @@
             $(document).ready(function () {
             <% String message = (String) session.getAttribute("message"); %>
             <% if (message != null) { %>
-                toastr.success('<%= message %>', 'Notification', {
-                    timeOut: 3000,
+            toastr.success('<%= message %>', 'Notification', {
+            timeOut: 3000,
                     positionClass: 'toast-top-right'
-                });
+            });
             <% session.removeAttribute("message"); %>
             <% } %>
-            });
-
+            });</script>
+        <script>
             document.getElementById('filter_search').addEventListener('click', function () {
-                var filterInputs = document.getElementById('filter_inputs');
-                if (filterInputs.style.display === 'none' || filterInputs.style.display === '') {
-                    filterInputs.style.display = 'block';
-                } else {
-                    filterInputs.style.display = 'none';
-                }
-            });
-            
-            <script>
-            // Hàm cắt bỏ văn bản dài hơn giới hạn
-            function truncateText(text, maxLength) {
-                if (text.length <= maxLength) {
-                    return text;
-                } else {
-                    return text.substring(0, maxLength) + "...";
-                }
+            var filterInputs = document.getElementById('filter_inputs');
+            if (filterInputs.style.display === 'none' || filterInputs.style.display === '') {
+            filterInputs.style.display = 'block';
+            } else {
+            filterInputs.style.display = 'none';
             }
-
-
-            var titles = document.querySelectorAll(".table-avatar.title a");
+            });
+            <script>
+        // Hàm cắt bỏ văn bản dài hơn giới hạn
+            function truncateText(text, maxLength) {
+            if (text.length <= maxLength) {
+            return text;
+            } else {
+            return text.substring(0, maxLength) + "...";
+            }
+        }
+        
+        
+        var titles = document.querySelectorAll(".table-avatar.title a");
             var descriptions = document.querySelectorAll(".descripition");
             titles.forEach(function (title) {
-                title.textContent = truncateText(title.textContent, 20); // Giới hạn 20 ký tự cho tiêu đề
-            });
+            title.textContent = truncateText(title.textContent, 20); // Giới hạn 20 ký tự cho tiêu đề
+                });
             descriptions.forEach(function (description) {
-                description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
-            });
-        </script>
+            description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
+                });
+                </script>
         </script>
         <script src="assets/js/jquery-3.7.1.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>

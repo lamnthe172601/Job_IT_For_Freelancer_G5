@@ -1,8 +1,4 @@
-<%-- 
-    Document   : postDetails
-    Created on : Jun 16, 2024, 3:26:44 PM
-    Author     : tanng
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -33,6 +29,93 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
+    <style>
+
+        .custom-flag {
+
+            padding: 2px; /* Khoảng cách bên trong để nhìn đẹp hơn */
+            border-radius: 3px; /* Bo tròn các góc */
+        }
+
+        .btn.report-post {
+            background-color: transparent; /* Làm nền nút trong suốt */
+            border: none; /* Bỏ viền nút */
+            padding: 0; /* Bỏ khoảng cách bên trong */
+            color: black;
+            margin-left: 170px;
+        }
+        .reporrt {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 1050;
+        }
+
+        .reporrt-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close-wrap {
+            float: right;
+            cursor: pointer;
+        }
+
+        .button {
+            cursor: pointer;
+        }
+
+        .report-postt-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 1040;
+            display: none;
+        }
+
+        .report-postt {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1050;
+            width: 90%;
+            max-width: 500px;
+            background-color: transparent;
+
+
+        }
+
+        #closeModal {
+            background-color: #FF5B37; /* Nền trong suốt */
+            color: white; /* Màu chữ */
+            border: 2px solid #333; /* Viền đậm */
+            width: 30px; /* Độ rộng */
+            height: 30px; /* Chiều cao */
+            border-radius: 50%; /* Để làm hình tròn */
+            display: flex; /* Sử dụng flexbox để căn giữa */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            cursor: pointer; /* Con trỏ khi di chuột vào */
+            outline: none; /* Loại bỏ đường viền khi được focus */
+            font-size: 20px; /* Kích thước chữ */
+            position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
+        }
+
+    </style>
     <body>
 
         <div class="main-wrapper">
@@ -102,6 +185,12 @@
                                     <div class="company-title">
 
                                         <h4>${post.title}</h4>
+                                    </div>
+                                    <div class="company-detail-flag">
+                                        <!-- biểu tượng cái cờ-->
+                                        <a href="#" class="btn btn-danger ml-2 report-post" data-postid="1" id="reportPostBtn">
+                                            <i class="fas fa-flag custom-flag"></i> 
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="company-address">
@@ -312,6 +401,42 @@
                                 </div>
                             </div>
 
+                            <!-- report post -->
+                            <div class="report-postt-backdrop" id="report-postBackdrop"></div>
+                            <div class="report-postt" id="report-post-modal-container">
+                                <div class="reporrt-content">
+                                    <span id="closeModal" class="close-wrap">&times;</span>
+                                    <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
+                                    <form action="${pageContext.request.contextPath}/allListPost" method="post" id="report-post-form-content">
+                                        <input type="hidden" name="action" value="report">
+                                        <input type="hidden" name="postID" id="reportPostID">
+                                        <div class="form-group">
+                                            <label for="report_post_message">Select a reason for reporting:</label><br>
+                                            <div class="form-check">
+                                                <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
+                                                <label for="report_post_reason_spam" class="form-check-label">Spam</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
+                                                <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
+                                                <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
+                                                <label for="report_post_message_other" class="form-check-label">Other</label>
+                                            </div>
+                                            <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" id="cancelReportBtn">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Submit Report</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
 
                             <div class="card budget-widget">
                                 <div class="budget-widget-details">
@@ -678,6 +803,42 @@
 
             }
         </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const radioButtons = document.getElementsByName("report_post_message");
+                const textarea = document.getElementById("report_post_message_additional");
+
+                radioButtons.forEach(radio => {
+                    radio.addEventListener("click", function () {
+                        if (radio.value === "Other") {
+                            textarea.style.display = "block";
+                        } else {
+                            textarea.style.display = "none";
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.report-post').forEach(button => {
+                    button.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        const postID = this.getAttribute('data-postid');
+                        document.getElementById('reportPostID').value = postID;
+                        document.getElementById('report-postBackdrop').style.display = 'block';
+                        document.getElementById('report-post-modal-container').style.display = 'block';
+                    });
+                });
+
+                document.getElementById('closeModal').addEventListener('click', function () {
+                    document.getElementById('report-postBackdrop').style.display = 'none';
+                    document.getElementById('report-post-modal-container').style.display = 'none';
+                });
+
+                document.getElementById('cancelReportBtn').addEventListener('click', function () {
+                    document.getElementById('report-postBackdrop').style.display = 'none';
+                    document.getElementById('report-post-modal-container').style.display = 'none';
+                });
+            });
+        </script>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
@@ -701,3 +862,9 @@
     <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
 </html>
+
+
+
+
+
+

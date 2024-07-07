@@ -23,13 +23,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-
 public class PostByCategory extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         HttpSession session = request.getSession();
+
+        HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
         RecruiterDAO reDAO = new RecruiterDAO();
         PostDAO pDao = new PostDAO();
@@ -38,7 +38,6 @@ public class PostByCategory extends HttpServlet {
         List<JobType> jobtype = job.getAllJobType();
         DurationDAO duration = new DurationDAO();
         List<Duration> dura = duration.getAllDuration();
-        //Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
         List<Post> listpost = pDao.getAllPosts();
         List<Categories> cate = caDAO.getAllCategory();
         List<SkillSet> skill = pDao.getAllSkillSet();
@@ -72,17 +71,17 @@ public class PostByCategory extends HttpServlet {
             request.setAttribute("postFavourites", postFavourites);
         }
         String categoryIDParam = request.getParameter("categoryID");
-        
+
         if (categoryIDParam != null) {
             try {
                 int categoryID = Integer.parseInt(categoryIDParam);
-               
+
                 PostDAO postDAO = new PostDAO();
                 List<Post> posts = postDAO.getPostsByCategory(categoryID);
                 request.setAttribute("posts", posts);
-                
+
                 request.getRequestDispatcher("views/postbycategory.jsp").forward(request, response);
-                
+
             } catch (NumberFormatException e) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid category ID");
             }

@@ -98,6 +98,69 @@
                 outline: none; /* Loại bỏ viền xung quanh khi focus */
 
             }
+
+            .custom-flag {
+
+                padding: 2px; /* Khoảng cách bên trong để nhìn đẹp hơn */
+                border-radius: 3px; /* Bo tròn các góc */
+            }
+
+            .btn.report-post {
+                background-color: transparent; /* Làm nền nút trong suốt */
+                border: none; /* Bỏ viền nút */
+                padding: 0; /* Bỏ khoảng cách bên trong */
+                color: black;
+                margin-left: 225px;
+                margin-top: 10px;
+                width: 30px;
+            }
+            .reporrt {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.4);
+                z-index: 1050;
+            }
+
+            .reporrt-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                z-index: 1050;
+            }
+
+            .close-wrap {
+                float: right;
+                cursor: pointer;
+            }
+
+            .button {
+                cursor: pointer;
+            }
+
+
+            #closeModal {
+                background-color: #FF5B37; /* Nền trong suốt */
+                color: white; /* Màu chữ */
+                border: 2px solid #333; /* Viền đậm */
+                width: 30px; /* Độ rộng */
+                height: 30px; /* Chiều cao */
+                border-radius: 50%; /* Để làm hình tròn */
+                display: flex; /* Sử dụng flexbox để căn giữa */
+                justify-content: center; /* Căn giữa theo chiều ngang */
+                align-items: center; /* Căn giữa theo chiều dọc */
+                cursor: pointer; /* Con trỏ khi di chuột vào */
+                outline: none; /* Loại bỏ đường viền khi được focus */
+                font-size: 20px; /* Kích thước chữ */
+                position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
+            }
         </style>
     </head>
     <body>
@@ -321,8 +384,13 @@
                                                                 <c:set var="favo" value="true" />
                                                             </c:when>                                                                
                                                         </c:choose>
+
                                                     </c:forEach>
 
+                                                    <!-- biểu tượng cái cờ -->
+                                                    <a href="#" data-bs-toggle="modal"  class="btn btn-danger ml-2 report-post" data-postid="${list.postID}"  data-bs-target="#applyModal_a" data-postid="a" tabindex="-1">
+                                                        <i class="fas fa-flag custom-flag"></i>
+                                                    </a>
                                                     <c:set var="postId" value="${list.postID}" />
 
                                                     <c:choose>
@@ -355,39 +423,39 @@
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>
-<!--
-                                                    <div class="skills-container">
-                                                        <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index % 3 == 0}">
-                                                                <div class="skills-row">
-                                                                </c:if>
-                                                                <div class="freelance-tags">
-                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                                </div>
-                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                                </div>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </div>-->
+                                                    <!--
+                                                                                                        <div class="skills-container">
+                                                    <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
+                                                        <c:if test="${loop.index % 3 == 0}">
+                                                            <div class="skills-row">
+                                                        </c:if>
+                                                        <div class="freelance-tags">
+                                                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
+                                                        </div>
+                                                        <c:if test="${loop.index % 3 == 2 || loop.last}">
+                                                        </div>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </div>-->
 
-<!--                                                    <style>
-
-
-                                                        .skills-container {
-                                                            display: flex;
-                                                            flex-wrap: wrap;
-                                                            justify-content: center;
-                                                            align-items: center;
-                                                        }
-                                                        .freelance-tags {
-                                                            margin: 5px;
-                                                        }
-                                                        .skills-row {
-                                                            display: flex;
-                                                            justify-content: center;
-                                                            width: 100%;
-                                                        }
-                                                    </style>-->
+                                                    <!--                                                    <style>
+                                                    
+                                                    
+                                                                                                            .skills-container {
+                                                                                                                display: flex;
+                                                                                                                flex-wrap: wrap;
+                                                                                                                justify-content: center;
+                                                                                                                align-items: center;
+                                                                                                            }
+                                                                                                            .freelance-tags {
+                                                                                                                margin: 5px;
+                                                                                                            }
+                                                                                                            .skills-row {
+                                                                                                                display: flex;
+                                                                                                                justify-content: center;
+                                                                                                                width: 100%;
+                                                                                                            }
+                                                                                                        </style>-->
                                                 </div>
                                                 <div class="counter-stats">
                                                     <ul>
@@ -477,8 +545,51 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
 
-
+                                    <!-- report post -->
+                                    <div class="modal custom-modal fade" id="applyModal_a" role="dialog">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="form-header">
+                                                        <input type="hidden" class="user-id1" id="">
+                                                        <span id="closeModal" class="close-wrap">&times;</span>
+                                                        <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
+                                                    </div>
+                                                    <div class="modal-btn Suspend-action">
+                                                        <form action="${pageContext.request.contextPath}/allListPost" method="post" id="report-post-form-content">
+                                                            <input type="hidden" name="action" value="report">
+                                                            <input type="hidden" name="postID" id="reportPostID">
+                                                            <div class="form-group">
+                                                                <label for="report_post_message">Select a reason for reporting:</label><br>
+                                                                <div class="form-check">
+                                                                    <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
+                                                                    <label for="report_post_reason_spam" class="form-check-label">Spam</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
+                                                                    <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
+                                                                    <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
+                                                                    <label for="report_post_message_other" class="form-check-label">Other</label>
+                                                                </div>
+                                                                <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a  data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
+                                                                <button  type="submit" class="btn btn-primary confirm-btn">Submit</button>
+                                                            </div>
+                                                        </form> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </c:forEach>
                             </div>
@@ -646,6 +757,37 @@
 
 
         <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const radioButtons = document.getElementsByName("report_post_message");
+                const textarea = document.getElementById("report_post_message_additional");
+
+                radioButtons.forEach(radio => {
+                    radio.addEventListener("click", function () {
+                        if (radio.value === "Other") {
+                            textarea.style.display = "block";
+                        } else {
+                            textarea.style.display = "none";
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.report-post').forEach(button => {
+                    button.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        const postID = this.getAttribute('data-postid');
+                        document.getElementById('reportPostID').value = postID;
+                        document.getElementById('report-postBackdrop').style.display = 'block';
+                        document.getElementById('report-post-modal-container').style.display = 'block';
+                    });
+                });
+
+                document.getElementById('closeModal').addEventListener('click', function () {
+                    $('#applyModal_a').modal('hide');
+                });
+            });
+        </script>
+        <script>
             document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('showMoreBtn').addEventListener('click', function () {
                     let collapseOne = document.getElementById('collapseOne');
@@ -721,123 +863,123 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-                function addToFavorites(postID) {
+                 function addToFavorites(postID) {
+                     $.ajax({
+                         url: 'AddFavourites',
+                         type: 'GET',
+                         data: {
+                             postID: postID
+                         },
+                         success: function (response) {
+                             // Xử lý phản hồi thành công (nếu cần)
+                             //alert('Đã thêm vào danh sách yêu thích!');
+                             $('#favourite_' + postID).addClass('color-active');
+                         },
+                         error: function (xhr, status, error) {
+                             // Xử lý lỗi (nếu có)
+                             alert('Đã xảy ra lỗi: ' + error);
+                         }
+                     });
+                 }
+
+                 function removeFromFavorites(postID) {
+                     $.ajax({
+                         url: 'DeleteFavourites',
+                         type: 'GET',
+                         data: {
+                             postID: postID
+                         },
+                         success: function (response) {
+                             // Xử lý phản hồi thành công (nếu cần)
+                             //alert('Đã xóa khỏi danh sách yêu thích!');
+                             $('#favourite_' + postID).removeClass('color-active');
+                         },
+                         error: function (xhr, status, error) {
+                             // Xử lý lỗi (nếu có)
+                             alert('Đã xảy ra lỗi: ' + error);
+                         }
+                     });
+                 }
+        </script>
+
+
+        <script>
+            function validateForm(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                    return false; // Prevent form submission
+                } else {
+                    errorDiv.innerHTML = '';
+                    return true;
+                }
+            }
+
+            function check(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                } else {
+                    errorDiv.innerHTML = '';
+                }
+            }
+
+
+        </script>
+
+        <script>
+            function submitForm(postID) {
+                if (validateForm(postID) === true) {
+                    event.preventDefault();
+                    showSuccessNotification('Approve project successfully!');
+                    setTimeout(function () {
+                        document.getElementById('jobApplicationForm_' + postID).submit();
+                    }, 1000);
+                }
+
+            }
+        </script>
+
+        <script>
+            function toggleFavorite(postId) {
+                var favouriteLink = $('#favourite_' + postId);
+
+                if (favouriteLink.hasClass('color-active')) {
+                    // Remove from favorites
                     $.ajax({
-                        url: 'AddFavourites',
+                        url: 'DeleteFavourites', // Thay đổi đường dẫn phù hợp
                         type: 'GET',
                         data: {
-                            postID: postID
+                            postID: postId
                         },
                         success: function (response) {
-                            // Xử lý phản hồi thành công (nếu cần)
-                            //alert('Đã thêm vào danh sách yêu thích!');
-                            $('#favourite_' + postID).addClass('color-active');
+                            favouriteLink.removeClass('color-active');
+                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
                         },
                         error: function (xhr, status, error) {
-                            // Xử lý lỗi (nếu có)
-                            alert('Đã xảy ra lỗi: ' + error);
+                            console.error(error);
+                        }
+                    });
+                } else {
+                    // Add to favorites
+                    $.ajax({
+                        url: 'AddFavourites', // Thay đổi đường dẫn phù hợp
+                        type: 'GET',
+                        data: {
+                            postID: postId
+                        },
+                        success: function (response) {
+                            favouriteLink.addClass('color-active');
+                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
                         }
                     });
                 }
-
-                function removeFromFavorites(postID) {
-                    $.ajax({
-                        url: 'DeleteFavourites',
-                        type: 'GET',
-                        data: {
-                            postID: postID
-                        },
-                        success: function (response) {
-                            // Xử lý phản hồi thành công (nếu cần)
-                            //alert('Đã xóa khỏi danh sách yêu thích!');
-                            $('#favourite_' + postID).removeClass('color-active');
-                        },
-                        error: function (xhr, status, error) {
-                            // Xử lý lỗi (nếu có)
-                            alert('Đã xảy ra lỗi: ' + error);
-                        }
-                    });
-                }
-        </script>
-
-
-        <script>
-                function validateForm(postID) {
-                    var fileInput = document.getElementById('fileInput_' + postID);
-                    var errorDiv = document.getElementById('error_' + postID);
-                    if (fileInput.files.length === 0) {
-                        errorDiv.innerHTML = 'Please select a file.';
-                        return false; // Prevent form submission
-                    } else {
-                        errorDiv.innerHTML = '';
-                        return true;
-                    }
-                }
-
-                function check(postID) {
-                    var fileInput = document.getElementById('fileInput_' + postID);
-                    var errorDiv = document.getElementById('error_' + postID);
-                    if (fileInput.files.length === 0) {
-                        errorDiv.innerHTML = 'Please select a file.';
-                    } else {
-                        errorDiv.innerHTML = '';
-                    }
-                }
-
-
-        </script>
-
-        <script>
-                function submitForm(postID) {
-                    if (validateForm(postID) === true) {
-                        event.preventDefault();
-                        showSuccessNotification('Approve project successfully!');
-                        setTimeout(function () {
-                            document.getElementById('jobApplicationForm_' + postID).submit();
-                        }, 1000);
-                    }
-
-                }
-        </script>
-
-        <script>
-                function toggleFavorite(postId) {
-                    var favouriteLink = $('#favourite_' + postId);
-
-                    if (favouriteLink.hasClass('color-active')) {
-                        // Remove from favorites
-                        $.ajax({
-                            url: 'DeleteFavourites', // Thay đổi đường dẫn phù hợp
-                            type: 'GET',
-                            data: {
-                                postID: postId
-                            },
-                            success: function (response) {
-                                favouriteLink.removeClass('color-active');
-                                favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
-                            },
-                            error: function (xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
-                    } else {
-                        // Add to favorites
-                        $.ajax({
-                            url: 'AddFavourites', // Thay đổi đường dẫn phù hợp
-                            type: 'GET',
-                            data: {
-                                postID: postId
-                            },
-                            success: function (response) {
-                                favouriteLink.addClass('color-active');
-                                favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
-                            },
-                            error: function (xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
-                    }
-                }
+            }
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

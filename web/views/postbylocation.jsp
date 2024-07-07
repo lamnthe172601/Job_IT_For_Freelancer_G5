@@ -91,13 +91,7 @@
                     border-radius: 3px; /* Bo tròn các góc */
                 }
             }
-            .btn.report-post {
-                background-color: transparent; /* Làm nền nút trong suốt */
-                border: none; /* Bỏ viền nút */
-                padding: 0; /* Bỏ khoảng cách bên trong */
-                color: black;
-                margin-left: 170px;
-            }
+           
             .modal {
                 display: none;
                 position: fixed;
@@ -490,33 +484,7 @@
                                 </c:forEach>
                             </div>
 
-                            <div class="pagination-container">
-                                <c:if test="${tongSoTrang > 1}">
-                                    <nav>
-                                        <ul class="pagination">
-                                            <c:if test="${trangHienTai > 1}">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="?page=${trangHienTai - 1}" aria-label="Trước">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                            </c:if>
-                                            <c:forEach var="i" begin="1" end="${tongSoTrang}">
-                                                <li class="page-item ${i == trangHienTai ? 'active' : ''}">
-                                                    <a class="page-link" href="?page=${i}">${i}</a>
-                                                </li>
-                                            </c:forEach>
-                                            <c:if test="${trangHienTai < tongSoTrang}">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="?page=${trangHienTai + 1}" aria-label="Sau">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </li>
-                                            </c:if>
-                                        </ul>
-                                    </nav>
-                                </c:if>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

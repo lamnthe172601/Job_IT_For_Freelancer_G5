@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +24,11 @@
         <link rel="stylesheet" href="assets/css/style.css">
 
         <style>
+            .text-center1 {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto 15px;
+            }
 
             .pagination {
                 display: flex;
@@ -83,92 +88,79 @@
                 color: #FFFFFF;
                 margin-right: 15px;
                 text-transform: uppercase;
- .report-post {
-        margin-left: 400px;
-    }
-    .custom-flag {
-        
-        padding: 2px; /* Khoảng cách bên trong để nhìn đẹp hơn */
-        border-radius: 3px; /* Bo tròn các góc */
-    }
+
             }
- .btn.report-post {
-        background-color: transparent; /* Làm nền nút trong suốt */
-        border: none; /* Bỏ viền nút */
-        padding: 0; /* Bỏ khoảng cách bên trong */
-         color: black;
-          margin-left: 170px;
-    }
-    .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
+            input.file {
+                border: 1px solid #000; /* Viền đen 2px */
+                color: black; /* Màu chữ đen */
+                padding: 8px; /* Khoảng cách giữa viền và nội dung */
+                border-radius: 5px; /* Bo tròn góc */
+                outline: none; /* Loại bỏ viền xung quanh khi focus */
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
+            }
 
-.close-wrap {
-    float: right;
-    cursor: pointer;
-}
+            .custom-flag {
 
-.button {
-    cursor: pointer;
-}
+                padding: 2px; /* Khoảng cách bên trong để nhìn đẹp hơn */
+                border-radius: 3px; /* Bo tròn các góc */
+            }
 
- .custom-modal-backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1040;
-        display: none;
-    }
+            .btn.report-post {
+                background-color: transparent; /* Làm nền nút trong suốt */
+                border: none; /* Bỏ viền nút */
+                padding: 0; /* Bỏ khoảng cách bên trong */
+                color: black;
+                margin-left: 225px;
+                margin-top: 10px;
+                width: 30px;
+            }
+            .reporrt {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.4);
+                z-index: 1050;
+            }
 
-.custom-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1050;
-    width: 90%;
-    max-width: 500px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-}
+            .reporrt-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                z-index: 1050;
+            }
 
- #closeModal {
-        background-color: #FF5B37; /* Nền trong suốt */
-        color: white; /* Màu chữ */
-        border: 2px solid #333; /* Viền đậm */
-        width: 30px; /* Độ rộng */
-        height: 30px; /* Chiều cao */
-        border-radius: 50%; /* Để làm hình tròn */
-        display: flex; /* Sử dụng flexbox để căn giữa */
-        justify-content: center; /* Căn giữa theo chiều ngang */
-        align-items: center; /* Căn giữa theo chiều dọc */
-        cursor: pointer; /* Con trỏ khi di chuột vào */
-        outline: none; /* Loại bỏ đường viền khi được focus */
-        font-size: 20px; /* Kích thước chữ */
-        position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
-    }
+            .close-wrap {
+                float: right;
+                cursor: pointer;
+            }
 
+            .button {
+                cursor: pointer;
+            }
+
+
+            #closeModal {
+                background-color: #FF5B37; /* Nền trong suốt */
+                color: white; /* Màu chữ */
+                border: 2px solid #333; /* Viền đậm */
+                width: 30px; /* Độ rộng */
+                height: 30px; /* Chiều cao */
+                border-radius: 50%; /* Để làm hình tròn */
+                display: flex; /* Sử dụng flexbox để căn giữa */
+                justify-content: center; /* Căn giữa theo chiều ngang */
+                align-items: center; /* Căn giữa theo chiều dọc */
+                cursor: pointer; /* Con trỏ khi di chuột vào */
+                outline: none; /* Loại bỏ đường viền khi được focus */
+                font-size: 20px; /* Kích thước chữ */
+                position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
+            }
         </style>
     </head>
     <body>
@@ -228,6 +220,7 @@
             <div class="content">
                 <div class="container">
                     <div class="row">
+
                         <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
                             <div class="card search-filter">
@@ -235,6 +228,21 @@
                                     <h4 class="card-title mb-0">Search Filter</h4>
                                 </div>
                                 <div class="card-body">
+                                    <div class="filter-widget">
+                                        <div class="row">
+                                            <div class="col-xl-6  col-sm-6 d-flex ">
+                                                <div class="sort-by">
+                                                    <select class="select" id="sortSelect">
+                                                        <option value="default">Sort by (Default)</option>
+                                                        <option value="newest">Newest</option>
+                                                        <option value="oldest">Oldest</option>
+                                                        <option value="proposals">Proposals</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -269,45 +277,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" id="projectTypeLink" data-bs-toggle="collapse" data-bs-target="#collapsproject" aria-expanded="true" aria-controls="collapsproject">
-                                                Project Type
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${jobtype}" var="jobtype">
-                                                <div class="project-type-item">
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="projectType" value="${jobtype.jobName}" data-filter="projectType">
-                                                        <span class="checkmark"></span>${jobtype.jobName}
-                                                    </label>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" id="projectDurationLink" data-bs-toggle="collapse" data-bs-target="#collapseOneDuration" aria-expanded="true" aria-controls="collapseOneDuration">
-                                                Project Duration
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapseOneDuration" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${dura}" var="dura">
-                                                <div class="duration-item">
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="projectDuration" value="${dura.durationName}" data-filter="projectDuration">
-                                                        <span class="checkmark"></span>${dura.durationName}
-                                                    </label>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" id="skillsLink" data-bs-toggle="collapse" data-bs-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
@@ -341,27 +310,53 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="filter-widget">
+                                        <h4 class="filter-title">
+                                            <a href="javascript:void(0);" class="w-100" id="projectTypeLink" data-bs-toggle="collapse" data-bs-target="#collapsproject" aria-expanded="true" aria-controls="collapsproject">
+                                                Level
+                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                                            </a>
+                                        </h4>
+                                        <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
+                                            <c:forEach items="${jobtype}" var="jobtype">
+                                                <div class="project-type-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="projectType" value="${jobtype.jobName}" data-filter="projectType">
+                                                        <span class="checkmark"></span>${jobtype.jobName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-widget">
+                                        <h4 class="filter-title">
+                                            <a href="javascript:void(0);" class="w-100" id="projectDurationLink" data-bs-toggle="collapse" data-bs-target="#collapseOneDuration" aria-expanded="true" aria-controls="collapseOneDuration">
+                                                Work time
+                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                                            </a>
+                                        </h4>
+                                        <div id="collapseOneDuration" class="collapse show" data-bs-parent="#accordionExample1">
+                                            <c:forEach items="${dura}" var="dura">
+                                                <div class="duration-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="projectDuration" value="${dura.durationName}" data-filter="projectDuration">
+                                                        <span class="checkmark"></span>${dura.durationName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
 
 
                         <div class="col-md-12 col-lg-8 col-xl-9">
-                            <div class="sort-tab ">
-                                <div class="row">
-                                    <div class="col-xl-6  col-sm-6 d-flex ">
-                                        <div class="sort-by">
-                                            <select class="select" id="sortSelect">
-                                                <option value="default">Sort by (Default)</option>
-                                                <option value="newest">Newest</option>
-                                                <option value="oldest">Oldest</option>
-                                                <option value="proposals">Proposals</option>
-                                            </select>
-                                        </div>
-                                    </div>
 
-                                </div>
-                            </div>
 
                             <%-- Lấy danh sách bài đăng và thông tin phân trang từ request --%>
                             <c:set var="listpost" value="${requestScope.listpost}" />
@@ -375,58 +370,59 @@
                             <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
 
                             <%-- Hiển thị danh sách bài đăng --%>
-<div class="row" id="listpostContainer">
-    <c:forEach items="${posts}" var="post">
-        <div class="col-xl-4 col-md-6 post-item">
-            <div class="freelance-widget widget-author position-relative">
-                <div class="freelance-content">
-                    <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${post.datePost}</div>
+                            <div class="row" id="listpostContainer">
+                                <c:forEach items="${posts}" var="post">
+                                    <div class="col-xl-4 col-md-6 post-item">
+                                        <div class="freelance-widget widget-author position-relative">
+                                            <div class="freelance-content">
+                                                <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${post.datePost}</div>
 
-                    <c:set var="favo" value="false" />
-                    <c:forEach items="${postFavourites}" var="favPost">
-                        <c:if test="${post.postID eq favPost.postID}">
-                            <c:set var="favo" value="true" />
-                        </c:if>
-                    </c:forEach>
-                    <c:choose>
-                        <c:when test="${favo}">
-                            <a href="javascript:void(0);" onclick="removeFromFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite color-active"><i class="feather-heart"></i></a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="javascript:void(0);" onclick="addToFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite"><i class="feather-heart"></i></a>
-                        </c:otherwise>
-                    </c:choose>
-                    <a href="#" class="btn btn-danger ml-2 report-post" data-postid="${post.postID}" onclick="showReportModal(${post.postID})">
-                        <i class="fas fa-flag custom-flag"></i>
-                    </a>
+                                                <c:set var="favo" value="false" />
+                                                <c:forEach items="${postFavourites}" var="favPost">
+                                                    <c:if test="${post.postID eq favPost.postID}">
+                                                        <c:set var="favo" value="true" />
+                                                    </c:if>
+                                                </c:forEach>
+                                                <c:choose>
+                                                    <c:when test="${favo}">
+                                                        <a href="javascript:void(0);" onclick="removeFromFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite color-active"><i class="feather-heart"></i></a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                        <a href="javascript:void(0);" onclick="addToFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite"><i class="feather-heart"></i></a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                <!-- biểu tượng cái cờ -->
+                                                <a href="#" data-bs-toggle="modal"  class="btn btn-danger ml-2 report-post" data-postid="${list.postID}"  data-bs-target="#applyModal_a" data-postid="a" tabindex="-1">
+                                                    <i class="fas fa-flag custom-flag"></i>
+                                                </a>
 
-                    <div class="author-heading">
-                        <div class="freelance-img">
-                            <a href="javascript:void(0);">
-                                <img src="${post.image}" alt="author">
-                                <span class="verified"><i class="fas fa-check-circle"></i></span>
-                            </a>
-                        </div>
-                        <div class="profile-name">
-                            <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${post.title}</div>
-                        </div>
-                        <div class="freelance-info">
-                            <h3><a href="javascript:void(0);">${post.caID.categoriesName}</a></h3>
-                            <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${post.location}</div>
-                        </div>
-                        <div class="skills-container">
-                            <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
-                                <c:if test="${loop.index % 3 == 0}">
-                                    <div class="skills-row">
-                                </c:if>
-                                <div class="freelance-tags">
-                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                </div>
-                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                    </div>
-                                </c:if>
-                            </c:forEach>
-                        </div>
+                                                <div class="author-heading">
+                                                    <div class="freelance-img">
+                                                        <a href="javascript:void(0);">
+                                                            <img src="${post.image}" alt="author">
+                                                            <span class="verified"><i class="fas fa-check-circle"></i></span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="profile-name">
+                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${post.title}</div>
+                                                    </div>
+                                                    <div class="freelance-info">
+                                                        <h3><a href="javascript:void(0);">${post.caID.categoriesName}</a></h3>
+                                                        <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${post.location}</div>
+                                                    </div>
+                                                    <div class="skills-container">
+                                                        <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
+                                                            <c:if test="${loop.index % 3 == 0}">
+                                                                <div class="skills-row">
+                                                                </c:if>
+                                                                <div class="freelance-tags">
+                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
+                                                                </div>
+                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
+                                                                </div>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
 
                                                     <style>
                                                         .skills-container {
@@ -464,8 +460,8 @@
                                             </div>
 
 
-                                            
-                                           <div class="cart-hover">
+
+                                            <div class="cart-hover">
                                                 <a href="PostDetails?postID=${post.postID}" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
 
                                                 <c:if test="${postApply != null}">
@@ -526,69 +522,95 @@
                                             </div>
                                         </div>
                                     </div>
-                                                                <div class="custom-modal-backdrop" id="customModalBackdrop"></div>
-<div class="custom-modal" id="report-post-modal-container">
-    <div class="modal-content">
-        <span id="closeModal" class="close-wrap">&times;</span>
-        <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
-         <form action="${pageContext.request.contextPath}/JobForFree" method="post" id="report-post-form-content">
-            <input type="hidden" name="action" value="report">
-            <input type="hidden" name="postID" id="reportPostID">
-            <div class="form-group">
-                <label for="report_post_message">Select a reason for reporting:</label><br>
-                <div class="form-check">
-                    <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
-                    <label for="report_post_reason_spam" class="form-check-label">Spam</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
-                    <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
-                    <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
-                    <label for="report_post_message_other" class="form-check-label">Other</label>
-                </div>
-                <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="cancelReportBtn">Cancel</button>
-                <button type="submit" class="btn btn-primary">Submit Report</button>
-            </div>
-        </form>
-    </div>
-</div>
+                                    <!-- report post -->
+                                    <div class="modal custom-modal fade" id="applyModal_a" role="dialog">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="form-header">
+                                                        <input type="hidden" class="user-id1" id="">
+                                                        <span id="closeModal" class="close-wrap">&times;</span>
+                                                        <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
+                                                    </div>
+                                                    <div class="modal-btn Suspend-action">
+                                                        <form action="${pageContext.request.contextPath}/allListPost" method="post" id="report-post-form-content">
+                                                            <input type="hidden" name="action" value="report">
+                                                            <input type="hidden" name="postID" id="reportPostID">
+                                                            <div class="form-group">
+                                                                <label for="report_post_message">Select a reason for reporting:</label><br>
+                                                                <div class="form-check">
+                                                                    <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
+                                                                    <label for="report_post_reason_spam" class="form-check-label">Spam</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
+                                                                    <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
+                                                                    <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
+                                                                    <label for="report_post_message_other" class="form-check-label">Other</label>
+                                                                </div>
+                                                                <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a  data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
+                                                                <button  type="submit" class="btn btn-primary confirm-btn">Submit</button>
+                                                            </div>
+                                                        </form> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </c:forEach>
                             </div>
 
                             <div class="pagination-container">
-                                <c:if test="${tongSoTrang > 1}">
-                                    <nav>
-                                        <ul class="pagination">
-                                            <c:if test="${trangHienTai > 1}">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="?page=${trangHienTai - 1}" aria-label="Trước">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                            </c:if>
-                                            <c:forEach var="i" begin="1" end="${tongSoTrang}">
-                                                <li class="page-item ${i == trangHienTai ? 'active' : ''}">
-                                                    <a class="page-link" href="?page=${i}">${i}</a>
-                                                </li>
-                                            </c:forEach>
-                                            <c:if test="${trangHienTai < tongSoTrang}">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="?page=${trangHienTai + 1}" aria-label="Sau">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </li>
-                                            </c:if>
-                                        </ul>
-                                    </nav>
+                                <c:if test="${endPage > 1}">
+                                    <!--                                    <div class="row">
+                                                                            <div class="col-md-12">                  
+                                                                                <ul class="paginations list-pagination">                                          
+                                                                                                                                <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a></li>
+                                    <c:forEach begin="1" end="${endPage}" var="e">     
+                                                                                    <li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
+                                        <li class="page-item" ><a class="${tag == e?"active":""}" href="PostFavourites?index=${e}">${e}</a></li>
+                                                                                    <li class="page-item"><a href="javascript:void(0);">3</a></li>
+                                                                                    <li class="page-item"><a href="javascript:void(0);">...</a></li>
+                                                                                    <li class="page-item"><a href="javascript:void(0);">10</a></li>
+                                    </c:forEach>
+                                                                                <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-right"></i></a></li>                                          
+                                </ul>
+
+                            </div>
+                        </div>-->
+
+
+                                    <ul class="pagination list-pagination">
+                                        <c:if test="${tag > 1}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="PostFavourites?index=${tag-1}" aria-label="Trước">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                        <c:forEach var="i" begin="1" end="${endPage}">
+                                            <li class="page-item ${i == tag ? 'active' : ''}">
+                                                <a class="page-link" href="PostFavourites?index=${i}">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:if test="${tag < endPage}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="PostFavourites?index=${tag + 1}" aria-label="Sau">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
+
                                 </c:if>
                             </div>
                         </div>
@@ -725,54 +747,39 @@
             </div>
         </div>
 
-                            
-                            
-            
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-             
 
         <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const radioButtons = document.getElementsByName("report_post_message");
-    const textarea = document.getElementById("report_post_message_additional");
 
-    radioButtons.forEach(radio => {
-        radio.addEventListener("click", function() {
-            if (radio.value === "Other") {
-                textarea.style.display = "block";
-            } else {
-                textarea.style.display = "none";
-            }
-        });
-    });
+            document.addEventListener("DOMContentLoaded", function () {
+                const radioButtons = document.getElementsByName("report_post_message");
+                const textarea = document.getElementById("report_post_message_additional");
 
-    document.querySelectorAll('.report-post').forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
-            const postID = this.getAttribute('data-postid');
-            document.getElementById('reportPostID').value = postID;
-            document.getElementById('customModalBackdrop').style.display = 'block';
-            document.getElementById('report-post-modal-container').style.display = 'block';
-        });
-    });
+                radioButtons.forEach(radio => {
+                    radio.addEventListener("click", function () {
+                        if (radio.value === "Other") {
+                            textarea.style.display = "block";
+                        } else {
+                            textarea.style.display = "none";
+                        }
+                    });
+                });
 
-    document.getElementById('closeModal').addEventListener('click', function() {
-        document.getElementById('customModalBackdrop').style.display = 'none';
-        document.getElementById('report-post-modal-container').style.display = 'none';
-    });
+                document.querySelectorAll('.report-post').forEach(button => {
+                    button.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        const postID = this.getAttribute('data-postid');
+                        document.getElementById('reportPostID').value = postID;
+                        document.getElementById('report-postBackdrop').style.display = 'block';
+                        document.getElementById('report-post-modal-container').style.display = 'block';
+                    });
+                });
 
-    document.getElementById('cancelReportBtn').addEventListener('click', function() {
-        document.getElementById('customModalBackdrop').style.display = 'none';
-        document.getElementById('report-post-modal-container').style.display = 'none';
-    });
-});
-
-
-
-
+                document.getElementById('closeModal').addEventListener('click', function () {
+                    $('#applyModal_a').modal('hide');
+                });
+            });
+        </script>
+        <script>
             document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('showMoreBtn').addEventListener('click', function () {
                     let collapseOne = document.getElementById('collapseOne');
@@ -812,8 +819,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
                     let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
-                    let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
-
+                    let postSkills = Array.from(post.querySelectorAll(' .badge')).map(el => el.innerText.toLowerCase());
                     let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
                     let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
                     let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));
@@ -888,44 +894,88 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         </script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
         <script>
-            $(document).ready(function () {
-                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
-                $('.apply-button').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
-                    // Hiển thị modal tương ứng
-                    $('#applyModal_' + postID).modal('show');
-                });
+            function validateForm(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                    return false; // Prevent form submission
+                } else {
+                    errorDiv.innerHTML = '';
+                    return true;
+                }
+            }
 
-                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
-                $('.confirm-btn').on('click', function (e) {
-                    e.preventDefault();
-                    var postID = $(this).data('postid');
+            function check(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                } else {
+                    errorDiv.innerHTML = '';
+                }
+            }
 
-                    // Gửi yêu cầu AJAX để ứng tuyển công việc
+
+        </script>
+
+        <script>
+            function submitForm(postID) {
+                if (validateForm(postID) === true) {
+                    event.preventDefault();
+                    showSuccessNotification('Approve project successfully!');
+                    setTimeout(function () {
+                        document.getElementById('jobApplicationForm_' + postID).submit();
+                    }, 1000);
+                }
+
+            }
+        </script>
+
+        <script>
+            function toggleFavorite(postId) {
+                var favouriteLink = $('#favourite_' + postId);
+
+                if (favouriteLink.hasClass('color-active')) {
+                    // Remove from favorites
                     $.ajax({
-                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
+                        url: 'DeleteFavourites', // Thay đổi đường dẫn phù hợp
                         type: 'GET',
                         data: {
-                            postID: postID
+                            postID: postId
                         },
                         success: function (response) {
-                            // Xử lý phản hồi thành công (nếu cần)
-                            // Đổi nút sang trạng thái "Applied"
-                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').addClass('apply').css('background-color', '#FF3300').css('color', 'white');
-                            // Đóng modal sau khi xử lý thành công
-                            $('#applyModal_' + postID).modal('hide');
+                            favouriteLink.removeClass('color-active');
+                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
                         },
                         error: function (xhr, status, error) {
-                            // Xử lý lỗi (nếu có)
-                            alert('Đã xảy ra lỗi: ' + error);
+                            console.error(error);
                         }
                     });
-                });
-            });
+                } else {
+                    // Add to favorites
+                    $.ajax({
+                        url: 'AddFavourites', // Thay đổi đường dẫn phù hợp
+                        type: 'GET',
+                        data: {
+                            postID: postId
+                        },
+                        success: function (response) {
+                            favouriteLink.addClass('color-active');
+                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
+            }
         </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
 
 
         <script src="assets/js/filterMyListPost.js" type="text/javascript"></script>
@@ -940,8 +990,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
         <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
-        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script></body>
-    <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-    <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
+
+        <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
 </html>
