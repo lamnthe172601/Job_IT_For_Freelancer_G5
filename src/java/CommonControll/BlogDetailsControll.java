@@ -5,6 +5,8 @@
 
 package CommonControll;
 
+import Models.Blogs;
+import dal.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -53,6 +55,11 @@ public class BlogDetailsControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        int blogID = Integer.parseInt(request.getParameter("id"));
+        BlogDAO blogDAO = new BlogDAO();
+        Blogs blog = blogDAO.selectBlogById(blogID);
+        
+        request.setAttribute("blog", blog);
         request.getRequestDispatcher("views/blogDetails.jsp").forward(request, response);
     } 
 
