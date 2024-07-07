@@ -29,9 +29,11 @@
         <link rel="stylesheet" href="assets/plugins/feather/feather.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
-        
+
+
+
         <style>
-                        .text-center1 {
+            .text-center1 {
                 width: 150px;
                 height: 150px;
                 margin: 0 auto 15px;
@@ -110,31 +112,23 @@
                                         </ul>
                                     </li>
 
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
 
-                                            <li><a href="myListJobProject">My List Post</a></li>                                        
-                                            <li><a href="SreachJob">Find Jobs</a></li>  
-                                            <li><a href="company">Company</a></li>
-                                        </ul>
-                                    </li>
                                 </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">Top Freelancer</a></li>
-                                            <li><a href="newsJobs">Skills</a></li>
+                                            <li><a href="ListFreelancer">Top Freelancer</a></li>
+
 
                                         </ul>
                                     </li>
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
-
-                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="CreatePost">Create a new Project</a></li>
+                                            <li><a href="myListJobProject">My list project</a></li>
                                             <li><a href="newsJobs">Reviews</a></li>
 
                                         </ul>
@@ -153,7 +147,7 @@
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
-                            <li><a href="chats.html"><img src="assets/img/icon/message-chat-icon.svg" alt="Img"></a></li>
+
                             <li class="dropdown">
                                 <a data-bs-toggle="dropdown" href="javascript:void(0);"><img src="assets/img/icon/notification-bell-icon.svg" alt="Img"></a>
                                 <div class="dropdown-menu notifications">
@@ -250,13 +244,12 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <a class="dropdown-item" href="company-profile.html"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                    <a class="dropdown-item" href="manage-projects.html"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
-                                    <a class="dropdown-item" href="favourites.html"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Subscription</a>
-                                    <a class="dropdown-item" href="deposit-funds.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
-                                    <a class="dropdown-item" href="chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
-                                    <a class="dropdown-item" href="profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                    <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                    <a class="dropdown-item" href="Dashboard"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img"> Dashboard</a>
+                                    <a class="dropdown-item" href="companydetail"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
+                                    <a class="dropdown-item" href="manageJobsPosts"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Project</a>
+                                    <a class="dropdown-item" href="RecruiterFavourites"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img">My Favourites</a>             
+                                    <a class="dropdown-item" href="recruitersetting"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                    <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -288,325 +281,52 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
-
                             <div class="card search-filter">
                                 <div class="card-header d-flex justify-content-between">
                                     <h4 class="card-title mb-0">Search Filter</h4>
                                 </div>
                                 <div class="card-body">
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapselocation" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Location
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapselocation" class="collapse show"
-                                             data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>USA (25)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> IND (62)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>UK (46)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>AUS (37)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes3" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> IND (62)
-                                                    </label>
+                                    <c:forEach items="${ExpertiseSkill}" var="du" varStatus="status">
+                                        <div class="filter-widget">
+                                            <h4 class="filter-title">
+                                                <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
+                                                   data-bs-target="#collapse${status.index}" aria-expanded="true"
+                                                   aria-controls="collapse${status.index}">
+                                                    ${du.expertiseName}
+                                                    <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                                                </a>
+                                            </h4>
+                                            <div id="collapse${status.index}" class="collapse show" data-bs-parent="#accordionExample1">
+                                                <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i" begin="0" end="3">
+                                                    <div>
+                                                        <label class="custom_check">
+                                                            <input type="checkbox" name="select_skill" value="${i.skillSetID.skill_set_name}">
+                                                            <span class="checkmark"></span>${i.skillSetID.skill_set_name}
+                                                        </label>
+                                                    </div>
+                                                </c:forEach>
+                                                <div id="collapseMore${status.index}" class="collapse" data-bs-parent="#accordionExample1">
+                                                    <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i" begin="4">
+                                                        <div>
+                                                            <label class="custom_check">
+                                                                <input type="checkbox" name="select_skill" value="${i.skillSetID.skill_set_name}">
+                                                                <span class="checkmark"></span>${i.skillSetID.skill_set_name}
+                                                            </label>
+                                                        </div>
+                                                    </c:forEach>
                                                 </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span>UK (46)
-                                                    </label>
+                                                <div class="showmore mt-2">
+                                                    <a href="javascript:void(0);" data-bs-toggle="collapse"
+                                                       data-bs-target="#collapseMore${status.index}" aria-expanded="true"
+                                                       aria-controls="collapseMore${status.index}"><i class="feather-plus me-1"></i>Show More</a>
                                                 </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span>AUS (37)
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse"
-                                                   data-bs-target="#collapseOnes3" aria-expanded="true"
-                                                   aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show
-                                                    More</a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapseskills" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Skills
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapseskills" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> After Effects (6)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Android Developer (7)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Backend Developer (7)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Computer Operator (1)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes1" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> After Effects (6)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Android Developer (7)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Backend Developer (7)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Computer Operator (1)
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse"
-                                                   data-bs-target="#collapseOnes1" aria-expanded="true"
-                                                   aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show
-                                                    More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapseOne" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Category
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Developer (25)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> UI Developer (62)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> React Developer (46)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> .Net Developer (37)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> UI Developer (62)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> React Developer (46)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> .Net Developer (37)
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse"
-                                                   data-bs-target="#collapseOnes" aria-expanded="true"
-                                                   aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show
-                                                    More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapsproject" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Freelancer Type
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Fixed (6)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Hourly (7)
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapselanguage" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Languages
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapselanguage" class="collapse show"
-                                             data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> English (5)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Arabic (2)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>German (1)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes2" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> English (5)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Arabic (2)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span>German (1)
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse"
-                                                   data-bs-target="#collapseOnes2" aria-expanded="true"
-                                                   aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show
-                                                    More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapselanguagea" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Freelancer Type
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapselanguagea" class="collapse show"
-                                             data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Full Time (3)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Part Time (4)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Project Based (2)
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="btn-search">
-                                        <button type="button" class="btn btn-primary">Search</button>
-                                        <button type="button" class="btn btn-block">Reset</button>
-                                    </div>
+                                    </c:forEach>
                                 </div>
                             </div>
-
                         </div>
+
                         <div class="col-md-12 col-lg-8 col-xl-9">
 
                             <c:set var="list" value="${requestScope.list}" />
@@ -621,11 +341,11 @@
 
 
 
-                            <div class="row">
-
+                            <!-- Phần hiển thị các bài post -->
+                            <div class="row" id="posts-container">
                                 <c:forEach items="${list}" var="l" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
                                     <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="freelance-widget">
+                                        <div class="freelance-widget" data-skills="${map[l.freelanceID]}">
                                             <div class="freelance-content">
                                                 <c:set var="favo" value="false" />
                                                 <c:forEach items="${list2}" var="list">
@@ -658,23 +378,16 @@
                                                     <c:set var="year" value="${fn:substring(dob, 0, 4)}" />
                                                     <div class="freelance-specific">${year}</div>
                                                     <div class="freelance-location"><i class="feather-map-pin me-1"></i>${l.email}</div>
-                                                        <c:forEach var="entry" items="${map}">
-                                                            <c:if test="${l.freelanceID == entry.key}">
-                                                            <div class="freelance-tags">
-                                                                <!--                                                                <a href="">
-                                                                                                                                    <span class="badge badge-pill badge-design">${entry.value}</span>
-                                                                                                                                </a>-->
-                                                                <c:forEach items="${fn:split(entry.value, ',')}" var="skill" varStatus="loop">
-                                                                    <c:if test="${loop.index < 2}">
-                                                                        <span class="badge badge-pill badge-design">${skill}</span>
-                                                                    </c:if>                                                              
-                                                                    <c:if test="${loop.index == 1 and not loop.last}">                                                                 
-                                                                        <span class="badge badge-pill badge-design">...</span>
-                                                                    </c:if>
-                                                                </c:forEach>
-                                                            </div>
-                                                        </c:if>
-                                                    </c:forEach>
+                                                    <div class="freelance-tags">
+                                                        <c:forEach items="${fn:split(map[l.freelanceID], ',')}" var="skill" varStatus="loop">
+                                                            <c:if test="${loop.index < 2}">
+                                                                <span class="badge badge-pill badge-design">${skill}</span>
+                                                            </c:if>
+                                                            <c:if test="${loop.index == 1 and not loop.last}">
+                                                                <span class="badge badge-pill badge-design">...</span>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="cart-hover">
@@ -718,131 +431,7 @@
             </div>
 
 
-            <footer class="footer">
-                <div class="footer-top">
-                    <div class="container">
-                        <div class="row">
-                            <div class=" col-lg-4 col-md-12">
-                                <div class="footer-bottom-logo">
-                                    <a href="index.html" class="menu-logo">
-                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                                    </a>
-                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce
-                                        yourself!</p>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f"
-                                                                             aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter"
-                                                                             aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram"
-                                                                             aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin"
-                                                                             aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                    <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
-                                </div>
-                            </div>
-                            <div class=" col-lg-8 col-md-12">
-                                <div class="row">
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Useful Links</h2>
-                                            <ul>
-                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a>
-                                                </li>
-                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a>
-                                                </li>
-                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a>
-                                                </li>
-                                                <li><a href="register.html"><i
-                                                            class="fas fa-angle-right me-1"></i>Register</a></li>
-                                                <li><a href="forgot-password.html"><i
-                                                            class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Help & Support</h2>
-                                            <ul>
-                                                <li><a href="javascript:void(0);"><i
-                                                            class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
-                                                <li><a href="javascript:void(0);"><i
-                                                            class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job
-                                                        Packages</a></li>
-                                                <li><a href="javascript:void(0);"><i
-                                                            class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
-                                                <li><a href="javascript:void(0);"><i
-                                                            class="fas fa-angle-right me-1"></i>Post A Job</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Other Links</h2>
-                                            <ul>
-                                                <li><a href="freelancer-dashboard.html"><i
-                                                            class="fas fa-angle-right me-1"></i>Freelancers</a></li>
-                                                <li><a href="freelancer-portfolio.html"><i
-                                                            class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
-                                                <li><a href="project.html"><i
-                                                            class="fas fa-angle-right me-1"></i>Project</a></li>
-                                                <li><a href="project-details.html"><i
-                                                            class="fas fa-angle-right me-1"></i>Project Details</a></li>
-                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post
-                                                        Project</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Connect With Us</h2>
-                                            <ul>
-                                                <li><a href="freelancer-chats.html"><i
-                                                            class="fas fa-angle-right me-1"></i>Chat</a></li>
-                                                <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
-                                                <li><a href="freelancer-review.html"><i
-                                                            class="fas fa-angle-right me-1"></i>Reviews</a></li>
-                                                <li><a href="privacy-policy.html"><i
-                                                            class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
-                                                <li><a href="term-condition.html"><i
-                                                            class="fas fa-angle-right me-1"></i>Terms of use</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="footer-bottom">
-                    <div class="container">
-
-                        <div class="copyright">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="copyright-text text-center">
-                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </footer>
+            <jsp:include page="footter.jsp" />
 
         </div>
 
@@ -912,7 +501,52 @@
                                                                     });
                                                                 }
                                                             }
+
+
+
+
         </script>
+
+        <script>
+            function filterPosts() {
+                const selectedSkills = Array.from(document.querySelectorAll('input[name="select_skill"]:checked'))
+                        .map(checkbox => checkbox.value.toLowerCase().trim());
+
+                const posts = document.querySelectorAll('.freelance-widget');
+                let visiblePosts = 0;
+
+                posts.forEach(post => {
+                    const postSkillsString = post.getAttribute('data-skills').toLowerCase();
+                    const postSkills = postSkillsString.split(',').map(skill => skill.trim());
+
+                    const isVisible = selectedSkills.length === 0 ||
+                            selectedSkills.every(selectedSkill =>
+                                postSkills.some(postSkill => postSkill.includes(selectedSkill))
+                            );
+
+                    post.closest('.col-md-6').style.display = isVisible ? 'block' : 'none';
+                    if (isVisible)
+                        visiblePosts++;
+                });
+
+                const noResultsMessage = document.getElementById('no-results-message');
+                if (noResultsMessage) {
+                    noResultsMessage.style.display = visiblePosts === 0 ? 'block' : 'none';
+                } else if (visiblePosts === 0) {
+                    const postsContainer = document.getElementById('posts-container');
+                    postsContainer.insertAdjacentHTML('beforeend', '<div id="no-results-message" class="col-12"><p>There is no post that matches all the skills selected.</p></div>');
+                }
+            }
+
+
+            document.querySelectorAll('input[name="select_skill"]').forEach(checkbox => {
+                checkbox.addEventListener('change', filterPosts);
+            });
+
+            document.addEventListener('DOMContentLoaded', filterPosts);
+        </script>
+
+
 
         <script src="assets/js/jquery-3.7.1.min.js" type="6afd00299c64b072e6c7887a-text/javascript"></script>
 
@@ -933,7 +567,7 @@
 
         <script src="assets/js/bootstrap.bundle.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
-        <script src="assets/plugins/select2/js/select2.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+
 
         <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
         <script src="assets/plugins/datatables/datatables.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
@@ -941,7 +575,7 @@
         <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
-        <script src="assets/js/script.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
+        <
         <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e07a54eb38ecbc80607f458c-|49" defer></script>
         <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>

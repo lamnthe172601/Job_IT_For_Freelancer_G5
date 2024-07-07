@@ -7,6 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.ParseException" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +39,126 @@
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th {
+                background-color: #f2f2f2;
+                position: relative;
+            }
+            .filter-form {
+                position: absolute;
+                background-color: white;
+                border: 1px solid #ddd;
+                padding: 10px;
+                z-index: 1000;
+                display: none;
+            }
+            button {
+                cursor: pointer;
+            }
+
+            .search-form {
+                margin-bottom: 20px;
+            }
+
+            .search-form input[type="text"] {
+                padding: 10px;
+                width: 300px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 10px;
+            }
+
+            .search-form button {
+                padding: 10px 20px;
+                background-color: #E65425;
+                color: white;
+                border: none;
+                cursor: pointer;
+                border-radius: 4px;
+                font-size: 10px;
+            }
+        </style>
+        <style>
+            .filter-form {
+                display: none;
+                position: absolute;
+                background-color: white;
+                padding: 15px;
+                border: 1px solid #ccc;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+            }
+            .filter-button {
+                display: none;
+                background-color: #E65425;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+                font-size: 14px;
+                margin-left: 5px;
+                border-radius: 5px;
+            }
+            .filter-button:hover {
+                background-color: #45a049;
+            }
+            .apply-button {
+                background-color: #E65425;
+                color: white;
+                border: none;
+                padding: 7px 15px;
+                cursor: pointer;
+                font-size: 14px;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+            .apply-button:hover {
+                background-color: #0056b3;
+            }
+            .filter-form input[type="date"] {
+                padding: 5px;
+                font-size: 14px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+        </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.addEventListener("click", function (event) {
+                    var postedButton = document.getElementById("postedButton");
+                    var expiredButton = document.getElementById("expiredButton");
+                    var postedForm = document.getElementById("postedForm");
+                    var expiredForm = document.getElementById("expiredForm");
+
+                    if (!event.target.closest("th") && !event.target.closest(".filter-form") && !event.target.closest(".filter-button")) {
+                        postedButton.style.display = "none";
+                        expiredButton.style.display = "none";
+                        postedForm.style.display = "none";
+                        expiredForm.style.display = "none";
+                    }
+                });
+            });
+
+            function toggleForm(formId) {
+                var form = document.getElementById(formId);
+                if (form.style.display === "none" || form.style.display === "") {
+                    form.style.display = "block";
+                } else {
+                    form.style.display = "none";
+                }
+            }
+
+            function showButton(buttonId) {
+                var button = document.getElementById(buttonId);
+                button.style.display = "inline";
+            }
+        </script>
     </head>
     <body class="dashboard-page">
 
@@ -368,7 +492,21 @@
                             <div class="my-projects-view">
                                 <div class="row">
                                     <div class="col-lg-12">
+                                        <div class="title-head d-flex justify-content-between align-items-center mb-4">
+                                            <div class="search-form">
+                                                <input type="text" id="searchInput" placeholder="Search...">
+                                            </div>
+                                            <div style="margin-bottom: 16px" class="filter-status">
+                                                <select class="form-select" id="filterSelect">
+                                                    <option value="">All</option>
+                                                    <option value="1">On-going</option>
+                                                    <option value="2">Completed</option>
+                                                    <option value="3">Expired</option>
+                                                    <option value="0">Rejected</option>
+                                                </select>
+                                            </div>                                          
 
+                                        </div>
                                         <div class="table-responsive table-box manage-projects-table">
                                             <table class="table table-center table-hover datatable no-sort">
                                                 <thead class="thead-pink">
@@ -376,16 +514,34 @@
                                                         <th style="text-align: center;">Action</th>                                                       
                                                         <th>TITLE</th>
                                                         <th>APPLICANTS</th>
-                                                        <th>POSTED</th>
-                                                        <th>EXPIRED</th>
+                                                        <th onclick="showButton('postedButton')">
+                                                            POSTED
+                                                            <button id="postedButton" class="filter-button" onclick="toggleForm('postedForm')">Filter</button>
+                                                            <div id="postedForm" class="filter-form">
+                                                                <form onsubmit="filterByDate('posted');
+                                                                        return false;">
+                                                                    <input type="date" id="postedDate" name="date">
+                                                                    <button class="apply-button" type="submit">Apply</button>
+                                                                </form>
+                                                            </div>
+                                                        </th>
+                                                        <th onclick="showButton('expiredButton')">
+                                                            EXPIRED
+                                                            <button id="expiredButton" class="filter-button" onclick="toggleForm('expiredForm')">Filter</button>
+                                                            <div id="expiredForm" class="filter-form">
+                                                                <form onsubmit="filterByDate('expired'); return false;">
+                                                                    <input type="date" id="expiredDate" name="date">
+                                                                    <button class="apply-button" type="submit">Apply</button>
+                                                                </form>
+                                                            </div>
+                                                        </th>
                                                         <th>STATUS</th>
                                                         <th>kkk</th>                                                        
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="postTable">
                                                     <c:forEach items="${listpost}" var="list">
                                                         <tr>
-                                                            
                                                             <td class="three-dots">
                                                                 <div class="action-table-data">
                                                                     <div class="edit-delete-action">
@@ -398,7 +554,7 @@
                                                                             <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Suspend_user">
                                                                                 <img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Reject Post
                                                                             </a>
-                                                                            
+
                                                                         </c:if>
                                                                         <c:if test='${list.status == 0}'>
                                                                             <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Activate_user">
@@ -406,16 +562,16 @@
                                                                             </a>
                                                                         </c:if>
                                                                         <c:if test='${list.status == 3}'>
-                                                                            <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Activate_user">
-                                                                                <img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Ongoing Post
+                                                                            <a class="dropdown-item typeChange btn btn-sm" href="javascript:void(0);">
+                                                                                Expired
                                                                             </a>
                                                                         </c:if>
                                                                         <c:if test='${list.status == 2}'>
-                                                                            <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Activate_user">
-                                                                                <img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Ongoing Post
+                                                                            <a class="dropdown-item typeChange btn btn-sm" href="javascript:void(0);">
+                                                                                Completed
                                                                             </a>
                                                                         </c:if>
-                                                              
+
                                                                     </div>
 
 
@@ -603,12 +759,12 @@
                                                             </td>
 
                                                             <td class="titleList">
-                                                                <div class="title">${list.title}</div>
+                                                                <div class="title applied">${list.title}</div>
                                                             </td>
                                                             <td class="APPLICANTS">                      
-                                                                
+
                                                                 <div class="APPLICANTS">${list.cout()}/${list.quantity}</div>
-                                                                
+
                                                             </td>
                                                             <td> 
                                                                 <div class="datePost">${list.datePost}</div>
@@ -617,20 +773,24 @@
                                                                 <div class="datePost">${list.expired}</div>
                                                             </td>      
                                                             <td class="StatusList">
-                                                                <span class="badge status ${
-                                                                      list.status == 0 ? 'badge-pill bg-warning-light' :
-                                                                          list.status == 1 ? 'badge-pill bg-success-light' :
-                                                                          list.status == 2 ? 'badge-pill bg-purple-light' :
-                                                                          list.status == 3 ? 'badge-pill bg-warning-light' : ''
-                                                                      }">
-                                                                    ${
-                                                                    list.status == 0 ? 'Delete' :
-                                                                        list.status == 1 ? 'On-going' :
-                                                                        list.status == 2 ? 'Completed' :
-                                                                        list.status == 3 ? 'Expired' : ''
-                                                                    }
-                                                                </span>
-                                                            </td>                                                     
+                                                                <c:choose>
+                                                                    <c:when test="${list.status == 3}">
+                                                                        <span class="badge status badge-pill bg-warning-light">Expired</span>
+                                                                    </c:when>
+                                                                    <c:when test="${list.status == 0}">
+                                                                        <span class="badge status badge-pill bg-danger-light">Rejected</span>
+                                                                    </c:when>
+                                                                    <c:when test="${list.status == 1}">
+                                                                        <span class="badge status badge-pill bg-success-light">On-going</span>
+                                                                    </c:when>
+                                                                    <c:when test="${list.status == 2}">
+                                                                        <span class="badge status badge-pill bg-purple-light">Completed</span>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <span class="badge status"></span>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </td>
                                                             <td class="CheckingList">
                                                                 <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
                                                                     ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}
@@ -817,13 +977,13 @@
                     success: function (response) {
                         // Xử lý khi suspend user thành công
                         var statusCell = $('.user-id#' + postID).closest('tr').find('.StatusList');
-                        statusCell.html('<span class="badge status badge-pill bg-danger-light">Reject</span>');
+                        statusCell.html('<span class="badge status badge-pill bg-danger-light">Rejected</span>');
 
                         var threeDotCell = $('.user-id#' + postID).closest('tr').find('.three-dots');
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Activate_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img">Ongoing Post</a>');
 
                         $('#Suspend_user').modal('hide');
-                        showSuccessNotification('Suspend user successfully!');
+                        showSuccessNotification('Reject project successfully!');
                     },
                     error: function (xhr, status, error) {
                         // Xử lý khi có lỗi xảy ra
@@ -846,7 +1006,7 @@
                         threeDotCell.find('.typeChange').html('<a class="dropdown-item typeChange" data-bs-toggle="modal" data-bs-target="#Suspend_user"><img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Reject Post</a>');
 
                         $('#Activate_user').modal('hide');
-                        showSuccessNotification('Activate user successfully!');
+                        showSuccessNotification('On-going project successfully!');
                     },
                     error: function (xhr, status, error) {
 
@@ -856,7 +1016,88 @@
             }
         </script>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var filterSelect = document.getElementById('filterSelect');
 
+                filterSelect.addEventListener('change', function () {
+                    var selectedValue = this.value;
+                    var rows = document.querySelectorAll('.StatusList');
+
+                    rows.forEach(function (row) {
+                        var status = row.querySelector('.badge').textContent.trim();
+                        if (selectedValue === '' || status === getStatusText(selectedValue)) {
+                            row.parentElement.style.display = '';
+                        } else {
+                            row.parentElement.style.display = 'none';
+                        }
+                    });
+                });
+
+                function getStatusText(value) {
+                    switch (value) {
+                        case '1':
+                            return 'On-going';
+                        case '2':
+                            return 'Completed';
+                        case '3':
+                            return 'Expired';
+                        case '0':
+                            return 'Rejected';
+                        default:
+                            return '';
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            function toggleForm(formId) {
+                var form = document.getElementById(formId);
+                form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            }
+
+            function filterByDate(column) {
+                var filterDate = document.getElementById(column + 'Date').value;
+                var rows = document.getElementById('postTable').getElementsByTagName('tr');
+
+                for (var i = 0; i < rows.length; i++) {
+                    var cells = rows[i].getElementsByTagName('td');
+                    var dateCell;
+                    if (column === 'posted') {
+                        dateCell = cells[3]; // POSTED là cột thứ 3 (index 2)
+                    } else if (column === 'expired') {
+                        dateCell = cells[4]; // EXPIRED là cột thứ 4 (index 3)
+                    }
+
+                    if (dateCell) {
+                        var rowDate = dateCell.querySelector('.datePost').textContent.trim();
+
+                        // Chuyển đổi định dạng ngày
+                        rowDate = formatDate(rowDate);
+
+                        console.log('Filter date:', filterDate);
+                        console.log('Row date:', rowDate);
+
+                        if (rowDate === filterDate) {
+                            rows[i].style.display = '';
+                        } else {
+                            rows[i].style.display = 'none';
+                        }
+                    }
+                }
+            }
+
+            function formatDate(dateString) {
+                // Giả sử định dạng ban đầu là YYYY-MM-DD
+                var parts = dateString.split('-');
+                if (parts.length === 3) {
+                    // Đảm bảo định dạng YYYY-MM-DD
+                    return parts[0] + '-' + parts[1].padStart(2, '0') + '-' + parts[2].padStart(2, '0');
+                }
+                return dateString; // Trả về nguyên bản nếu không khớp định dạng
+            }
+        </script>
         <script>
 // Hàm cắt ngắn chuỗi chỉ lấy 3 từ đầu tiên rồi thêm dấu ba chấm
             function shortenTitle(title) {
@@ -877,6 +1118,29 @@
                     const originalTitle = element.textContent;
                     const shortenedTitle = shortenTitle(originalTitle);
                     element.textContent = shortenedTitle;
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Lắng nghe sự kiện khi người dùng nhập vào ô tìm kiếm
+                document.getElementById('searchInput').addEventListener('input', function () {
+                    var searchValue = this.value.toLowerCase(); // Lấy giá trị nhập vào và chuyển thành chữ thường
+
+                    // Lặp qua từng hàng trong tbody để tìm kiếm và ẩn hiện các hàng thỏa mãn
+                    var rows = document.getElementById('postTable').getElementsByTagName('tr');
+                    for (var i = 0; i < rows.length; i++) {
+                        var row = rows[i];
+                        var titleElement = row.querySelector('.applied'); // Lấy phần tử span chứa tiêu đề
+
+                        // Kiểm tra nếu tiêu đề chứa chuỗi tìm kiếm
+                        if (titleElement.textContent.toLowerCase().includes(searchValue)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
                 });
             });
         </script>

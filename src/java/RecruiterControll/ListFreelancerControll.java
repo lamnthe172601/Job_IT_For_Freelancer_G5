@@ -4,12 +4,15 @@
  */
 package RecruiterControll;
 
+import Models.ExpertiseSkill;
 import Models.Freelancer;
+import Models.SkillSet;
 import Models.Skills;
 import Models.User;
 import dal.DAO;
 import dal.FavoritesDAO;
 import dal.FreelancerDAO;
+import dal.PostDAO;
 import dal.RecruiterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -100,6 +103,10 @@ public class ListFreelancerControll extends HttpServlet {
         int freelancerInPgae = 9;
         int totalPage = (int) Math.ceil((double) countFreelancer / freelancerInPgae);
         int index = 1;
+        PostDAO postdao = new PostDAO();
+        List<SkillSet> skill = postdao.getAllSkillSet();
+        List<ExpertiseSkill> ess = postdao.getAllExpertiseSkill();
+        request.setAttribute("ExpertiseSkill", ess);
 
         String indexPage = request.getParameter("page");
         if (indexPage != null && !indexPage.isEmpty()) {

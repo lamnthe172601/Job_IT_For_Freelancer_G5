@@ -17,23 +17,20 @@
             <file>file:/D:/SU24/A/web/views/CreatePost.jsp</file>
         </group>
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/PostDetailsControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listapply.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/SearchInPostFavoControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/SearchInListApplyControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobFormSearchControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ListApplyControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/MutiModels/JobApply.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPostSearch.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listApplySearch.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/PostDAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listPostFavoritesSearch.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/Models/Blogs.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/BlogDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/blogGrid.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/CommonControll/blogGridControll.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/BlogDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/blogGrid.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/CommonControll/blogGridControll.java</file>
         </group>
     </open-files>
 </project-private>
