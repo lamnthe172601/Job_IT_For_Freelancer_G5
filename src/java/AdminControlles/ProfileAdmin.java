@@ -5,6 +5,8 @@
 
 package AdminControlles;
 
+import Models.Admin;
+import dal.AdminDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -52,7 +54,15 @@ public class ProfileAdmin extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
+        String adminID = request.getParameter("adminID");
+        AdminDAO adminDAO = new AdminDAO();
+        Admin admin = adminDAO.getAdminByID(adminID);
+
+        // Set the Admin object in the request scope
+        request.setAttribute("admin", admin);
+
+        // Forward to the JSP page
         request.getRequestDispatcher("adminViews/profileAdmin.jsp").forward(request, response);
     } 
 

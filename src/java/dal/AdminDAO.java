@@ -4,6 +4,7 @@
  */
 package dal;
 
+import Models.Admin;
 import Models.Blogs;
 import Models.Categories;
 import Models.Duration;
@@ -14,6 +15,8 @@ import MutiModels.ReportDetails;
 import MutiModels.PostBasic;
 import MutiModels.Project;
 import MutiModels.RecruiterBasic;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -291,6 +294,43 @@ public class AdminDAO extends DBContext {
         } catch (SQLException e) {
         }
         return false;
+    }
+    
+    public Admin getAdminByID(String adminID) {
+        Admin admin = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT * FROM Admin WHERE adminID = ?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, adminID);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                admin = new Admin(
+                    rs.getString("adminID"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("phone"),
+                    rs.getString("email"),
+                    rs.getString("image"),
+                    rs.getString("userID")
+                );
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return admin;
     }
 
     public static void main(String[] args) {

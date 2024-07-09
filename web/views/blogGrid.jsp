@@ -51,12 +51,12 @@
                     <div class="col-md-12 col-12 text-center">
                         <div class="breadcrumb-list">
                             <h2>Blog Grid</h2>
-<!--                            <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <nav aria-label="breadcrumb" class="page-breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="home">Home</a></li>
                                     <li class="breadcrumb-item" aria-current="page">Blog Grid</li>
                                 </ol>
-                            </nav>-->
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
             <div class="container">
                 <div class="row blog-grid-row">
                     <c:forEach var="blog" items="${listBlog}">
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <div class="blog grid-blog">
                                 <div class="blog-image">
                                     <a href="blogDetails.jsp?blogId=${blog.blogID}">
@@ -76,11 +76,11 @@
                                 </div>
                                 <div class="blog-content">
                                     <ul class="entry-meta meta-item">
-                                        <li>
+<!--                                        <li>
                                             <div class="post-author">
                                                 <a href="developer-details.jsp"><img src="assets/img/img-02.jpg" alt="Post Author"> <span> David Lee</span></a>
                                             </div>
-                                        </li>
+                                        </li>-->
                                         <li><i class="far fa-clock"></i> <c:out value="${blog.date_blog}"/></li>
                                     </ul>
                                     <h3 class="blog-title"><a href="blogDetails.jsp?blogId=${blog.blogID}"><c:out value="${blog.title}"/></a></h3>
