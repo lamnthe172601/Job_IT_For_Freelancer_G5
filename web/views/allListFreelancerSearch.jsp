@@ -29,9 +29,9 @@
         <link rel="stylesheet" href="assets/plugins/feather/feather.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
-        
+
         <style>
-                        .text-center1 {
+            .text-center1 {
                 width: 150px;
                 height: 150px;
                 margin: 0 auto 15px;
@@ -293,318 +293,68 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <h4 class="card-title mb-0">Search Filter</h4>
                                 </div>
+                                <form action="SearchInHome" method="get" style=" display: flex;
+                                      align-items: center;">
+                                    <c:if test="${txtSearch == null}">
+                                        <input type="text" name="txtSearch" placeholder="Search..." style="padding: 5px;margin: 10px;border-radius: 5px; width: 250px;">
+                                    </c:if>
+                                    <c:if test="${txtSearch != null}">
+                                        <input type="text" name="txtSearch" value="${txtSearch}" style="padding: 5px;margin: 10px; border-radius: 5px; width: 250px;">
+                                    </c:if>
+                                    <button type="submit" style="display: flex;
+                                            align-items: center;
+                                            padding: 5px 10px;
+                                            background-color: rgb(230, 84, 37);
+                                            color: white;
+                                            border: none;
+                                            cursor: pointer;
+                                            margin-right: 5px;
+                                            border-radius: 10px;">
+                                        <i class="feather-search me-1"></i>
+                                    </button>
+                                </form>
                                 <div class="card-body">
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapselocation" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Location
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapselocation" class="collapse show"
-                                             data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>USA (25)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> IND (62)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>UK (46)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>AUS (37)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes3" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> IND (62)
-                                                    </label>
+                                    <c:forEach items="${ExpertiseSkill}" var="du" varStatus="status">
+                                        <div class="filter-widget">
+                                            <h4 class="filter-title">
+                                                <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
+                                                   data-bs-target="#collapse${status.index}" aria-expanded="true"
+                                                   aria-controls="collapse${status.index}">
+                                                    ${du.expertiseName}
+                                                    <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                                                </a>
+                                            </h4>
+                                            <div id="collapse${status.index}" class="collapse show" data-bs-parent="#accordionExample1">
+                                                <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i" begin="0" end="3">
+                                                    <div>
+                                                        <label class="custom_check">
+                                                            <input type="checkbox" name="select_skill" value="${i.skillSetID.skill_set_name}">
+                                                            <span class="checkmark"></span>${i.skillSetID.skill_set_name}
+                                                        </label>
+                                                    </div>
+                                                </c:forEach>
+                                                <div id="collapseMore${status.index}" class="collapse" data-bs-parent="#accordionExample1">
+                                                    <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i" begin="4">
+                                                        <div>
+                                                            <label class="custom_check">
+                                                                <input type="checkbox" name="select_skill" value="${i.skillSetID.skill_set_name}">
+                                                                <span class="checkmark"></span>${i.skillSetID.skill_set_name}
+                                                            </label>
+                                                        </div>
+                                                    </c:forEach>
                                                 </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span>UK (46)
-                                                    </label>
+                                                <div class="showmore mt-2">
+                                                    <a href="javascript:void(0);" data-bs-toggle="collapse"
+                                                       data-bs-target="#collapseMore${status.index}" aria-expanded="true"
+                                                       aria-controls="collapseMore${status.index}"><i class="feather-plus me-1"></i>Show More</a>
                                                 </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span>AUS (37)
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse"
-                                                   data-bs-target="#collapseOnes3" aria-expanded="true"
-                                                   aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show
-                                                    More</a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapseskills" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Skills
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapseskills" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> After Effects (6)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Android Developer (7)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Backend Developer (7)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Computer Operator (1)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes1" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> After Effects (6)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Android Developer (7)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Backend Developer (7)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Computer Operator (1)
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse"
-                                                   data-bs-target="#collapseOnes1" aria-expanded="true"
-                                                   aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show
-                                                    More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapseOne" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Category
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Developer (25)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> UI Developer (62)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> React Developer (46)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> .Net Developer (37)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> UI Developer (62)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> React Developer (46)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> .Net Developer (37)
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse"
-                                                   data-bs-target="#collapseOnes" aria-expanded="true"
-                                                   aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show
-                                                    More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapsproject" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Freelancer Type
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Fixed (6)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Hourly (7)
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapselanguage" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Languages
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapselanguage" class="collapse show"
-                                             data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> English (5)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Arabic (2)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>German (1)
-                                                </label>
-                                            </div>
-                                            <div id="collapseOnes2" class="collapse" data-bs-parent="#accordionExample1">
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> English (5)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span> Arabic (2)
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="select_time">
-                                                        <span class="checkmark"></span>German (1)
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="showmore mt-2">
-                                                <a href="javascript:void(0);" data-bs-toggle="collapse"
-                                                   data-bs-target="#collapseOnes2" aria-expanded="true"
-                                                   aria-controls="collapseOne"><i class="feather-plus me-1"></i>Show
-                                                    More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse"
-                                               data-bs-target="#collapselanguagea" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Freelancer Type
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapselanguagea" class="collapse show"
-                                             data-bs-parent="#accordionExample1">
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Full Time (3)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span> Part Time (4)
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="custom_check">
-                                                    <input type="checkbox" name="select_time">
-                                                    <span class="checkmark"></span>Project Based (2)
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="btn-search">
-                                        <button type="button" class="btn btn-primary">Search</button>
-                                        <button type="button" class="btn btn-block">Reset</button>
-                                    </div>
+                                    </c:forEach>
                                 </div>
                             </div>
+
+
 
                         </div>
                         <div class="col-md-12 col-lg-8 col-xl-9">
@@ -625,7 +375,7 @@
 
                                 <c:forEach items="${list}" var="l" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
                                     <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="freelance-widget">
+                                        <div class="freelance-widget" data-skills="${map[l.freelanceID]}">
                                             <div class="freelance-content">
                                                 <c:set var="favo" value="false" />
                                                 <c:forEach items="${list2}" var="list">
@@ -912,6 +662,45 @@
                                                                     });
                                                                 }
                                                             }
+        </script>
+
+        <script>
+            function filterPosts() {
+                const selectedSkills = Array.from(document.querySelectorAll('input[name="select_skill"]:checked'))
+                        .map(checkbox => checkbox.value.toLowerCase().trim());
+
+                const posts = document.querySelectorAll('.freelance-widget');
+                let visiblePosts = 0;
+
+                posts.forEach(post => {
+                    const postSkillsString = post.getAttribute('data-skills').toLowerCase();
+                    const postSkills = postSkillsString.split(',').map(skill => skill.trim());
+
+                    const isVisible = selectedSkills.length === 0 ||
+                            selectedSkills.every(selectedSkill =>
+                                postSkills.some(postSkill => postSkill.includes(selectedSkill))
+                            );
+
+                    post.closest('.col-md-6').style.display = isVisible ? 'block' : 'none';
+                    if (isVisible)
+                        visiblePosts++;
+                });
+
+                const noResultsMessage = document.getElementById('no-results-message');
+                if (noResultsMessage) {
+                    noResultsMessage.style.display = visiblePosts === 0 ? 'block' : 'none';
+                } else if (visiblePosts === 0) {
+                    const postsContainer = document.getElementById('posts-container');
+                    postsContainer.insertAdjacentHTML('beforeend', '<div id="no-results-message" class="col-12"><p>There is no post that matches all the skills selected.</p></div>');
+                }
+            }
+
+
+            document.querySelectorAll('input[name="select_skill"]').forEach(checkbox => {
+                checkbox.addEventListener('change', filterPosts);
+            });
+
+            document.addEventListener('DOMContentLoaded', filterPosts);
         </script>
 
         <script src="assets/js/jquery-3.7.1.min.js" type="6afd00299c64b072e6c7887a-text/javascript"></script>
