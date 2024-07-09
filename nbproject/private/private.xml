@@ -17,20 +17,9 @@
             <file>file:/D:/SU24/A/web/views/CreatePost.jsp</file>
         </group>
         <group>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/Models/Blogs.java</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/BlogDAO.java</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/blogGrid.jsp</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/CommonControll/blogGridControll.java</file>
-        </group>
-        <group>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/BlogDAO.java</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/blogGrid.jsp</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/CommonControll/blogGridControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/AllListPostControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/RecruiterFavouritesControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
         </group>
     </open-files>
 </project-private>
