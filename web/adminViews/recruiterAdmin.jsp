@@ -384,7 +384,7 @@
                         return (!companyValue || company.includes(companyValue)) &&
                                 (!primaryContactValue || primaryContact.includes(primaryContactValue)) &&
                                 (totalPosts >= totalPostsMinValue && totalPosts <= totalPostsMaxValue) &&
-                                (statusValue === '' || status.includes(statusValue));
+                                (statusValue === '' || status===statusValue);
                     });
 
                     table.draw();
