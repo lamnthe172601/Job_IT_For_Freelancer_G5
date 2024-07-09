@@ -30,6 +30,8 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
 
+
+
         <style>
             .text-center1 {
                 width: 150px;
@@ -279,7 +281,6 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
-
                             <div class="card search-filter">
                                 <div class="card-header d-flex justify-content-between">
                                     <h4 class="card-title mb-0">Search Filter</h4>
@@ -299,17 +300,16 @@
                                                 <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i" begin="0" end="3">
                                                     <div>
                                                         <label class="custom_check">
-                                                            <input type="checkbox" name="select_time" value="${i.skillSetID.skill_set_name}">
+                                                            <input type="checkbox" name="select_skill" value="${i.skillSetID.skill_set_name}">
                                                             <span class="checkmark"></span>${i.skillSetID.skill_set_name}
                                                         </label>
                                                     </div>
                                                 </c:forEach>
-
                                                 <div id="collapseMore${status.index}" class="collapse" data-bs-parent="#accordionExample1">
                                                     <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i" begin="4">
                                                         <div>
                                                             <label class="custom_check">
-                                                                <input type="checkbox" name="select_time" value="${i.skillSetID.skill_set_name}">
+                                                                <input type="checkbox" name="select_skill" value="${i.skillSetID.skill_set_name}">
                                                                 <span class="checkmark"></span>${i.skillSetID.skill_set_name}
                                                             </label>
                                                         </div>
@@ -323,15 +323,10 @@
                                             </div>
                                         </div>
                                     </c:forEach>
-                                    <div class="btn-search">
-                                        <button type="button" class="btn btn-primary">Search</button>
-                                        <button type="button" class="btn btn-block">Reset</button>
-                                    </div>
                                 </div>
-
                             </div>
-
                         </div>
+
                         <div class="col-md-12 col-lg-8 col-xl-9">
 
                             <c:set var="list" value="${requestScope.list}" />
@@ -346,11 +341,11 @@
 
 
 
-                            <div class="row">
-
+                            <!-- Phần hiển thị các bài post -->
+                            <div class="row" id="posts-container">
                                 <c:forEach items="${list}" var="l" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
                                     <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="freelance-widget">
+                                        <div class="freelance-widget" data-skills="${map[l.freelanceID]}">
                                             <div class="freelance-content">
                                                 <c:set var="favo" value="false" />
                                                 <c:forEach items="${list2}" var="list">
@@ -383,23 +378,16 @@
                                                     <c:set var="year" value="${fn:substring(dob, 0, 4)}" />
                                                     <div class="freelance-specific">${year}</div>
                                                     <div class="freelance-location"><i class="feather-map-pin me-1"></i>${l.email}</div>
-                                                        <c:forEach var="entry" items="${map}">
-                                                            <c:if test="${l.freelanceID == entry.key}">
-                                                            <div class="freelance-tags">
-                                                                <!--                                                                <a href="">
-                                                                                                                                    <span class="badge badge-pill badge-design">${entry.value}</span>
-                                                                                                                                </a>-->
-                                                                <c:forEach items="${fn:split(entry.value, ',')}" var="skill" varStatus="loop">
-                                                                    <c:if test="${loop.index < 2}">
-                                                                        <span class="badge badge-pill badge-design">${skill}</span>
-                                                                    </c:if>                                                              
-                                                                    <c:if test="${loop.index == 1 and not loop.last}">                                                                 
-                                                                        <span class="badge badge-pill badge-design">...</span>
-                                                                    </c:if>
-                                                                </c:forEach>
-                                                            </div>
-                                                        </c:if>
-                                                    </c:forEach>
+                                                    <div class="freelance-tags">
+                                                        <c:forEach items="${fn:split(map[l.freelanceID], ',')}" var="skill" varStatus="loop">
+                                                            <c:if test="${loop.index < 2}">
+                                                                <span class="badge badge-pill badge-design">${skill}</span>
+                                                            </c:if>
+                                                            <c:if test="${loop.index == 1 and not loop.last}">
+                                                                <span class="badge badge-pill badge-design">...</span>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="cart-hover">
@@ -513,7 +501,52 @@
                                                                     });
                                                                 }
                                                             }
+
+
+
+
         </script>
+
+        <script>
+            function filterPosts() {
+                const selectedSkills = Array.from(document.querySelectorAll('input[name="select_skill"]:checked'))
+                        .map(checkbox => checkbox.value.toLowerCase().trim());
+
+                const posts = document.querySelectorAll('.freelance-widget');
+                let visiblePosts = 0;
+
+                posts.forEach(post => {
+                    const postSkillsString = post.getAttribute('data-skills').toLowerCase();
+                    const postSkills = postSkillsString.split(',').map(skill => skill.trim());
+
+                    const isVisible = selectedSkills.length === 0 ||
+                            selectedSkills.every(selectedSkill =>
+                                postSkills.some(postSkill => postSkill.includes(selectedSkill))
+                            );
+
+                    post.closest('.col-md-6').style.display = isVisible ? 'block' : 'none';
+                    if (isVisible)
+                        visiblePosts++;
+                });
+
+                const noResultsMessage = document.getElementById('no-results-message');
+                if (noResultsMessage) {
+                    noResultsMessage.style.display = visiblePosts === 0 ? 'block' : 'none';
+                } else if (visiblePosts === 0) {
+                    const postsContainer = document.getElementById('posts-container');
+                    postsContainer.insertAdjacentHTML('beforeend', '<div id="no-results-message" class="col-12"><p>There is no post that matches all the skills selected.</p></div>');
+                }
+            }
+
+
+            document.querySelectorAll('input[name="select_skill"]').forEach(checkbox => {
+                checkbox.addEventListener('change', filterPosts);
+            });
+
+            document.addEventListener('DOMContentLoaded', filterPosts);
+        </script>
+
+
 
         <script src="assets/js/jquery-3.7.1.min.js" type="6afd00299c64b072e6c7887a-text/javascript"></script>
 
