@@ -528,7 +528,7 @@
                                                                         <input oninput="check('${list.postID}')" class='file' type='file' id='fileInput_${list.postID}' name="file"/>
                                                                         <div style="color: red" id="error_${list.postID}"></div>
                                                                         <input hidden="" name="postID" value="${list.postID}"/>
-                                                                        <input hidden="" name="index" value="${i}"/>
+                                                                        <input hidden="" name="index" value="${trangHienTai}"/>
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <!-- Nút "Yes" để xử lý AJAX -->
