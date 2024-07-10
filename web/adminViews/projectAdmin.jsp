@@ -443,7 +443,7 @@
                                 (companyFilter === '' || company.includes(companyFilter)) &&
                                 (startDate === '' || date >= new Date(startDate)) &&
                                 (endDate === '' || date <= new Date(endDate)) &&
-                                (statusFilter === '' || status.includes(statusFilter))
+                                (statusFilter === '' || status===statusFilter)
                                 ) {
                             return true;
                         }
