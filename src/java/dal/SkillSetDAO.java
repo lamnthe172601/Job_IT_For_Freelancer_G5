@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dal;
 import Models.SkillSet;
 import MutiModels.Skill_Set;
@@ -13,27 +9,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-/**
- *
- * @author DUC MINH
- */
-public class SkillSetDAO extends DBContext{
+
+public class SkillSetDAO extends DBContext {
     public List<Map<String, String>> getAllSkillSets() {
         List<Map<String, String>> skillSets = new ArrayList<>();
-        String sql = "SELECT skill_set_ID, skill_set_name, description FROM Skill_Set where statusSkill=1";
-        
-        try (Connection conn = connection; 
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-             
+        String sql = "SELECT skill_set_ID, skill_set_name, description, statusSkill FROM Skill_Set";
+        try (Connection conn = connection; PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Map<String, String> skillSet = new HashMap<>();
                 skillSet.put("skill_set_ID", String.valueOf(rs.getInt("skill_set_ID")));
                 skillSet.put("skill_set_name", rs.getString("skill_set_name"));
                 skillSet.put("description", rs.getString("description"));
+                skillSet.put("statusSkill", String.valueOf(rs.getInt("statusSkill")));
                 skillSets.add(skillSet);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return skillSets;
@@ -68,6 +58,38 @@ public class SkillSetDAO extends DBContext{
         }
     }
 
+    public List<Map<String, String>> searchSkillSets(String skill, String status) {
+        List<Map<String, String>> skillSets = new ArrayList<>();
+        String sql = "SELECT skill_set_ID, skill_set_name, description, statusSkill FROM Skill_Set WHERE statusSkill != -1";
+        if (skill != null && !skill.trim().isEmpty()) {
+            sql += " AND skill_set_name LIKE ?";
+        }
+        if (status != null && !status.trim().isEmpty()) {
+            sql += " AND statusSkill = ?";
+        }
+        try (Connection conn = connection; PreparedStatement stmt = conn.prepareStatement(sql)) {
+            int paramIndex = 1;
+            if (skill != null && !skill.trim().isEmpty()) {
+                stmt.setString(paramIndex++, "%" + skill + "%");
+            }
+            if (status != null && !status.trim().isEmpty()) {
+                stmt.setString(paramIndex, status);
+            }
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Map<String, String> skillSet = new HashMap<>();
+                    skillSet.put("skill_set_ID", String.valueOf(rs.getInt("skill_set_ID")));
+                    skillSet.put("skill_set_name", rs.getString("skill_set_name"));
+                    skillSet.put("description", rs.getString("description"));
+                    skillSet.put("statusSkill", String.valueOf(rs.getInt("statusSkill")));
+                    skillSets.add(skillSet);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return skillSets;
+    }
     //update skill when resgister
     // doing by TanNN
     public List<Skill_Set> getSkillSet() {

@@ -2,18 +2,18 @@ package FreelancerControll;
 
 import Models.Categories;
 import Models.Duration;
+import Models.Freelancer;
 import Models.JobType;
 import Models.Post;
-import Models.SkillSet;
 import Models.User;
 import MutiModels.JobApply;
 import MutiModels.PostBasic;
 import dal.DAO;
 import dal.CategoriesDAO;
 import dal.DurationDAO;
+import dal.FreelancerDAO;
 import dal.JobTypeDAO;
 import dal.PostDAO;
-import dal.RecruiterDAO;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,14 +25,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-
+@WebServlet("/postByLocation")
 public class PostByLocation extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        // Placeholder method for handling request processing, not used in doGet/doPost
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,6 +35,8 @@ public class PostByLocation extends HttpServlet {
         User user = (User) session.getAttribute("account");
 
         // Initialize DAOs and retrieve necessary data
+       DAO d = new DAO();
+        PostDAO p = new PostDAO();
         DAO dao = new DAO();
         PostDAO postDAO = new PostDAO();
         CategoriesDAO categoriesDAO = new CategoriesDAO();
@@ -62,7 +58,11 @@ public class PostByLocation extends HttpServlet {
             currentPage = Integer.parseInt(pageParam);
         }
 
-        request.setAttribute("listpost", allPosts);
+        int startIndex = (currentPage - 1) * postsPerPage;
+        int endIndex = Math.min(startIndex + postsPerPage, totalPosts);
+        List<Post> postsForCurrentPage = allPosts.subList(startIndex, endIndex);
+
+        request.setAttribute("listpost", postsForCurrentPage);
         request.setAttribute("tongSoBaiDang", totalPosts);
         request.setAttribute("baiDangTrenMotTrang", postsPerPage);
         request.setAttribute("tongSoTrang", totalPages);
@@ -79,6 +79,23 @@ public class PostByLocation extends HttpServlet {
             request.setAttribute("postApply", appliedPosts);
             request.setAttribute("postFavourites", favouritePosts);
         }
+         String indexPage= request.getParameter("index");
+            if(indexPage==null){
+                indexPage="1";
+            }
+            User u = (User) user;
+            int userId = u.getUserID();
+            int freelancerID = d.getFreelancerIDbyUserID(userId);
+            String txtSearch = request.getParameter("searchName");
+            int index=Integer.parseInt(indexPage);
+            int count=p.getCountFavoSearch(freelancerID, txtSearch);
+            int endPage=count/6;
+            if(count%6!=0){
+                endPage++;
+            }
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("tag", index);
+          
 
         String location = request.getParameter("location");
 
@@ -100,5 +117,11 @@ public class PostByLocation extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Servlet to fetch posts based on location and user's session";
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        // Placeholder method for handling request processing, not used in doGet/doPost
     }
 }
