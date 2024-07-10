@@ -114,57 +114,58 @@ public class DashboardDAO extends DBContext {
 //    }
     public List<ChartData> getChartDataForYear(int id, int year) {
         List<ChartData> chartDataList = new ArrayList<>();
-        String sql = "DECLARE @Year INT = ?; \n"
-                + "\n"
-                + "WITH Months AS (\n"
-                + "    SELECT 1 AS Month UNION ALL\n"
-                + "    SELECT 2 UNION ALL\n"
-                + "    SELECT 3 UNION ALL\n"
-                + "    SELECT 4 UNION ALL\n"
-                + "    SELECT 5 UNION ALL\n"
-                + "    SELECT 6 UNION ALL\n"
-                + "    SELECT 7 UNION ALL\n"
-                + "    SELECT 8 UNION ALL\n"
-                + "    SELECT 9 UNION ALL\n"
-                + "    SELECT 10 UNION ALL\n"
-                + "    SELECT 11 UNION ALL\n"
-                + "    SELECT 12\n"
-                + "),\n"
-                + "RecruiterPosts AS (\n"
-                + "    SELECT \n"
-                + "        p.recruiterID,\n"
-                + "        YEAR(p.date_post) AS Year, \n"
-                + "        MONTH(p.date_post) AS Month,\n"
-                + "        p.postID\n"
-                + "    FROM [freelancer].[dbo].[Post] p\n"
-                + "    WHERE p.recruiterID = ? -- Replace with the desired recruiterID\n"
-                + "), \n"
-                + "PostCounts AS (\n"
-                + "    SELECT \n"
-                + "        rp.Year, \n"
-                + "        rp.Month,\n"
-                + "        COUNT(*) AS PostCount \n"
-                + "    FROM RecruiterPosts rp\n"
-                + "    GROUP BY rp.Year, rp.Month\n"
-                + "),\n"
-                + "ApplyCounts AS (\n"
-                + "    SELECT \n"
-                + "        rp.Year, \n"
-                + "        rp.Month, \n"
-                + "        COUNT(*) AS ApplyCount \n"
-                + "    FROM [freelancer].[dbo].[JobApply] a\n"
-                + "    INNER JOIN RecruiterPosts rp ON a.postID = rp.postID\n"
-                + "    GROUP BY rp.Year, rp.Month\n"
-                + ")\n"
-                + "SELECT \n"
-                + "    @Year AS Year, \n"
-                + "    m.Month, \n"
-                + "    COALESCE(pc.PostCount, 0) AS PostCount, \n"
-                + "    COALESCE(ac.ApplyCount, 0) AS ApplyCount\n"
-                + "FROM Months m\n"
-                + "LEFT JOIN PostCounts pc ON m.Month = pc.Month AND pc.Year = @Year\n"
-                + "LEFT JOIN ApplyCounts ac ON m.Month = ac.Month AND ac.Year = @Year\n"
-                + "ORDER BY m.Month;";
+        String sql = """
+                     DECLARE @Year INT = ?; 
+                     
+                     WITH Months AS (
+                         SELECT 1 AS Month UNION ALL
+                         SELECT 2 UNION ALL
+                         SELECT 3 UNION ALL
+                         SELECT 4 UNION ALL
+                         SELECT 5 UNION ALL
+                         SELECT 6 UNION ALL
+                         SELECT 7 UNION ALL
+                         SELECT 8 UNION ALL
+                         SELECT 9 UNION ALL
+                         SELECT 10 UNION ALL
+                         SELECT 11 UNION ALL
+                         SELECT 12
+                     ),
+                     RecruiterPosts AS (
+                         SELECT 
+                             p.recruiterID,
+                             YEAR(p.date_post) AS Year, 
+                             MONTH(p.date_post) AS Month,
+                             p.postID
+                         FROM [freelancer].[dbo].[Post] p
+                         WHERE p.recruiterID = ? -- Replace with the desired recruiterID
+                     ), 
+                     PostCounts AS (
+                         SELECT 
+                             rp.Year, 
+                             rp.Month,
+                             COUNT(*) AS PostCount 
+                         FROM RecruiterPosts rp
+                         GROUP BY rp.Year, rp.Month
+                     ),
+                     ApplyCounts AS (
+                         SELECT 
+                             rp.Year, 
+                             rp.Month, 
+                             COUNT(*) AS ApplyCount 
+                         FROM [freelancer].[dbo].[JobApply] a
+                         INNER JOIN RecruiterPosts rp ON a.postID = rp.postID
+                         GROUP BY rp.Year, rp.Month
+                     )
+                     SELECT 
+                         @Year AS Year, 
+                         m.Month, 
+                         COALESCE(pc.PostCount, 0) AS PostCount, 
+                         COALESCE(ac.ApplyCount, 0) AS ApplyCount
+                     FROM Months m
+                     LEFT JOIN PostCounts pc ON m.Month = pc.Month AND pc.Year = @Year
+                     LEFT JOIN ApplyCounts ac ON m.Month = ac.Month AND ac.Year = @Year
+                     ORDER BY m.Month;""";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
