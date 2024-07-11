@@ -286,7 +286,7 @@
                                 <c:forEach items="${lpost}" var="p" >
                                     <div class="project-proposals-block ">
                                         <div class="project-proposals-img">
-                                            <img src="${p.image}" class="img-fluid" alt="user">
+                                            <img style="width: 80px; height: 80px; border-radius: 50%" src="${p.image}" class="" alt="user">
                                         </div>
                                         <div class="project-proposals-description">
                                             <div class="proposals-user-detail">
