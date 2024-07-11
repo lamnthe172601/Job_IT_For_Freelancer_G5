@@ -17,21 +17,23 @@
             <file>file:/D:/SU24/A/web/views/CreatePost.jsp</file>
         </group>
         <group>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/skillAdmin.jsp</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/BlogDAO.java</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/blogGrid.jsp</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/AdminDAO.java</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ProfileAdmin.java</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/CommonControll/blogGridControll.java</file>
         </group>
         <group>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/skillAdmin.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/blogDetails.jsp</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/BlogDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/CommonControll/BlogDetailsControll.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ViewCategoryAdmin.java</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/profileAdmin.jsp</file>
-            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ProjectAdmin.java</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/blogGrid.jsp</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ProfileAdmin.java</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/AdminDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/categoryAdmin.jsp</file>
             <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/CommonControll/blogGridControll.java</file>
         </group>
     </open-files>

@@ -15,8 +15,6 @@ import MutiModels.ReportDetails;
 import MutiModels.PostBasic;
 import MutiModels.Project;
 import MutiModels.RecruiterBasic;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

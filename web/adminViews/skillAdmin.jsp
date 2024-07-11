@@ -34,7 +34,7 @@
                 var status = $('#status').val();
 
                 $.ajax({
-                    url: 'skillAdmin', // Make sure this URL is correct and points to your servlet/controller
+                    url: 'skillAdmin',
                     type: 'POST',
                     data: {
                         skill: skill,
@@ -46,26 +46,6 @@
                 });
             }
         </script>
-        <!--<script>
-                $(document).ready(function() {
-                    $('#skill, #status').on('keyup change', function() {
-                        filterSkills();
-                    });
-                });
-        
-                function filterSkills() {
-                    var skill = $('#skill').val();
-                    var status = $('#status').val();
-                    $.ajax({
-                        url: 'skillAdmin',
-                        type: 'POST',
-                        data: { skill: skill, status: status },
-                        success: function(data) {
-                            $('#skillTableBody').html($(data).find('#skillTableBody').html());
-                        }
-                    });
-                }
-            </script>-->
 
     </head>
     <body>
@@ -113,8 +93,37 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                
 
-                                <div class="table-responsive">
+                            </form>
+                        </div>
+                    </div>
+                    <%
+                        String message = (String) session.getAttribute("message");
+                        if (message != null) {
+                    %>
+                    <div class="alert alert-success" role="alert">
+                        <%= message %>
+                    </div>
+                    <%
+                            session.removeAttribute("message");
+                        }
+                        String error = (String) session.getAttribute("error");
+                        if (error != null) {
+                    %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                    <%
+                            session.removeAttribute("error");
+                        }
+                    %> 
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
                                     <table class="table table-center table-hover mb-0 datatable">
                                         <thead>
                                             <tr>
@@ -125,7 +134,6 @@
                                             </tr>
                                         </thead>
                                         <tbody id="skillTableBody">
-                                            <%-- Dữ liệu sẽ được cập nhật ở đây --%>
                                             <%
                                                     List<Map<String, String>> skillSets = (List<Map<String, String>>) request.getAttribute("skillSets");
                                                     if (skillSets != null) {
@@ -155,81 +163,13 @@
                                     </table>
                                 </div>
 
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-center table-hover mb-0 datatable">
-                                            <thead>
-                                                <tr>
-                                                    <th>Skill</th>
-                                                    <th>Description</th>
-                                                    <th>Status</th>
-                                                    <th class="text-end">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <%
-                                                    //List<Map<String, String>> skillSets = (List<Map<String, String>>) request.getAttribute("skillSets");
-                                                    if (skillSets != null) {
-                                                        for (Map<String, String> skillSet : skillSets) {
-                                                            String status = skillSet.get("statusSkill").equals("1") ? "Active" : "Inactive";
-                                                            String statusClass = skillSet.get("statusSkill").equals("1") ? "text-success" : "text-danger";
-                                                %>
-                                                <tr>
-                                                    <td><%= skillSet.get("skill_set_name") %></td>
-                                                    <td><%= skillSet.get("description") %></td>
-                                                    <td class="<%= statusClass %>"><%= status %></td>   
-                                                    <td class="text-end">
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"
-                                                           onclick="editSkill('<%= skillSet.get("skill_set_ID") %>', '<%= skillSet.get("skill_set_name") %>', '<%= skillSet.get("description") %>')">
-                                                            <i class="far fa-edit"></i>
-                                                        </a>
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"
-                                                           onclick="document.getElementById('deleteSkillSetID').value = '<%= skillSet.get("skill_set_ID") %>'">
-                                                            <i class="far fa-trash-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <%
-                                                        }
-                                                    }
-                                                %>
-                                            </tbody>
-
-                                        </table>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>                    
 
 
-                    <%
-                        String message = (String) session.getAttribute("message");
-                        if (message != null) {
-                    %>
-                    <div class="alert alert-success" role="alert">
-                        <%= message %>
-                    </div>
-                    <%
-                            session.removeAttribute("message");
-                        }
-                        String error = (String) session.getAttribute("error");
-                        if (error != null) {
-                    %>
-                    <div class="alert alert-danger" role="alert">
-                        <%= error %>
-                    </div>
-                    <%
-                            session.removeAttribute("error");
-                        }
-                    %>                   
+                                      
                 </div>
 
             </div>
@@ -325,7 +265,7 @@
         </div>
 
 
-
+        
         <script>
             function editSkill(skillSetID, skillSetName, description) {
                 document.getElementById("editSkillSetID").value = skillSetID;
