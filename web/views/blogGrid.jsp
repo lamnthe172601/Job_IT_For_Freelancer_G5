@@ -51,12 +51,12 @@
                     <div class="col-md-12 col-12 text-center">
                         <div class="breadcrumb-list">
                             <h2>Blog Grid</h2>
-<!--                            <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <nav aria-label="breadcrumb" class="page-breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="home">Home</a></li>
                                     <li class="breadcrumb-item" aria-current="page">Blog Grid</li>
                                 </ol>
-                            </nav>-->
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -67,20 +67,15 @@
             <div class="container">
                 <div class="row blog-grid-row">
                     <c:forEach var="blog" items="${listBlog}">
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <div class="blog grid-blog">
                                 <div class="blog-image">
-                                    <a href="blogDetails.jsp?blogId=${blog.blogID}">
+                                    <a href="BlogDetails">
                                         <img class="img-fluid" src="assets/img/blog/${blog.image}" alt="${blog.title}">
                                     </a>
                                 </div>
                                 <div class="blog-content">
                                     <ul class="entry-meta meta-item">
-                                        <li>
-                                            <div class="post-author">
-                                                <a href="developer-details.jsp"><img src="assets/img/img-02.jpg" alt="Post Author"> <span> David Lee</span></a>
-                                            </div>
-                                        </li>
                                         <li><i class="far fa-clock"></i> <c:out value="${blog.date_blog}"/></li>
                                     </ul>
                                     <h3 class="blog-title"><a href="blogDetails.jsp?blogId=${blog.blogID}"><c:out value="${blog.title}"/></a></h3>
@@ -197,5 +192,18 @@
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
         <script src="assets/js/script.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
         <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="8157e937c31e3b17dd795771-|49" defer></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const maxLength = 100;
+            const descriptions = document.querySelectorAll(".blog-content p.mb-0");
+
+            descriptions.forEach(function(description) {
+                const text = description.innerText;
+                if (text.length > maxLength) {
+                    description.innerText = text.substring(0, maxLength) + "...";
+                }
+            });
+        });
+    </script>
     </body>
 </html>

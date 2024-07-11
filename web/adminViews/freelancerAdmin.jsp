@@ -422,7 +422,7 @@
 
                     var nameMatch = !nameValue || name.includes(nameValue);
                     var emailMatch = !emailValue || email.includes(emailValue);
-                    var statusMatch = statusValue === '' || status.includes(statusValue);
+                    var statusMatch = statusValue === '' || status===statusValue;
 
                     // New skill matching logic
                     var skillsMatch = true;

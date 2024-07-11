@@ -337,7 +337,7 @@
 
                         const titleMatch = title.includes(titleValue);
                         const dateMatch = (!dateFromValue || date >= dateFromValue) && (date <= dateToValue);
-                        const statusMatch = statusValue === '' || status.includes(statusValue);
+                        const statusMatch = statusValue === '' || status===statusValue;
 
                         return titleMatch && dateMatch && statusMatch;
                     });
