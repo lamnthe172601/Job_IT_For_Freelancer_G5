@@ -6,6 +6,7 @@ package CommonControll;
 
 import Models.Categories;
 import Models.Duration;
+import Models.ExpertiseSkill;
 import Models.Freelancer;
 import Models.JobType;
 import Models.Post;
@@ -220,12 +221,16 @@ public class SearchInHomeControll extends HttpServlet {
                 }
                 request.setAttribute("listSearch", list);
                 request.setAttribute("map", map);
-
+                request.setAttribute("txtSearch", txtSearch_1);
                 int count = list.size();
                 int NumberInPgae = 9;
                 int totalFavoritesPage = (int) Math.ceil((double) count / NumberInPgae);
                 int indexSearch = 1;
 
+                PostDAO postdao = new PostDAO();
+
+                List<ExpertiseSkill> ess = postdao.getAllExpertiseSkill();
+                request.setAttribute("ExpertiseSkill", ess);
                 String indexPage = request.getParameter("page");
                 if (indexPage != null && !indexPage.isEmpty()) {
                     indexSearch = Integer.parseInt(indexPage);
@@ -235,7 +240,6 @@ public class SearchInHomeControll extends HttpServlet {
                 request.setAttribute("NumberInPgae", NumberInPgae);
                 request.setAttribute("totalFavoritesPage", totalFavoritesPage);
                 request.setAttribute("indexSearch", indexSearch);
-                
 
                 FavoritesDAO fDao = new FavoritesDAO();
                 ArrayList<Freelancer> listFavorites = new ArrayList<>();

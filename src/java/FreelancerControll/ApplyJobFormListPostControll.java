@@ -102,7 +102,9 @@ public class ApplyJobFormListPostControll extends HttpServlet {
             int freelancerID = d.getFreelancerIDbyUserID(userId);
             p.applyJob(freelancerID, postID, linkDB);
             
-            String link="AllListPost";
+            int index=Integer.parseInt(request.getParameter("index"));
+            
+            String link="AllListPost?page="+index;
             request.getRequestDispatcher(link).forward(request, response); 
 
         } catch (Exception e) {

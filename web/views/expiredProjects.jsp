@@ -1,17 +1,10 @@
-<%-- 
-    Document   : expiredProjects
-    Created on : Jun 9, 2024, 12:04:30 PM
-    Author     : Admin
---%>
-
-
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:30:15 GMT -->
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -26,10 +19,40 @@
 
         <link rel="stylesheet" href="assets/plugins/feather/feather.css">
 
+        <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+        <link rel="stylesheet" href="assets/plugins/summernote/dist/summernote-lite.css">
+
+        <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+        <style>
+            .search-form {
+                margin-bottom: 20px;
+            }
+
+            .search-form input[type="text"] {
+                padding: 10px;
+                width: 300px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 10px;
+            }
+
+            .search-form button {
+                padding: 10px 20px;
+                background-color: #E65425;
+                color: white;
+                border: none;
+                cursor: pointer;
+                border-radius: 4px;
+                font-size: 10px;
+            }
+        </style>
     </head>
+
     <body class="dashboard-page">
 
         <div class="main-wrapper">
@@ -46,7 +69,7 @@
                                     <span></span>
                                 </span>
                             </a>
-                            <a href="index.html" class="navbar-brand logo">
+                            <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
@@ -59,16 +82,18 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                           <ul class="main-nav">
+                            <ul class="main-nav">
                                 <li class="active has-submenu">
                                     <a href="home">Home <i class="fas "></i></a>
 
                                 </li>
 
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
+                                <c:if
+                                    test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
                                     <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu"> 
+                                        <a href="javascript:void(0);">For Freelancer<i
+                                                class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
 
                                             <li><a href="PostFavourites">Jobs Favourites</a></li>
 
@@ -78,18 +103,20 @@
                                     </li>
 
                                     <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                        <a href="javascript:void(0);">For Jobs<i
+                                                class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="myListJobProject">My List Post</a></li>                                        
-                                            <li><a href="SreachJob">Find Jobs</a></li>  
+                                            <li><a href="ListPost">Jobs List</a></li>
+                                            <li><a href="SreachJob">Find Jobs</a></li>
                                             <li><a href="company">Company</a></li>
                                         </ul>
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
                                     <li class="has-submenu">
-                                        <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <a href="javascript:void(0);">Find Freelancer<i
+                                                class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
                                             <li><a href="jobsList">Top Freelancer</a></li>
@@ -101,7 +128,7 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
                                             <li><a href="newsJobs">Reviews</a></li>
 
                                         </ul>
@@ -109,83 +136,105 @@
                                 </c:if>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">                                                                           
+                                    <ul class="submenu">
                                         <li><a href="About">About us</a></li>
                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
-                                <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
+                                <li class="has-submenu">
+                                <li><a href="blogGrid">Blog</a></li>
+                                </li>
 
-                               
+
                             </ul>
                         </div>
                         <ul class="nav header-navbar-rht">
-                            <li><a href="chats.html"><img src="assets/img/icon/message-chat-icon.svg" alt="Img"></a></li>
+
                             <li class="dropdown">
-                                <a data-bs-toggle="dropdown" href="javascript:void(0);"><img src="assets/img/icon/notification-bell-icon.svg" alt="Img"></a>
+                                <a data-bs-toggle="dropdown" href="javascript:void(0);"><img
+                                        src="assets/img/icon/notification-bell-icon.svg" alt="Img"></a>
                                 <div class="dropdown-menu notifications">
                                     <div class="topnav-dropdown-header">
-                                        <div class="notification-title">Notifications<span class="msg-count-badge">2</span></div>
-                                        <a href="javascript:void(0)" class="clear-noti d-flex align-items-center">Mark all as read <i class="fe fe-check-circle"></i></a>
+                                        <div class="notification-title">Notifications<span
+                                                class="msg-count-badge">2</span></div>
+                                        <a href="javascript:void(0)"
+                                           class="clear-noti d-flex align-items-center">Mark all as read <i
+                                                class="fe fe-check-circle"></i></a>
                                     </div>
                                     <div class="noti-content">
                                         <ul class="notification-list">
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="#">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md active">
-                                                            <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-2.jpg">
+                                                            <img class="avatar-img rounded-circle" alt="avatar-img"
+                                                                 src="assets/img/avatar/avatar-2.jpg">
                                                         </span>
                                                         <div class="media-body">
                                                             <span class="noti-title">Edward Curr</span>
-                                                            <p class="noti-details">Notifications inform you when someone likes, reacts</p>
-                                                            <p class="noti-time"><span class="notification-time">Yesterday at 11:42 PM</span></p>
+                                                            <p class="noti-details">Notifications inform you when
+                                                                someone likes, reacts</p>
+                                                            <p class="noti-time"><span
+                                                                    class="notification-time">Yesterday at 11:42
+                                                                    PM</span></p>
                                                         </div>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="#">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md active">
-                                                            <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-1.jpg">
+                                                            <img class="avatar-img rounded-circle" alt="avatar-img"
+                                                                 src="assets/img/avatar/avatar-1.jpg">
                                                         </span>
                                                         <div class="media-body">
                                                             <span class="noti-title">Maria Hill</span>
-                                                            <p class="noti-details"> Notifications alert you to new messages in your Kofejob inbox.</p>
+                                                            <p class="noti-details"> Notifications alert you to new
+                                                                messages in your Kofejob inbox.</p>
                                                             <div class="notification-btn">
                                                                 <span class="btn btn-primary">Accept</span>
                                                                 <span class="btn btn-outline-primary">Reject</span>
                                                             </div>
-                                                            <p class="noti-time"><span class="notification-time">Today at 9:42 AM</span></p>
+                                                            <p class="noti-time"><span
+                                                                    class="notification-time">Today at 9:42
+                                                                    AM</span></p>
                                                         </div>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="notification">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md">
-                                                            <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-3.jpg">
+                                                            <img class="avatar-img rounded-circle" alt="avatar-img"
+                                                                 src="assets/img/avatar/avatar-3.jpg">
                                                         </span>
                                                         <div class="media-body">
                                                             <span class="noti-title">Maria Hill</span>
-                                                            <p class="noti-details"> Notifications alert you to new messages in your Kofejob inbox.</p>
-                                                            <p class="noti-time"><span class="notification-time">Yesterday at 5:42 PM</span></p>
+                                                            <p class="noti-details"> Notifications alert you to new
+                                                                messages in your Kofejob inbox.</p>
+                                                            <p class="noti-time"><span
+                                                                    class="notification-time">Yesterday at 5:42
+                                                                    PM</span></p>
                                                         </div>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="notification">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md">
-                                                            <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-4.jpg">
+                                                            <img class="avatar-img rounded-circle" alt="avatar-img"
+                                                                 src="assets/img/avatar/avatar-4.jpg">
                                                         </span>
                                                         <div class="media-body">
                                                             <span class="noti-title">Edward Curr</span>
-                                                            <p class="noti-details">Notifications inform you when someone likes, reacts</p>
-                                                            <p class="noti-time"><span class="notification-time">Last Wednesday at 11:15 AM</span></p>
+                                                            <p class="noti-details">Notifications inform you when
+                                                                someone likes, reacts</p>
+                                                            <p class="noti-time"><span
+                                                                    class="notification-time">Last Wednesday at
+                                                                    11:15 AM</span></p>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -193,13 +242,15 @@
                                         </ul>
                                     </div>
                                     <div class="topnav-dropdown-footer text-center">
-                                        <a href="notification.html">View All Notification</a>
+                                        <a href="notification">View All Notification</a>
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="post-project.html" class="login-btn">Post a Project <i class="feather-plus ms-1"></i></a></li>
+                            <li><a href="CreatePost" class="login-btn">Post a Project <i
+                                        class="feather-plus ms-1"></i></a></li>
                             <li class="nav-item dropdown account-item">
-                                <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle nav-link"
+                                   data-bs-toggle="dropdown">
                                     <span class="user-img">
                                         <img src="${recruiter.image}" alt="Img">
                                     </span>
@@ -207,23 +258,25 @@
                                 </a>
                                 <div class="dropdown-menu emp">
                                     <div class="drop-head">
-                                        <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle nav-link"
+                                           data-bs-toggle="dropdown">
                                             <span class="user-img">
                                                 <img src="${recruiter.image}" alt="Img">
                                             </span>
                                             <div>
                                                 <span>${recruiter.fullName()}</span>
-                                                <p><span  data-cfemail="81e8efe7eec1e3f3f4e2e4e3f4f2e9afe2eeec">@${sessionScope.account.username}</span></p>
+                                                <p><span
+                                                        data-cfemail="81e8efe7eec1e3f3f4e2e4e3f4f2e9afe2eeec">@${sessionScope.account.username}</span>
+                                                </p>
                                             </div>
                                         </a>
                                     </div>
-                                    <a class="dropdown-item" href="company-profile.html"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                    <a class="dropdown-item" href="manage-projects.html"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
-                                    <a class="dropdown-item" href="favourites.html"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Subscription</a>
-                                    <a class="dropdown-item" href="deposit-funds.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
-                                    <a class="dropdown-item" href="chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
-                                    <a class="dropdown-item" href="profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                    <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                    <a class="dropdown-item" href="Dashboard"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img"> Dashboard</a>
+                                    <a class="dropdown-item" href="companydetail"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
+                                    <a class="dropdown-item" href="manageJobsPosts"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Project</a>
+                                    <a class="dropdown-item" href="RecruiterFavourites"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img">My Favourites</a>             
+                                    <a class="dropdown-item" href="recruitersetting"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                    <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -237,10 +290,15 @@
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
-                                <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/table-avatar-03.jpg" class="avatar-lg rounded-circle"></a>
+                                <div
+                                    class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
+                                    <a href="companydetail"><img alt="profile image"
+                                                                           src="${recruiter.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
-                                        <h3 class="mb-0"><a href="profile-settings.html">${recruiter.fullName()}</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
+                                        <h3 class="mb-0"><a
+                                                href="companydetail">${recruiter.fullName()}</a><img
+                                                src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img">
+                                        </h3>
                                         <p class="mb-0">@${sessionScope.account.username}</p>
                                     </div>
                                 </div>
@@ -249,85 +307,70 @@
                                         <ul>
                                             <li class="nav-item">
                                                 <a href="Dashboard" class="nav-link ">
-                                                    <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
+                                                    <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img">
+                                                    Dashboard
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu active">
                                                 <a href="milestones.html" class="nav-link active">
-                                                    <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
+                                                    <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img">
+                                                    Projects
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="manageJobsPosts" >Manage jobs</a>
+                                                        <a href="manageJobsPosts">Manage Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="tasks.html">All applicants</a>
+                                                        <a href="ManageApplication" class="active">All
+                                                            applicants</a>
                                                     </li>
                                                     <li>
-                                                        <a  href="CompletedProjects">Completed Projects</a>
+                                                        <a href="CompletedProjects">Completed Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a class="active" href="ExpiredProjects">Expired Projects</a>
+                                                        <a href="ExpiredProjects">Freelancer Approved</a>
                                                     </li>
-                                                    
-                                                    
+
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-favourites.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
+                                                <a href="RecruiterFavourites" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img">
+                                                    Favourites
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="favourites.html">Bookmarked Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="invited-favourites.html">Invitations</a>
+                                                        <a href="RecruiterFavourites">Bookmarked Projects</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="review.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="chats.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="deposit-funds.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
+                                                <a href="#" class="nav-link">
+                                                    <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img">
+                                                    Reviews
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
+                                                    <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img">
+                                                    Settings
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="profile-settings.html">Profile</a>
+                                                        <a href="companydetail">Profile</a>
                                                     </li>
+
                                                     <li>
-                                                        <a href="membership-plans.html">Plan & Billing</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="verify-identity.html">Verify Identity</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="change-password.html">Change Password</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="delete-account.html">Delete Account</a>
+                                                        <a href="changePassword">Change Password</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="index.html" class="nav-link">
+                                                <a href="logout" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-11.svg" alt="Img"> Logout
                                                 </a>
                                             </li>
@@ -336,25 +379,25 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="col-xl-9 col-lg-8">
-                            <div class="page-title">
-                                <h3>Manage Projects</h3>
-                            </div>
+
                             <nav class="user-tabs mb-4">
                                 <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
-                                    
+
                                     <li class="nav-item">
-                                        <a class="nav-link " href="manageJobsPosts">Manage jobs</a>
+                                        <a class="nav-link " href="manageJobsPosts">Manage projects</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="ManageApplication">All applicants</a>
+                                        <a class="nav-link active" href="ManageApplication">All applicants</a>
                                     </li>
-                                    
+
                                     <li class="nav-item">
                                         <a class="nav-link " href="CompletedProjects">Completed Projects</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="ExpiredProjects">Expired Projects</a>
+                                        <a class="nav-link" href="ExpiredProjects">Freelancer Approved</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -362,127 +405,304 @@
                             <div class="my-projects-view">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="title-head d-flex justify-content-between align-items-center mb-4">
-                                            <h4 class="mb-0">Files</h4>
-                                            <a href="#add-milestone" class="login-btn btn-primary" data-bs-toggle="modal">Add Files</a>
+                                        <div
+                                            class="title-head d-flex justify-content-between align-items-center mb-4">
+                                            <div class="search-form">
+                                                <input type="text" id="searchInput" placeholder="Search...">
+                                            </div>
+                                            <div style="margin-bottom: 16px" class="filter-status">
+
+                                                <select class="form-select" id="filterSelect">
+                                                    <option value="">All</option>
+                                                    <option value="0">Pending</option>
+                                                    <option value="1">Approved</option>
+                                                    <option value="2">Refused</option>
+                                                </select>
+                                            </div>
+
                                         </div>
                                         <div class="table-responsive table-box manage-projects-table">
+
+
                                             <table class="table table-center table-hover datatable no-sort">
                                                 <thead class="thead-pink">
                                                     <tr>
-                                                        <th>File Preview</th>
-                                                        <th>Title</th>
-                                                        <th>Description</th>
-                                                        <th>Type</th>
-                                                        <th>Size</th>
+                                                        <th>NAME</th>
+                                                        <th>RESUME</th>
+                                                        <th>STATUS</th>
+                                                        <th>INFORMATION</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><img src="assets/img/icon/manage-file-icon-01.svg" alt="Img"> </td>
-                                                        <td>Website Designer Required </td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td>Png</td>
-                                                        <td>20 KB</td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="javascript:void(0);" class="download-icon me-2"><i class="feather-download"></i></a>
-                                                                    <a href="javascript:void(0);" class="download-icon"><i class="feather-trash-2"></i></a>
+                                                <tbody id="tableBody">
+                                                    <c:forEach items="${listapply}" var="listapply">
+                                                        <tr>
+                                                            <td>
+                                                                <a
+                                                                    href="PostDetails?postID=${listapply.post.postID}">${listapply.freelancer.name()}</a><br>
+                                                                <div class="applied">Applied:<a
+                                                                        href="PostDetails?postID=${listapply.post.postID}"
+                                                                        target="_blank">
+                                                                        <span>${listapply.post.title}</span>
+                                                                        <i class="fas fa-external-link-alt"></i>
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/img/icon/manage-file-icon-02.svg" alt="Img"> </td>
-                                                        <td>Create desktop applications </td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td>Jpg</td>
-                                                        <td>2 MB</td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="javascript:void(0);" class="download-icon me-2"><i class="feather-download"></i></a>
-                                                                    <a href="javascript:void(0);" class="download-icon"><i class="feather-trash-2"></i></a>
+                                                            </td>
+                                                            <td>
+                                                                <div class="action-table-data">
+                                                                    <a id="Download${listapply.applyID}"
+                                                                       style="margin-left: 20px"
+                                                                       href="https://ik.imagekit.io/tvlk/blog/2023/07/den-lanh-giang.jpg?tr=dpr-2,w-675"
+                                                                       class="download-icon me-2" download>
+                                                                        <i class="feather-download"></i>
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/img/icon/manage-file-icon-03.svg" alt="Img"> </td>
-                                                        <td>PHP, Javascript Projects </td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td>Jpg</td>
-                                                        <td>12 KB</td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="javascript:void(0);" class="download-icon me-2"><i class="feather-download"></i></a>
-                                                                    <a href="javascript:void(0);" class="download-icon"><i class="feather-trash-2"></i></a>
+                                                            </td>
+                                                            <td class="status-cell">
+                                                                <span id="status-${listapply.applyID}"
+                                                                      class="badge checked badge-pill ${listapply.status == 0 ? 'bg-warning-light' : (listapply.status == 1 ? 'bg-success-light' : 'bg-danger-light')}"
+                                                                      data-status="${listapply.status}">
+                                                                    ${listapply.status == 0 ? 'Pending' :
+                                                                      (listapply.status == 1 ? 'Approved' :
+                                                                      'Refused')}
+                                                                </span>
+                                                                <br>
+                                                                <span class="applied-time">Applied:
+                                                                    ${listapply.dateApply}</span>
+                                                            </td>
+                                                            <td>${listapply.freelancer.phone}
+                                                                <br>${listapply.freelancer.email}
+                                                            </td>
+                                                            <td>
+                                                                <div class="action-table-data">
+                                                                    <div id="ApproveAndRefuse${listapply.applyID}">
+                                                                        <a href="#Approve${listapply.applyID}"
+                                                                           data-bs-toggle="modal"
+                                                                           class="btn btn-request">Connect</a>
+                                                                        <a style="background: blueviolet;"
+                                                                           href="#Refuse${listapply.applyID}"
+                                                                           data-bs-toggle="modal"
+                                                                           class="btn btn-request">Refuse</a>
+                                                                    </div>
+
+                                                                    <div style="display: none;"
+                                                                         id="connectedBtn${listapply.applyID}">
+                                                                        <a style="background: violet;margin-left: 30px;"
+                                                                           href="javascript:void(0);"
+                                                                           data-bs-toggle="modal"
+                                                                           class="btn btn-request">Connected</a>
+                                                                    </div>
+
+                                                                    <div class="modal fade edit-proposal-modal success-modal"
+                                                                         id="success-milestone${listapply.applyID}">
+                                                                        <div
+                                                                            class="modal-dialog modal-dialog-centered modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div
+                                                                                    class="modal-header justify-content-end">
+                                                                                    <span class="modal-close">
+                                                                                        <a href="javascript:void(0);"
+                                                                                           data-bs-dismiss="modal"
+                                                                                           aria-label="Close">
+                                                                                            <i
+                                                                                                class="feather-x"></i>
+                                                                                        </a>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <form
+                                                                                        id="emailForm${listapply.applyID}"
+                                                                                        method="post"
+                                                                                        action="ManageApplication">
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                for="emailSubject">Subject</label>
+                                                                                            <input type="text"
+                                                                                                   class="form-control"
+                                                                                                   id="emailSubject"
+                                                                                                   name="emailSubject"
+                                                                                                   placeholder="Enter email subject"
+                                                                                                   required>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                for="emailRecipient">Recipient</label>
+                                                                                            <input type="email"
+                                                                                                   class="form-control"
+                                                                                                   id="emailRecipient"
+                                                                                                   name="emailRecipient"
+                                                                                                   value="${listapply.freelancer.email}"
+                                                                                                   required>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                for="emailContent">Content</label>
+                                                                                            <textarea
+                                                                                                class="form-control"
+                                                                                                id="emailContent"
+                                                                                                name="emailContent"
+                                                                                                rows="10"
+                                                                                                placeholder="Enter email content"
+                                                                                                required></textarea>
+                                                                                        </div>
+                                                                                        <div class="text-center">
+                                                                                            <button type="submit"
+                                                                                                    class="btn btn-primary mt-3">Send
+                                                                                                Email</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+
+
+
+                                                                    <div class="modal fade edit-proposal-modal success-modal"
+                                                                         id="Refuse${listapply.applyID}">
+                                                                        <div
+                                                                            class="modal-dialog modal-dialog-centered modal-md">
+                                                                            <div class="modal-content">
+                                                                                <div
+                                                                                    class="modal-header justify-content-end">
+                                                                                    <span class="modal-close">
+                                                                                        <a href="javascript:void(0);"
+                                                                                           data-bs-dismiss="modal"
+                                                                                           aria-label="Close">
+                                                                                            <i
+                                                                                                class="feather-x"></i>
+                                                                                        </a>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div
+                                                                                        class="confirmation-msg-content text-center">
+                                                                                        <input type="hidden"
+                                                                                               class="apply-id"
+                                                                                               value="${listapply.applyID}">
+                                                                                        <h4>Confirm Action</h4>
+                                                                                        <p>Are you sure you want to
+                                                                                            refuse this freelancer?
+                                                                                        </p>
+                                                                                        <div class="text-center">
+                                                                                            <a href="javascript:void(0);"
+                                                                                               class="btn btn-primary mt-3 refuse-freelancer">Refuse</a>
+                                                                                            <a href="javascript:void(0);"
+                                                                                               data-bs-dismiss="modal"
+                                                                                               class="btn btn-secondary mt-3"
+                                                                                               style="margin-left: 30px;"
+                                                                                               aria-label="Close">Cancel</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal fade edit-proposal-modal success-modal"
+                                                                         id="Approve${listapply.applyID}">
+                                                                        <div
+                                                                            class="modal-dialog modal-dialog-centered modal-md">
+                                                                            <div class="modal-content">
+                                                                                <div
+                                                                                    class="modal-header justify-content-end">
+                                                                                    <span class="modal-close">
+                                                                                        <a href="javascript:void(0);"
+                                                                                           data-bs-dismiss="modal"
+                                                                                           aria-label="Close">
+                                                                                            <i
+                                                                                                class="feather-x"></i>
+                                                                                        </a>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div
+                                                                                        class="confirmation-msg-content text-center">
+                                                                                        <input type="hidden"
+                                                                                               class="apply-id"
+                                                                                               value="${listapply.applyID}">
+                                                                                        <h4>Confirm Action</h4>
+                                                                                        <p>Are you sure you want to
+                                                                                            approve this freelancer?
+                                                                                        </p>
+                                                                                        <div class="text-center">
+                                                                                            <a href="javascript:void(0);"
+                                                                                               class="btn btn-primary mt-3 approve-freelancer">Approve</a>
+                                                                                            <a href="javascript:void(0);"
+                                                                                               data-bs-dismiss="modal"
+                                                                                               class="btn btn-secondary mt-3"
+                                                                                               style="margin-left: 30px;"
+                                                                                               aria-label="Close">Cancel</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/img/icon/manage-file-icon-04.svg" alt="Img"> </td>
-                                                        <td>Website Designer Required </td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td>Png</td>
-                                                        <td>25 KB</td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="javascript:void(0);" class="download-icon me-2"><i class="feather-download"></i></a>
-                                                                    <a href="javascript:void(0);" class="download-icon"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/img/icon/manage-file-icon-05.svg" alt="Img"> </td>
-                                                        <td>Swift / SwiftUI Developer </td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td>Jpg</td>
-                                                        <td>50 KB</td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="javascript:void(0);" class="download-icon me-2"><i class="feather-download"></i></a>
-                                                                    <a href="javascript:void(0);" class="download-icon"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/img/icon/manage-file-icon-06.svg" alt="Img"> </td>
-                                                        <td>Full-stack Developer </td>
-                                                        <td>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...
-                                                        </td>
-                                                        <td>Png</td>
-                                                        <td>38 KB</td>
-                                                        <td>
-                                                            <div class="action-table-data">
-                                                                <div class="edit-delete-action m-0">
-                                                                    <a href="javascript:void(0);" class="download-icon me-2"><i class="feather-download"></i></a>
-                                                                    <a href="javascript:void(0);" class="download-icon"><i class="feather-trash-2"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
+
+
+
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                    var filterSelect = document.getElementById('filterSelect');
+
+                                                    // Lắng nghe sự kiện khi người dùng thay đổi lựa chọn trong dropdown filter
+                                                    filterSelect.addEventListener('change', function () {
+                                                        var selectedValue = this.value; // Lấy giá trị đã chọn trong dropdown
+
+                                                        // Lặp qua từng hàng trong tbody để lọc và ẩn hiện các hàng thỏa mãn
+                                                        var rows = document.getElementById('tableBody').getElementsByTagName('tr');
+                                                        for (var i = 0; i < rows.length; i++) {
+                                                            var row = rows[i];
+                                                            var statusCell = row.querySelector('.status-cell span'); // Lấy cell chứa status
+                                                            var statusValue = parseInt(statusCell.getAttribute('data-status')); // Lấy giá trị status từ data attribute và chuyển sang số nguyên
+
+                                                            // Kiểm tra nếu status của hàng trùng với giá trị filter hoặc không có filter
+                                                            if (selectedValue === '' || statusValue === parseInt(selectedValue)) {
+                                                                row.style.display = '';
+                                                            } else {
+                                                                row.style.display = 'none';
+                                                            }
+                                                        }
+
+
+
+                                                    });
+                                                });
+                                            </script>
+
+
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                    // Lắng nghe sự kiện khi người dùng nhập vào ô tìm kiếm
+                                                    document.getElementById('searchInput').addEventListener('input', function () {
+                                                        var searchValue = this.value.toLowerCase(); // Lấy giá trị nhập vào và chuyển thành chữ thường
+
+                                                        // Lặp qua từng hàng trong tbody để tìm kiếm và ẩn hiện các hàng thỏa mãn
+                                                        var rows = document.getElementById('tableBody').getElementsByTagName('tr');
+                                                        for (var i = 0; i < rows.length; i++) {
+                                                            var row = rows[i];
+                                                            var titleElement = row.querySelector('.applied span'); // Lấy phần tử span chứa tiêu đề
+
+                                                            // Kiểm tra nếu tiêu đề chứa chuỗi tìm kiếm
+                                                            if (titleElement.textContent.toLowerCase().includes(searchValue)) {
+                                                                row.style.display = '';
+                                                            } else {
+                                                                row.style.display = 'none';
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -493,127 +713,179 @@
                 </div>
             </div>
 
-
-            <footer class="footer">
-                <div class="footer-top">
-                    <div class="container">
-                        <div class="row">
-                            <div class=" col-lg-4 col-md-12">
-                                <div class="footer-bottom-logo">
-                                    <a href="index.html" class="menu-logo">
-                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                                    </a>
-                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                    <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
-                                </div>
-                            </div>
-                            <div class=" col-lg-8 col-md-12">
-                                <div class="row">
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Useful Links</h2>
-                                            <ul>
-                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
-                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
-                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
-                                                <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
-                                                <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Help & Support</h2>
-                                            <ul>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Other Links</h2>
-                                            <ul>
-                                                <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
-                                                <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
-                                                <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
-                                                <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
-                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Connect With Us</h2>
-                                            <ul>
-                                                <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
-                                                <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
-                                                <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
-                                                <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
-                                                <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="footer-bottom">
-                    <div class="container">
-
-                        <div class="copyright">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="copyright-text text-center">
-                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </footer>
+            <jsp:include page="footter.jsp" />
 
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-       <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
-                                        
-        </script><script src="assets/js/jquery-3.7.1.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
 
-        <script src="assets/plugins/apexchart/apexcharts.min.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/plugins/apexchart/chart-data.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+        <script>
+                                                $(document).ready(function () {
+                                                    // Lấy trạng thái từ localStorage khi tải trang
+                                                    var appliedIDs = JSON.parse(localStorage.getItem('appliedIDs')) || {};
 
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
+                                                    $.each(appliedIDs, function (applyID, status) {
+                                                        if (status === 'connected') {
+                                                            $('#ApproveAndRefuse' + applyID).hide();
+                                                            $('#connectedBtn' + applyID).show();
+                                                        }
+                                                    });
 
-        <script src="assets/js/script.js" type="50c5e983c70b40808b575f53-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="50c5e983c70b40808b575f53-|49" defer></script></body>
+                                                    // Xử lý khi nhấn nút Refuse Freelancer
+                                                    $('.refuse-freelancer').on('click', function () {
+                                                        var applyID = $(this).closest('.modal').find('.apply-id').val();
+                                                        changeFreelancerStatus(applyID, "reject", $(this));
+                                                    });
 
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:31:10 GMT -->
+                                                    // Xử lý khi nhấn nút Approve Freelancer
+                                                    $('.approve-freelancer').on('click', function () {
+                                                        var applyID = $(this).closest('.modal').find('.apply-id').val();
+                                                        changeFreelancerStatus(applyID, "approve", $(this));
+                                                    });
+
+                                                    // Hàm thay đổi trạng thái Freelancer
+                                                    function changeFreelancerStatus(applyID, actionType, buttonClicked) {
+                                                        $.ajax({
+                                                            url: '/Job_IT_For_Freelancer_G5/ConnectFreelancer',
+                                                            type: 'POST',
+                                                            data: {postID: applyID, type: actionType},
+                                                            success: function (response) {
+                                                                if (response.success) {
+                                                                    var statusBadge = $('#status-' + applyID);
+                                                                    var statusText = actionType === "reject" ? "Rejected" : "Approved";
+                                                                    var badgeClass = actionType === "reject" ? "bg-danger-light" : "bg-success-light";
+
+                                                                    // Cập nhật badge trạng thái
+                                                                    statusBadge
+                                                                            .removeClass()
+                                                                            .addClass('badge checked badge-pill ' + badgeClass)
+                                                                            .text(statusText);
+
+                                                                    // Ẩn modal hiện tại
+                                                                    buttonClicked.closest('.modal').modal('hide');
+
+                                                                    // Hiển thị thông báo thành công và mở modal success-milestone
+                                                                    showSuccessNotification(response.message, applyID);
+                                                                } else {
+                                                                    console.error('Error:', response.message);
+                                                                    showErrorNotification('Failed to update status.');
+                                                                }
+                                                            },
+                                                            error: function (xhr, status, error) {
+                                                                console.error('Error:', error);
+                                                                showErrorNotification('An error occurred while processing your request.');
+                                                            }
+                                                        });
+                                                    }
+
+                                                    // Hàm hiển thị thông báo thành công
+                                                    function showSuccessNotification(message, applyID) {
+                                                        // Hiển thị modal success-milestone
+                                                        $('#success-milestone' + applyID).modal('show');
+
+                                                        // Ẩn nút Connect và Refuse, hiển thị nút Đã Connect
+                                                        $('#ApproveAndRefuse' + applyID).hide();
+                                                        $('#connectedBtn' + applyID).show();
+
+                                                        // Lưu trạng thái vào localStorage
+                                                        var appliedIDs = JSON.parse(localStorage.getItem('appliedIDs')) || {};
+                                                        appliedIDs[applyID] = 'connected';
+                                                        localStorage.setItem('appliedIDs', JSON.stringify(appliedIDs));
+
+                                                        Swal.fire({
+                                                            icon: 'success',
+                                                            title: 'Notification',
+                                                            text: message,
+                                                            confirmButtonText: 'OK'
+                                                        });
+                                                    }
+
+                                                    // Xử lý gửi email qua AJAX
+                                                    $('form[id^="emailForm"]').on('submit', function (e) {
+                                                        e.preventDefault();
+
+                                                        var form = $(this);
+                                                        var applyID = form.attr('id').replace('emailForm', '');
+
+                                                        $.ajax({
+                                                            url: form.attr('action'),
+                                                            type: 'POST',
+                                                            data: form.serialize(),
+                                                            success: function (response) {
+                                                                if (response.success) {
+                                                                    // Đóng modal gửi email sau khi gửi thành công
+                                                                    $('#success-milestone' + applyID).modal('hide');
+
+                                                                    // Ẩn nút Connect và Refuse, hiển thị nút Đã Connect
+                                                                    $('#ApproveAndRefuse' + applyID).hide();
+                                                                    $('#connectedBtn' + applyID).show();
+
+                                                                    // Lưu trạng thái vào localStorage
+                                                                    var appliedIDs = JSON.parse(localStorage.getItem('appliedIDs')) || {};
+                                                                    appliedIDs[applyID] = 'connected';
+                                                                    localStorage.setItem('appliedIDs', JSON.stringify(appliedIDs));
+
+                                                                    Swal.fire({
+                                                                        icon: 'success',
+                                                                        title: 'Email Sent',
+                                                                        text: response.message
+                                                                    });
+                                                                } else {
+                                                                    Swal.fire({
+                                                                        icon: 'error',
+                                                                        title: 'Error',
+                                                                        text: response.message
+                                                                    });
+                                                                }
+                                                            },
+                                                            error: function (xhr, status, error) {
+                                                                Swal.fire({
+                                                                    icon: 'error',
+                                                                    title: 'Error',
+                                                                    text: 'An error occurred while sending the email.'
+                                                                });
+                                                            }
+                                                        });
+                                                    });
+                                                });
+
+
+
+        </script>
+
+        <script src="adminAssets/js/notification.js"></script>
+        <script src="assets/js/jquery-3.7.1.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/js/bootstrap.bundle.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/plugins/select2/js/select2.min.js"
+        type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/js/moment.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/js/bootstrap-datetimepicker.min.js"
+        type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js"
+        type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/plugins/datatables/datatables.min.js"
+        type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/plugins/summernote/dist/summernote-lite.min.js"
+        type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js"
+        type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"
+        type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+
+        <script src="assets/js/script.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+        data-cf-settings="b9b8f1fa285a150b1a70a944-|49" defer></script>
+    </body>
+
+
 </html>
-

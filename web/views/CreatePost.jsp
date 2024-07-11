@@ -238,7 +238,7 @@
                     <div style="padding: 10px;" class="row align-items-center ">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h3>My List Post Project</h3>
+                                <h3>My List Project</h3>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="home"> Home</a></li>
@@ -271,12 +271,12 @@
                                                 <div class="ms-3">
                                                     <label class="image-upbtn focus-label" for="imgInp">Upload Image</label>
                                                     <input class="form-control" type="file" id="imgInp" name="profileImage" accept="image/*">
-                                                    <p>Max Image size 600*300</p>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label" for="jobsType">Jobs Type</label>
+                                                    <label class="focus-label" for="jobsType">Level</label>
                                                     <select class="form-control select" name="jobsType" id="jobsType">
                                                         <option value="0">Select</option>
                                                         <c:forEach items="${alljobtype}" var="jobtype">
@@ -288,7 +288,7 @@
                                             </div>
                                             <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label" for="projectDuration">Project Duration</label>
+                                                    <label class="focus-label" for="projectDuration">Work time</label>
                                                     <select class="form-control select" name="projectDuration" id="projectDuration">
                                                         <option value="0">Select</option>
                                                         <c:forEach items="${allDuration}" var="du">
@@ -300,7 +300,7 @@
                                             </div>
                                             <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label" for="expired">Expired</label>
+                                                    <label class="focus-label" for="expired">End date</label>
                                                     <input type="date" name="expired" id="expired" class="form-control">
                                                     <div class="error" id="error-expired"></div>
                                                 </div>
@@ -321,7 +321,7 @@
                                             </div>
                                             <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label">Skill</label>
+                                                    <label class="focus-label">Skills</label>
                                                     <div class="title-content p-0">
                                                         <div class="title-detail">
                                                             <c:forEach items="${ExpertiseSkill}" var="du">
@@ -349,14 +349,14 @@
                                             </div>
                                             <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label" for="budgetFrom">From ($)</label>
+                                                    <label class="focus-label" for="budgetFrom">From ($/hours)</label>
                                                     <input type="number" class="form-control" name="budgetFrom" id="budgetFrom" placeholder="15">
                                                     <div class="error" id="error-budgetFrom"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="focus-label" for="categoriesName">Categories Name</label>
+                                                    <label class="focus-label" for="categoriesName">Position</label>
                                                     <select class="form-control select" name="categoriesName" id="categoriesName">
                                                         <option value="0">Select</option>
                                                         <c:forEach items="${allCate}" var="allcate">

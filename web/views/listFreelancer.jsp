@@ -285,6 +285,26 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <h4 class="card-title mb-0">Search Filter</h4>
                                 </div>
+                                <form action="SearchInHome" method="get" style=" display: flex;
+                                      align-items: center;">
+                                    <c:if test="${txtSearch == null}">
+                                        <input type="text" name="txtSearch" placeholder="Search..." style="padding: 5px;margin: 10px;border-radius: 5px; width: 250px;">
+                                    </c:if>
+                                    <c:if test="${txtSearch != null}">
+                                        <input type="text" name="txtSearch" value="${txtSearch}" style="padding: 5px;margin: 10px; border-radius: 5px; width: 250px;">
+                                    </c:if>
+                                    <button type="submit" style="display: flex;
+                                            align-items: center;
+                                            padding: 5px 10px;
+                                            background-color: rgb(230, 84, 37);
+                                            color: white;
+                                            border: none;
+                                            cursor: pointer;
+                                            margin-right: 5px;
+                                            border-radius: 10px;">
+                                        <i class="feather-search me-1"></i>
+                                    </button>
+                                </form>
                                 <div class="card-body">
                                     <c:forEach items="${ExpertiseSkill}" var="du" varStatus="status">
                                         <div class="filter-widget">

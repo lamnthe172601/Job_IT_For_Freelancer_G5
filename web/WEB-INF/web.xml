@@ -267,7 +267,7 @@
     <servlet>
         <servlet-name>ReportPost</servlet-name>
         <servlet-class>CommonControll.ReportPost</servlet-class>
-         </servlet>
+    </servlet>
     <servlet>
         <servlet-name>SearchInListApplyControll</servlet-name>
         <servlet-class>FreelancerControll.SearchInListApplyControll</servlet-class>
@@ -279,7 +279,7 @@
     <servlet>
         <servlet-name>ApplyJobFormSearchControll</servlet-name>
         <servlet-class>FreelancerControll.ApplyJobFormSearchControll</servlet-class>
-        </servlet>
+    </servlet>
     <servlet>
         <servlet-name>ConnectFreelancerControll</servlet-name>
         <servlet-class>RecruiterControll.ConnectFreelancerControll</servlet-class>
@@ -287,6 +287,10 @@
     <servlet>
         <servlet-name>UpdateStatusServlet</servlet-name>
         <servlet-class>RecruiterControll.UpdateStatusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchFreelancerFvrControll</servlet-name>
+        <servlet-class>RecruiterControll.SearchFreelancerFvrControll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -563,7 +567,7 @@
     <servlet-mapping>
         <servlet-name>ReportPost</servlet-name>
         <url-pattern>/allListPost</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchInListApplyControll</servlet-name>
         <url-pattern>/SearchInListApply</url-pattern>
@@ -575,7 +579,7 @@
     <servlet-mapping>
         <servlet-name>ApplyJobFormSearchControll</servlet-name>
         <url-pattern>/ApplyJobFormSearch</url-pattern>
-          </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ConnectFreelancerControll</servlet-name>
         <url-pattern>/ConnectFreelancer</url-pattern>
@@ -583,5 +587,9 @@
     <servlet-mapping>
         <servlet-name>UpdateStatusServlet</servlet-name>
         <url-pattern>/UpdateStatusServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchFreelancerFvrControll</servlet-name>
+        <url-pattern>/SearchFreelancerFvr</url-pattern>
     </servlet-mapping>
 </web-app>
