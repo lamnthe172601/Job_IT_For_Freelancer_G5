@@ -125,8 +125,8 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">Top Freelancer</a></li>
-                                            <li><a href="newsJobs">Skills</a></li>
+                                            <li><a href="ListFreelancer">List Freelancer</a></li>
+
 
                                         </ul>
                                     </li>
@@ -134,7 +134,8 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">List Post</a></li>
+                                            <li><a href="CreatePost">Create a new Project</a></li>
+                                            <li><a href="myListJobProject">My list project</a></li>
                                             <li><a href="newsJobs">Reviews</a></li>
 
                                         </ul>
@@ -143,6 +144,7 @@
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">                                                                           
+                                        <li><a href="blogGrid">Blog</a></li>
                                         <li><a href="About">About us</a></li>
                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
@@ -250,13 +252,12 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <a class="dropdown-item" href="company-profile.html"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                    <a class="dropdown-item" href="manage-projects.html"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
-                                    <a class="dropdown-item" href="favourites.html"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Subscription</a>
-                                    <a class="dropdown-item" href="deposit-funds.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
-                                    <a class="dropdown-item" href="chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
-                                    <a class="dropdown-item" href="profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                    <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                    <a class="dropdown-item" href="Dashboard"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img"> Dashboard</a>
+                                    <a class="dropdown-item" href="companydetail"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
+                                    <a class="dropdown-item" href="manageJobsPosts"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Project</a>
+                                    <a class="dropdown-item" href="RecruiterFavourites"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img">My Favourites</a>             
+                                    <a class="dropdown-item" href="recruitersetting"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                    <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -428,7 +429,7 @@
                                                 </div>
                                             </div>
                                             <div class="cart-hover">
-                                                <a href="javascript:void(0);" class="btn-invite mb-2 w-100 d-block" tabindex="-1">Connect</a>
+
                                                 <a href="ViewFreelancerProfile?id=${l.freelanceID}" class="btn-cart" tabindex="-1">View Profile</a>
                                             </div>
                                         </div>
