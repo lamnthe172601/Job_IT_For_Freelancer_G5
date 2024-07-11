@@ -53,22 +53,10 @@
                         <h2><%= admin.getFirst_name() %> <%= admin.getLast_name() %> 
                             <i class="fas fa-certificate text-primary small" data-bs-toggle="tooltip" data-placement="top" title data-original-title="Verified"></i>
                         </h2>
-<!--                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <i class="far fa-building"></i> <span>Versatile Workforce</span>
-                            </li>
-                            <li class="list-inline-item">
-                                <i class="fas fa-map-marker-alt"></i> 359 Plains, PA 18705
-                            </li>
-                            <li class="list-inline-item">
-                                <i class="far fa-calendar-alt"></i> <span>Joined March 2022</span>
-                            </li>
-                        </ul>-->
                     <% } else { %>
                         <p>Admin not found.</p>
                     <% } %>
                 </div>
-                <!-- Rest of the HTML content -->
             </div>
         </div>
     </div>
