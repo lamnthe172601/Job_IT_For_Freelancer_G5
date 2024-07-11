@@ -173,11 +173,11 @@
                     <div class="row align-items-center inner-banner">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h3>My Post By Category</h3>
+                                <h3>My Post By Position</h3>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="home"> Home</a></li>
-                                        <li class="breadcrumb-item" aria-current="page">Post By Category</li>
+                                        <li class="breadcrumb-item" aria-current="page">Post By Position</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -484,7 +484,19 @@
 
                                 </c:forEach>
                             </div>
-
+<c:if test="${endPage > 1}">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="paginations list-pagination">
+                <c:forEach begin="1" end="${endPage}" var="e">
+                    <li class="page-item">
+                        <a class="${page == e? 'active' : ''}" href="postbycategory?categoryID=${param.categoryID}&page=${e}">${e}</a>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+</c:if>
 
                         </div>
                     </div>

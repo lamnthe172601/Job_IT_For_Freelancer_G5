@@ -44,6 +44,9 @@ public class ManageJobsPostsControll extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("account");
+            if(user == null){
+                request.getRequestDispatcher("views/404Page.jsp").forward(request, response);
+            }
             RecruiterDAO reDAO = new RecruiterDAO();
             Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
             PostDAO postdao = new PostDAO();

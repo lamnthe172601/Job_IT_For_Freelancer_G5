@@ -84,8 +84,7 @@
                                         <ul class="submenu">
 
                                             <li><a href="AllListPost">Jobs List</a></li>                                        
-                                            <li><a href="SreachJob">Find Jobs</a></li>  
-                                            <li><a href="company">Company</a></li>
+                                            
                                         </ul>
                                     </li>
                                 </c:if>

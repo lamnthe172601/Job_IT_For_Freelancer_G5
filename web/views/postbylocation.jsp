@@ -483,6 +483,15 @@
                                    
                                 </c:forEach>
                             </div>
+<c:if test="${endPage > 1}">
+    <ul class="pagination">
+        <c:forEach var="i" begin="1" end="${endPage}">
+            <li class="page-item ${i == page ? 'active' : ''}">
+                <a class="page-link" href="postByLocation?location=${location}&page=${i}">${i}</a>
+            </li>
+        </c:forEach>
+    </ul>
+</c:if>
 
                             
                         </div>

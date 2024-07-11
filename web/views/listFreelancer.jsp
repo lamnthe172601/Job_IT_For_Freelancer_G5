@@ -119,7 +119,7 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="ListFreelancer">Top Freelancer</a></li>
+                                            <li><a href="ListFreelancer">List Freelancer</a></li>
 
 
                                         </ul>
@@ -137,6 +137,7 @@
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">                                                                           
+                                        <li><a href="blogGrid">Blog</a></li>
                                         <li><a href="About">About us</a></li>
                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
@@ -411,7 +412,7 @@
                                                 </div>
                                             </div>
                                             <div class="cart-hover">
-                                                <a href="javascript:void(0);" class="btn-invite mb-2 w-100 d-block" tabindex="-1">Connect</a>
+                                                <!--                                                <a href="javascript:void(0);" class="btn-invite mb-2 w-100 d-block" tabindex="-1">Connect</a>-->
                                                 <a href="ViewFreelancerProfile?id=${l.freelanceID}" class="btn-cart" tabindex="-1">View Profile</a>
                                             </div>
                                         </div>

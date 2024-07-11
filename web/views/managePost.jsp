@@ -261,7 +261,7 @@
                                     <div class="noti-content">
                                         <ul class="notification-list">
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="#">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md active">
                                                             <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-2.jpg">
@@ -275,7 +275,7 @@
                                                 </a>
                                             </li>
                                             <li class="notification-message">
-                                                <a href="notification.html">
+                                                <a href="#">
                                                     <div class="d-flex">
                                                         <span class="avatar avatar-md active">
                                                             <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/avatar/avatar-1.jpg">
@@ -347,13 +347,12 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <a class="dropdown-item" href="company-profile.html"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                    <a class="dropdown-item" href="manage-projects.html"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
-                                    <a class="dropdown-item" href="favourites.html"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Subscription</a>
-                                    <a class="dropdown-item" href="deposit-funds.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
-                                    <a class="dropdown-item" href="chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
-                                    <a class="dropdown-item" href="profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                    <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                    <a class="dropdown-item" href="Dashboard"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img"> Dashboard</a>
+                                    <a class="dropdown-item" href="companydetail"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
+                                    <a class="dropdown-item" href="manageJobsPosts"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Project</a>
+                                    <a class="dropdown-item" href="RecruiterFavourites"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img">My Favourites</a>             
+                                    <a class="dropdown-item" href="recruitersetting"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                    <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -369,9 +368,9 @@
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="${recruiter.image}" class="avatar-lg rounded-circle"></a>
+                                    <a href="companydetail"><img alt="profile image" src="${recruiter.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
-                                        <h3 class="mb-0"><a href="profile-settings.html">${recruiter.fullName()}</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
+                                        <h3 class="mb-0"><a href="companydetail">${recruiter.fullName()}</a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
                                         <p class="mb-0">@${sessionScope.account.username}</p>
                                     </div>
                                 </div>
@@ -390,7 +389,7 @@
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="manageJobsPosts" class="active">Manage jobs</a>
+                                                        <a href="manageJobsPosts" class="active">Manage Projects</a>
                                                     </li>
                                                     <li>
                                                         <a href="ManageApplication">All applicants</a>
@@ -399,41 +398,31 @@
                                                         <a href="CompletedProjects">Completed Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="ExpiredProjects">Expired Projects</a>
+                                                        <a href="ExpiredProjects">Freelancer Approved</a>
                                                     </li>
 
 
                                                 </ul>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-favourites.html" class="nav-link">
+                                                <a href="RecruiterFavourites" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
                                                     <span class="menu-arrow"></span>
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="favourites.html">Bookmarked Projects</a>
+                                                        <a href="RecruiterFavourites">Bookmarked Projects</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="invited-favourites.html">Invitations</a>
-                                                    </li>
+                                                    
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="review.html" class="nav-link">
+                                                <a href="#" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="chats.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="deposit-funds.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
-                                                </a>
-                                            </li>
+                                            
+                                            
                                             <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
@@ -441,20 +430,13 @@
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="profile-settings.html">Profile</a>
+                                                        <a href="companydetail">Profile</a>
                                                     </li>
+                                                    
                                                     <li>
-                                                        <a href="membership-plans.html">Plan & Billing</a>
+                                                        <a href="changePassword">Change Password</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="verify-identity.html">Verify Identity</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="change-password.html">Change Password</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="delete-account.html">Delete Account</a>
-                                                    </li>
+                                                    
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
@@ -474,7 +456,7 @@
                                 <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
 
                                     <li class="nav-item">
-                                        <a class="active nav-link" href="manageJobsPosts">Manage jobs</a>
+                                        <a class="active nav-link" href="manageJobsPosts">Manage projects</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link " href="ManageApplication">All applicants</a>
@@ -484,7 +466,7 @@
                                         <a class="nav-link " href="CompletedProjects">Completed Projects</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="ExpiredProjects">Expired Projects</a>
+                                        <a class="nav-link" href="ExpiredProjects">Freelancer Approved</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -628,7 +610,7 @@
                                                                         <div class="modal-dialog modal-dialog-centered modal-md">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h4 class="modal-title">Edit Post a new Jobs</h4>
+                                                                                    <h4 class="modal-title">Edit Post a new Project</h4>
                                                                                     <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
                                                                                 </div>
                                                                                 <div class="modal-body">
@@ -811,107 +793,7 @@
             </div>
 
 
-            <footer class="footer">
-                <div class="footer-top">
-                    <div class="container">
-                        <div class="row">
-                            <div class=" col-lg-4 col-md-12">
-                                <div class="footer-bottom-logo">
-                                    <a href="index.html" class="menu-logo">
-                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                                    </a>
-                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                    <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
-                                </div>
-                            </div>
-                            <div class=" col-lg-8 col-md-12">
-                                <div class="row">
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Useful Links</h2>
-                                            <ul>
-                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
-                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
-                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
-                                                <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
-                                                <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Help & Support</h2>
-                                            <ul>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Other Links</h2>
-                                            <ul>
-                                                <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
-                                                <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
-                                                <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
-                                                <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
-                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Connect With Us</h2>
-                                            <ul>
-                                                <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
-                                                <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
-                                                <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
-                                                <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
-                                                <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="footer-bottom">
-                    <div class="container">
-
-                        <div class="copyright">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="copyright-text text-center">
-                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </footer>
+            <jsp:include page="footter.jsp" />
 
         </div>
 

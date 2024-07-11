@@ -190,6 +190,33 @@ public class RecruiterDAO extends DBContext {
         }
         return list;
     }
+    
+    public List<Post> ListAllPostByRecruiterbyCompleted(int recruiterID) {
+        List<Post> list = new ArrayList<>();
+        String query = """
+                           SELECT * FROM Post p
+                           JOIN JobType j ON p.job_type_ID = j.jobID
+                           JOIN Duration du ON p.durationID = du.durationID
+                           JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                           JOIN Categories ca ON p.caID = ca.caID                           
+                           where p.recruiterID = ?
+                           """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recruiterID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
+                JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     public List<JobApply> ListAllApplyForFreelancerByRecruiterID(int recruiterID) {
         List<JobApply> list = new ArrayList<>();
@@ -205,7 +232,65 @@ public class RecruiterDAO extends DBContext {
                                                           JOIN [Freelancer] free ON ja.freelanceID = free.freelanceID
                                                           JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
                                                           WHERE 
-                                                              p.recruiterID =?;
+                                                          p.recruiterID =?  ;
+                           """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recruiterID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
+                JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+                Post post = new Post(
+                        rs.getInt("postID"),
+                        rs.getString("title"),
+                        rs.getString("image"),
+                        job, du,
+                        rs.getDate("date_post"),
+                        rs.getDate("expired"),
+                        rs.getInt("quantity"),
+                        rs.getString("description"),
+                        rs.getInt("budget"),
+                        rs.getString("location"),
+                        rs.getString("skill"),
+                       re, ca,
+                         rs.getInt("status"), rs.getInt("checking"));
+                
+                Freelancer en = new Freelancer(
+                        rs.getInt("freelanceID"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("image"),
+                        rs.getBoolean("gender"),
+                        rs.getDate("dob"),
+                        rs.getString("describe"),
+                        rs.getString("email__contact"),
+                        rs.getString("phone_contact")
+                );
+
+                list.add(new JobApply(rs.getInt("applyID"), en, post, rs.getString("status"), rs.getDate("dateApply"), rs.getString("Resume")));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+     public List<JobApply> ListAllApplyForFreelancerApprove(int recruiterID) {
+        List<JobApply> list = new ArrayList<>();
+        String query = """
+                           SELECT 
+                                                              *
+                                                          FROM [JobApply] ja
+                                                          JOIN [Post] p ON ja.postID = p.postID
+                                                          join Categories ca on p.caID = ca.caID
+                                                          join JobType jt on jt.jobID = p.job_type_ID
+                                                          join Duration du on du.durationID = p.durationID
+                                                          
+                                                          JOIN [Freelancer] free ON ja.freelanceID = free.freelanceID
+                                                          JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
+                                                          WHERE 
+                                                              p.recruiterID =? and ja.status = 1;
                            """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
