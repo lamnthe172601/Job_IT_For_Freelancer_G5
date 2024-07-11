@@ -309,7 +309,35 @@ public class HomeDAO extends DBContext {
         }
         return -1;
     }
+     public int countPostsByRecruiterStatus(int recruiterId) {
+    String query = """
+                    SELECT COUNT(postID) AS total_posts FROM [Post] WHERE recruiterID = ? AND status = 1""";
+    try (PreparedStatement ps = connection.prepareStatement(query)) {
+        ps.setInt(1, recruiterId);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("total_posts");
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return -1;
+}
+  public int  getAllOpenPosts() {
+        String query = """
+                         SELECT COUNT(postID) AS total_openposts FROM [Post] WHERE status = 1""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
 
+            while (rs.next()) {
+                return rs.getInt("total_openposts");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
     public int getNumberCompany() {
         String query = """
                         SELECT COUNT(companyID) AS total_company
@@ -369,5 +397,24 @@ public class HomeDAO extends DBContext {
 
         return categoryPostCount;
     }
+public int getNumberPostByRecruiter(int recruiterID) {
+    String query = """
+                    SELECT COUNT(postID) AS total_posts
+                    FROM [Post]
+                    WHERE recruiterID = ?;"""; // Thay đổi để phù hợp với cấu trúc bảng của bạn
+    try {
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, recruiterID); // Thiết lập giá trị cho tham số truy vấn
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("total_posts");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return -1; // Trả về -1 trong trường hợp có lỗi
+}
 
 }
