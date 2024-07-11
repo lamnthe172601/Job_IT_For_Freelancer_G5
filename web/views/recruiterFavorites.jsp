@@ -29,7 +29,7 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
         <style>
-                                    .text-center1 {
+            .text-center1 {
                 width: 150px;
                 height: 150px;
                 margin: 0 auto 15px;
@@ -80,6 +80,24 @@
                 cursor: pointer;
                 border-radius: 4px;
                 font-size: 10px;
+            }
+
+            .form-inline {
+
+                margin-right: 50px;
+            }
+
+            /* Để căn chỉnh nút và icon */
+            .input-group {
+                position: relative;
+                width: 100%;
+            }
+
+            .btn.btn-secondary.btn-number {
+                position: absolute;
+                right: -50px;
+                top: 50%;
+                transform: translateY(-50%);
             }
         </style>
     </head>
@@ -145,8 +163,7 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">Top Freelancer</a></li>
-                                            <li><a href="newsJobs">Skills</a></li>
+                                            <li><a href="ListFreelancer">List Freelancer</a></li>
 
                                         </ul>
                                     </li>
@@ -154,7 +171,8 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="myListJobProject">My List Post</a></li>
+                                            <li><a href="CreatePost">Create a new Project</a></li>
+                                            <li><a href="myListJobProject">My list project</a></li>
                                             <li><a href="newsJobs">Reviews</a></li>
 
                                         </ul>
@@ -163,6 +181,7 @@
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">                                                                           
+                                        <li><a href="blogGrid">Blog</a></li>
                                         <li><a href="About">About us</a></li>
                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
@@ -270,13 +289,12 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <a class="dropdown-item" href="company-profile.html"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                                    <a class="dropdown-item" href="manage-projects.html"><img src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
-                                    <a class="dropdown-item" href="favourites.html"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Subscription</a>
-                                    <a class="dropdown-item" href="deposit-funds.html"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
-                                    <a class="dropdown-item" href="chats.html"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
-                                    <a class="dropdown-item" href="profile-settings.html"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                                    <a class="dropdown-item" href="login.html"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
+                                    <a class="dropdown-item" href="Dashboard"><img src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img"> Dashboard</a>
+                                    <a class="dropdown-item" href="companydetail"><img src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
+                                    <a class="dropdown-item" href="manageJobsPosts"><img src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Project</a>
+                                    <a class="dropdown-item" href="RecruiterFavourites"><img src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img">My Favourites</a>             
+                                    <a class="dropdown-item" href="recruitersetting"><img src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
+                                    <a class="dropdown-item" href="logout"><img src="assets/img/icon/user-dropdown-icon--07.svg" alt="Img"> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -367,6 +385,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div><form action="SearchFreelancerFvr" method="get" class="form-inline my-2 my-lg-0">
+                                    <div class="input-group input-group-sm">
+                                        <c:if test="${txtSearch != null}">
+                                            <input name="searchName" type="text" value="${txtSearch}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
+                                        </c:if>
+                                        <c:if test="${txtSearch == null}">
+                                            <input name="searchName" type="text"  class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search">
+                                        </c:if>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-secondary btn-number">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form></div>
                         </div>
 
                         <div class="col-md-12 col-lg-8 col-xl-9">
@@ -384,7 +417,9 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="freelance-widget">
                                             <div class="freelance-content">
+                                
                                                 <a  class="favourite color-active" class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#delete${l.freelanceID}"><i class="feather-heart"></i></a>
+                                                
                                                 <div class="freelance-img">
                                                     <a href="developer-details.html">
                                                         <img src="${l.image}" alt="User Image">
@@ -417,7 +452,7 @@
                                                 </div>
                                             </div>
                                             <div class="cart-hover">
-                                                <a href="javascript:void(0);" class="btn-invite mb-2 w-100 d-block" tabindex="-1">Connect</a>
+                                                
                                                 <a href="ViewFreelancerProfile?id=${l.freelanceID}" class="btn-cart" tabindex="-1">View Profile</a>
                                             </div>
                                         </div>

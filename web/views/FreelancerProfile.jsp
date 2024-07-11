@@ -87,7 +87,7 @@
                                             </div>
                                         </div>
                                         <div class="pro-info-right profile-inf">
-                                            <a class="btn profile-edit-btn" href="">Connect Now</a>
+                                            
                                         </div>
                                     </div>
                                 </div>

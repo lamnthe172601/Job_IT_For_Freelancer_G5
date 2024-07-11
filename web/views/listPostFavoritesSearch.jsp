@@ -84,8 +84,7 @@
                                         <ul class="submenu">
 
                                             <li><a href="AllListPost">Jobs List</a></li>                                        
-                                            <li><a href="SreachJob">Find Jobs</a></li>  
-                                            <li><a href="company">Company</a></li>
+                                            
                                         </ul>
                                     </li>
                                 </c:if>
@@ -428,7 +427,7 @@
                                                     <div class="counter-stats">
                                                         <ul>
                                                             <li class="class3">
-                                                                <h3>Duration</h3>
+                                                                <h3>Work Time</h3>
                                                                 <h5 class="counter-value ">${p.durationID.durationName}</h5>
                                                             </li>
                                                             <li class="class3">
@@ -436,7 +435,7 @@
                                                                 <h5 class="counter-value " style="padding-left: 20px">${p.quantity}</h5>
                                                             </li>
                                                             <li class="class3">
-                                                                <h3>Job Type</h3>
+                                                                <h3>Level</h3>
                                                                 <h5 class="counter-value ">${p.jobTypeID.jobName}</h5>
                                                             </li>
                                                         </ul>
@@ -580,7 +579,7 @@
                                                         </div>
                                                         <div class="freelance-info">
                                                             <div>
-                                                                <div class="class1" style="display: inline-block;">Duration:</div>
+                                                                <div class="class1" style="display: inline-block;">Work Time:</div>
                                                                 <div class="class2" style="display: inline-block; margin-left: 5px;">
                                                                     <h3>${p.durationID.durationName}</h3>
                                                                 </div>
@@ -592,7 +591,7 @@
                                                                 </div>
                                                             </div>
                                                             <div>
-                                                                <div class="class1" style="display: inline-block;">Jop Type:</div>
+                                                                <div class="class1" style="display: inline-block;">Level:</div>
                                                                 <div class="class2" style="display: inline-block; margin-left: 5px;">
                                                                     <h3>${p.jobTypeID.jobName}</h3>
                                                                 </div>

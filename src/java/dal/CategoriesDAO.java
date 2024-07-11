@@ -5,6 +5,10 @@
 package dal;
 
 import Models.Categories;
+import Models.Duration;
+import Models.JobType;
+import MutiModels.PostBasic;
+import MutiModels.RecruiterBasic;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -206,4 +210,122 @@ public List<Categories> getCategoryByNameAndStatus(String categoryName, int stat
     }
     return false;
 }
+ 
+  public List<PostBasic> getPostsByCategoryPage(int categoryId, int index) {
+    List<PostBasic> posts = new ArrayList<>();
+    String query = """
+                   select p.postID, p.title, p.image, p.job_type_ID, p.durationID, p.date_post, p.quantity, p.description, p.budget, p.location, p.skill, p.recruiterID, p.status, p.caID, p.checking,
+                           j.job_name,
+                           d.duration_name,
+                           c.categories_img, c.categories_name, c.description, c.statusCate,
+                           r.first_name, r.last_name, r.email_contact, r.image,
+                           co.company_name
+                   from Post p 
+                   inner join JobType j on j.jobID = p.job_type_ID
+                   inner join Duration d on d.durationID = p.durationID
+                   inner join Categories c on c.caID = p.caID
+                   inner join Recruiter r on r.recruiterID = p.recruiterID
+                   inner join Company co on co.recruiterID = p.recruiterID
+                   where p.caID = ?
+                   order by p.postID desc
+                   offset ? rows fetch next 6 rows only;
+                   """;
+
+    try {
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, categoryId);
+        ps.setInt(2, (index - 1) * 6);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
+            Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+            RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString("image"));
+            JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
+            posts.add(new PostBasic(rs.getInt("postID"), rs.getInt("quantity"), rs.getInt("budget"), rs.getString("title"), rs.getString("description"), rs.getString("location"), rs.getString("skill"), rs.getString("image"), rs.getDate("date_post"),
+                    job, du,
+                    re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return posts;
+}
+  
+  public List<PostBasic> getPostsByLocationPage(String location, int index) {
+    List<PostBasic> posts = new ArrayList<>();
+    String query = """
+                   select p.postID, p.title, p.image, p.job_type_ID, p.durationID, p.date_post, p.quantity, p.description, p.budget, p.location, p.skill, p.recruiterID, p.status, p.caID, p.checking,
+                           j.job_name,
+                           d.duration_name,
+                           c.categories_img, c.categories_name, c.description, c.statusCate,
+                           r.first_name, r.last_name, r.email_contact, r.image,
+                           co.company_name
+                   from Post p 
+                   inner join JobType j on j.jobID = p.job_type_ID
+                   inner join Duration d on d.durationID = p.durationID
+                   inner join Categories c on c.caID = p.caID
+                   inner join Recruiter r on r.recruiterID = p.recruiterID
+                   inner join Company co on co.recruiterID = p.recruiterID
+                   where p.location = ?
+                   order by p.postID desc
+                   offset ? rows fetch next 6 rows only;
+                   """;
+
+    try {
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, location);
+        ps.setInt(2, (index - 1) * 6);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
+            Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+            RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString("image"));
+            JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
+            posts.add(new PostBasic(rs.getInt("postID"), rs.getInt("quantity"), rs.getInt("budget"), rs.getString("title"), rs.getString("description"), rs.getString("location"), rs.getString("skill"), rs.getString("image"), rs.getDate("date_post"),
+                    job, du,
+                    re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return posts;
+}
+
+  public List<PostBasic> getPostsByFreelancerSkillsPage(int freelancerID, int index) {
+    List<PostBasic> posts = new ArrayList<>();
+    String query = """
+                   SELECT p.postID, p.title, p.image, p.job_type_ID, p.durationID, p.date_post, p.quantity, p.description, p.budget, p.location, p.skill, p.recruiterID, p.status, p.caID, p.checking,
+                          j.job_name, d.duration_name, c.categories_img, c.categories_name, c.description, c.statusCate,
+                          r.first_name, r.last_name, r.email_contact, r.image, co.company_name
+                   FROM Post p
+                   JOIN SkillPost sp ON p.postID = sp.postID
+                   JOIN Skill s ON sp.skillID = s.skillID
+                   JOIN FreelancerSkill fs ON s.skillID = fs.skillID
+                   JOIN JobType j ON j.jobID = p.job_type_ID
+                   JOIN Duration d ON d.durationID = p.durationID
+                   JOIN Categories c ON c.caID = p.caID
+                   JOIN Recruiter r ON r.recruiterID = p.recruiterID
+                   JOIN Company co ON co.recruiterID = p.recruiterID
+                   WHERE fs.freelancerID = ?
+                   ORDER BY p.postID DESC
+                   OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY;
+                   """;
+    try (PreparedStatement ps = connection.prepareStatement(query)) {
+        ps.setInt(1, freelancerID);
+        ps.setInt(2, (index - 1) * 6);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
+            Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+            RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString("image"));
+            JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
+            posts.add(new PostBasic(rs.getInt("postID"), rs.getInt("quantity"), rs.getInt("budget"), rs.getString("title"), rs.getString("description"), rs.getString("location"), rs.getString("skill"), rs.getString("image"), rs.getDate("date_post"),
+                    job, du, re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return posts;
+}
+
 }

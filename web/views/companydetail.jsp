@@ -217,27 +217,15 @@
                                 <ul class="d-flex mb-0 list-style job-list-block">
                                     <li>
                                         <span>Jobs Posted</span>
-                                        <p class="mb-0">48</p>
+                                        <p class="mb-0">${NumberPostOfRecruiter}</p>
                                     </li>
                                     <li>
-                                        <span>Hire Rate</span>
-                                        <p class="mb-0">22</p>
+                                        <span>Applicants</span>
+                                        <p class="mb-0">${numberApply}</p>
                                     </li>
                                     <li>
                                         <span>Open Jobs</span>
-                                        <p class="mb-0">75</p>
-                                    </li>
-                                    <li>
-                                        <span>Total Spent</span>
-                                        <p class="mb-0">22</p>
-                                    </li>
-                                    <li>
-                                        <span>Hired</span>
-                                        <p class="mb-0">64</p>
-                                    </li>
-                                    <li>
-                                        <span>Active</span>
-                                        <p class="mb-0">29</p>
+                                        <p class="mb-0">${openJobs}</p>
                                     </li>
                                 </ul>
                             </div>

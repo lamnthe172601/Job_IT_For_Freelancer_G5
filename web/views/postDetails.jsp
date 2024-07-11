@@ -115,6 +115,51 @@
             position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
         }
 
+
+
+
+
+        .company-detail {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px; /* Bo tròn các góc */
+            margin-bottom: 10px;
+        }
+
+        .company-detail-image {
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+
+        .company-title {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .company-detail-flag {
+            flex-shrink: 0;
+        }
+
+        .company-title h4 {
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn.report-post {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .custom-flag {
+            margin-left: 5px;
+        }
+
+
     </style>
     <body>
 
@@ -159,7 +204,7 @@
                     <div class="row align-items-center inner-banner">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h2>Post Details</h2>
+                                <h2>Project Details</h2>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -183,16 +228,16 @@
                                         <img src="${post.image}" class="img-fluid" alt="logo">
                                     </div>
                                     <div class="company-title">
-
                                         <h4>${post.title}</h4>
                                     </div>
                                     <div class="company-detail-flag">
                                         <!-- biểu tượng cái cờ-->
-                                        <a href="#" class="btn btn-danger ml-2 report-post" data-postid="1" id="reportPostBtn">
+                                        <a href="#" data-bs-toggle="modal" class="btn btn-danger ml-2 report-post" id="reportPostBtn" data-bs-target="#reportModal_${post.postID}" data-postid="${post.postID}" tabindex="-1">
                                             <i class="fas fa-flag custom-flag"></i> 
                                         </a>
                                     </div>
                                 </div>
+
                                 <div class="company-address">
                                     <ul>
                                         <li>
@@ -210,7 +255,7 @@
                                                 <img src="assets/img/icon/computer-line.svg" alt="icons">
                                             </div>
                                             <div class="proposal-detail text-capitalize">
-                                                <span class=" d-block">Category</span>
+                                                <span class=" d-block">Position</span>
                                                 <p class="mb-0">${post.caID.categoriesName}</p>
                                             </div>
                                         </li>
@@ -219,7 +264,7 @@
                                                 <img src="assets/img/icon/time-line.svg" alt="icons">
                                             </div>
                                             <div class="proposal-detail text-capitalize">
-                                                <span class=" d-block">Duration</span>
+                                                <span class=" d-block">Work Time</span>
                                                 <p class="mb-0">${post.durationID.durationName}</p>
                                             </div>
                                         </li>
@@ -228,7 +273,7 @@
                                                 <img src="assets/img/icon/time-line.svg" alt="icons">
                                             </div>
                                             <div class="proposal-detail text-capitalize">
-                                                <span class=" d-block">Job Type</span>
+                                                <span class=" d-block">Level</span>
                                                 <p class="mb-0">${post.jobTypeID.jobName}</p>
                                             </div>
                                         </li>
@@ -286,7 +331,7 @@
                                 <c:forEach items="${lpost}" var="p" >
                                     <div class="project-proposals-block ">
                                         <div class="project-proposals-img">
-                                            <img src="${p.image}" class="img-fluid" alt="user">
+                                            <img style="width: 80px; height: 80px; border-radius: 50%" src="${p.image}" class="" alt="user">
                                         </div>
                                         <div class="project-proposals-description">
                                             <div class="proposals-user-detail">
@@ -401,42 +446,52 @@
                                 </div>
                             </div>
 
+                            
                             <!-- report post -->
-                            <div class="report-postt-backdrop" id="report-postBackdrop"></div>
-                            <div class="report-postt" id="report-post-modal-container">
-                                <div class="reporrt-content">
-                                    <span id="closeModal" class="close-wrap">&times;</span>
-                                    <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
-                                    <form action="${pageContext.request.contextPath}/allListPost" method="post" id="report-post-form-content">
-                                        <input type="hidden" name="action" value="report">
-                                        <input type="hidden" name="postID" id="reportPostID">
-                                        <div class="form-group">
-                                            <label for="report_post_message">Select a reason for reporting:</label><br>
-                                            <div class="form-check">
-                                                <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
-                                                <label for="report_post_reason_spam" class="form-check-label">Spam</label>
+                            <div class="modal custom-modal fade" id="reportModal_${post.postID}" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="form-header">
+                                                <input type="hidden" class="user-id1" id="">
+                                                <span id="closeModal" class="close-wrap">&times;</span>
+                                                <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
                                             </div>
-                                            <div class="form-check">
-                                                <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
-                                                <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
+                                            <div class="modal-btn Suspend-action">
+                                                <form action="${pageContext.request.contextPath}/allListPost" method="post" id="report-post-form-content">
+                                                    <input type="hidden" name="action" value="report">
+                                                    <input type="hidden" name="postID" id="reportPostID">
+                                                    <div class="form-group">
+                                                        <label for="report_post_message">Select a reason for reporting:</label><br>
+                                                        <div class="form-check">
+                                                            <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
+                                                            <label for="report_post_reason_spam" class="form-check-label">Spam</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
+                                                            <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
+                                                            <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
+                                                            <label for="report_post_message_other" class="form-check-label">Other</label>
+                                                        </div>
+                                                        <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
+                                                        <button type="submit" class="btn btn-primary confirm-btn">Submit</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <div class="form-check">
-                                                <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
-                                                <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
-                                                <label for="report_post_message_other" class="form-check-label">Other</label>
-                                            </div>
-                                            <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" id="cancelReportBtn">Cancel</button>
-                                            <button type="submit" class="btn btn-primary">Submit Report</button>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
+
 
                             <div class="card budget-widget">
                                 <div class="budget-widget-details">
@@ -767,28 +822,61 @@
         </style>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-                                                                function validateForm(postID) {
-                                                                    var fileInput = document.getElementById('fileInput_' + postID);
-                                                                    var errorDiv = document.getElementById('error_' + postID);
-                                                                    if (fileInput.files.length === 0) {
-                                                                        errorDiv.innerHTML = 'Please select a file.';
-                                                                        return false; // Prevent form submission
-                                                                    } else {
-                                                                        errorDiv.innerHTML = '';
-                                                                        return true;
-                                                                    }
-                                                                }
 
-                                                                function check(postID) {
-                                                                    var fileInput = document.getElementById('fileInput_' + postID);
-                                                                    var errorDiv = document.getElementById('error_' + postID);
-                                                                    if (fileInput.files.length === 0) {
-                                                                        errorDiv.innerHTML = 'Please select a file.';
-                                                                    } else {
-                                                                        errorDiv.innerHTML = '';
-                                                                    }
-                                                                }
+        <script>
+                                                                document.addEventListener("DOMContentLoaded", function () {
+                                                                    const radioButtons = document.getElementsByName("report_post_message");
+                                                                    const textarea = document.getElementById("report_post_message_additional");
+
+                                                                    radioButtons.forEach(radio => {
+                                                                        radio.addEventListener("click", function () {
+                                                                            if (radio.value === "Other") {
+                                                                                textarea.style.display = "block";
+                                                                            } else {
+                                                                                textarea.style.display = "none";
+                                                                            }
+                                                                        });
+                                                                    });
+
+                                                                    document.querySelectorAll('.report-post').forEach(button => {
+                                                                        button.addEventListener('click', function (event) {
+                                                                            event.preventDefault();
+                                                                            const postID = this.getAttribute('data-postid');
+                                                                            document.getElementById('reportPostID').value = postID;
+                                                                            const targetModalId = this.getAttribute('data-bs-target');
+                                                                            const targetModal = document.querySelector(targetModalId);
+                                                                            $(targetModal).modal('show');
+                                                                        });
+                                                                    });
+
+                                                                    document.getElementById('closeModal').addEventListener('click', function () {
+                                                                        $('#reportModal_${post.postID}').modal('hide');
+                                                                    });
+                                                                });
+        </script>
+
+        <script>
+            function validateForm(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                    return false; // Prevent form submission
+                } else {
+                    errorDiv.innerHTML = '';
+                    return true;
+                }
+            }
+
+            function check(postID) {
+                var fileInput = document.getElementById('fileInput_' + postID);
+                var errorDiv = document.getElementById('error_' + postID);
+                if (fileInput.files.length === 0) {
+                    errorDiv.innerHTML = 'Please select a file.';
+                } else {
+                    errorDiv.innerHTML = '';
+                }
+            }
         </script>
 
         <script>

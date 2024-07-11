@@ -119,7 +119,7 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="ListFreelancer">Top Freelancer</a></li>
+                                            <li><a href="ListFreelancer">List Freelancer</a></li>
 
 
                                         </ul>
@@ -137,6 +137,7 @@
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">                                                                           
+                                        <li><a href="blogGrid">Blog</a></li>
                                         <li><a href="About">About us</a></li>
                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
@@ -285,6 +286,26 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <h4 class="card-title mb-0">Search Filter</h4>
                                 </div>
+                                <form action="SearchInHome" method="get" style=" display: flex;
+                                      align-items: center;">
+                                    <c:if test="${txtSearch == null}">
+                                        <input type="text" name="txtSearch" placeholder="Search..." style="padding: 5px;margin: 10px;border-radius: 5px; width: 250px;">
+                                    </c:if>
+                                    <c:if test="${txtSearch != null}">
+                                        <input type="text" name="txtSearch" value="${txtSearch}" style="padding: 5px;margin: 10px; border-radius: 5px; width: 250px;">
+                                    </c:if>
+                                    <button type="submit" style="display: flex;
+                                            align-items: center;
+                                            padding: 5px 10px;
+                                            background-color: rgb(230, 84, 37);
+                                            color: white;
+                                            border: none;
+                                            cursor: pointer;
+                                            margin-right: 5px;
+                                            border-radius: 10px;">
+                                        <i class="feather-search me-1"></i>
+                                    </button>
+                                </form>
                                 <div class="card-body">
                                     <c:forEach items="${ExpertiseSkill}" var="du" varStatus="status">
                                         <div class="filter-widget">
@@ -391,7 +412,7 @@
                                                 </div>
                                             </div>
                                             <div class="cart-hover">
-                                                <a href="javascript:void(0);" class="btn-invite mb-2 w-100 d-block" tabindex="-1">Connect</a>
+                                                <!--                                                <a href="javascript:void(0);" class="btn-invite mb-2 w-100 d-block" tabindex="-1">Connect</a>-->
                                                 <a href="ViewFreelancerProfile?id=${l.freelanceID}" class="btn-cart" tabindex="-1">View Profile</a>
                                             </div>
                                         </div>

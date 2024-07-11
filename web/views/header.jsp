@@ -23,7 +23,7 @@
             <ul class="submenu">
 
                 <li><a href="AllListPost">Jobs List</a></li>                                        
-                <li><a href="SreachJob">Find Jobs</a></li>  
+                 
             </ul>
         </li>
     </c:if>
@@ -102,12 +102,37 @@
 <ul style="margin-left: 5px;" class="nav header-navbar-rht">
 
 
-    <c:if test="${sessionScope.account.roleID.getRoleID() == null ||  sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == 4}">
+    <c:if test="${sessionScope.account.roleID.getRoleID() == null ||  sessionScope.account.roleID.getRoleID() == 3}">
         <li>
             <form action="SearchInHome" method="get" style=" display: flex;
                   align-items: center;">
                 <c:if test="${txtSearch == null}">
-                    <input type="text" name="txtSearch" placeholder="Search..." style="padding: 5px;margin-right: 5px; border-radius: 10px; width: 250px;">
+                    <input type="text" name="txtSearch" placeholder="Search Project" style="padding: 5px;margin-right: 5px; border-radius: 10px; width: 250px;">
+                </c:if>
+                <c:if test="${txtSearch != null}">
+                    <input type="text" name="txtSearch" value="${txtSearch}" style="padding: 5px;margin-right: 5px; border-radius: 10px; width: 250px;">
+                </c:if>
+                <button type="submit" style="display: flex;
+                        align-items: center;
+                        padding: 5px 10px;
+                        background-color: rgb(230, 84, 37);
+                        color: white;
+                        border: none;
+                        cursor: pointer;
+                        margin-right: 5px;
+                        border-radius: 10px;">
+                    <i class="feather-search me-1"></i>Search
+                </button>
+            </form>
+        </li>
+    </c:if>
+        
+            <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+        <li>
+            <form action="SearchInHome" method="get" style=" display: flex;
+                  align-items: center;">
+                <c:if test="${txtSearch == null}">
+                    <input type="text" name="txtSearch" placeholder="Search Freelancer" style="padding: 5px;margin-right: 5px; border-radius: 10px; width: 250px;">
                 </c:if>
                 <c:if test="${txtSearch != null}">
                     <input type="text" name="txtSearch" value="${txtSearch}" style="padding: 5px;margin-right: 5px; border-radius: 10px; width: 250px;">
