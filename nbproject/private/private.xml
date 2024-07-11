@@ -19,10 +19,15 @@
         </group>
         <group>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/recruiterFavorites.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/RecruiterFavouritesControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/SearchFreelancerFvrControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listFreelancer.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/ProfileSettingFreelancer.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/searchfreelancer.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/LoginController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listPostFavoritesSearch.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/searchRecruiterFavo.jsp</file>
         </group>
     </open-files>
