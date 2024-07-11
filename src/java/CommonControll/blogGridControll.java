@@ -9,12 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 public class blogGridControll extends HttpServlet {
-   private static final long serialVersionUID = 1L;
-    private BlogDAO blogDAO;
-
+    private static final long serialVersionUID = 1L;
+    
    @Override
     public void init() {
-        blogDAO = new BlogDAO();
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -37,12 +35,13 @@ public class blogGridControll extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         System.out.println("Processing GET request in blogGridControll");
-
+        BlogDAO blogDAO = new BlogDAO();
         // Retrieve the list of blogs from the DAO
         List<Blogs> listBlog = blogDAO.selectAllBlogs();
 
+        
         // Logging the retrieved blogs
-        if (listBlog != null && !listBlog.isEmpty()) {
+        if (listBlog != null) {
             System.out.println("List of blogs: " + listBlog);
         } else {
             System.out.println("No blogs found");

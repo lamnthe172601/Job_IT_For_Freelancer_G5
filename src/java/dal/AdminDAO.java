@@ -296,44 +296,35 @@ public class AdminDAO extends DBContext {
     
     public Admin getAdminByID(String adminID) {
         Admin admin = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            String sql = "SELECT * FROM Admin WHERE adminID = ?";
-            stmt = connection.prepareStatement(sql);
+        String sql = "SELECT * FROM Admin WHERE userID = ?";
+        
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, adminID);
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                admin = new Admin(
-                    rs.getString("adminID"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("phone"),
-                    rs.getString("email"),
-                    rs.getString("image"),
-                    rs.getString("userID")
-                );
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    admin = new Admin(
+                        rs.getString("adminID"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getString("image"),
+                        rs.getString("userID")
+                    );
+                }
             }
         } catch (SQLException ex) {
-//            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            ex.printStackTrace();
         }
-
+        
         return admin;
     }
+        
 
     public static void main(String[] args) {
-        new AdminDAO().deleteReportByPostId(2);
-        System.out.println(new AdminDAO().getAllProject().get(3).getPostBasic().getChecking());
-
+        AdminDAO adminDAO = new AdminDAO();
+        Admin admin = adminDAO.getAdminByID("1");
+        System.out.println(admin.toString());
+    
     }
 }

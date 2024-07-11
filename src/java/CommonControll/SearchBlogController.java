@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 
 package CommonControll;
 
@@ -13,13 +10,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-/**
- *
- * @author Admin
- */
-public class BlogDetailsControll extends HttpServlet {
-   
+import java.util.List;
+public class SearchBlogController extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+    private BlogDAO blogDAO;
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -35,10 +29,10 @@ public class BlogDetailsControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogDetailsControll</title>");  
+            out.println("<title>Servlet SearchBlogController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogDetailsControll at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SearchBlogController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,12 +49,11 @@ public class BlogDetailsControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int blogID = Integer.parseInt(request.getParameter("blogID"));
-        BlogDAO blogDAO = new BlogDAO();
-        Blogs blog = blogDAO.selectBlogById(blogID);
-        
-        request.setAttribute("blog", blog);
-        request.getRequestDispatcher("views/blogDetails.jsp").forward(request, response);
+        blogDAO = new BlogDAO();
+        String query = request.getParameter("query");
+        List<Blogs> blogs = blogDAO.searchBlogs(query);
+        request.setAttribute("blogs", blogs);
+        request.getRequestDispatcher("views/searchBlog.jsp").forward(request, response);
     } 
 
     /** 
@@ -73,7 +66,7 @@ public class BlogDetailsControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /** 
