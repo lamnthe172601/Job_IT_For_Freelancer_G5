@@ -159,7 +159,7 @@
                     <div class="row align-items-center inner-banner">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h2>Post Details</h2>
+                                <h2>Project Details</h2>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -210,7 +210,7 @@
                                                 <img src="assets/img/icon/computer-line.svg" alt="icons">
                                             </div>
                                             <div class="proposal-detail text-capitalize">
-                                                <span class=" d-block">Category</span>
+                                                <span class=" d-block">Position</span>
                                                 <p class="mb-0">${post.caID.categoriesName}</p>
                                             </div>
                                         </li>
@@ -219,7 +219,7 @@
                                                 <img src="assets/img/icon/time-line.svg" alt="icons">
                                             </div>
                                             <div class="proposal-detail text-capitalize">
-                                                <span class=" d-block">Duration</span>
+                                                <span class=" d-block">Work Time</span>
                                                 <p class="mb-0">${post.durationID.durationName}</p>
                                             </div>
                                         </li>
@@ -228,7 +228,7 @@
                                                 <img src="assets/img/icon/time-line.svg" alt="icons">
                                             </div>
                                             <div class="proposal-detail text-capitalize">
-                                                <span class=" d-block">Job Type</span>
+                                                <span class=" d-block">Level</span>
                                                 <p class="mb-0">${post.jobTypeID.jobName}</p>
                                             </div>
                                         </li>
@@ -286,7 +286,7 @@
                                 <c:forEach items="${lpost}" var="p" >
                                     <div class="project-proposals-block ">
                                         <div class="project-proposals-img">
-                                            <img src="${p.image}" class="img-fluid" alt="user">
+                                            <img style="width: 80px; height: 80px; border-radius: 50%" src="${p.image}" class="" alt="user">
                                         </div>
                                         <div class="project-proposals-description">
                                             <div class="proposals-user-detail">

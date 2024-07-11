@@ -105,7 +105,6 @@ public class InputFreelancerProfileController extends HttpServlet {
         User user = (User) session.getAttribute("user");
         if (user != null) {
             int userID = user.getUserID();
-            
             dao.inputFreelancerInfo(firstname, lastname, img, gender, date, decscribe, email, phone, userID);
             int freelancerID = dao.getFreelancerIDbyUserID(userID);
             String[] skills = request.getParameterValues("skill");
@@ -136,8 +135,7 @@ public class InputFreelancerProfileController extends HttpServlet {
             dao.inputFreelancerEducation(university, edustart, eduend, freelancerID, degreename);
             dao.inputFreelancerExperiance(exworkname, project, position, datestart, dateend, freelancerID);
             request.setAttribute("mess", "Registration successful. Please log in again!");
-            
-            request.getRequestDispatcher("login").forward(request, response);
+            request.getRequestDispatcher("views/login.jsp").forward(request, response);
         }
 
     }

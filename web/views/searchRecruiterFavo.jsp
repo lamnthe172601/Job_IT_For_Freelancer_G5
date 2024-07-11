@@ -401,11 +401,11 @@
                         </div>
 
                         <div class="col-md-12 col-lg-8 col-xl-9">
-                            <c:set var="list" value="${requestScope.listFavorites}" />
-                            <c:set var="tongSoBaiDang" value="${requestScope.countFavorites}" />
-                            <c:set var="baiDangTrenMotTrang" value="${requestScope.FavoritesInPgae}" />
-                            <c:set var="tongSoTrang" value="${requestScope.totalFavoritesPage}" />
-                            <c:set var="trangHienTai" value="${requestScope.indexFvr}" />
+                            <c:set var="list" value="${requestScope.list}" />
+                            <c:set var="tongSoBaiDang" value="${requestScope.countS}" />
+                            <c:set var="baiDangTrenMotTrang" value="${requestScope.FavoritesS}" />
+                            <c:set var="tongSoTrang" value="${requestScope.totalS}" />
+                            <c:set var="trangHienTai" value="${requestScope.indexS}" />
 
                             <%-- Tính chỉ số bắt đầu và kết thúc cho danh sách bài đăng hiển thị trên trang hiện tại --%>
                             <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
@@ -415,9 +415,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="freelance-widget">
                                             <div class="freelance-content">
-                                
                                                 <a  class="favourite color-active" class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#delete${l.freelanceID}"><i class="feather-heart"></i></a>
-                                                
                                                 <div class="freelance-img">
                                                     <a href="developer-details.html">
                                                         <img src="${l.image}" alt="User Image">
@@ -486,19 +484,19 @@
                                         <ul class="pagination">
                                             <c:if test="${trangHienTai > 1}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="RecruiterFavourites?page=${trangHienTai - 1}" aria-label="Trước">
+                                                    <a class="page-link" href="SearchFreelancerFvr?page=${trangHienTai - 1}" aria-label="Trước">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
                                             </c:if>
                                             <c:forEach var="i" begin="1" end="${tongSoTrang}">
                                                 <li class="page-item ${i == trangHienTai ? 'active' : ''}">
-                                                    <a class="page-link" href="RecruiterFavourites?page=${i}">${i}</a>
+                                                    <a class="page-link" href="SearchFreelancerFvr?page=${i}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <c:if test="${trangHienTai < tongSoTrang}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="RecruiterFavourites?page=${trangHienTai + 1}" aria-label="Sau">
+                                                    <a class="page-link" href="SearchFreelancerFvr?page=${trangHienTai + 1}" aria-label="Sau">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>

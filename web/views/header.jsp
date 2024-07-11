@@ -23,7 +23,7 @@
             <ul class="submenu">
 
                 <li><a href="AllListPost">Jobs List</a></li>                                        
-                <li><a href="SreachJob">Find Jobs</a></li>  
+                 
             </ul>
         </li>
     </c:if>
