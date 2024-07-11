@@ -5,6 +5,7 @@
 
 package AdminControlles;
 
+import MutiModels.ChartDataAdmin;
 import dal.DashboardDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -58,8 +60,32 @@ public class DashboardAdmin extends HttpServlet {
         request.setAttribute("totalUsers",d.getTotalUsers() );
         request.setAttribute("totalPosts",d.getTotalPost() );
         request.setAttribute("totalJobApplys",d.getTotalJobApply() );
+        request.setAttribute("totalBlog",d.getTotalJobApply());        
+      List<ChartDataAdmin> chartDataList = d.getChartData();
+        
+        // Chuyển đổi dữ liệu thành JSON string
+        String chartDataJson = convertToJsonArray(chartDataList);
+        
+        request.setAttribute("chartDataJson", chartDataJson);
          request.getRequestDispatcher("adminViews/dashboardAdmin.jsp").forward(request, response);
     } 
+    private String convertToJsonArray(List<ChartDataAdmin> dataList) {
+        StringBuilder json = new StringBuilder("[");
+        for (int i = 0; i < dataList.size(); i++) {
+            ChartDataAdmin data = dataList.get(i);
+            json.append("{");
+            json.append("\"month\":").append(data.getMonth()).append(",");
+            json.append("\"totalPosts\":").append(data.getTotalPosts()).append(",");
+            json.append("\"totalRecruiters\":").append(data.getTotalRecruiters()).append(",");
+            json.append("\"totalFreelancers\":").append(data.getTotalFreelancers());
+            json.append("}");
+            if (i < dataList.size() - 1) {
+                json.append(",");
+            }
+        }
+        json.append("]");
+        return json.toString();
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
