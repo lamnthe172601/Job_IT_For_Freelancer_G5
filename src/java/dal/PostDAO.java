@@ -87,6 +87,40 @@ public class PostDAO extends DBContext {
         }
         return list;
     }
+    
+    public List<Post> getPostByRecruiterCompleted(int pid) {
+        List<Post> list = new ArrayList<>();
+        String query = """
+                   SELECT p.*, j.*, du.*, re.*, ca.*, co.*
+                     FROM [freelancer].[dbo].[Post] p
+                     JOIN [freelancer].[dbo].[JobType] j ON p.job_type_ID = j.jobID
+                     JOIN [freelancer].[dbo].[Duration] du ON p.durationID = du.durationID
+                     JOIN [freelancer].[dbo].[Recruiter] re ON p.recruiterID = re.recruiterID
+                     JOIN [freelancer].[dbo].[Categories] ca ON p.caID = ca.caID
+                     JOIN [freelancer].[dbo].[Company] co ON re.recruiterID = co.recruiterID
+                     WHERE p.quantity = (
+                         SELECT COUNT(ja.applyID)
+                         FROM [freelancer].[dbo].[JobApply] ja
+                         WHERE ja.postID = p.postID
+                     )
+                     AND re.recruiterID = ?; """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, pid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
+                JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
+
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     public List<Post> getAllPosts() {
         List<Post> posts = new ArrayList<>();
@@ -96,7 +130,8 @@ public class PostDAO extends DBContext {
                                   JOIN Duration du ON p.durationID = du.durationID
                                    JOIN Recruiter re ON p.recruiterID = re.recruiterID
                                    JOIN Categories ca ON p.caID = ca.caID
-                                   JOIN Company co ON re.recruiterID = co.recruiterID""";
+                                   JOIN Company co ON re.recruiterID = co.recruiterID
+                       where p.status = 1 and p.checking = 1""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -346,14 +381,7 @@ public class PostDAO extends DBContext {
         }
     }
 
-    public static void main(String[] args) {
-        PostDAO dao = new PostDAO();
-        try {
-            dao.updatePostStatus();
-        } catch (SQLException ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 
     //Tan task--------------------------------------------------------------------------------------------------------------------
     public List<PostBasic> getAllFavPosts(int id) {
@@ -805,7 +833,20 @@ public class PostDAO extends DBContext {
         }
         return posts;
     }
-
+ public int countPostsByCategory(int categoryID) {
+    int count = 0;
+    String query = "SELECT COUNT(*) AS total FROM Post WHERE caID = ?";
+    try (PreparedStatement ps = connection.prepareStatement(query)) {
+        ps.setInt(1, categoryID);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt("total");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return count;
+}
     public List<Post> getPostsByLocation(String location) {
         List<Post> posts = new ArrayList<>();
         String query = """
@@ -877,6 +918,21 @@ public class PostDAO extends DBContext {
 
         return posts;
     }
+    public int countPostsByLocation(String location) {
+    int count = 0;
+    String query = "SELECT COUNT(*) AS total FROM Post WHERE location = ?";
+    try (PreparedStatement ps = connection.prepareStatement(query)) {
+        ps.setString(1, location);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt("total");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return count;
+}
+
     
     public int TotalApplyByPost(int ID) {
 
@@ -978,5 +1034,34 @@ public class PostDAO extends DBContext {
         }
         return list;
     }
+public int countPostsByFreelancerSkills(int freelancerID) {
+    int count = 0;
+    String query = """
+                   SELECT COUNT(*) AS total 
+                   FROM Post p
+                   JOIN SkillPost sp ON p.postID = sp.postID
+                   JOIN Skill s ON sp.skillID = s.skillID
+                   JOIN FreelancerSkill fs ON s.skillID = fs.skillID
+                   WHERE fs.freelancerID = ?
+                   """;
+    try (PreparedStatement ps = connection.prepareStatement(query)) {
+        ps.setInt(1, freelancerID);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt("total");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return count;
+}
 
+    
+    public static void main(String[] args) {
+        PostDAO dao = new PostDAO();
+       List<Post> p = dao.getPostByRecruiterCompleted(3);
+        for (Post post : p) {
+            System.out.println(post.toString());
+        }
+    }
 }

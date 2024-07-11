@@ -133,8 +133,7 @@
                                         <ul class="submenu">
 
                                             <li><a href="dashboard">Dashboard</a></li>
-                                            <li><a href="companydetail">My Profile</a></li>
-                                            <li><a href="company-details">Company Details</a></li>
+                                            <li><a href="companydetail">My Profile</a></li>                                        
                                             <li><a href="manage-projects">Projects</a></li>
                                             <li><a href="favourites">Favourites</a></li>                                                                                       
                                             <li><a href="profile-settings">Settings</a></li>
@@ -191,76 +190,34 @@
                                             <li class="nav-item submenu">
                                                 <a href="freelancer-project-proposals.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
-                                                    <span class="menu-arrow"></span>
+                                                   
                                                 </a>
-                                                <ul class="sub-menu-ul">
-                                                    <li>
-                                                        <a href="manage-projects.html">All Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="ongoing-projects.html">Ongoing Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="completed-projects.html">Completed Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="pending-projects.html">Pending Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="cancelled-projects.html">Cancelled Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="expired-projects.html">Expired Projects</a>
-                                                    </li>
-                                                </ul>
+                                               
                                             </li>
                                             <li class="nav-item submenu">
                                                 <a href="freelancer-favourites.html" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
-                                                    <span class="menu-arrow"></span>
+                                                   
                                                 </a>
-                                                <ul class="sub-menu-ul">
-                                                    <li>
-                                                        <a href="favourites.html">Bookmarked Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="invited-favourites.html">Invitations</a>
-                                                    </li>
-                                                </ul>
+                                                
                                             </li>
                                             <li class="nav-item">
-                                                <a href="review.html" class="nav-link">
+                                                <a href="review" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="chats.html" class="nav-link">
+                                                <a href="chat" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
                                                 </a>
                                             </li>
-                                            
+
                                             <li class="nav-item submenu">
-                                                <a href="javascript:void(0);" class="nav-link">
+                                                <a href="recruitersetting" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
-                                                    <span class="menu-arrow"></span>
+                                                    
                                                 </a>
-                                                <ul class="sub-menu-ul">
-                                                    <li>
-                                                        <a href="profile-settings.html" class="active">Profile</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="membership-plans.html">Plan & Billing</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="verify-identity.html">Verify Identity</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="change-password.html">Change Password</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="delete-account.html">Delete Account</a>
-                                                    </li>
-                                                </ul>
+                                               
                                             </li>
                                             <li class="nav-item">
                                                 <a href="home" class="nav-link">
@@ -276,8 +233,6 @@
                         <div class="col-xl-9 col-lg-8">
                             <div class="pro-pos">
                                 <div class="setting-content employee-profile-new">
-
-
                                     <form action="updateRecruiterProfile" method="post">
                                         <div class="card">
                                             <div class="pro-head">
@@ -308,29 +263,28 @@
                                                                 <div class="col-lg-6 col-md-12">
                                                                     <div class="mb-3">
                                                                         <label class="form-label">First Name</label>
-                                                                        <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstName" value="${recruiter.firstName}" required>
-
+                                                                        <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstName" value="${recruiter.firstName}" maxlength="20" required>
                                                                         <div style="color: red" id="eFirstname"></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-12">
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Last Name</label>
-                                                                        <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastName" value="${recruiter.lastName}" required>
+                                                                        <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastName" value="${recruiter.lastName}" maxlength="20" required>
                                                                         <div style="color: red" id="eLastname"></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-12">
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Phone Number</label>
-                                                                        <input oninput="checkphone()" type="text" class="form-control" id="phone" name="phoneNumber" value="${recruiter.phone}" pattern="^0\d{9}$" title="Phone number must be 10 digits starting with 0" required>
+                                                                        <input oninput="checkphone()" type="text" class="form-control" id="phone" name="phoneNumber" value="${recruiter.phone}" pattern="^0\d{9}$" title="Phone number must be 10 digits starting with 0" maxlength="10" required>
                                                                         <div style="color: red" id="ePhone"></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-12">
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Email</label>
-                                                                        <input oninput="checkEmail()"  type="email" class="form-control" id="email"  name="email" value="${recruiter.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" required>
+                                                                        <input oninput="checkEmail()" type="email" class="form-control" id="email" name="email" value="${recruiter.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" maxlength="30" required>
                                                                         <div style="color: red" id="eEmail"></div>
                                                                     </div>
                                                                 </div>
@@ -339,7 +293,7 @@
                                                                     <h2>Company Details</h2>
                                                                     <div class="mb-3">                                                                     
                                                                         <label class="form-label">Company Name</label>
-                                                                        <input oninput="checkcompany()"  type="text" class="form-control"  id="companyname" name="companyName" value="${company.companyName}" required>                                                                  
+                                                                        <input oninput="checkcompany()" type="text" class="form-control" id="companyname" name="companyName" value="${company.companyName}" maxlength="20" required>                                                                  
                                                                         <div style="color: red" id="eCompanyname"></div>
                                                                     </div>
                                                                     <div class="mb-3">
@@ -348,12 +302,11 @@
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Website</label>
-                                                                       <input type="text" class="form-control" name="website" value="${company.website}" required>
-
+                                                                        <input type="text" class="form-control" name="website" value="${company.website}" maxlength="50" required>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Describe</label>
-                                                                        <textarea rows="1" class="form-control" name="describe" required>${company.describe}</textarea>
+                                                                        <textarea rows="4" class="form-control" name="describe" maxlength="500" required>${company.describe}</textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -369,16 +322,13 @@
                                             </div>
                                         </div>
                                     </form>
-
-
-
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-
 
 
 

@@ -233,7 +233,7 @@
                                     <img src="assets/img/icon/count-icon-01.svg" class="img-fluid" alt="Img">
                                 </div>
                                 <div class="feature-content course-count">
-                                    <h3 class="counter-up">9,207</h3>
+                                    <h3 class="counter-up">${NumberUsers}</h3>
                                     <p>Freelance developers</p>
                                 </div>
                             </div>
@@ -246,7 +246,7 @@
                                     <img src="assets/img/icon/count-icon-02.svg" class="img-fluid" alt="Img">
                                 </div>
                                 <div class="feature-content course-count">
-                                    <h3><span class="counter-up">6000</span></h3>
+                                    <h3><span class="counter-up">${NumberPost}</span></h3>
                                     <p>Projects Added</p>
                                 </div>
                             </div>
@@ -259,8 +259,8 @@
                                     <img src="assets/img/icon/count-icon-03.svg" class="img-fluid" alt="Img">
                                 </div>
                                 <div class="feature-content course-count">
-                                    <h3 class="counter-up">919,207</h3>
-                                    <p>Completed projects</p>
+                                    <h3 class="counter-up">${allpostopen}</h3>
+                                    <p>Open projects</p>
                                 </div>
                             </div>
                         </div>
@@ -272,7 +272,7 @@
                                     <img src="assets/img/icon/count-icon-04.svg" class="img-fluid" alt="Img">
                                 </div>
                                 <div class="feature-content course-count">
-                                    <h3 class="counter-up">998</h3>
+                                    <h3 class="counter-up">${NumberCompany}</h3>
                                     <p>Companies Registered</p>
                                 </div>
                             </div>
@@ -323,7 +323,7 @@
                                     <a href="review.html"><img class="img-fluid" src="assets/img/review/review-02.jpg" alt="Post Image"></a>
                                 </div>
                                 <div class="review-info">
-                                    <h3><a href="review.html">Camelia Rennesa</a></h3>
+                                    <h3><a href="ViewFreelancerProfile?id=${l.freelanceID}">Camelia Rennesa</a></h3>
                                     <h5>Project Lead</h5>
                                 </div>
                             </div>
@@ -397,7 +397,7 @@
                                 <div class="job-content-blk aos" data-aos="fade-up">
                                     <h2>Find Your Next Great Job Opportunity!</h2>
                                     <p>Quisque pretium dolor turpis, quis blandit turpis semper ut. Nam malesuada eros nec luctus laoreet.</p>
-                                    <a href="register.html" class="btn all-btn">Join Now</a>
+                                    <a href="Register" class="btn all-btn">Join Now</a>
                                 </div>
                                 <div class="see-all mt-0 aos opportunity   " data-aos="zoom-in">
                                     <img src="assets/img/job1.png" alt="img">

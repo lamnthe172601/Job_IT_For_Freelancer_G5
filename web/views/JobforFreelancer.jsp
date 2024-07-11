@@ -23,7 +23,7 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
 
-        <style>
+       <style>
             .text-center1 {
                 width: 150px;
                 height: 150px;
@@ -111,7 +111,7 @@
                 padding: 0; /* Bỏ khoảng cách bên trong */
                 color: black;
                 margin-left: 225px;
-                margin-top: 10px;
+                margin-top: 25px;
                 width: 30px;
             }
             .reporrt {
@@ -215,6 +215,9 @@
                     </div>
                 </div>
             </div>
+
+
+      
 
 
             <div class="content">
@@ -569,50 +572,7 @@
                                 </c:forEach>
                             </div>
 
-                            <div class="pagination-container">
-                                <c:if test="${endPage > 1}">
-                                    <!--                                    <div class="row">
-                                                                            <div class="col-md-12">                  
-                                                                                <ul class="paginations list-pagination">                                          
-                                                                                                                                <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a></li>
-                                    <c:forEach begin="1" end="${endPage}" var="e">     
-                                                                                    <li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
-                                        <li class="page-item" ><a class="${tag == e?"active":""}" href="PostFavourites?index=${e}">${e}</a></li>
-                                                                                    <li class="page-item"><a href="javascript:void(0);">3</a></li>
-                                                                                    <li class="page-item"><a href="javascript:void(0);">...</a></li>
-                                                                                    <li class="page-item"><a href="javascript:void(0);">10</a></li>
-                                    </c:forEach>
-                                                                                <li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-right"></i></a></li>                                          
-                                </ul>
-
-                            </div>
-                        </div>-->
-
-
-                                    <ul class="pagination list-pagination">
-                                        <c:if test="${tag > 1}">
-                                            <li class="page-item">
-                                                <a class="page-link" href="PostFavourites?index=${tag-1}" aria-label="Trước">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                        </c:if>
-                                        <c:forEach var="i" begin="1" end="${endPage}">
-                                            <li class="page-item ${i == tag ? 'active' : ''}">
-                                                <a class="page-link" href="PostFavourites?index=${i}">${i}</a>
-                                            </li>
-                                        </c:forEach>
-                                        <c:if test="${tag < endPage}">
-                                            <li class="page-item">
-                                                <a class="page-link" href="PostFavourites?index=${tag + 1}" aria-label="Sau">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </c:if>
-                                    </ul>
-
-                                </c:if>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -747,8 +707,7 @@
             </div>
         </div>
 
-
-        <script>
+ <script>
 
             document.addEventListener("DOMContentLoaded", function () {
                 const radioButtons = document.getElementsByName("report_post_message");
@@ -855,43 +814,43 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-            function addToFavorites(postID) {
-                $.ajax({
-                    url: 'AddFavourites',
-                    type: 'GET',
-                    data: {
-                        postID: postID
-                    },
-                    success: function (response) {
-                        // Xử lý phản hồi thành công (nếu cần)
-                        //alert('Đã thêm vào danh sách yêu thích!');
-                        $('#favourite_' + postID).addClass('color-active');
-                    },
-                    error: function (xhr, status, error) {
-                        // Xử lý lỗi (nếu có)
-                        alert('Đã xảy ra lỗi: ' + error);
-                    }
-                });
-            }
+                 function addToFavorites(postID) {
+                     $.ajax({
+                         url: 'AddFavourites',
+                         type: 'GET',
+                         data: {
+                             postID: postID
+                         },
+                         success: function (response) {
+                             // Xử lý phản hồi thành công (nếu cần)
+                             //alert('Đã thêm vào danh sách yêu thích!');
+                             $('#favourite_' + postID).addClass('color-active');
+                         },
+                         error: function (xhr, status, error) {
+                             // Xử lý lỗi (nếu có)
+                             alert('Đã xảy ra lỗi: ' + error);
+                         }
+                     });
+                 }
 
-            function removeFromFavorites(postID) {
-                $.ajax({
-                    url: 'DeleteFavourites',
-                    type: 'GET',
-                    data: {
-                        postID: postID
-                    },
-                    success: function (response) {
-                        // Xử lý phản hồi thành công (nếu cần)
-                        //alert('Đã xóa khỏi danh sách yêu thích!');
-                        $('#favourite_' + postID).removeClass('color-active');
-                    },
-                    error: function (xhr, status, error) {
-                        // Xử lý lỗi (nếu có)
-                        alert('Đã xảy ra lỗi: ' + error);
-                    }
-                });
-            }
+                 function removeFromFavorites(postID) {
+                     $.ajax({
+                         url: 'DeleteFavourites',
+                         type: 'GET',
+                         data: {
+                             postID: postID
+                         },
+                         success: function (response) {
+                             // Xử lý phản hồi thành công (nếu cần)
+                             //alert('Đã xóa khỏi danh sách yêu thích!');
+                             $('#favourite_' + postID).removeClass('color-active');
+                         },
+                         error: function (xhr, status, error) {
+                             // Xử lý lỗi (nếu có)
+                             alert('Đã xảy ra lỗi: ' + error);
+                         }
+                     });
+                 }
         </script>
 
 

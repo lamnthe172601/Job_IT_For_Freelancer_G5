@@ -3,19 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="SWP391">
-            <file>file:/D:/SU24/A/web/views/allApplication.jsp</file>
-            <file>file:/D:/SU24/A/src/java/CommonControll/SearchController.java</file>
+            <file>file:/D:/SU24/A/src/java/dal/RecruiterDAO.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/CompletedProjectsControll.java</file>
+            <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
+            <file>file:/D:/SU24/A/web/views/header.jsp</file>
             <file>file:/D:/SU24/A/web/views/managePost.jsp</file>
-            <file>file:/D:/SU24/A/src/java/FreelancerControll/AddFavouritesControll.java</file>
-            <file>file:/D:/SU24/A/web/views/CreatePost.jsp</file>
-            <file>file:/D:/SU24/A/web/views/listFreelancer.jsp</file>
-            <file>file:/D:/SU24/A/src/java/CommonControll/SearchInHomeControll.java</file>
-            <file>file:/D:/SU24/A/web/WEB-INF/web.xml</file>
-            <file>file:/D:/SU24/A/src/java/dal/PostDAO.java</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/CreatePostControll.java</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/ListFreelancerControll.java</file>
             <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageJobsPostsControll.java</file>
-            <file>file:/D:/SU24/A/src/java/dal/FreelancerDAO.java</file>
+            <file>file:/D:/SU24/A/src/java/Models/Post.java</file>
+            <file>file:/D:/SU24/A/src/java/AccountControll/LoginController.java</file>
+            <file>file:/D:/SU24/A/web/views/CreatePost.jsp</file>
+            <file>file:/D:/SU24/A/web/views/completedProjects.jsp</file>
+            <file>file:/D:/SU24/A/web/views/404Page.jsp</file>
         </group>
         <group>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/recruiterFavorites.jsp</file>

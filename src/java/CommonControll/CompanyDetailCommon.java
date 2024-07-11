@@ -6,6 +6,8 @@ package CommonControll;
 
 import Models.Company;
 import dal.CompanyDAO;
+import dal.HomeDAO;
+import dal.RecruiterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,17 +21,21 @@ public class CompanyDetailCommon extends HttpServlet {
             throws ServletException, IOException {
 
     }
-
+      RecruiterDAO re = new RecruiterDAO();
+ HomeDAO pDAO = new HomeDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String recruiterIDStr = request.getParameter("recruiterID");
         if (recruiterIDStr != null && !recruiterIDStr.isEmpty()) {
             int recruiterID = Integer.parseInt(recruiterIDStr);
-            // Xử lý logic để lấy thông tin công ty dựa trên recruiterID
+         
+         
             CompanyDAO companyDAO = new CompanyDAO();
             Company company = companyDAO.getCompanyByReID(recruiterID);
-
+             request.setAttribute("openJobs", pDAO.countPostsByRecruiterStatus(recruiterID));
+            request.setAttribute("numberApply", re.getNumberApplyPostbyRecruiter(recruiterID));
+             request.setAttribute("NumberPostOfRecruiter", pDAO.getNumberPostByRecruiter(recruiterID));
             request.setAttribute("company", company);
             request.getRequestDispatcher("views/companydetailcommon.jsp").forward(request, response);
         } else {

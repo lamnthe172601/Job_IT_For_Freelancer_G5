@@ -484,7 +484,19 @@
 
                                 </c:forEach>
                             </div>
-
+<c:if test="${endPage > 1}">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="paginations list-pagination">
+                <c:forEach begin="1" end="${endPage}" var="e">
+                    <li class="page-item">
+                        <a class="${page == e? 'active' : ''}" href="postbycategory?categoryID=${param.categoryID}&page=${e}">${e}</a>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+</c:if>
 
                         </div>
                     </div>
