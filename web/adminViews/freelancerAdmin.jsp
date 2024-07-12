@@ -72,7 +72,7 @@
                                             <input type="text" class="form-control" id="emailFilter" placeholder="Enter email">
                                         </div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+<!--                                    <div class="col-md-3 mb-3">
                                         <div class="form-group">
                                             <label for="skillFilter">Skill</label>
                                             <div class="skill-filter-container">
@@ -85,7 +85,7 @@
                                                 <div class="selected-skills"></div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
 
                                     <div class="col-md-3 mb-3">
                                         <div class="form-group">
@@ -114,7 +114,7 @@
                                                     <th>No.</th>                                                
                                                     <th>Freelancer</th>                                                   
                                                     <th>Email</th>
-                                                    <th>Skills</th>
+<!--                                                    <th>Skills</th>-->
                                                     <th>Status</th>
                                                     <th></th>
                                                 </tr>
@@ -138,7 +138,7 @@
                                                             </div>
                                                         </td>                                                   
                                                         <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getBasicInformation().getEmail()}</td>
-                                                        <td class="skill-icon">
+<!--                                                        <td class="skill-icon">
                                                             <div class="skill-list">
                                                                 <c:forEach items="${freelancer.listSkill}" var="skill" begin="0" end="2">
                                                                     <span class="skill-item">${skill.skill_set_name}</span>
@@ -150,7 +150,7 @@
                                                                     <span class="skill-more">...</span>
                                                                 </c:if>
                                                             </div>
-                                                        </td>
+                                                        </td>-->
                                                         <td class="test1">
 
                                                             <c:if test='${freelancer.getAccount().getStatus() == "active"}'>
