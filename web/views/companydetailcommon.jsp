@@ -209,9 +209,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div>
-                                    <a href="javascript:void(0);" class="btn  btn-primary price-btn btn-block">Contact Me </a>
-                                </div>
+                               
                             </div>
                             <div class="card budget-widget">
                                 <ul class="d-flex mb-0 list-style job-list-block">
