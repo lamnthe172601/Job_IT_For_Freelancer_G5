@@ -78,10 +78,15 @@ public class BlogDAO extends DBContext {
 
     
     public static void main(String[] args) {
-        BlogDAO blogDAO = new BlogDAO();
-        List<Blogs> blogs = blogDAO.selectAllBlogs();
-        for (Blogs blog : blogs) {
-            System.out.println(blog.toString());
+        BlogDAO dao = new BlogDAO();
+        
+        int blogIDToTest = 2; // Thay thế bằng một ID của blog hiện có để kiểm tra
+        Blogs blog = dao.selectBlogById(blogIDToTest);
+        
+        if (blog != null) {
+            System.out.println(blog);
+        } else {
+            System.out.println("No blog found with ID: " + blogIDToTest);
         }
     }
 }

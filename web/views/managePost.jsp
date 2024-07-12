@@ -637,10 +637,10 @@
                                                                                                         <label class="image-upbtn">
                                                                                                             Upload Image <input type="file" id="imgInp" name="profileImage">
                                                                                                         </label>
-                                                                                                        <p>Max Image size 300*300</p>
+                                                                                                        
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-4">
+                                                                                                    <div style="margin-top: 35px;" class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Level</label>
                                                                                                         <select name="jobsType" class="form-control select">
@@ -650,7 +650,7 @@
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-4">
+                                                                                                <div style="margin-top: 35px;" class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Work Time</label>
                                                                                                         <select name="Duration" class="form-control select">
