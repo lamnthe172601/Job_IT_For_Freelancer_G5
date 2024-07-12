@@ -3,23 +3,38 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="SWP391">
+            <file>file:/D:/SU24/A/web/views/allApplication.jsp</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageAllApplicationControll.java</file>
+            <file>file:/D:/SU24/A/web/views/expiredProjects.jsp</file>
             <file>file:/D:/SU24/A/src/java/dal/RecruiterDAO.java</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/CompletedProjectsControll.java</file>
-            <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
-            <file>file:/D:/SU24/A/web/views/header.jsp</file>
+            <file>file:/D:/SU24/A/web/WEB-INF/web.xml</file>
+            <file>file:/D:/SU24/A/src/java/MutiModels/JobApply.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/CreatePostControll.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/EmailService.java</file>
             <file>file:/D:/SU24/A/web/views/managePost.jsp</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageJobsPostsControll.java</file>
-            <file>file:/D:/SU24/A/src/java/Models/Post.java</file>
-            <file>file:/D:/SU24/A/src/java/AccountControll/LoginController.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/SendEmailControll.java</file>
+            <file>file:/D:/SU24/A/src/java/Models/JobApply.java</file>
             <file>file:/D:/SU24/A/web/views/CreatePost.jsp</file>
-            <file>file:/D:/SU24/A/web/views/completedProjects.jsp</file>
-            <file>file:/D:/SU24/A/web/views/404Page.jsp</file>
         </group>
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listApplySearch.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listapply.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/BlogDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/blogGrid.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/CommonControll/blogGridControll.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/skillAdmin.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/blogDetails.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/BlogDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/CommonControll/BlogDetailsControll.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ViewCategoryAdmin.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/profileAdmin.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ProjectAdmin.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/views/blogGrid.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ProfileAdmin.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/AdminDAO.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/categoryAdmin.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/CommonControll/blogGridControll.java</file>
         </group>
     </open-files>
 </project-private>

@@ -87,35 +87,57 @@ public class DashboardDAO extends DBContext {
         }
         return -1;
     }
-    public List<ChartDataAdmin> getChartData() {
-        List<ChartDataAdmin> dataList = new ArrayList<>();
-        String query = """
-                       SELECT MONTH(date_post) as month, 
-                       COUNT(*) as total_posts, 
-                       COUNT(DISTINCT recruiterID) as total_recruiters, 
-                       COUNT(DISTINCT p.postID) as total_completed_projects 
-                       FROM Post p
-                       LEFT JOIN JobApply ja ON p.postID = ja.postID AND ja.status = 'Completed' 
-                       WHERE YEAR(date_post) = YEAR(GETDATE())
-                       GROUP BY MONTH(date_post) 
-                       ORDER BY MONTH(date_post)""" ;
+   public List<ChartDataAdmin> getChartData() {
+    List<ChartDataAdmin> chartData = new ArrayList<>();
+    String sql = """
+            WITH AllMonths AS (
+                SELECT 1 AS MonthNumber
+                UNION ALL
+                SELECT MonthNumber + 1
+                FROM AllMonths
+                WHERE MonthNumber < 12
+            )
+            
+            SELECT 
+                AM.MonthNumber,
+                DATENAME(MONTH, DATEADD(MONTH, AM.MonthNumber - 1, DATEFROMPARTS(YEAR(GETDATE()), 1, 1))) AS MonthName,
+                COUNT(DISTINCT CASE WHEN U.roleID = 3 AND MONTH(U.CreateDate) <= AM.MonthNumber THEN U.userID END) as freelancers,
+                COUNT(DISTINCT CASE WHEN MONTH(P.date_post) <= AM.MonthNumber THEN P.postID END) as projects,
+                COUNT(DISTINCT CASE WHEN MONTH(JA.dateApply) <= AM.MonthNumber THEN JA.applyID END) as applications
+            FROM 
+                AllMonths AM
+            LEFT JOIN 
+                [User] U ON MONTH(U.CreateDate) <= AM.MonthNumber AND YEAR(U.CreateDate) = YEAR(GETDATE())
+            LEFT JOIN 
+                Post P ON MONTH(P.date_post) <= AM.MonthNumber AND YEAR(P.date_post) = YEAR(GETDATE())
+            LEFT JOIN 
+                JobApply JA ON MONTH(JA.dateApply) <= AM.MonthNumber AND YEAR(JA.dateApply) = YEAR(GETDATE())
+            GROUP BY 
+                AM.MonthNumber
+            ORDER BY 
+                AM.MonthNumber;
+         """;
+    
+    try {
+         PreparedStatement pstmt = connection.prepareStatement(sql);
+         ResultSet rs = pstmt.executeQuery(); 
         
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                ChartDataAdmin data = new ChartDataAdmin();
-                data.setMonth(rs.getInt("month"));
-                data.setTotalPosts(rs.getInt("total_posts"));
-                data.setTotalRecruiters(rs.getInt("total_recruiters"));
-                data.setTotalFreelancers(rs.getInt("total_freelancers"));
-                dataList.add(data);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        while (rs.next()) {
+            ChartDataAdmin data = new ChartDataAdmin(
+                 rs.getInt("monthNumber"),
+                rs.getString("monthName"),
+                rs.getInt("freelancers"),
+                rs.getInt("projects"),
+                rs.getInt("applications")
+            );
+            chartData.add(data);
         }
-        return dataList;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    
+    return chartData;
+}
 
 //      public List<Integer> getApplicationsData(){
 //        List<Integer> applicationsData = new ArrayList<>();
@@ -235,7 +257,7 @@ public class DashboardDAO extends DBContext {
         DashboardDAO dao = new DashboardDAO();
         List<ChartDataAdmin> m = dao.getChartData();
         for (ChartDataAdmin chartData : m) {
-            System.out.println( chartData.getMonth());
+            System.out.println( chartData.getMonthName());
         }
         
     }

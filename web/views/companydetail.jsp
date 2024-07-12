@@ -27,10 +27,11 @@
         <div class="main-wrapper">
 
 
-            <header class="header">
+            <header class="header header-two">
+
                 <div class="container">
                     <nav class="navbar navbar-expand-lg header-nav p-0">
-                        <div class="navbar-header">
+                        <div class="navbar-header header-select">
                             <a id="mobile_btn" href="javascript:void(0);">
                                 <span class="bar-icon">
                                     <span></span>
@@ -41,6 +42,7 @@
                             <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
+
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
@@ -51,7 +53,8 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                            <jsp:include page="header.jsp" />
+
+                           <jsp:include page="header.jsp" />
                     </nav>
                 </div>
             </header>
@@ -88,7 +91,7 @@
                                                 <img src="${company.logo}" class="img-fluid" alt="logo">
                                             </c:when>
                                             <c:otherwise>
-                                                <img src="assets/img/default-logo.svg" class="img-fluid" alt="logo">
+                                                <img src="${company.logo}" class="img-fluid" alt="logo">
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
@@ -149,16 +152,7 @@
                         </div>
 
                         <div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar project-client-view">
-                            <div class="card budget-widget">
-                                <div class="budget-widget-details">
-                                    <h6>Budget</h6>
-                                    <h4>$125 - $180</h4>
-                                    <p class="mb-0">Hourly Rate</p>
-                                </div>
-                                <c:if test="${postApply == null}">
-                                    <a href="login" class="btn proposal-btn btn-primary"  tabindex="-1">Apply Now</a> 
-                                </c:if>
-                            </div>
+                          
                             <div class="card budget-widget">
                                 <div class="budget-widget-details">
                                     <h6>About Client</h6>
@@ -209,9 +203,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div>
-                                    <a href="javascript:void(0);" class="btn  btn-primary price-btn btn-block">Contact Me </a>
-                                </div>
+                              
                             </div>
                             <div class="card budget-widget">
                                 <ul class="d-flex mb-0 list-style job-list-block">

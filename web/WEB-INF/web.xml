@@ -292,6 +292,10 @@
         <servlet-name>SearchFreelancerFvrControll</servlet-name>
         <servlet-class>RecruiterControll.SearchFreelancerFvrControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchBlogController</servlet-name>
+        <servlet-class>CommonControll.SearchBlogController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -591,5 +595,9 @@
     <servlet-mapping>
         <servlet-name>SearchFreelancerFvrControll</servlet-name>
         <url-pattern>/SearchFreelancerFvr</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBlogController</servlet-name>
+        <url-pattern>/searchBlog</url-pattern>
     </servlet-mapping>
 </web-app>

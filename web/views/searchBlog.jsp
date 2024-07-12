@@ -7,11 +7,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
         <title>KofeJob</title>
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/plugins/feather/feather.css">
-        <link rel="stylesheet" type="text/css" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/plugins/fontawesome/css/all.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/plugins/feather/feather.css">
+        <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+        <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <style>
+            .no-blogs-found {
+                text-align: center;
+                font-size: 18px;
+                color: #E65425;
+                margin-top: 20px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+        </style>
     </head>
     <body>
         <div class="main-wrapper">
@@ -44,7 +54,6 @@
                     </nav>
                 </div>
             </header>
-
             <div class="bread-crumb-bar">
                 <div class="container">
                     <div class="row align-items-center inner-banner">
@@ -72,28 +81,36 @@
                 </div>
             </div>
 
-
             <div class="content">
                 <div class="container">
                     <div class="row blog-grid-row">
-                        <c:forEach var="blog" items="${listBlog}">
-                            <div class="col-md-4 col-sm-12">
-                                <div class="blog grid-blog">
-                                    <div class="blog-image">
-                                        <a href="BlogDetails">
-                                            <img class="img-fluid" src="assets/img/blog/${blog.image}" alt="${blog.title}">
-                                        </a>
+                        <c:choose>
+                            <c:when test="${not empty blogs}">
+                                <c:forEach var="blog" items="${blogs}">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="blog grid-blog">
+                                            <div class="blog-image">
+                                                <a href="BlogDetails?blogId=${blog.blogID}">
+                                                    <img class="img-fluid" src="assets/img/blog/${blog.image}" alt="${blog.title}">
+                                                </a>
+                                            </div>
+                                            <div class="blog-content">
+                                                <ul class="entry-meta meta-item">
+                                                    <li><i class="far fa-clock"></i> <c:out value="${blog.date_blog}"/></li>
+                                                </ul>
+                                                <h3 class="blog-title"><a href="BlogDetails?blogId=${blog.blogID}"><c:out value="${blog.title}"/></a></h3>
+                                                <p class="mb-0"><c:out value="${blog.description}"/></p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="blog-content">
-                                        <ul class="entry-meta meta-item">
-                                            <li><i class="far fa-clock"></i> <c:out value="${blog.date_blog}"/></li>
-                                        </ul>
-                                        <h3 class="blog-title"><a href="views/blogDetails.jsp?blogId=${blog.blogID}"><c:out value="${blog.title}"/></a></h3>
-                                        <p class="mb-0"><c:out value="${blog.description}"/></p>
-                                    </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="col-12">
+                                    <p class="no-blogs-found">There are no blogs that match your query</p>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>

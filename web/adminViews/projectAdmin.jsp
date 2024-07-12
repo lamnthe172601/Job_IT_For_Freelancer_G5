@@ -401,7 +401,6 @@
                 </div>
             </div>
         </div>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>        
@@ -501,7 +500,6 @@
                     approveProject(postId);
                 });
             });
-
             function suspendProject(postId) {
                 $.ajax({
                     url: '/Job_IT_For_Freelancer_G5/moderationProjectAdmin',
@@ -525,7 +523,6 @@
                     }
                 });
             }
-
             function approveProject(postId) {
                 $.ajax({
                     url: '/Job_IT_For_Freelancer_G5/moderationProjectAdmin',
@@ -550,25 +547,17 @@
                 });
             }
         </script>
-
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
         <script src="adminAssets/js/jquery-3.7.1.min.js" ></script>
-
         <script src="adminAssets/js/bootstrap.bundle.min.js" ></script>
-
         <script src="adminAssets/js/feather.min.js" ></script>
-
         <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" ></script>
-
         <script src="adminAssets/plugins/select2/js/select2.min.js" ></script>
-
         <script src="adminAssets/plugins/moment/moment.min.js" ></script>
         <script src="adminAssets/js/bootstrap-datetimepicker.min.js" ></script>
-
         <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" ></script>
         <script src="adminAssets/plugins/datatables/datatables.min.js" ></script>
-
         <script src="adminAssets/js/script.js" ></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="89331437dcc86709a93430b9-|49" defer></script></body>
 </html>

@@ -4,6 +4,7 @@
  */
 package dal;
 
+import Models.Admin;
 import Models.Blogs;
 import Models.Categories;
 import Models.Duration;
@@ -292,10 +293,38 @@ public class AdminDAO extends DBContext {
         }
         return false;
     }
+    
+    public Admin getAdminByID(String adminID) {
+        Admin admin = null;
+        String sql = "SELECT * FROM Admin WHERE userID = ?";
+        
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, adminID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    admin = new Admin(
+                        rs.getString("adminID"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getString("image"),
+                        rs.getString("userID")
+                    );
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return admin;
+    }
+        
 
     public static void main(String[] args) {
-        new AdminDAO().deleteReportByPostId(2);
-        System.out.println(new AdminDAO().getAllProject().get(3).getPostBasic().getChecking());
-
+        AdminDAO adminDAO = new AdminDAO();
+        Admin admin = adminDAO.getAdminByID("1");
+        System.out.println(admin.toString());
+    
     }
 }

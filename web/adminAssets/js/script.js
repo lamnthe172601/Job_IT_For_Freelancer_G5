@@ -227,6 +227,7 @@ Version      : 1.0
 		});
 	})();
 
+
 //	if($('#chart').length > 0) {
 //		var options = {
 //	     	series: [{
@@ -234,11 +235,11 @@ Version      : 1.0
 //	      color: '#ff5b37',
 //	      data: [31, 40, 28, 51, 42, 109, 100]
 //	    }, {
-//	      name: 'Developers per project',
+//	      name: 'Projects',
 //	      color: '#ffb8a8',
 //	      data: [11, 32, 45, 32, 34, 52, 41]
 //	    },{
-//	      name: 'completed projects',
+//	      name: ' Job applications',
 //	      color: '#feb019',
 //	      data: [12, 36, 42, 30, 39, 58, 40]
 //	    }],
