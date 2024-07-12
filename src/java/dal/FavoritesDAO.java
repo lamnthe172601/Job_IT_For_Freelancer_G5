@@ -96,8 +96,8 @@ public class FavoritesDAO extends DBContext {
                      """;
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, freelancerID);
-            statement.setInt(2, recruiterID);
+            statement.setString(2, freelancerID);
+            statement.setInt(1, recruiterID);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
