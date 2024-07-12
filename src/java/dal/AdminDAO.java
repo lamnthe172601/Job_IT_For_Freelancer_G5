@@ -296,7 +296,7 @@ public class AdminDAO extends DBContext {
     
     public Admin getAdminByID(String adminID) {
         Admin admin = null;
-        String sql = "SELECT * FROM Admin WHERE userID = ?";
+        String sql = "SELECT * FROM Admin WHERE adminID = ?";
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, adminID);
