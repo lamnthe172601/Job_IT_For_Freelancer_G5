@@ -12,7 +12,7 @@ public class ProfileAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("userID");
+        String id = request.getParameter("adminID");
         AdminDAO adminDAO = new AdminDAO();
         
         try {
