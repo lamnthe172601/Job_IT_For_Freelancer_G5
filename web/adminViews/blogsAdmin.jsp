@@ -8,7 +8,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Kofejob - Bootstrap Admin HTML Template</title>
+        <title>Kofejob</title>
 
         <link rel="shortcut icon" href="adminAssets/img/favicon.png">
 
@@ -337,7 +337,7 @@
 
                         const titleMatch = title.includes(titleValue);
                         const dateMatch = (!dateFromValue || date >= dateFromValue) && (date <= dateToValue);
-                        const statusMatch = statusValue === '' || status.includes(statusValue);
+                        const statusMatch = statusValue === '' || status===statusValue;
 
                         return titleMatch && dateMatch && statusMatch;
                     });

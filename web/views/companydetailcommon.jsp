@@ -141,8 +141,9 @@
                             </div>
                             <div class="company-detail-block company-description">
                                 <h4 class="form-label">Describe</h4>
-                                <textarea rows="4" class="form-control" name="describe">${company.describe}</textarea>
+                                <textarea rows="4" class="form-control" name="describe" readonly>${company.describe}</textarea>
                             </div>
+
 
 
                         </div>
@@ -208,36 +209,23 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div>
-                                    <a href="javascript:void(0);" class="btn  btn-primary price-btn btn-block">Contact Me </a>
-                                </div>
+                               
                             </div>
                             <div class="card budget-widget">
                                 <ul class="d-flex mb-0 list-style job-list-block">
                                     <li>
                                         <span>Jobs Posted</span>
-                                        <p class="mb-0">48</p>
+                                        <p class="mb-0">${NumberPostOfRecruiter}</p>
                                     </li>
                                     <li>
-                                        <span>Hire Rate</span>
-                                        <p class="mb-0">22</p>
+                                        <span>Applicants</span>
+                                        <p class="mb-0">${numberApply}</p>
                                     </li>
                                     <li>
                                         <span>Open Jobs</span>
-                                        <p class="mb-0">75</p>
+                                        <p class="mb-0">${openJobs}</p>
                                     </li>
-                                    <li>
-                                        <span>Total Spent</span>
-                                        <p class="mb-0">22</p>
-                                    </li>
-                                    <li>
-                                        <span>Hired</span>
-                                        <p class="mb-0">64</p>
-                                    </li>
-                                    <li>
-                                        <span>Active</span>
-                                        <p class="mb-0">29</p>
-                                    </li>
+                                  
                                 </ul>
                             </div>
                         </div>

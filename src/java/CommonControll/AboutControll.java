@@ -4,6 +4,10 @@
  */
 package CommonControll;
 
+import dal.CategoriesDAO;
+import dal.FreelancerDAO;
+import dal.HomeDAO;
+import dal.RecruiterDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,11 +47,18 @@ public class AboutControll extends HttpServlet {
             out.println("</html>");
         }
     }
+CategoriesDAO cDao = new CategoriesDAO();
+    HomeDAO pDAO = new HomeDAO();
+    FreelancerDAO free = new FreelancerDAO();
+    RecruiterDAO recrui = new RecruiterDAO();
 
- 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         request.setAttribute("allpostopen", pDAO.getAllOpenPosts());
+       request.setAttribute("NumberUsers", pDAO.getNumberUsers());
+        request.setAttribute("NumberPost", pDAO.getNumberPost());
+        request.setAttribute("NumberCompany", pDAO.getNumberCompany());
         request.getRequestDispatcher("views/about.jsp").forward(request, response);
     }
 

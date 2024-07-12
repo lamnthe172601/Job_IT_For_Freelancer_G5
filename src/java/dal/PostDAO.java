@@ -833,7 +833,20 @@ public class PostDAO extends DBContext {
         }
         return posts;
     }
-
+ public int countPostsByCategory(int categoryID) {
+    int count = 0;
+    String query = "SELECT COUNT(*) AS total FROM Post WHERE caID = ?";
+    try (PreparedStatement ps = connection.prepareStatement(query)) {
+        ps.setInt(1, categoryID);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt("total");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return count;
+}
     public List<Post> getPostsByLocation(String location) {
         List<Post> posts = new ArrayList<>();
         String query = """
@@ -905,6 +918,21 @@ public class PostDAO extends DBContext {
 
         return posts;
     }
+    public int countPostsByLocation(String location) {
+    int count = 0;
+    String query = "SELECT COUNT(*) AS total FROM Post WHERE location = ?";
+    try (PreparedStatement ps = connection.prepareStatement(query)) {
+        ps.setString(1, location);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt("total");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return count;
+}
+
     
     public int TotalApplyByPost(int ID) {
 
@@ -1006,6 +1034,27 @@ public class PostDAO extends DBContext {
         }
         return list;
     }
+public int countPostsByFreelancerSkills(int freelancerID) {
+    int count = 0;
+    String query = """
+                   SELECT COUNT(*) AS total 
+                   FROM Post p
+                   JOIN SkillPost sp ON p.postID = sp.postID
+                   JOIN Skill s ON sp.skillID = s.skillID
+                   JOIN FreelancerSkill fs ON s.skillID = fs.skillID
+                   WHERE fs.freelancerID = ?
+                   """;
+    try (PreparedStatement ps = connection.prepareStatement(query)) {
+        ps.setInt(1, freelancerID);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt("total");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return count;
+}
 
     
     public static void main(String[] args) {

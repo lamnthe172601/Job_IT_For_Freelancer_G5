@@ -227,45 +227,46 @@ Version      : 1.0
 		});
 	})();
 
-	if($('#chart').length > 0) {
-		var options = {
-	     	series: [{
-	      name: 'freelance Developers',
-	      color: '#ff5b37',
-	      data: [31, 40, 28, 51, 42, 109, 100]
-	    }, {
-	      name: 'Developers per project',
-	      color: '#ffb8a8',
-	      data: [11, 32, 45, 32, 34, 52, 41]
-	    },{
-	      name: 'completed projects',
-	      color: '#feb019',
-	      data: [12, 36, 42, 30, 39, 58, 40]
-	    }],
-	      chart: {
-	      height: 335,
-	      type: 'area'
-	    },
-	    dataLabels: {
-	      enabled: false
-	    },
-	    stroke: {
-	      curve: 'smooth'
-	    },
 
-	    xaxis: {
-	      type: 'datetime',
-	      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-	    },
-	    tooltip: {
-	      x: {
-	        format: 'dd/MM/yy HH:mm'
-	      },
-	    },
-	    };
-	    var chart = new ApexCharts(document.querySelector("#chart"), options);
-	    chart.render();
-	}
+//	if($('#chart').length > 0) {
+//		var options = {
+//	     	series: [{
+//	      name: 'freelance Developers',
+//	      color: '#ff5b37',
+//	      data: [31, 40, 28, 51, 42, 109, 100]
+//	    }, {
+//	      name: 'Projects',
+//	      color: '#ffb8a8',
+//	      data: [11, 32, 45, 32, 34, 52, 41]
+//	    },{
+//	      name: ' Job applications',
+//	      color: '#feb019',
+//	      data: [12, 36, 42, 30, 39, 58, 40]
+//	    }],
+//	      chart: {
+//	      height: 335,
+//	      type: 'area'
+//	    },
+//	    dataLabels: {
+//	      enabled: false
+//	    },
+//	    stroke: {
+//	      curve: 'smooth'
+//	    },
+//
+//	    xaxis: {
+//	      type: 'datetime',
+//	      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+//	    },
+//	    tooltip: {
+//	      x: {
+//	        format: 'dd/MM/yy HH:mm'
+//	      },
+//	    },
+//	    };
+//	    var chart = new ApexCharts(document.querySelector("#chart"), options);
+//	    chart.render();
+//	}
 
 	// Project Chart
 	

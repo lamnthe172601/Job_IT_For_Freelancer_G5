@@ -42,7 +42,7 @@
                                         <div class="card-body">
                                             <p class="text-primary mt-0 mb-2">Users</p>
                                             <h5>${totalUsers}</h5>
-                                            <p><a href="users.html">view details</a></p>
+                                            <!--<p><a href="users.html">view details</a></p>-->
                                             <span class="dash-widget-icon bg-1">
                                                 <i class="fas fa-users"></i>
                                             </span>
@@ -54,7 +54,7 @@
                                         <div class="card-body">
                                             <p class="text-primary mt-0 mb-2">Completed Projects</p>
                                             <h5>${totalPosts}</h5>
-                                            <p><a href="projects.html">view details</a></p>
+                                            <!--<p><a href="projects.html">view details</a></p>-->
                                             <span class="dash-widget-icon bg-1">
                                                 <i class="fas fa-th-large"></i>
                                             </span>
@@ -66,7 +66,7 @@
                                         <div class="card-body">
                                             <p class="text-primary mt-0 mb-2">Active Projects</p>
                                             <h5>${totalJobApplys}</h5>
-                                            <p><a href="projects.html">view details</a></p>
+                                            <!--<p><a href="projects.html">view details</a></p>-->
                                             <span class="dash-widget-icon bg-1">
                                                 <i class="fas fa-bezier-curve"></i>
                                             </span>
@@ -89,230 +89,16 @@
                             </div>
                         </div>
 
-                    </div>
-<!--                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card bg-white projects-card">
-                                <div class="card-body pt-0">
-                                    <div class="card-header">
-                                        <h5 class="card-title">Reviews</h5>
-                                    </div>
-                                    <div class="reviews-menu-links">
-                                        <ul role="tablist" class="nav nav-pills card-header-pills nav-justified">
-                                            <li class="nav-item">
-                                                <a href="#tab-4" data-bs-toggle="tab" class="nav-link active">All (272)</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#tab-5" data-bs-toggle="tab" class="nav-link">Active (218)</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#tab-6" data-bs-toggle="tab" class="nav-link"> Pending Approval (03)
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#tab-7" data-bs-toggle="tab" class="nav-link">Trash (0)</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="tab-content pt-0">
-                                        <div role="tabpanel" id="tab-4" class="tab-pane fade active show">
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-center mb-0 datatable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>Profile</th>
-                                                            <th>Designation</th>
-                                                            <th>comments</th>
-                                                            <th>Stars</th>
-                                                            <th>Category</th>
-                                                            <th class="text-end">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check custom-checkbox">
-                                                                    <input type="checkbox" class="form-check-input" id="customCheck1">
-                                                                    <label class="form-check-label" for="customCheck1"></label>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="profile.html"><img class="avatar-img rounded-circle me-2" src="adminAssets/img/profiles/avatar-14.jpg" alt="User Image">
-                                                                        Janet Paden
-                                                                    </a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>
-                                                                CEO
-                                                            </td>
-                                                            <td>
-                                                                <div class="desc-info">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-muted"></i>
-                                                            </td>
-                                                            <td>
-                                                                Angular
-                                                            </td>
-                                                            <td class="text-end text-nowrap">
-                                                                <a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
-                                                                <a href="javascript:void(0);" class="btn btn-disable">Enable</a>
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div role="tabpanel" id="tab-5" class="tab-pane fade">
-                                            <div class="table-responsive">
-                                                <table class="table table-center table-bordered table-hover datatable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>Profile</th>
-                                                            <th>Designation</th>
-                                                            <th>comments</th>
-                                                            <th>Stars</th>
-                                                            <th>Category</th>
-                                                            <th class="text-end">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check custom-checkbox">
-                                                                    <input type="checkbox" class="form-check-input" id="customCheck11">
-                                                                    <label class="form-check-label" for="customCheck11"></label>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="profile.html"><img class="avatar-img rounded-circle me-2" src="adminAssets/img/profiles/avatar-04.jpg" alt="User Image">
-                                                                        Deboarah
-                                                                    </a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>
-                                                                Associate Engineer
-                                                            </td>
-                                                            <td>
-                                                                <div class="desc-info">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
-                                                                </div>
-                                                            </td>
-                                                            <td class="text-nowrap">
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-muted"></i>
-                                                            </td>
-                                                            <td>
-                                                                React
-                                                            </td>
-                                                            <td class="text-end text-nowrap">
-                                                                <a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
-                                                                <a href="javascript:void(0);" class="btn btn-disable">Enable</a>
-                                                            </td>
-                                                        </tr>                                                     
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div role="tabpanel" id="tab-6" class="tab-pane fade">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover datatable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>Profile</th>
-                                                            <th>Designation</th>
-                                                            <th>comments</th>
-                                                            <th>Stars</th>
-                                                            <th>Category</th>
-                                                            <th class="text-end">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check custom-checkbox">
-                                                                    <input type="checkbox" class="form-check-input" id="customCheck21">
-                                                                    <label class="form-check-label" for="customCheck21"></label>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="profile.html"><img class="avatar-img rounded-circle me-2" src="adminAssets/img/profiles/avatar-05.jpg" alt="User Image">
-                                                                        Albert Boone
-                                                                    </a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>
-                                                                CEO
-                                                            </td>
-                                                            <td>
-                                                                <div class="desc-info">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
-                                                                </div>
-                                                            </td>
-                                                            <td class="text-nowrap">
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-primary"></i>
-                                                                <i class="fas fa-star text-muted"></i>
-                                                            </td>
-                                                            <td>
-                                                                React
-                                                            </td>
-                                                            <td class="text-end text-nowrap">
-                                                                <a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
-                                                                <a href="javascript:void(0);" class="btn btn-disable">Enable</a>
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div role="tabpanel" id="tab-7" class="tab-pane fade">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover datatable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>Profile</th>
-                                                            <th>Designation</th>
-                                                            <th>comments</th>
-                                                            <th>Stars</th>
-                                                            <th>Category</th>
-                                                            <th class="text-end">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
+                    </div>              
                 </div>
 
             </div>
 
         </div>
 
+        <script>
+            var chartData = ${chartDataJson};
+        </script>
         <script src="adminAssets/js/jquery-3.7.1.min.js" defer></script>
         <script src="adminAssets/js/bootstrap.bundle.min.js" defer></script>
         <script src="adminAssets/js/feather.min.js" defer></script>
@@ -322,6 +108,7 @@
         <script src="adminAssets/plugins/datatables/datatables.min.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts" defer></script>
         <script src="adminAssets/js/script.js" defer></script>
+        <script src="adminAssets/js/Chart.js" defer></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="164eb6d6a75caec95434e247-|49" defer></script>
     </body>
 

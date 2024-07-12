@@ -137,7 +137,7 @@
                             </div>
                             <div class="col-md-3 mb-3">
                                 <div class="form-group">
-                                    <label>Total Posts</label>
+                                    <label>Total Projects</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" id="totalPostsMinFilter" placeholder="Min" min="0">
                                         <span class="input-group-text">to</span>
@@ -384,7 +384,7 @@
                         return (!companyValue || company.includes(companyValue)) &&
                                 (!primaryContactValue || primaryContact.includes(primaryContactValue)) &&
                                 (totalPosts >= totalPostsMinValue && totalPosts <= totalPostsMaxValue) &&
-                                (statusValue === '' || status.includes(statusValue));
+                                (statusValue === '' || status===statusValue);
                     });
 
                     table.draw();

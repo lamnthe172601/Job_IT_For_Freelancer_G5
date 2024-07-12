@@ -665,7 +665,7 @@
 
             <script src="assets/js/profile-settings.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 
-            <script src="assets/js/script.js" type="4558dd39f62761c94e962170-text/javascript"></script>
+            
             <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="4558dd39f62761c94e962170-|49" defer></script></body>
 
 </html>

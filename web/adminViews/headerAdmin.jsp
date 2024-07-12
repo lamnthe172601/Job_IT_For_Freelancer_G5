@@ -36,9 +36,9 @@
                 </span>
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="profileAdmin"><i data-feather="user" class="me-1"></i>
+                <a class="dropdown-item" href="profileAdmin?adminID=${adminProfile.getAdminID()}"><i data-feather="user" class="me-1"></i>
                     Profile</a>
-                <a class="dropdown-item" href="settings.html"><i data-feather="settings" class="me-1"></i>
+                <a class="dropdown-item" href="changePass"><i data-feather="settings" class="me-1"></i>
                     ChangePassword</a>
                 <a class="dropdown-item" href="logout"><i data-feather="log-out" class="me-1"></i>
                     Logout</a>

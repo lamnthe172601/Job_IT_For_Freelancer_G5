@@ -37,7 +37,7 @@ public class JobforFreelancer extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+       HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
         RecruiterDAO reDAO = new RecruiterDAO();
         PostDAO pDao = new PostDAO();
@@ -46,10 +46,28 @@ public class JobforFreelancer extends HttpServlet {
         List<JobType> jobtype = job.getAllJobType();
         DurationDAO duration = new DurationDAO();
         List<Duration> dura = duration.getAllDuration();
-        //Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
         List<Post> listpost = pDao.getAllPosts();
         List<Categories> cate = caDAO.getAllCategory();
         List<SkillSet> skill = pDao.getAllSkillSet();
+
+        int tongSoBaiDang = listpost.size();
+        int baiDangTrenMotTrang = 6;
+        int tongSoTrang = (int) Math.ceil((double) tongSoBaiDang / baiDangTrenMotTrang);
+        int trangHienTai = 1;
+
+        String thamSoTrang = request.getParameter("page");
+        if (thamSoTrang != null && !thamSoTrang.isEmpty()) {
+            trangHienTai = Integer.parseInt(thamSoTrang);
+        }
+        request.setAttribute("listpost", listpost);
+        request.setAttribute("tongSoBaiDang", tongSoBaiDang);
+        request.setAttribute("baiDangTrenMotTrang", baiDangTrenMotTrang);
+        request.setAttribute("tongSoTrang", tongSoTrang);
+        request.setAttribute("trangHienTai", trangHienTai);
+        request.setAttribute("cate", cate);
+        request.setAttribute("jobtype", jobtype);
+        request.setAttribute("dura", dura);
+        request.setAttribute("skill", skill);
 
         if (user != null) {
             DAO d = new DAO();
@@ -60,6 +78,7 @@ public class JobforFreelancer extends HttpServlet {
             request.setAttribute("postApply", postAplly);
             request.setAttribute("postFavourites", postFavourites);
         }
+        String categoryIDParam = request.getParameter("categoryID");
 
         if (user != null) {
             DAO d = new DAO();
@@ -80,6 +99,7 @@ public class JobforFreelancer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
     }
 
     @Override

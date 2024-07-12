@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Kofejob - Bootstrap Admin HTML Template</title>
+        <title>Kofejob</title>
 
         <link rel="shortcut icon" href="adminAssets/img/favicon.png">
 
@@ -422,7 +422,7 @@
 
                     var nameMatch = !nameValue || name.includes(nameValue);
                     var emailMatch = !emailValue || email.includes(emailValue);
-                    var statusMatch = statusValue === '' || status.includes(statusValue);
+                    var statusMatch = statusValue === '' || status===statusValue;
 
                     // New skill matching logic
                     var skillsMatch = true;
