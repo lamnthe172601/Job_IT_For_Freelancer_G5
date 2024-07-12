@@ -452,7 +452,7 @@
                                                                 <div class="action-table-data">
                                                                     <a id="Download${listapply.applyID}"
                                                                        style="margin-left: 20px"
-                                                                       href="https://ik.imagekit.io/tvlk/blog/2023/07/den-lanh-giang.jpg?tr=dpr-2,w-675"
+                                                                       href="${listapply.resume}"
                                                                        class="download-icon me-2" download>
                                                                         <i class="feather-download"></i>
                                                                     </a>

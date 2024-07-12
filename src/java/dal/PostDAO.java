@@ -91,19 +91,19 @@ public class PostDAO extends DBContext {
     public List<Post> getPostByRecruiterCompleted(int pid) {
         List<Post> list = new ArrayList<>();
         String query = """
-                   SELECT p.*, j.*, du.*, re.*, ca.*, co.*
-                     FROM [freelancer].[dbo].[Post] p
-                     JOIN [freelancer].[dbo].[JobType] j ON p.job_type_ID = j.jobID
-                     JOIN [freelancer].[dbo].[Duration] du ON p.durationID = du.durationID
-                     JOIN [freelancer].[dbo].[Recruiter] re ON p.recruiterID = re.recruiterID
-                     JOIN [freelancer].[dbo].[Categories] ca ON p.caID = ca.caID
-                     JOIN [freelancer].[dbo].[Company] co ON re.recruiterID = co.recruiterID
-                     WHERE p.quantity = (
-                         SELECT COUNT(ja.applyID)
-                         FROM [freelancer].[dbo].[JobApply] ja
-                         WHERE ja.postID = p.postID
-                     )
-                     AND re.recruiterID = ?; """;
+                    SELECT p.*, j.*, du.*, re.*, ca.*, co.*
+                      FROM [freelancer].[dbo].[Post] p
+                      JOIN [freelancer].[dbo].[JobType] j ON p.job_type_ID = j.jobID
+                      JOIN [freelancer].[dbo].[Duration] du ON p.durationID = du.durationID
+                      JOIN [freelancer].[dbo].[Recruiter] re ON p.recruiterID = re.recruiterID
+                      JOIN [freelancer].[dbo].[Categories] ca ON p.caID = ca.caID
+                      JOIN [freelancer].[dbo].[Company] co ON re.recruiterID = co.recruiterID
+                      WHERE p.quantity = (
+                          SELECT COUNT(ja.applyID)
+                          FROM [freelancer].[dbo].[JobApply] ja
+                          WHERE ja.postID = p.postID
+                      )
+                      AND re.recruiterID = ?; """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, pid);
