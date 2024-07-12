@@ -5,6 +5,7 @@
 package dal;
 
 import MutiModels.ChartData;
+import MutiModels.ChartDataAdmin;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,6 +59,20 @@ public class DashboardDAO extends DBContext {
         }
         return -1;
     }
+    
+     public int getTotalBlog() {
+        String query = "  SELECT count(blogID) as totalBlog FROM Blogs";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("totalBlog");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
 
     public int getTotalFreelancer() {
         String query = "   SELECT count(freelanceID) as totalFreelancer FROM freelancer";
@@ -71,6 +86,35 @@ public class DashboardDAO extends DBContext {
         } catch (SQLException e) {
         }
         return -1;
+    }
+    public List<ChartDataAdmin> getChartData() {
+        List<ChartDataAdmin> dataList = new ArrayList<>();
+        String query = """
+                       SELECT MONTH(date_post) as month, 
+                       COUNT(*) as total_posts, 
+                       COUNT(DISTINCT recruiterID) as total_recruiters, 
+                       COUNT(DISTINCT p.postID) as total_completed_projects 
+                       FROM Post p
+                       LEFT JOIN JobApply ja ON p.postID = ja.postID AND ja.status = 'Completed' 
+                       WHERE YEAR(date_post) = YEAR(GETDATE())
+                       GROUP BY MONTH(date_post) 
+                       ORDER BY MONTH(date_post)""" ;
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ChartDataAdmin data = new ChartDataAdmin();
+                data.setMonth(rs.getInt("month"));
+                data.setTotalPosts(rs.getInt("total_posts"));
+                data.setTotalRecruiters(rs.getInt("total_recruiters"));
+                data.setTotalFreelancers(rs.getInt("total_freelancers"));
+                dataList.add(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dataList;
     }
 
 //      public List<Integer> getApplicationsData(){
@@ -189,9 +233,9 @@ public class DashboardDAO extends DBContext {
 
     public static void main(String[] args) {
         DashboardDAO dao = new DashboardDAO();
-        List<ChartData> m = dao.getChartDataForYear(1, 2024);
-        for (ChartData chartData : m) {
-            System.out.println(chartData.toString());
+        List<ChartDataAdmin> m = dao.getChartData();
+        for (ChartDataAdmin chartData : m) {
+            System.out.println( chartData.getMonth());
         }
         
     }

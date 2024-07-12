@@ -55,7 +55,7 @@ public class BlogDetailsControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int blogID = Integer.parseInt(request.getParameter("id"));
+        int blogID = Integer.parseInt(request.getParameter("blogID"));
         BlogDAO blogDAO = new BlogDAO();
         Blogs blog = blogDAO.selectBlogById(blogID);
         

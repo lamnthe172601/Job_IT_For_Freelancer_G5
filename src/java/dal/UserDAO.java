@@ -4,6 +4,7 @@
  */
 package dal;
 
+import Models.Admin;
 import Models.Role;
 import Models.User;
 import java.sql.SQLException;
@@ -19,19 +20,37 @@ import java.sql.ResultSet;
  */
 public class UserDAO extends DBContext{
     
-
+    public Role getRoleByRoleID(int ID) throws SQLException {
+        String query = "SELECT * FROM [freelancer].[dbo].[Role] WHERE [roleID] = ?";
+        
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, ID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Lấy thông tin role từ cơ sở dữ liệu
+                
+                    return new Role(
+                        rs.getInt("roleID"),
+                        rs.getString("role_name")
+                    );
+                }
+            }
+        }
+        return null;
+    }
     public User getUserByUserID(int userID) throws SQLException {
         String query = "SELECT * FROM [freelancer].[dbo].[User] WHERE [userID] = ?";
+        UserDAO userDAO = new UserDAO();
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, userID);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     // Lấy thông tin role từ cơ sở dữ liệu
                     int roleID = rs.getInt("roleID");
-                    String roleName = rs.getString("roleName");
-
+                    //String roleName = rs.getString("role_name");
+                    Role role = userDAO.getRoleByRoleID(roleID);
                     
-                    Role role = new Role(roleID, roleName);
+                    //Role role = new Role(roleID, roleName);
                     return new User(
                         rs.getInt("userID"),
                         rs.getString("username"),
@@ -62,5 +81,15 @@ public class UserDAO extends DBContext{
         Connection connection = new DBContext().connection;
         return connection;
     }
-    
+    public static void main(String[] args) {
+        UserDAO userDAO = new UserDAO();
+        try {
+            User userProfile = userDAO.getUserByUserID(2);
+            System.out.println(userProfile.toString());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        
+    }
 }

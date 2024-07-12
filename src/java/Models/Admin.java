@@ -85,5 +85,12 @@ public class Admin {
     public void setUserID(String userID) {
         this.userID = userID;
     }
+
+    @Override
+    public String toString() {
+        return "Admin{" + "adminID=" + adminID + ", first_name=" + first_name + ", last_name=" + last_name + ", phone=" + phone + ", email=" + email + ", image=" + image + ", userID=" + userID + '}';
+    }
+    
+    
     
 }
