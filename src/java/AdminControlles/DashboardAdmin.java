@@ -61,31 +61,29 @@ public class DashboardAdmin extends HttpServlet {
         request.setAttribute("totalPosts",d.getTotalPost() );
         request.setAttribute("totalJobApplys",d.getTotalJobApply() );
         request.setAttribute("totalBlog",d.getTotalJobApply());        
-      List<ChartDataAdmin> chartDataList = d.getChartData();
+      List<ChartDataAdmin> chartData = d.getChartData();
         
-        // Chuyển đổi dữ liệu thành JSON string
-        String chartDataJson = convertToJsonArray(chartDataList);
-        
-        request.setAttribute("chartDataJson", chartDataJson);
-         request.getRequestDispatcher("adminViews/dashboardAdmin.jsp").forward(request, response);
-    } 
-    private String convertToJsonArray(List<ChartDataAdmin> dataList) {
-        StringBuilder json = new StringBuilder("[");
-        for (int i = 0; i < dataList.size(); i++) {
-            ChartDataAdmin data = dataList.get(i);
-            json.append("{");
-            json.append("\"month\":").append(data.getMonth()).append(",");
-            json.append("\"totalPosts\":").append(data.getTotalPosts()).append(",");
-            json.append("\"totalRecruiters\":").append(data.getTotalRecruiters()).append(",");
-            json.append("\"totalFreelancers\":").append(data.getTotalFreelancers());
-            json.append("}");
-            if (i < dataList.size() - 1) {
-                json.append(",");
+        // Convert the data to a JSON string manually
+        StringBuilder jsonBuilder = new StringBuilder("[");
+        for (int i = 0; i < chartData.size(); i++) {
+            ChartDataAdmin data = chartData.get(i);
+            jsonBuilder.append("{")
+                       .append("\"month\":").append(data.getMonthNumber()).append(",")
+                       .append("\"freelancers\":").append(data.getFreelancers()).append(",")
+                       .append("\"projects\":").append(data.getProjects()).append(",")
+                       .append("\"applications\":").append(data.getApplications())
+                       .append("}");
+            if (i < chartData.size() - 1) {
+                jsonBuilder.append(",");
             }
         }
-        json.append("]");
-        return json.toString();
-    }
+        jsonBuilder.append("]");
+        String chartDataJson = jsonBuilder.toString();
+        
+        // Pass the JSON data to the JSP
+        request.setAttribute("chartDataJson", chartDataJson);
+         request.getRequestDispatcher("adminViews/dashboardAdmin.jsp").forward(request, response);
+    }    
 
     /** 
      * Handles the HTTP <code>POST</code> method.
