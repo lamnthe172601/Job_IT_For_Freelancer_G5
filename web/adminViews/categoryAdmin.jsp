@@ -68,8 +68,7 @@
         </style>
     </head>
     <body>
-        <div class="main-wrapper">
-
+         <div class="main-wrapper">
 
             <%@ include file="headerAdmin.jsp" %>
             <%@ include file="sidebar.jsp" %>
@@ -94,13 +93,13 @@
                         <div class="row filter-row">
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="categoryname">Name Categories</label>
-                                    <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Category Name" >
+                                    <label for="categoryname">Name Position</label>
+                                    <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" >
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="statusCate">Status Category</label>
+                                    <label for="statusCate">Status Position</label>
                                     <select class="form-control" id="statusCate" name="statusCate">
                                         <option value="">All</option>
                                         <option value="1">Active</option>
@@ -127,7 +126,7 @@
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
-                                                <th>Category Name</th>
+                                                <th>Position Name</th>
                                                 <th>Description</th>
                                                 <th>Status</th>
                                                 <th class="text-end">Actions</th>
@@ -183,7 +182,7 @@
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="viewCategoryDetailsModalLabel">Category Details</h5>
+                                                            <h5 class="modal-title" id="viewCategoryDetailsModalLabel">Position Details</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
@@ -192,7 +191,7 @@
                                                                     <img id="category-details-image" src="${c.getImage()}" alt="Category Image" class="img-fluid">
                                                                 </div>
                                                                 <div class="col-md-8">
-                                                                    <h2 id="category-details-title">Category Name : ${c.getCategoriesName()}</h2>
+                                                                    <h2 id="category-details-title">Position Name : ${c.getCategoriesName()}</h2>
                                                                     <h5 id="category-details-description">Description : ${c.getDescription()}</h5>
                                                                 </div>
                                                             </div>
@@ -267,22 +266,22 @@
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Edit Category</h4>
+                                                            <h4 class="modal-title">Edit Position</h4>
                                                             <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <form id="edit-category-${c.getCaID()}" action="categoryAdmin" method="post">
                                                                 <input name="mod" value="edit" hidden>
                                                                 <div class="form-group">
-                                                                    <label for="edit-categoryname">Category Name</label>
+                                                                    <label for="edit-categoryname">Position Name</label>
                                                                     <input name="categoryIdStr" value="${c.getCaID()}" hidden>
-                                                                    <input type="text" class="form-control" id="edit-categoryname-${c.getCaID()}" name="categoryName" value="${c.getCategoriesName()}" maxlength="20" required pattern="\S+" title="Category name cannot be the same as the previous name and must not contain only spaces." oninput="checkDuplicateCategoryName(${c.getCaID()});">
+                                                                    <input type="text" class="form-control" id="edit-categoryname-${c.getCaID()}" name="categoryName" value="${c.getCategoriesName()}" maxlength="20" required pattern="^(?!.*\s{3}).*$" title="Position name cannot be the same as the previous name and must not contain only spaces." >
 
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="edit-description">Description</label>
                                                                     <input name="categoryIdStr" value="${c.getCaID()}" hidden>
-                                                                    <input  type="text" class="form-control" id="edit-description" name="description" value="${c.getDescription()}"required pattern="\S+" title="Category name cannot be the same as the previous name and must not contain only spaces."
+                                                                    <input  type="text" class="form-control" id="edit-description" name="description" value="${c.getDescription()}"required pattern="^(?!.*\s{3}).*$" title="Position name cannot be the same as the previous name and must not contain only spaces.">
                                                                             </div>
                                                                     <div class="mt-4">
                                                                         <button id="edit-category-btn" class="btn btn-primary btn-block">Submit</button>
@@ -309,20 +308,21 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add Category</h4>
+                        <h4 class="modal-title">Add Position</h4>
                         <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
                         <form id="add-category-form" action="categoryAdmin" method="post">
                             <input name="mod" value="add" hidden>
                             <div class="form-group">
-                                <label for="categoryName">Category Name</label>
-                                <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Category Name" maxlength="30" required pattern="[^\s]+" title="Category Name cannot be empty or consist only of whitespace.">
+                                <label for="categoryName">Position Name</label>
+                                <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" maxlength="30" required pattern="^(?!.*\s{3}).*$" title="Position Name cannot be empty or consist only of whitespace">
+
 
                             </div>
                             <div class="form-group">
                                 <label for="categoryDescription">Description</label>
-                                <input oninput="checkCategory()" type="text" class="form-control" id="categorydescription" name="description" placeholder="Enter Category Description"  maxlength="500" required pattern="[^\s]+" title="Category Description cannot be empty or consist only of whitespace.">
+                                <input oninput="checkCategory()" type="text" class="form-control" id="categorydescription" name="description" placeholder="Enter Position Description"  maxlength="500" required pattern="^(?!.*\s{3}).*$" title="Position Description cannot be empty or consist only of whitespace.">
 
                             </div>
                             <div class="mt-4">
@@ -347,7 +347,7 @@
             <% session.removeAttribute("message"); %>
             <% } %>
             });
-            <script>
+            </script>
         <script>
                 document.getElementById('filter_search').addEventListener('click', function () {
                     var filterInputs = document.getElementById('filter_inputs');

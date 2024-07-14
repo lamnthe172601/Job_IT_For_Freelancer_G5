@@ -232,7 +232,7 @@ public class RecruiterDAO extends DBContext {
                                                           JOIN [Freelancer] free ON ja.freelanceID = free.freelanceID
                                                           JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
                                                           WHERE 
-                                                          p.recruiterID =? and ja.status != 1 ;
+                                                          p.recruiterID =?  ;
                            """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);

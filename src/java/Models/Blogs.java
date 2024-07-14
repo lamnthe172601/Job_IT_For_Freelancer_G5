@@ -84,5 +84,10 @@ public class Blogs {
         this.status = status;
     }
 
-  
+    @Override
+    public String toString() {
+        return "Blogs{" + "BlogID=" + BlogID + ", title=" + title + ", image=" + image + ", description=" + description + ", tag=" + tag + ", date_blog=" + date_blog + ", status=" + status + '}';
+    }
+
+    
 }

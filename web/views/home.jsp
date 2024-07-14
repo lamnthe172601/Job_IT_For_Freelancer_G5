@@ -681,8 +681,8 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-12 mx-auto">
                                 <div class="section-header section-header-two text-center aos" data-aos="fade-up">
-                                    <h2 class="header-title">Recently Updated <span>Projects for you</span></h2>
-                                    <p>Get work done in over 60 different categories</p>
+                                    <h2 class="header-title">Jobs By <span> Positions </span></h2>
+                                    <p>Get work done in over 60 different Positions</p>
                                 </div>
                             </div>
                         </div>

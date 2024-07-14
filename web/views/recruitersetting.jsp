@@ -33,10 +33,11 @@
         <div class="main-wrapper">
 
 
-            <header class="header">
+            <header class="header header-two">
+
                 <div class="container">
                     <nav class="navbar navbar-expand-lg header-nav p-0">
-                        <div class="navbar-header">
+                        <div class="navbar-header header-select">
                             <a id="mobile_btn" href="javascript:void(0);">
                                 <span class="bar-icon">
                                     <span></span>
@@ -47,6 +48,7 @@
                             <a href="home" class="navbar-brand logo">
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
+
                         </div>
                         <div class="main-menu-wrapper">
                             <div class="menu-header">
@@ -58,110 +60,7 @@
                                 </a>
                             </div>
 
-
-
-                            <ul class="main-nav">
-                                <li class="active has-submenu">
-                                    <a href="home">Home <i class="fas "></i></a>
-
-                                </li>
-
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu"> 
-
-                                            <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
-                                            <li><a href="ListApply">Jobs Apply</a></li>
-                                            <li><a href="jobforyou">Jobs For you</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-
-                                            <li><a href="ListPost">Jobs List</a></li>                                        
-                                            <li><a href="SreachJob">Find Jobs</a></li>  
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-
-                                            <li><a href="jobsList">Top Freelancer</a></li>
-                                            <li><a href="newsJobs">Skills</a></li>
-
-                                        </ul>
-                                    </li>
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-
-                                            <li><a href="jobsList">List Post</a></li>
-                                            <li><a href="newsJobs">Reviews</a></li>
-
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">                                                                           
-                                        <li><a href="About">About us</a></li>
-                                        <li><a href="ContactUs">Contact us</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
-                                    <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
-
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-                                            <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
-                                            <li><a href="Project">Projects</a></li>                        
-                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
-                                            <li><a href="profile-settings">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
-                                    <li class="has-submenu">
-                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
-
-                                            <li><a href="dashboard">Dashboard</a></li>
-                                            <li><a href="companydetail">My Profile</a></li>                                        
-                                            <li><a href="manage-projects">Projects</a></li>
-                                            <li><a href="favourites">Favourites</a></li>                                                                                       
-                                            <li><a href="profile-settings">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
-                                    <li>
-                                        <a href="/admin/index.html" target="_blank">Admin</a>
-                                        <ul class="submenu">
-
-                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
-                                            <li><a href="profile-settings">Settings</a></li>
-                                            <li><a href="logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>
-                                <c:if test="${sessionScope.account == null}">
-                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
-                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
-                                        </c:if>
-                            </ul> 
-                        </div>
-                        <ul class="nav header-navbar-rht reg-head">
-
-                            <li><a href="post-project.html" class="login-btn"><i class="feather-plus me-1"></i>Post a Project </a></li>
-                        </ul>
+                           <jsp:include page="header.jsp" />
                     </nav>
                 </div>
             </header>
@@ -173,43 +72,34 @@
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="assets/img/user/table-avatar-03.jpg" class="avatar-lg rounded-circle"></a>
+                                    <a href="companydetail"><img alt="profile image" src="${recruiter.image}" alt="Image" id="blah" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
                                         <h3 class="mb-0"><a href="profile-settings.html"></a><img src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
 
                                     </div>
                                 </div>
+                                
                                 <div class="settings-menu">
                                     <div id="sidebar-menu" class="sidebar-menu">
                                         <ul>
                                             <li class="nav-item">
-                                                <a href="dashboard.html" class="nav-link">
+                                                <a href="Dashboard" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-project-proposals.html" class="nav-link">
+                                                <a href="companydetail" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
                                                    
                                                 </a>
                                                
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="freelancer-favourites.html" class="nav-link">
+                                                <a href="RecruiterFavourites" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-03.svg" alt="Img"> Favourites
                                                    
                                                 </a>
                                                 
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="review" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="chat" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
-                                                </a>
                                             </li>
 
                                             <li class="nav-item submenu">
