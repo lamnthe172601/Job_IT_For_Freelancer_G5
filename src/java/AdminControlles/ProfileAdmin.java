@@ -21,7 +21,7 @@ public class ProfileAdmin extends HttpServlet {
             request.getRequestDispatcher("adminViews/profileAdmin.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+//            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 }
