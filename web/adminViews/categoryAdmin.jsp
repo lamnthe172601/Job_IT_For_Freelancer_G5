@@ -68,7 +68,7 @@
         </style>
     </head>
     <body>
-         <div class="main-wrapper">
+        <div class="main-wrapper">
 
             <%@ include file="headerAdmin.jsp" %>
             <%@ include file="sidebar.jsp" %>
@@ -218,7 +218,7 @@
                                                                 <div class="modal-btn delete-action">
                                                                     <div class="row">
                                                                         <div class="col-6">
-                                                                            <button style="width: 100%" type="submit" class="btn btn-primary continue-btn delete-btn-ajax">Delete</button>
+                                                                            <button style="width: 100%" type="submit" class="btn btn-primary continue-btn ">Delete</button>
                                                                         </div>
                                                                         <div class="col-6">
                                                                             <a style="width: 100%" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -282,16 +282,16 @@
                                                                     <label for="edit-description">Description</label>
                                                                     <input name="categoryIdStr" value="${c.getCaID()}" hidden>
                                                                     <input  type="text" class="form-control" id="edit-description" name="description" value="${c.getDescription()}"required pattern="^(?!.*\s{3}).*$" title="Position name cannot be the same as the previous name and must not contain only spaces.">
-                                                                            </div>
-                                                                    <div class="mt-4">
-                                                                        <button id="edit-category-btn" class="btn btn-primary btn-block">Submit</button>
-                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-4">
+                                                                    <button id="edit-category-btn" class="btn btn-primary btn-block">Submit</button>
+                                                                </div>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                                                            
+
                                         </c:forEach>
                                         </tbody>
                                     </table>
@@ -336,46 +336,130 @@
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <!-- JavaScript để kiểm tra thông báo từ session và hiển thị modal -->
+
+
+
         <script>
             $(document).ready(function () {
-            <% String message = (String) session.getAttribute("message"); %>
-            <% if (message != null) { %>
-            toastr.success('<%= message %>', 'Notification', {
-            timeOut: 3000,
-                    positionClass: 'toast-top-right'
-            });
+            // Kiểm tra nếu có thông báo trong session khi mới tải trang
+            var message = "<%= (String) session.getAttribute("message") %>";
+            if (message != null && message.trim().length > 0) {
+            // Hiển thị modal thông báo
+            var messageModal =
+                    `<c:if test="${sessionScope.check == 1}">
+        
+        <div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <div class="checkmark-circle">
+                                        <div class="background"></div>
+                                        <div class="checkmark"></div>
+                                    </div>
+                                    <h3>Notification</h3>
+                                    <p>${message}</p>
+                                    <a style="width: 10%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div></c:if>
+            <c:remove var="check" scope="session" />
+    `;
+            $('body').append(messageModal);
+            $('#messageModal').modal('show');
+            // Xóa thông báo khỏi session
             <% session.removeAttribute("message"); %>
-            <% } %>
+            }
+
+            // Hiển thị modal xác nhận xóa khi ấn nút delete
+            $('.delete-btn').on('click', function (e) {
+            e.preventDefault();
+            var categoryId = $(this).data('category-id');
+            var modalId = '#delete_category_' + categoryId;
+            $(modalId).modal('show');
             });
-            </script>
+            });
+        </script>
+
+
+        <style>
+            .modal-body.text-center {
+                text-align: center;
+            }
+            .checkmark-circle {
+                width: 80px;
+                height: 80px;
+                position: relative;
+                display: inline-block;
+                vertical-align: top;
+                margin-bottom: 10px;
+            }
+            .background {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: #f8f8f8;
+                position: absolute;
+            }
+            .checkmark {
+                width: 50px;
+                height: 15px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #28a745;
+                border-top: none;
+                border-right: none;
+                transform: rotate(-45deg);
+                position: absolute;
+                top: 35%;
+                left: 25%;
+            }
+            .notification-title {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .notification-message {
+                margin-bottom: 30px;
+                font-size: 16px;
+
+            }
+
+        </style>
+
         <script>
-                document.getElementById('filter_search').addEventListener('click', function () {
-                    var filterInputs = document.getElementById('filter_inputs');
+            document.getElementById('filter_search').addEventListener('click', function () {
+            var filterInputs = document.getElementById('filter_inputs');
             if (filterInputs.style.display === 'none' || filterInputs.style.display === '') {
             filterInputs.style.display = 'block';
             } else {
             filterInputs.style.display = 'none';
             }
-        });
-<script>
+            });
+            <script>
                 // Hàm cắt bỏ văn bản dài hơn giới hạn
-                function truncateText(text, maxLength) {
-                    if (text.length <= maxLength) {
+            function truncateText(text, maxLength) {
+            if (text.length <= maxLength) {
             return text;
             } else {
             return text.substring(0, maxLength) + "...";
             }
         }
-                var titles = document.querySelectorAll(".table-avatar.title a");
-                var descriptions = document.querySelectorAll(".descripition");
-                titles.forEach(function (title) {
-                    title.textContent = truncateText(title.textContent, 20); // Giới hạn 20 ký tự cho tiêu đề
-        });
-                descriptions.forEach(function (description) {
-                    description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
-        });
-        
-           </script>
+        var titles = document.querySelectorAll(".table-avatar.title a");
+            var descriptions = document.querySelectorAll(".descripition");
+            titles.forEach(function (title) {                     title.textContent = truncateText(title.textContent, 20); // Giới hạn 20 ký tự cho tiêu đề
+                        });
+                            descriptions.forEach(function (description) {
+            description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
+                                });
+                                
+                        </script>
         <script src="assets/js/jquery-3.7.1.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/feather.min.js"></script>
