@@ -62,7 +62,7 @@
             <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
             <ul class="submenu">
                 <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>                      
-                <li><a href="changePassword">Change Password</a></li>                                                                                     
+                <li><a href="changePass">Change Password</a></li>                                                                                     
                 <li><a href="UpdateProfile?id=${sessionScope.account.userID}">Settings</a></li>
                 <li><a href="logout">Logout</a></li>
             </ul>
