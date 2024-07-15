@@ -10,51 +10,62 @@ package MutiModels;
  * @author kudol
  */
 public class ChartDataAdmin {
-     private int month;
-    private int totalPosts;
-    private int totalRecruiters;
-    private int totalFreelancers;
+    private int monthNumber;
+    private String monthName;
+    private int freelancers;
+    private int projects;
+    private int applications;
+
 
     public ChartDataAdmin() {
     }
 
-    public ChartDataAdmin(int month, int totalPosts, int totalRecruiters, int totalFreelancers) {
-        this.month = month;
-        this.totalPosts = totalPosts;
-        this.totalRecruiters = totalRecruiters;
-        this.totalFreelancers = totalFreelancers;
+    public ChartDataAdmin(int monthNumber, String monthName, int freelancers, int projects, int applications) {
+        this.monthNumber = monthNumber;
+        this.monthName = monthName;
+        this.freelancers = freelancers;
+        this.projects = projects;
+        this.applications = applications;
     }
 
-    public int getMonth() {
-        return month;
+    public int getMonthNumber() {
+        return monthNumber;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public void setMonthNumber(int monthNumber) {
+        this.monthNumber = monthNumber;
     }
 
-    public int getTotalPosts() {
-        return totalPosts;
+    public String getMonthName() {
+        return monthName;
     }
 
-    public void setTotalPosts(int totalPosts) {
-        this.totalPosts = totalPosts;
+    public void setMonthName(String monthName) {
+        this.monthName = monthName;
     }
 
-    public int getTotalRecruiters() {
-        return totalRecruiters;
+    public int getFreelancers() {
+        return freelancers;
     }
 
-    public void setTotalRecruiters(int totalRecruiters) {
-        this.totalRecruiters = totalRecruiters;
+    public void setFreelancers(int freelancers) {
+        this.freelancers = freelancers;
     }
 
-    public int getTotalFreelancers() {
-        return totalFreelancers;
+    public int getProjects() {
+        return projects;
     }
 
-    public void setTotalFreelancers(int totalFreelancers) {
-        this.totalFreelancers = totalFreelancers;
+    public void setProjects(int projects) {
+        this.projects = projects;
+    }
+
+    public int getApplications() {
+        return applications;
+    }
+
+    public void setApplications(int applications) {
+        this.applications = applications;
     }
 
    
