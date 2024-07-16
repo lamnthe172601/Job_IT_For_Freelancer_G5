@@ -38,6 +38,7 @@
 
             /* Đảm bảo khoảng cách đều giữa các form */
             .blog {
+                height: 450px;
                 margin-bottom: 5px; /* Khoảng cách giữa các blog, có thể thay đổi tùy nhu cầu */
             }
 
@@ -120,7 +121,11 @@
                                         </ul>
                                         <h3 class="blog-title"><a href="BlogDetails?blogID=${blog.blogID}""><c:out value="${blog.title}"/></a></h3>
                                         <p class="mb-0"><c:out value="${blog.description}"/></p>
+                                        <div class="blog-read">
+                                            <a href="BlogDetails?blogID=${blog.blogID}">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                                        </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </c:forEach>
