@@ -181,14 +181,14 @@
                                                 <a href="javascript:void(0);" class="btn btn-primary green-active">${list.durationID.durationName}</a>
                                                 <span><i class="far fa-clock me-1"></i> ${list.datePost}</span>
                                             </div>
-                                            <h4><a href="project.html">${list.getTitle()}</a></h4>
+                                            <h4><a href="PostDetails?postID=${list.postID}">${list.getTitle()}</a></h4>
                                             <ul class="feature-project-list nav">
                                                 <li><i class="feather-user me-1"></i>${list.caID.categoriesName}</li>
                                                 <li><i class="feather-map-pin me-1"></i>${list.location}</li>
                                             </ul>
                                             <div class="feature-foot">
                                                 <div class="logo-company">
-                                                    <a href="project.html">
+                                                    <a href="PostDetails?postID=${list.postID}">
                                                         <img src="assets/img/icon/logo-icon-01.svg" class="me-1" alt="icon">
                                                         <span>${list.recruiterID.fullName()}</span>
                                                     </a>
