@@ -64,6 +64,7 @@ public class ViewCategoryAdmin extends HttpServlet {
             // Thêm thông báo vào session
             HttpSession session = request.getSession();
             session.setAttribute("message", "DELETE SUCCESSFUL");
+            session.setAttribute("check", "1");
 
             // Chuyển hướng lại trang quản lý category
             response.sendRedirect(request.getContextPath() + "/categoryAdmin");
@@ -85,6 +86,7 @@ public class ViewCategoryAdmin extends HttpServlet {
 
         if (isAdded) {
             response.sendRedirect(request.getContextPath() + "/categoryAdmin");
+            session.setAttribute("check", "1");
         } else {
             request.setAttribute("errorMessage", "Failed to add category.");
             request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
@@ -94,6 +96,7 @@ public class ViewCategoryAdmin extends HttpServlet {
     private void handleEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("message", "UPDATE SUCCESSFUL");
+         session.setAttribute("check", "1");
         try {
             String categoryIdStr = request.getParameter("categoryIdStr");
             if (categoryIdStr.trim().isEmpty()) {
@@ -113,8 +116,10 @@ public class ViewCategoryAdmin extends HttpServlet {
 
             if (isUpdated) {
                 response.sendRedirect(request.getContextPath() + "/categoryAdmin");
+                
             } else {
                 request.setAttribute("errorMessage", "Failed to update category.");
+              
                 request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);
             }
         } catch (NumberFormatException e) {
@@ -168,6 +173,7 @@ public class ViewCategoryAdmin extends HttpServlet {
     if (isActive) {
         // Chuyển hướng lại trang quản lý category với cateId
         response.sendRedirect(request.getContextPath() + "/categoryAdmin?activatedCateId=" + cat);
+        session.setAttribute("check", "1");
     } else {
         request.setAttribute("errorMessage", "Failed to activate category.");
         request.getRequestDispatcher("/adminViews/categoryAdmin.jsp").forward(request, response);

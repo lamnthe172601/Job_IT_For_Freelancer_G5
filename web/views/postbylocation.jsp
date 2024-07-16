@@ -370,15 +370,12 @@
                                                     </div>
                                                     <div class="skills-container">
                                                         <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index % 3 == 0}">
-                                                                <div class="skills-row">
+                                                            <c:if test="${loop.index < 3}">
+                                                                    <span class="badge badge-pill badge-design">${skill}</span>
+                                                                </c:if>                                                              
+                                                                <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                                    <span class="badge badge-pill badge-design">...</span>
                                                                 </c:if>
-                                                                <div class="freelance-tags">
-                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                                </div>
-                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                                </div>
-                                                            </c:if>
                                                         </c:forEach>
                                                     </div>
 
