@@ -391,6 +391,8 @@
                                                     <a href="#" data-bs-toggle="modal"  class="btn btn-danger ml-2 report-post" data-postid="${list.postID}"  data-bs-target="#applyModal_a" data-postid="a" tabindex="-1">
                                                         <i class="fas fa-flag custom-flag"></i>
                                                     </a>
+                                                       
+                                                            
                                                     <c:set var="postId" value="${list.postID}" />
 
                                                     <c:choose>

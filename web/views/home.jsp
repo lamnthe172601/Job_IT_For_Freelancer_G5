@@ -99,7 +99,7 @@
             </header>
 
 
-            <section class="section home-banner  home-two">
+            <section style="padding-top: 0px" class="section home-banner  home-two">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class=" col-lg-6 col-md-12">
@@ -405,7 +405,7 @@
 
             <!--the post project by categori-->
             <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">           
-                <section class="section feature-project home-two-projects">
+                <section style="padding-top: 0px" class="section feature-project home-two-projects">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-12 mx-auto">
@@ -463,7 +463,7 @@
             </c:if>
 
             <c:if test="${sessionScope.account.roleID.getRoleID() == null}">              
-                <section class="section top-skill">
+                <section style="padding-top: 0px" class="section top-skill">
                     <div class="container">
                         <div class="section-header section-header-two text-center aos" data-aos="fade-up">
                             <h2 class="header-title">Featured <span> Skills</span></h2>
@@ -750,47 +750,10 @@
 
 
 
-            <section class="section top-company-two border-bottom-0">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="section-header section-header-two text-center aos" data-aos="fade-up">
-                                <h2 class="header-title">Trusted By The <span>World’s Best</span></h2>
-                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="company-slider" class="owl-carousel owl-theme testimonial-slider aos" data-aos="fade-up">
-                        <div class="company-logos">
-                            <img src="assets/img/company-logo-01.svg" alt="Img">
-                        </div>
-                        <div class="company-logos">
-                            <img src="assets/img/company-logo-02.svg" alt="Img">
-                        </div>
-                        <div class="company-logos">
-                            <img src="assets/img/company-logo-03.svg" alt="Img">
-                        </div>
-                        <div class="company-logos">
-                            <img src="assets/img/company-logo-04.svg" alt="Img">
-                        </div>
-                        <div class="company-logos">
-                            <img src="assets/img/company-logo-05.svg" alt="Img">
-                        </div>
-                        <div class="company-logos">
-                            <img src="assets/img/company-logo-06.svg" alt="Img">
-                        </div>
-                        <div class="company-logos">
-                            <img src="assets/img/company-logo-03.svg" alt="Img">
-                        </div>
-                        <div class="company-logos">
-                            <img src="assets/img/company-logo-02.svg" alt="Img">
-                        </div>
-                    </div>
-                </div>
-            </section>
+            
 
 
-            <section class="section blog-tricks">
+            <section style="padding-top: 0px" class="section blog-tricks">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">

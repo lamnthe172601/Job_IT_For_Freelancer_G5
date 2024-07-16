@@ -107,8 +107,7 @@
                                                     <th>No.</th>
                                                     <th>Image</th>
                                                     <th>Title</th>
-                                                    <th>Date Create</th> 
-                                                    <th>Descripition</th> 
+                                                    <th>Date Create</th>                                                     
                                                     <th>Status</th>                                                    
                                                     <th class="text-end">Actions</th>
                                                 </tr>
@@ -133,12 +132,7 @@
                                                                 ${blog.getDate_blog()}
 
                                                             </h2>
-                                                        </td>
-                                                        <td>
-                                                            <h2 class="descripition">                                                                
-                                                                ${blog.getDescription()}                                                                
-                                                            </h2>
-                                                        </td>                                                     
+                                                        </td>                                                                                                         
 
                                                         <td class="test1">
 
