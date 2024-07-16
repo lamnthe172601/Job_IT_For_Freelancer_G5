@@ -326,8 +326,8 @@
 
                     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
                         const title = data[2].toLowerCase(); // Assuming title is in the 3rd column
-                        const date = data[4]; // Assuming date is in the 5th column
-                        const status = data[5].toLowerCase(); // Assuming status is in the 6th column
+                        const date = data[3]; // Assuming date is in the 5th column
+                        const status = data[4].toLowerCase(); // Assuming status is in the 6th column
 
                         const titleMatch = title.includes(titleValue);
                         const dateMatch = (!dateFromValue || date >= dateFromValue) && (date <= dateToValue);
