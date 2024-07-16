@@ -484,7 +484,7 @@
                                             <table class="table table-center table-hover datatable no-sort">
                                                 <thead class="thead-pink">
                                                     <tr>                                         
-                                                        <th style="text-align: center;">Action</th>                                                       
+                                                                                                              
                                                         <th>TITLE</th>
                                                         <th>APPLICANTS</th>
                                                         <th onclick="showButton('postedButton')">
@@ -509,19 +509,64 @@
                                                             </div>
                                                         </th>
                                                         <th>STATUS</th>
-                                                        <th>kkk</th>                                                        
+                                                        <th>CHECKED</th>    
+                                                        <th style="text-align: center;">ACTION</th> 
                                                     </tr>
                                                 </thead>
                                                 <tbody id="postTable">
                                                     <c:forEach items="${listpost}" var="list">
                                                         <tr>
+                                                            
+
+                                                            <td class="titleList">
+                                                                <div class="title applied">${list.title}</div>
+                                                            </td>
+                                                            <td class="APPLICANTS">                      
+
+                                                                <div style="margin-left: 30px" class="APPLICANTS">${list.cout()}/${list.quantity}</div>
+
+                                                            </td>
+                                                            <td> 
+                                                                <div class="datePost">${list.datePost}</div>
+                                                            </td>
+                                                            <td> 
+                                                                <div class="datePost">${list.expired}</div>
+                                                            </td>      
+                                                            <td class="StatusList">
+                                                                <c:choose>
+                                                                    <c:when test="${list.status == 3}">
+                                                                        <span class="badge status badge-pill bg-warning-light">Expired</span>
+                                                                    </c:when>
+                                                                    <c:when test="${list.status == 0}">
+                                                                        <span class="badge status badge-pill bg-danger-light">Rejected</span>
+                                                                    </c:when>
+                                                                    <c:when test="${list.status == 1}">
+                                                                        <span class="badge status badge-pill bg-success-light">On-going</span>
+                                                                    </c:when>
+                                                                    <c:when test="${list.status == 2}">
+                                                                        <span class="badge status badge-pill bg-purple-light">Completed</span>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <span class="badge status"></span>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </td>
+                                                            <td class="CheckingList">
+                                                                <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
+                                                                    ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}
+                                                                </span>
+                                                            </td>
                                                             <td class="three-dots">
                                                                 <div class="action-table-data">
                                                                     <div class="edit-delete-action">
-                                                                        <a href="#edit-milestone${list.postID}" class="me-2" data-bs-toggle="modal"><i class="feather-edit-2"></i></a>
+                                                                        <a style="background: #22cc62; margin-left: 0px" href="#edit-milestone${list.postID}" data-bs-toggle="modal"
+                                                                           class="btn btn-request"><i style="color: white" class="fa fa-edit"></i></a>
+                                                                        
                                                                     </div>
                                                                     <input type="hidden" class="user-id" id="${list.postID}">
-                                                                    <a href="javascript:void(0);" class=" nav-link three-dot " data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" ></i></a>
+                                                                    
+                                                                     <a style="background: #6c757d; margin-left: 0px;" href="javascript:void(0);" data-bs-toggle="dropdown"
+                                                                           class="btn btn-request"><i style="color: white" class="nav-link  fa fa-align-justify"></i></a>
                                                                     <div class="dropdown-menu user-menu-list typeChange">                                                                      
                                                                         <c:if test='${list.status == 1}'>
                                                                             <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Suspend_user">
@@ -601,7 +646,7 @@
                                                                         <div class="modal-dialog modal-dialog-centered modal-md">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h4 class="modal-title">Edit Post a new Jobs</h4>
+                                                                                    <h4 class="modal-title">Edit Post a new Project</h4>
                                                                                     <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather-x"></i></a></span>
                                                                                 </div>
                                                                                 <div class="modal-body">
@@ -628,10 +673,10 @@
                                                                                                         <label class="image-upbtn">
                                                                                                             Upload Image <input type="file" id="imgInp" name="profileImage">
                                                                                                         </label>
-                                                                                                        <p>Max Image size 300*300</p>
+                                                                                                        
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-4">
+                                                                                                    <div style="margin-top: 35px;" class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Level</label>
                                                                                                         <select name="jobsType" class="form-control select">
@@ -641,7 +686,7 @@
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-4">
+                                                                                                <div style="margin-top: 35px;" class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Work Time</label>
                                                                                                         <select name="Duration" class="form-control select">
@@ -729,45 +774,6 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                            </td>
-
-                                                            <td class="titleList">
-                                                                <div class="title applied">${list.title}</div>
-                                                            </td>
-                                                            <td class="APPLICANTS">                      
-
-                                                                <div class="APPLICANTS">${list.cout()}/${list.quantity}</div>
-
-                                                            </td>
-                                                            <td> 
-                                                                <div class="datePost">${list.datePost}</div>
-                                                            </td>
-                                                            <td> 
-                                                                <div class="datePost">${list.expired}</div>
-                                                            </td>      
-                                                            <td class="StatusList">
-                                                                <c:choose>
-                                                                    <c:when test="${list.status == 3}">
-                                                                        <span class="badge status badge-pill bg-warning-light">Expired</span>
-                                                                    </c:when>
-                                                                    <c:when test="${list.status == 0}">
-                                                                        <span class="badge status badge-pill bg-danger-light">Rejected</span>
-                                                                    </c:when>
-                                                                    <c:when test="${list.status == 1}">
-                                                                        <span class="badge status badge-pill bg-success-light">On-going</span>
-                                                                    </c:when>
-                                                                    <c:when test="${list.status == 2}">
-                                                                        <span class="badge status badge-pill bg-purple-light">Completed</span>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <span class="badge status"></span>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </td>
-                                                            <td class="CheckingList">
-                                                                <span class="badge checked  badge-pill ${list.checking == 0 ? 'bg-warning-light' : (list.checking == 1 ? 'bg-success-light' : 'bg-warning-light')}">
-                                                                    ${list.checking == 0 ? 'Pending' : (list.checking == 1 ? 'Approve' : 'Suspended')}
-                                                                </span>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>

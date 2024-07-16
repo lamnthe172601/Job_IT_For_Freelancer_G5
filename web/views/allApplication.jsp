@@ -293,7 +293,7 @@
                                 <div
                                     class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
                                     <a href="companydetail"><img alt="profile image"
-                                                                           src="${recruiter.image}" class="avatar-lg rounded-circle"></a>
+                                                                 src="${recruiter.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
                                         <h3 class="mb-0"><a
                                                 href="companydetail">${recruiter.fullName()}</a><img
@@ -431,7 +431,7 @@
                                                         <th>RESUME</th>
                                                         <th>STATUS</th>
                                                         <th>INFORMATION</th>
-                                                        <th>Action</th>
+                                                        <th style="padding-left: 40px">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tableBody">
@@ -457,6 +457,29 @@
                                                                         <i class="feather-download"></i>
                                                                     </a>
                                                                 </div>
+                                                                <script>
+                                                                    document.addEventListener("DOMContentLoaded", function () {
+                                                                        var downloadLinks = document.querySelectorAll(".download-icon");
+
+                                                                        downloadLinks.forEach(function (link) {
+                                                                            link.addEventListener("click", function (event) {
+                                                                                var applyID = this.id.replace("Download", "");
+                                                                                downloadFile(applyID);
+                                                                            });
+                                                                        });
+                                                                    });
+
+                                                                    function downloadFile(applyID) {
+                                                                        var downloadLink = document.getElementById("Download" + applyID);
+                                                                        if (downloadLink) {
+                                                                            // Perform any additional operations here if needed
+                                                                            downloadLink.click();
+                                                                        } else {
+                                                                            console.error("Download link not found for applyID: " + applyID);
+                                                                        }
+                                                                    }
+
+                                                                </script>        
                                                             </td>
                                                             <td class="status-cell">
                                                                 <span id="status-${listapply.applyID}"
@@ -475,14 +498,15 @@
                                                             </td>
                                                             <td>
                                                                 <div class="action-table-data">
-                                                                    <div id="ApproveAndRefuse${listapply.applyID}">
-                                                                        <a href="#Approve${listapply.applyID}"
+                                                                    <div style="margin-left: 30px; "  id="ApproveAndRefuse${listapply.applyID}">
+                                                                        <a style="background: #22cc62" href="#Approve${listapply.applyID}"
                                                                            data-bs-toggle="modal"
-                                                                           class="btn btn-request">Connect</a>
-                                                                        <a style="background: blueviolet;"
+                                                                           class="btn btn-request"><i class="fa fa-user-plus"></i></a>
+                                                                        <br/>
+                                                                        <a style="background: #6c757d; margin-top: 8px;"
                                                                            href="#Refuse${listapply.applyID}"
                                                                            data-bs-toggle="modal"
-                                                                           class="btn btn-request">Refuse</a>
+                                                                           class="btn btn-request"><i class="fa fa-user-xmark"></i></a>
                                                                     </div>
 
                                                                     <div style="display: none;"
@@ -490,7 +514,7 @@
                                                                         <a style="background: violet;margin-left: 30px;"
                                                                            href="javascript:void(0);"
                                                                            data-bs-toggle="modal"
-                                                                           class="btn btn-request">Connected</a>
+                                                                           class="btn btn-request"><i class="fa fa-user-check"></i></a>
                                                                     </div>
 
                                                                     <div class="modal fade edit-proposal-modal success-modal"

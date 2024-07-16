@@ -212,7 +212,7 @@
 
 
             <c:if test="${sessionScope.account.roleID.getRoleID() == null}">              
-                <section style="margin-top: 100px;" class="section platform">
+                <section style="margin-top: 50px;" class="section platform">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
