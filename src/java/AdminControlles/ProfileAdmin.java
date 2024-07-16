@@ -12,16 +12,20 @@ public class ProfileAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String id = request.getParameter("adminID");
         AdminDAO adminDAO = new AdminDAO();
+
         
         try {
             Admin admin = adminDAO.getAdminByID(id);
+            if(admin!=null){
             request.setAttribute("admin", admin);
             request.getRequestDispatcher("adminViews/profileAdmin.jsp").forward(request, response);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-//            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 }

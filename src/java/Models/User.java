@@ -13,6 +13,7 @@ public class User {
     private String username, password, email,status;
     private Role roleID;
     private boolean levelPass;
+    
     public User(int aInt, String string, String string1, String string2, String string3, boolean aBoolean) {
     }
 

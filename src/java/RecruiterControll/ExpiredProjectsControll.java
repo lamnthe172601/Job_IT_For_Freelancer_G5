@@ -59,7 +59,7 @@ public class ExpiredProjectsControll extends HttpServlet {
         List<JobApply> listapply = reDAO.ListAllApplyForFreelancerApprove(re.getRecruiterID());
         request.setAttribute("listapply", listapply);
 
-        request.getRequestDispatcher("views/allApplication.jsp").forward(request, response);
+        request.getRequestDispatcher("views/expiredProjects.jsp").forward(request, response);
     }
 
     @Override
