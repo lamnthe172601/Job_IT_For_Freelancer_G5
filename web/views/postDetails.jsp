@@ -375,7 +375,7 @@
                         <div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar project-client-view">
                             <div class="card budget-widget">
                                 <div class="budget-widget-details">
-                                    <h6>Budget</h6>
+                                    <h6></h6>
                                     <h4>$${post.budget}</h4>
                                     <p class="mb-0">Hourly Rate</p>
                                 </div>
