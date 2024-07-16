@@ -50,7 +50,7 @@ public class PostByCategory extends HttpServlet {
 
                 // Fetch posts by category with pagination
                 List<PostBasic> posts = caDAO.getPostsByCategoryPage(categoryID, index);
-
+        
                 // Fetch other data (categories, job types, durations, etc.)
                 List<Categories> categories = caDAO.getAllCategories();
                 List<JobType> jobtype = jobDAO.getAllJobType();
@@ -97,6 +97,7 @@ public class PostByCategory extends HttpServlet {
 
     private int calculateEndPage(PostDAO pDao, int categoryID) {
         int count = pDao.countPostsByCategory(categoryID);
+        System.out.println(count);
         int endPage = count / 6;
         if (count % 6 != 0) {
             endPage++;

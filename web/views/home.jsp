@@ -764,21 +764,21 @@
                         </div>
                     </div>
                     <div class="row aos" data-aos="fade-up">
-                        <c:forEach items="${listblogs}" var="listblogs">
+                        <c:forEach items="${listblogs}" var="blog">
                             <div class="col-lg-4 col-md-6">
                                 <div class="grid-blog blog-two aos" data-aos="fade-up">
                                     <div class="blog-image">
-                                        <a href="blog-details.html"><img style="width: 331px; height: 207px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
+                                        <a href="BlogDetails?blogID=${blog.blogID}"><img style="width: 331px; height: 207px;" class="img-fluid" src="assets/img/blog/${blog.image}" alt="Post Image"></a>
                                     </div>
                                     <div class="blog-content">
                                         <div class="feature-time-blk">
-                                            <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
-                                            <span><i class="far fa-calendar me-1"></i>${listblogs.date_blog} 06 Oct, 2023</span>
+                                            <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${blog.tag}</span>
+                                            <span><i class="far fa-calendar me-1"></i>${blog.date_blog}</span>
                                         </div>
-                                        <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
-                                        <p>${listblogs.description}</p>
+                                        <h3 class="blog-title mt-0"><a href="BlogDetails?blogID=${blog.blogID}">${blog.title}</a></h3>
+                                        <p>${blog.description}</p>
                                         <div class="blog-read">
-                                            <a href="blog-details.html">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                                            <a href="BlogDetails?blogID=${blog.blogID}">Read More <i class="fas fa-arrow-right ms-1"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -1078,6 +1078,20 @@
                     });
                 }
             }
+            
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const maxLength = 100;
+                const descriptions = document.querySelectorAll(".blog-content p.mb-0");
+
+                descriptions.forEach(function (description) {
+                    const text = description.innerText;
+                    if (text.length > maxLength) {
+                        description.innerText = text.substring(0, maxLength) + "...";
+                    }
+                });
+            });
         </script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 

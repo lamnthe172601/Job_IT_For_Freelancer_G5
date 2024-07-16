@@ -72,21 +72,6 @@
                                             <input type="text" class="form-control" id="emailFilter" placeholder="Enter email">
                                         </div>
                                     </div>
-<!--                                    <div class="col-md-3 mb-3">
-                                        <div class="form-group">
-                                            <label for="skillFilter">Skill</label>
-                                            <div class="skill-filter-container">
-                                                <input type="text" class="form-control skill-filter-input" placeholder="Select Skills">
-                                                <div class="skill-filter-dropdown">
-                                                    <c:forEach items="${listSkill}" var="skill">
-                                                        <div class="skill-filter-option" data-value="${skill.getSkill_set_name()}">${skill.getSkill_set_name()}</div>
-                                                    </c:forEach>
-                                                </div>
-                                                <div class="selected-skills"></div>
-                                            </div>
-                                        </div>
-                                    </div>-->
-
                                     <div class="col-md-3 mb-3">
                                         <div class="form-group">
                                             <label for="statusFilter">Status</label>
@@ -138,19 +123,7 @@
                                                             </div>
                                                         </td>                                                   
                                                         <td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>${freelancer.getBasicInformation().getEmail()}</td>
-<!--                                                        <td class="skill-icon">
-                                                            <div class="skill-list">
-                                                                <c:forEach items="${freelancer.listSkill}" var="skill" begin="0" end="2">
-                                                                    <span class="skill-item">${skill.skill_set_name}</span>
-                                                                </c:forEach>
-                                                                <c:forEach items="${freelancer.listSkill}" var="skill" begin="3">
-                                                                    <span class="skill-item" hidden="">${skill.skill_set_name}</span>
-                                                                </c:forEach>
-                                                                <c:if test="${fn:length(freelancer.listSkill) > 3}">
-                                                                    <span class="skill-more">...</span>
-                                                                </c:if>
-                                                            </div>
-                                                        </td>-->
+
                                                         <td class="test1">
 
                                                             <c:if test='${freelancer.getAccount().getStatus() == "active"}'>
@@ -372,68 +345,29 @@
         <script>
             $(document).ready(function () {
                 var table = $('.table').DataTable();
-                var skillFilterInput = $('.skill-filter-input');
-                var skillFilterDropdown = $('.skill-filter-dropdown');
-                var selectedSkills = new Set();
-                var $selectedSkills = $('.selected-skills');
-
-                var nameFilter = $('#nameFilter');
+                   var nameFilter = $('#nameFilter');
                 var emailFilter = $('#emailFilter');
                 var statusFilter = $('#statusFilter');
 
-                // Skill dropdown toggle
-                skillFilterInput.on('click', function () {
-                    skillFilterDropdown.toggle();
-                });
-
-                // Skill selection
-                $('.skill-filter-option').on('click', function () {
-                    var skillName = $(this).data('value');
-                    if (!selectedSkills.has(skillName)) {
-                        selectedSkills.add(skillName);
-                        var $selectedSkill = $('<div class="selected-skill" data-skill="' + skillName + '">' + skillName + '<span class="remove-skill">&times;</span></div>');
-                        $selectedSkills.append($selectedSkill);
-                    }
-                    skillFilterInput.val('');
-                    skillFilterDropdown.hide();
-                    applyFilter();
-                });
-
-                // Remove selected skill
-                $selectedSkills.on('click', '.remove-skill', function () {
-                    var $skillElement = $(this).parent();
-                    var skillName = $skillElement.data('skill');
-                    selectedSkills.delete(skillName);
-                    $skillElement.remove();
-                    applyFilter();
-                });
 
                 // Custom filtering function
                 $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
                     var name = data[1].toLowerCase();
                     var email = data[2].toLowerCase();
-                    var skillsString = data[3] ? data[3].toLowerCase() : '';
-                    var status = data[4].toLowerCase();
+                    var status = data[3].toLowerCase().trim();
 
                     var nameValue = nameFilter.val().toLowerCase();
                     var emailValue = emailFilter.val().toLowerCase();
-                    var statusValue = statusFilter.val().toLowerCase();
-                    var selectedSkillsArray = Array.from(selectedSkills).map(s => s.toLowerCase());
+                    var statusValue = statusFilter.val().toLowerCase().trim();
+                  
 
                     var nameMatch = !nameValue || name.includes(nameValue);
                     var emailMatch = !emailValue || email.includes(emailValue);
                     var statusMatch = statusValue === '' || status===statusValue;
 
-                    // New skill matching logic
-                    var skillsMatch = true;
-                    if (selectedSkillsArray.length > 0) {
-                        var rowSkills = skillsString.split(',').map(s => s.trim());
-                        skillsMatch = selectedSkillsArray.every(selectedSkill =>
-                            rowSkills.some(rowSkill => rowSkill.includes(selectedSkill))
-                        );
-                    }
+                   
 
-                    return nameMatch && emailMatch && statusMatch && skillsMatch;
+                    return nameMatch && emailMatch && statusMatch;
                 });
 
                 function applyFilter() {
@@ -449,18 +383,10 @@
                 $('#resetFilter').click(function () {
                     nameFilter.val('');
                     emailFilter.val('');
-                    statusFilter.val('');
-                    selectedSkills.clear();
-                    $selectedSkills.empty();
+                    statusFilter.val('');                    
                     applyFilter();
                 });
-
-                // Close skill dropdown when clicking outside
-                $(document).on('click', function (event) {
-                    if (!$(event.target).closest('.skill-filter-container').length) {
-                        skillFilterDropdown.hide();
-                    }
-                });
+                
             });
         </script>
         <script>
