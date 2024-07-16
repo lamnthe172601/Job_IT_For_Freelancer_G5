@@ -21,6 +21,34 @@
                 padding: 10px;
                 border-radius: 5px;
             }
+            .blog-image {
+                width: 100%;
+                height: 270px; /* Chiều cao cố định, có thể thay đổi tùy nhu cầu */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            /* Cố định kích thước của ảnh */
+            .img-fluid {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: cover; /* Đảm bảo ảnh vừa khít với khung mà không bị méo */
+                display: block;
+            }
+
+            /* Đảm bảo chiều cao đồng đều cho các blog content */
+            .blog-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                min-height: 180px; /* Chiều cao tối thiểu, có thể thay đổi tùy nhu cầu */
+            }
+
+            /* Đảm bảo khoảng cách đều giữa các form */
+            .blog {
+                height: 450px;
+                margin-bottom: 5px; /* Khoảng cách giữa các blog, có thể thay đổi tùy nhu cầu */
+            }
         </style>
     </head>
     <body>
@@ -100,6 +128,9 @@
                                                 </ul>
                                                 <h3 class="blog-title"><a href="BlogDetails?blogId=${blog.blogID}"><c:out value="${blog.title}"/></a></h3>
                                                 <p class="mb-0"><c:out value="${blog.description}"/></p>
+                                                <div class="blog-read">
+                                                    <a href="BlogDetails?blogID=${blog.blogID}">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -16,15 +16,9 @@
             <file>file:/D:/SU24/A/web/views/404Page.jsp</file>
         </group>
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/ListFreelancerControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/RecruiterFavouritesControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/register.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/ProfileSettingFreelancer.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listApplySearch.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/AddFreelancerFavoritesControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/listapply.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
         </group>
     </open-files>
 </project-private>

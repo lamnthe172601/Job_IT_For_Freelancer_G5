@@ -50,7 +50,34 @@
             .favorite-icon:hover {
                 color: red; /* Màu đỏ khi hover */
             }
+            .blog-image {
+                width: 100%;
+                height: 270px; /* Chiều cao cố định, có thể thay đổi tùy nhu cầu */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            /* Cố định kích thước của ảnh */
+            .img-fluid {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: cover; /* Đảm bảo ảnh vừa khít với khung mà không bị méo */
+                display: block;
+            }
 
+            /* Đảm bảo chiều cao đồng đều cho các blog content */
+            .blog-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                min-height: 180px; /* Chiều cao tối thiểu, có thể thay đổi tùy nhu cầu */
+            }
+
+            /* Đảm bảo khoảng cách đều giữa các form */
+            .blog {
+                height: 450px;
+                margin-bottom: 5px; /* Khoảng cách giữa các blog, có thể thay đổi tùy nhu cầu */
+            }
 
 
         </style>
@@ -181,14 +208,14 @@
                                                 <a href="javascript:void(0);" class="btn btn-primary green-active">${list.durationID.durationName}</a>
                                                 <span><i class="far fa-clock me-1"></i> ${list.datePost}</span>
                                             </div>
-                                            <h4><a href="project.html">${list.getTitle()}</a></h4>
+                                            <h4><a href="PostDetails?postID=${list.postID}">${list.getTitle()}</a></h4>
                                             <ul class="feature-project-list nav">
                                                 <li><i class="feather-user me-1"></i>${list.caID.categoriesName}</li>
                                                 <li><i class="feather-map-pin me-1"></i>${list.location}</li>
                                             </ul>
                                             <div class="feature-foot">
                                                 <div class="logo-company">
-                                                    <a href="project.html">
+                                                    <a href="PostDetails?postID=${list.postID}">
                                                         <img src="assets/img/icon/logo-icon-01.svg" class="me-1" alt="icon">
                                                         <span>${list.recruiterID.fullName()}</span>
                                                     </a>
@@ -212,7 +239,7 @@
 
 
             <c:if test="${sessionScope.account.roleID.getRoleID() == null}">              
-                <section style="margin-top: 100px;" class="section platform">
+                <section style="margin-top: 50px;" class="section platform">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
@@ -764,21 +791,21 @@
                         </div>
                     </div>
                     <div class="row aos" data-aos="fade-up">
-                        <c:forEach items="${listblogs}" var="listblogs">
+                        <c:forEach items="${listblogs}" var="blog">
                             <div class="col-lg-4 col-md-6">
                                 <div class="grid-blog blog-two aos" data-aos="fade-up">
                                     <div class="blog-image">
-                                        <a href="blog-details.html"><img style="width: 331px; height: 207px;" class="img-fluid" src="${listblogs.image}" alt="Post Image"></a>
+                                        <a href="BlogDetails?blogID=${blog.blogID}"><img " class="img-fluid" src="assets/img/blog/${blog.image}" alt="Post Image"></a>
                                     </div>
                                     <div class="blog-content">
                                         <div class="feature-time-blk">
-                                            <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${listblogs.tag}</span>
-                                            <span><i class="far fa-calendar me-1"></i>${listblogs.date_blog} 06 Oct, 2023</span>
+                                            <span class="badge bg-pink d-flex align-items-center"><i class="feather-tag me-1"></i>${blog.tag}</span>
+                                            <span><i class="far fa-calendar me-1"></i>${blog.date_blog}</span>
                                         </div>
-                                        <h3 class="blog-title mt-0"><a href="blog-details.html">${listblogs.title}</a></h3>
-                                        <p>${listblogs.description}</p>
+                                        <h3 class="blog-title mt-0"><a href="BlogDetails?blogID=${blog.blogID}">${blog.title}</a></h3>
+                                        <p>${blog.description}</p>
                                         <div class="blog-read">
-                                            <a href="blog-details.html">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                                            <a href="BlogDetails?blogID=${blog.blogID}">Read More <i class="fas fa-arrow-right ms-1"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -1078,6 +1105,20 @@
                     });
                 }
             }
+            
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const maxLength = 100;
+                const descriptions = document.querySelectorAll(".blog-content p.mb-0");
+
+                descriptions.forEach(function (description) {
+                    const text = description.innerText;
+                    if (text.length > maxLength) {
+                        description.innerText = text.substring(0, maxLength) + "...";
+                    }
+                });
+            });
         </script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 
