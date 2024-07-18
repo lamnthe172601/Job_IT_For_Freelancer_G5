@@ -34,6 +34,7 @@
                 flex-direction: column;
                 justify-content: space-between;
                 min-height: 180px; /* Chiều cao tối thiểu, có thể thay đổi tùy nhu cầu */
+
             }
 
             /* Đảm bảo khoảng cách đều giữa các form */
@@ -41,7 +42,11 @@
                 height: 450px;
                 margin-bottom: 5px; /* Khoảng cách giữa các blog, có thể thay đổi tùy nhu cầu */
             }
-
+            .blog-content p {
+                word-break: break-word; /* Chuyển từ dài xuống dòng mới */
+                overflow-wrap: break-word; /* Chuyển từ dài xuống dòng mới */
+                white-space: pre-wrap; /* Giữ khoảng trắng và xuống dòng khi cần */
+            }
         </style>
     </head>
     <body>
@@ -125,7 +130,7 @@
                                             <a href="BlogDetails?blogID=${blog.blogID}">Read More <i class="fas fa-arrow-right ms-1"></i></a>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </c:forEach>
