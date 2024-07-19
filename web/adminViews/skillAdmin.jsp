@@ -398,11 +398,16 @@
         <script>
             window.onload = function () {
                 let message = '<%= session.getAttribute("message") %>';
+                 if (message !== null) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: message
+                });
 
-                if (message) {
-                    showSuccessNotification(message);
-            <% session.removeAttribute("message"); %>
-                }
+                // Remove the message after displaying
+                <% session.removeAttribute("message"); %>
+            }
             };
         </script>
 
