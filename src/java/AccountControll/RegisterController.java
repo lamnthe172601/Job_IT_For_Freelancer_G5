@@ -79,7 +79,7 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
         try {
             if (dao.checkUserExsit(username)) {
-                request.setAttribute("mess1", "This Username have been exit!");
+                request.setAttribute("mess1", "This Username have been exsit!");
                 request.getRequestDispatcher("views/register.jsp").forward(request, response);
             }
             if (dao.checkEmailExsit(email)) {
