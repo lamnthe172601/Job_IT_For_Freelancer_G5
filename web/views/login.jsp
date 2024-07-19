@@ -203,7 +203,7 @@
                     title: 'Success',
                     text: '${sessionScope.successMessage}',
                     showConfirmButton: true,
-                    timer: 3000
+//                    timer: 3000
                 });
                 <c:remove var="successMessage" scope="session" />
             </c:if>
