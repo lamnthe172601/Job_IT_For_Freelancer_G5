@@ -758,6 +758,86 @@
         </div>
 
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+        var messageModal =
+                  <c:if test="${sessionScope.check == 1}">
+            `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <div class="checkmark-circle">
+                                <div class="background"></div>
+                                <div class="checkmark"></div>
+                            </div>
+                            <h3>Notification</h3>
+                            <p>Report successful</p>
+                            <a href="recruitersetting" style="margin-left= 50%  width: 4%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>`</c:if>
+           <c:remove var="check" scope="session" />
+   ;
+
+        $('body').append(messageModal);
+        $('#messageModal').modal('show');
+    });
+</script>
+
+
+
+        <style>
+            .modal-body.text-center {
+                text-align: center;
+            }
+            .checkmark-circle {
+                width: 80px;
+                height: 80px;
+                position: relative;
+                display: inline-block;
+                vertical-align: top;
+                margin-bottom: 10px;
+            }
+            .background {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: #f8f8f8;
+                position: absolute;
+            }
+            .checkmark {
+                width: 50px;
+                height: 15px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #28a745;
+                border-top: none;
+                border-right: none;
+                transform: rotate(-45deg);
+                position: absolute;
+                top: 35%;
+                left: 25%;
+            }
+            .notification-title {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .notification-message {
+                margin-bottom: 30px;
+                font-size: 16px;
+
+            }
+
+        </style>
         <script>
 
             document.addEventListener("DOMContentLoaded", function () {

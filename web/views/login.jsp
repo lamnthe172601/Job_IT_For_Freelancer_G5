@@ -25,6 +25,8 @@
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
     </head>
     <body class="account-page">
 
@@ -63,9 +65,9 @@
                                                 <span style="cursor: pointer;" class="fas toggle-password "></span>
                                             </div>
                                         </div>
-                                            <div  style="color: red;" id="error1"></div>
+                                        <div  style="color: red;" id="error1"></div>
                                     </div>       
-                                    
+
                                     <c:if test = "${username != null }" >
                                         <p style="text-align: center;" class="text-danger">${loginFaild}</p>
                                     </c:if>
@@ -194,38 +196,50 @@
         </div>
 
         <script>
+            window.onload = function () {
+            <c:if test="${not empty sessionScope.successMessage}">
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '${sessionScope.successMessage}',
+                    showConfirmButton: true,
+//                    timer: 3000
+                });
+                <c:remove var="successMessage" scope="session" />
+            </c:if>
+            };
             function FormValidate() {
-            let checkusername = false;
-            let checkpass = false;
+                let checkusername = false;
+                let checkpass = false;
 
-            var username = document.getElementById('user').value.trim();
-            var password = document.getElementById('pass').value.trim();
-            var err = document.getElementById('error');
-            var err1 = document.getElementById('error1');
-            
-            if (password === null || password === '') {
-                err1.innerHTML = 'Password are required fields.';
-            }else {
-                checkpass = true;
-                err1.innerHTML = '';
+                var username = document.getElementById('user').value.trim();
+                var password = document.getElementById('pass').value.trim();
+                var err = document.getElementById('error');
+                var err1 = document.getElementById('error1');
+
+                if (password === null || password === '') {
+                    err1.innerHTML = 'Password are required fields.';
+                } else {
+                    checkpass = true;
+                    err1.innerHTML = '';
+                }
+                if (username === null || username === '') {
+                    err.innerHTML = 'Username are required fields.';
+                } else {
+                    checkusername = true;
+                    err.innerHTML = '';
+                }
+
+
+                if (checkusername && checkpass) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+
             }
-            if (username === null || username === '') {
-                err.innerHTML = 'Username are required fields.';
-            }else {
-                checkusername = true;
-                err.innerHTML = '';
-            }
-            
-            
-            if(checkusername && checkpass){
-                return true;
-            }else{
-                return false;
-            }
-            
-            
-            }  
-            
+
         </script>
 
         <script src="assets/js/checkpass.js" type="text/javascript"></script>                                   

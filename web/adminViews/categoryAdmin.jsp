@@ -94,7 +94,7 @@
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
                                     <label for="categoryname">Name Position</label>
-                                    <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" >
+                                       <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" value="${categoryName}">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
@@ -363,7 +363,7 @@ $(document).ready(function () {
                             </div>
                             <h3>Notification</h3>
                             <p>${message}</p>
-                            <a style="width: 10%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
+                            <a style=" margin-left= 50%  width: 10%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
                         </div>
                     </div>
                 </div>

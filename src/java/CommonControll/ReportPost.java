@@ -107,7 +107,8 @@ public class ReportPost extends HttpServlet {
 
                 try {
                     reportDAO.reportPost(user.getUserID(), postId, message);
-                    session.setAttribute("message", "Report submitted successfully.");
+                  
+                     session.setAttribute("check", "1");
                     response.sendRedirect(request.getHeader("Referer")); // Quay trở lại trang trước đó
                 } catch (SQLException e) {
                     e.printStackTrace();

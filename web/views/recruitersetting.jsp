@@ -228,25 +228,88 @@
         </div>
 
 
-        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <script src="assets/plugins/select2/js/select2.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+  <script>
+    $(document).ready(function () {
+        var messageModal =
+                  <c:if test="${sessionScope.check == 1}">
+            `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <div class="checkmark-circle">
+                                <div class="background"></div>
+                                <div class="checkmark"></div>
+                            </div>
+                            <h3>Notification</h3>
+                            <p>Update successful</p>
+                            <a href="recruitersetting" style="margin-left= 50%  width: 4%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>`</c:if>
+           <c:remove var="check" scope="session" />
+   ;
 
-        <script src="assets/js/moment.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="assets/js/bootstrap-datetimepicker.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        $('body').append(messageModal);
+        $('#messageModal').modal('show');
+    });
+</script>
 
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="assets/plugins/datatables/datatables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-        <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
-    <script src="assets/js/checkinput.js"></script>
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:09 GMT -->
+        <style>
+            .modal-body.text-center {
+                text-align: center;
+            }
+            .checkmark-circle {
+                width: 80px;
+                height: 80px;
+                position: relative;
+                display: inline-block;
+                vertical-align: top;
+                margin-bottom: 10px;
+            }
+            .background {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: #f8f8f8;
+                position: absolute;
+            }
+            .checkmark {
+                width: 50px;
+                height: 15px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #28a745;
+                border-top: none;
+                border-right: none;
+                transform: rotate(-45deg);
+                position: absolute;
+                top: 35%;
+                left: 25%;
+            }
+            .notification-title {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .notification-message {
+                margin-bottom: 30px;
+                font-size: 16px;
+
+            }
+
+        </style>
+
+    
 </html>
-
+    
 

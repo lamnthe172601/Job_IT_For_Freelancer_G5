@@ -22,8 +22,15 @@
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
-
-       <style>
+ <style>
+        .pagination .page-item.active .page-link {
+            font-weight: bold;
+            color: #fff;
+            background-color:#FF3300;
+            border-color: #FF3300;
+        }
+    </style>
+        <style>
             .text-center1 {
                 width: 150px;
                 height: 150px;
@@ -217,7 +224,7 @@
             </div>
 
 
-      
+
 
 
             <div class="content">
@@ -374,53 +381,50 @@
 
                             <%-- Hiển thị danh sách bài đăng --%>
                             <div class="row" id="listpostContainer">
-                                <c:forEach items="${posts}" var="post">
+                                <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
                                     <div class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
-                                                <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${post.datePost}</div>
+                                                <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
 
                                                 <c:set var="favo" value="false" />
-                                                <c:forEach items="${postFavourites}" var="favPost">
-                                                    <c:if test="${post.postID eq favPost.postID}">
-                                                        <c:set var="favo" value="true" />
-                                                    </c:if>
+                                                <c:forEach items="${postFavourites}" var="post">
+                                                    <c:choose>
+                                                        <c:when test="${list.postID == post.postID}">
+                                                            <c:set var="favo" value="true" />
+                                                        </c:when>                                                                
+                                                    </c:choose>
                                                 </c:forEach>
                                                 <c:choose>
                                                     <c:when test="${favo}">
-                                                        <a href="javascript:void(0);" onclick="removeFromFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite color-active"><i class="feather-heart"></i></a>
+                                                        <a href="javascript:void(0);" onclick="removeFromFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite color-active"><i class="feather-heart"></i></a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                        <a href="javascript:void(0);" onclick="addToFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite"><i class="feather-heart"></i></a>
+                                                        <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite"><i class="feather-heart"></i></a>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                <!-- biểu tượng cái cờ -->
-                                                <a href="#" data-bs-toggle="modal"  class="btn btn-danger ml-2 report-post" data-postid="${list.postID}"  data-bs-target="#applyModal_a" data-postid="a" tabindex="-1">
-                                                    <i class="fas fa-flag custom-flag"></i>
-                                                </a>
-
                                                 <div class="author-heading">
                                                     <div class="freelance-img">
                                                         <a href="javascript:void(0);">
-                                                            <img src="${post.image}" alt="author">
+                                                            <img src="${list.image}" alt="author">
                                                             <span class="verified"><i class="fas fa-check-circle"></i></span>
                                                         </a>
                                                     </div>
                                                     <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${post.title}</div>
+                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
                                                     </div>
                                                     <div class="freelance-info">
-                                                        <h3><a href="javascript:void(0);">${post.caID.categoriesName}</a></h3>
-                                                        <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${post.location}</div>
+                                                        <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
+                                                        <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${list.location}</div>
                                                     </div>
                                                     <div class="skills-container">
-                                                        <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
+                                                        <c:forEach items="${fn:split(list.skill, ',')}" var="skill" varStatus="loop">
                                                             <c:if test="${loop.index < 3}">
-                                                                    <span class="badge badge-pill badge-design">${skill}</span>
-                                                                </c:if>                                                              
-                                                                <c:if test="${loop.index == 2 and not loop.last}">                                                                 
-                                                                    <span class="badge badge-pill badge-design">...</span>
-                                                                </c:if>
+                                                                <span class="badge badge-pill badge-design">${skill}</span>
+                                                            </c:if>                                                              
+                                                            <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                                <span class="badge badge-pill badge-design">...</span>
+                                                            </c:if>
                                                         </c:forEach>
                                                     </div>
 
@@ -460,9 +464,8 @@
                                             </div>
 
 
-
                                             <div class="cart-hover">
-                                                <a href="PostDetails?postID=${post.postID}" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
+                                                <a href="PostDetails?postID=${list.postID}" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
 
                                                 <c:if test="${postApply != null}">
                                                     <c:set var="applied" value="false" />
@@ -522,54 +525,36 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- report post -->
-                                    <div class="modal custom-modal fade" id="applyModal_a" role="dialog">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <div class="form-header">
-                                                        <input type="hidden" class="user-id1" id="">
-                                                        <span id="closeModal" class="close-wrap">&times;</span>
-                                                        <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
-                                                    </div>
-                                                    <div class="modal-btn Suspend-action">
-                                                        <form action="${pageContext.request.contextPath}/allListPost" method="post" id="report-post-form-content">
-                                                            <input type="hidden" name="action" value="report">
-                                                            <input type="hidden" name="postID" id="reportPostID">
-                                                            <div class="form-group">
-                                                                <label for="report_post_message">Select a reason for reporting:</label><br>
-                                                                <div class="form-check">
-                                                                    <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
-                                                                    <label for="report_post_reason_spam" class="form-check-label">Spam</label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
-                                                                    <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
-                                                                    <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
-                                                                    <label for="report_post_message_other" class="form-check-label">Other</label>
-                                                                </div>
-                                                                <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <a  data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
-                                                                <button  type="submit" class="btn btn-primary confirm-btn">Submit</button>
-                                                            </div>
-                                                        </form> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </c:forEach>
                             </div>
+                          <c:if test="${endPage > 1}">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="pagination list-pagination">
+                <c:if test="${tag > 1}">
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Trước" href="JobforFreelancer?page=${tag - 1}">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:forEach begin="1" end="${endPage}" var="e">
+                    <li class="page-item ${page == e ? 'active' : ''}">
+                        <a class="page-link" href="JobforFreelancer?page=${e}">${e}</a>
+                    </li>
+                </c:forEach>
+                <c:if test="${tag < endPage}">
+                    <li class="page-item">
+                        <a class="page-link" href="JobforFreelancer?page=${tag + 1}" aria-label="Sau">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+            </ul>
+        </div>
+    </div>
+</c:if>
 
-                           
                         </div>
                     </div>
                 </div>
@@ -704,7 +689,7 @@
             </div>
         </div>
 
- <script>
+        <script>
 
             document.addEventListener("DOMContentLoaded", function () {
                 const radioButtons = document.getElementsByName("report_post_message");
@@ -811,43 +796,43 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-                 function addToFavorites(postID) {
-                     $.ajax({
-                         url: 'AddFavourites',
-                         type: 'GET',
-                         data: {
-                             postID: postID
-                         },
-                         success: function (response) {
-                             // Xử lý phản hồi thành công (nếu cần)
-                             //alert('Đã thêm vào danh sách yêu thích!');
-                             $('#favourite_' + postID).addClass('color-active');
-                         },
-                         error: function (xhr, status, error) {
-                             // Xử lý lỗi (nếu có)
-                             alert('Đã xảy ra lỗi: ' + error);
-                         }
-                     });
-                 }
+            function addToFavorites(postID) {
+                $.ajax({
+                    url: 'AddFavourites',
+                    type: 'GET',
+                    data: {
+                        postID: postID
+                    },
+                    success: function (response) {
+                        // Xử lý phản hồi thành công (nếu cần)
+                        //alert('Đã thêm vào danh sách yêu thích!');
+                        $('#favourite_' + postID).addClass('color-active');
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi (nếu có)
+                        alert('Đã xảy ra lỗi: ' + error);
+                    }
+                });
+            }
 
-                 function removeFromFavorites(postID) {
-                     $.ajax({
-                         url: 'DeleteFavourites',
-                         type: 'GET',
-                         data: {
-                             postID: postID
-                         },
-                         success: function (response) {
-                             // Xử lý phản hồi thành công (nếu cần)
-                             //alert('Đã xóa khỏi danh sách yêu thích!');
-                             $('#favourite_' + postID).removeClass('color-active');
-                         },
-                         error: function (xhr, status, error) {
-                             // Xử lý lỗi (nếu có)
-                             alert('Đã xảy ra lỗi: ' + error);
-                         }
-                     });
-                 }
+            function removeFromFavorites(postID) {
+                $.ajax({
+                    url: 'DeleteFavourites',
+                    type: 'GET',
+                    data: {
+                        postID: postID
+                    },
+                    success: function (response) {
+                        // Xử lý phản hồi thành công (nếu cần)
+                        //alert('Đã xóa khỏi danh sách yêu thích!');
+                        $('#favourite_' + postID).removeClass('color-active');
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi (nếu có)
+                        alert('Đã xảy ra lỗi: ' + error);
+                    }
+                });
+            }
         </script>
 
 
