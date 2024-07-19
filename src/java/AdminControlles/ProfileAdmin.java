@@ -7,21 +7,26 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class ProfileAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String id = request.getParameter("adminID");
-        AdminDAO adminDAO = new AdminDAO();
+        HttpSession session = request.getSession();
+//        String id = session.getAttribute("adminProfile").getAdminID();
+//         String id = admin.getAdminID();
+//        String id = request.getParameter("adminID");
+//        AdminDAO adminDAO = new AdminDAO();
 
+//            Admin admin = adminDAO.getAdminByID(id);
         
         try {
-            Admin admin = adminDAO.getAdminByID(id);
+            Admin admin = (Admin) session.getAttribute("adminProfile");
             if(admin!=null){
-            request.setAttribute("admin", admin);
-            request.getRequestDispatcher("adminViews/profileAdmin.jsp").forward(request, response);
+                request.setAttribute("admin", admin);
+                request.getRequestDispatcher("adminViews/profileAdmin.jsp").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
