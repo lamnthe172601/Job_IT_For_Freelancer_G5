@@ -64,6 +64,7 @@ public class RecruiterDAO extends DBContext {
         }
     }
 
+    
     public String convertDateTimeFormat(String inputDateTime) {
         if (inputDateTime == null) {
             return null;
@@ -460,4 +461,27 @@ public class RecruiterDAO extends DBContext {
             System.out.println(jobApply.toString());
         }
     }
+    
+    public boolean updateRecruiterR(Recruiter recruiter) throws SQLException {
+    String query = """
+                   UPDATE Recruiter SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, phone_contact = ?, email_contact = ? WHERE recruiterID = ?
+                   """;
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        stmt.setString(1, recruiter.getFirstName());
+        stmt.setString(2, recruiter.getLastName());
+        stmt.setString(3, recruiter.getImage());
+        stmt.setBoolean(4, recruiter.isGender());
+        stmt.setDate(5, (java.sql.Date) recruiter.getDob());
+        stmt.setString(6, recruiter.getPhone());
+        stmt.setString(7, recruiter.getEmail());
+        stmt.setInt(8, recruiter.getRecruiterID());
+
+        int rowsUpdated = stmt.executeUpdate();
+        return rowsUpdated > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new SQLException("Error while updating recruiter", e);
+    }
+}
+
 }

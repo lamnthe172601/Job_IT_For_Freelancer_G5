@@ -100,4 +100,27 @@ public class CompanyDAO extends DBContext {
             throw new SQLException("Error while updating company", e);
         }
     }
+    
+    public boolean updateCompanyY(Company company) throws SQLException {
+    String query = "UPDATE Company SET company_name = ?, team_numberID = ?, established_on = ?, logo = ?, website = ?, describe = ?, location = ?, recruiterID = ? WHERE companyID = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        stmt.setString(1, company.getCompanyName());
+        stmt.setInt(2, company.getTeamNumber().getId());
+        stmt.setDate(3, (java.sql.Date) company.getEstablishedOn());
+        stmt.setString(4, company.getLogo());
+        stmt.setString(5, company.getWebsite());
+        stmt.setString(6, company.getDescribe());
+        stmt.setString(7, company.getLocation());
+        stmt.setInt(8, company.getRecruiID().getRecruiterID());
+        stmt.setInt(9, company.getCompanyID());
+
+        int rowsUpdated = stmt.executeUpdate();
+        return rowsUpdated > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new SQLException("Error while updating company", e);
+    }
 }
+
+}
+

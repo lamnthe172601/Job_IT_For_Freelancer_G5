@@ -22,10 +22,15 @@ public class RecruiterProfileEditControll extends HttpServlet {
         Recruiter recruiter = (Recruiter) session.getAttribute("recruiter");
         Company company = (Company) session.getAttribute("company");
 
+        // Lấy dữ liệu từ form
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String phone = req.getParameter("phoneNumber");
-        String newEmail = req.getParameter("email"); // Lấy giá trị email mới từ form
+        String newEmail = req.getParameter("email");
+        String companyName = req.getParameter("companyName");
+        String establishedOn = req.getParameter("establishedOn");
+        String website = req.getParameter("website");
+        String describe = req.getParameter("describe");
 
         // Define regex patterns
         String phonePattern = "^0\\d{9}$";
@@ -45,27 +50,19 @@ public class RecruiterProfileEditControll extends HttpServlet {
             return;
         }
 
-        // Update recruiter information from form
-        recruiter.setFirstName(firstName);
-        recruiter.setLastName(lastName);
-        recruiter.setPhone(phone);
-        recruiter.setEmail(newEmail); // Cập nhật email mới
-
         // Validate company information
-        String companyName = req.getParameter("companyName");
-        String establishedOn = req.getParameter("establishedOn");
-        String website = req.getParameter("website");
-        String describe = req.getParameter("describe");
-
-        // Validate company name
         if (companyName == null || companyName.isEmpty()) {
             req.setAttribute("updateMessage", "Company name is required.");
             req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
             return;
         }
-        // Add more validation for other company fields as needed
 
-        // Update company information from form
+        // Cập nhật thông tin recruiter và company
+        recruiter.setFirstName(firstName);
+        recruiter.setLastName(lastName);
+        recruiter.setPhone(phone);
+        recruiter.setEmail(newEmail);
+
         company.setCompanyName(companyName);
         company.setEstablishedOn(java.sql.Date.valueOf(establishedOn));
         company.setWebsite(website);
@@ -76,7 +73,8 @@ public class RecruiterProfileEditControll extends HttpServlet {
 
         boolean updateSuccess = false;
         try {
-            updateSuccess = recruiterDAO.updateRecruiter(recruiter) && companyDAO.updateCompany(company);
+            // Cập nhật thông tin trong cơ sở dữ liệu
+            updateSuccess = recruiterDAO.updateRecruiterR(recruiter) && companyDAO.updateCompanyY(company);
         } catch (SQLException e) {
             e.printStackTrace();
         }
