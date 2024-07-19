@@ -47,6 +47,7 @@
                 overflow-wrap: break-word; /* Chuyển từ dài xuống dòng mới */
                 white-space: pre-wrap; /* Giữ khoảng trắng và xuống dòng khi cần */
             }
+            
         </style>
     </head>
     <body>
@@ -117,7 +118,7 @@
                                 <div class="blog grid-blog">
                                     <div class="blog-image">
                                         <a href="BlogDetails?blogID=${blog.blogID}">
-                                            <img class="img-fluid" src="assets/img/blog/${blog.image}" alt="${blog.title}">
+                                            <img class="img-fluid" src="assets/img/blog/${blog.image}">
                                         </a>
                                     </div>
                                     <div class="blog-content">
@@ -149,7 +150,7 @@
         <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="8157e937c31e3b17dd795771-|49" defer></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const maxLength = 100;
+                const maxLength = 50;
                 const descriptions = document.querySelectorAll(".blog-content p.mb-0");
 
                 descriptions.forEach(function (description) {

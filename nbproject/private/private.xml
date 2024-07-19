@@ -16,13 +16,9 @@
             <file>file:/D:/SU24/A/web/views/404Page.jsp</file>
         </group>
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/register.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputFreelancerProfileController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputRecruiterProfileController.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/SkillSetDAO.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/web/adminViews/profileAdmin.jsp</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/AdminControlles/ProfileAdmin.java</file>
+            <file>file:/C:/Users/DUC%20MINH/OneDrive/Documents/Kì%205/Job_IT_For_Freelancer_G5/src/java/dal/AdminDAO.java</file>
         </group>
     </open-files>
 </project-private>
