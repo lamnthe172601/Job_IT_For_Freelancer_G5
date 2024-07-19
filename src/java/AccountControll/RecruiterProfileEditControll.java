@@ -89,6 +89,7 @@ public class RecruiterProfileEditControll extends HttpServlet {
 
         req.setAttribute("recruiter", recruiter);
         req.setAttribute("company", company);
+        session.setAttribute("check", "1");
         req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
     }
 
