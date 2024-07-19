@@ -94,7 +94,7 @@
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
                                     <label for="categoryname">Name Position</label>
-                                    <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" >
+                                       <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" value="${categoryName}">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
@@ -345,46 +345,45 @@
 
 
         <script>
-            $(document).ready(function () {
-            // Kiểm tra nếu có thông báo trong session khi mới tải trang
-            var message = "<%= (String) session.getAttribute("message") %>";
-            if (message != null && message.trim().length > 0) {
-            // Hiển thị modal thông báo
-            var messageModal =
-                    `<c:if test="${sessionScope.check == 1}">
-        
-        <div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body text-center">
-                                    <div class="checkmark-circle">
-                                        <div class="background"></div>
-                                        <div class="checkmark"></div>
-                                    </div>
-                                    <h3>Notification</h3>
-                                    <p>${message}</p>
-                                    <a style="width: 10%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div></c:if>
-            <c:remove var="check" scope="session" />
-    `;
-            $('body').append(messageModal);
-            $('#messageModal').modal('show');
-            // Xóa thông báo khỏi session
-            <% session.removeAttribute("message"); %>
-            }
+$(document).ready(function () {
+    // Kiểm tra nếu có thông báo trong session khi mới tải trang
+    var message = "<%= (String) session.getAttribute("message") %>";
+    var check = "<%= (String) session.getAttribute("check") %>";
 
-            // Hiển thị modal xác nhận xóa khi ấn nút delete
-            $('.delete-btn').on('click', function (e) {
-            e.preventDefault();
-            var categoryId = $(this).data('category-id');
-            var modalId = '#delete_category_' + categoryId;
-            $(modalId).modal('show');
-            });
-            });
-        </script>
+    if (message != null && message.trim().length > 0 && check === "1") {
+        // Hiển thị modal thông báo
+        var messageModal =
+            `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <div class="checkmark-circle">
+                                <div class="background"></div>
+                                <div class="checkmark"></div>
+                            </div>
+                            <h3>Notification</h3>
+                            <p>${message}</p>
+                            <a style=" margin-left= 50%  width: 10%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        $('body').append(messageModal);
+        $('#messageModal').modal('show');
+        // Xóa thông báo khỏi session
+        <% session.removeAttribute("message"); %>
+        <% session.removeAttribute("check"); %>
+    }
+
+    // Hiển thị modal xác nhận xóa khi ấn nút delete
+    $('.delete-btn').on('click', function (e) {
+        e.preventDefault();
+        var categoryId = $(this).data('category-id');
+        var modalId = '#delete_category_' + categoryId;
+        $(modalId).modal('show');
+    });
+});
+</script>
 
 
         <style>

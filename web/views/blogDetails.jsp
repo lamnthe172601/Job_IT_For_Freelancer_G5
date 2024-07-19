@@ -13,6 +13,13 @@
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <style>
+            .blog-content {
+                word-break: break-word; /* Chuyển từ dài xuống dòng mới */
+                overflow-wrap: break-word; /* Chuyển từ dài xuống dòng mới */
+                white-space: pre-wrap; /* Giữ khoảng trắng và xuống dòng khi cần */
+            }
+        </style>
     </head>
     <body>
         <div class="main-wrapper">

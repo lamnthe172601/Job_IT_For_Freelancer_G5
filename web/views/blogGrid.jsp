@@ -34,6 +34,7 @@
                 flex-direction: column;
                 justify-content: space-between;
                 min-height: 180px; /* Chiều cao tối thiểu, có thể thay đổi tùy nhu cầu */
+
             }
 
             /* Đảm bảo khoảng cách đều giữa các form */
@@ -41,7 +42,12 @@
                 height: 450px;
                 margin-bottom: 5px; /* Khoảng cách giữa các blog, có thể thay đổi tùy nhu cầu */
             }
-
+            .blog-content p {
+                word-break: break-word; /* Chuyển từ dài xuống dòng mới */
+                overflow-wrap: break-word; /* Chuyển từ dài xuống dòng mới */
+                white-space: pre-wrap; /* Giữ khoảng trắng và xuống dòng khi cần */
+            }
+            
         </style>
     </head>
     <body>
@@ -112,7 +118,7 @@
                                 <div class="blog grid-blog">
                                     <div class="blog-image">
                                         <a href="BlogDetails?blogID=${blog.blogID}">
-                                            <img class="img-fluid" src="assets/img/blog/${blog.image}" alt="${blog.title}">
+                                            <img class="img-fluid" src="assets/img/blog/${blog.image}">
                                         </a>
                                     </div>
                                     <div class="blog-content">
@@ -125,7 +131,7 @@
                                             <a href="BlogDetails?blogID=${blog.blogID}">Read More <i class="fas fa-arrow-right ms-1"></i></a>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </c:forEach>
@@ -144,7 +150,7 @@
         <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="8157e937c31e3b17dd795771-|49" defer></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const maxLength = 100;
+                const maxLength = 50;
                 const descriptions = document.querySelectorAll(".blog-content p.mb-0");
 
                 descriptions.forEach(function (description) {
