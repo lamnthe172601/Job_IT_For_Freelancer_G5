@@ -32,7 +32,7 @@ public class BlogDAO extends DBContext {
 
     public Blogs selectBlogById(int blogID) {
         Blogs blog = null;
-        String sql = "SELECT * FROM [freelancer].[dbo].[Blogs] WHERE BlogID = ?";
+        String sql = "SELECT * FROM [freelancer].[dbo].[Blogs] WHERE BlogID = ? and statusBlog = 1";
         try (Connection conn = connection; PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, blogID);
             try (ResultSet rs = stmt.executeQuery()) {

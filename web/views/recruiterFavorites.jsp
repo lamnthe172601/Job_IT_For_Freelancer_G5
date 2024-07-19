@@ -121,7 +121,7 @@
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
-                        <div class="main-menu-wrapper">
+                       <div class="main-menu-wrapper">
                             <div class="menu-header">
                                 <a href="home" class="menu-logo">
                                     <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
@@ -163,7 +163,7 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="ListFreelancer">List Freelancer</a></li>
+                                             <li><a href="ListFreelancer">List Freelancer</a></li>
 
                                         </ul>
                                     </li>
@@ -171,9 +171,8 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="CreatePost">Create a new Project</a></li>
-                                            <li><a href="myListJobProject">My list project</a></li>
-                                            <li><a href="newsJobs">Reviews</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
+                                            
 
                                         </ul>
                                     </li>
@@ -181,7 +180,6 @@
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">                                                                           
-                                        <li><a href="blogGrid">Blog</a></li>
                                         <li><a href="About">About us</a></li>
                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>

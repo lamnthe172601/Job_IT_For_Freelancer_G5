@@ -92,7 +92,7 @@
                                         <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="myListJobProject">My List Post</a></li>                                        
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
                                             <li><a href="SreachJob">Find Jobs</a></li>  
                                             <li><a href="company">Company</a></li>
                                         </ul>
@@ -103,8 +103,7 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="ListFreelancer">List Freelancer</a></li>
-                                            <li><a href="newsJobs">Skills</a></li>
+                                             <li><a href="ListFreelancer">List Freelancer</a></li>
 
                                         </ul>
                                     </li>
@@ -112,8 +111,8 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">List Post</a></li>
-                                            <li><a href="newsJobs">Reviews</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
+                                            
 
                                         </ul>
                                     </li>

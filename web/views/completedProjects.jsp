@@ -222,8 +222,7 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">Top Freelancer</a></li>
-                                            <li><a href="newsJobs">Skills</a></li>
+                                             <li><a href="ListFreelancer">List Freelancer</a></li>
 
                                         </ul>
                                     </li>
@@ -232,7 +231,7 @@
                                         <ul class="submenu">
 
                                             <li><a href="myListJobProject">My List Post</a></li>
-                                            <li><a href="newsJobs">Reviews</a></li>
+                                            
 
                                         </ul>
                                     </li>

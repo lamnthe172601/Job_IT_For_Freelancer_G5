@@ -222,17 +222,16 @@ public class RecruiterDAO extends DBContext {
         List<JobApply> list = new ArrayList<>();
         String query = """
                            SELECT 
-                                                              *
-                                                          FROM [JobApply] ja
-                                                          JOIN [Post] p ON ja.postID = p.postID
-                                                          join Categories ca on p.caID = ca.caID
-                                                          join JobType jt on jt.jobID = p.job_type_ID
-                                                          join Duration du on du.durationID = p.durationID
-                                                          
-                                                          JOIN [Freelancer] free ON ja.freelanceID = free.freelanceID
-                                                          JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
-                                                          WHERE 
-                                                          p.recruiterID =?  ;
+                                                                                                                        *
+                                                                                                                    FROM [JobApply] ja
+                                                                                                                    JOIN [Post] p ON ja.postID = p.postID
+                                                                                                                    JOIN Categories ca ON p.caID = ca.caID
+                                                                                                                    JOIN JobType jt ON jt.jobID = p.job_type_ID
+                                                                                                                    JOIN Duration du ON du.durationID = p.durationID
+                                                                                                                    JOIN [Freelancer] free ON ja.freelanceID = free.freelanceID
+                                                                                                                    JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
+                                                                                                                    WHERE p.recruiterID = ?
+                                                                                                                    ORDER BY ja.dateApply DESC ;
                            """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
