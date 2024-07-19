@@ -115,13 +115,14 @@ public class DAO extends DBContext {
 
     public void register(String username, String password, String email, String status) {
         String sql = "insert into [User]\n"
-                + "values(?,?,?,?,5,1)";
+                + "values(?,?,?,?,5,1,GETDATE())";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setString(3, email);
             statement.setString(4, status);
+            
             statement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);

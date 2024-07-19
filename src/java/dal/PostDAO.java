@@ -959,9 +959,7 @@ public class PostDAO extends DBContext {
     }
     
 
-    
-    
-    public List<Post> getPostsByFreelancerSkill(int freelancerID) {
+  public List<Post> getPostsByFreelancerSkill(int freelancerID) {
         List<Post> list = new ArrayList<>();
         String query = """
                        
@@ -1017,6 +1015,7 @@ public class PostDAO extends DBContext {
                                               
                                               SELECT *
                                               FROM MatchingPosts;""";
+        
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, freelancerID);
@@ -1034,16 +1033,21 @@ public class PostDAO extends DBContext {
         }
         return list;
     }
-public int countPostsByFreelancerSkills(int freelancerID) {
+
+  public int countPostsByFreelancerSkills(int freelancerID) {
     int count = 0;
     String query = """
-                   SELECT COUNT(*) AS total 
-                   FROM Post p
-                   JOIN SkillPost sp ON p.postID = sp.postID
-                   JOIN Skill s ON sp.skillID = s.skillID
-                   JOIN FreelancerSkill fs ON s.skillID = fs.skillID
-                   WHERE fs.freelancerID = ?
-                   """;
+                   WITH FreelancerSkills AS (
+                                          SELECT ss.skill_set_name
+                                          FROM [freelancer].[dbo].[Skills] us
+                                          JOIN [freelancer].[dbo].[Skill_Set] ss ON us.skill_set_ID = ss.skill_set_ID
+                                          WHERE us.freelancerID = ?
+                                      )
+                                      SELECT COUNT(DISTINCT p.postID) AS total
+                                      FROM [freelancer].[dbo].[Post] p
+                                      CROSS APPLY STRING_SPLIT(p.skill, ',') ps
+                                      WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills)""";
+                   
     try (PreparedStatement ps = connection.prepareStatement(query)) {
         ps.setInt(1, freelancerID);
         ResultSet rs = ps.executeQuery();
@@ -1055,6 +1059,9 @@ public int countPostsByFreelancerSkills(int freelancerID) {
     }
     return count;
 }
+
+ 
+
 
     
     public static void main(String[] args) {

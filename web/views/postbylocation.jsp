@@ -370,15 +370,12 @@
                                                     </div>
                                                     <div class="skills-container">
                                                         <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index % 3 == 0}">
-                                                                <div class="skills-row">
+                                                            <c:if test="${loop.index < 3}">
+                                                                    <span class="badge badge-pill badge-design">${skill}</span>
+                                                                </c:if>                                                              
+                                                                <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                                    <span class="badge badge-pill badge-design">...</span>
                                                                 </c:if>
-                                                                <div class="freelance-tags">
-                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                                </div>
-                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                                </div>
-                                                            </c:if>
                                                         </c:forEach>
                                                     </div>
 
@@ -483,15 +480,19 @@
                                    
                                 </c:forEach>
                             </div>
-<c:if test="${endPage > 1}">
-    <ul class="pagination">
-        <c:forEach var="i" begin="1" end="${endPage}">
-            <li class="page-item ${i == page ? 'active' : ''}">
-                <a class="page-link" href="postByLocation?location=${location}&page=${i}">${i}</a>
-            </li>
-        </c:forEach>
-    </ul>
-</c:if>
+<c:if test="${tongSoTrang > 1}">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="pagination list-pagination">
+                        <c:forEach begin="1" end="${tongSoTrang}" var="e">
+                            <li class="page-item ${trangHienTai == e ? 'active' : ''}">
+                                <a class="page-link" href="postbylocation?location=${param.location}&page=${e}">${e}</a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+        </c:if>
 
                             
                         </div>
