@@ -26,11 +26,15 @@
             <file>file:/D:/SU24/A/src/java/Models/Company.java</file>
         </group>
         <group>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/sidebar.jsp</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/views/recruiterDashboard.jsp</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AccountControll/ViewProfile_Freelancer.java</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/register.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/FreelancerDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/FavoritesDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/RegisterController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/RecruiterFavouritesControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/inputFreelancerProfile.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/HomeContronller.java</file>
         </group>
     </open-files>
 </project-private>
