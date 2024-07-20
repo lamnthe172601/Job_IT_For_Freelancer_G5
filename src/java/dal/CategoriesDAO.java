@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale.Category;
+
 
 /**
  *
@@ -24,8 +24,9 @@ public class CategoriesDAO extends DBContext {
 
     public List<Categories> getAllCategory() {
         List<Categories> list = new ArrayList<>();
-        String query = "select * from Categories WHERE statusCate = 1";
+        
         try {
+            String query = "select * from Categories WHERE statusCate = 1";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

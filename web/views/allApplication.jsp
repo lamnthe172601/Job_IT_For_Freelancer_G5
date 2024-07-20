@@ -123,7 +123,7 @@
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
-                       <div class="main-menu-wrapper">
+                        <div class="main-menu-wrapper">
                             <div class="menu-header">
                                 <a href="home" class="menu-logo">
                                     <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
@@ -165,7 +165,7 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                             <li><a href="ListFreelancer">List Freelancer</a></li>
+                                            <li><a href="ListFreelancer">List Freelancer</a></li>
 
                                         </ul>
                                     </li>
@@ -174,7 +174,7 @@
                                         <ul class="submenu">
 
                                             <li><a href="myListJobProject">My List Post</a></li>
-                                            
+
 
                                         </ul>
                                     </li>
@@ -493,276 +493,229 @@
                                                             </td>
                                                             <td>
                                                                 <div class="action-table-data">
-                                                                    <button class="download-button" 
-                                                                            data-apply-id="${listapply.applyID}" 
-                                                                            data-resume-url="${listapply.resume}">
-                                                                        <i class="feather-download"></i> 
-                                                                    </button>
+                                                                    <a href="${listapply.resume}" target="_blank" class="custom-tooltip" data-title="View CV"><i class="feather-eye"></i></a>
+
+                                                                    <style>
+                                                                        .custom-tooltip {
+                                                                            position: relative;
+                                                                            cursor: pointer;
+                                                                        }
+
+                                                                        .custom-tooltip::after {
+                                                                            content: attr(data-title);
+                                                                            position: absolute;
+                                                                            bottom: 125%; /* Adjust the position as needed */
+                                                                            left: 50%;
+                                                                            transform: translateX(-50%);
+                                                                            background-color: #333;
+                                                                            color: #fff;
+                                                                            padding: 5px 10px;
+                                                                            border-radius: 4px;
+                                                                            white-space: nowrap;
+                                                                            opacity: 0;
+                                                                            visibility: hidden;
+                                                                            transition: opacity 0.3s;
+                                                                            z-index: 1000;
+                                                                        }
+
+                                                                        .custom-tooltip:hover::after {
+                                                                            opacity: 1;
+                                                                            visibility: visible;
+                                                                        }
+
+                                                                    </style>      
+
                                                                 </div>
                                                             </td>
 
-                                                    <script>
-                                                        // Đảm bảo script chỉ chạy một lần
-                                                        (function () {
-                                                            if (window.hasRunDownloadScript)
-                                                                return;
-                                                            window.hasRunDownloadScript = true;
 
-                                                            let downloadPromise = Promise.resolve();
+                                                            <td class="status-cell">
+                                                                <span id="status-${listapply.applyID}"
+                                                                      class="badge checked badge-pill ${listapply.status == 0 ? 'bg-warning-light' : (listapply.status == 1 ? 'bg-success-light' : 'bg-danger-light')}"
+                                                                      data-status="${listapply.status}">
+                                                                    ${listapply.status == 0 ? 'Pending' :
+                                                                      (listapply.status == 1 ? 'Approved' :
+                                                                      'Refused')}
+                                                                </span>
+                                                                <br>
+                                                                <span class="applied-time">Applied:
+                                                                    ${listapply.dateApply}</span>
+                                                            </td>
+                                                            <td>${listapply.freelancer.phone}
+                                                                <br>${listapply.freelancer.email}
+                                                            </td>
+                                                            <td>
+                                                                <div class="action-table-data">
+                                                                    <div style="margin-left: 30px; "  id="ApproveAndRefuse${listapply.applyID}">
+                                                                        <a style="background: #22cc62" href="#Approve${listapply.applyID}"
+                                                                           data-bs-toggle="modal"
+                                                                           class="btn btn-request"><i class="fa fa-user-plus"></i></a>
+                                                                        <br/>
+                                                                        <a style="background: #6c757d; margin-top: 8px;"
+                                                                           href="#Refuse${listapply.applyID}"
+                                                                           data-bs-toggle="modal"
+                                                                           class="btn btn-request"><i class="fa fa-user-xmark"></i></a>
+                                                                    </div>
 
-                                                            function downloadFile(applyID, url, button) {
-                                                                console.log("Downloading file for ApplyID:", applyID, "URL:", url);
+                                                                    <div style="display: none;"
+                                                                         id="connectedBtn${listapply.applyID}">
+                                                                        <a style="background: violet;margin-left: 30px;"
+                                                                           href="javascript:void(0);"
+                                                                           data-bs-toggle="modal"
+                                                                           class="btn btn-request"><i class="fa fa-user-check"></i></a>
+                                                                    </div>
 
-                                                                return fetch(url)
-                                                                        .then(response => response.blob())
-                                                                        .then(blob => {
-                                                                            var blobUrl = window.URL.createObjectURL(blob);
-                                                                            var a = document.createElement('a');
-                                                                            a.style.display = 'none';
-                                                                            a.href = blobUrl;
-                                                                            a.download = 'resume_' + applyID + '.pdf';
-                                                                            document.body.appendChild(a);
-                                                                            a.click();
-                                                                            window.URL.revokeObjectURL(blobUrl);
-                                                                            document.body.removeChild(a);
-                                                                            console.log("Download completed for ApplyID:", applyID);
-
-                                                                            // Đánh dấu file đã được tải xuống
-                                                                            sessionStorage.setItem('downloaded_' + applyID, 'true');
-
-                                                                            // Xóa đánh dấu sau 5 giây
-                                                                            setTimeout(() => {
-                                                                                sessionStorage.removeItem('downloaded_' + applyID);
-                                                                            }, 5000);
-                                                                        })
-
-                                                                        .finally(() => {
-                                                                            button.disabled = false;
-                                                                        });
-                                                            }
-
-                                                            function initializeDownloadButtons() {
-                                                                var downloadButtons = document.querySelectorAll(".download-button");
-                                                                downloadButtons.forEach(function (button) {
-                                                                    button.addEventListener("click", function (event) {
-                                                                        event.preventDefault();
-                                                                        var applyID = this.getAttribute("data-apply-id");
-                                                                        var resumeUrl = this.getAttribute("data-resume-url");
-
-                                                                        // Kiểm tra xem file đã được tải xuống gần đây chưa
-                                                                        if (sessionStorage.getItem('downloaded_' + applyID)) {
-                                                                            console.log("File recently downloaded. Please wait before trying again.");
-                                                                            return;
-                                                                        }
-
-                                                                        this.disabled = true;
-
-                                                                        downloadPromise = downloadPromise.then(() => {
-                                                                            return new Promise((resolve) => {
-                                                                                setTimeout(() => {
-                                                                                    downloadFile(applyID, resumeUrl, this).then(resolve);
-                                                                                }, 1000); // 1 giây delay giữa các lần tải xuống
-                                                                            });
-                                                                        });
-                                                                    });
-                                                                });
-                                                            }
-
-                                                            // Khởi tạo khi DOM đã sẵn sàng
-                                                            if (document.readyState === "loading") {
-                                                                document.addEventListener("DOMContentLoaded", initializeDownloadButtons);
-                                                            } else {
-                                                                initializeDownloadButtons();
-                                                            }
-                                                        })();
-                                                    </script>
-                                                    <td class="status-cell">
-                                                        <span id="status-${listapply.applyID}"
-                                                              class="badge checked badge-pill ${listapply.status == 0 ? 'bg-warning-light' : (listapply.status == 1 ? 'bg-success-light' : 'bg-danger-light')}"
-                                                              data-status="${listapply.status}">
-                                                            ${listapply.status == 0 ? 'Pending' :
-                                                              (listapply.status == 1 ? 'Approved' :
-                                                              'Refused')}
-                                                        </span>
-                                                        <br>
-                                                        <span class="applied-time">Applied:
-                                                            ${listapply.dateApply}</span>
-                                                    </td>
-                                                    <td>${listapply.freelancer.phone}
-                                                        <br>${listapply.freelancer.email}
-                                                    </td>
-                                                    <td>
-                                                        <div class="action-table-data">
-                                                            <div style="margin-left: 30px; "  id="ApproveAndRefuse${listapply.applyID}">
-                                                                <a style="background: #22cc62" href="#Approve${listapply.applyID}"
-                                                                   data-bs-toggle="modal"
-                                                                   class="btn btn-request"><i class="fa fa-user-plus"></i></a>
-                                                                <br/>
-                                                                <a style="background: #6c757d; margin-top: 8px;"
-                                                                   href="#Refuse${listapply.applyID}"
-                                                                   data-bs-toggle="modal"
-                                                                   class="btn btn-request"><i class="fa fa-user-xmark"></i></a>
-                                                            </div>
-
-                                                            <div style="display: none;"
-                                                                 id="connectedBtn${listapply.applyID}">
-                                                                <a style="background: violet;margin-left: 30px;"
-                                                                   href="javascript:void(0);"
-                                                                   data-bs-toggle="modal"
-                                                                   class="btn btn-request"><i class="fa fa-user-check"></i></a>
-                                                            </div>
-
-                                                            <div class="modal fade edit-proposal-modal success-modal"
-                                                                 id="success-milestone${listapply.applyID}">
-                                                                <div
-                                                                    class="modal-dialog modal-dialog-centered modal-lg">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal fade edit-proposal-modal success-modal"
+                                                                         id="success-milestone${listapply.applyID}">
                                                                         <div
-                                                                            class="modal-header justify-content-end">
-                                                                            <span class="modal-close">
-                                                                                <a href="javascript:void(0);"
-                                                                                   data-bs-dismiss="modal"
-                                                                                   aria-label="Close">
-                                                                                    <i
-                                                                                        class="feather-x"></i>
-                                                                                </a>
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <form
-                                                                                id="emailForm${listapply.applyID}"
-                                                                                method="post"
-                                                                                action="ManageApplication">
-                                                                                <div class="form-group">
-                                                                                    <label
-                                                                                        for="emailSubject">Subject</label>
-                                                                                    <input type="text"
-                                                                                           class="form-control"
-                                                                                           id="emailSubject"
-                                                                                           name="emailSubject"
-                                                                                           value="Mail thông báo kết quả vòng đơn Apply tại ${listapply.post.title}"
-                                                                                           required>
+                                                                            class="modal-dialog modal-dialog-centered modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div
+                                                                                    class="modal-header justify-content-end">
+                                                                                    <span class="modal-close">
+                                                                                        <a href="javascript:void(0);"
+                                                                                           data-bs-dismiss="modal"
+                                                                                           aria-label="Close">
+                                                                                            <i
+                                                                                                class="feather-x"></i>
+                                                                                        </a>
+                                                                                    </span>
                                                                                 </div>
-                                                                                <div class="form-group">
-                                                                                    <label
-                                                                                        for="emailRecipient">Recipient</label>
-                                                                                    <input type="email"
-                                                                                           class="form-control"
-                                                                                           id="emailRecipient"
-                                                                                           name="emailRecipient"
-                                                                                           value="${listapply.freelancer.email}"
-                                                                                           required>
+                                                                                <div class="modal-body">
+                                                                                    <form
+                                                                                        id="emailForm${listapply.applyID}"
+                                                                                        method="post"
+                                                                                        action="ManageApplication">
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                for="emailSubject">Subject</label>
+                                                                                            <input type="text"
+                                                                                                   class="form-control"
+                                                                                                   id="emailSubject"
+                                                                                                   name="emailSubject"
+                                                                                                   value="Mail thông báo kết quả vòng đơn Apply tại ${listapply.post.title}"
+                                                                                                   required>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                for="emailRecipient">Recipient</label>
+                                                                                            <input type="email"
+                                                                                                   class="form-control"
+                                                                                                   id="emailRecipient"
+                                                                                                   name="emailRecipient"
+                                                                                                   value="${listapply.freelancer.email}"
+                                                                                                   required>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                for="emailContent">Content</label>
+                                                                                            <textarea
+                                                                                                class="form-control"
+                                                                                                id="emailContent"
+                                                                                                name="emailContent"
+                                                                                                rows="10"
+                                                                                                placeholder="Enter email content"
+                                                                                                required></textarea>
+                                                                                        </div>
+                                                                                        <div class="text-center">
+                                                                                            <button type="submit"
+                                                                                                    class="btn btn-primary mt-3">Send
+                                                                                                Email</button>
+                                                                                        </div>
+                                                                                    </form>
                                                                                 </div>
-                                                                                <div class="form-group">
-                                                                                    <label
-                                                                                        for="emailContent">Content</label>
-                                                                                    <textarea
-                                                                                        class="form-control"
-                                                                                        id="emailContent"
-                                                                                        name="emailContent"
-                                                                                        rows="10"
-                                                                                        placeholder="Enter email content"
-                                                                                        required></textarea>
-                                                                                </div>
-                                                                                <div class="text-center">
-                                                                                    <button type="submit"
-                                                                                            class="btn btn-primary mt-3">Send
-                                                                                        Email</button>
-                                                                                </div>
-                                                                            </form>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
 
 
 
 
 
-                                                            <div class="modal fade edit-proposal-modal success-modal"
-                                                                 id="Refuse${listapply.applyID}">
-                                                                <div
-                                                                    class="modal-dialog modal-dialog-centered modal-md">
-                                                                    <div class="modal-content">
+                                                                    <div class="modal fade edit-proposal-modal success-modal"
+                                                                         id="Refuse${listapply.applyID}">
                                                                         <div
-                                                                            class="modal-header justify-content-end">
-                                                                            <span class="modal-close">
-                                                                                <a href="javascript:void(0);"
-                                                                                   data-bs-dismiss="modal"
-                                                                                   aria-label="Close">
-                                                                                    <i
-                                                                                        class="feather-x"></i>
-                                                                                </a>
-                                                                            </span>
+                                                                            class="modal-dialog modal-dialog-centered modal-md">
+                                                                            <div class="modal-content">
+                                                                                <div
+                                                                                    class="modal-header justify-content-end">
+                                                                                    <span class="modal-close">
+                                                                                        <a href="javascript:void(0);"
+                                                                                           data-bs-dismiss="modal"
+                                                                                           aria-label="Close">
+                                                                                            <i
+                                                                                                class="feather-x"></i>
+                                                                                        </a>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div
+                                                                                        class="confirmation-msg-content text-center">
+                                                                                        <input type="hidden"
+                                                                                               class="apply-id"
+                                                                                               value="${listapply.applyID}">
+                                                                                        <h4>Confirm Action</h4>
+                                                                                        <p>Are you sure you want to
+                                                                                            refuse this freelancer?
+                                                                                        </p>
+                                                                                        <div class="text-center">
+                                                                                            <a href="javascript:void(0);"
+                                                                                               class="btn btn-primary mt-3 refuse-freelancer">Refuse</a>
+                                                                                            <a href="javascript:void(0);"
+                                                                                               data-bs-dismiss="modal"
+                                                                                               class="btn btn-secondary mt-3"
+                                                                                               style="margin-left: 30px;"
+                                                                                               aria-label="Close">Cancel</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <div
-                                                                                class="confirmation-msg-content text-center">
-                                                                                <input type="hidden"
-                                                                                       class="apply-id"
-                                                                                       value="${listapply.applyID}">
-                                                                                <h4>Confirm Action</h4>
-                                                                                <p>Are you sure you want to
-                                                                                    refuse this freelancer?
-                                                                                </p>
-                                                                                <div class="text-center">
-                                                                                    <a href="javascript:void(0);"
-                                                                                       class="btn btn-primary mt-3 refuse-freelancer">Refuse</a>
-                                                                                    <a href="javascript:void(0);"
-                                                                                       data-bs-dismiss="modal"
-                                                                                       class="btn btn-secondary mt-3"
-                                                                                       style="margin-left: 30px;"
-                                                                                       aria-label="Close">Cancel</a>
+                                                                    </div>
+                                                                    <div class="modal fade edit-proposal-modal success-modal"
+                                                                         id="Approve${listapply.applyID}">
+                                                                        <div
+                                                                            class="modal-dialog modal-dialog-centered modal-md">
+                                                                            <div class="modal-content">
+                                                                                <div
+                                                                                    class="modal-header justify-content-end">
+                                                                                    <span class="modal-close">
+                                                                                        <a href="javascript:void(0);"
+                                                                                           data-bs-dismiss="modal"
+                                                                                           aria-label="Close">
+                                                                                            <i
+                                                                                                class="feather-x"></i>
+                                                                                        </a>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div
+                                                                                        class="confirmation-msg-content text-center">
+                                                                                        <input type="hidden"
+                                                                                               class="apply-id"
+                                                                                               value="${listapply.applyID}">
+                                                                                        <h4>Confirm Action</h4>
+                                                                                        <p>Are you sure you want to
+                                                                                            approve this freelancer?
+                                                                                        </p>
+                                                                                        <div class="text-center">
+                                                                                            <a href="javascript:void(0);"
+                                                                                               class="btn btn-primary mt-3 approve-freelancer">Approve</a>
+                                                                                            <a href="javascript:void(0);"
+                                                                                               data-bs-dismiss="modal"
+                                                                                               class="btn btn-secondary mt-3"
+                                                                                               style="margin-left: 30px;"
+                                                                                               aria-label="Close">Cancel</a>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="modal fade edit-proposal-modal success-modal"
-                                                                 id="Approve${listapply.applyID}">
-                                                                <div
-                                                                    class="modal-dialog modal-dialog-centered modal-md">
-                                                                    <div class="modal-content">
-                                                                        <div
-                                                                            class="modal-header justify-content-end">
-                                                                            <span class="modal-close">
-                                                                                <a href="javascript:void(0);"
-                                                                                   data-bs-dismiss="modal"
-                                                                                   aria-label="Close">
-                                                                                    <i
-                                                                                        class="feather-x"></i>
-                                                                                </a>
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div
-                                                                                class="confirmation-msg-content text-center">
-                                                                                <input type="hidden"
-                                                                                       class="apply-id"
-                                                                                       value="${listapply.applyID}">
-                                                                                <h4>Confirm Action</h4>
-                                                                                <p>Are you sure you want to
-                                                                                    approve this freelancer?
-                                                                                </p>
-                                                                                <div class="text-center">
-                                                                                    <a href="javascript:void(0);"
-                                                                                       class="btn btn-primary mt-3 approve-freelancer">Approve</a>
-                                                                                    <a href="javascript:void(0);"
-                                                                                       data-bs-dismiss="modal"
-                                                                                       class="btn btn-secondary mt-3"
-                                                                                       style="margin-left: 30px;"
-                                                                                       aria-label="Close">Cancel</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    </tr>
-                                                </c:forEach>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
 

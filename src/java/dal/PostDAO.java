@@ -288,13 +288,14 @@ public class PostDAO extends DBContext {
         return list;
     }
 
-    public void updatePost(String title, String image, String job_type_ID, String durationID, String quantity, String description, String budget, String location, String skill, String caID, int postID) {
+    public void updatePost(String title, String image, String job_type_ID, String durationID,String expired, String quantity, String description, String budget, String location, String skill, String caID, int postID) {
         String query = """
                        UPDATE [dbo].[Post]
                                 SET [title] = ?
                                    ,[image] = ?
                                    ,[job_type_ID] = ?
                                    ,[durationID] = ?
+                                   ,expired = ?
                                    ,[quantity] = ?
                                    ,[description] = ?
                                    ,[budget] = ?
@@ -307,13 +308,14 @@ public class PostDAO extends DBContext {
             stmt.setString(2, image);
             stmt.setString(3, job_type_ID);
             stmt.setString(4, durationID);
-            stmt.setString(5, quantity);
-            stmt.setString(6, description);
-            stmt.setString(7, budget);
-            stmt.setString(8, location);
-            stmt.setString(9, skill);
-            stmt.setString(10, caID);
-            stmt.setInt(11, postID);
+            stmt.setString(5, expired);
+            stmt.setString(6, quantity);
+            stmt.setString(7, description);
+            stmt.setString(8, budget);
+            stmt.setString(9, location);
+            stmt.setString(10, skill);
+            stmt.setString(11, caID);
+            stmt.setInt(12, postID);
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -330,8 +332,6 @@ public class PostDAO extends DBContext {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-
         }
     }
 
@@ -357,7 +357,7 @@ public class PostDAO extends DBContext {
                 + "    FROM JobApply j\n"
                 + "    WHERE j.postID = post.postID\n"
                 + ") AND status != 2\n"
-                + "AND postID = 8;";
+                ;
         PreparedStatement stmt = connection.prepareStatement(sql);
         try {
 

@@ -103,6 +103,7 @@ public class ManageJobsPostsControll extends HttpServlet {
         String skills = String.join(", ", skill);
         String categories = request.getParameter("Categories");
         String description = request.getParameter("description");
+        String expired = request.getParameter("expired");
 
         String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ProjectsPost";
         String imgFileName = re.getRecruiterID() + "-" + postID + "_image.jpg";
@@ -115,7 +116,7 @@ public class ManageJobsPostsControll extends HttpServlet {
             imgPart.write(imgFilePath);
 
             PostDAO pDao = new PostDAO();
-            pDao.updatePost(title, linkDB, jobsType, duration, target, description, budgetFrom, location, skills, categories, postID);
+            pDao.updatePost(title, linkDB, jobsType, duration,expired, target, description, budgetFrom, location, skills, categories, postID);
 
             Thread.sleep(1500);
             response.sendRedirect("manageJobsPosts");

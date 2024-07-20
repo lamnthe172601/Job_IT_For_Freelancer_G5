@@ -436,11 +436,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Title</th>
-                                                            <th>Job Type</th>
-                                                            <th>Skill</th>
+                                                            <th>Level</th>                                                            
                                                             <th>Create On</th>
-                                                            <th>Categories</th>
-                                                            <th>Proposals</th>
+                                                            <th>Position</th>
+                                                            <th>Quantity</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -449,13 +448,11 @@
                                                             <tr>
                                                                 <td>${listpost.title}</td>
                                                                 <td>${listpost.jobTypeID.jobName}</td>
-                                                                <td><c:forEach var="skill" items="${listpost.skill.split(',')}">
-                                                                        <div class="skill">${skill.trim()}</div>
-                                                                    </c:forEach></td>
+                                                                
                                                                 <td>${listpost.datePost}</td>
                                                                 <td>${listpost.caID.categoriesName}</td>
                                                                 <td style="text-align: center;">${listpost.quantity}</td>
-                                                                <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
+                                                                <td ><a style="margin-left: 30px" href="PostDetails?postID=${listpost.postID}"><i class="feather-eye"></i></a></td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>

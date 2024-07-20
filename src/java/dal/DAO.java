@@ -300,6 +300,24 @@ public class DAO extends DBContext {
         }
 
     }
+    public void inputFreelancerExperiance2(String experiance,  String position, String start, String end, int freeID) {
+        String sql = """
+                     insert into [Experience]
+                     values(?,?,?,?,?)""";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, experiance);
+            statement.setString(2, position);
+            statement.setString(3, start);
+            statement.setString(4, end);
+            
+            statement.setInt(5, freeID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
 
     public ArrayList<TeamNumber> listTeamNumber() {
         ArrayList<TeamNumber> listTeamSize = new ArrayList<>();

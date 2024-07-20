@@ -21,16 +21,20 @@
             <file>file:/D:/SU24/A/src/java/Models/User.java</file>
             <file>file:/D:/SU24/A/src/java/dal/DashboardDAO.java</file>
             <file>file:/D:/SU24/A/src/java/Models/Recruiter.java</file>
+            <file>file:/D:/SU24/A/web/views/ProfileSettingFreelancer.jsp</file>
             <file>file:/D:/SU24/A/src/java/FreelancerControll/JobforFreelancer.java</file>
             <file>file:/D:/SU24/A/web/views/listFreelancer.jsp</file>
             <file>file:/D:/SU24/A/src/java/Models/Categories.java</file>
             <file>file:/D:/SU24/A/src/java/dal/CompanyDAO.java</file>
+            <file>file:/D:/SU24/A/web/views/inputFreelancerProfile.jsp</file>
             <file>file:/D:/SU24/A/web/views/header.jsp</file>
             <file>file:/D:/SU24/A/src/java/AccountControll/HomeContronller.java</file>
             <file>file:/D:/SU24/A/src/java/dal/DurationDAO.java</file>
             <file>file:/D:/SU24/A/src/java/RecruiterControll/ConnectFreelancerControll.java</file>
             <file>file:/D:/SU24/A/src/java/Models/Company.java</file>
             <file>file:/D:/SU24/A/src/java/dal/FreelancerDAO.java</file>
+            <file>file:/D:/SU24/A/src/java/dal/DAO.java</file>
+            <file>file:/D:/SU24/A/web/views/JobforFreelancer.jsp</file>
             <file>file:/D:/SU24/A/src/java/RecruiterControll/CompletedProjectsControll.java</file>
             <file>file:/D:/SU24/A/web/views/recruiterDashboard.jsp</file>
             <file>file:/D:/SU24/A/src/java/RecruiterControll/ExpiredProjectsControll.java</file>
@@ -42,7 +46,7 @@
             <file>file:/D:/SU24/A/src/java/AccountControll/InputFreelancerProfileController.java</file>
             <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
             <file>file:/D:/SU24/A/web/views/login.jsp</file>
-            <file>file:/D:/SU24/A/web/views/home.jsp</file>
+            <file>file:/D:/SU24/A/src/java/AccountControll/UpdateProfile_Freelancer.java</file>
             <file>file:/D:/SU24/A/src/java/dal/HomeDAO.java</file>
         </group>
     </open-files>
