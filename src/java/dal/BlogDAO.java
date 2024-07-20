@@ -12,7 +12,7 @@ public class BlogDAO extends DBContext {
 
     public List<Blogs> selectAllBlogs() {
         List<Blogs> blogs = new ArrayList<>();
-        String sql = "SELECT * FROM [freelancer].[dbo].[Blogs] WHERE statusBlog = 1";
+        String sql = "SELECT * FROM Blogs WHERE statusBlog = 1";
         try (Connection conn = connection; PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 int id = rs.getInt("BlogID");
@@ -54,7 +54,7 @@ public class BlogDAO extends DBContext {
     }
     public List<Blogs> searchBlogs(String keyword) {
         List<Blogs> blogs = new ArrayList<>();
-        String sql = "SELECT * FROM [freelancer].[dbo].[Blogs] WHERE statusBlog = 1 AND (title LIKE ? OR description LIKE ?)";
+        String sql = "SELECT * FROM Blogs WHERE statusBlog = 1 AND (title LIKE ? OR description LIKE ?)";
         try (Connection conn = connection; PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, "%" + keyword + "%");
             stmt.setString(2, "%" + keyword + "%");
