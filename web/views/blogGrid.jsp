@@ -241,7 +241,7 @@
                                 <ul class="entry-meta meta-item">
                                     <li><i class="far fa-clock"></i> <c:out value="${blog.date_blog}"/></li>
                                 </ul>
-                                <h3 class="blog-title"><a href="BlogDetails?blogID=${blog.blogID}""><c:out value="${blog.title}"/></a></h3>
+                                <h3 class="blog-title"><a href="BlogDetails?blogID=${blog.blogID}"><c:out value="${blog.title}"/></a></h3>
                                 <p class="mb-0"><c:out value="${blog.description}"/></p>
                                 <div class="blog-read">
                                     <a href="BlogDetails?blogID=${blog.blogID}">Read More <i class="fas fa-arrow-right ms-1"></i></a>
