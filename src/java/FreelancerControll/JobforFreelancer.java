@@ -33,7 +33,7 @@ import java.util.List;
 
 @WebServlet(name = "JobforFreelancer", urlPatterns = {"/JobforFreelancer"})
 public class JobforFreelancer extends HttpServlet {
-private CategoriesDAO caDAO = new CategoriesDAO();
+ 
     private PostDAO pDao = new PostDAO();
     private JobTypeDAO jobDAO = new JobTypeDAO();
     private DurationDAO durationDAO = new DurationDAO();
@@ -56,9 +56,9 @@ private CategoriesDAO caDAO = new CategoriesDAO();
 
         FreelancerDAO f = new FreelancerDAO();
         Freelancer freelancer = f.getFreelancerById(freelancerID);
-
+        CategoriesDAO caDAO = new CategoriesDAO();
         List<PostBasic> posts = caDAO.getPostsByFreelancerSkillsPage(freelancerID, index);
-        List<Categories> categories = caDAO.getAllCategories();
+        List<Categories> categories = caDAO.getAllCategory();
         List<JobType> jobtype = jobDAO.getAllJobType();
         List<Duration> dura = durationDAO.getAllDuration();
         List<Post> listpost = pDao.getAllPosts();

@@ -135,7 +135,7 @@
                                             <div class="blog grid-blog">
                                                 <div class="blog-image">
                                                     <a href="BlogDetails?blogId=${blog.blogID}">
-                                                        <img class="img-fluid" src="assets/img/blog/${blog.image}">
+                                                        <img class="img-fluid" src="${blog.image}">
                                                     </a>
                                                 </div>
                                                 <div class="blog-content">
