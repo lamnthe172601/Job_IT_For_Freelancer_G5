@@ -795,7 +795,7 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="grid-blog blog-two aos" data-aos="fade-up">
                                     <div class="blog-image">
-                                        <a href="BlogDetails?blogID=${blog.blogID}"><img " class="img-fluid" src="assets/img/blog/${blog.image}" alt="Post Image"></a>
+                                        <a href="BlogDetails?blogID=${blog.blogID}"><img style="width: 350px; height: 203px; margin-left: 14px"  class="img-fluid" src="${blog.image}" alt="Post Image"></a>
                                     </div>
                                     <div class="blog-content">
                                         <div class="feature-time-blk">

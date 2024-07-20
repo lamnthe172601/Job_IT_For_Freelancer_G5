@@ -69,11 +69,12 @@ public class HomeContronller extends HttpServlet {
         request.setAttribute("listblogs", listBlogs);
 
         if (userID != null && userID.getRoleID().getRoleID() == 3) {
-            Freelancer freelancer = free.getFreelancerById(userID.getUserID());
+            int id = userID.getUserID();
+            Freelancer freelancer = free.getFreelancerById(id);
             List<Post> getPostsByFreelancerSkill = pDAO.getPostsByFreelancerSkill(freelancer.getFreelanceID());
             request.setAttribute("getPostsByFreelancerSkill", getPostsByFreelancerSkill);
             PostDAO pDao = new PostDAO();
-            int id = userID.getUserID();
+            
             DAO d = new DAO();
             int freelancerID = d.getFreelancerIDbyUserID(id);
             List<PostBasic> postFavourites = pDao.getAllFavPosts(freelancerID);

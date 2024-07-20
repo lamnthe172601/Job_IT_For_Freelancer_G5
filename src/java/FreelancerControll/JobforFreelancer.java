@@ -58,7 +58,7 @@ private CategoriesDAO caDAO = new CategoriesDAO();
         Freelancer freelancer = f.getFreelancerById(freelancerID);
 
         List<PostBasic> posts = caDAO.getPostsByFreelancerSkillsPage(freelancerID, index);
-        List<Categories> categories = caDAO.getAllCategories();
+        List<Categories> categories = caDAO.getAllCategory();
         List<JobType> jobtype = jobDAO.getAllJobType();
         List<Duration> dura = durationDAO.getAllDuration();
         List<Post> listpost = pDao.getAllPosts();

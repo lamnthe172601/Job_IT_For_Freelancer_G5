@@ -26,7 +26,7 @@ import java.util.List;
 public class FreelancerDAO extends DBContext {
 
     public Freelancer getFreelancerById(int id) {
-        String query = "SELECT * FROM freelancer WHERE userID = ? .";
+        String query = "SELECT * FROM freelancer WHERE userID = ? ";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
