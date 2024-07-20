@@ -51,6 +51,12 @@ public class FreelancerDAO extends DBContext {
         return null;
     }
     
+    public static void main(String[] args) {
+        FreelancerDAO da = new FreelancerDAO();
+        Freelancer m = da.getFreelancerByFreelancerId(2);
+        System.out.println(m);
+    }
+    
     public Freelancer getFreelancerByFreelancerId(int id) {
         String query = "SELECT * FROM freelancer WHERE freelanceID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {

@@ -73,7 +73,7 @@ public class HomeDAO extends DBContext {
                                                   SELECT ss.skill_set_name
                                                   FROM [freelancer].[dbo].[Skills] us
                                                   JOIN [freelancer].[dbo].[Skill_Set] ss ON us.skill_set_ID = ss.skill_set_ID
-                                                  WHERE us.freelancerID =1
+                                                  WHERE us.freelancerID =?
                                               ),
                                               
                                               MatchingPosts AS (
@@ -142,21 +142,21 @@ public class HomeDAO extends DBContext {
         List<Post> list = new ArrayList<>();
         String query = """
                        SELECT  top 6 * FROM [Post] p JOIN JobType j ON p.job_type_ID = j.jobID
-                                                                      JOIN Duration du ON p.durationID = du.durationID
-                                                                      JOIN Recruiter re ON p.recruiterID = re.recruiterID
-                                                                      JOIN [Categories] c ON p.caID = c.caID
-                                                                      JOIN Company co ON re.recruiterID = co.recruiterID
-                                                                     
-                                                                      WHERE p.recruiterID != 1 AND EXISTS (
-                                                                                                    SELECT 1
-                                                                                                    FROM [Post] your_post
-                                                                                                    WHERE your_post.recruiterID = 1
-                                                                                                      AND your_post.caID = p.caID ) and p.status = 1
-                                                                                            ORDER BY p.date_post DESC;""";
+                                                                                              JOIN Duration du ON p.durationID = du.durationID
+                                                                                               JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                                                                                               JOIN [Categories] c ON p.caID = c.caID
+                                                                                             JOIN Company co ON re.recruiterID = co.recruiterID
+                                                                                                                                                                 
+                                                                                              WHERE p.status = 1 AND EXISTS (
+                                                                                                SELECT 1
+                                                                                              FROM [Post] your_post
+                                                                                                WHERE your_post.recruiterID = ?
+                                                                                               AND your_post.caID = p.caID )  and p.checking =1
+                                                                                                  ORDER BY p.date_post DESC;""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, recruiterID);
-            ps.setInt(2, recruiterID);
+            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
@@ -171,6 +171,13 @@ public class HomeDAO extends DBContext {
         }
         return list;
     }
+    public static void main(String[] args) {
+        HomeDAO d = new HomeDAO();
+        List<Post> m = d.getOtherPostsBySimilarCategories(1);
+        for (Post post : m) {
+            System.out.println(post.toString());
+        }
+    }
 
     public List<SkillFreelancer> getTop8FreelancersByLatestRecruiterPostSkill(int id) {
         List<SkillFreelancer> list = new ArrayList<>();
@@ -178,7 +185,7 @@ public class HomeDAO extends DBContext {
                        WITH LatestPostSkills AS (
                                                   SELECT TOP 1 p.skill
                                                   FROM [freelancer].[dbo].[Post] p
-                                                  WHERE p.recruiterID = 1
+                                                  WHERE p.recruiterID = ?
                                                   ORDER BY p.postID DESC
                                               ),
                                               PostSkills AS (
@@ -229,8 +236,6 @@ public class HomeDAO extends DBContext {
         return list;
     }
 
-  
-
     public List<Blogs> getTopBlogs() {
         List<Blogs> blogs = new ArrayList<>();
         String query = """
@@ -255,14 +260,8 @@ public class HomeDAO extends DBContext {
         }
         return blogs;
     }
-    
-    public static void main(String[] args) {
-        HomeDAO dao = new HomeDAO();
-        List<Blogs> m = dao.getTopBlogs();
-        for (Blogs blogs : m) {
-            System.out.println(blogs.toString());
-        }
-    }
+
+   
 
     public static String getShortDescription(String description, int wordLimit) {
         if (description == null || description.isEmpty()) {

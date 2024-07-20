@@ -32,68 +32,6 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
 
-<!--        <style>
-            /* Modal CSS */
-            .modal {
-                display: none;
-                position: fixed;
-                z-index: 1;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                overflow: auto;
-                background-color: rgb(0,0,0);
-                background-color: rgba(0,0,0,0.4);
-            }
-
-            .modal-content {
-                background-color: #fefefe;
-                margin: 15% auto;
-                padding: 20px;
-                border: 1px solid #888;
-                width: 30%;
-                text-align: center;
-                border-radius: 10px;
-            }
-
-            .close-btn {
-                color: #aaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-                cursor: pointer;
-            }
-
-            .success-icon {
-                font-size: 50px;
-                color: green;
-            }
-
-            #okButton, #viewPostsButton {
-                margin-top: 20px;
-                padding: 10px 20px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            #okButton:hover, #viewPostsButton:hover {
-                background-color: #45a049;
-            }
-
-            .btn-item {
-                margin-top: 20px;
-            }
-
-            .error {
-                color: red;
-                margin-top: 5px;
-                font-size: 0.9em;
-            }
-        </style>-->
     </head>
     <body>
 
@@ -165,7 +103,7 @@
                                         <ul class="submenu">
                                             <li><a href="CreatePost">Create a new Post</a></li>
                                             <li><a href="myListJobProject">My List Post</a></li>
-                                            <li><a href="newsJobs">Reviews</a></li>
+                                           
 
                                         </ul>
                                     </li>

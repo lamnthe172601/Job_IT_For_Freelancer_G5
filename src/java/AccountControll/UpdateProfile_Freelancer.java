@@ -11,6 +11,7 @@ import Models.Freelancer;
 import Models.SkillSet;
 import Models.Skills;
 import Models.User;
+import dal.DAO;
 import dal.FreelancerDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -61,54 +62,69 @@ public class UpdateProfile_Freelancer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String date = request.getParameter("dob");
-        String gender = request.getParameter("gender");
-        String decscribe = request.getParameter("decscribe");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
-        String degree = request.getParameter("degree");
-        String educationName = request.getParameter("educationName");
-        String dateStart = request.getParameter("dateStart");
-        String dateEnd = request.getParameter("dateEnd");
+        try {
+            String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String date = request.getParameter("dob");
+            String gender = request.getParameter("gender");
+            String decscribe = request.getParameter("decscribe");
+            String degree = request.getParameter("degree");
+            String educationName = request.getParameter("educationName");
+            String dateStart = request.getParameter("dateStart");
+            String dateEnd = request.getParameter("dateEnd");
+            String experienceName = request.getParameter("experienceName");
+            String position = request.getParameter("your_project");
+            String startDate = request.getParameter("startDate");
+            String endDate = request.getParameter("endDate");
+            String experienceId = request.getParameter("experienceId");
 
-        String experienceName = request.getParameter("experienceName");
-        String position = request.getParameter("your_project");
-        String startDate = request.getParameter("startDate");
-        String endDate = request.getParameter("endDate");
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("account");
+            
+            if (user != null) {
+                int userID = user.getUserID();
+                DAO dao = new DAO();
+                
+                String[] selectedSkills = request.getParameterValues("skill");
+                List<String> skillList = (selectedSkills != null) ? Arrays.asList(selectedSkills) : null;
 
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("account");
-        int userID = user.getUserID();
-
-        if (user != null) {
-
-            String[] selectedSkills = request.getParameterValues("skill");
-            List<String> skillList = (selectedSkills != null) ? Arrays.asList(selectedSkills) : null;
-
-            try {
                 String uploadDirectory = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").length() - 10) + "web\\FolderImages\\ImagePost";
                 String imgFileName = userID + "_image.jpg";
                 String imgFilePath = uploadDirectory + "\\" + imgFileName;
                 String linkDB = "FolderImages/ImagePost/" + imgFileName;
+                
                 Part imgPart = request.getPart("profileImage");
-                imgPart.write(imgFilePath);
+                if (imgPart != null && imgPart.getSize() > 0) {
+                    imgPart.write(imgFilePath);
+                }
+
                 Freelancer freelan = freelancerDAO.getFreelancerById(userID);
                 freelancerDAO.updateFreelancer(firstname, lastname, linkDB, gender, date, decscribe, email, phone, userID, freelan.getFreelanceID());
                 freelancerDAO.updateskill(freelan.getFreelanceID(), skillList);
+
+                if(experienceId == null || experienceId.isEmpty()){
+                    dao.inputFreelancerExperiance2(experienceName, position, startDate, endDate, freelan.getFreelanceID());
+                } else {
+                    freelancerDAO.updateExperience(experienceName, position, startDate, endDate, freelan.getFreelanceID());
+                }
+
                 freelancerDAO.updateEducation(educationName, dateStart, dateEnd, degree, freelan.getFreelanceID());
-                freelancerDAO.updateExperience(experienceName, position, startDate, endDate, freelan.getFreelanceID());
-
+                
+                response.getWriter().write("{\"success\": true, \"message\": \"Profile updated successfully\"}");
                 Thread.sleep(2000);
-
-                response.sendRedirect("UpdateProfile?id=" + userID);
-
-            } catch (Exception e) {
-                response.getWriter().write(" " + e);
+            } else {
+                response.getWriter().write("{\"success\": false, \"message\": \"User not found in session\"}");
+                Thread.sleep(2000);
             }
-
+        } catch (ServletException | IOException | SQLException e) {
+            response.getWriter().write("{\"success\": false, \"message\": \"An error occurred: " + e.getMessage().replace("\"", "\\\"") + "\"}");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(UpdateProfile_Freelancer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
