@@ -30,7 +30,7 @@ public class SearchDAO extends DBContext {
                                                            JOIN Recruiter re ON p.recruiterID = re.recruiterID
                                                            JOIN Categories ca ON p.caID = ca.caID
                                 JOIN Company co ON re.recruiterID = co.recruiterID
-                        	where p.skill like ? or p.title like ? or ca.categories_name like ?
+                        	where (p.skill like ? or p.title like ? or ca.categories_name like ?) and (p.status = 1 and p.checking = 1)
                                 ORDER BY p.postID desc
                                 OFFSET ? rows fetch next 6 rows only;
                        """;
@@ -64,7 +64,7 @@ public class SearchDAO extends DBContext {
                                   JOIN Recruiter re ON p.recruiterID = re.recruiterID
                                    JOIN Categories ca ON p.caID = ca.caID
                                     JOIN Company co ON re.recruiterID = co.recruiterID
-                                    where p.skill like ? or p.title like ? or ca.categories_name like ?;
+                                    where (p.skill like ? or p.title like ? or ca.categories_name like ?) and (p.status = 1 and p.checking = 1);
                      """;
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
