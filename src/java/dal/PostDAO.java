@@ -938,9 +938,9 @@ public class PostDAO extends DBContext {
 
         String sql = """
                      SELECT COUNT(j.applyID) AS TotalApplications
-                     FROM Post p
-                     LEFT JOIN JobApply j ON p.postID = j.postID
-                     where p.postID = ?
+                                                               FROM Post p
+                                                               LEFT JOIN JobApply j ON p.postID = j.postID
+                                                               where p.postID = ? and j.status = 1
                      """;
         try {
             PreparedStatement ps = connection.prepareStatement(sql);

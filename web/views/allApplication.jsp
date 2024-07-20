@@ -51,55 +51,55 @@
                 font-size: 10px;
             }
 
-          .action-table-data {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+            .action-table-data {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-.download-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
+            .download-button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 8px;
+                border-radius: 50%;
+                transition: background-color 0.3s ease;
+            }
 
-.download-button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-}
+            .download-button:hover {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
 
-.download-button i {
-    color: #666;
-    font-size: 18px;
-    transition: color 0.3s ease;
-}
+            .download-button i {
+                color: #666;
+                font-size: 18px;
+                transition: color 0.3s ease;
+            }
 
-.download-button:hover i {
-    color: #333;
-}
+            .download-button:hover i {
+                color: #333;
+            }
 
-/* Tùy chỉnh tooltip */
-.download-button:hover::after {
-    content: attr(title);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+            /* Tùy chỉnh tooltip */
+            .download-button:hover::after {
+                content: attr(title);
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #333;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 4px;
+                font-size: 12px;
+                white-space: nowrap;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
 
-.download-button:hover::after {
-    opacity: 1;
-}
+            .download-button:hover::after {
+                opacity: 1;
+            }
         </style>
     </head>
 
@@ -123,7 +123,7 @@
                                 <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                             </a>
                         </div>
-                        <div class="main-menu-wrapper">
+                       <div class="main-menu-wrapper">
                             <div class="menu-header">
                                 <a href="home" class="menu-logo">
                                     <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
@@ -138,12 +138,10 @@
 
                                 </li>
 
-                                <c:if
-                                    test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
                                     <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Freelancer<i
-                                                class="fas fa-chevron-down"></i></a>
-                                        <ul class="submenu">
+                                        <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu"> 
 
                                             <li><a href="PostFavourites">Jobs Favourites</a></li>
 
@@ -153,24 +151,21 @@
                                     </li>
 
                                     <li class="has-submenu">
-                                        <a href="javascript:void(0);">For Jobs<i
-                                                class="fas fa-chevron-down"></i></a>
+                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="ListPost">Jobs List</a></li>
-                                            <li><a href="SreachJob">Find Jobs</a></li>
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
+                                            <li><a href="SreachJob">Find Jobs</a></li>  
                                             <li><a href="company">Company</a></li>
                                         </ul>
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
                                     <li class="has-submenu">
-                                        <a href="javascript:void(0);">Find Freelancer<i
-                                                class="fas fa-chevron-down"></i></a>
+                                        <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">Top Freelancer</a></li>
-                                            <li><a href="newsJobs">Skills</a></li>
+                                             <li><a href="ListFreelancer">List Freelancer</a></li>
 
                                         </ul>
                                     </li>
@@ -179,21 +174,19 @@
                                         <ul class="submenu">
 
                                             <li><a href="myListJobProject">My List Post</a></li>
-                                            <li><a href="newsJobs">Reviews</a></li>
+                                            
 
                                         </ul>
                                     </li>
                                 </c:if>
                                 <li class="has-submenu">
                                     <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
+                                    <ul class="submenu">                                                                           
                                         <li><a href="About">About us</a></li>
                                         <li><a href="ContactUs">Contact us</a></li>
                                     </ul>
                                 </li>
-                                <li class="has-submenu">
-                                <li><a href="blogGrid">Blog</a></li>
-                                </li>
+                                <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>
 
 
                             </ul>
@@ -647,7 +640,7 @@
                                                                                            class="form-control"
                                                                                            id="emailSubject"
                                                                                            name="emailSubject"
-                                                                                           placeholder="Enter email subject"
+                                                                                           value="Mail thông báo kết quả vòng đơn Apply tại ${listapply.post.title}"
                                                                                            required>
                                                                                 </div>
                                                                                 <div class="form-group">

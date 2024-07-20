@@ -41,7 +41,7 @@
             <ul class="submenu">
                 <li><a href="CreatePost">Create a new Project</a></li>
                 <li><a href="myListJobProject">My list project</a></li>
-                <li><a href="newsJobs">Reviews</a></li>
+                
 
             </ul>
         </li>
