@@ -204,7 +204,7 @@
                                                 <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span></a>
                                         </h4>
                                         <div id="collapseOne" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${cate}" var="category" varStatus="loop">
+                                            <c:forEach items="${categories}" var="category" varStatus="loop">
                                                 <div style="${loop.index > 3 ? 'display:none;' : ''}" class="category-item">
                                                     <label class="custom_check">
                                                         <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
@@ -214,7 +214,7 @@
                                             </c:forEach>
 
                                             <div id="collapseOnes" class="collapse" data-bs-parent="#accordionExample1">
-                                                <c:forEach items="${cate}" var="category" begin="4">
+                                                <c:forEach items="${categories}" var="category" begin="4">
                                                     <div class="category-item">
                                                         <label class="custom_check">
                                                             <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
@@ -399,15 +399,15 @@
                                                 <div class="counter-stats">
                                                     <ul>
                                                         <li>
-                                                            <h5>Duration</h5>
+                                                            <h5>Work Time</h5>
                                                             <h3 class="counter-value">${post.durationID.durationName}</h3>
                                                         </li>
                                                         <li>
-                                                            <h5>Proposals</h5>
+                                                            <h5>Quantity</h5>
                                                             <h3 class="counter-value">${post.quantity}</h3>
                                                         </li>
                                                         <li>
-                                                            <h5>Job Type</h5>
+                                                            <h5>Level</h5>
                                                             <h3 class="counter-value"><span class="jobtype">${post.jobTypeID.jobName}</span></h3>
                                                         </li>
                                                     </ul>

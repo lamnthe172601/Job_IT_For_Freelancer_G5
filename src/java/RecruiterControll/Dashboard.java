@@ -32,6 +32,9 @@ public class Dashboard extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
+        if (user == null) {
+                request.getRequestDispatcher("views/404Page.jsp").forward(request, response);
+            }
         RecruiterDAO reDAO = new RecruiterDAO();
         Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
         int numberPost = reDAO.getNumberPostbyRecruiter(re.getRecruiterID());

@@ -77,6 +77,7 @@ public class ViewFreelancerProfileControll extends HttpServlet {
                 request.setAttribute("experience", experience);
                 request.setAttribute("skills", skills);
                 request.getRequestDispatcher("views/FreelancerProfile.jsp").forward(request, response);
+            } else {
             } 
         } catch (SQLException ex) {
             Logger.getLogger(ViewProfile_Freelancer.class.getName()).log(Level.SEVERE, null, ex);

@@ -8,7 +8,6 @@ import Models.Freelancer;
 import Models.User;
 import dal.DAO;
 import dal.FavoritesDAO;
-import dal.FreelancerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,9 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
+
 
 /**
  *
@@ -69,6 +66,9 @@ public class DeleteRecruiterFavouritesControll extends HttpServlet {
             HttpSession session = request.getSession();
             Object u = session.getAttribute("account");
             User user = (User) u;
+            if (user == null) {
+                request.getRequestDispatcher("views/404Page.jsp").forward(request, response);
+            }
             DAO d = new DAO();
             int userId = user.getUserID();
             int recruiterID = d.getRecruiterIDbyUserID(userId);
