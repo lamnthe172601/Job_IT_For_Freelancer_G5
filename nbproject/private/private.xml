@@ -3,12 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/blogGrid.jsp</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/blogGridControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/SearchDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/PostDetailsControll.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/searchBlog.jsp</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/SearchFreelancerFvrControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/blogGrid.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/blogGridControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/AllListPostControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/SearchBlogController.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/SearchInHomeControll.java</file>
-            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/HomeContronller.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPostSearch.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/PostDAO.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
         </group>
         <group name="SWP391">
             <file>file:/D:/SU24/A/src/java/dal/RecruiterDAO.java</file>

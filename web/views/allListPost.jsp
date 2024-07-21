@@ -64,6 +64,46 @@
                 width: 100%;
             }
 
+            .reporrt-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                z-index: 1050;
+            }
+
+            .close-wrap {
+                float: right;
+                cursor: pointer;
+            }
+
+            .button {
+                cursor: pointer;
+            }
+
+
+            #closeModal {
+                background-color: #FF5B37; /* Nền trong suốt */
+                color: white; /* Màu chữ */
+                border: 2px solid #333; /* Viền đậm */
+                width: 30px; /* Độ rộng */
+                height: 30px; /* Chiều cao */
+                border-radius: 50%; /* Để làm hình tròn */
+                display: flex; /* Sử dụng flexbox để căn giữa */
+                justify-content: center; /* Căn giữa theo chiều ngang */
+                align-items: center; /* Căn giữa theo chiều dọc */
+                cursor: pointer; /* Con trỏ khi di chuột vào */
+                outline: none; /* Loại bỏ đường viền khi được focus */
+                font-size: 20px; /* Kích thước chữ */
+                position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
+            }
+            .titlepost{
+                max-width: 300px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         </style>
 
     </head>
@@ -401,7 +441,7 @@
                                                         <img style="width: 239px; height: 139px;" src="${list.image}" alt="author">                                                       
                                                     </div>
                                                     <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
+                                                        <div class="author-location titlepost"><a>${list.title} </a></div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>

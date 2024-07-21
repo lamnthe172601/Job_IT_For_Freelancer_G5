@@ -63,7 +63,13 @@
                 justify-content: center;
                 width: 100%;
             }
-
+            .titlepost{
+                max-width: 250px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-left: 15px;
+            }
         </style>
 
     </head>
@@ -390,7 +396,7 @@
                                             </div>
                                             <div class="freelance-content">
                                                 <div style="padding-bottom: 30px; padding-top: 16px">
-                                                    <div style="margin-top: 10px;" class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
+                                                    <div style="margin-top: 10px;" class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.expired}</div>
                                                     
                                                     
 
@@ -401,7 +407,7 @@
                                                         <img style="width: 239px; height: 139px;" src="${list.image}" alt="author">                                                       
                                                     </div>
                                                     <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
+                                                        <div class="author-location titlepost"><a>${list.title} </a></div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
@@ -439,15 +445,15 @@
                                                 <div class="counter-stats">
                                                     <ul>
                                                         <li>
-                                                            <h5>Duration</h5>
+                                                            <h5>Work Time</h5>
                                                             <h3 class="counter-value">${list.durationID.durationName}</h3>
                                                         </li>
                                                         <li>
-                                                            <h5>Proposals</h5>
+                                                            <h5>Quantity</h5>
                                                             <h3 class="counter-value">${list.quantity}</h3>
                                                         </li>
                                                         <li>
-                                                            <h5>Job Type</h5>
+                                                            <h5>Level</h5>
                                                             <h3 class="counter-value"><span class="jobtype">${list.jobTypeID.jobName}</span></h3>
                                                         </li>
                                                     </ul>
