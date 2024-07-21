@@ -488,6 +488,7 @@ public class PostDAO extends DBContext {
                                               	inner join Categories c on c.caID=p.caID
                                               	inner join Recruiter r on r.recruiterID=p.recruiterID
                                               	inner join Company co on co.recruiterID=p.recruiterID
+                                                where status=1 and checking=1
                                               	order by p.postID desc;
                        """;
         try {

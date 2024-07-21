@@ -400,7 +400,7 @@
                                                         </div>
                                                         <div class="profile-name">
 
-                                                            <div class="author-location titlepost"><a ">${p.title} </a></div>
+                                                            <div class="author-location titlepost"><a>${p.title} </a></div>
                                                         </div>
                                                         <div class="freelance-info">
                                                             <h3><a href="javascript:void(0);">${p.caID.categoriesName}</a></h3>

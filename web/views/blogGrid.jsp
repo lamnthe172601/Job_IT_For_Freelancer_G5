@@ -48,6 +48,29 @@
                 white-space: pre-wrap; /* Giữ khoảng trắng và xuống dòng khi cần */
             }
 
+            .pagination {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .pagination a, .pagination span {
+                margin: 0 5px;
+                padding: 10px 20px;
+                border: 1px solid #ddd;
+                text-decoration: none;
+                color: #333;
+            }
+
+            .pagination .current-page {
+                background-color: #007bff;
+                color: white;
+                border: 1px solid #007bff;
+            }
+
+            .pagination a:hover {
+                background-color: #ddd;
+            }
         </style>
     </head>
     <body>
@@ -175,107 +198,143 @@
                             </ul>
                         </div>
                         <ul style="margin-left: 5px;" class="nav header-navbar-rht">                       
-                                <li>
-                                    <form action="searchBlog" method="get" style=" display: flex;
-                                          align-items: center;">
-                                        <c:if test="${txtSearch == null}">
-                                            <input type="text" name="query" placeholder="Search Blog" style="padding: 5px;margin-right: 5px; border-radius: 10px; width: 250px;">
-                                        </c:if>
-                                        <c:if test="${txtSearch != null}">
-                                            <input type="text" name="query" value="${txtSearch}" style="padding: 5px;margin-right: 5px; border-radius: 10px; width: 250px;">
-                                        </c:if>
-                                        <button type="submit" style="display: flex;
-                                                align-items: center;
-                                                padding: 5px 10px;
-                                                background-color: rgb(230, 84, 37);
-                                                color: white;
-                                                border: none;
-                                                cursor: pointer;
-                                                margin-right: 5px;
-                                                border-radius: 10px;">
-                                            <i class="feather-search me-1"></i>Search
-                                        </button>
-                                    </form>
-                                </li>                            
+                            <li>
+                                <form action="searchBlog" method="get" style=" display: flex;
+                                      align-items: center;">
+                                    <c:if test="${txtSearch == null}">
+                                        <input type="text" name="query" placeholder="Search Blog" style="padding: 5px;margin-right: 5px; border-radius: 10px; width: 250px;">
+                                    </c:if>
+                                    <c:if test="${txtSearch != null}">
+                                        <input type="text" name="query" value="${txtSearch}" style="padding: 5px;margin-right: 5px; border-radius: 10px; width: 250px;">
+                                    </c:if>
+                                    <button type="submit" style="display: flex;
+                                            align-items: center;
+                                            padding: 5px 10px;
+                                            background-color: rgb(230, 84, 37);
+                                            color: white;
+                                            border: none;
+                                            cursor: pointer;
+                                            margin-right: 5px;
+                                            border-radius: 10px;">
+                                        <i class="feather-search me-1"></i>Search
+                                    </button>
+                                </form>
+                            </li>                            
 
                         </ul>
-                  </nav>      
+                    </nav>      
                 </div>  
-         </header>       
+            </header>       
         </div>
-    
 
-    <div class="bread-crumb-bar">
-        <div class="container">
-            <div class="row align-items-center inner-banner">
-                <div class="col-md-12 col-12 text-center">
-                    <div class="breadcrumb-list">
-                        <h2>Blog Grid</h2>
-                        <nav aria-label="breadcrumb" class="page-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="home">Home</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Blog Grid</li>
 
-                            </ol>
-                        </nav>
+        <div class="bread-crumb-bar">
+            <div class="container">
+                <div class="row align-items-center inner-banner">
+                    <div class="col-md-12 col-12 text-center">
+                        <div class="breadcrumb-list">
+                            <h2>Blog Grid</h2>
+                            <nav aria-label="breadcrumb" class="page-breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="home">Home</a></li>
+                                    <li class="breadcrumb-item" aria-current="page">Blog Grid</li>
+
+                                </ol>
+                            </nav>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="content">
-        <div class="container">
-            <div class="row blog-grid-row">
-                <c:forEach var="blog" items="${listBlog}">
-                    <div class="col-md-4 col-sm-12">
-                        <div class="blog grid-blog">
-                            <div class="blog-image">
-                                <a href="BlogDetails?blogID=${blog.blogID}">
-                                    <img class="img-fluid" src="${blog.image}">
-                                </a>
-                            </div>
-                            <div class="blog-content">
-                                <ul class="entry-meta meta-item">
-                                    <li><i class="far fa-clock"></i> <c:out value="${blog.date_blog}"/></li>
-                                </ul>
-                                <h3 class="blog-title"><a href="BlogDetails?blogID=${blog.blogID}"><c:out value="${blog.title}"/></a></h3>
-                                <p class="mb-0"><c:out value="${blog.description}"/></p>
-                                <div class="blog-read">
-                                    <a href="BlogDetails?blogID=${blog.blogID}">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+        <div class="content">
+            <div class="container">
+                <div class="row blog-grid-row">
+                    <c:set var="list" value="${requestScope.listBlog}" />
+                    <c:set var="tongSoBaiDang" value="${requestScope.countBlog}" />
+                    <c:set var="baiDangTrenMotTrang" value="${requestScope.blogInPage}" />
+                    <c:set var="tongSoTrang" value="${requestScope.totalBlog}" />
+                    <c:set var="trangHienTai" value="${requestScope.indexBlogPage}" />
+
+                    <%-- Tính chỉ số bắt đầu và kết thúc cho danh sách bài đăng hiển thị trên trang hiện tại --%>
+                    <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
+                    <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
+                        <c:forEach items="${list}" var="blog" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="blog grid-blog">
+                                <div class="blog-image">
+                                    <a href="BlogDetails?blogID=${blog.blogID}">
+                                        <img class="img-fluid" src="${blog.image}">
+                                    </a>
                                 </div>
-                            </div>
+                                <div class="blog-content">
+                                    <ul class="entry-meta meta-item">
+                                        <li><i class="far fa-clock"></i> <c:out value="${blog.date_blog}"/></li>
+                                    </ul>
+                                    <h3 class="blog-title"><a href="BlogDetails?blogID=${blog.blogID}"><c:out value="${blog.title}"/></a></h3>
+                                    <p class="mb-0"><c:out value="${blog.description}"/></p>
+                                    <div class="blog-read">
+                                        <a href="BlogDetails?blogID=${blog.blogID}">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                                    </div>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
+                        <div class="pagination-container">
+                                <c:if test="${tongSoTrang > 1}">
+                                    <nav>
+                                        <ul class="pagination">
+                                            <c:if test="${trangHienTai > 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="blogGrid?page=${trangHienTai - 1}" aria-label="Trước">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach var="i" begin="1" end="${tongSoTrang}">
+                                                <li class="page-item ${i == trangHienTai ? 'active' : ''}">
+                                                    <a class="page-link" href="blogGrid?page=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <c:if test="${trangHienTai < tongSoTrang}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="blogGrid?page=${trangHienTai + 1}" aria-label="Sau">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </ul>
+                                    </nav>
+                                </c:if>
+                            </div>
             </div>
         </div>
+
+        <jsp:include page="footter.jsp" />
     </div>
 
-    <jsp:include page="footter.jsp" />
-</div>
+    <script src="assets/js/jquery-3.7.1.min.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
+    <script src="assets/js/bootstrap.bundle.min.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
+    <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
+    <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
+    <script src="assets/js/script.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
+    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="8157e937c31e3b17dd795771-|49" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const maxLength = 50;
+            const descriptions = document.querySelectorAll(".blog-content p.mb-0");
 
-<script src="assets/js/jquery-3.7.1.min.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
-<script src="assets/js/bootstrap.bundle.min.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
-<script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
-<script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
-<script src="assets/js/script.js" type="8157e937c31e3b17dd795771-text/javascript"></script>
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="8157e937c31e3b17dd795771-|49" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const maxLength = 50;
-        const descriptions = document.querySelectorAll(".blog-content p.mb-0");
-
-        descriptions.forEach(function (description) {
-            const text = description.innerText;
-            if (text.length > maxLength) {
-                description.innerText = text.substring(0, maxLength) + "...";
-            }
+            descriptions.forEach(function (description) {
+                const text = description.innerText;
+                if (text.length > maxLength) {
+                    description.innerText = text.substring(0, maxLength) + "...";
+                }
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>

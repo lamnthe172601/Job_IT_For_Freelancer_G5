@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 public class SearchBlogController extends HttpServlet {
    private static final long serialVersionUID = 1L;
@@ -49,9 +50,37 @@ public class SearchBlogController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
         blogDAO = new BlogDAO();
         String query = request.getParameter("query");
+        
+        if (query == null) {
+            query = (String) session.getAttribute("blogSearch");
+        } else {
+            String txt = (String) session.getAttribute("blogSearch");
+            if (txt != null) {
+                session.removeAttribute("blogSearch");
+                session.setAttribute("blogSearch", query);
+            } else {
+                session.setAttribute("blogSearch", query);
+            }
+
+        }
         List<Blogs> blogs = blogDAO.searchBlogs(query);
+        int countResult = blogs.size();
+        int resultInPage = 12;
+        int totalResult = (int) Math.ceil((double) countResult / resultInPage);
+        int index = 1;
+        String indexPage = request.getParameter("page");
+        if (indexPage != null && !indexPage.isEmpty()) {
+            index = Integer.parseInt(indexPage);
+        }
+        request.setAttribute("countResult", countResult);
+        request.setAttribute("resultInPage", resultInPage);
+        request.setAttribute("totalResult", totalResult);
+        request.setAttribute("indexBlogResult", index);
+        request.setAttribute("blogsearch", query);
+        
         request.setAttribute("blogs", blogs);
         request.getRequestDispatcher("views/searchBlog.jsp").forward(request, response);
     } 
