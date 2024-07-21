@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Kofejob - Bootstrap Admin HTML Template</title>
+        <title>Kofejob</title>
 
         <link rel="shortcut icon" href="adminAssets/img/favicon.png">
 

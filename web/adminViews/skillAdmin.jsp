@@ -1,63 +1,92 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
 <!DOCTYPE html>
 <html lang="en">
+
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/providers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:41:24 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Kofejob - Bootstrap Admin HTML Template</title>
+        <title>Kofejob</title>
+
         <link rel="shortcut icon" href="adminAssets/img/favicon.png">
+
         <link rel="stylesheet" href="adminAssets/css/bootstrap.min.css">
+
         <link rel="stylesheet" href="adminAssets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="adminAssets/plugins/fontawesome/css/all.min.css">
-        <link rel="stylesheet" href="adminAssets/css/feather.css">
-        <link rel="stylesheet" href="adminAssets/plugins/select2/css/select2.min.css">
-        <link rel="stylesheet" href="adminAssets/css/bootstrap-datetimepicker.min.css">
-        <link rel="stylesheet" href="adminAssets/plugins/datatables/datatables.min.css">
-        <link rel="stylesheet" href="adminAssets/css/style.css">
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="adminAssets/js/notification.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <!--        <script>
-                    $(document).ready(function () {
-                        $('#skill, #status').on('keyup change', function () {
-                            filterSkills();
-                        });
-                    });
-        
-                    function filterSkills() {
-                        var skill = $('#skill').val();
-                        var status = $('#status').val();
-        
-                        $.ajax({
-                            url: 'skillAdmin',
-                            type: 'POST',
-                            data: {
-                                skill: skill,
-                                status: status
-                            },
-                            success: function (data) {
-                                $('#skillTableBody').html($(data).find('#skillTableBody').html());
-                            }
-                        });
-                    }
-                </script>-->
+        <link rel="stylesheet" href="adminAssets/css/feather.css">
+
+        <link rel="stylesheet" href="adminAssets/plugins/select2/css/select2.min.css">
+
+        <link rel="stylesheet" href="adminAssets/css/bootstrap-datetimepicker.min.css">
+
+        <link rel="stylesheet" href="adminAssets/plugins/datatables/datatables.min.css">
+
+        <link rel="stylesheet" href="adminAssets/css/recruiter.css">
+        <link rel="stylesheet" href="adminAssets/css/style.css">
+        <style>
+            /* Các kiểu dáng cho form */
+            .form-control {
+                border-radius: 0.25rem;
+            }
+
+            .form-label {
+                font-weight: bold;
+            }
+            .modal-header {
+                border-bottom: 0;
+            }
+
+            .form-control-static {
+                padding-top: calc(0.375rem + 1px);
+                padding-bottom: calc(0.375rem + 1px);
+                margin-bottom: 0;
+                min-height: calc(1.5em + 0.75rem + 2px);
+            }
+
+            .bg-light {
+                background-color: #f8f9fa;
+            }
+
+            .fw-bold {
+                font-weight: bold;
+            }
+            .error-message {
+                color: red;
+                font-size: 0.8em;
+                margin-top: 5px;
+            }
+            .is-invalid {
+                border-color: red;
+            }
+            .is-valid {
+                border-color: green;
+            }
+        </style>
+
     </head>
     <body>
+
         <div class="main-wrapper">
+
             <%@ include file="headerAdmin.jsp" %>
             <%@ include file="sidebar.jsp" %>
+
+
             <div class="page-wrapper">
                 <div class="content container-fluid">
-                    <div class="page-header">
+                    <!-- Page Header -->
+                    <div class="page-header user-active">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="page-title">Skills</h3>
+                                <h3 class="page-title">All Skills</h3>
+                                <p>Total <span>${totalSkill}</span> Skill</p>
                             </div>
                             <div class="col-auto">
-                                <a href="javascript:void(0);" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-category">
+                                <a href="javascript:void(0);" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-blog">
                                     <i class="fas fa-plus"></i>
                                 </a>
                                 <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
@@ -66,49 +95,41 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card filter-card" id="filter_inputs" style="display: none;">
-                        <div class="card-body pb-0">
-                            <form action="skillAdmin" method="post" id="filterForm">
-                                <div class="row filter-row">
-                                    <div class="col-sm-6 col-md-3">
-                                        <div class="form-group">
-                                            <label>Skill</label>
-                                            <input class="form-control" type="text" name="skill" id="skill">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-3">
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select class="form-control" name="status" id="status">
-                                                <option value="">All</option>
-                                                <option value="1">Active</option>
-                                                <option value="0">Inactive</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <button type="button" class="btn btn-secondary" id="resetFilter">Reset</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
 
+                    <!-- Filter Section -->
+                    <div class="filter-section" style="display: none">
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="filter-title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="filter-title" placeholder="Enter blog title">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="filter-categories" class="form-label">Categories</label>
+                                <select class="form-select" id="filter-categories" style="height: 46px;">
+                                    <option value="">All</option>
+                                    <option value="Language">Language</option>
+                                    <option value="Database">Database</option>
+                                    <option value="Domain">Domain</option>
+                                    <option value="Orther">Orther</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="filter-status" class="form-label">Status</label>
+                                <select class="form-select" id="filter-status" style="height: 46px;">
+                                    <option value="">All</option>
+                                    <option value="active">Active</option>
+                                    <option value="trash">Trash</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary" id="resetFilter">Reset</button>
+                            </div>
                         </div>
                     </div>
 
-
-                    <%
-                        String error = (String) session.getAttribute("error");
-                        if (error != null) {
-                    %>
-                    <div class="alert alert-danger" role="alert">
-                        <%= error %>
-                    </div>
-                    <%
-                            session.removeAttribute("error");
-                        }
-                    %> 
+                    <!-- Skills Table -->
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -117,309 +138,378 @@
                                         <table class="table table-center table-hover mb-0 datatable">
                                             <thead>
                                                 <tr>
+                                                    <th>No.</th>
                                                     <th>Skill</th>
-                                                    <th>Description</th>
+                                                    <th>Categories</th>
                                                     <th>Status</th>
                                                     <th class="text-end">Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="skillTableBody">
-                                                <%
-                                                    List<Map<String, String>> skillSets = (List<Map<String, String>>) request.getAttribute("skillSets");
-                                                    if (skillSets != null && !skillSets.isEmpty()) {
-                                                        for (Map<String, String> skillSet : skillSets) {
-                                                            String status = skillSet.get("statusSkill").equals("1") ? "Active" : "Inactive";
-                                                            String statusClass = skillSet.get("statusSkill").equals("1") ? "text-success" : "text-danger";
-                                                %>
-                                                <tr>
-                                                    <td><%= skillSet.get("skill_set_name") %></td>
-                                                    <td><%= skillSet.get("description") %></td>
-                                                    <td class="<%= statusClass %>"><%= status %></td>
-                                                    <td class="text-end">
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"
-                                                           onclick="editSkill('<%= skillSet.get("skill_set_ID") %>', '<%= skillSet.get("skill_set_name") %>', '<%= skillSet.get("description") %>')">
-                                                            <i class="far fa-edit"></i>
-                                                        </a>
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"
-                                                           onclick="document.getElementById('deleteSkillSetID').value = '<%= skillSet.get("skill_set_ID") %>'">
-                                                            <i class="far fa-trash-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <%
-                                                        }
-                                                    } else {
-                                                %>
-                                                <tr>
-                                                    <td colspan="4" class="text-center">No matching results found</td>
-                                                </tr>
-                                                <%
-                                                    }
-                                                %>
-                                            </tbody>
+                                            <tbody>
+                                                <c:forEach items="${listSkill}" var="skill" varStatus="loop">
+                                                    <tr id="skill-row-${skill.getSkillID()}">
+                                                        <td>${loop.index + 1}</td>
+                                                        <td>
+                                                            <h2 class="table-avatar title">
+                                                                <a href="javascript:void(0);">${skill.getSkillName()}</a>
+                                                            </h2>
+                                                        </td>
+                                                        <td>
+                                                            <h2 class="table-avatar title">
+                                                                <a href="javascript:void(0);">${skill.getExpertise().getExpertiseName()}</a>
+                                                            </h2>
+                                                        </td>
+                                                        <td class="test1">
+                                                            <c:if test="${skill.isStatus()}">
+                                                                <a href="javascript:void(0);" class="user-active-btn status">Active</a>
+                                                            </c:if>
+                                                            <c:if test="${!skill.isStatus()}">
+                                                                <a href="javascript:void(0);" class="user-inactive-btn status">Trash</a>
+                                                            </c:if>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#update-blog-modal${skill.getSkillID()}">
+                                                                <i class="far fa-edit"></i>
+                                                            </a>
+                                                            <c:if test="${skill.isStatus()}">
+                                                                <button class="btn btn-sm btn-danger delete-blog-btn btn-status" data-skill-id="${skill.getSkillID()}">
+                                                                    <i class="far fa-trash-alt"></i>
+                                                                </button>
+                                                                <button style="display: none" class="btn btn-sm btn-success activate-blog-btn btn-status" data-skill-id="${skill.getSkillID()}">
+                                                                    <i class="fas fa-check"></i>
+                                                                </button>
+                                                            </c:if>
+                                                            <c:if test="${!skill.isStatus()}">
+                                                                <button class="btn btn-sm btn-success activate-blog-btn btn-status" data-skill-id="${skill.getSkillID()}">
+                                                                    <i class="fas fa-check"></i>
+                                                                </button>
+                                                                <button style="display: none" class="btn btn-sm btn-danger delete-blog-btn btn-status" data-skill-id="${skill.getSkillID()}">
+                                                                    <i class="far fa-trash-alt" hidden=""></i>
+                                                                </button>
+                                                            </c:if>
+                                                            <a href="javascript:void(0);" class="btn btn-sm btn-info me-2 view-details-btn" data-bs-toggle="modal" data-bs-target="#view-blog-details-modal${skill.getSkillID()}">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>  
+                                                    <!-- Modal for View skill Details -->
+                                                <div class="modal fade" id="view-blog-details-modal${skill.getSkillID()}" tabindex="-1" aria-labelledby="viewBlogDetailsModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-info text-white">
+                                                                <h5 class="modal-title" id="viewBlogDetailsModalLabel">
+                                                                    <i class="fas fa-info-circle me-2"></i>Skill Details
+                                                                </h5>
+                                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-6">
+                                                                        <label class="form-label fw-bold">Skill Name</label>
+                                                                        <p class="form-control-static">${skill.getSkillName()}</p>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label class="form-label fw-bold">Category</label>
+                                                                        <p class="form-control-static">${skill.getExpertise().getExpertiseName()}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label fw-bold">Description</label>
+                                                                    <div class="border rounded p-3 bg-light">
+                                                                        <p class="mb-0">${skill.getDescription()}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
+                                                <!-- Modal for Updating Blog -->
+                                                <div class="modal fade" id="update-blog-modal${skill.getSkillID()}" tabindex="-1" aria-labelledby="updateBlogModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-primary text-white">
+                                                                <h5 class="modal-title" id="updateBlogModalLabel">
+                                                                    <i class="fas fa-edit me-2"></i>Update Skill
+                                                                </h5>
+                                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form id="update-blog-form-${skill.getSkillID()}" data-validate="blog-form" method="post" action="skillAdmin">
+                                                                    <input type="hidden" name="skillId" value="${skill.getSkillID()}">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="blog-title-${skill.getSkillID()}" class="form-label">Skill Name</label>
+                                                                            <input type="text" class="form-control" name="skillName" id="blog-title-${skill.getSkillID()}" value="${skill.getSkillName()}" required>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for="filter-categories-${skill.getSkillID()}" class="form-label">Category</label>
+                                                                            <select class="form-select" id="filter-categories-${skill.getSkillID()}" name="categoriesId">
+                                                                                <option value="1" ${skill.getExpertise().getExpertiseName() == 'Language' ? 'selected' : ''}>Language</option>
+                                                                                <option value="2" ${skill.getExpertise().getExpertiseName() == 'Database' ? 'selected' : ''}>Database</option>
+                                                                                <option value="3" ${skill.getExpertise().getExpertiseName() == 'Domain' ? 'selected' : ''}>Domain</option>
+                                                                                <option value="4" ${skill.getExpertise().getExpertiseName() == 'Other' ? 'selected' : ''}>Other</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="blog-description-${skill.getSkillID()}" class="form-label">Description</label>
+                                                                        <textarea class="form-control" id="blog-description-${skill.getSkillID()}" name="description" rows="5" required>${skill.getDescription()}</textarea>
+                                                                    </div>
+                                                                    <div class="text-end">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" class="btn btn-primary" name="mode" value="update">Update Skill</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </c:forEach>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>                                                         
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="modal fade custom-modal" id="add-category" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
+
+        </div>      
+        <!-- Modal -->
+        <div class="modal fade" id="add-blog" tabindex="-1" aria-labelledby="addBlogModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add New Skill</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                        <h5 class="modal-title" id="addBlogModalLabel">Add New Skill</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form name="addSkillForm" action="addSkill" method="post" onsubmit="return validateAddForm();">                            
-                            <div class="form-group">
-                                <label>Skill Name</label>
-                                <input type="text" name="skillSetName" class="form-control" required>
+                        <form id="add-blog-form" data-validate="blog-form" method="post" action="skillAdmin">
+
+                            <div class="mb-3">
+                                <label for="blog-title" class="form-label">Skill</label>
+                                <input type="text" class="form-control"name="skillName" id="blog-title" required>
                             </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea name="description" class="form-control" required></textarea>
-                            </div>
-                            <div id="addSkillError" class="error-message" style="color:red;">
-                                <%= request.getAttribute("addSkillError") != null ? request.getAttribute("addSkillError") : "" %>
-                            </div>
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade custom-modal" id="edit-category" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Skill</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <form name="editSkillForm" action="updateSkill" method="post" onsubmit="return validateEditForm();">
-                            <input type="hidden" id="editSkillSetID" name="skillSetID" >
-                            <div class="form-group">
-                                <label>Skill Name</label>
-                                <input type="text" id="editSkillSetName" name="skillSetName" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea id="editDescription" name="description" class="form-control" required></textarea>
-                            </div>
-                            <div id="editSkillError" class="error-message" style="color:red;">
-                                <%= request.getAttribute("editSkillError") != null ? request.getAttribute("editSkillError") : "" %>
-                            </div>
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal custom-modal fade" id="delete_category" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="form-header">
-                            <p>Are you sure you want to delete this skill?</p>
-                        </div>
-                        <form action="deleteSkill" method="post">
-                            <input type="hidden" id="deleteSkillSetID" name="skillSetID">
-                            <div class="modal-btn delete-action">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <button type="submit" style="width: 100%" class="btn btn-primary continue-btn">Yes</button>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-                                    </div>
+                            <div class="col-md-3 mb-3" >
+                                <label for="filter-categories" class="form-label" >Categories</label>
+                                <select class="form-select" name="categoriesId" style="height: 46px;">                                    
+                                    <option value="1">Language</option>
+                                    <option value="2">Database</option>
+                                    <option value="3">Domain</option>
+                                    <option value="4">Orther</option>
+                                </select>
+                            </div>         
+                            <div class="mb-3">
+                                <label for="blog-description" class="form-label">Description</label>
+                                <div class="description-editor border rounded p-2">
+                                    <textarea class="form-control border-0" id="blog-description-${skill.getSkillID()}" name="description" rows="10" style="height: 200px" required>${blog.getDescription()}</textarea>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>   
+
+                                <button type="reset" class="btn btn-secondary" >Reset</button>                               
+
+                                <button type="submit" class="btn btn-primary" name="mode" value="add" id="add-blog-btn">Add Skill</button>
+                            </div>
                         </form>
                     </div>
+
                 </div>
             </div>
-        </div>       
+        </div>
+        <script src="adminAssets/js/jquery-3.7.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
         <script>
-            function editSkill(skillSetID, skillSetName, description) {
-                document.getElementById("editSkillSetID").value = skillSetID;
-                document.getElementById("editSkillSetName").value = skillSetName;
-                document.getElementById("editDescription").value = description;
-            }
-
-            function deleteSkill(skillSetID) {
-                if (confirm("Are you sure?")) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "DeleteSkill", true);
-                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            alert(xhr.responseText);
-                            window.location.reload();
-                        }
-                    };
-                    xhr.send("skillSetID=" + skillSetID);
-                }
-            }
-
-            function confirmDelete() {
-                // Find the skillSetID from the modal and call deleteSkill
-                var skillSetID = document.getElementById("deleteSkillSetID").value;
-                deleteSkill(skillSetID);
-            }
-            function validateAddForm() {
-                var skillSetName = document.forms["addSkillForm"]["skillSetName"].value.trim();
-                var description = document.forms["addSkillForm"]["description"].value.trim();
-                var errorDiv = document.getElementById("addSkillError");
-
-                if (skillSetName === "" || description === "") {
-                    errorDiv.innerText = "Skill Name and Description cannot be empty or just spaces.";
-                    return false;
-                }
-                errorDiv.innerText = ""; // Clear the error message if validation passes
-                return true;
-            }
-
-            function validateEditForm() {
-                var skillSetName = document.forms["editSkillForm"]["skillSetName"].value.trim();
-                var description = document.forms["editSkillForm"]["description"].value.trim();
-                var errorDiv = document.getElementById("editSkillError");
-
-                if (skillSetName === "" || description === "") {
-                    errorDiv.innerText = "Skill Name and Description cannot be empty or just spaces.";
-                    return false;
-                }
-                errorDiv.innerText = ""; // Clear the error message if validation passes
-                return true;
-            }
-        </script>
-        <script>
-            document.getElementById("filter_search").addEventListener("click", function () {
-                var filterCard = document.getElementById("filter_inputs");
-                if (filterCard.style.display === "none" || filterCard.style.display === "") {
-                    filterCard.style.display = "block";
-                } else {
-                    filterCard.style.display = "none";
-                }
+            $(document).ready(function () {
+                $('#filter_search').click(function () {
+                    $('.filter-section').toggle();
+                });
             });
+
         </script>
         <script>
             $(document).ready(function () {
-                $('#skill, #status').on('keyup change', function () {
-                    filterSkills();
+                var table = $('.datatable').DataTable();
+                const filterTitle = document.getElementById('filter-title');
+                const filterCategories = document.getElementById('filter-categories');
+                const filterStatus = document.getElementById('filter-status');
+
+                function applyFilter() {
+                    const titleValue = filterTitle.value.toLowerCase();
+                    const categoriesValue = filterCategories.value.toLowerCase();
+                    const statusValue = filterStatus.value.toLowerCase();
+
+                    // Clear any existing search function
+                    $.fn.dataTable.ext.search.pop();
+
+                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                        const title = data[1].toLowerCase(); // Assuming skill name is in the 2nd column
+                        const categories = data[2].toLowerCase(); // Assuming categories is in the 3rd column
+                        const status = data[3].toLowerCase(); // Assuming status is in the 4th column
+
+                        const titleMatch = title.includes(titleValue);
+                        const categoriesMatch = categoriesValue === '' || categories.includes(categoriesValue);
+                        const statusMatch = statusValue === '' || status.includes(statusValue);
+
+                        return titleMatch && categoriesMatch && statusMatch;
+                    });
+
+                    table.draw();
+                }
+
+                // Add event listeners for instant filtering
+                filterTitle.addEventListener('input', applyFilter);
+                filterCategories.addEventListener('change', applyFilter);
+                filterStatus.addEventListener('change', applyFilter);
+
+                // Reset filter
+                $('#resetFilter').click(function () {
+                    filterTitle.value = '';
+                    filterCategories.value = '';
+                    filterStatus.value = '';
+                    resetFilter();
                 });
 
-                $('#resetFilter').on('click', function () {
-                    $('#skill').val('');
-                    $('#status').val('');
-                    filterSkills();
+                function resetFilter() {
+                    // Remove custom search function
+                    $.fn.dataTable.ext.search.pop();
+                    // Clear all column searches
+                    table.columns().search('');
+                    // Clear global search
+                    table.search('');
+                    // Redraw the table
+                    table.draw();
+                }
+
+                // Initial filter application
+                applyFilter();
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                // Xử lý sự kiện click trên nút xóa
+                $('.delete-blog-btn').click(function () {
+                    var skillId = $(this).data('skill-id');
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'This will move the skill to the trash.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Delete'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Gọi AJAX để thay đổi trạng thái blog
+                            changeSkillStatus(skillId, false);
+                        }
+                    });
+                });
+
+                // Xử lý sự kiện click trên nút kích hoạt
+                $('.activate-blog-btn').click(function () {
+                    var skillId = $(this).data('skill-id');
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'This will activate the skill.',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Activate'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Gọi AJAX để thay đổi trạng thái blog
+                            changeSkillStatus(skillId, true);
+                        }
+                    });
                 });
             });
-
-            function filterSkills() {
-                var skill = $('#skill').val();
-                var status = $('#status').val();
-
+            function changeSkillStatus(skillId, isActive) {
                 $.ajax({
-                    url: 'skillAdmin',
+                    url: 'skillAdmin', // Đường dẫn tới servlet xử lý yêu cầu
                     type: 'POST',
                     data: {
-                        skill: skill,
-                        status: status
+                        mode: isActive ? 'activate' : 'delete',
+                        skillId: skillId
                     },
-                    success: function (data) {
-                        $('#skillTableBody').html($(data).find('#skillTableBody').html());
+                    success: function (response) {
+
+                        if (response.success) {
+
+                            updateBlogRowStatus(skillId, isActive);
+                            showSuccessNotification(response.message);
+                        } else {
+                            showErrorNotification(response.message);
+                        }
+                    },
+                    error: function () {
+                        showErrorNotification('An error occurred while changing the blog status.');
                     }
                 });
             }
-        </script>
-        <script>
-            $(document).ready(function () {
-                // Khởi tạo DataTable và cấu hình
-                $('.datatable').DataTable({
-                    "pagingType": "full_numbers", // Kiểu phân trang
-                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]], // Số lượng bản ghi trên mỗi trang
-                    "processing": true, // Hiển thị tiêu đề đang xử lý
-                    "serverSide": true, // Kích hoạt chế độ phía máy chủ
-                    "ajax": {
-                        "url": "skillAdmin",
-                        "type": "POST",
-                        "data": function (d) {
-                            d.skill = $('#skill').val();
-                            d.status = $('#status').val();
-                        }
-                    },
-                    "columns": [
-                        {"data": "skill_set_name"}, // Cột Skill Name
-                        {"data": "description"}, // Cột Description
-                        {
-                            "data": "statusSkill",
-                            "render": function (data, type, row) {
-                                return data === "1" ? "Active" : "Inactive";
-                            }
-                        }, // Cột Status
-                        {
-                            "data": null,
-                            "render": function (data, type, row) {
-                                return '<div class="text-end">' +
-                                        '<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category" ' +
-                                        'onclick="editSkill(\'' + row.skill_set_ID + '\', \'' + row.skill_set_name + '\', \'' + row.description + '\')">' +
-                                        '<i class="far fa-edit"></i></a>' +
-                                        '<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category" ' +
-                                        'onclick="document.getElementById(\'deleteSkillSetID\').value = \'' + row.skill_set_ID + '\'">' +
-                                        '<i class="far fa-trash-alt"></i></a></div>';
-                            }
-                        } // Cột Actions
-                    ]
-                });
 
-                // Xử lý sự kiện Filter
-                $('#skill, #status').on('keyup change', function () {
-                    $('.datatable').DataTable().ajax.reload();
-                });
+            function updateBlogRowStatus(skillId, isActive) {
+                var blogRow = $('#skill-row-' + skillId);
+                var statusCell = blogRow.find('.test1');
 
-                // Xử lý sự kiện Reset Filter
-                $('#resetFilter').on('click', function () {
-                    $('#skill').val('');
-                    $('#status').val('');
-                    $('.datatable').DataTable().ajax.reload();
-                });
-            });
-
-        </script>
-        <script>
-            window.onload = function () {
-                let message = '<%= session.getAttribute("message") %>';
-                 if (message !== null) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: message
-                });
-
-                // Remove the message after displaying
-                <% session.removeAttribute("message"); %>
+                if (isActive) {
+                    statusCell.html('<a href="javascript:void(0);" class="user-active-btn status">Active</a>');
+                    blogRow.find('.delete-blog-btn').show();
+                    blogRow.find('.activate-blog-btn').hide();
+                } else {
+                    statusCell.html('<a href="javascript:void(0);" class="user-inactive-btn status">Trash</a>');
+                    blogRow.find('.activate-blog-btn').show();
+                    blogRow.find('.delete-blog-btn').hide();
+                }
             }
-            };
+
         </script>
 
 
-        <script src="assets/js/jquery-3.7.1.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="assets/js/bootstrap.bundle.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="assets/js/feather.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="assets/plugins/moment/moment.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="assets/js/bootstrap-datetimepicker.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="assets/plugins/datatables/datatables.min.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="assets/js/script.js" type="a94573ecdb54ed8c1a4f750c-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="a94573ecdb54ed8c1a4f750c-|49" defer></script></body>
+        <c:if test="${not empty successMessage}">
+            <script>
+                var successMessage = "${successMessage}";
+
+                $(document).ready(function () {
+                    if (typeof successMessage !== 'undefined' && successMessage !== '') {
+                        console.log(successMessage);
+                        showSuccessNotification(successMessage);
+                    }
+                });
+            </script>
+
+        </c:if>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="adminAssets/js/notification.js"></script>
+
+        <script src="adminAssets/js/validate_skill.js"></script>
+        <script src="adminAssets/js/bootstrap.bundle.min.js"></script>
+
+        <script src="adminAssets/js/feather.min.js" ></script>
+
+        <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" ></script>
+
+        <script src="adminAssets/plugins/select2/js/select2.min.js" ></script>
+
+        <script src="adminAssets/plugins/moment/moment.min.js" ></script>
+        <script src="adminAssets/js/bootstrap-datetimepicker.min.js" ></script>
+
+        <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" ></script>
+        <script src="adminAssets/plugins/datatables/datatables.min.js" ></script>
+
+        <script src="adminAssets/js/script.js" ></script>
+    </body>
+
 </html>
