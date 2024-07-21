@@ -73,7 +73,9 @@ public class LoginController extends HttpServlet {
                     CategoriesDAO cat = new CategoriesDAO();
                     Categories ca = cat.getCategoryByID(c.getUserID());
                     Recruiter rec = re.getRecruiterProfile(c.getUserID());
+                    System.out.println("Recruiter ID: " + rec.getRecruiterID());
                     Company co = com.getCompanyByCompanyID(rec.getRecruiterID());
+                    System.out.println(co);
                     session.setAttribute("company", co);
                     session.setAttribute("recruiter", rec);
                     session.setAttribute("categories", ca);

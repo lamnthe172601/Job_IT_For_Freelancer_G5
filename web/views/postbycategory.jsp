@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -481,34 +481,45 @@
 
                                 </c:forEach>
                             </div>
-                            <c:if test="${endPage > 1}">
-                                <div class="row">
-                                    <div class="col-md-12">
 
-                                        <ul class="pagination list-pagination">
-                                            <c:if test="${tag > 1}">
-                                                <li class="page-item">
-                                                    <a class="page-link" aria-label="Trước" href="postbycategory?categoryID=${param.categoryID}&page=${e}">${e}</a>
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                            </c:if>
-                                            <c:forEach var="i" begin="1" end="${endPage}">
-                                                <li class="page-item ${i == tag ? 'active' : ''}">
-                                                    <a class="page-link" href="postbycategory?categoryID=${param.categoryID}&page=${i}">${i}</a>
-                                                </li>
-                                            </c:forEach>
-                                            <c:if test="${tag < endPage}">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="postbycategory?categoryID=${param.categoryID}&page=${tag + 1}" aria-label="Sau">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </li>
-                                            </c:if>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </c:if>
+
+                            <c:if test="${endPage > 1}">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="pagination list-pagination">
+                <!-- Trang trước -->
+                <c:if test="${trangHienTai > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="postbycategory?categoryID=${param.categoryID}&page=${trangHienTai - 1}">« Previous</a>
+                    </li>
+                </c:if>
+
+                <!-- Các trang -->
+                <c:forEach begin="1" end="${endPage}" var="i">
+                    <li class="page-item ${trangHienTai == i ? 'active' : ''}">
+                        <a class="page-link" href="postbycategory?categoryID=${param.categoryID}&page=${i}">${i}</a>
+                    </li>
+                </c:forEach>
+
+                <!-- Trang tiếp theo -->
+                <c:if test="${trangHienTai < endPage}">
+                    <li class="page-item">
+                        <a class="page-link" href="postbycategory?categoryID=${param.categoryID}&page=${trangHienTai + 1}">Next »</a>
+                    </li>
+                </c:if>
+            </ul>
+        </div>
+    </div>
+</c:if>
+
+
+
+
+
+
+
+
+
 
                         </div>
                     </div>

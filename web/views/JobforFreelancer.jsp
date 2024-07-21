@@ -22,15 +22,20 @@
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
- <style>
-        .pagination .page-item.active .page-link {
-            font-weight: bold;
-            color: #fff;
-            background-color:#FF3300;
-            border-color: #FF3300;
-        }
-    </style>
+
+
+       <style>
+
+        
+            .pagination .page-item.active .page-link {
+                font-weight: bold;
+                color: #fff;
+                background-color:#FF3300;
+                border-color: #FF3300;
+            }
+        </style>
         <style>
+
             .text-center1 {
                 width: 150px;
                 height: 150px;
@@ -379,7 +384,7 @@
                             <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
                             <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
 
-                            <%-- Hiển thị danh sách bài đăng --%>
+                           <%-- Hiển thị danh sách bài đăng --%>
                             <div class="row" id="listpostContainer">
                                 <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
                                     <div class="col-xl-4 col-md-6 post-item">
@@ -554,6 +559,8 @@
         </div>
     </div>
 </c:if>
+
+
 
                         </div>
                     </div>

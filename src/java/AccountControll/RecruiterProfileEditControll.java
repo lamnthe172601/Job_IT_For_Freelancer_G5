@@ -22,6 +22,12 @@ public class RecruiterProfileEditControll extends HttpServlet {
         Recruiter recruiter = (Recruiter) session.getAttribute("recruiter");
         Company company = (Company) session.getAttribute("company");
 
+        if (recruiter == null || company == null) {
+            req.setAttribute("updateMessage", "Recruiter or Company data is missing.");
+            req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
+            return;
+        }
+
         // Lấy dữ liệu từ form
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
@@ -32,23 +38,30 @@ public class RecruiterProfileEditControll extends HttpServlet {
         String website = req.getParameter("website");
         String describe = req.getParameter("describe");
 
-        // Define regex patterns
         String phonePattern = "^0\\d{9}$";
         String emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$";
 
-        // Validate phone number
         if (!Pattern.matches(phonePattern, phone)) {
             req.setAttribute("updateMessage", "Invalid phone number format. Please enter a valid phone number.");
             req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
             return;
         }
 
-        // Validate new email
         if (!Pattern.matches(emailPattern, newEmail)) {
             req.setAttribute("updateMessage", "Invalid email format. Please enter a valid email address.");
             req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
             return;
         }
+
+        recruiter.setFirstName(firstName);
+        recruiter.setLastName(lastName);
+        recruiter.setPhone(phone);
+        recruiter.setEmail(newEmail);
+
+        String companyName = req.getParameter("companyName");
+        String establishedOn = req.getParameter("establishedOn");
+        String website = req.getParameter("website");
+        String describe = req.getParameter("describe");
 
         // Validate company information
         if (companyName == null || companyName.isEmpty()) {
@@ -64,7 +77,7 @@ public class RecruiterProfileEditControll extends HttpServlet {
         recruiter.setEmail(newEmail);
 
         company.setCompanyName(companyName);
-        company.setEstablishedOn(java.sql.Date.valueOf(establishedOn));
+        company.setEstablishedOn(establishedDate);
         company.setWebsite(website);
         company.setDescribe(describe);
 
@@ -77,6 +90,9 @@ public class RecruiterProfileEditControll extends HttpServlet {
             updateSuccess = recruiterDAO.updateRecruiterR(recruiter) && companyDAO.updateCompanyY(company);
         } catch (SQLException e) {
             e.printStackTrace();
+            req.setAttribute("updateMessage", "Database error occurred: " + e.getMessage());
+            req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
+            return;
         }
 
         if (updateSuccess) {
