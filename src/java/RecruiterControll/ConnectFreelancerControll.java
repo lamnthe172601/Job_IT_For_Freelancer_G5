@@ -5,6 +5,7 @@
 
 package RecruiterControll;
 
+import Models.User;
 import dal.RecruiterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -69,6 +71,12 @@ public class ConnectFreelancerControll extends HttpServlet {
     throws ServletException, IOException {
         RecruiterDAO d = new RecruiterDAO();
         try {
+            HttpSession session = request.getSession();
+            Object u = session.getAttribute("account");
+            User user = (User) u;
+            if (user == null) {
+                request.getRequestDispatcher("views/404Page.jsp").forward(request, response);
+            }
             int applyID = Integer.parseInt(request.getParameter("postID").trim());
             String type = request.getParameter("type");
             int status = type.equals("approve") ? 1 : 2;

@@ -26,7 +26,11 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "PostByLocation", urlPatterns = {"/postbylocation"})
 public class PostByLocation extends HttpServlet {
-
+      private CategoriesDAO caDAO = new CategoriesDAO();
+    private PostDAO pDao = new PostDAO();
+    private JobTypeDAO jobDAO = new JobTypeDAO();
+    private DurationDAO durationDAO = new DurationDAO();
+    private DAO d = new DAO();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -49,6 +53,7 @@ public class PostByLocation extends HttpServlet {
         List<JobType> jobTypes = jobTypeDAO.getAllJobType();
         List<Duration> durations = durationDAO.getAllDuration();
         List<Categories> categories = categoriesDAO.getAllCategory();
+         List<SkillSet> skill = pDao.getAllSkillSet();
 
         String location = request.getParameter("location");
 
@@ -72,6 +77,7 @@ public class PostByLocation extends HttpServlet {
             request.setAttribute("cate", categories);
             request.setAttribute("jobtype", jobTypes);
             request.setAttribute("dura", durations);
+             request.setAttribute("skill", skill);
 
             if (user != null) {
                 int userId = user.getUserID();

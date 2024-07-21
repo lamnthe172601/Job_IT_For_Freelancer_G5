@@ -36,9 +36,19 @@ public class blogGridControll extends HttpServlet {
     throws ServletException, IOException {
 
         BlogDAO blogDAO = new BlogDAO();
-        // Retrieve the list of blogs from the DAO
         List<Blogs> listBlog = blogDAO.selectAllBlogs();
-
+        int countBlog = listBlog.size();
+        int blogInPage = 12;
+        int totalBlog = (int) Math.ceil((double) countBlog / blogInPage);
+        int index = 1;
+        String indexPage = request.getParameter("page");
+        if (indexPage != null && !indexPage.isEmpty()) {
+            index = Integer.parseInt(indexPage);
+        }
+        request.setAttribute("countBlog", countBlog);
+        request.setAttribute("blogInPage", blogInPage);
+        request.setAttribute("totalBlog", totalBlog);
+        request.setAttribute("indexBlogPage", index);
         request.setAttribute("listBlog", listBlog);
 
         // Forward the request to the JSP page

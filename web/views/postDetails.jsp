@@ -207,7 +207,7 @@
                                 <h2>Project Details</h2>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="home">Home</a></li>
                                         <li class="breadcrumb-item" aria-current="page">Project Details</li>
                                     </ol>
                                 </nav>
@@ -362,7 +362,7 @@
                                                                                                 </div>
                                                                                             </div>-->
                                             </div>
-                                            <p class="mb-0">${p.description}</p>
+                                            <p class="mb-0 describe">${p.description}</p>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -819,6 +819,15 @@
                 outline: none; /* Loại bỏ viền xung quanh khi focus */
 
             }
+            .describe {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.5em;
+            max-height: 3em; /* 2 lines * 1.5em line-height */
+        }
         </style>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -31,6 +31,20 @@ public class DashboardDAO extends DBContext {
         }
         return -1;
     }
+    
+    public int getTotalPostComplete() {
+        String query = " SELECT count(postID) as totalpost FROM post where status = 2";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("totalpost");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
 
     public int getTotalPost() {
         String query = "  SELECT count(postID) as totalpost FROM post";

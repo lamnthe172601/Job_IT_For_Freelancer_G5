@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale.Category;
+
 
 /**
  *
@@ -24,8 +24,9 @@ public class CategoriesDAO extends DBContext {
 
     public List<Categories> getAllCategory() {
         List<Categories> list = new ArrayList<>();
-        String query = "select * from Categories WHERE statusCate = 1";
+        
         try {
+            String query = "select * from Categories WHERE statusCate = 1";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -57,11 +58,13 @@ public class CategoriesDAO extends DBContext {
         return null;
     }
 public boolean addCategory(Categories category) {
-    String query = "INSERT INTO Categories (categories_name, description) VALUES (?, ?);";
+    String query = "INSERT INTO Categories (categories_name, description, statusCate) VALUES (?, ?, ?);";
     try (PreparedStatement ps = connection.prepareStatement(query)) {
         
         ps.setString(1, category.getCategoriesName());
+       
         ps.setString(2, category.getDescription());
+        ps.setBoolean(3, true); // Đặt giá trị statusCate là true (1)
       
         int rowsInserted = ps.executeUpdate();
     
@@ -73,6 +76,7 @@ public boolean addCategory(Categories category) {
         return false;
     }
 }
+
 
 
     public List<Categories> getCategory() {
@@ -273,64 +277,56 @@ public List<Categories> getCategoryByNameAndStatus(String categoryName, int stat
     }
     return posts;
 }
-
-  public List<PostBasic> getPostsByFreelancerSkillsPage(int freelancerID, int offset) {
+ public List<PostBasic> getPostsByFreelancerSkillsPage(int freelancerID, int offset) {
      List<PostBasic> posts = new ArrayList<>();
      String query = """
                    WITH FreelancerSkills AS (
-                               SELECT ss.skill_set_name
-                               FROM [freelancer].[dbo].[Skills] us
-                               JOIN [freelancer].[dbo].[Skill_Set] ss ON us.skill_set_ID = ss.skill_set_ID
-                               WHERE us.freelancerID = ?
-                           ),
-                           
-                           MatchingPosts AS (
-                               SELECT 
-                                   p.postID, 
-                                   p.title, 
-                                   p.image AS post_postImg, 
-                                   p.job_type_ID, 
-                                   p.durationID AS post_durationID, 
-                                   p.date_post,
-                                   p.expired,
-                                   p.quantity, 
-                                   p.description AS post_description, 
-                                   p.budget, 
-                                   p.location, 
-                                   p.skill, 
-                                   p.recruiterID AS post_recruiterID, 
-                                   p.status, 
-                                   p.caID, 
-                                   p.checking,
-                                   j.jobID, 
-                                   j.job_name, 
-                                   du.durationID AS du_durationID, 
-                                   du.duration_name, 
-                                   re.recruiterID AS re_recruiterID, 
-                                   re.first_name,
-                                   re.last_name, re.dob, re.email_contact, re.gender,re.image, re.phone_contact, re.UserID,
-                                   ca.caID AS ca_caID, 
-                                   ca.categories_name, 
-                                   ca.categories_img,
-                                   ca.description,
-                                   ca.statusCate,
-                                   co.companyID, 
-                                   co.company_name
-                               FROM [freelancer].[dbo].[Post] p
-                               JOIN [freelancer].[dbo].[JobType] j ON p.job_type_ID = j.jobID
-                               JOIN [freelancer].[dbo].[Duration] du ON p.durationID = du.durationID
-                               JOIN [freelancer].[dbo].[Recruiter] re ON p.recruiterID = re.recruiterID
-                               JOIN [freelancer].[dbo].[Categories] ca ON p.caID = ca.caID
-                               JOIN [freelancer].[dbo].[Company] co ON re.recruiterID = co.recruiterID
-                               CROSS APPLY STRING_SPLIT(p.skill, ',') ps
-                               WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills)
-                           )
-                           
-                           SELECT *
-                           FROM MatchingPosts
-                           ORDER BY postID
-                           OFFSET ? ROWS
-                           FETCH NEXT 6 ROWS ONLY;
+                       SELECT ss.skill_set_name
+                       FROM [freelancer].[dbo].[Skills] us
+                       JOIN [freelancer].[dbo].[Skill_Set] ss ON us.skill_set_ID = ss.skill_set_ID
+                       WHERE us.freelancerID = ?
+                   ),
+                   MatchingPosts AS (
+                       SELECT 
+                           p.postID, 
+                           p.title, 
+                           p.image, 
+                           p.job_type_ID, 
+                           p.durationID, 
+                           p.date_post, 
+                           p.quantity, 
+                           p.description, 
+                           p.budget, 
+                           p.location,
+                           p.skill, 
+                           p.recruiterID, 
+                           p.status,
+                           p.caID, 
+                           p.checking,
+                           j.job_name, 
+                           d.duration_name, 
+                           c.categories_img, 
+                           c.categories_name, 
+                           c.description AS category_description, 
+                           c.statusCate,
+                           r.first_name, 
+                           r.last_name, 
+                           r.email_contact, 
+                           r.image AS recruiter_image, 
+                           co.company_name
+                       FROM [freelancer].[dbo].[Post] p
+                       JOIN [freelancer].[dbo].[JobType] j ON p.job_type_ID = j.jobID
+                       JOIN [freelancer].[dbo].[Duration] d ON p.durationID = d.durationID
+                       JOIN [freelancer].[dbo].[Categories] c ON p.caID = c.caID
+                       JOIN [freelancer].[dbo].[Recruiter] r ON p.recruiterID = r.recruiterID
+                       JOIN [freelancer].[dbo].[Company] co ON r.recruiterID = co.recruiterID
+                       CROSS APPLY STRING_SPLIT(p.skill, ',') ps
+                       WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills)
+                       ORDER BY p.postID DESC
+                       OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY
+                   )
+                   SELECT *
+                   FROM MatchingPosts
                    """;
     try (PreparedStatement ps = connection.prepareStatement(query)) {
         ps.setInt(1, freelancerID);

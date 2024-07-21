@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -120,8 +120,12 @@
             .button {
                 cursor: pointer;
             }
-
-            
+.titlepost{
+                max-width: 300px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
 
         </style>
     </head>
@@ -362,20 +366,21 @@
                                                         </a>
                                                     </div>
                                                     <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${post.title}</div>
+                                                        <div class="author-location titlepost"><a>${post.title} </a></div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${post.caID.categoriesName}</a></h3>
                                                         <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${post.location}</div>
                                                     </div>
                                                     <div class="skills-container">
-                                                        <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index < 3}">
-                                                                    <span class="badge badge-pill badge-design">${skill}</span>
-                                                                </c:if>                                                              
-                                                                <c:if test="${loop.index == 2 and not loop.last}">                                                                 
-                                                                    <span class="badge badge-pill badge-design">...</span>
-                                                                </c:if>
+                                                        <c:forEach items="${fn:split(post.skill, ',')}" var="skill" varStatus="loop">
+                                                            <c:if test="${loop.index < 2}">
+                                                                <span class="badge badge-pill badge-design">${skill}</span>
+                                                            </c:if>                                                              
+                                                            <c:if test="${loop.index == 1 and not loop.last}">                                                                 
+                                                                <span class="badge badge-pill badge-design">...</span>
+
+                                                            </c:if>
                                                         </c:forEach>
                                                     </div>
 
@@ -480,19 +485,37 @@
                                    
                                 </c:forEach>
                             </div>
-<c:if test="${tongSoTrang > 1}">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="pagination list-pagination">
-                        <c:forEach begin="1" end="${tongSoTrang}" var="e">
-                            <li class="page-item ${trangHienTai == e ? 'active' : ''}">
-                                <a class="page-link" href="postbylocation?location=${param.location}&page=${e}">${e}</a>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </div>
-        </c:if>
+
+                            <c:if test="${tongSoTrang > 1}">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="pagination list-pagination">
+                <!-- Trang trước -->
+                <c:if test="${trangHienTai > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="postbylocation?location=${param.location}&page=${trangHienTai - 1}">« Previous</a>
+                    </li>
+                </c:if>
+
+                <!-- Các trang -->
+                <c:forEach begin="1" end="${tongSoTrang}" var="e">
+                    <li class="page-item ${trangHienTai == e ? 'active' : ''}">
+                        <a class="page-link" href="postbylocation?location=${param.location}&page=${e}">${e}</a>
+                    </li>
+                </c:forEach>
+
+                <!-- Trang tiếp theo -->
+                <c:if test="${trangHienTai < tongSoTrang}">
+                    <li class="page-item">
+                        <a class="page-link" href="postbylocation?location=${param.location}&page=${trangHienTai + 1}">Next »</a>
+                    </li>
+                </c:if>
+            </ul>
+        </div>
+    </div>
+</c:if>
+
+
 
                             
                         </div>

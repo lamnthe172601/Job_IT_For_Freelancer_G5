@@ -669,15 +669,15 @@
                                                                                                     </div>
                                                                                                     <div class="ms-3 freelancer-pic-upload">
                                                                                                         <label class="image-upbtn">
-                                                                                                            Upload Image <input type="file" id="imgInp" name="profileImage">
+                                                                                                            <input type="file" id="imgInp" name="profileImage">
                                                                                                         </label>
-                                                                                                        
+
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                    <div style="margin-top: 35px;" class="col-lg-4">
+                                                                                                <div style="margin-top: 35px;" class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Level</label>
-                                                                                                        <select name="jobsType" class="form-control select">
+                                                                                                        <select name="jobsType" class="form-control ">
                                                                                                             <c:forEach items="${alljobtype}" var="jobtype">
                                                                                                                 <option value="${jobtype.jobTypeID}" <c:if test="${jobtype.jobTypeID == list.jobTypeID.jobTypeID}">selected=""</c:if>>${jobtype.jobName}</option>
                                                                                                             </c:forEach>
@@ -687,17 +687,17 @@
                                                                                                 <div style="margin-top: 35px;" class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Work Time</label>
-                                                                                                        <select name="Duration" class="form-control select">
+                                                                                                        <select name="Duration" class="form-control ">
                                                                                                             <c:forEach items="${allDuration}" var="allDuration">
                                                                                                                 <option value="${allDuration.durationID}" <c:if test="${allDuration.durationID == list.durationID.durationID}">selected=""</c:if>>${allDuration.durationName}</option>
                                                                                                             </c:forEach>
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-4">
+                                                                                                <div style="margin-top: 35px;" class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <div class="mb-3">
-                                                                                                            <label class="focus-label">Target</label>
+                                                                                                            <label class="focus-label">Quantity</label>
                                                                                                             <input value="${list.quantity}" type="text" class="form-control" name="target">
                                                                                                         </div>
                                                                                                     </div>
@@ -744,17 +744,23 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-
-                                                                                                <div class="col-lg-4">
+                                                                                                <div style="margin-top: 35px;" class="col-lg-4">
+                                                                                                    <div class="input-block">
+                                                                                                        <label class="focus-label">End date</label>
+                                                                                                        <input type="date" name="expired" id="expired" class="form-control">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div style="margin-top: 35px;" class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Position</label>
-                                                                                                        <select class="form-control select" name="Categories">
+                                                                                                        <select class="form-control " name="Categories">
                                                                                                             <c:forEach items="${allCate}" var="allcate">
                                                                                                                 <option value="${allcate.caID}" <c:if test="${allcate.caID == list.caID.caID}">selected=""</c:if>>${allcate.categoriesName}</option>
                                                                                                             </c:forEach>
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
+
                                                                                                 <div class="col-lg-12">
                                                                                                     <div class="input-block">
                                                                                                         <label class="form-label">Description</label>

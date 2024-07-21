@@ -24,6 +24,7 @@ public class DBContext {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass); 
         } catch (ClassNotFoundException | SQLException e) {
+            
         }
     }
     public static void main(String[] args) {

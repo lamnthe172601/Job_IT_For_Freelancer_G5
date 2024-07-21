@@ -127,6 +127,15 @@
                 border: 1px solid #ccc;
                 border-radius: 5px;
             }
+
+            .skill-container {
+                display: flex;
+                flex-wrap: wrap;
+
+            }
+
+
+
         </style>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -222,7 +231,7 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                             <li><a href="ListFreelancer">List Freelancer</a></li>
+                                            <li><a href="ListFreelancer">List Freelancer</a></li>
 
                                         </ul>
                                     </li>
@@ -231,7 +240,7 @@
                                         <ul class="submenu">
 
                                             <li><a href="myListJobProject">My List Post</a></li>
-                                            
+
 
                                         </ul>
                                     </li>
@@ -412,7 +421,7 @@
                                                     <li>
                                                         <a href="RecruiterFavourites">Bookmarked Projects</a>
                                                     </li>
-                                                    
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
@@ -420,8 +429,8 @@
                                                     <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
                                                 </a>
                                             </li>
-                                            
-                                            
+
+
                                             <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
@@ -431,11 +440,11 @@
                                                     <li>
                                                         <a href="companydetail">Profile</a>
                                                     </li>
-                                                    
+
                                                     <li>
                                                         <a href="changePassword">Change Password</a>
                                                     </li>
-                                                    
+
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
@@ -492,7 +501,7 @@
                                             <table class="table table-center table-hover datatable no-sort">
                                                 <thead class="thead-pink">
                                                     <tr>                                         
-                                                                                                              
+
                                                         <th>TITLE</th>
                                                         <th>APPLICANTS</th>
                                                         <th onclick="showButton('postedButton')">
@@ -524,7 +533,7 @@
                                                 <tbody id="postTable">
                                                     <c:forEach items="${listpost}" var="list">
                                                         <tr>
-                                                            
+
 
                                                             <td class="titleList">
                                                                 <div class="title applied">${list.title}</div>
@@ -569,12 +578,12 @@
                                                                     <div class="edit-delete-action">
                                                                         <a style="background: #22cc62; margin-left: 0px" href="#edit-milestone${list.postID}" data-bs-toggle="modal"
                                                                            class="btn btn-request"><i style="color: white" class="fa fa-edit"></i></a>
-                                                                        
+
                                                                     </div>
                                                                     <input type="hidden" class="user-id" id="${list.postID}">
-                                                                    
-                                                                     <a style="background: #6c757d; margin-left: 0px;" href="javascript:void(0);" data-bs-toggle="dropdown"
-                                                                           class="btn btn-request"><i style="color: white" class="nav-link  fa fa-align-justify"></i></a>
+
+                                                                    <a style="background: #6c757d; margin-left: 0px;" href="javascript:void(0);" data-bs-toggle="dropdown"
+                                                                       class="btn btn-request"><i style="color: white" class="nav-link  fa fa-align-justify"></i></a>
                                                                     <div class="dropdown-menu user-menu-list typeChange">                                                                      
                                                                         <c:if test='${list.status == 1}'>
                                                                             <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Suspend_user">
@@ -588,13 +597,13 @@
                                                                             </a>
                                                                         </c:if>
                                                                         <c:if test='${list.status == 3}'>
-                                                                            <a class="dropdown-item typeChange btn btn-sm" href="javascript:void(0);">
-                                                                                Expired
+                                                                            <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Activate_user">
+                                                                                <img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Ongoing Post
                                                                             </a>
                                                                         </c:if>
                                                                         <c:if test='${list.status == 2}'>
-                                                                            <a class="dropdown-item typeChange btn btn-sm" href="javascript:void(0);">
-                                                                                Completed
+                                                                            <a class="dropdown-item typeChange btn btn-sm" data-bs-toggle="modal" data-bs-target="#Activate_user">
+                                                                                <img class="me-2" src="adminAssets/img/icon/icon-04.svg" alt="Img"> Ongoing Post
                                                                             </a>
                                                                         </c:if>
 
@@ -664,16 +673,17 @@
                                                                                                 <div hidden class="col-lg-6">
                                                                                                     <div class="input-block">
                                                                                                         <label class="form-label">Project ID</label>
-                                                                                                        <input type="text" name="postID" class="form-control" value="${list.postID}">
+                                                                                                        <input type="text" id="postID" name="postID" class="form-control" value="${list.postID}">
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="col-lg-6">
                                                                                                     <div class="input-block">
                                                                                                         <label class="form-label">Project Title</label>
-                                                                                                        <input type="text" name="title" class="form-control" value="${list.title}">
+                                                                                                        <input type="text" id="title" name="title" class="form-control" value="${list.title}">
+                                                                                                        <div id="error-title" class="text-danger"></div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class=" col-lg-6  d-flex align-items-center">
+                                                                                                <div class="col-lg-6 d-flex align-items-center">
                                                                                                     <div class="upload-images freelancer-pic-box">
                                                                                                         <img style="width: 80px; height: 80px;" src="${list.image}" alt id="blah">
                                                                                                     </div>
@@ -681,58 +691,69 @@
                                                                                                         <label class="image-upbtn">
                                                                                                             <input type="file" id="imgInp" name="profileImage">
                                                                                                         </label>
-                                                                                                        
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                    <div style="margin-top: 35px;" class="col-lg-4">
+                                                                                                <div class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Level</label>
-                                                                                                        <select name="jobsType" class="form-control select">
+                                                                                                        <select name="jobsType" id="jobsType" class="form-control">
                                                                                                             <c:forEach items="${alljobtype}" var="jobtype">
-                                                                                                                <option value="${jobtype.jobTypeID}" <c:if test="${jobtype.jobTypeID == list.jobTypeID.jobTypeID}">selected=""</c:if>>${jobtype.jobName}</option>
+                                                                                                                <option value="${jobtype.jobTypeID}" <c:if test="${jobtype.jobTypeID == list.jobTypeID.jobTypeID}">selected</c:if>>${jobtype.jobName}</option>
                                                                                                             </c:forEach>
                                                                                                         </select>
+                                                                                                        <div id="error-jobsType" class="text-danger"></div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div style="margin-top: 35px;" class="col-lg-4">
+                                                                                                <div class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Work Time</label>
-                                                                                                        <select name="Duration" class="form-control select">
+                                                                                                        <select name="Duration" id="Duration" class="form-control">
                                                                                                             <c:forEach items="${allDuration}" var="allDuration">
-                                                                                                                <option value="${allDuration.durationID}" <c:if test="${allDuration.durationID == list.durationID.durationID}">selected=""</c:if>>${allDuration.durationName}</option>
+                                                                                                                <option value="${allDuration.durationID}" <c:if test="${allDuration.durationID == list.durationID.durationID}">selected</c:if>>${allDuration.durationName}</option>
                                                                                                             </c:forEach>
                                                                                                         </select>
+                                                                                                        <div id="error-Duration" class="text-danger"></div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <div class="mb-3">
-                                                                                                            <label class="focus-label">Target</label>
-                                                                                                            <input value="${list.quantity}" type="text" class="form-control" name="target">
+                                                                                                            <label class="focus-label">Quantity</label>
+                                                                                                            <input value="${list.quantity}" type="text" id="target" class="form-control" name="target">
+                                                                                                            <div id="error-target" class="text-danger"></div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-8">
+                                                                                                <div class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <div class="mb-3">
                                                                                                             <label class="focus-label">Location</label>
-                                                                                                            <input value="${list.location}" type="text" class="form-control" name="Location">
+                                                                                                            <input value="${list.location}" type="text" id="Location" class="form-control" name="Location">
+                                                                                                            <div id="error-Location" class="text-danger"></div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-3 ">
+                                                                                                <div class="col-lg-4">
                                                                                                     <div class="input-block mb-3">
                                                                                                         <label class="focus-label">From($)/hours</label>
-                                                                                                        <input type="text" class="form-control" name="budgetFrom" value="${list.budget}">
+                                                                                                        <input type="text" id="budgetFrom" class="form-control" name="budgetFrom" value="${list.budget}">
+                                                                                                        <div id="error-budgetFrom" class="text-danger"></div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col-lg-4 col-md-12">
-                                                                                                    <div class="mb-3">
+                                                                                                <div class="col-lg-4">
+                                                                                                    <div class="input-block">
+                                                                                                        <label class="focus-label">End date</label>
+                                                                                                        <input type="date" name="expired" id="expired" value="${list.expired}" class="form-control">
+                                                                                                        <div id="error-expired" class="text-danger"></div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-lg-8 col-md-12">
+                                                                                                    <div class="input-block">
                                                                                                         <label class="focus-label">Skill</label>
                                                                                                         <div class="title-content p-0">
-                                                                                                            <div class="title-detail">
+                                                                                                            <div class="title-detail skill-container">
                                                                                                                 <c:forEach items="${ExpertiseSkill}" var="du">
-                                                                                                                    <div class="expertise-group">
+                                                                                                                    <div style="margin-left: 30px;" class="expertise-group">
                                                                                                                         <h3>
                                                                                                                             <input type="checkbox" id="expertise-${du.expertiseName}" class="form-check-input expertise-checkbox">
                                                                                                                             <label class="form-check-label" for="expertise-${du.expertiseName}">${du.expertiseName}</label>
@@ -740,7 +761,7 @@
                                                                                                                         <div class="d-flex flex-wrap skill-checkboxes d-none">
                                                                                                                             <c:forEach items="${du.getAllExpertiseSkillSet()}" var="i">
                                                                                                                                 <div class="form-check me-3 mb-2">
-                                                                                                                                    <input class="form-check-input" type="checkbox" id="skill-${i.skillSetID.skill_set_ID}" name="skill" value="${i.skillSetID.skill_set_name}" ${fn:contains(list.skill, i.skillSetID.skill_set_name) ? 'checked' : ''}>
+                                                                                                                                    <input class="form-check-input skill-checkbox" type="checkbox" id="skill-${i.skillSetID.skill_set_ID}" name="skill" value="${i.skillSetID.skill_set_name}" ${fn:contains(list.skill, i.skillSetID.skill_set_name) ? 'checked' : ''}>
                                                                                                                                     <label class="form-check-label" for="skill-${i.skillSetID.skill_set_ID}">
                                                                                                                                         ${i.skillSetID.skill_set_name}
                                                                                                                                     </label>
@@ -749,26 +770,27 @@
                                                                                                                         </div>
                                                                                                                     </div>
                                                                                                                 </c:forEach>
-                                                                                                                <div class="error" id="error-skill"></div>
+                                                                                                                <div id="error-skill" class="text-danger"></div>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-
                                                                                                 <div class="col-lg-4">
                                                                                                     <div class="input-block">
                                                                                                         <label class="focus-label">Position</label>
-                                                                                                        <select class="form-control select" name="Categories">
+                                                                                                        <select class="form-control" name="Categories" id="Categories">
                                                                                                             <c:forEach items="${allCate}" var="allcate">
-                                                                                                                <option value="${allcate.caID}" <c:if test="${allcate.caID == list.caID.caID}">selected=""</c:if>>${allcate.categoriesName}</option>
+                                                                                                                <option value="${allcate.caID}" <c:if test="${allcate.caID == list.caID.caID}">selected</c:if>>${allcate.categoriesName}</option>
                                                                                                             </c:forEach>
                                                                                                         </select>
+                                                                                                        <div id="error-Categories" class="text-danger"></div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="col-lg-12">
                                                                                                     <div class="input-block">
                                                                                                         <label class="form-label">Description</label>
-                                                                                                        <textarea name="description" class="form-control summernote">${list.description}</textarea>
+                                                                                                        <textarea name="description" id="description" class="form-control summernote">${list.description}</textarea>
+                                                                                                        <div id="error-description" class="text-danger"></div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -801,7 +823,172 @@
             <jsp:include page="footter.jsp" />
 
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Function to add event listeners for validation to a form
+                function setupValidation(form) {
+                    form.querySelector('#title').addEventListener('input', validateTitle);
+                    form.querySelector('#target').addEventListener('input', validateQuantity);
+                    form.querySelector('#Location').addEventListener('input', validateLocation);
+                    form.querySelector('#budgetFrom').addEventListener('input', validateBudget);
+                    form.querySelector('#expired').addEventListener('input', validateDate);
+                    form.querySelector('#description').addEventListener('input', validateDescription);
 
+                    
+
+                    form.addEventListener('submit', function (event) {
+                        event.preventDefault(); // Prevent default form submission
+
+                        validateTitle();
+                        validateQuantity();
+                        validateLocation();
+                        validateBudget();
+                        validateDate();
+                        validateDescription();
+                        
+
+                        // Check if there are no validation errors
+                        if (form.querySelector('.text-danger').innerText === '') {
+                            // Use Fetch API to send form data
+                            fetch(form.action, {
+                                method: form.method,
+                                body: new FormData(form)
+                            })
+                                    .then(response => {
+                                        if (response.ok) {
+                                            // Show success message
+                                            Swal.fire({
+                                                title: 'Success!',
+                                                text: 'Update Thành công',
+                                                icon: 'success',
+                                                confirmButtonText: 'OK'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    // Close the modal (if needed)
+                                                    var modal = form.closest('.modal');
+                                                    if (modal) {
+                                                        var modalInstance = bootstrap.Modal.getInstance(modal);
+                                                        modalInstance.hide();
+                                                    }
+                                                    // You can add code to refresh data or update UI here
+                                                }
+                                            });
+                                        } else {
+                                            // Handle errors if needed
+                                            Swal.fire('Error!', 'There was an error updating the project.', 'error');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        Swal.fire('Error!', 'There was an error updating the project.', 'error');
+                                    });
+                        }
+                    });
+                }
+
+                // Initialize validation on all existing forms
+                document.querySelectorAll('.modal').forEach(function (modal) {
+                    var form = modal.querySelector('form');
+                    if (form) {
+                        setupValidation(form);
+                    }
+                });
+
+                // Handle dynamically added modals if needed
+                document.addEventListener('click', function (event) {
+                    if (event.target.matches('[data-bs-toggle="modal"]')) {
+                        var modalId = event.target.getAttribute('data-bs-target');
+                        var modal = document.querySelector(modalId);
+                        var form = modal ? modal.querySelector('form') : null;
+                        if (form) {
+                            setupValidation(form);
+                        }
+                    }
+                });
+
+                function validateTitle() {
+                    document.querySelectorAll('.modal .form-control#title').forEach(function (input) {
+                        var title = input.value;
+                        var errorElement = input.closest('.modal').querySelector('#error-title');
+                        if (title === '') {
+                            errorElement.innerText = 'Title is required.';
+                        } else {
+                            errorElement.innerText = '';
+                        }
+                    });
+                }
+
+                function validateQuantity() {
+                    document.querySelectorAll('.modal .form-control#target').forEach(function (input) {
+                        var target = input.value;
+                        var errorElement = input.closest('.modal').querySelector('#error-target');
+                        if (target === '' || isNaN(target)) {
+                            errorElement.innerText = 'Valid quantity is required.';
+                        } else {
+                            errorElement.innerText = '';
+                        }
+                    });
+                }
+
+                function validateLocation() {
+                    document.querySelectorAll('.modal .form-control#Location').forEach(function (input) {
+                        var location = input.value;
+                        var errorElement = input.closest('.modal').querySelector('#error-Location');
+                        if (location === '') {
+                            errorElement.innerText = 'Location is required.';
+                        } else {
+                            errorElement.innerText = '';
+                        }
+                    });
+                }
+
+                function validateBudget() {
+                    document.querySelectorAll('.modal .form-control#budgetFrom').forEach(function (input) {
+                        var budget = input.value;
+                        var errorElement = input.closest('.modal').querySelector('#error-budgetFrom');
+                        if (budget === '' || isNaN(budget)) {
+                            errorElement.innerText = 'Valid budget is required.';
+                        } else {
+                            errorElement.innerText = '';
+                        }
+                    });
+                }
+
+                function validateDate() {
+                    document.querySelectorAll('.modal .form-control#expired').forEach(function (input) {
+                        var date = input.value;
+                        var errorElement = input.closest('.modal').querySelector('#error-expired');
+                        if (date === '') {
+                            errorElement.innerText = 'End date is required.';
+                        } else {
+                            var selectedDate = new Date(date);
+                            var today = new Date();
+                            today.setHours(0, 0, 0, 0);
+                            if (selectedDate <= today) {
+                                errorElement.innerText = 'End date must be greater than today.';
+                            } else {
+                                errorElement.innerText = '';
+                            }
+                        }
+                    });
+                }
+
+                function validateDescription() {
+                    document.querySelectorAll('.modal .form-control#description').forEach(function (textarea) {
+                        var description = textarea.value;
+                        var errorElement = textarea.closest('.modal').querySelector('#error-description');
+                        if (description === '') {
+                            errorElement.innerText = 'Description is required.';
+                        } else {
+                            errorElement.innerText = '';
+                        }
+                    });
+                }
+
+                
+            });
+
+        </script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 var expertiseCheckboxes = document.querySelectorAll('.expertise-checkbox');
@@ -1031,6 +1218,8 @@
                 });
             });
         </script>
+
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
         <script data-cfasync="false" src="assets/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="b9b8f1fa285a150b1a70a944-text/javascript"></script>

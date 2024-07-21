@@ -91,7 +91,7 @@ public class InputRecruiterProfileController extends HttpServlet {
         String date = request.getParameter("dob");
         String gender = request.getParameter("gender");
         String img="IMG/chung.png";
-
+        String logoCompany="IMG/company_img.png";
         dao.inputRecruiterInfo(firstname, lastname, gender, date, img, email, phone, userID);
 
         String companyname = request.getParameter("companyname");
@@ -101,10 +101,10 @@ public class InputRecruiterProfileController extends HttpServlet {
         String location = request.getParameter("location");
         String budget = request.getParameter("budget");
         String describe = request.getParameter("describe");
-
+        
         int recruiterID = dao.getRecruiterIDbyUserID(userID);
 
-        dao.inputCompanyInfo(companyname, budget, established, null, website, describe, location, recruiterID);
+        dao.inputCompanyInfo(companyname, budget, established, logoCompany, website, describe, location, recruiterID);
         request.setAttribute("mess", "Registration successful. Please log in again!");
         
         request.getRequestDispatcher("login").forward(request, response);

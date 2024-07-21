@@ -22,49 +22,59 @@ public class RecruiterProfileEditControll extends HttpServlet {
         Recruiter recruiter = (Recruiter) session.getAttribute("recruiter");
         Company company = (Company) session.getAttribute("company");
 
-        // Lấy dữ liệu từ form
+        if (recruiter == null || company == null) {
+            req.setAttribute("updateMessage", "Recruiter or Company data is missing.");
+            req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
+            return;
+        }
+
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String phone = req.getParameter("phoneNumber");
         String newEmail = req.getParameter("email");
-        String companyName = req.getParameter("companyName");
-        String establishedOn = req.getParameter("establishedOn");
-        String website = req.getParameter("website");
-        String describe = req.getParameter("describe");
 
-        // Define regex patterns
         String phonePattern = "^0\\d{9}$";
         String emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$";
 
-        // Validate phone number
         if (!Pattern.matches(phonePattern, phone)) {
             req.setAttribute("updateMessage", "Invalid phone number format. Please enter a valid phone number.");
             req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
             return;
         }
 
-        // Validate new email
         if (!Pattern.matches(emailPattern, newEmail)) {
             req.setAttribute("updateMessage", "Invalid email format. Please enter a valid email address.");
             req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
             return;
         }
 
-        // Validate company information
+        recruiter.setFirstName(firstName);
+        recruiter.setLastName(lastName);
+        recruiter.setPhone(phone);
+        recruiter.setEmail(newEmail);
+
+        String companyName = req.getParameter("companyName");
+        String establishedOn = req.getParameter("establishedOn");
+        String website = req.getParameter("website");
+        String describe = req.getParameter("describe");
+
         if (companyName == null || companyName.isEmpty()) {
             req.setAttribute("updateMessage", "Company name is required.");
             req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
             return;
         }
 
-        // Cập nhật thông tin recruiter và company
-        recruiter.setFirstName(firstName);
-        recruiter.setLastName(lastName);
-        recruiter.setPhone(phone);
-        recruiter.setEmail(newEmail);
+        java.sql.Date establishedDate;
+        try {
+            establishedDate = java.sql.Date.valueOf(establishedOn);
+        } catch (IllegalArgumentException e) {
+            req.setAttribute("updateMessage", "Invalid date format for established date.");
+            req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
+            return;
+        }
 
         company.setCompanyName(companyName);
-        company.setEstablishedOn(java.sql.Date.valueOf(establishedOn));
+        company.setEstablishedOn(establishedDate);
         company.setWebsite(website);
         company.setDescribe(describe);
 
@@ -73,10 +83,12 @@ public class RecruiterProfileEditControll extends HttpServlet {
 
         boolean updateSuccess = false;
         try {
-            // Cập nhật thông tin trong cơ sở dữ liệu
-            updateSuccess = recruiterDAO.updateRecruiterR(recruiter) && companyDAO.updateCompanyY(company);
+            updateSuccess = recruiterDAO.updateRecruiter(recruiter) && companyDAO.updateCompany(company);
         } catch (SQLException e) {
             e.printStackTrace();
+            req.setAttribute("updateMessage", "Database error occurred: " + e.getMessage());
+            req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
+            return;
         }
 
         if (updateSuccess) {
@@ -87,7 +99,6 @@ public class RecruiterProfileEditControll extends HttpServlet {
 
         req.setAttribute("recruiter", recruiter);
         req.setAttribute("company", company);
-        session.setAttribute("check", "1");
         req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
     }
 

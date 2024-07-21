@@ -22,15 +22,20 @@
         <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
- <style>
-        .pagination .page-item.active .page-link {
-            font-weight: bold;
-            color: #fff;
-            background-color:#FF3300;
-            border-color: #FF3300;
-        }
-    </style>
+
+
+       <style>
+
+        
+            .pagination .page-item.active .page-link {
+                font-weight: bold;
+                color: #fff;
+                background-color:#FF3300;
+                border-color: #FF3300;
+            }
+        </style>
         <style>
+
             .text-center1 {
                 width: 150px;
                 height: 150px;
@@ -168,7 +173,16 @@
                 font-size: 20px; /* Kích thước chữ */
                 position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
             }
+            
+            .titlepost{
+                max-width: 300px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
         </style>
+        
     </head>
     <body>
 
@@ -260,7 +274,7 @@
                                                 <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span></a>
                                         </h4>
                                         <div id="collapseOne" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${cate}" var="category" varStatus="loop">
+                                            <c:forEach items="${categories}" var="category" varStatus="loop">
                                                 <div style="${loop.index > 3 ? 'display:none;' : ''}" class="category-item">
                                                     <label class="custom_check">
                                                         <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
@@ -270,7 +284,7 @@
                                             </c:forEach>
 
                                             <div id="collapseOnes" class="collapse" data-bs-parent="#accordionExample1">
-                                                <c:forEach items="${cate}" var="category" begin="4">
+                                                <c:forEach items="${categories}" var="category" begin="4">
                                                     <div class="category-item">
                                                         <label class="custom_check">
                                                             <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
@@ -379,7 +393,7 @@
                             <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
                             <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
 
-                            <%-- Hiển thị danh sách bài đăng --%>
+                           <%-- Hiển thị danh sách bài đăng --%>
                             <div class="row" id="listpostContainer">
                                 <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
                                     <div class="col-xl-4 col-md-6 post-item">
@@ -410,8 +424,8 @@
                                                             <span class="verified"><i class="fas fa-check-circle"></i></span>
                                                         </a>
                                                     </div>
-                                                    <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
+                                                   <div class="profile-name">
+                                                        <div class="author-location titlepost"><a>${list.title} </a></div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
@@ -419,10 +433,10 @@
                                                     </div>
                                                     <div class="skills-container">
                                                         <c:forEach items="${fn:split(list.skill, ',')}" var="skill" varStatus="loop">
-                                                            <c:if test="${loop.index < 3}">
+                                                            <c:if test="${loop.index < 2}">
                                                                 <span class="badge badge-pill badge-design">${skill}</span>
                                                             </c:if>                                                              
-                                                            <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                            <c:if test="${loop.index == 1 and not loop.last}">                                                                 
                                                                 <span class="badge badge-pill badge-design">...</span>
                                                             </c:if>
                                                         </c:forEach>
@@ -554,6 +568,8 @@
         </div>
     </div>
 </c:if>
+
+
 
                         </div>
                     </div>

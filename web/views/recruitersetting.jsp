@@ -121,100 +121,100 @@
                         </div>
 
                         <div class="col-xl-9 col-lg-8">
-                            <div class="pro-pos">
-                                <div class="setting-content employee-profile-new">
-                                    <form action="updateRecruiterProfile" method="post">
-                                        <div class="card">
-                                            <div class="pro-head">
-                                                <h3>Profile Setting</h3>
+    <div class="pro-pos">
+        <div class="setting-content employee-profile-new">
+            <form action="updateRecruiterProfile" method="post">
+                <div class="card">
+                    <div class="pro-head">
+                        <h3>Profile Setting</h3>
+                    </div>
+                    <div class="pro-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-row pro-pad pt-0 ps-0">
+                                    <div class="input-block col-md-6 pro-pic">                                             
+                                        <label class="form-label">Profile Picture</label>
+                                        <div class="d-flex align-items-center">
+                                            <div class="upload-images">
+                                                <img src="${recruiter.image}" alt="Image" id="blah">
                                             </div>
-                                            <div class="pro-body">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="form-row pro-pad pt-0 ps-0">
-                                                            <div class="input-block col-md-6 pro-pic">                                             
-                                                                <label class="form-label">Profile Picture</label>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="upload-images">
-                                                                        <img src="${recruiter.image}" alt="Image" id="blah">
-                                                                    </div>
-                                                                    <div class="ms-3">
-                                                                        <label class="file-upload image-upbtn ms-0">
-                                                                            Upload Image <input type="file" id="imgInp">
-                                                                        </label>
-                                                                        <p>Max Image size 300*300</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="container">
-                                                            <h2>Recruiter Profile</h2>
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">First Name</label>
-                                                                        <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstName" value="${recruiter.firstName}" maxlength="20" required>
-                                                                        <div style="color: red" id="eFirstname"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Last Name</label>
-                                                                        <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastName" value="${recruiter.lastName}" maxlength="20" required>
-                                                                        <div style="color: red" id="eLastname"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Phone Number</label>
-                                                                        <input oninput="checkphone()" type="text" class="form-control" id="phone" name="phoneNumber" value="${recruiter.phone}" pattern="^0\d{9}$" title="Phone number must be 10 digits starting with 0" maxlength="10" required>
-                                                                        <div style="color: red" id="ePhone"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Email</label>
-                                                                        <input oninput="checkEmail()" type="email" class="form-control" id="email" name="email" value="${recruiter.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" maxlength="30" required>
-                                                                        <div style="color: red" id="eEmail"></div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-lg-12">
-                                                                    <h2>Company Details</h2>
-                                                                    <div class="mb-3">                                                                     
-                                                                        <label class="form-label">Company Name</label>
-                                                                        <input oninput="checkcompany()" type="text" class="form-control" id="companyname" name="companyName" value="${company.companyName}" maxlength="20" required>                                                                  
-                                                                        <div style="color: red" id="eCompanyname"></div>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Established On</label>
-                                                                        <input type="date" class="form-control" name="establishedOn" value="${company.establishedOn}" required>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Website</label>
-                                                                        <input type="text" class="form-control" name="website" value="${company.website}" maxlength="50" required>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Describe</label>
-                                                                        <textarea rows="4" class="form-control" name="describe" maxlength="500" required>${company.describe}</textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card text-end border-0">
-                                                                <div class="pro-body">
-                                                                    <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
-                                                                    <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="ms-3">
+                                                <label class="file-upload image-upbtn ms-0">
+                                                    Upload Image <input type="file" id="imgInp">
+                                                </label>
+                                                <p>Max Image size 300*300</p>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <h2>Recruiter Profile</h2>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">First Name</label>
+                                                <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstName" value="${recruiter.firstName}" maxlength="20" required>
+                                                <div style="color: red" id="eFirstname"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Last Name</label>
+                                                <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastName" value="${recruiter.lastName}" maxlength="20" required>
+                                                <div style="color: red" id="eLastname"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Phone Number</label>
+                                                <input oninput="checkphone()" type="text" class="form-control" id="phone" name="phoneNumber" value="${recruiter.phone}" pattern="^0\d{9}$" title="Phone number must be 10 digits starting with 0" maxlength="10" required>
+                                                <div style="color: red" id="ePhone"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input oninput="checkEmail()" type="email" class="form-control" id="email" name="email" value="${recruiter.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" maxlength="30" required>
+                                                <div style="color: red" id="eEmail"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <h2>Company Details</h2>
+                                            <div class="mb-3">                                                                     
+                                                <label class="form-label">Company Name</label>
+                                                <input oninput="checkcompany()" type="text" class="form-control" id="companyname" name="companyName" value="${company.companyName}" maxlength="20" required>                                                                  
+                                                <div style="color: red" id="eCompanyname"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Established On</label>
+                                                <input type="date" class="form-control" name="establishedOn" value="${company.establishedOn}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Website</label>
+                                                <input type="text" class="form-control" name="website" value="${company.website}" maxlength="50" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Describe</label>
+                                                <textarea rows="4" class="form-control" name="describe" maxlength="500" required>${company.describe}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-end border-0">
+                                        <div class="pro-body">
+                                            <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
+                                            <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
                     </div>
                 </div>
@@ -263,6 +263,12 @@
 
 
 
+
+        <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
+    <script src="assets/js/checkinput.js"></script>
+    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:09 GMT -->
+
         <style>
             .modal-body.text-center {
                 text-align: center;
@@ -308,8 +314,26 @@
             }
 
         </style>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
+        <script src="assets/js/bootstrap.bundle.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/plugins/select2/js/select2.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/js/moment.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="assets/js/bootstrap-datetimepicker.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="assets/plugins/datatables/datatables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
+    <script src="assets/js/checkinput.js"></script>
     
+
 </html>
     
 

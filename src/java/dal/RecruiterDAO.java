@@ -351,6 +351,23 @@ public class RecruiterDAO extends DBContext {
         }
         return -1;
     }
+    
+    public int getNumberPostbyRecruiter2(int recreuiterID) {
+        String query = """
+                          SELECT COUNT(postID) AS total_posts
+                                              FROM [Post] where recruiterID = ? and status = 2;""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recreuiterID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("total_posts");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
 
     public int getNumberApplyPostbyRecruiter(int recreuiterID) {
         String query = """
@@ -358,6 +375,25 @@ public class RecruiterDAO extends DBContext {
                                               FROM Post P
                                               LEFT JOIN JobApply JA ON P.postID = JA.postID
                                               where recruiterID =?""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recreuiterID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("TotalApplies");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
+    
+    public int getNumberApplyPostbyRecruiter2(int recreuiterID) {
+        String query = """
+                        SELECT COUNT(JA.applyID) AS TotalApplies
+                                                                       FROM Post P
+                                                                       LEFT JOIN JobApply JA ON P.postID = JA.postID
+                                                                       where recruiterID =? and JA.status = 1""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, recreuiterID);

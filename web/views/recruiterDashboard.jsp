@@ -355,7 +355,7 @@
                                                 <div class="dash-widget-info">Completed Projects</div>
                                             </div>
                                             <div class="dash-widget-more d-flex align-items-center justify-content-between">
-                                                <div class="dash-widget-count">25</div>
+                                                <div class="dash-widget-count">${numberComplete}</div>
                                                 <a href="CompletedProjects" class="d-flex">View Details</a>
                                             </div>
                                         </div>
@@ -369,7 +369,7 @@
                                                 <div class="dash-widget-info">Freelancer Approved</div>
                                             </div>
                                             <div class="dash-widget-more d-flex align-items-center justify-content-between">
-                                                <div class="dash-widget-count">52</div>
+                                                <div class="dash-widget-count">${getNumberApplyAproed}</div>
                                                 <a href="ExpiredProjects" class="d-flex">View Details</a>
                                             </div>
                                         </div>
@@ -436,11 +436,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Title</th>
-                                                            <th>Job Type</th>
-                                                            <th>Skill</th>
+                                                            <th>Level</th>                                                            
                                                             <th>Create On</th>
-                                                            <th>Categories</th>
-                                                            <th>Proposals</th>
+                                                            <th>Position</th>
+                                                            <th>Quantity</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -449,13 +448,11 @@
                                                             <tr>
                                                                 <td>${listpost.title}</td>
                                                                 <td>${listpost.jobTypeID.jobName}</td>
-                                                                <td><c:forEach var="skill" items="${listpost.skill.split(',')}">
-                                                                        <div class="skill">${skill.trim()}</div>
-                                                                    </c:forEach></td>
+                                                                
                                                                 <td>${listpost.datePost}</td>
                                                                 <td>${listpost.caID.categoriesName}</td>
                                                                 <td style="text-align: center;">${listpost.quantity}</td>
-                                                                <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
+                                                                <td ><a style="margin-left: 30px" href="PostDetails?postID=${listpost.postID}"><i class="feather-eye"></i></a></td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
