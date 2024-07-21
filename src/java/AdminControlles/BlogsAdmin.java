@@ -133,7 +133,7 @@ public class BlogsAdmin extends HttpServlet {
             request.getSession().setAttribute("successMessage", "Add Blog successfull!");
             Thread.sleep(2000);
             response.sendRedirect("blogAdmin");
-        } catch (Exception e) {
+        } catch (ServletException | IOException | InterruptedException e) {
             System.out.println(e.getMessage());
         }
 
@@ -160,7 +160,7 @@ public class BlogsAdmin extends HttpServlet {
             request.getSession().setAttribute("successMessage", "Update Blog successfull!");
             Thread.sleep(2000);
             response.sendRedirect("blogAdmin");
-        } catch (Exception e) {
+        } catch (ServletException | IOException | InterruptedException | NumberFormatException e) {
             e.getMessage();
         }
     }

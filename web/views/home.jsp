@@ -80,6 +80,20 @@
             }
 
 
+            .nav li span {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .truncate {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
         </style>
     </head>
     <body class="home-page bg-two">
@@ -361,7 +375,7 @@
                                                 <a href=""><img src="${freelancerSkill.freelancer.getImage()}" class="me-2" alt="Img"></a>
                                             </div>
                                             <div class="developer-content">
-                                                <h4><a href="ViewFreelancerProfile?id=${freelancerSkill.freelancer.getFreelanceID()}">${freelancerSkill.freelancer.fullname()}</a></h4>
+                                                <h4><a href="ViewFreelancerProfile?id=${freelancerSkill.freelancer.getFreelanceID()} " class="truncate">${freelancerSkill.freelancer.fullname()}</a></h4>
                                                 <p>${freelancerSkill.skills.skill_set_ID.skill_set_name}</p>
                                                 <div class="rating">
                                                     <i class="fas fa-star filled"></i>
@@ -376,30 +390,6 @@
                                         <div class="hour-rate">
                                             <ul class="nav">
                                                 <li><i class="  me-1"></i><span id="describe-text">${freelancerSkill.freelancer.describe}</span></li>
-
-                                                <script>
-                                                    // Function to truncate text to the first 5 words followed by '...'
-                                                    function truncateText(selector, maxWords) {
-                                                        const element = document.querySelector(selector);
-                                                        if (element) {
-                                                            let text = element.textContent;
-                                                            let words = text.split(' ');
-                                                            if (words.length > maxWords) {
-                                                                text = words.slice(0, maxWords).join(' ') + '...';
-                                                            }
-                                                            element.textContent = text;
-                                                        }
-                                                    }
-
-                                                    // Usage
-                                                    truncateText('#describe-text', 5); // Truncate to 5 words
-                                                </script>
-
-                                                <li>
-                                                    <div class="favorite-icon" onclick="toggleHeart(this)" >
-                                                        <i class="far fa-heart"></i>
-                                                    </div>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -449,10 +439,7 @@
                                         <div class="project-img position-relative">
                                             <!-- Hình ảnh -->
                                             <a href="PostDetails?postID=${list.postID}"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
-                                            <!-- Biểu tượng trái tym -->
-                                            <div class="favorite-icon" onclick="toggleHeart(this)" >
-                                                <i class="far fa-heart"></i>
-                                            </div>
+
                                         </div>
                                         <div class="feature-content">
                                             <!-- Các nội dung khác -->
@@ -1121,18 +1108,18 @@
             });
         </script>
         <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const maxLength = 40;
-        const descriptions = document.querySelectorAll(".blog-content p.mb-0");
+            document.addEventListener("DOMContentLoaded", function () {
+                const maxLength = 40;
+                const descriptions = document.querySelectorAll(".blog-content p.mb-0");
 
-        descriptions.forEach(function (description) {
-            const text = description.innerText;
-            if (text.length > maxLength) {
-                description.innerText = text.substring(0, maxLength) + "...";
-            }
-        });
-    });
-</script>
+                descriptions.forEach(function (description) {
+                    const text = description.innerText;
+                    if (text.length > maxLength) {
+                        description.innerText = text.substring(0, maxLength) + "...";
+                    }
+                });
+            });
+        </script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>

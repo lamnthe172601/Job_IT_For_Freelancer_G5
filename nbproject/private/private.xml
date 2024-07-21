@@ -20,19 +20,40 @@
             <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/freelancerFavourites.jsp</file>
         </group>
         <group name="SWP391">
+            <file>file:/D:/SU24/A/src/java/AdminControlles/BlogsAdmin.java</file>
             <file>file:/D:/SU24/A/src/java/dal/RecruiterDAO.java</file>
+            <file>file:/D:/SU24/A/src/java/CommonControll/CompanyDetailCommon.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/AddFreelancerFavoritesControll.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ChangeStatusPostServlet.java</file>
+            <file>file:/D:/SU24/A/src/java/FreelancerControll/PostByLocation.java</file>
+            <file>file:/D:/SU24/A/web/views/ProfileSettingFreelancer.jsp</file>
+            <file>file:/D:/SU24/A/web/views/404Page.jsp</file>
+            <file>file:/D:/SU24/A/src/java/dal/CompanyDAO.java</file>
+            <file>file:/D:/SU24/A/src/java/Models/Post.java</file>
+            <file>file:/D:/SU24/A/src/java/AccountControll/LoginController.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ConnectFreelancerControll.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageAllApplicationControll.java</file>
+            <file>file:/D:/SU24/A/web/views/allApplication.jsp</file>
+            <file>file:/D:/SU24/A/web/views/expiredProjects.jsp</file>
             <file>file:/D:/SU24/A/src/java/dal/BlogDAO.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/CompletedProjectsControll.java</file>
+            <file>file:/D:/SU24/A/web/views/recruiterDashboard.jsp</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/Dashboard.java</file>
             <file>file:/D:/SU24/A/web/views/managePost.jsp</file>
+            <file>file:/D:/SU24/A/src/java/Models/Freelancer.java</file>
             <file>file:/D:/SU24/A/web/views/blogDetails.jsp</file>
             <file>file:/D:/SU24/A/web/views/CreatePost.jsp</file>
-            <file>file:/D:/SU24/A/web/views/ProfileSettingFreelancer.jsp</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/DeleteFreelancerFavoritesControll.java</file>
             <file>file:/D:/SU24/A/src/java/dal/CategoriesDAO.java</file>
+            <file>file:/D:/SU24/A/src/java/CommonControll/CompanyDetailControll.java</file>
             <file>file:/D:/SU24/A/src/java/dal/PostDAO.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/CreatePostControll.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ChartControll.java</file>
+            <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/EmailService.java</file>
             <file>file:/D:/SU24/A/web/views/home.jsp</file>
             <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageJobsPostsControll.java</file>
-            <file>file:/D:/SU24/A/src/java/Models/Post.java</file>
             <file>file:/D:/SU24/A/src/java/CommonControll/BlogDetailsControll.java</file>
-            <file>file:/D:/SU24/A/src/java/dal/HomeDAO.java</file>
         </group>
     </open-files>
 </project-private>
