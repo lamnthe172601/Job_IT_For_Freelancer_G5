@@ -20,7 +20,6 @@ import java.io.PrintWriter;
 import Models.User;
 import dal.CategoriesDAO;
 import dal.CompanyDAO;
-import dal.HomeDAO;
 import dal.RecruiterDAO;
 
 public class LoginController extends HttpServlet {
@@ -82,13 +81,13 @@ public class LoginController extends HttpServlet {
                 }
 
                 if (c.isLevelPass() == true && c.getStatus().equals("active")) {
-                    if (c.getRoleID().getRoleID() == 1 || c.getRoleID().getRoleID() == 2) {
-                        session.setAttribute("adminProfile", accDao.getAdminProfileByUserID(c.getUserID()));
-                        response.sendRedirect("dashboardAdmin");
-                    } else if (c.getRoleID().getRoleID() == 5) {
-                        response.sendRedirect("SelectAccountType");
-                    } else {
-                        response.sendRedirect("home");
+                    switch (c.getRoleID().getRoleID()) {
+                        case 1, 2 -> {
+                            session.setAttribute("adminProfile", accDao.getAdminProfileByUserID(c.getUserID()));
+                            response.sendRedirect("dashboardAdmin");
+                        }
+                        case 5 -> response.sendRedirect("SelectAccountType");
+                        default -> response.sendRedirect("home");
                     }
                 } else if (c.isLevelPass() == true && c.getStatus().equals("inactive")) {
                     request.setAttribute("loginFaild", "Your account has been banned");

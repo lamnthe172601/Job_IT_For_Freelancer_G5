@@ -1109,7 +1109,7 @@
         </script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const maxLength = 80;
+                const maxLength = 40;
                 const descriptions = document.querySelectorAll(".blog-content p.mb-0");
 
                 descriptions.forEach(function (description) {
@@ -1122,7 +1122,7 @@
         </script>
         <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const maxLength = 50;
+        const maxLength = 40;
         const descriptions = document.querySelectorAll(".blog-content p.mb-0");
 
         descriptions.forEach(function (description) {

@@ -1,9 +1,11 @@
 package dal;
 
 import Models.Blogs;
+import static dal.HomeDAO.getShortDescription;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,6 +56,30 @@ public class BlogDAO extends DBContext {
         }
         return blog;
 
+    }
+    public List<Blogs> getTopBlogs() {
+        List<Blogs> blogs = new ArrayList<>();
+        String query = """
+                   SELECT TOP(3) blogID, title, image, date_blog, description, tag, statusBlog
+                                      FROM Blogs
+                   				   where statusBlog = 1
+                                      ORDER BY date_blog DESC;""";
+        try (PreparedStatement ps = connection.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Blogs blog = new Blogs();
+                blog.setBlogID(rs.getInt("blogID"));
+                blog.setTitle(rs.getString("title"));
+                blog.setImage(rs.getString("image"));
+                blog.setDate_blog(rs.getDate("date_blog"));
+                String description = rs.getString("description");
+                blog.setDescription(getShortDescription(description, 10));
+                blog.setTag(rs.getString("tag"));
+                blog.setStatus(true);
+                blogs.add(blog);
+            }
+        } catch (SQLException e) {
+        }
+        return blogs;
     }
 
     public List<Blogs> searchBlogs(String keyword) {

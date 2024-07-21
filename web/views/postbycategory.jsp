@@ -404,15 +404,15 @@
                                                 <div class="counter-stats">
                                                     <ul>
                                                         <li>
-                                                            <h5>Duration</h5>
+                                                            <h5>Work Time</h5>
                                                             <h3 class="counter-value">${post.durationID.durationName}</h3>
                                                         </li>
                                                         <li>
-                                                            <h5>Proposals</h5>
+                                                            <h5>Quantity</h5>
                                                             <h3 class="counter-value">${post.quantity}</h3>
                                                         </li>
                                                         <li>
-                                                            <h5>Job Type</h5>
+                                                            <h5>Level</h5>
                                                             <h3 class="counter-value"><span class="jobtype">${post.jobTypeID.jobName}</span></h3>
                                                         </li>
                                                     </ul>
