@@ -161,6 +161,12 @@
                 font-size: 20px; /* Kích thước chữ */
                 position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
             }
+            .titlepost{
+                max-width: 300px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         </style>
     </head>
     <body>
@@ -409,7 +415,7 @@
                                                         <img style="width: 100%; height: 100%;" src="${list.image}" alt="author">                                                       
                                                     </div>
                                                     <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
+                                                        <div class="author-location titlepost"><a>${list.title} </a></div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
