@@ -43,32 +43,24 @@ public class changePass extends HttpServlet {
         request.setAttribute("confirmPassword", confirmPassword);
 
         if (!newPassword.equals(confirmPassword)) {
-            request.setAttribute("errorPass", "Mật khẩu không khớp");
+            request.setAttribute("errorPass", "Passwords do not match.");
             request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
         } else {
             // Kiểm tra xem mật khẩu mới đáp ứng các yêu cầu (bắt đầu bằng chữ cái in hoa, dài ít nhất 8 kí tự, có ít nhất 1 chữ số)
             if (!newPassword.matches("^(?=.*[A-Z])(?=.*[0-9]).{8,}$")) {
-                request.setAttribute("errorPass", "Mật khẩu mới phải bắt đầu bằng chữ cái in hoa, dài ít nhất 8 kí tự và có ít nhất 1 chữ số");
+                request.setAttribute("errorPass", "The new password must start with a capital letter, be at least 8 characters long, and include at least one number.");
                 request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
             } else {
                 try {
-//                    if (account.getPassword().equals(currentPassword)) {
-//                        String pw = SHA1.toSHA1(newPassword);
-//                        userDAO.changePassword(account.getUserID(), pw);
-//                        response.sendRedirect("login");
-//                    } else {
-//                        request.setAttribute("errorPass", "Mật khẩu hiện tại không đúng");
-//                        request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
-//                    }
 
                     String hashedCurrentPassword = SHA1.toSHA1(currentPassword);
                     if (account.getPassword().equals(hashedCurrentPassword)) {
                         String hashedNewPassword = SHA1.toSHA1(newPassword);
                         userDAO.changePassword(account.getUserID(), hashedNewPassword);
-                        session.setAttribute("successMessage", "Đổi mật khẩu thành công. Vui lòng đăng nhập lại.");
+                        session.setAttribute("successMessage", "Password changed successfully.");
                         response.sendRedirect("login");
                     } else {
-                        request.setAttribute("errorPass", "Mật khẩu hiện tại không đúng");
+                        request.setAttribute("errorPass", " The current password is incorrect.");
                         request.getRequestDispatcher("views/changePasswordPrimary.jsp").forward(request, response);
                     }
                 } catch (SQLException ex) {
