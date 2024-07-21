@@ -129,7 +129,12 @@
                 cursor: pointer;
             }
 
-
+.titlepost{
+                max-width: 300px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
 
         </style>
     </head>
@@ -362,7 +367,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${post.title}</div>
+                                                        <div class="author-location titlepost"><a>${post.title} </a></div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${post.caID.categoriesName}</a></h3>
@@ -370,10 +375,10 @@
                                                     </div>
                                                     <div class="skills-container">
                                                         <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index < 3}">
+                                                            <c:if test="${loop.index < 2}">
                                                                 <span class="badge badge-pill badge-design">${skill}</span>
                                                             </c:if>                                                              
-                                                            <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                            <c:if test="${loop.index == 1 and not loop.last}">                                                                 
                                                                 <span class="badge badge-pill badge-design">...</span>
                                                             </c:if>
                                                         </c:forEach>

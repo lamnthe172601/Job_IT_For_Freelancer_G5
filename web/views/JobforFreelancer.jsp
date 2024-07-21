@@ -173,7 +173,16 @@
                 font-size: 20px; /* Kích thước chữ */
                 position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
             }
+            
+            .titlepost{
+                max-width: 300px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
         </style>
+        
     </head>
     <body>
 
@@ -265,7 +274,7 @@
                                                 <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span></a>
                                         </h4>
                                         <div id="collapseOne" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${cate}" var="category" varStatus="loop">
+                                            <c:forEach items="${categories}" var="category" varStatus="loop">
                                                 <div style="${loop.index > 3 ? 'display:none;' : ''}" class="category-item">
                                                     <label class="custom_check">
                                                         <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
@@ -275,7 +284,7 @@
                                             </c:forEach>
 
                                             <div id="collapseOnes" class="collapse" data-bs-parent="#accordionExample1">
-                                                <c:forEach items="${cate}" var="category" begin="4">
+                                                <c:forEach items="${categories}" var="category" begin="4">
                                                     <div class="category-item">
                                                         <label class="custom_check">
                                                             <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
@@ -415,8 +424,8 @@
                                                             <span class="verified"><i class="fas fa-check-circle"></i></span>
                                                         </a>
                                                     </div>
-                                                    <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
+                                                   <div class="profile-name">
+                                                        <div class="author-location titlepost"><a>${list.title} </a></div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
@@ -424,10 +433,10 @@
                                                     </div>
                                                     <div class="skills-container">
                                                         <c:forEach items="${fn:split(list.skill, ',')}" var="skill" varStatus="loop">
-                                                            <c:if test="${loop.index < 3}">
+                                                            <c:if test="${loop.index < 2}">
                                                                 <span class="badge badge-pill badge-design">${skill}</span>
                                                             </c:if>                                                              
-                                                            <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                            <c:if test="${loop.index == 1 and not loop.last}">                                                                 
                                                                 <span class="badge badge-pill badge-design">...</span>
                                                             </c:if>
                                                         </c:forEach>

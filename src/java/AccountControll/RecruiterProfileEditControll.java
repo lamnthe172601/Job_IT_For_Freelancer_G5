@@ -28,15 +28,10 @@ public class RecruiterProfileEditControll extends HttpServlet {
             return;
         }
 
-        // Lấy dữ liệu từ form
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String phone = req.getParameter("phoneNumber");
         String newEmail = req.getParameter("email");
-        String companyName = req.getParameter("companyName");
-        String establishedOn = req.getParameter("establishedOn");
-        String website = req.getParameter("website");
-        String describe = req.getParameter("describe");
 
         String phonePattern = "^0\\d{9}$";
         String emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$";
@@ -63,18 +58,20 @@ public class RecruiterProfileEditControll extends HttpServlet {
         String website = req.getParameter("website");
         String describe = req.getParameter("describe");
 
-        // Validate company information
         if (companyName == null || companyName.isEmpty()) {
             req.setAttribute("updateMessage", "Company name is required.");
             req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
             return;
         }
 
-        // Cập nhật thông tin recruiter và company
-        recruiter.setFirstName(firstName);
-        recruiter.setLastName(lastName);
-        recruiter.setPhone(phone);
-        recruiter.setEmail(newEmail);
+        java.sql.Date establishedDate;
+        try {
+            establishedDate = java.sql.Date.valueOf(establishedOn);
+        } catch (IllegalArgumentException e) {
+            req.setAttribute("updateMessage", "Invalid date format for established date.");
+            req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
+            return;
+        }
 
         company.setCompanyName(companyName);
         company.setEstablishedOn(establishedDate);
@@ -86,8 +83,7 @@ public class RecruiterProfileEditControll extends HttpServlet {
 
         boolean updateSuccess = false;
         try {
-            // Cập nhật thông tin trong cơ sở dữ liệu
-            updateSuccess = recruiterDAO.updateRecruiterR(recruiter) && companyDAO.updateCompanyY(company);
+            updateSuccess = recruiterDAO.updateRecruiter(recruiter) && companyDAO.updateCompany(company);
         } catch (SQLException e) {
             e.printStackTrace();
             req.setAttribute("updateMessage", "Database error occurred: " + e.getMessage());
@@ -103,7 +99,6 @@ public class RecruiterProfileEditControll extends HttpServlet {
 
         req.setAttribute("recruiter", recruiter);
         req.setAttribute("company", company);
-        session.setAttribute("check", "1");
         req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
     }
 
