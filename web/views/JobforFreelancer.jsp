@@ -229,7 +229,7 @@
             </div>
 
 
-      
+
 
 
             <div class="content">
@@ -536,11 +536,25 @@
     <div class="row">
         <div class="col-md-12">
             <ul class="pagination list-pagination">
+                <c:if test="${tag > 1}">
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Trước" href="JobforFreelancer?page=${tag - 1}">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                </c:if>
                 <c:forEach begin="1" end="${endPage}" var="e">
                     <li class="page-item ${page == e ? 'active' : ''}">
                         <a class="page-link" href="JobforFreelancer?page=${e}">${e}</a>
                     </li>
                 </c:forEach>
+                <c:if test="${tag < endPage}">
+                    <li class="page-item">
+                        <a class="page-link" href="JobforFreelancer?page=${tag + 1}" aria-label="Sau">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </c:if>
             </ul>
         </div>
     </div>
@@ -548,7 +562,6 @@
 
 
 
-                           
                         </div>
                     </div>
                 </div>
@@ -683,7 +696,7 @@
             </div>
         </div>
 
- <script>
+        <script>
 
             document.addEventListener("DOMContentLoaded", function () {
                 const radioButtons = document.getElementsByName("report_post_message");
@@ -790,43 +803,43 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-                 function addToFavorites(postID) {
-                     $.ajax({
-                         url: 'AddFavourites',
-                         type: 'GET',
-                         data: {
-                             postID: postID
-                         },
-                         success: function (response) {
-                             // Xử lý phản hồi thành công (nếu cần)
-                             //alert('Đã thêm vào danh sách yêu thích!');
-                             $('#favourite_' + postID).addClass('color-active');
-                         },
-                         error: function (xhr, status, error) {
-                             // Xử lý lỗi (nếu có)
-                             alert('Đã xảy ra lỗi: ' + error);
-                         }
-                     });
-                 }
+            function addToFavorites(postID) {
+                $.ajax({
+                    url: 'AddFavourites',
+                    type: 'GET',
+                    data: {
+                        postID: postID
+                    },
+                    success: function (response) {
+                        // Xử lý phản hồi thành công (nếu cần)
+                        //alert('Đã thêm vào danh sách yêu thích!');
+                        $('#favourite_' + postID).addClass('color-active');
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi (nếu có)
+                        alert('Đã xảy ra lỗi: ' + error);
+                    }
+                });
+            }
 
-                 function removeFromFavorites(postID) {
-                     $.ajax({
-                         url: 'DeleteFavourites',
-                         type: 'GET',
-                         data: {
-                             postID: postID
-                         },
-                         success: function (response) {
-                             // Xử lý phản hồi thành công (nếu cần)
-                             //alert('Đã xóa khỏi danh sách yêu thích!');
-                             $('#favourite_' + postID).removeClass('color-active');
-                         },
-                         error: function (xhr, status, error) {
-                             // Xử lý lỗi (nếu có)
-                             alert('Đã xảy ra lỗi: ' + error);
-                         }
-                     });
-                 }
+            function removeFromFavorites(postID) {
+                $.ajax({
+                    url: 'DeleteFavourites',
+                    type: 'GET',
+                    data: {
+                        postID: postID
+                    },
+                    success: function (response) {
+                        // Xử lý phản hồi thành công (nếu cần)
+                        //alert('Đã xóa khỏi danh sách yêu thích!');
+                        $('#favourite_' + postID).removeClass('color-active');
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi (nếu có)
+                        alert('Đã xảy ra lỗi: ' + error);
+                    }
+                });
+            }
         </script>
 
 

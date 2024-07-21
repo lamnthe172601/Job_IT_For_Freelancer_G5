@@ -369,16 +369,12 @@
                                                         <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${post.location}</div>
                                                     </div>
                                                     <div class="skills-container">
-
-
-
-                                                        <c:forEach items="${fn:split(post.skill, ',')}" var="skill" varStatus="loop">
+                                                        <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
                                                             <c:if test="${loop.index < 3}">
                                                                 <span class="badge badge-pill badge-design">${skill}</span>
                                                             </c:if>                                                              
                                                             <c:if test="${loop.index == 2 and not loop.last}">                                                                 
                                                                 <span class="badge badge-pill badge-design">...</span>
-
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>

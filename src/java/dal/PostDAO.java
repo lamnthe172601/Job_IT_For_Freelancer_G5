@@ -58,6 +58,26 @@ public class PostDAO extends DBContext {
         return posts;
     }
 
+    public String getPostImagePath(int postID) {
+        String imagePath = null;
+        String query = "SELECT image FROM Posts WHERE postID = ?";
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, postID);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                imagePath = rs.getString("image");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return imagePath;
+    }
+
     public List<Post> getPostByRecruiterID(int pid) {
         List<Post> list = new ArrayList<>();
         String query = """
@@ -87,7 +107,7 @@ public class PostDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Post> getPostByRecruiterCompleted(int pid) {
         List<Post> list = new ArrayList<>();
         String query = """
@@ -288,13 +308,14 @@ public class PostDAO extends DBContext {
         return list;
     }
 
-    public void updatePost(String title, String image, String job_type_ID, String durationID, String quantity, String description, String budget, String location, String skill, String caID, int postID) {
+    public void updatePost(String title, String image, String job_type_ID, String durationID, String expired, String quantity, String description, String budget, String location, String skill, String caID, int postID) {
         String query = """
                        UPDATE [dbo].[Post]
                                 SET [title] = ?
                                    ,[image] = ?
                                    ,[job_type_ID] = ?
                                    ,[durationID] = ?
+                                   ,expired = ?
                                    ,[quantity] = ?
                                    ,[description] = ?
                                    ,[budget] = ?
@@ -307,13 +328,14 @@ public class PostDAO extends DBContext {
             stmt.setString(2, image);
             stmt.setString(3, job_type_ID);
             stmt.setString(4, durationID);
-            stmt.setString(5, quantity);
-            stmt.setString(6, description);
-            stmt.setString(7, budget);
-            stmt.setString(8, location);
-            stmt.setString(9, skill);
-            stmt.setString(10, caID);
-            stmt.setInt(11, postID);
+            stmt.setString(5, expired);
+            stmt.setString(6, quantity);
+            stmt.setString(7, description);
+            stmt.setString(8, budget);
+            stmt.setString(9, location);
+            stmt.setString(10, skill);
+            stmt.setString(11, caID);
+            stmt.setInt(12, postID);
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -330,8 +352,6 @@ public class PostDAO extends DBContext {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-
         }
     }
 
@@ -356,8 +376,7 @@ public class PostDAO extends DBContext {
                 + "    SELECT COUNT(j.applyID)\n"
                 + "    FROM JobApply j\n"
                 + "    WHERE j.postID = post.postID\n"
-                + ") AND status != 2\n"
-                + "AND postID = 8;";
+                + ") AND status != 2\n";
         PreparedStatement stmt = connection.prepareStatement(sql);
         try {
 
@@ -380,8 +399,6 @@ public class PostDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
-
-    
 
     //Tan task--------------------------------------------------------------------------------------------------------------------
     public List<PostBasic> getAllFavPosts(int id) {
@@ -471,6 +488,7 @@ public class PostDAO extends DBContext {
                                               	inner join Categories c on c.caID=p.caID
                                               	inner join Recruiter r on r.recruiterID=p.recruiterID
                                               	inner join Company co on co.recruiterID=p.recruiterID
+                                                where status=1 and checking=1
                                               	order by p.postID desc;
                        """;
         try {
@@ -536,7 +554,7 @@ public class PostDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 posts.add(new JobApply(rs.getInt("postID"), rs.getInt("budget"), rs.getDate("date_post"), rs.getDate("dateApply"),
-                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name"),rs.getString("Resume")));
+                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name"), rs.getString("Resume")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -562,8 +580,6 @@ public class PostDAO extends DBContext {
         }
         return 0;
     }
-    
-    
 
     public int getCountFavoSearch(int id, String txtSearch) {
 
@@ -706,7 +722,7 @@ public class PostDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 posts.add(new JobApply(rs.getInt("postID"), rs.getInt("budget"), rs.getDate("date_post"), rs.getDate("dateApply"),
-                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name"),rs.getString("Resume")));
+                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name"), rs.getString("Resume")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -795,15 +811,14 @@ public class PostDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 posts.add(new JobApply(rs.getInt("postID"), rs.getInt("budget"), rs.getDate("date_post"), rs.getDate("dateApply"),
-                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name"),rs.getString("Resume")));
+                        rs.getString("status"), rs.getString("title"), rs.getString("categories_name"), rs.getString("Resume")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return posts;
     }
-        
-  
+
     public List<Post> getPostsByCategory(int categoryID) {
         List<Post> posts = new ArrayList<>();
         String query = """
@@ -825,28 +840,30 @@ public class PostDAO extends DBContext {
                 Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
-                
-                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
+
+                posts.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return posts;
     }
- public int countPostsByCategory(int categoryID) {
-    int count = 0;
-    String query = "SELECT COUNT(*) AS total FROM Post WHERE caID = ?";
-    try (PreparedStatement ps = connection.prepareStatement(query)) {
-        ps.setInt(1, categoryID);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            count = rs.getInt("total");
+
+    public int countPostsByCategory(int categoryID) {
+        int count = 0;
+        String query = "SELECT COUNT(*) AS total FROM Post WHERE caID = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, categoryID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return count;
     }
-    return count;
-}
+
     public List<Post> getPostsByLocation(String location) {
         List<Post> posts = new ArrayList<>();
         String query = """
@@ -918,29 +935,29 @@ public class PostDAO extends DBContext {
 
         return posts;
     }
-    public int countPostsByLocation(String location) {
-    int count = 0;
-    String query = "SELECT COUNT(*) AS total FROM Post WHERE location = ?";
-    try (PreparedStatement ps = connection.prepareStatement(query)) {
-        ps.setString(1, location);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            count = rs.getInt("total");
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return count;
-}
 
-    
+    public int countPostsByLocation(String location) {
+        int count = 0;
+        String query = "SELECT COUNT(*) AS total FROM Post WHERE location = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, location);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
     public int TotalApplyByPost(int ID) {
 
         String sql = """
                      SELECT COUNT(j.applyID) AS TotalApplications
-                     FROM Post p
-                     LEFT JOIN JobApply j ON p.postID = j.postID
-                     where p.postID = ?
+                                                               FROM Post p
+                                                               LEFT JOIN JobApply j ON p.postID = j.postID
+                                                               where p.postID = ? and j.status = 1
                      """;
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -957,10 +974,7 @@ public class PostDAO extends DBContext {
         return -1;
 
     }
-    
 
-    
-    
     public List<Post> getPostsByFreelancerSkill(int freelancerID) {
         List<Post> list = new ArrayList<>();
         String query = """
@@ -1017,6 +1031,7 @@ public class PostDAO extends DBContext {
                                               
                                               SELECT *
                                               FROM MatchingPosts;""";
+
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, freelancerID);
@@ -1027,39 +1042,43 @@ public class PostDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("re_recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return list;
     }
-public int countPostsByFreelancerSkills(int freelancerID) {
-    int count = 0;
-    String query = """
-                   SELECT COUNT(*) AS total 
-                   FROM Post p
-                   JOIN SkillPost sp ON p.postID = sp.postID
-                   JOIN Skill s ON sp.skillID = s.skillID
-                   JOIN FreelancerSkill fs ON s.skillID = fs.skillID
-                   WHERE fs.freelancerID = ?
-                   """;
-    try (PreparedStatement ps = connection.prepareStatement(query)) {
-        ps.setInt(1, freelancerID);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            count = rs.getInt("total");
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return count;
-}
 
-    
+    public int countPostsByFreelancerSkills(int freelancerID) {
+        int count = 0;
+        String query = """
+                   WITH FreelancerSkills AS (
+                                          SELECT ss.skill_set_name
+                                          FROM [freelancer].[dbo].[Skills] us
+                                          JOIN [freelancer].[dbo].[Skill_Set] ss ON us.skill_set_ID = ss.skill_set_ID
+                                          WHERE us.freelancerID = ?
+                                      )
+                                      SELECT COUNT(DISTINCT p.postID) AS total
+                                      FROM [freelancer].[dbo].[Post] p
+                                      CROSS APPLY STRING_SPLIT(p.skill, ',') ps
+                                      WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills)""";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, freelancerID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         PostDAO dao = new PostDAO();
-       List<Post> p = dao.getPostByRecruiterCompleted(3);
+        List<Post> p = dao.getPostByRecruiterCompleted(3);
         for (Post post : p) {
             System.out.println(post.toString());
         }

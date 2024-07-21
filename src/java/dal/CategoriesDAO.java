@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale.Category;
+
 
 /**
  *
@@ -24,8 +24,9 @@ public class CategoriesDAO extends DBContext {
 
     public List<Categories> getAllCategory() {
         List<Categories> list = new ArrayList<>();
-        String query = "select * from Categories";
+        
         try {
+            String query = "select * from Categories WHERE statusCate = 1";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -43,7 +44,7 @@ public class CategoriesDAO extends DBContext {
         
 
     public Categories getCategoryByID(int categoryId) {
-        String query = "select * from Categories where caID=?";
+        String query = "select * from Categories where caID=? and statusCate = 1";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, categoryId);
@@ -80,7 +81,7 @@ public boolean addCategory(Categories category) {
 
     public List<Categories> getCategory() {
         List<Categories> categoriesList = new ArrayList<>();
-        String sql = "SELECT caID, categories_name ,[description],statusCate FROM categories";
+        String sql = "SELECT caID, categories_name ,[description],statusCate FROM categories Where statusCate = 1";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -101,24 +102,7 @@ public boolean addCategory(Categories category) {
         return categoriesList;
     }
 
-    public List<Categories> getAllCategories() {
-        List<Categories> list = new ArrayList<>();
-        String query = "SELECT * FROM Categories";
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Categories(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5)));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
+   
 
    public boolean deleteCategory(String categoryId) {
     PreparedStatement statement = null;
@@ -374,5 +358,5 @@ public List<Categories> getCategoryByNameAndStatus(String categoryName, int stat
     }
     return posts;
 }
-
 }
+

@@ -92,7 +92,7 @@
                                         <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="myListJobProject">My List Post</a></li>                                        
+                                            <li><a href="ListPost">Jobs List</a></li>                                        
                                             <li><a href="SreachJob">Find Jobs</a></li>  
                                             <li><a href="company">Company</a></li>
                                         </ul>
@@ -103,8 +103,7 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="ListFreelancer">List Freelancer</a></li>
-                                            <li><a href="newsJobs">Skills</a></li>
+                                             <li><a href="ListFreelancer">List Freelancer</a></li>
 
                                         </ul>
                                     </li>
@@ -112,8 +111,8 @@
                                         <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                            <li><a href="jobsList">List Post</a></li>
-                                            <li><a href="newsJobs">Reviews</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
+                                            
 
                                         </ul>
                                     </li>
@@ -437,11 +436,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Title</th>
-                                                            <th>Job Type</th>
-                                                            <th>Skill</th>
+                                                            <th>Level</th>                                                            
                                                             <th>Create On</th>
-                                                            <th>Categories</th>
-                                                            <th>Proposals</th>
+                                                            <th>Position</th>
+                                                            <th>Quantity</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -450,13 +448,11 @@
                                                             <tr>
                                                                 <td>${listpost.title}</td>
                                                                 <td>${listpost.jobTypeID.jobName}</td>
-                                                                <td><c:forEach var="skill" items="${listpost.skill.split(',')}">
-                                                                        <div class="skill">${skill.trim()}</div>
-                                                                    </c:forEach></td>
+                                                                
                                                                 <td>${listpost.datePost}</td>
                                                                 <td>${listpost.caID.categoriesName}</td>
                                                                 <td style="text-align: center;">${listpost.quantity}</td>
-                                                                <td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
+                                                                <td ><a style="margin-left: 30px" href="PostDetails?postID=${listpost.postID}"><i class="feather-eye"></i></a></td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>

@@ -16,7 +16,24 @@
         <title>KofeJob</title>
 
         <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+        <style>
+            .skill-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px; /* Khoảng cách giữa các item */
+            }
 
+            .skill-item {
+                display: flex;
+                align-items: center;
+                margin-right: 15px; /* Khoảng cách giữa các item theo chiều ngang */
+                margin-bottom: 10px; /* Khoảng cách giữa các hàng nếu wrapping */
+            }
+
+            .skill-item input[type="checkbox"] {
+                margin-right: 5px; /* Khoảng cách giữa checkbox và text */
+            }
+        </style>
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
@@ -265,7 +282,7 @@
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
                                 <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-                                    <a href="freelancer-profile.html"><img alt="profile image" src="${freelancer.image}" class="avatar-lg rounded-circle"></a>
+                                    <a href=""><img alt="profile image" src="${freelancer.image}" class="avatar-lg rounded-circle"></a>
                                     <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
                                         <h3 class="mb-0">${freelancer.fullname()}</h3>
                                         <p class="mb-0">@${sessionScope.account.username}</p>
@@ -321,12 +338,13 @@
                             <div class="pro-pos">
                                 <div class="setting-content">
 
-                                    <form name="profileForm" action="UpdateProfile" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                    <form id="profileForm" name="profileForm" action="UpdateProfile" method="post" enctype="multipart/form-data">
                                         <div class="card">
                                             <div class="pro-head">
                                                 <h3>Profile Setting</h3>
                                             </div>
                                             <div class="pro-body">
+                                                <!-- Profile Picture -->
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-row pro-pad pt-0 ps-0">
@@ -334,7 +352,7 @@
                                                                 <label class="form-label">Profile Picture</label>
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="upload-images freelancer-pic-box">
-                                                                        <img style="width: 80px; height: 80px;" src="${freelancer.image}" alt id="blah">
+                                                                        <img style="width: 80px; height: 80px;" src="${freelancer.image}" alt="" id="blah">
                                                                     </div>
                                                                     <div class="ms-3 freelancer-pic-upload">
                                                                         <label class="image-upbtn">
@@ -346,33 +364,32 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
 
+                                                <!-- Personal Information -->
+                                                <div class="row">
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">First Name</label>
                                                             <input type="text" name="firstname" class="form-control" value="${freelancer.first_name}">
-                                                            <div id="firstNameError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Last Name</label>
                                                             <input type="text" name="lastname" class="form-control" value="${freelancer.last_name}">
-                                                            <div id="lastNameError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Phone Number</label>
                                                             <input type="text" name="phone" class="form-control" value="${freelancer.phone}">
-                                                            <div id="phoneError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Email Address</label>
                                                             <input type="text" name="email" class="form-control" value="${freelancer.email}">
-                                                            <div id="emailError" class="text-danger"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
@@ -385,18 +402,38 @@
                                                         <div class="mb-3 input-block">
                                                             <label class="form-label">Gender</label>
                                                             <select name="gender" class="form-control select">
-                                                                <option value="1" ${freelancer.gender ? 'selected="selected"' : ''}>
-                                                                    Male
-                                                                </option>
-                                                                <option value="0" ${!freelancer.gender ? 'selected="selected"' : ''}>
-                                                                    Female
-                                                                </option>
+                                                                <option value="1" ${freelancer.gender ? 'selected="selected"' : ''}>Male</option>
+                                                                <option value="0" ${!freelancer.gender ? 'selected="selected"' : ''}>Female</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Skills -->
+                                        <div class="form-row">
+                                            <div class="col-lg-12 w-100">
+                                                <div class="card flex-fill mb-3">
+                                                    <div class="pro-head">
+                                                        <h4 class="pro-titles mb-0">Skills</h4>
+                                                    </div>
+                                                    <div class="skill-container">
+                                                        <c:forEach items="${skillset}" var="skillset">
+                                                            <div class="skill-item">
+                                                                <input name="skill" type="checkbox" value="${skillset.skill_set_ID}"
+                                                                       <c:forEach items="${skills}" var="skill">
+                                                                           ${skillset.skill_set_ID == skill.skill_set_ID.skill_set_ID ? 'checked="checked"' : ''}
+                                                                       </c:forEach>>
+                                                                ${skillset.skill_set_name}
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Overview -->
                                         <div class="card">
                                             <div class="pro-head">
                                                 <h4 class="pro-titles mb-0">Overview</h4>
@@ -410,31 +447,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-row">
-                                            <div class="col-lg-12 w-100">
-                                                <div class="card flex-fill mb-3">
-                                                    <div class="pro-head">
-                                                        <h4 class="pro-titles mb-0">Skills</h4>
-                                                    </div>
-                                                    <c:forEach items="${skillset}" var="skillset">
-                                                        <div class="pro-body skill-info" style="display: inline-block; margin-right: 10px;">
-                                                            <input name="skill" type="checkbox" value="${skillset.skill_set_ID}"
-                                                                   <c:forEach items="${skills}" var="skill">
-                                                                       ${skillset.skill_set_ID == skill.skill_set_ID.skill_set_ID ? 'checked="checked"' : ''}
-                                                                   </c:forEach>>
-                                                            ${skillset.skill_set_name}
-                                                        </div>
-                                                    </c:forEach>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                        <!-- Education -->
                                         <div class="col-lg-12 w-100">
-                                            <div class="card flex-fill mb-3">
+                                            <div class="card flex-fill mb-3 Education">
                                                 <div class="pro-head">
                                                     <h4 class="pro-titles without-border mb-0">Education</h4>
                                                 </div>
                                                 <div class="pro-body">
-                                                    <c:forEach items="${education}" var="education">
+                                                    <c:forEach items="${education}" var="education" varStatus="status">
                                                         <div class="form-row align-items-center skill-cont">
                                                             <div class="input-block col-lg-3">
                                                                 <label class="form-label">Degree Name</label>
@@ -463,39 +484,69 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Experience -->
                                         <div class="col-lg-12 w-100">
-                                            <div class="card flex-fill mb-3">
+                                            <div class="card flex-fill mb-3 Experience">
                                                 <div class="pro-head">
                                                     <h4 class="pro-titles without-border mb-0">Experience</h4>
                                                 </div>
-                                                <c:forEach items="${experience}" var="experience">
-                                                    <div class="pro-body">
-                                                        <div class="form-row align-items-center skill-cont">
-                                                            <div class="input-block col-lg-3">
-                                                                <label class="form-label">Company Name</label>
-                                                                <input name="experienceName" type="text" class="form-control" value="${experience.experienceName}">
-                                                            </div>
-                                                            <div class="input-block col-lg-3">
-                                                                <label class="form-label">Position</label>
-                                                                <input name="your_project" type="text" class="form-control" value="${experience.your_project}">
-                                                            </div>
-                                                            <div class="col-md-3 input-block floating-icon">
-                                                                <label class="form-label">Start Date</label>
-                                                                <input name="startDate" type="date" class="form-control" value="${experience.start_date}">
-                                                            </div>
-                                                            <div class="col-md-2 input-block floating-icon">
-                                                                <label class="form-label">End Date</label>
-                                                                <input name="endDate" type="date" class="form-control" value="${experience.end_date}">
+                                                <c:choose>
+                                                    <c:when test="${empty experience}">
+                                                        <div class="pro-body">
+                                                            <div class="form-row align-items-center skill-cont">
+                                                                <div class="input-block col-lg-3">
+                                                                    <label class="form-label">Company Name</label>
+                                                                    <input name="experienceName" type="text" class="form-control">
+                                                                </div>
+                                                                <div class="input-block col-lg-3">
+                                                                    <label class="form-label">Position</label>
+                                                                    <input name="your_project" type="text" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-3 input-block floating-icon">
+                                                                    <label class="form-label">Start Date</label>
+                                                                    <input name="startDate" type="date" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-2 input-block floating-icon">
+                                                                    <label class="form-label">End Date</label>
+                                                                    <input name="endDate" type="date" class="form-control">
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </c:forEach>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:forEach items="${experience}" var="experience" varStatus="status">
+                                                            <div class="pro-body">
+                                                                <div class="form-row align-items-center skill-cont">
+                                                                    <div class="input-block col-lg-3">
+                                                                        <label class="form-label">Company Name</label>
+                                                                        <input name="experienceName" type="text" class="form-control" value="${experience.experienceName}">
+                                                                    </div>
+                                                                    <div class="input-block col-lg-3">
+                                                                        <label class="form-label">Position</label>
+                                                                        <input name="your_project" type="text" class="form-control" value="${experience.your_project}">
+                                                                    </div>
+                                                                    <div class="col-md-3 input-block floating-icon">
+                                                                        <label class="form-label">Start Date</label>
+                                                                        <input name="startDate" type="date" class="form-control" value="${experience.start_date}">
+                                                                    </div>
+                                                                    <div class="col-md-2 input-block floating-icon">
+                                                                        <label class="form-label">End Date</label>
+                                                                        <input name="endDate" type="date" class="form-control" value="${experience.end_date}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </c:forEach>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
                                         </div>
+
+                                        <!-- Submit Buttons -->
                                         <div class="card text-end border-0">
                                             <div class="pro-body">
-                                                <button onclick="MyProfile" class="btn btn-secondary click-btn btn-plan">Cancel</button>
-                                                <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
+                                                <button type="button" onclick="window.location.href = 'MyProfile?id=${sessionScope.account.userID}'" class="btn btn-secondary click-btn btn-plan">Cancel</button>
+                                                <button type="submit" class="btn btn-primary click-btn btn-plan">Update</button>
                                             </div>
                                         </div>
                                     </form>
@@ -507,149 +558,318 @@
                 </div>
             </div>
 
-            <footer class="footer">
-                <div class="footer-top ">
-                    <div class="container">
-                        <div class="row">
-                            <div class=" col-lg-4 col-md-12">
-                                <div class="footer-bottom-logo">
-                                    <a href="home" class="menu-logo">
-                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                                    </a>
-                                    <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                    <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
-                                </div>
-                            </div>
-                            <div class=" col-lg-8 col-md-12">
-                                <div class="row">
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Useful Links</h2>
-                                            <ul>
-                                                <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
-                                                <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
-                                                <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
-                                                <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
-                                                <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Help & Support</h2>
-                                            <ul>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Other Links</h2>
-                                            <ul>
-                                                <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
-                                                <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
-                                                <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
-                                                <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
-                                                <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="footer-widget footer-menu">
-                                            <h2 class="footer-title">Connect With Us</h2>
-                                            <ul>
-                                                <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
-                                                <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
-                                                <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
-                                                <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
-                                                <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <jsp:include page="footter.jsp" />
 
-
-                <div class="footer-bottom">
-                    <div class="container">
-
-                        <div class="copyright">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="copyright-text text-center">
-                                        <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </footer>
 
 
             <script>
-                function validateForm() {
-                    let firstName = document.forms["profileForm"]["firstname"].value;
-                    let lastName = document.forms["profileForm"]["lastname"].value;
-                    let email = document.forms["profileForm"]["email"].value;
-                    let phone = document.forms["profileForm"]["phone"].value;
-                    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                    let phonePattern = /^[0-9]{10}$/;
+                document.addEventListener('DOMContentLoaded', function () {
+                    const form = document.querySelector('form[name="profileForm"]');
+                    const inputs = form.querySelectorAll('input, select, textarea');
 
-                    let isValid = true;
+                    // Real-time validation
+                    inputs.forEach(input => {
+                        input.addEventListener('input', function () {
+                            validateField(this);
+                        });
+                    });
 
-                    // Reset previous error messages
-                    document.getElementById("firstNameError").innerHTML = "";
-                    document.getElementById("lastNameError").innerHTML = "";
-                    document.getElementById("emailError").innerHTML = "";
-                    document.getElementById("phoneError").innerHTML = "";
+                    // Form submission
+                    form.addEventListener('submit', function (event) {
+                        event.preventDefault();
+                        if (validateForm()) {
+                            submitForm();
+                        }
+                    });
 
-                    if (firstName === "") {
-                        document.getElementById("firstNameError").innerHTML = "First Name is required";
-                        isValid = false;
-                    }
+                    // Image preview functionality
+                    document.getElementById("imgInp").onchange = function () {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            document.getElementById("blah").src = e.target.result;
+                        };
+                        reader.readAsDataURL(this.files[0]);
+                    };
+                });
 
-                    if (lastName === "") {
-                        document.getElementById("lastNameError").innerHTML = "Last Name is required";
-                        isValid = false;
-                    }
+                function submitForm() {
+                    console.log('submitForm() called');
 
-                    if (!emailPattern.test(email)) {
-                        document.getElementById("emailError").innerHTML = "Please enter a valid email address";
-                        isValid = false;
-                    }
+                    const form = document.getElementById('profileForm');
+                    const formData = new FormData(form);
 
-                    if (!phonePattern.test(phone)) {
-                        document.getElementById("phoneError").innerHTML = "Please enter a valid phone number (10 digits)";
-                        isValid = false;
-                    }
+                    // Log form data
+                    for (let [key, value] of formData.entries()) {
+                        console.log(`${key}: ${value}`);
+                                }
 
-                    return isValid;
-                }
-            </script>                                            
+                                fetch('UpdateProfile', {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                        .then(response => {
+                                            console.log('Response status:', response.status);
+                                            return response.json();
+                                        })
+                                        .then(data => {
+                                            console.log('Response data:', data);
+                                            if (data.success) {
+                                                console.log('Update successful');
+                                                Swal.fire({
+                                                    icon: 'success',
+                                                    title: 'Success',
+                                                    text: data.message,
+                                                    confirmButtonText: 'OK'
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        console.log('Redirecting to profile page');
+                                                        window.location.href = `UpdateProfile?id=${sessionScope.account.userID}`;
+                                                    }
+                                                });
+                                            } else {
+                                                console.error('Update failed:', data.message);
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'Error',
+                                                    text: data.message,
+                                                    confirmButtonText: 'OK'
+                                                });
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Fetch error:', error);
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Error',
+                                                text: 'An error occurred while communicating with the server.',
+                                                confirmButtonText: 'OK'
+                                            });
+                                        });
+                            }
+
+                            function validateField(field) {
+                                const fieldName = field.getAttribute('name');
+                                let errorElement = document.getElementById(fieldName + 'Error');
+
+                                if (!errorElement) {
+                                    errorElement = document.createElement('div');
+                                    errorElement.id = fieldName + 'Error';
+                                    errorElement.className = 'text-danger';
+                                    field.parentNode.insertBefore(errorElement, field.nextSibling);
+                                }
+
+                                switch (fieldName) {
+                                    case 'firstname':
+                                    case 'lastname':
+                                        validateName(field, errorElement);
+                                        break;
+                                    case 'phone':
+                                        validatePhone(field, errorElement);
+                                        break;
+                                    case 'email':
+                                        validateEmail(field, errorElement);
+                                        break;
+                                    case 'dob':
+                                        validateDate(field, errorElement);
+                                        break;
+                                    case 'gender':
+                                        validateSelect(field, errorElement);
+                                        break;
+                                    case 'skill':
+                                        validateSkills();
+                                        break;
+                                    case 'decscribe':
+                                        validateDescription(field, errorElement);
+                                        break;
+                                    case 'degree':
+                                    case 'educationName':
+                                    case 'dateStart':
+                                    case 'dateEnd':
+                                        validateEducation();
+                                        break;
+                                    case 'experienceName':
+                                    case 'your_project':
+                                    case 'startDate':
+                                    case 'endDate':
+                                        validateExperience();
+                                        break;
+                                }
+                            }
+
+                            function validateName(field, errorElement) {
+                                if (field.value.trim() === '') {
+                                    errorElement.textContent = `Please enter name`;
+                                } else {
+                                    errorElement.textContent = '';
+                                }
+                            }
+
+                            function validatePhone(field, errorElement) {
+                                const phoneRegex = /^[0-9]{10}$/;
+                                if (!phoneRegex.test(field.value.trim())) {
+                                    errorElement.textContent = 'Please enter a valid 10-digit phone number';
+                                } else {
+                                    errorElement.textContent = '';
+                                }
+                            }
+
+                            function validateEmail(field, errorElement) {
+                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                if (!emailRegex.test(field.value.trim())) {
+                                    errorElement.textContent = 'Please enter a valid email address';
+                                } else {
+                                    errorElement.textContent = '';
+                                }
+                            }
+
+                            function validateDate(field, errorElement) {
+                                if (field.value === '') {
+                                    errorElement.textContent = 'Please select a date';
+                                } else {
+                                    errorElement.textContent = '';
+                                }
+                            }
+
+                            function validateSelect(field, errorElement) {
+                                if (field.value === '') {
+                                    errorElement.textContent = 'Please select an option';
+                                } else {
+                                    errorElement.textContent = '';
+                                }
+                            }
+
+                            function validateDescription(field, errorElement) {
+                                if (field.value.trim() === '') {
+                                    errorElement.textContent = 'Description is required';
+                                } else {
+                                    errorElement.textContent = '';
+                                }
+                            }
+
+                            function validateSkills() {
+                                const skills = document.querySelectorAll('input[name="skill"]:checked');
+                                let errorElement = document.getElementById('skillsError');
+                                if (!errorElement) {
+                                    errorElement = document.createElement('div');
+                                    errorElement.id = 'skillsError';
+                                    errorElement.className = 'text-danger';
+                                    document.querySelector('.skill-container').appendChild(errorElement);
+                                }
+
+                                if (skills.length === 0) {
+                                    errorElement.textContent = 'Please select at least one skill';
+                                } else {
+                                    errorElement.textContent = '';
+                                }
+                            }
+
+                            function validateEducation() {
+                                const educationContainer = document.querySelector('.card.flex-fill.mb-3.Education');
+                                let errorElement = document.getElementById('educationError');
+                                if (!errorElement) {
+                                    errorElement = document.createElement('div');
+                                    errorElement.id = 'educationError';
+                                    errorElement.className = 'text-danger mt-2';
+                                    educationContainer.appendChild(errorElement);
+                                }
+
+                                const degrees = document.getElementsByName('degree');
+                                const educationNames = document.getElementsByName('educationName');
+                                const dateStarts = document.getElementsByName('dateStart');
+                                const dateEnds = document.getElementsByName('dateEnd');
+
+                                let isValid = true;
+                                let errorMessage = '';
+
+                                for (let i = 0; i < degrees.length; i++) {
+                                    if (degrees[i].value === '' || educationNames[i].value.trim() === '' ||
+                                            dateStarts[i].value === '' || dateEnds[i].value === '') {
+                                        isValid = false;
+                                        errorMessage = 'Please fill all education fields.';
+                                        break;
+                                    }
+                                    if (new Date(dateEnds[i].value) <= new Date(dateStarts[i].value)) {
+                                        isValid = false;
+                                        errorMessage = 'End date must be after start date in education.';
+                                        break;
+                                    }
+                                }
+
+                                errorElement.textContent = errorMessage;
+                            }
+
+                            function validateExperience() {
+                                const experienceContainer = document.querySelector('.card.flex-fill.mb-3.Experience');
+                                let errorElement = document.getElementById('experienceError');
+                                if (!errorElement) {
+                                    errorElement = document.createElement('div');
+                                    errorElement.id = 'experienceError';
+                                    errorElement.className = 'text-danger mt-2';
+                                    experienceContainer.appendChild(errorElement);
+                                }
+
+                                const experienceNames = document.getElementsByName('experienceName');
+                                const positions = document.getElementsByName('your_project');
+                                const startDates = document.getElementsByName('startDate');
+                                const endDates = document.getElementsByName('endDate');
+
+                                let isValid = true;
+                                let errorMessage = '';
+
+                                for (let i = 0; i < experienceNames.length; i++) {
+                                    if (experienceNames[i].value.trim() === '' || positions[i].value.trim() === '' ||
+                                            startDates[i].value === '' || endDates[i].value === '') {
+                                        isValid = false;
+                                        errorMessage = 'Please fill all experience fields.';
+                                        break;
+                                    }
+                                    if (new Date(endDates[i].value) <= new Date(startDates[i].value)) {
+                                        isValid = false;
+                                        errorMessage = 'End date must be after start date in experience.';
+                                        break;
+                                    }
+                                }
+
+                                errorElement.textContent = errorMessage;
+                            }
+
+                            function validateForm() {
+                                let isValid = true;
+                                const inputs = document.querySelectorAll('input, select, textarea');
+
+                                inputs.forEach(input => {
+                                    validateField(input);
+                                    const errorElement = document.getElementById(input.name + 'Error');
+                                    if (errorElement && errorElement.textContent !== '') {
+                                        isValid = false;
+                                    }
+                                });
+
+                                validateSkills();
+                                const skillsError = document.getElementById('skillsError');
+                                if (skillsError && skillsError.textContent !== '') {
+                                    isValid = false;
+                                }
+
+                                validateEducation();
+                                const educationError = document.getElementById('educationError');
+                                if (educationError && educationError.textContent !== '') {
+                                    isValid = false;
+                                }
+
+                                validateExperience();
+                                const experienceError = document.getElementById('experienceError');
+                                if (experienceError && experienceError.textContent !== '') {
+                                    isValid = false;
+                                }
+
+                                return isValid;
+                            }
+            </script>
+
+
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
             <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 
@@ -665,7 +885,7 @@
 
             <script src="assets/js/profile-settings.js" type="4558dd39f62761c94e962170-text/javascript"></script>
 
-            
+
             <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="4558dd39f62761c94e962170-|49" defer></script></body>
 
 </html>

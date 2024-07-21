@@ -98,6 +98,12 @@
                 outline: none; /* Loại bỏ viền xung quanh khi focus */
 
             }
+       .titlepost{
+                max-width: 300px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         </style>
     </head>
     <body>
@@ -326,8 +332,8 @@
                                                     <div class="text-center1" >                                                                                                              
                                                         <img style="width: 100%; height: 100%;" src="${list.image}" alt="author">                                                       
                                                     </div>
-                                                    <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
+                                                    <div class="profile-name ">
+                                                        <div class="author-location titlepost"><a>${list.title} </a></div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
@@ -687,23 +693,23 @@
             }
 
             // Định nghĩa hàm cắt chuỗi và thêm "..."
-            function truncateString(str, maxLength) {
-                if (str.length <= maxLength) {
-                    return str;
-                } else {
-                    return str.substring(0, maxLength) + "...";
-                }
-            }
+//            function truncateString(str, maxLength) {
+//                if (str.length <= maxLength) {
+//                    return str;
+//                } else {
+//                    return str.substring(0, maxLength) + "...";
+//                }
+//            }
 
-            // Lấy nội dung của element có id là 'title-list-post'
-            let titleElement = document.getElementById('title-list-post');
-
-            // Lấy nội dung ban đầu từ innerHTML của element
-            let originalTitle = titleElement.innerHTML;
-
-            // Sử dụng hàm truncateString để cắt chuỗi và gán lại vào innerHTML của element
-            let truncatedTitle = truncateString(originalTitle, 5);
-            titleElement.innerHTML = truncatedTitle;
+//            // Lấy nội dung của element có id là 'title-list-post'
+//            let titleElement = document.getElementById('title-list-post');
+//
+//            // Lấy nội dung ban đầu từ innerHTML của element
+//            let originalTitle = titleElement.innerHTML;
+//
+//            // Sử dụng hàm truncateString để cắt chuỗi và gán lại vào innerHTML của element
+//            let truncatedTitle = truncateString(originalTitle, 5);
+//            titleElement.innerHTML = truncatedTitle;
         </script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

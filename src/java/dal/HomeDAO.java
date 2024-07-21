@@ -34,14 +34,15 @@ public class HomeDAO extends DBContext {
         List<Post> list = new ArrayList<>();
         String query = """
                            SELECT TOP 6 * 
-                           FROM Post p
-                           JOIN JobType j ON p.job_type_ID = j.jobID
-                           JOIN Duration du ON p.durationID = du.durationID
-                           JOIN Recruiter re ON p.recruiterID = re.recruiterID
-                           JOIN Categories ca ON p.caID = ca.caID
-                           JOIN Company co ON re.recruiterID = co.recruiterID
-                           JOIN Team_Number temp ON temp.team_numberID = co.team_numberID
-                           ORDER BY p.date_post DESC;""";
+                                                      FROM Post p
+                                                      JOIN JobType j ON p.job_type_ID = j.jobID
+                                                      JOIN Duration du ON p.durationID = du.durationID
+                                                      JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                                                      JOIN Categories ca ON p.caID = ca.caID
+                                                      JOIN Company co ON re.recruiterID = co.recruiterID
+                                                      JOIN Team_Number temp ON temp.team_numberID = co.team_numberID
+                                                        where p.status = 1
+                                                      ORDER BY p.date_post DESC;""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
 
@@ -55,7 +56,7 @@ public class HomeDAO extends DBContext {
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
                 int checking = rs.getInt("checking");
                 int status = rs.getInt("status");
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("expired"),rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, status, checking));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("expired"), rs.getDate("date_post"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, status, checking));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,56 +70,56 @@ public class HomeDAO extends DBContext {
                        
                        
                        WITH FreelancerSkills AS (
-                           SELECT ss.skill_set_name
-                           FROM [freelancer].[dbo].[Skills] us
-                           JOIN [freelancer].[dbo].[Skill_Set] ss ON us.skill_set_ID = ss.skill_set_ID
-                           WHERE us.freelancerID =?
-                       ),
-                       
-                       MatchingPosts AS (
-                           SELECT 
-                               p.postID, 
-                               p.title, 
-                               p.image AS post_postImg, 
-                               p.job_type_ID, 
-                               p.durationID AS post_durationID, 
-                               p.date_post,
-                               p.expired,
-                               p.quantity, 
-                               p.description AS post_description, 
-                               p.budget, 
-                               p.location, 
-                               p.skill, 
-                               p.recruiterID AS post_recruiterID, 
-                               p.status, 
-                               p.caID, 
-                               p.checking,
-                               j.jobID, 
-                               j.job_name, 
-                               du.durationID AS du_durationID, 
-                               du.duration_name, 
-                               re.recruiterID AS re_recruiterID, 
-                               re.first_name,
-                       		re.last_name, re.dob, re.email_contact, re.gender,re.image, re.phone_contact, re.UserID,
-                               ca.caID AS ca_caID, 
-                               ca.categories_name, 
-                       		ca.categories_img,
-                       		ca.description,
-                       		ca.statusCate,
-                               co.companyID, 
-                               co.company_name
-                           FROM [freelancer].[dbo].[Post] p
-                           JOIN [freelancer].[dbo].[JobType] j ON p.job_type_ID = j.jobID
-                           JOIN [freelancer].[dbo].[Duration] du ON p.durationID = du.durationID
-                           JOIN [freelancer].[dbo].[Recruiter] re ON p.recruiterID = re.recruiterID
-                           JOIN [freelancer].[dbo].[Categories] ca ON p.caID = ca.caID
-                           JOIN [freelancer].[dbo].[Company] co ON re.recruiterID = co.recruiterID
-                           CROSS APPLY STRING_SPLIT(p.skill, ',') ps
-                           WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills)
-                       )
-                       
-                       SELECT TOP 6 *
-                       FROM MatchingPosts;""";
+                                                  SELECT ss.skill_set_name
+                                                  FROM [freelancer].[dbo].[Skills] us
+                                                  JOIN [freelancer].[dbo].[Skill_Set] ss ON us.skill_set_ID = ss.skill_set_ID
+                                                  WHERE us.freelancerID =?
+                                              ),
+                                              
+                                              MatchingPosts AS (
+                                                  SELECT 
+                                                      p.postID, 
+                                                      p.title, 
+                                                      p.image AS post_postImg, 
+                                                      p.job_type_ID, 
+                                                      p.durationID AS post_durationID, 
+                                                      p.date_post,
+                                                      p.expired,
+                                                      p.quantity, 
+                                                      p.description AS post_description, 
+                                                      p.budget, 
+                                                      p.location, 
+                                                      p.skill, 
+                                                      p.recruiterID AS post_recruiterID, 
+                                                      p.status, 
+                                                      p.caID, 
+                                                      p.checking,
+                                                      j.jobID, 
+                                                      j.job_name, 
+                                                      du.durationID AS du_durationID, 
+                                                      du.duration_name, 
+                                                      re.recruiterID AS re_recruiterID, 
+                                                      re.first_name,
+                                              		re.last_name, re.dob, re.email_contact, re.gender,re.image, re.phone_contact, re.UserID,
+                                                      ca.caID AS ca_caID, 
+                                                      ca.categories_name, 
+                                              		ca.categories_img,
+                                              		ca.description,
+                                              		ca.statusCate,
+                                                      co.companyID, 
+                                                      co.company_name
+                                                  FROM [freelancer].[dbo].[Post] p
+                                                  JOIN [freelancer].[dbo].[JobType] j ON p.job_type_ID = j.jobID
+                                                  JOIN [freelancer].[dbo].[Duration] du ON p.durationID = du.durationID
+                                                  JOIN [freelancer].[dbo].[Recruiter] re ON p.recruiterID = re.recruiterID
+                                                  JOIN [freelancer].[dbo].[Categories] ca ON p.caID = ca.caID
+                                                  JOIN [freelancer].[dbo].[Company] co ON re.recruiterID = co.recruiterID
+                                                  CROSS APPLY STRING_SPLIT(p.skill, ',') ps
+                                                  WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills) and p.status =1
+                                              )
+                                              
+                                              SELECT TOP 6 *
+                                              FROM MatchingPosts;""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, freelancerID);
@@ -129,7 +130,7 @@ public class HomeDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("re_recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -140,23 +141,22 @@ public class HomeDAO extends DBContext {
     public List<Post> getOtherPostsBySimilarCategories(int recruiterID) {
         List<Post> list = new ArrayList<>();
         String query = """
-                       SELECT  top 6 * FROM [Post] p
-                        JOIN JobType j ON p.job_type_ID = j.jobID
-                        JOIN Duration du ON p.durationID = du.durationID
-                        JOIN Recruiter re ON p.recruiterID = re.recruiterID
-                        JOIN [Categories] c ON p.caID = c.caID
-                        JOIN Company co ON re.recruiterID = co.recruiterID
-                       
-                        WHERE p.recruiterID != ? AND EXISTS (
-                                                      SELECT 1
-                                                      FROM [Post] your_post
-                                                      WHERE your_post.recruiterID = ?
-                                                        AND your_post.caID = p.caID)
-                                              ORDER BY p.date_post DESC;""";
+                       SELECT  top 6 * FROM [Post] p JOIN JobType j ON p.job_type_ID = j.jobID
+                                                                                              JOIN Duration du ON p.durationID = du.durationID
+                                                                                               JOIN Recruiter re ON p.recruiterID = re.recruiterID
+                                                                                               JOIN [Categories] c ON p.caID = c.caID
+                                                                                             JOIN Company co ON re.recruiterID = co.recruiterID
+                                                                                                                                                                 
+                                                                                              WHERE p.status = 1 AND EXISTS (
+                                                                                                SELECT 1
+                                                                                              FROM [Post] your_post
+                                                                                                WHERE your_post.recruiterID = ?
+                                                                                               AND your_post.caID = p.caID )  and p.checking =1
+                                                                                                  ORDER BY p.date_post DESC;""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, recruiterID);
-            ps.setInt(2, recruiterID);
+            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
@@ -164,40 +164,49 @@ public class HomeDAO extends DBContext {
                 Recruiter re = new Recruiter(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getBoolean("gender"), rs.getDate("dob"), rs.getString("image"), rs.getString("email_contact"), rs.getString("phone_contact"), rs.getInt("UserID"));
                 JobType job = new JobType(rs.getInt("jobID"), rs.getString("job_name"));
 
-                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"),rs.getDate("expired"),  rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
+                list.add(new Post(rs.getInt("postID"), rs.getString("title"), rs.getString("image"), job, du, rs.getDate("date_post"), rs.getDate("expired"), rs.getInt("quantity"), rs.getString("description"), rs.getInt("budget"), rs.getString("location"), rs.getString("skill"), re, ca, rs.getInt("status"), rs.getInt("checking")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return list;
     }
+    public static void main(String[] args) {
+        HomeDAO d = new HomeDAO();
+        List<Post> m = d.getOtherPostsBySimilarCategories(1);
+        for (Post post : m) {
+            System.out.println(post.toString());
+        }
+    }
 
     public List<SkillFreelancer> getTop8FreelancersByLatestRecruiterPostSkill(int id) {
         List<SkillFreelancer> list = new ArrayList<>();
         String query = """
                        WITH LatestPostSkills AS (
-                           SELECT TOP 1 p.skill
-                           FROM [freelancer].[dbo].[Post] p
-                           WHERE p.recruiterID = ?
-                           ORDER BY p.postID DESC
-                       ),
-                       PostSkills AS (
-                           SELECT TRIM(value) AS skill_name
-                           FROM LatestPostSkills
-                           CROSS APPLY STRING_SPLIT(skill, ',')
-                       ),
-                       FreelancerWithMatchingSkills AS (
-                           SELECT f.freelanceID, f.first_name, f.last_name, f.image, f.gender, f.dob, f.[describe], f.email__contact, f.phone_contact, f.userID,
-                                  ss.skill_set_ID, ss.skill_set_name, s.skillID,
-                                  ROW_NUMBER() OVER (PARTITION BY f.freelanceID ORDER BY ss.skill_set_name) AS rn
-                           FROM [freelancer].[dbo].[Freelancer] f
-                           JOIN [freelancer].[dbo].[Skills] s ON f.freelanceID = s.freelancerID
-                           JOIN [freelancer].[dbo].[Skill_Set] ss ON s.skill_set_ID = ss.skill_set_ID
-                           JOIN PostSkills ps ON ss.skill_set_name = ps.skill_name
-                       )
-                       SELECT TOP 8 f.*
-                       FROM FreelancerWithMatchingSkills f
-                       WHERE f.rn = 1;""";
+                                                  SELECT TOP 1 p.skill
+                                                  FROM [freelancer].[dbo].[Post] p
+                                                  WHERE p.recruiterID = ?
+                                                  ORDER BY p.postID DESC
+                                              ),
+                                              PostSkills AS (
+                                                  SELECT TRIM(value) AS skill_name
+                                                  FROM LatestPostSkills
+                                                  CROSS APPLY STRING_SPLIT(skill, ',')
+                                              ),
+                                              FreelancerWithMatchingSkills AS (
+                                                  SELECT f.freelanceID, f.first_name, f.last_name, f.image, f.gender, f.dob, f.[describe], f.email__contact, f.phone_contact, f.userID,
+                                                         ss.skill_set_ID, ss.skill_set_name, s.skillID,
+                                                         ROW_NUMBER() OVER (PARTITION BY f.freelanceID ORDER BY ss.skill_set_name) AS rn
+                                                  FROM [freelancer].[dbo].[Freelancer] f
+                       						   Join [User] us on f.userID = us.userID
+                                                  JOIN [freelancer].[dbo].[Skills] s ON f.freelanceID = s.freelancerID
+                                                  JOIN [freelancer].[dbo].[Skill_Set] ss ON s.skill_set_ID = ss.skill_set_ID
+                                                  JOIN PostSkills ps ON ss.skill_set_name = ps.skill_name
+                       						   where us.status = 'active'
+                                              )
+                                              SELECT TOP 8 f.*
+                                              FROM FreelancerWithMatchingSkills f
+                                              WHERE f.rn = 1;""";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -227,21 +236,13 @@ public class HomeDAO extends DBContext {
         return list;
     }
 
-    public static void main(String[] args) {
-        HomeDAO p = new HomeDAO();
-        List<Post> s = p.getPostsByFreelancerSkill(1);
-        for (Post skillFreelancer : s) {
-            System.out.println(skillFreelancer.toString());
-        }
-
-    }
-
     public List<Blogs> getTopBlogs() {
         List<Blogs> blogs = new ArrayList<>();
         String query = """
-                   SELECT TOP(3) blogID, title, image, date_blog, description, tag
-                   FROM Blogs
-                   ORDER BY date_blog DESC;""";
+                   SELECT TOP(3) blogID, title, image, date_blog, description, tag, statusBlog
+                                      FROM Blogs
+                   				   where statusBlog = 1
+                                      ORDER BY date_blog DESC;""";
         try (PreparedStatement ps = connection.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Blogs blog = new Blogs();
@@ -252,12 +253,15 @@ public class HomeDAO extends DBContext {
                 String description = rs.getString("description");
                 blog.setDescription(getShortDescription(description, 10));
                 blog.setTag(rs.getString("tag"));
+                blog.setStatus(true);
                 blogs.add(blog);
             }
         } catch (SQLException e) {
         }
         return blogs;
     }
+
+   
 
     public static String getShortDescription(String description, int wordLimit) {
         if (description == null || description.isEmpty()) {
@@ -309,22 +313,24 @@ public class HomeDAO extends DBContext {
         }
         return -1;
     }
-     public int countPostsByRecruiterStatus(int recruiterId) {
-    String query = """
-                    SELECT COUNT(postID) AS total_posts FROM [Post] WHERE recruiterID = ? AND status = 1""";
-    try (PreparedStatement ps = connection.prepareStatement(query)) {
-        ps.setInt(1, recruiterId);
-        try (ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                return rs.getInt("total_posts");
+
+    public int countPostsByRecruiterStatus(int recruiterId) {
+        String query = """
+                    SELECT COUNT(postID) AS total_posts FROM [Post] WHERE recruiterID = ?""";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, recruiterId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total_posts");
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return -1;
     }
-    return -1;
-}
-  public int  getAllOpenPosts() {
+
+    public int getAllOpenPosts() {
         String query = """
                          SELECT COUNT(postID) AS total_openposts FROM [Post] WHERE status = 1""";
         try {
@@ -338,6 +344,7 @@ public class HomeDAO extends DBContext {
         }
         return -1;
     }
+
     public int getNumberCompany() {
         String query = """
                         SELECT COUNT(companyID) AS total_company
@@ -397,24 +404,24 @@ public class HomeDAO extends DBContext {
 
         return categoryPostCount;
     }
-public int getNumberPostByRecruiter(int recruiterID) {
-    String query = """
+
+    public int getNumberPostByRecruiter(int recruiterID) {
+        String query = """
                     SELECT COUNT(postID) AS total_posts
                     FROM [Post]
                     WHERE recruiterID = ?;"""; // Thay đổi để phù hợp với cấu trúc bảng của bạn
-    try {
-        PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, recruiterID); // Thiết lập giá trị cho tham số truy vấn
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recruiterID); // Thiết lập giá trị cho tham số truy vấn
 
-        ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
-            return rs.getInt("total_posts");
+            if (rs.next()) {
+                return rs.getInt("total_posts");
+            }
+        } catch (SQLException e) {
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return -1; // Trả về -1 trong trường hợp có lỗi
     }
-    return -1; // Trả về -1 trong trường hợp có lỗi
-}
 
 }

@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Models.Admin" %>
+<%--<%@page import="Models.Admin" %>--%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,6 +11,25 @@
         <link rel="stylesheet" href="adminAssets/plugins/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="adminAssets/css/feather.css">
         <link rel="stylesheet" href="adminAssets/css/style.css">
+        <style>
+            /* Căn giữa card trong khung hình */
+            .card {
+                display: flex;
+                flex-direction: column;
+                align-items: center; /* Căn giữa theo chiều ngang */
+                justify-content: center; /* Căn giữa theo chiều dọc */
+                height: 100%; /* Đảm bảo card chiếm toàn bộ chiều cao của container */
+            }
+
+            /* Đảm bảo card-body cũng được căn giữa nếu cần */
+            .card-body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center; /* Căn giữa văn bản trong card-body */
+            }
+
+        </style>
     </head>
     <body>
         <div class="main-wrapper">
@@ -28,40 +47,40 @@
 
                     <div class="profile-cover">
                         <div class="profile-cover-wrap">
-                            <img class="profile-cover-img" src="adminAssets/img/profiles/avatar-07.jpg" alt="Profile Cover">
+                            <!--<img class="profile-cover-img" src="adminAssets/img/profiles/avatar-07.jpg" alt="Profile Cover">-->
                             <div class="cover-content">
                                 <div class="custom-file-btn">
-                                    <input type="file" class="custom-file-btn-input" id="cover_upload">
-                                    <label class="custom-file-btn-label btn btn-sm btn-white" for="cover_upload">
-                                        <i class="fas fa-camera"></i>
-                                        <span class="d-none d-sm-inline-block ms-1">Update Cover</span>
-                                    </label>
+                                    <!--                                    <input type="file" class="custom-file-btn-input" id="cover_upload">
+                                                                        <label class="custom-file-btn-label btn btn-sm btn-white" for="cover_upload">
+                                                                            <i class="fas fa-camera"></i>
+                                                                            <span class="d-none d-sm-inline-block ms-1">Update Cover</span>
+                                                                        </label>-->
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="text-center mb-5">
                         <label class="avatar avatar-xxl profile-cover-avatar" for="avatar_upload">
-                            <img class="avatar-img" src="<%= admin.getImage() %>" alt="Profile Image">
+                            <img class="avatar-img" src=${admin.getImage()} alt="Profile Image">
                             <input type="file" id="avatar_upload">
                             <span class="avatar-edit">
                                 <i data-feather="edit-2" class="avatar-uploader-icon shadow-soft"></i>
                             </span>
                         </label>
-                        <h2><%= admin.getFirst_name() %> <%= admin.getLast_name() %> <i class="fas fa-certificate text-primary small" data-bs-toggle="tooltip" data-placement="top" title data-original-title="Verified"></i></h2>
+                        <h2>${admin.getFirst_name()} ${admin.getLast_name()} <i class="fas fa-certificate text-primary small" data-bs-toggle="tooltip" data-placement="top" title data-original-title="Verified"></i></h2>
                         <ul class="list-inline">
                             <li class="list-inline-item">
-                                <i class="fas fa-map-marker-alt"></i> <%= admin.getPhone() %>
+                                 ${admin.getPhone()}
                             </li>
                         </ul>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body pt-0">
                                 <div class="card-header mb-4">
                                     <h5 class="card-title d-flex justify-content-between">
                                         <span>Profile</span>
-                                        <a class="btn btn-sm btn-white" href="settings.html">Edit</a>
+                                        <!--<a class="btn btn-sm btn-white" href="settings.html">Edit</a>-->
                                     </h5>
                                 </div>
                                 <ul class="list-unstyled mb-0">
@@ -69,13 +88,13 @@
                                         <small class="text-dark">About</small>
                                     </li>
                                     <li>
-                                        <%= admin.getFirst_name() %> <%= admin.getLast_name() %>
+                                        ${admin.getFirst_name()} ${admin.getLast_name()}
                                     </li>
                                     <li>
-                                        <%= admin.getEmail() %>
+                                        ${admin.getEmail()}
                                     </li>
                                     <li>
-                                        <%= admin.getPhone() %>
+                                        ${admin.getPhone()}
                                     </li>
                                 </ul>
                             </div>

@@ -228,20 +228,40 @@
         </div>
 
 
-        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <script src="assets/plugins/select2/js/select2.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+  <script>
+    $(document).ready(function () {
+        var messageModal =
+                  <c:if test="${sessionScope.check == 1}">
+            `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <div class="checkmark-circle">
+                                <div class="background"></div>
+                                <div class="checkmark"></div>
+                            </div>
+                            <h3>Notification</h3>
+                            <p>Update successful</p>
+                            <a href="recruitersetting" style="margin-left= 50%  width: 4%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>`</c:if>
+           <c:remove var="check" scope="session" />
+   ;
 
-        <script src="assets/js/moment.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="assets/js/bootstrap-datetimepicker.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        $('body').append(messageModal);
+        $('#messageModal').modal('show');
+    });
+</script>
 
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="assets/plugins/datatables/datatables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
 
         <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
@@ -315,5 +335,5 @@
     
 
 </html>
-
+    
 

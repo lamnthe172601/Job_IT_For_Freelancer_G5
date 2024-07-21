@@ -1,10 +1,10 @@
 
 package Models;
 
-import MutiModels.PostApplicationCount;
+
 import dal.PostDAO;
 import java.util.Date;
-import java.util.List;
+
 
 /**
  *

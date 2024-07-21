@@ -348,14 +348,15 @@
 
 
         <script>
-            $(document).ready(function () {
-            // Kiểm tra nếu có thông báo trong session khi mới tải trang
-            var message = "<%= (String) session.getAttribute("message") %>";
-            var check = "<%= (String) session.getAttribute("check") %>";
-            if (message != null && message.trim().length > 0 && check === "1") {
-            // Hiển thị modal thông báo
-            var messageModal =
-                    `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
+$(document).ready(function () {
+    // Kiểm tra nếu có thông báo trong session khi mới tải trang
+    var message = "<%= (String) session.getAttribute("message") %>";
+    var check = "<%= (String) session.getAttribute("check") %>";
+
+    if (message != null && message.trim().length > 0 && check === "1") {
+        // Hiển thị modal thông báo
+        var messageModal =
+            `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body text-center">
@@ -370,22 +371,22 @@
                     </div>
                 </div>
             </div>`;
-            $('body').append(messageModal);
-            $('#messageModal').modal('show');
-            // Xóa thông báo khỏi session
-            <% session.removeAttribute("message"); %>
-            <% session.removeAttribute("check"); %>
-            }
+        $('body').append(messageModal);
+        $('#messageModal').modal('show');
+        // Xóa thông báo khỏi session
+        <% session.removeAttribute("message"); %>
+        <% session.removeAttribute("check"); %>
+    }
 
-            // Hiển thị modal xác nhận xóa khi ấn nút delete
-            $('.delete-btn').on('click', function (e) {
-            e.preventDefault();
-            var categoryId = $(this).data('category-id');
-            var modalId = '#delete_category_' + categoryId;
-            $(modalId).modal('show');
-            });
-            });
-        </script>
+    // Hiển thị modal xác nhận xóa khi ấn nút delete
+    $('.delete-btn').on('click', function (e) {
+        e.preventDefault();
+        var categoryId = $(this).data('category-id');
+        var modalId = '#delete_category_' + categoryId;
+        $(modalId).modal('show');
+    });
+});
+</script>
 
 
         <style>

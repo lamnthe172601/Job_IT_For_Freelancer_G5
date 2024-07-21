@@ -777,7 +777,7 @@
 
 
 
-            
+
 
 
             <section style="padding-top: 0px" class="section blog-tricks">
@@ -795,7 +795,7 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="grid-blog blog-two aos" data-aos="fade-up">
                                     <div class="blog-image">
-                                        <a href="BlogDetails?blogID=${blog.blogID}"><img " class="img-fluid" src="assets/img/blog/${blog.image}" alt="Post Image"></a>
+                                        <a href="BlogDetails?blogID=${blog.blogID}"><img style="width: 350px; height: 203px; margin-left: 14px"  class="img-fluid" src="${blog.image}" alt="Post Image"></a>
                                     </div>
                                     <div class="blog-content">
                                         <div class="feature-time-blk">
@@ -803,7 +803,7 @@
                                             <span><i class="far fa-calendar me-1"></i>${blog.date_blog}</span>
                                         </div>
                                         <h3 class="blog-title mt-0"><a href="BlogDetails?blogID=${blog.blogID}">${blog.title}</a></h3>
-                                        <p>${blog.description}</p>
+                                        <p class="mb-0">${blog.description}</p>
                                         <div class="blog-read">
                                             <a href="BlogDetails?blogID=${blog.blogID}">Read More <i class="fas fa-arrow-right ms-1"></i></a>
                                         </div>
@@ -1105,11 +1105,11 @@
                     });
                 }
             }
-            
+
         </script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const maxLength = 100;
+                const maxLength = 80;
                 const descriptions = document.querySelectorAll(".blog-content p.mb-0");
 
                 descriptions.forEach(function (description) {
@@ -1120,6 +1120,19 @@
                 });
             });
         </script>
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const maxLength = 50;
+        const descriptions = document.querySelectorAll(".blog-content p.mb-0");
+
+        descriptions.forEach(function (description) {
+            const text = description.innerText;
+            if (text.length > maxLength) {
+                description.innerText = text.substring(0, maxLength) + "...";
+            }
+        });
+    });
+</script>
         <script data-cfasync="false" src="assets/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js" type="94bd991bf5d56390f4d2da30-text/javascript"></script>

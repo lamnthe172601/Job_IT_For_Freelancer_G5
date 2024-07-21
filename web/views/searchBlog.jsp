@@ -49,39 +49,196 @@
                 height: 450px;
                 margin-bottom: 5px; /* Khoảng cách giữa các blog, có thể thay đổi tùy nhu cầu */
             }
-        </style>
-    </head>
-    <body>
-        <div class="main-wrapper">
-            <header class="header">
-                <div class="container">
-                    <nav class="navbar navbar-expand-lg header-nav p-0">
-                        <div class="navbar-header">
-                            <a id="mobile_btn" href="javascript:void(0);">
-                                <span class="bar-icon">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </span>
-                            </a>
-                            <a href="home" class="navbar-brand logo">
-                                <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                            </a>
-                        </div>
-                        <div class="main-menu-wrapper">
-                            <div class="menu-header">
-                                <a href="home" class="menu-logo">
+            .blog-content p {
+                word-break: break-word; /* Chuyển từ dài xuống dòng mới */
+                overflow-wrap: break-word; /* Chuyển từ dài xuống dòng mới */
+                white-space: pre-wrap; /* Giữ khoảng trắng và xuống dòng khi cần */
+
+
+            .pagination {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .pagination a, .pagination span {
+                margin: 0 5px;
+                padding: 10px 20px;
+                border: 1px solid #ddd;
+                text-decoration: none;
+                color: #333;
+            }
+
+            .pagination .current-page {
+                background-color: #007bff;
+                color: white;
+                border: 1px solid #007bff;
+            }
+
+            .pagination a:hover {
+                background-color: #ddd;
+            }
+            </style>
+        </head>
+        <body>
+            <div class="main-wrapper">
+                <header class="header">
+                    <div class="container">
+                        <nav class="navbar navbar-expand-lg header-nav p-0">
+                            <div class="navbar-header">
+                                <a id="mobile_btn" href="javascript:void(0);">
+                                    <span class="bar-icon">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </span>
+                                </a>
+                                <a href="home" class="navbar-brand logo">
                                     <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                                 </a>
-                                <a id="menu_close" class="menu-close" href="javascript:void(0);">
-                                    <i class="fas fa-times"></i>
-                                </a>
                             </div>
-                            <jsp:include page="header.jsp" />
-                        </div>
-                    </nav>
-                </div>
-            </header>
+                            <div class="main-menu-wrapper">
+                                <div class="menu-header">
+                                    <a href="home" class="menu-logo">
+                                        <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                                    </a>
+                                    <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </div>
+                                <ul class="main-nav">
+                                    <li class="active has-submenu">
+                                        <a href="home">Home <i class="fas"></i></a>
+
+                                    </li>
+
+                                    <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
+                                        <li class="has-submenu">
+                                            <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                            <ul class="submenu"> 
+
+                                                <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
+                                                <li><a href="ListApply">Jobs Apply</a></li>
+                                                <li><a href="JobforFreelancer">Jobs For you</a></li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="has-submenu">
+                                            <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                            <ul class="submenu">
+
+                                                <li><a href="AllListPost">Jobs List</a></li>                                        
+
+                                            </ul>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                        <li class="has-submenu">
+                                            <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                            <ul class="submenu">
+
+                                                <li><a href="ListFreelancer">List Freelancer</a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li class="has-submenu">
+                                            <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="CreatePost">Create a new Project</a></li>
+                                                <li><a href="myListJobProject">My list project</a></li>
+
+
+                                            </ul>
+                                        </li>
+                                    </c:if>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">                                                                           
+
+                                            <li><a href="blogGrid">Blog</a></li>
+                                            <li><a href="About">About us</a></li>
+                                            <li><a href="ContactUs">Contact us</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+
+                                        <li class="has-submenu">
+                                            <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>                      
+                                                <li><a href="changePass">Change Password</a></li>                                                                                     
+                                                <li><a href="UpdateProfile?id=${sessionScope.account.userID}">Settings</a></li>
+                                                <li><a href="logout">Logout</a></li>
+                                            </ul>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                        <li class="has-submenu">
+                                            <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                            <ul class="submenu">
+
+                                                <li><a href="Dashboard">Dashboard</a></li>
+                                                <li><a href="companydetail">My Profile</a></li>
+                                                <li><a href="manageJobsPosts">Projects</a></li>
+                                                <li><a href="RecruiterFavourites">Favourites</a></li>                                                                                       
+                                                <li><a href="recruitersetting">Settings</a></li>
+                                                <li><a href="logout">Logout</a></li>
+                                            </ul>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
+                                        <li>
+                                            <a href="home" target="_blank">Admin</a>
+                                            <ul class="submenu">
+
+                                                <li><a href="dashboardAdmin">Dashboard</a></li>                                           
+                                                <li><a href="profile-settings">Settings</a></li>
+                                                <li><a href="logout">Logout</a></li>
+                                            </ul>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="${sessionScope.account == null}">
+                                        <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                                        <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
+                                            </c:if>
+                                </ul>
+                            </div>
+                            <ul style="margin-left: 5px;" class="nav header-navbar-rht">                       
+                                <li>
+                                    <form action="searchBlog" method="get" style=" display: flex;
+                                          align-items: center;">
+                                        <c:if test="${blogsearch == null}">
+                                            <input type="text" name="query" placeholder="Search Blog" style="padding: 5px;
+                                                   margin-right: 5px;
+                                                   border-radius: 10px;
+                                                   width: 250px;">
+                                        </c:if>
+                                        <c:if test="${blogsearch != null}">
+                                            <input type="text" name="query" value="${blogsearch}" style="padding: 5px;
+                                                   margin-right: 5px;
+                                                   border-radius: 10px;
+                                                   width: 250px;">
+                                        </c:if>
+                                        <button type="submit" style="display: flex;
+                                                align-items: center;
+                                                padding: 5px 10px;
+                                                background-color: rgb(230, 84, 37);
+                                                color: white;
+                                                border: none;
+                                                cursor: pointer;
+                                                margin-right: 5px;
+                                                border-radius: 10px;">
+                                            <i class="feather-search me-1"></i>Search
+                                        </button>
+                                    </form>
+                                </li>                            
+
+                            </ul>
+                        </nav>      
+                    </div>  
+                </header>       
+            </div>
             <div class="bread-crumb-bar">
                 <div class="container">
                     <div class="row align-items-center inner-banner">
@@ -95,13 +252,6 @@
 
                                     </ol>
                                 </nav>
-                                <form action="searchBlog" method="get" style=" display: flex; align-items: center;">
-                                    <input type="text" name="query" placeholder="Search blog..." style="padding: 5px; margin-right: 5px; border-radius: 10px; width: 250px;">
-                                    <button type="submit" style="display: flex; align-items: center; padding: 5px 10px; background-color: rgb(230, 84, 37); color: white; border: none; cursor: pointer; margin-right: 5px; border-radius: 10px;">
-                                        <i class="feather-search me-1"></i>Search
-                                    </button>
-                                </form>
-
                             </div>
 
                         </div>
@@ -111,15 +261,26 @@
 
             <div class="content">
                 <div class="container">
+
+                    <c:set var="list" value="${requestScope.blogs}" />
+                    <c:set var="tongSoBaiDang" value="${requestScope.countResult}" />
+                    <c:set var="baiDangTrenMotTrang" value="${requestScope.resultInPage}" />
+                    <c:set var="tongSoTrang" value="${requestScope.totalResult}" />
+                    <c:set var="trangHienTai" value="${requestScope.indexBlogResult}" />
+
+                    <%-- Tính chỉ số bắt đầu và kết thúc cho danh sách bài đăng hiển thị trên trang hiện tại --%>
+                    <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
+                    <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
+
                     <div class="row blog-grid-row">
                         <c:choose>
                             <c:when test="${not empty blogs}">
-                                <c:forEach var="blog" items="${blogs}">
+                                <c:forEach items="${list}" var="blog" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
                                     <div class="col-md-4 col-sm-12">
                                         <div class="blog grid-blog">
                                             <div class="blog-image">
                                                 <a href="BlogDetails?blogId=${blog.blogID}">
-                                                    <img class="img-fluid" src="assets/img/blog/${blog.image}" alt="${blog.title}">
+                                                    <img class="img-fluid" src="${blog.image}">
                                                 </a>
                                             </div>
                                             <div class="blog-content">
@@ -138,10 +299,37 @@
                             </c:when>
                             <c:otherwise>
                                 <div class="col-12">
-                                    <p class="no-blogs-found">There are no blogs that match your query</p>
+                                    <p class="no-blogs-found">There are no blogs that match your search title</p>
                                 </div>
                             </c:otherwise>
                         </c:choose>
+                    </div>
+                    <div class="pagination-container">
+                        <c:if test="${tongSoTrang > 1}">
+                            <nav>
+                                <ul class="pagination" style="display: flex;justify-content: center;margin-top: 20px">
+                                    <c:if test="${trangHienTai > 1}">
+                                        <li class="page-item">
+                                            <a style="margin: 0 5px;padding: 10px 20px;border: 1px solid #ddd;text-decoration: none;color: #333;" class="page-link " href="searchBlog?page=${trangHienTai - 1}" aria-label="Trước">
+                                                <span style="margin: 0 5px;padding: 10px 20px;border: 1px solid #ddd;text-decoration: none;color: #333;" aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                    <c:forEach var="i" begin="1" end="${tongSoTrang}">
+                                        <li class="page-item ${i == trangHienTai ? 'active' : ''}">
+                                            <a style="margin: 0 5px;padding: 10px 20px;border: 1px solid #ddd;text-decoration: none;color: #333;" class="page-link" href="searchBlog?page=${i}">${i}</a>
+                                        </li>
+                                    </c:forEach>
+                                    <c:if test="${trangHienTai < tongSoTrang}">
+                                        <li class="page-item">
+                                            <a style="margin: 0 5px;padding: 10px 20px;border: 1px solid #ddd;text-decoration: none;color: #333;" class="page-link" href="searchBlog?page=${trangHienTai + 1}" aria-label="Sau">
+                                                <span style="margin: 0 5px;padding: 10px 20px;border: 1px solid #ddd;text-decoration: none;color: #333;" aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                </ul>
+                            </nav>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -157,7 +345,7 @@
         <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="8157e937c31e3b17dd795771-|49" defer></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const maxLength = 100;
+                const maxLength = 50;
                 const descriptions = document.querySelectorAll(".blog-content p.mb-0");
 
                 descriptions.forEach(function (description) {

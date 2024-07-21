@@ -115,13 +115,14 @@ public class DAO extends DBContext {
 
     public void register(String username, String password, String email, String status) {
         String sql = "insert into [User]\n"
-                + "values(?,?,?,?,5,1)";
+                + "values(?,?,?,?,5,1,GETDATE())";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setString(3, email);
             statement.setString(4, status);
+            
             statement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -293,6 +294,24 @@ public class DAO extends DBContext {
             statement.setString(4, end);
             statement.setString(5, project);
             statement.setInt(6, freeID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+    public void inputFreelancerExperiance2(String experiance,  String position, String start, String end, int freeID) {
+        String sql = """
+                     insert into [Experience]
+                     values(?,?,?,?,?)""";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, experiance);
+            statement.setString(2, position);
+            statement.setString(3, start);
+            statement.setString(4, end);
+            
+            statement.setInt(5, freeID);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

@@ -34,20 +34,21 @@ public class blogGridControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        System.out.println("Processing GET request in blogGridControll");
+
         BlogDAO blogDAO = new BlogDAO();
-        // Retrieve the list of blogs from the DAO
         List<Blogs> listBlog = blogDAO.selectAllBlogs();
-
-        
-        // Logging the retrieved blogs
-        if (listBlog != null) {
-            System.out.println("List of blogs: " + listBlog);
-        } else {
-            System.out.println("No blogs found");
+        int countBlog = listBlog.size();
+        int blogInPage = 12;
+        int totalBlog = (int) Math.ceil((double) countBlog / blogInPage);
+        int index = 1;
+        String indexPage = request.getParameter("page");
+        if (indexPage != null && !indexPage.isEmpty()) {
+            index = Integer.parseInt(indexPage);
         }
-
-        // Set the blogs as a request attribute
+        request.setAttribute("countBlog", countBlog);
+        request.setAttribute("blogInPage", blogInPage);
+        request.setAttribute("totalBlog", totalBlog);
+        request.setAttribute("indexBlogPage", index);
         request.setAttribute("listBlog", listBlog);
 
         // Forward the request to the JSP page

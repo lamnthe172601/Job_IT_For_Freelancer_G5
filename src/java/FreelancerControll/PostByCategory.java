@@ -52,7 +52,7 @@ public class PostByCategory extends HttpServlet {
                 List<PostBasic> posts = caDAO.getPostsByCategoryPage(categoryID, index);
         
                 // Fetch other data (categories, job types, durations, etc.)
-                List<Categories> categories = caDAO.getAllCategories();
+                List<Categories> categories = caDAO.getAllCategory();
                 List<JobType> jobtype = jobDAO.getAllJobType();
                 List<Duration> dura = durationDAO.getAllDuration();
                 List<Post> listpost = pDao.getAllPosts();

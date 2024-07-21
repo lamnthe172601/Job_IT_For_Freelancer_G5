@@ -26,7 +26,7 @@ import java.util.List;
 public class FreelancerDAO extends DBContext {
 
     public Freelancer getFreelancerById(int id) {
-        String query = "SELECT * FROM freelancer WHERE userID = ?";
+        String query = "SELECT * FROM freelancer WHERE userID = ? ";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -49,6 +49,12 @@ public class FreelancerDAO extends DBContext {
 
         }
         return null;
+    }
+    
+    public static void main(String[] args) {
+        FreelancerDAO da = new FreelancerDAO();
+        Freelancer m = da.getFreelancerByFreelancerId(2);
+        System.out.println(m);
     }
     
     public Freelancer getFreelancerByFreelancerId(int id) {

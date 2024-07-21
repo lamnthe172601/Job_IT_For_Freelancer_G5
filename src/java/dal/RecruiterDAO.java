@@ -64,6 +64,7 @@ public class RecruiterDAO extends DBContext {
         }
     }
 
+    
     public String convertDateTimeFormat(String inputDateTime) {
         if (inputDateTime == null) {
             return null;
@@ -222,17 +223,16 @@ public class RecruiterDAO extends DBContext {
         List<JobApply> list = new ArrayList<>();
         String query = """
                            SELECT 
-                                                              *
-                                                          FROM [JobApply] ja
-                                                          JOIN [Post] p ON ja.postID = p.postID
-                                                          join Categories ca on p.caID = ca.caID
-                                                          join JobType jt on jt.jobID = p.job_type_ID
-                                                          join Duration du on du.durationID = p.durationID
-                                                          
-                                                          JOIN [Freelancer] free ON ja.freelanceID = free.freelanceID
-                                                          JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
-                                                          WHERE 
-                                                          p.recruiterID =?  ;
+                                                                                                                        *
+                                                                                                                    FROM [JobApply] ja
+                                                                                                                    JOIN [Post] p ON ja.postID = p.postID
+                                                                                                                    JOIN Categories ca ON p.caID = ca.caID
+                                                                                                                    JOIN JobType jt ON jt.jobID = p.job_type_ID
+                                                                                                                    JOIN Duration du ON du.durationID = p.durationID
+                                                                                                                    JOIN [Freelancer] free ON ja.freelanceID = free.freelanceID
+                                                                                                                    JOIN [Recruiter] r ON p.recruiterID = r.recruiterID
+                                                                                                                    WHERE p.recruiterID = ?
+                                                                                                                    ORDER BY ja.dateApply DESC ;
                            """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -460,4 +460,27 @@ public class RecruiterDAO extends DBContext {
             System.out.println(jobApply.toString());
         }
     }
+    
+    public boolean updateRecruiterR(Recruiter recruiter) throws SQLException {
+    String query = """
+                   UPDATE Recruiter SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, phone_contact = ?, email_contact = ? WHERE recruiterID = ?
+                   """;
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        stmt.setString(1, recruiter.getFirstName());
+        stmt.setString(2, recruiter.getLastName());
+        stmt.setString(3, recruiter.getImage());
+        stmt.setBoolean(4, recruiter.isGender());
+        stmt.setDate(5, (java.sql.Date) recruiter.getDob());
+        stmt.setString(6, recruiter.getPhone());
+        stmt.setString(7, recruiter.getEmail());
+        stmt.setInt(8, recruiter.getRecruiterID());
+
+        int rowsUpdated = stmt.executeUpdate();
+        return rowsUpdated > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new SQLException("Error while updating recruiter", e);
+    }
+}
+
 }
