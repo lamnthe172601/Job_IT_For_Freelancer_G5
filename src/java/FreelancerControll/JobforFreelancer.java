@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package FreelancerControll;
 
 import Models.Categories;
 import Models.Duration;
+import Models.Freelancer;
 import Models.JobType;
 import Models.Post;
+import Models.Recruiter;
 import Models.SkillSet;
 import Models.User;
 import MutiModels.JobApply;
@@ -15,96 +13,106 @@ import MutiModels.PostBasic;
 import dal.CategoriesDAO;
 import dal.DAO;
 import dal.DurationDAO;
+import dal.FreelancerDAO;
 import dal.JobTypeDAO;
 import dal.PostDAO;
 import dal.RecruiterDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
 
+@WebServlet(name = "JobforFreelancer", urlPatterns = {"/JobforFreelancer"})
 public class JobforFreelancer extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
+    private CategoriesDAO caDAO = new CategoriesDAO();
+    private PostDAO pDao = new PostDAO();
+    private JobTypeDAO jobDAO = new JobTypeDAO();
+    private DurationDAO durationDAO = new DurationDAO();
+    private DAO d = new DAO();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       HttpSession session = request.getSession();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
-        RecruiterDAO reDAO = new RecruiterDAO();
-        PostDAO pDao = new PostDAO();
-        CategoriesDAO caDAO = new CategoriesDAO();
-        JobTypeDAO job = new JobTypeDAO();
-        List<JobType> jobtype = job.getAllJobType();
-        DurationDAO duration = new DurationDAO();
-        List<Duration> dura = duration.getAllDuration();
+
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
+
+        String indexPage = request.getParameter("page");
+        int index = Integer.parseInt(indexPage != null ? indexPage : "1");
+
+        int userId = user.getUserID();
+        int freelancerID = d.getFreelancerIDbyUserID(userId);
+
+        FreelancerDAO f = new FreelancerDAO();
+        Freelancer freelancer = f.getFreelancerById(freelancerID);
+
+        List<PostBasic> posts = caDAO.getPostsByFreelancerSkillsPage(freelancerID, index);
+        List<Categories> categories = caDAO.getAllCategories();
+        List<JobType> jobtype = jobDAO.getAllJobType();
+        List<Duration> dura = durationDAO.getAllDuration();
         List<Post> listpost = pDao.getAllPosts();
-        List<Categories> cate = caDAO.getAllCategory();
         List<SkillSet> skill = pDao.getAllSkillSet();
 
-        int tongSoBaiDang = listpost.size();
         int baiDangTrenMotTrang = 6;
+        int tongSoBaiDang = pDao.countPostsByFreelancerSkills(freelancerID);
         int tongSoTrang = (int) Math.ceil((double) tongSoBaiDang / baiDangTrenMotTrang);
-        int trangHienTai = 1;
 
-        String thamSoTrang = request.getParameter("page");
-        if (thamSoTrang != null && !thamSoTrang.isEmpty()) {
-            trangHienTai = Integer.parseInt(thamSoTrang);
-        }
+        request.setAttribute("posts", posts);
+        request.setAttribute("categories", categories);
+        request.setAttribute("jobtype", jobtype);
+        request.setAttribute("dura", dura);
         request.setAttribute("listpost", listpost);
+        request.setAttribute("skill", skill);
         request.setAttribute("tongSoBaiDang", tongSoBaiDang);
         request.setAttribute("baiDangTrenMotTrang", baiDangTrenMotTrang);
         request.setAttribute("tongSoTrang", tongSoTrang);
-        request.setAttribute("trangHienTai", trangHienTai);
-        request.setAttribute("cate", cate);
-        request.setAttribute("jobtype", jobtype);
-        request.setAttribute("dura", dura);
-        request.setAttribute("skill", skill);
+        request.setAttribute("trangHienTai", index);
+        request.setAttribute("page", index);
 
         if (user != null) {
-            DAO d = new DAO();
-            int userId = user.getUserID();
-            int freelancerID = d.getFreelancerIDbyUserID(userId);
-            List<JobApply> postAplly = pDao.getPostApply(freelancerID);
+            List<JobApply> postApply = pDao.getPostApply(freelancerID);
             List<PostBasic> postFavourites = pDao.getAllFavPosts(freelancerID);
-            request.setAttribute("postApply", postAplly);
+            request.setAttribute("postApply", postApply);
             request.setAttribute("postFavourites", postFavourites);
         }
-        String categoryIDParam = request.getParameter("categoryID");
 
-        if (user != null) {
-            DAO d = new DAO();
-            int userId = user.getUserID();
-            int freelancerID = d.getFreelancerIDbyUserID(userId);
-
-            PostDAO postDAO = new PostDAO();
-            List<Post> posts = postDAO.getPostsByFreelancerSkill(freelancerID);
-
-            request.setAttribute("posts", posts);
-            request.getRequestDispatcher("views/JobforFreelancer.jsp").forward(request, response);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
-        }
-
+        request.getRequestDispatcher("views/JobforFreelancer.jsp").forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            String postID = request.getParameter("postID");
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("account");
+
+            if (user == null) {
+                request.getRequestDispatcher("login").forward(request, response);
+                return;
+            }
+
+            int userId = user.getUserID();
+            int freelancerID = d.getFreelancerIDbyUserID(userId);
+
+            pDao.deleteFavoPostByPostID(freelancerID, postID);
+
+            response.sendRedirect("JobforFreelancer");
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.getRequestDispatcher("login").forward(request, response);
+        }
     }
 
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Servlet to fetch and display jobs for freelancers";
+    }
 }

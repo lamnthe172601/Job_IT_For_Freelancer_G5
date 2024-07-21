@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="company-title">
                                         <p>Company Name</p>
-                                        <h4>${company.companyName}</h4>
+                                        <h4>${company.getCompanyName()}</h4>
                                     </div>
                                 </div>
 

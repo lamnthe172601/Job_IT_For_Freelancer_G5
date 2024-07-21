@@ -75,6 +75,7 @@
 
                 <li><a href="Dashboard">Dashboard</a></li>
                 <li><a href="companydetail">My Profile</a></li>
+                <li><a href="changePass">Change Password</a></li>   
                 <li><a href="manageJobsPosts">Projects</a></li>
                 <li><a href="RecruiterFavourites">Favourites</a></li>                                                                                       
                 <li><a href="recruitersetting">Settings</a></li>

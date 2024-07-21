@@ -57,11 +57,13 @@ public class CategoriesDAO extends DBContext {
         return null;
     }
 public boolean addCategory(Categories category) {
-    String query = "INSERT INTO Categories (categories_name, description) VALUES (?, ?);";
+    String query = "INSERT INTO Categories (categories_name, description, statusCate) VALUES (?, ?, ?);";
     try (PreparedStatement ps = connection.prepareStatement(query)) {
         
         ps.setString(1, category.getCategoriesName());
+       
         ps.setString(2, category.getDescription());
+        ps.setBoolean(3, true); // Đặt giá trị statusCate là true (1)
       
         int rowsInserted = ps.executeUpdate();
     
@@ -73,6 +75,7 @@ public boolean addCategory(Categories category) {
         return false;
     }
 }
+
 
 
     public List<Categories> getCategory() {
@@ -290,37 +293,81 @@ public List<Categories> getCategoryByNameAndStatus(String categoryName, int stat
     }
     return posts;
 }
-
-  public List<PostBasic> getPostsByFreelancerSkillsPage(int freelancerID, int index) {
-    List<PostBasic> posts = new ArrayList<>();
-    String query = """
-                   SELECT p.postID, p.title, p.image, p.job_type_ID, p.durationID, p.date_post, p.quantity, p.description, p.budget, p.location, p.skill, p.recruiterID, p.status, p.caID, p.checking,
-                          j.job_name, d.duration_name, c.categories_img, c.categories_name, c.description, c.statusCate,
-                          r.first_name, r.last_name, r.email_contact, r.image, co.company_name
-                   FROM Post p
-                   JOIN SkillPost sp ON p.postID = sp.postID
-                   JOIN Skill s ON sp.skillID = s.skillID
-                   JOIN FreelancerSkill fs ON s.skillID = fs.skillID
-                   JOIN JobType j ON j.jobID = p.job_type_ID
-                   JOIN Duration d ON d.durationID = p.durationID
-                   JOIN Categories c ON c.caID = p.caID
-                   JOIN Recruiter r ON r.recruiterID = p.recruiterID
-                   JOIN Company co ON co.recruiterID = p.recruiterID
-                   WHERE fs.freelancerID = ?
-                   ORDER BY p.postID DESC
-                   OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY;
+ public List<PostBasic> getPostsByFreelancerSkillsPage(int freelancerID, int offset) {
+     List<PostBasic> posts = new ArrayList<>();
+     String query = """
+                   WITH FreelancerSkills AS (
+                       SELECT ss.skill_set_name
+                       FROM [freelancer].[dbo].[Skills] us
+                       JOIN [freelancer].[dbo].[Skill_Set] ss ON us.skill_set_ID = ss.skill_set_ID
+                       WHERE us.freelancerID = ?
+                   ),
+                   MatchingPosts AS (
+                       SELECT 
+                           p.postID, 
+                           p.title, 
+                           p.image, 
+                           p.job_type_ID, 
+                           p.durationID, 
+                           p.date_post, 
+                           p.quantity, 
+                           p.description, 
+                           p.budget, 
+                           p.location,
+                           p.skill, 
+                           p.recruiterID, 
+                           p.status,
+                           p.caID, 
+                           p.checking,
+                           j.job_name, 
+                           d.duration_name, 
+                           c.categories_img, 
+                           c.categories_name, 
+                           c.description AS category_description, 
+                           c.statusCate,
+                           r.first_name, 
+                           r.last_name, 
+                           r.email_contact, 
+                           r.image AS recruiter_image, 
+                           co.company_name
+                       FROM [freelancer].[dbo].[Post] p
+                       JOIN [freelancer].[dbo].[JobType] j ON p.job_type_ID = j.jobID
+                       JOIN [freelancer].[dbo].[Duration] d ON p.durationID = d.durationID
+                       JOIN [freelancer].[dbo].[Categories] c ON p.caID = c.caID
+                       JOIN [freelancer].[dbo].[Recruiter] r ON p.recruiterID = r.recruiterID
+                       JOIN [freelancer].[dbo].[Company] co ON r.recruiterID = co.recruiterID
+                       CROSS APPLY STRING_SPLIT(p.skill, ',') ps
+                       WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills)
+                       ORDER BY p.postID DESC
+                       OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY
+                   )
+                   SELECT *
+                   FROM MatchingPosts
                    """;
     try (PreparedStatement ps = connection.prepareStatement(query)) {
         ps.setInt(1, freelancerID);
-        ps.setInt(2, (index - 1) * 6);
+        ps.setInt(2, offset);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("description"), rs.getInt("statusCate"));
+            Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("category_description"), rs.getInt("statusCate"));
             Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
-            RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString("image"));
+            RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString("recruiter_image"));
             JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
-            posts.add(new PostBasic(rs.getInt("postID"), rs.getInt("quantity"), rs.getInt("budget"), rs.getString("title"), rs.getString("description"), rs.getString("location"), rs.getString("skill"), rs.getString("image"), rs.getDate("date_post"),
-                    job, du, re, ca, rs.getBoolean("status"), rs.getInt("checking")));
+            PostBasic post = new PostBasic(
+                rs.getInt("postID"), 
+                rs.getInt("quantity"), 
+                rs.getInt("budget"), 
+                rs.getString("title"), 
+                rs.getString("description"), 
+                rs.getString("location"), 
+                rs.getString("skill"), 
+                rs.getString("image"), 
+                rs.getDate("date_post"),
+                job, du, re, ca, 
+                rs.getBoolean("status"), 
+                rs.getInt("checking")
+            );
+            posts.add(post);
         }
     } catch (SQLException e) {
         e.printStackTrace();

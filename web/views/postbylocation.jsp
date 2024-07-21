@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -369,15 +369,13 @@
                                                         <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${post.location}</div>
                                                     </div>
                                                     <div class="skills-container">
-                                                        <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index % 3 == 0}">
-                                                                <div class="skills-row">
-                                                                </c:if>
-                                                                <div class="freelance-tags">
-                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                                </div>
-                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                                </div>
+                                                        <c:forEach items="${fn:split(post.skill, ',')}" var="skill" varStatus="loop">
+                                                            <c:if test="${loop.index < 3}">
+                                                                <span class="badge badge-pill badge-design">${skill}</span>
+                                                            </c:if>                                                              
+                                                            <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                                <span class="badge badge-pill badge-design">...</span>
+
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>
@@ -483,15 +481,37 @@
                                    
                                 </c:forEach>
                             </div>
-<c:if test="${endPage > 1}">
-    <ul class="pagination">
-        <c:forEach var="i" begin="1" end="${endPage}">
-            <li class="page-item ${i == page ? 'active' : ''}">
-                <a class="page-link" href="postByLocation?location=${location}&page=${i}">${i}</a>
-            </li>
-        </c:forEach>
-    </ul>
+
+                            <c:if test="${tongSoTrang > 1}">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="pagination list-pagination">
+                <!-- Trang trước -->
+                <c:if test="${trangHienTai > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="postbylocation?location=${param.location}&page=${trangHienTai - 1}">« Previous</a>
+                    </li>
+                </c:if>
+
+                <!-- Các trang -->
+                <c:forEach begin="1" end="${tongSoTrang}" var="e">
+                    <li class="page-item ${trangHienTai == e ? 'active' : ''}">
+                        <a class="page-link" href="postbylocation?location=${param.location}&page=${e}">${e}</a>
+                    </li>
+                </c:forEach>
+
+                <!-- Trang tiếp theo -->
+                <c:if test="${trangHienTai < tongSoTrang}">
+                    <li class="page-item">
+                        <a class="page-link" href="postbylocation?location=${param.location}&page=${trangHienTai + 1}">Next »</a>
+                    </li>
+                </c:if>
+            </ul>
+        </div>
+    </div>
 </c:if>
+
+
 
                             
                         </div>

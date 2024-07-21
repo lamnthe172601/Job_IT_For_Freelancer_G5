@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -369,15 +369,16 @@
                                                         <div class="freelance-location"><img src="assets/img/icon/locations.svg" class="me-2" alt="img">${post.location}</div>
                                                     </div>
                                                     <div class="skills-container">
-                                                        <c:forEach var="skill" items="${post.skill.split(',')}" varStatus="loop">
-                                                            <c:if test="${loop.index % 3 == 0}">
-                                                                <div class="skills-row">
-                                                                </c:if>
-                                                                <div class="freelance-tags">
-                                                                    <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                                </div>
-                                                                <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                                </div>
+
+
+
+                                                        <c:forEach items="${fn:split(post.skill, ',')}" var="skill" varStatus="loop">
+                                                            <c:if test="${loop.index < 3}">
+                                                                <span class="badge badge-pill badge-design">${skill}</span>
+                                                            </c:if>                                                              
+                                                            <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                                <span class="badge badge-pill badge-design">...</span>
+
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>
@@ -484,50 +485,46 @@
 
                                 </c:forEach>
                             </div>
-<c:if test="${endPage > 1}">
+
+
+                            <c:if test="${endPage > 1}">
     <div class="row">
         <div class="col-md-12">
-<!--            <ul class="paginations list-pagination">
-                <c:forEach begin="1" end="${endPage}" var="e">
+            <ul class="pagination list-pagination">
+                <!-- Trang trước -->
+                <c:if test="${trangHienTai > 1}">
                     <li class="page-item">
-                        <a class="${page == e? 'active' : ''}" href="postbycategory?categoryID=${param.categoryID}&page=${e}">${e}</a>
+                        <a class="page-link" href="postbycategory?categoryID=${param.categoryID}&page=${trangHienTai - 1}">« Previous</a>
+                    </li>
+                </c:if>
+
+                <!-- Các trang -->
+                <c:forEach begin="1" end="${endPage}" var="i">
+                    <li class="page-item ${trangHienTai == i ? 'active' : ''}">
+                        <a class="page-link" href="postbycategory?categoryID=${param.categoryID}&page=${i}">${i}</a>
                     </li>
                 </c:forEach>
-            </ul>-->
-  <ul class="pagination list-pagination">
-                                            <c:if test="${tag > 1}">
-                                                <li class="page-item">
-                                                    <a class="page-link" aria-label="Trước" href="postbycategory?categoryID=${param.categoryID}&page=${e}">${e}</a>
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                            </c:if>
-                                            <c:forEach var="i" begin="1" end="${endPage}">
-                                                <li class="page-item ${i == tag ? 'active' : ''}">
-                                                    <a class="page-link" href="postbycategory?categoryID=${param.categoryID}&page=${i}">${i}</a>
-                                                </li>
-                                            </c:forEach>
-                                            <c:if test="${tag < endPage}">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="postbycategory?categoryID=${param.categoryID}&page=${tag + 1}" aria-label="Sau">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </li>
-                                            </c:if>
-                                        </ul>
+
+                <!-- Trang tiếp theo -->
+                <c:if test="${trangHienTai < endPage}">
+                    <li class="page-item">
+                        <a class="page-link" href="postbycategory?categoryID=${param.categoryID}&page=${trangHienTai + 1}">Next »</a>
+                    </li>
+                </c:if>
+            </ul>
         </div>
     </div>
 </c:if>
 
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+
+
+
+
+
+
+
+
+
                         </div>
                     </div>
                 </div>

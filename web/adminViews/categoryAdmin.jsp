@@ -94,7 +94,9 @@
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
                                     <label for="categoryname">Name Position</label>
-                                    <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" >
+
+                                    <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" value="${categoryName}">
+
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
@@ -275,7 +277,7 @@
                                                                 <div class="form-group">
                                                                     <label for="edit-categoryname">Position Name</label>
                                                                     <input name="categoryIdStr" value="${c.getCaID()}" hidden>
-                                                                    <input type="text" class="form-control" id="edit-categoryname-${c.getCaID()}" name="categoryName" value="${c.getCategoriesName()}" maxlength="20" required pattern="^(?!.*\s{3}).*$" title="Position name cannot be the same as the previous name and must not contain only spaces." >
+                                                                    <input oninput="checkDuplicateCategoryName(caID)" type="text" class="form-control" id="edit-categoryname-${c.getCaID()}" name="categoryName" value="${c.getCategoriesName()}" maxlength="20" required pattern="^(?!.*\s{3}).*$" title="Position name cannot be the same as the previous name and must not contain only spaces." >
 
                                                                 </div>
                                                                 <div class="form-group">
@@ -316,15 +318,16 @@
                             <input name="mod" value="add" hidden>
                             <div class="form-group">
                                 <label for="categoryName">Position Name</label>
-                                <input type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" maxlength="30" required pattern="^(?!.*\s{3}).*$" title="Position Name cannot be empty or consist only of whitespace">
-
+                                <input oninput="checknameCategory()" type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" maxlength="30" required pattern="^(?!.*\s{3}).*$" title="Position Name cannot be empty or consist only of whitespace">
+                                <div style="color: red; display: none;" id="eCategoryname"></div>
 
                             </div>
                             <div class="form-group">
-                                <label for="categoryDescription">Description</label>
-                                <input oninput="checkCategory()" type="text" class="form-control" id="categorydescription" name="description" placeholder="Enter Position Description"  maxlength="500" required pattern="^(?!.*\s{3}).*$" title="Position Description cannot be empty or consist only of whitespace.">
-
+                                <label for="categorydescription">Description</label>
+                                <input oninput="checkDescription()" type="text" class="form-control" id="categorydescription" name="description" placeholder="Enter Position Description" maxlength="500" required pattern="^[\s\S]{5,500}$" title="Description must be between 5 and 500 characters and cannot consist only of whitespace.">
+                                <div style="color: red" id="eDescription"></div>
                             </div>
+
                             <div class="mt-4">
                                 <button type="submit" id="add-category-btn" class="btn btn-primary btn-block">Submit</button>
                             </div>
@@ -348,32 +351,30 @@
             $(document).ready(function () {
             // Kiểm tra nếu có thông báo trong session khi mới tải trang
             var message = "<%= (String) session.getAttribute("message") %>";
-            if (message != null && message.trim().length > 0) {
+            var check = "<%= (String) session.getAttribute("check") %>";
+            if (message != null && message.trim().length > 0 && check === "1") {
             // Hiển thị modal thông báo
             var messageModal =
-                    `<c:if test="${sessionScope.check == 1}">
-        
-        <div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body text-center">
-                                    <div class="checkmark-circle">
-                                        <div class="background"></div>
-                                        <div class="checkmark"></div>
-                                    </div>
-                                    <h3>Notification</h3>
-                                    <p>${message}</p>
-                                    <a style="width: 10%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
-                                </div>
+                    `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <div class="checkmark-circle">
+                                <div class="background"></div>
+                                <div class="checkmark"></div>
                             </div>
+                            <h3>Notification</h3>
+                            <p>${message}</p>
+                            <a style=" margin-left= 50%  width: 10%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
                         </div>
-                    </div></c:if>
-            <c:remove var="check" scope="session" />
-    `;
+                    </div>
+                </div>
+            </div>`;
             $('body').append(messageModal);
             $('#messageModal').modal('show');
             // Xóa thông báo khỏi session
             <% session.removeAttribute("message"); %>
+            <% session.removeAttribute("check"); %>
             }
 
             // Hiển thị modal xác nhận xóa khi ấn nút delete
@@ -444,22 +445,22 @@
             });
             <script>
                 // Hàm cắt bỏ văn bản dài hơn giới hạn
-            function truncateText(text, maxLength) {
+                function truncateText(text, maxLength) {
             if (text.length <= maxLength) {
             return text;
             } else {
             return text.substring(0, maxLength) + "...";
             }
-        }
-        var titles = document.querySelectorAll(".table-avatar.title a");
-            var descriptions = document.querySelectorAll(".descripition");
+            }
+                var titles = document.querySelectorAll(".table-avatar.title a");
+        var descriptions = document.querySelectorAll(".descripition");
             titles.forEach(function (title) {                     title.textContent = truncateText(title.textContent, 20); // Giới hạn 20 ký tự cho tiêu đề
-                        });
-                            descriptions.forEach(function (description) {
-            description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
+                    });
+                    descriptions.forEach(function (description) {
+                    description.textContent = truncateText(description.textContent, 100); // Giới hạn 100 ký tự cho mô tả
                                 });
                                 
-                        </script>
+                                </script>
         <script src="assets/js/jquery-3.7.1.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/feather.min.js"></script>
@@ -469,6 +470,24 @@
         <script src="assets/js/moment.min.js"></script>
         <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
         <script src="assets/js/script.js"></script>
+            <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/js/bootstrap.bundle.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/plugins/select2/js/select2.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/js/moment.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="assets/js/bootstrap-datetimepicker.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="assets/plugins/datatables/datatables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+
+        <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
+    <script src="assets/js/checkinput.js"></script>
         <script src="../../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="8b91df92299aa578c48a6e6b-|49" defer></script>
     </body>
 </html>
