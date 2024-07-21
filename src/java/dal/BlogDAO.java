@@ -12,8 +12,11 @@ public class BlogDAO extends DBContext {
 
     public List<Blogs> selectAllBlogs() {
         List<Blogs> blogs = new ArrayList<>();
-        String sql = "SELECT * FROM Blogs WHERE statusBlog = 1";
-        try (Connection conn = connection; PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+        
+        try  {
+            String sql = "SELECT * FROM Blogs WHERE statusBlog = 1";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("BlogID");
                 String title = rs.getString("title");
@@ -50,8 +53,9 @@ public class BlogDAO extends DBContext {
             e.printStackTrace();
         }
         return blog;
-        
+
     }
+
     public List<Blogs> searchBlogs(String keyword) {
         List<Blogs> blogs = new ArrayList<>();
         String sql = "SELECT * FROM Blogs WHERE statusBlog = 1 AND (title LIKE ? OR description LIKE ?)";
@@ -76,17 +80,35 @@ public class BlogDAO extends DBContext {
         return blogs;
     }
 
-    
+    public List<Blogs> selectNewBlogs() {
+        List<Blogs> blogs = new ArrayList<>();
+        String sql = "SELECT TOP 3 * \n"
+                + "FROM [freelancer].[dbo].[Blogs] \n"
+                + "WHERE statusBlog = 1 \n"
+                + "ORDER BY date_blog DESC;";
+        try (Connection conn = connection; PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                int id = rs.getInt("BlogID");
+                String title = rs.getString("title");
+                String image = rs.getString("image");
+                String description = rs.getString("description");
+                String tag = rs.getString("tag");
+                Date date = rs.getDate("date_blog");
+                boolean status = rs.getBoolean("statusBlog");
+                blogs.add(new Blogs(id, title, image, description, tag, date, status));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blogs;
+    }
+
     public static void main(String[] args) {
         BlogDAO dao = new BlogDAO();
-        
-        int blogIDToTest = 2; // Thay thế bằng một ID của blog hiện có để kiểm tra
-        Blogs blog = dao.selectBlogById(blogIDToTest);
-        
-        if (blog != null) {
-            System.out.println(blog);
-        } else {
-            System.out.println("No blog found with ID: " + blogIDToTest);
+        List<Blogs> m = dao.selectAllBlogs();
+        for (Blogs blogs : m) {
+            System.out.println(blogs.toString());
         }
+        
     }
 }
