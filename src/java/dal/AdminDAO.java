@@ -305,7 +305,7 @@ public class AdminDAO extends DBContext {
         
         return admin;
     }
-<<<<<<< HEAD
+
         public boolean updateAdmin(String adminID, String firstName, String lastName, String phone, String email, String image, String userID) {
         String sql = "UPDATE Admin SET first_name = ?, last_name = ?, phone = ?, email = ?, image = ?, userID = ? WHERE adminID = ?";
         try (
@@ -323,7 +323,10 @@ public class AdminDAO extends DBContext {
             return rowsUpdated > 0;
         } catch (SQLException ex) {
             ex.printStackTrace();
-=======
+        }
+        
+        return admin;
+    }
        
      public List<skillFull> getListSkill() {
         List<skillFull> list = new ArrayList<>();
@@ -342,6 +345,7 @@ public class AdminDAO extends DBContext {
         }
         return list;
     }
+    
 public boolean changeSkillsStatus(int skillId, boolean b) {
         String query = """
                  UPDATE [dbo].[Skill_Set]
@@ -356,7 +360,7 @@ public boolean changeSkillsStatus(int skillId, boolean b) {
             return rowsAffected > 0; // Trả về true nếu có dòng bị ảnh hưởng
         } catch (SQLException e) {
             System.out.println(e.getMessage());
->>>>>>> 09a2abef556ddb27638801b53f42f1dcd56adb03
+
         }
         return false;
     }
