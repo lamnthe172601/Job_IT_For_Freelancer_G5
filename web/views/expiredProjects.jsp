@@ -50,6 +50,56 @@
                 border-radius: 4px;
                 font-size: 10px;
             }
+
+            .action-table-data {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .download-button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 8px;
+                border-radius: 50%;
+                transition: background-color 0.3s ease;
+            }
+
+            .download-button:hover {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+
+            .download-button i {
+                color: #666;
+                font-size: 18px;
+                transition: color 0.3s ease;
+            }
+
+            .download-button:hover i {
+                color: #333;
+            }
+
+            /* Tùy chỉnh tooltip */
+            .download-button:hover::after {
+                content: attr(title);
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #333;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 4px;
+                font-size: 12px;
+                white-space: nowrap;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .download-button:hover::after {
+                opacity: 1;
+            }
         </style>
     </head>
 
@@ -115,7 +165,7 @@
                                         <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
                                         <ul class="submenu">
 
-                                             <li><a href="ListFreelancer">List Freelancer</a></li>
+                                            <li><a href="ListFreelancer">List Freelancer</a></li>
 
                                         </ul>
                                     </li>
@@ -124,7 +174,7 @@
                                         <ul class="submenu">
 
                                             <li><a href="myListJobProject">My List Post</a></li>
-                                            
+
 
                                         </ul>
                                     </li>
@@ -315,14 +365,14 @@
                                                         <a href="manageJobsPosts">Manage Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="ManageApplication">All
+                                                        <a href="ManageApplication" >All
                                                             applicants</a>
                                                     </li>
                                                     <li>
                                                         <a href="CompletedProjects">Completed Projects</a>
                                                     </li>
                                                     <li>
-                                                        <a href="ExpiredProjects"  class="active">Freelancer Approved</a>
+                                                        <a href="ExpiredProjects" class="active">Freelancer Approved</a>
                                                     </li>
 
 
@@ -403,15 +453,7 @@
                                             <div class="search-form">
                                                 <input type="text" id="searchInput" placeholder="Search...">
                                             </div>
-                                            <div style="margin-bottom: 16px" class="filter-status">
-
-                                                <select class="form-select" id="filterSelect">
-                                                    <option value="">All</option>
-                                                    <option value="0">Pending</option>
-                                                    <option value="1">Approved</option>
-                                                    <option value="2">Refused</option>
-                                                </select>
-                                            </div>
+                                            
 
                                         </div>
                                         <div class="table-responsive table-box manage-projects-table">
@@ -432,7 +474,7 @@
                                                         <tr>
                                                             <td>
                                                                 <a
-                                                                    href="PostDetails?postID=${listapply.post.postID}">${listapply.freelancer.name()}</a><br>
+                                                                    href="ViewFreelancerProfile?id=${listapply.freelancer.freelanceID}">${listapply.freelancer.name()}</a><br>
                                                                 <div class="applied">Applied:<a
                                                                         href="PostDetails?postID=${listapply.post.postID}"
                                                                         target="_blank">
@@ -443,37 +485,42 @@
                                                             </td>
                                                             <td>
                                                                 <div class="action-table-data">
-                                                                    <a id="Download${listapply.applyID}"
-                                                                       style="margin-left: 20px"
-                                                                       href="${listapply.resume}"
-                                                                       class="download-icon me-2" download>
-                                                                        <i class="feather-download"></i>
-                                                                    </a>
-                                                                </div>
-                                                                <script>
-                                                                    document.addEventListener("DOMContentLoaded", function () {
-                                                                        var downloadLinks = document.querySelectorAll(".download-icon");
+                                                                    <a href="${listapply.resume}" target="_blank" class="custom-tooltip" data-title="View CV"><i class="feather-eye"></i></a>
 
-                                                                        downloadLinks.forEach(function (link) {
-                                                                            link.addEventListener("click", function (event) {
-                                                                                var applyID = this.id.replace("Download", "");
-                                                                                downloadFile(applyID);
-                                                                            });
-                                                                        });
-                                                                    });
-
-                                                                    function downloadFile(applyID) {
-                                                                        var downloadLink = document.getElementById("Download" + applyID);
-                                                                        if (downloadLink) {
-                                                                            // Perform any additional operations here if needed
-                                                                            downloadLink.click();
-                                                                        } else {
-                                                                            console.error("Download link not found for applyID: " + applyID);
+                                                                    <style>
+                                                                        .custom-tooltip {
+                                                                            position: relative;
+                                                                            cursor: pointer;
                                                                         }
-                                                                    }
 
-                                                                </script>        
+                                                                        .custom-tooltip::after {
+                                                                            content: attr(data-title);
+                                                                            position: absolute;
+                                                                            bottom: 125%; /* Adjust the position as needed */
+                                                                            left: 50%;
+                                                                            transform: translateX(-50%);
+                                                                            background-color: #333;
+                                                                            color: #fff;
+                                                                            padding: 5px 10px;
+                                                                            border-radius: 4px;
+                                                                            white-space: nowrap;
+                                                                            opacity: 0;
+                                                                            visibility: hidden;
+                                                                            transition: opacity 0.3s;
+                                                                            z-index: 1000;
+                                                                        }
+
+                                                                        .custom-tooltip:hover::after {
+                                                                            opacity: 1;
+                                                                            visibility: visible;
+                                                                        }
+
+                                                                    </style>      
+
+                                                                </div>
                                                             </td>
+
+
                                                             <td class="status-cell">
                                                                 <span id="status-${listapply.applyID}"
                                                                       class="badge checked badge-pill ${listapply.status == 0 ? 'bg-warning-light' : (listapply.status == 1 ? 'bg-success-light' : 'bg-danger-light')}"
@@ -538,7 +585,7 @@
                                                                                                    class="form-control"
                                                                                                    id="emailSubject"
                                                                                                    name="emailSubject"
-                                                                                                   placeholder="Enter email subject"
+                                                                                                   value="Mail thông báo kết quả vòng đơn Apply tại ${listapply.post.title}"
                                                                                                    required>
                                                                                         </div>
                                                                                         <div class="form-group">

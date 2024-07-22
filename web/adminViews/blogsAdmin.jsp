@@ -71,9 +71,9 @@
                                 <label for="filter-title" class="form-label">Title</label>
                                 <input type="text" class="form-control" id="filter-title" placeholder="Enter blog title">
                             </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="filter-status" class="form-label">Status</label>
-                                <select class="form-select" id="filter-status">
+                            <div class="col-md-3 mb-3" >
+                                <label for="filter-status" class="form-label" >Status</label>
+                                <select class="form-select" id="filter-status" style="height: 46px;">
                                     <option value="">All</option>
                                     <option value="active">Active</option>
                                     <option value="trash">Trash</option>

@@ -1,5 +1,9 @@
 package AccountControll;
-
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.sql.SQLException;
 import Models.*;
 import dal.CompanyDAO;
 import dal.RecruiterDAO;
@@ -9,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
@@ -16,9 +21,10 @@ import java.util.regex.Pattern;
 @WebServlet("/updateRecruiterProfile")
 public class RecruiterProfileEditControll extends HttpServlet {
 
-    @Override
+     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        session.setAttribute("check", "1");
         Recruiter recruiter = (Recruiter) session.getAttribute("recruiter");
         Company company = (Company) session.getAttribute("company");
 
@@ -78,6 +84,22 @@ public class RecruiterProfileEditControll extends HttpServlet {
         company.setWebsite(website);
         company.setDescribe(describe);
 
+        // Xử lý upload hình ảnh
+        Part filePart = req.getPart("image");
+        if (filePart != null && filePart.getSize() > 0) {
+            String fileName = filePart.getSubmittedFileName();
+            String uploadPath = getServletContext().getRealPath("") + "uploads" + File.separator + fileName;
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
+            }
+
+            try (InputStream input = filePart.getInputStream()) {
+                Files.copy(input, uploadDir.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                recruiter.setImage(fileName);
+            }
+        }
+
         RecruiterDAO recruiterDAO = new RecruiterDAO();
         CompanyDAO companyDAO = new CompanyDAO();
 
@@ -99,6 +121,7 @@ public class RecruiterProfileEditControll extends HttpServlet {
 
         req.setAttribute("recruiter", recruiter);
         req.setAttribute("company", company);
+              
         req.getRequestDispatcher("views/recruitersetting.jsp").forward(req, resp);
     }
 

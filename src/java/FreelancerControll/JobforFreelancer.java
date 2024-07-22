@@ -5,7 +5,6 @@ import Models.Duration;
 import Models.Freelancer;
 import Models.JobType;
 import Models.Post;
-import Models.Recruiter;
 import Models.SkillSet;
 import Models.User;
 import MutiModels.JobApply;
@@ -13,10 +12,8 @@ import MutiModels.PostBasic;
 import dal.CategoriesDAO;
 import dal.DAO;
 import dal.DurationDAO;
-import dal.FreelancerDAO;
 import dal.JobTypeDAO;
 import dal.PostDAO;
-import dal.RecruiterDAO;
 import java.io.IOException;
 import java.util.List;
 import jakarta.servlet.ServletException;
@@ -29,8 +26,8 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet(name = "JobforFreelancer", urlPatterns = {"/JobforFreelancer"})
 public class JobforFreelancer extends HttpServlet {
 
-    private CategoriesDAO caDAO = new CategoriesDAO();
     private PostDAO pDao = new PostDAO();
+    private CategoriesDAO caDAO = new CategoriesDAO();
     private JobTypeDAO jobDAO = new JobTypeDAO();
     private DurationDAO durationDAO = new DurationDAO();
     private DAO d = new DAO();
@@ -41,7 +38,7 @@ public class JobforFreelancer extends HttpServlet {
         User user = (User) session.getAttribute("account");
 
         if (user == null) {
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
@@ -51,10 +48,10 @@ public class JobforFreelancer extends HttpServlet {
         int userId = user.getUserID();
         int freelancerID = d.getFreelancerIDbyUserID(userId);
 
-        FreelancerDAO f = new FreelancerDAO();
-        Freelancer freelancer = f.getFreelancerById(freelancerID);
+        // Fetch posts by freelancer skills with pagination
+        List<PostBasic> posts = pDao.getPostsByFreelancerSkillsPage(freelancerID, index);
 
-        List<PostBasic> posts = caDAO.getPostsByFreelancerSkillsPage(freelancerID, index);
+        // Fetch other data (categories, job types, durations, etc.)
         List<Categories> categories = caDAO.getAllCategory();
         List<JobType> jobtype = jobDAO.getAllJobType();
         List<Duration> dura = durationDAO.getAllDuration();
@@ -76,6 +73,7 @@ public class JobforFreelancer extends HttpServlet {
         request.setAttribute("tongSoTrang", tongSoTrang);
         request.setAttribute("trangHienTai", index);
         request.setAttribute("page", index);
+        request.setAttribute("endPage", calculateEndPage(freelancerID));
 
         if (user != null) {
             List<JobApply> postApply = pDao.getPostApply(freelancerID);
@@ -85,6 +83,15 @@ public class JobforFreelancer extends HttpServlet {
         }
 
         request.getRequestDispatcher("views/JobforFreelancer.jsp").forward(request, response);
+    }
+
+    private int calculateEndPage(int freelancerID) {
+        int count = pDao.countPostsByFreelancerSkills(freelancerID);
+        int endPage = count / 6;
+        if (count % 6 != 0) {
+            endPage++;
+        }
+        return endPage;
     }
 
     @Override

@@ -209,7 +209,7 @@
                                                 <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span></a>
                                         </h4>
                                         <div id="collapseOne" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${categories}" var="category" varStatus="loop">
+                                            <c:forEach items="${cate}" var="category" varStatus="loop">
                                                 <div style="${loop.index > 3 ? 'display:none;' : ''}" class="category-item">
                                                     <label class="custom_check">
                                                         <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
@@ -219,7 +219,7 @@
                                             </c:forEach>
 
                                             <div id="collapseOnes" class="collapse" data-bs-parent="#accordionExample1">
-                                                <c:forEach items="${categories}" var="category" begin="4">
+                                                <c:forEach items="${cate}" var="category" begin="4">
                                                     <div class="category-item">
                                                         <label class="custom_check">
                                                             <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
