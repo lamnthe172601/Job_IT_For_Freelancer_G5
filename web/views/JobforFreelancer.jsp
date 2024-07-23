@@ -389,13 +389,11 @@
                             <c:set var="tongSoTrang" value="${requestScope.tongSoTrang}" />
                             <c:set var="trangHienTai" value="${requestScope.trangHienTai}" />
 
-                            <%-- Tính chỉ số bắt đầu và kết thúc cho danh sách bài đăng hiển thị trên trang hiện tại --%>
-                            <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
-                            <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
+
 
                             <%-- Hiển thị danh sách bài đăng --%>
                             <div class="row" id="listpostContainer">
-                                <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
+                                <c:forEach items="${listpost}" var="list" >
                                     <div class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
@@ -569,11 +567,11 @@
                                     </div>
                                 </div>
                             </c:if>
-<!-- Thêm debug -->
-<p>Tổng số trang: ${tongSoTrang}</p>
-<p>Trang hiện tại: ${trangHienTai}</p>
-<p>Số bài đăng trên mỗi trang: ${baiDangTrenMotTrang}</p>
-<p>Tổng số bài đăng: ${tongSoBaiDang}</p>
+                            <!-- Thêm debug 
+                            <p>Tổng số trang: ${tongSoTrang}</p>
+                            <p>Trang hiện tại: ${trangHienTai}</p>
+                            <p>Số bài đăng trên mỗi trang: ${baiDangTrenMotTrang}</p>
+                            <p>Tổng số bài đăng: ${tongSoBaiDang}</p>-->
 
 
                         </div>

@@ -41,7 +41,24 @@ public class CategoriesDAO extends DBContext {
         return list;
     }
         
+          public List<Categories> getAllCategories() {
+        List<Categories> list = new ArrayList<>();
         
+        try {
+            String query = "select * from Categories";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Categories(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                            rs.getString(4),
+             rs.getInt(5)));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
 
     public Categories getCategoryByID(int categoryId) {
         String query = "select * from Categories where caID=? and statusCate = 1";

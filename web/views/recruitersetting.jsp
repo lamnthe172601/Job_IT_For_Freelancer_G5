@@ -117,7 +117,7 @@
                         <div class="col-xl-9 col-lg-8">
                             <div class="pro-pos">
                                 <div class="setting-content employee-profile-new">
-                                    <form action="updateRecruiterProfile" method="post">
+                                    <form action="updateRecruiterProfile" method="post"  enctype="multipart/form-data">
                                         <div class="card">
                                             <div class="pro-head">
                                                 <h3>Profile Setting</h3>
@@ -126,23 +126,23 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-row pro-pad pt-0 ps-0">
-                                                            <div class="input-block col-md-6 pro-pic">                                             
+                                                            <div class="input-block col-md-6 pro-pic">
                                                                 <label class="form-label">Profile Picture</label>
                                                                 <div class="d-flex align-items-center">
-                                                                    <div class="upload-images">
-                                                                        <img src="${recruiter.image}" alt="Image" id="blah">
+                                                                    <div class="upload-images freelancer-pic-box">
+                                                                        <img style="width: 80px; height: 80px;" src="${recruiter.image}" alt="" id="blah">
                                                                     </div>
-                                                                    <div class="ms-3">
-                                                                        <label for="recruiter-image" class="form-label"> Upload Image</label>
-
-                                                                        <input type="file" class="form-control" name="image" id="recruiter-image" accept="image/*">
+                                                                    <div class="ms-3 freelancer-pic-upload">
+                                                                        <label class="image-upbtn">
+                                                                            Upload Image <input type="file" id="imgInp" name="profileImage">
                                                                         </label>
-                                                                      
+                                                                        <p>Max Image size 300*300</p>
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
                                                         <div class="container">
                                                             <h2>Recruiter Profile</h2>
                                                             <div class="row">

@@ -1,9 +1,7 @@
 package AccountControll;
-import java.io.File;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.sql.SQLException;
+
+
+
 import Models.*;
 import dal.CompanyDAO;
 import dal.RecruiterDAO;
@@ -17,11 +15,33 @@ import jakarta.servlet.http.Part;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.sql.SQLException;
+import java.util.regex.Pattern;
 
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.sql.SQLException;
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+    maxFileSize = 1024 * 1024 * 50,      // 50MB
+    maxRequestSize = 1024 * 1024 * 100   // 100MB
+)
 @WebServlet("/updateRecruiterProfile")
 public class RecruiterProfileEditControll extends HttpServlet {
 
-     @Override
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.setAttribute("check", "1");

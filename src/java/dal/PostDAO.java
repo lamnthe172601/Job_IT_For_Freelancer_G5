@@ -1085,7 +1085,7 @@ public class PostDAO extends DBContext {
                        WHERE us.freelancerID = ?
                    ),
                    MatchingPosts AS (
-                       SELECT 
+                       SELECT DISTINCT
                            p.postID, 
                            p.title, 
                            p.image, 
@@ -1120,11 +1120,13 @@ public class PostDAO extends DBContext {
                        JOIN [freelancer].[dbo].[Company] co ON r.recruiterID = co.recruiterID
                        CROSS APPLY STRING_SPLIT(p.skill, ',') ps
                        WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills)
-                       ORDER BY p.postID DESC
-                       OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY
+                   	ORDER BY p.postID
+                   OFFSET ? ROWS
+                   FETCH NEXT 6 ROWS ONLY
                    )
                    SELECT *
-                   FROM MatchingPosts
+                   FROM MatchingPosts;
+                   
                    """;
     try (PreparedStatement ps = connection.prepareStatement(query)) {
         ps.setInt(1, freelancerID);

@@ -324,8 +324,7 @@ public class AdminDAO extends DBContext {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
-        return admin;
+        return false;
     }
        
      public List<skillFull> getListSkill() {
