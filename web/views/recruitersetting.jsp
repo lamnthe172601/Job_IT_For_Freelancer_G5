@@ -122,203 +122,210 @@
                                             <div class="pro-head">
                                                 <h3>Profile Setting</h3>
                                             </div>
-                                            <div class="pro-body">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="form-row pro-pad pt-0 ps-0">
-                                                            <div class="input-block col-md-6 pro-pic">
-                                                                <label class="form-label">Profile Picture</label>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="upload-images freelancer-pic-box">
-                                                                        <img style="width: 80px; height: 80px;" src="${recruiter.image}" alt="" id="blah">
-                                                                    </div>
-                                                                    <div class="ms-3 freelancer-pic-upload">
-                                                                        <label class="image-upbtn">
-                                                                            Upload Image <input type="file" id="imgInp" name="profileImage">
-                                                                        </label>
-                                                                        <p>Max Image size 300*300</p>
-                                                                    </div>
-                                                                </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-row pro-pad pt-0 ps-0">
+                                                    <div class="input-block col-md-6 pro-pic">                                             
+                                                        <label class="form-label">Profile Picture</label>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="upload-images">
+                                                                <img style="width: 80px; height: 80px;" src="${recruiter.image}" alt="Image" id="image-preview">
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                        <div class="container">
-                                                            <h2>Recruiter Profile</h2>
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">First Name</label>
-                                                                        <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstName" value="${recruiter.firstName}" maxlength="20" required>
-                                                                        <div style="color: red" id="eFirstname"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Last Name</label>
-                                                                        <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastName" value="${recruiter.lastName}" maxlength="20" required>
-                                                                        <div style="color: red" id="eLastname"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Phone Number</label>
-                                                                        <input oninput="checkphone()" type="text" class="form-control" id="phone" name="phoneNumber" value="${recruiter.phone}" pattern="^0\d{9}$" title="Phone number must be 10 digits starting with 0" maxlength="10" required>
-                                                                        <div style="color: red" id="ePhone"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Email</label>
-                                                                        <input oninput="checkEmail()" type="email" class="form-control" id="email" name="email" value="${recruiter.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" maxlength="30" required>
-                                                                        <div style="color: red" id="eEmail"></div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-lg-12">
-                                                                    <h2>Company Details</h2>
-                                                                    <div class="mb-3">                                                                     
-                                                                        <label class="form-label">Company Name</label>
-                                                                        <input oninput="checkcompany()" type="text" class="form-control" id="companyname" name="companyName" value="${company.companyName}" maxlength="20" required>                                                                  
-                                                                        <div style="color: red" id="eCompanyname"></div>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Established On</label>
-                                                                        <input type="date" class="form-control" name="establishedOn" value="${company.establishedOn}" required>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Website</label>
-                                                                        <input type="text" class="form-control" name="website" value="${company.website}" maxlength="50" required>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Describe</label>
-                                                                        <textarea rows="4" class="form-control" name="describe" maxlength="500" required>${company.describe}</textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card text-end border-0">
-                                                                <div class="pro-body">
-                                                                    <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
-                                                                    <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
-                                                                </div>
+                                                            <div class="ms-3 freelancer-pic-upload">
+                                                                <label for="recruiter-image" class="form-upbtn"> Upload Image</label>
+                                                                <input type="file" class="form-control" name="image" id="recruiter-image" accept="image/*" onchange="previewImage(event)">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+
+
+                                        <div class="container">
+                                            <h2>Recruiter Profile</h2>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">First Name</label>
+                                                        <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstName" value="${recruiter.firstName}" maxlength="20" required>
+                                                        <div style="color: red" id="eFirstname"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Last Name</label>
+                                                        <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastName" value="${recruiter.lastName}" maxlength="20" required>
+                                                        <div style="color: red" id="eLastname"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Phone Number</label>
+                                                        <input oninput="checkphone()" type="text" class="form-control" id="phone" name="phoneNumber" value="${recruiter.phone}" pattern="^0\d{9}$" title="Phone number must be 10 digits starting with 0" maxlength="10" required>
+                                                        <div style="color: red" id="ePhone"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Email</label>
+                                                        <input oninput="checkEmail()" type="email" class="form-control" id="email" name="email" value="${recruiter.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" maxlength="30" required>
+                                                        <div style="color: red" id="eEmail"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <h2>Company Details</h2>
+                                                    <div class="mb-3">                                                                     
+                                                        <label class="form-label">Company Name</label>
+                                                        <input oninput="checkcompany()" type="text" class="form-control" id="companyname" name="companyName" value="${company.companyName}" maxlength="20" required>                                                                  
+                                                        <div style="color: red" id="eCompanyname"></div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Established On</label>
+                                                        <input type="date" class="form-control" name="establishedOn" value="${company.establishedOn}" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Website</label>
+                                                        <input type="text" class="form-control" name="website" value="${company.website}" maxlength="50" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Describe</label>
+                                                        <textarea rows="4" class="form-control" name="describe" maxlength="500" required>${company.describe}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card text-end border-0">
+                                                <div class="pro-body">
+                                                    <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
+                                                    <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+                    </form>
                 </div>
             </div>
-
-
-
-            <%@ include file="footter.jsp" %>                  
-
-
         </div>
 
+    </div>
+</div>
+</div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-        <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
-    <script src="assets/js/checkinput.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            var messageModal =
-        <c:if test="${sessionScope.check == 1}">
-            `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                          <div class="modal-body text-center">
-                              <div class="checkmark-circle">
-                                  <div class="background"></div>
-                                  <div class="checkmark"></div>
-                              </div>
-                              <h3>Notification</h3>
-                              <p>Update successful</p>
-                              <a href="recruitersetting" style="margin-left= 50%  width: 4%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
+
+<%@ include file="footter.jsp" %>                  
+
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
+<script src="assets/js/checkinput.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+                                                                    $(document).ready(function () {
+                                                                        var messageModal =
+    <c:if test="${sessionScope.check == 1}">
+                                                                        `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                      <div class="modal-body text-center">
+                          <div class="checkmark-circle">
+                              <div class="background"></div>
+                              <div class="checkmark"></div>
                           </div>
+                          <h3>Notification</h3>
+                          <p>Update successful</p>
+                          <a href="recruitersetting" style="margin-left= 50%  width: 4%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
                       </div>
                   </div>
-              </div>`</c:if>
-        <c:remove var="check" scope="session" />
-            ;
-            $('body').append(messageModal);
-            $('#messageModal').modal('show');
-        });
-    </script>
+              </div>
+          </div>`</c:if>
+    <c:remove var="check" scope="session" />
+                                                                        ;
+                                                                        $('body').append(messageModal);
+                                                                        $('#messageModal').modal('show');
+                                                                    });
+</script>
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('image-preview');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+<style>
+    .modal-body.text-center {
+        text-align: center;
+    }
+    .checkmark-circle {
+        width: 80px;
+        height: 80px;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        margin-bottom: 10px;
+    }
+    .background {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #f8f8f8;
+        position: absolute;
+    }
+    .checkmark {
+        width: 50px;
+        height: 15px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #28a745;
+        border-top: none;
+        border-right: none;
+        transform: rotate(-45deg);
+        position: absolute;
+        top: 35%;
+        left: 25%;
+    }
+    .notification-title {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .notification-message {
+        margin-bottom: 30px;
+        font-size: 16px;
 
-    <style>
-        .modal-body.text-center {
-            text-align: center;
-        }
-        .checkmark-circle {
-            width: 80px;
-            height: 80px;
-            position: relative;
-            display: inline-block;
-            vertical-align: top;
-            margin-bottom: 10px;
-        }
-        .background {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #f8f8f8;
-            position: absolute;
-        }
-        .checkmark {
-            width: 50px;
-            height: 15px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #28a745;
-            border-top: none;
-            border-right: none;
-            transform: rotate(-45deg);
-            position: absolute;
-            top: 35%;
-            left: 25%;
-        }
-        .notification-title {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .notification-message {
-            margin-bottom: 30px;
-            font-size: 16px;
+    }
 
-        }
+</style>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-    </style>
-    <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+<script src="assets/js/bootstrap.bundle.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-    <script src="assets/js/bootstrap.bundle.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+<script src="assets/plugins/select2/js/select2.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-    <script src="assets/plugins/select2/js/select2.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+<script src="assets/js/moment.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+<script src="assets/js/bootstrap-datetimepicker.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-    <script src="assets/js/moment.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-    <script src="assets/js/bootstrap-datetimepicker.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+<script src="assets/plugins/datatables/jquery.dataTables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+<script src="assets/plugins/datatables/datatables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-    <script src="assets/plugins/datatables/jquery.dataTables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-    <script src="assets/plugins/datatables/datatables.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+<script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+<script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 
-    <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-    <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-
-    <script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
-    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
+<script src="assets/js/script.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ba3353e5dfbf68844181f2d9-|49" defer></script></body>
 <script src="assets/js/checkinput.js"></script>
 
 

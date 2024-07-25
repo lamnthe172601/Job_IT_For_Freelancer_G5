@@ -59,7 +59,7 @@
                     </div>
                     <div class="text-center mb-5">
                         <label class="avatar avatar-xxl profile-cover-avatar" for="avatar_upload">
-                            <img class="avatar-img" src=${admin.getImage()} alt="Profile Image">
+                            <img class="avatar-img" src="${admin.getImage()}" alt="./IMG/company_img.png">
                             <input type="file" id="avatar_upload">
                             <span class="avatar-edit">
                                 <i data-feather="edit-2" class="avatar-uploader-icon shadow-soft"></i>

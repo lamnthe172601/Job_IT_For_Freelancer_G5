@@ -318,7 +318,7 @@
                             <input name="mod" value="add" hidden>
                             <div class="form-group">
                                 <label for="categoryName">Position Name</label>
-                                <input oninput="checknameCategory()" type="text" class="form-control" id="categoryname" name="categoryName" placeholder="Enter Position Name" maxlength="30" required pattern="^(?!.*\s{3}).*$" title="Position Name cannot be empty or consist only of whitespace">
+                                <input oninput="checknameCategory()" type="text" class="form-control" id="categorynamee" name="categoryName" placeholder="Enter Position Name" maxlength="30" required>
                                 <div style="color: red; display: none;" id="eCategoryname"></div>
 
                             </div>
