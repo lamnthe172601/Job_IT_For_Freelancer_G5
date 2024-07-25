@@ -44,20 +44,13 @@ public class JobforFreelancer extends HttpServlet {
 
         String indexPage = request.getParameter("page");
         int index = Integer.parseInt(indexPage != null ? indexPage : "1");
-        System.out.println(index);
+       
         int userId = user.getUserID();
         int freelancerID = d.getFreelancerIDbyUserID(userId);
 
         // Fetch posts by freelancer skills with pagination
-        List<PostBasic> posts = pDao.getPostsByFreelancerSkillsPage(freelancerID, (index -1)*6);
-        System.out.println("abc"+freelancerID);
-        for(PostBasic x:posts){
-            System.out.println(x.getPostID());
-        };
-        
-        
-        System.out.println(posts);
-        // Fetch other data (categories, job types, durations, etc.)
+        List<PostBasic> posts = pDao.getPostsByFreelancerSkillsPage(freelancerID, (index - 1) * 6);
+
         List<Categories> categories = caDAO.getAllCategory();
         List<JobType> jobtype = jobDAO.getAllJobType();
         List<Duration> dura = durationDAO.getAllDuration();

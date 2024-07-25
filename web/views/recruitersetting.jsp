@@ -71,7 +71,15 @@
 
                         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
                             <div class="settings-widget">
+                                   <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
+                                   <img style="width: 80px; height: 80px;" src="${recruiter.image}" class="img-fluid" alt="User" id="image-preview">
+                                  
+                                    <div class="profile-info">
+                                         <h3 class="profile-title">${recruiter.fullName()}</h3>
+                                           <p class="mb-0">@${recruiter.email}</p>  
 
+                                    </div>
+                                </div>
 
                                 <div class="settings-menu">
                                     <div id="sidebar-menu" class="sidebar-menu">
@@ -127,8 +135,8 @@
                                                     <div class="input-block col-md-6 pro-pic">                                             
                                                         <label class="form-label">Profile Picture</label>
                                                         <div class="d-flex align-items-center">
-                                                            <div class="upload-images">
-                                                                <img style="width: 80px; height: 80px;" src="${recruiter.image}" alt="Image" id="image-preview">
+                                                            <div class="upload-images" for="avatar_upload">
+                                                                <img style="width: 80px; height: 80px;" src="${recruiter.image}" class="img-fluid" alt="User" id="image-preview">
                                                             </div>
                                                             <div class="ms-3 freelancer-pic-upload">
                                                                 <label for="recruiter-image" class="form-upbtn"> Upload Image</label>
@@ -147,14 +155,14 @@
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="mb-3">
                                                         <label class="form-label">First Name</label>
-                                                        <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstName" value="${recruiter.firstName}" maxlength="20" required>
+                                                        <input oninput="checkfn()" type="text" class="form-control" id="firstname" name="firstName" value="${recruiter.firstName}" maxlength="10" required>
                                                         <div style="color: red" id="eFirstname"></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="mb-3">
                                                         <label class="form-label">Last Name</label>
-                                                        <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastName" value="${recruiter.lastName}" maxlength="20" required>
+                                                        <input oninput="checkln()" type="text" class="form-control" id="lastname" name="lastName" value="${recruiter.lastName}" maxlength="15" required>
                                                         <div style="color: red" id="eLastname"></div>
                                                     </div>
                                                 </div>
@@ -197,7 +205,7 @@
                                             <div class="card text-end border-0">
                                                 <div class="pro-body">
                                                     <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
-                                                    <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
+                                                     <button type="submit" class="btn btn-primary click-btn btn-plan">Update</button>
                                                 </div>
                                             </div>
                                         </div>

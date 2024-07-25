@@ -1078,39 +1078,51 @@ public class PostDAO extends DBContext {
     public List<PostBasic> getPostsByFreelancerSkillsPage(int freelancerID, int offset) {
      List<PostBasic> posts = new ArrayList<>();
      String query = """
+                 
                    WITH FreelancerSkills AS (
                        SELECT ss.skill_set_name
                        FROM [freelancer].[dbo].[Skills] us
                        JOIN [freelancer].[dbo].[Skill_Set] ss ON us.skill_set_ID = ss.skill_set_ID
                        WHERE us.freelancerID = ?
                    ),
+                   
+                  
+                   PostSkills AS (
+                       SELECT 
+                           p.postID, 
+                           ps.value AS skill
+                       FROM [freelancer].[dbo].[Post] p
+                       CROSS APPLY STRING_SPLIT(p.skill, ',') ps
+                   ),
+                   
+                  
                    MatchingPosts AS (
                        SELECT DISTINCT
                            p.postID, 
                            p.title, 
-                           p.image, 
+                           p.[image], 
                            p.job_type_ID, 
                            p.durationID, 
                            p.date_post, 
                            p.quantity, 
-                           p.description, 
+                           p.[description], 
                            p.budget, 
-                           p.location,
+                           p.[location],
                            p.skill, 
                            p.recruiterID, 
-                           p.status,
+                           p.[status],
                            p.caID, 
                            p.checking,
                            j.job_name, 
                            d.duration_name, 
                            c.categories_img, 
                            c.categories_name, 
-                           c.description AS category_description, 
+                           c.[description] AS category_description, 
                            c.statusCate,
                            r.first_name, 
                            r.last_name, 
                            r.email_contact, 
-                           r.image AS recruiter_image, 
+                           r.[image] AS recruiter_image, 
                            co.company_name
                        FROM [freelancer].[dbo].[Post] p
                        JOIN [freelancer].[dbo].[JobType] j ON p.job_type_ID = j.jobID
@@ -1118,12 +1130,17 @@ public class PostDAO extends DBContext {
                        JOIN [freelancer].[dbo].[Categories] c ON p.caID = c.caID
                        JOIN [freelancer].[dbo].[Recruiter] r ON p.recruiterID = r.recruiterID
                        JOIN [freelancer].[dbo].[Company] co ON r.recruiterID = co.recruiterID
-                       CROSS APPLY STRING_SPLIT(p.skill, ',') ps
-                       WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills)
-                   	ORDER BY p.postID
-                   OFFSET ? ROWS
-                   FETCH NEXT 6 ROWS ONLY
+                       WHERE EXISTS (
+                           SELECT *
+                           FROM PostSkills ps
+                           JOIN FreelancerSkills fs ON TRIM(ps.skill) = fs.skill_set_name
+                           WHERE ps.postID = p.postID
+                       )
+                       ORDER BY p.postID
+                       OFFSET ? ROWS
+                       FETCH NEXT 6 ROWS ONLY
                    )
+                   
                    SELECT *
                    FROM MatchingPosts;
                    

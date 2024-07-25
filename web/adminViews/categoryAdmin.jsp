@@ -462,16 +462,25 @@ $(document).ready(function () {
                                 });
                                 
                                 </script>
-        <script src="assets/js/jquery-3.7.1.min.js"></script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/feather.min.js"></script>
-        <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="assets/plugins/datatables/datatables.min.js"></script>
-        <script src="assets/js/moment.min.js"></script>
-        <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="assets/js/script.js"></script>
-            <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
+             
+           <script src="adminAssets/js/bootstrap.bundle.min.js" ></script>
+        
+        
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    
+   
+       <script src="adminAssets/js/jquery-3.7.1.min.js" defer></script>
+            <script src="adminAssets/js/bootstrap.bundle.min.js" defer></script>
+            <script src="adminAssets/js/feather.min.js" defer></script>
+            <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" defer></script>
+            <script src="adminAssets/plugins/select2/js/select2.min.js" defer></script>
+            <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" defer></script>
+            <script src="adminAssets/plugins/datatables/datatables.min.js" defer></script>
+          
+            <script src="adminAssets/js/script.js" defer></script>
+            
+           
 
         <script src="assets/js/bootstrap.bundle.min.js" type="ba3353e5dfbf68844181f2d9-text/javascript"></script>
 

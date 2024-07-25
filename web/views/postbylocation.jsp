@@ -91,7 +91,7 @@
                     border-radius: 3px; /* Bo tròn các góc */
                 }
             }
-           
+
             .modal {
                 display: none;
                 position: fixed;
@@ -120,7 +120,7 @@
             .button {
                 cursor: pointer;
             }
-.titlepost{
+            .titlepost{
                 max-width: 300px;
                 white-space: nowrap;
                 overflow: hidden;
@@ -356,7 +356,7 @@
                                                         <a href="javascript:void(0);" onclick="addToFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite"><i class="feather-heart"></i></a>
                                                         </c:otherwise>
                                                     </c:choose>
-                                              
+
 
                                                 <div class="author-heading">
                                                     <div class="freelance-img">
@@ -482,42 +482,42 @@
                                             </div>
                                         </div>
                                     </div>
-                                   
+
                                 </c:forEach>
                             </div>
 
                             <c:if test="${tongSoTrang > 1}">
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="pagination list-pagination">
-                <!-- Trang trước -->
-                <c:if test="${trangHienTai > 1}">
-                    <li class="page-item">
-                        <a class="page-link" href="postbylocation?location=${param.location}&page=${trangHienTai - 1}">« Previous</a>
-                    </li>
-                </c:if>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ul class="pagination list-pagination">
+                                            <!-- Trang trước -->
+                                            <c:if test="${trangHienTai > 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="postbylocation?location=${param.location}&page=${trangHienTai - 1}">« Previous</a>
+                                                </li>
+                                            </c:if>
 
-                <!-- Các trang -->
-                <c:forEach begin="1" end="${tongSoTrang}" var="e">
-                    <li class="page-item ${trangHienTai == e ? 'active' : ''}">
-                        <a class="page-link" href="postbylocation?location=${param.location}&page=${e}">${e}</a>
-                    </li>
-                </c:forEach>
+                                            <!-- Các trang -->
+                                            <c:forEach begin="1" end="${tongSoTrang}" var="e">
+                                                <li class="page-item ${trangHienTai == e ? 'active' : ''}">
+                                                    <a class="page-link" href="postbylocation?location=${param.location}&page=${e}">${e}</a>
+                                                </li>
+                                            </c:forEach>
 
-                <!-- Trang tiếp theo -->
-                <c:if test="${trangHienTai < tongSoTrang}">
-                    <li class="page-item">
-                        <a class="page-link" href="postbylocation?location=${param.location}&page=${trangHienTai + 1}">Next »</a>
-                    </li>
-                </c:if>
-            </ul>
-        </div>
-    </div>
-</c:if>
+                                            <!-- Trang tiếp theo -->
+                                            <c:if test="${trangHienTai < tongSoTrang}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="postbylocation?location=${param.location}&page=${trangHienTai + 1}">Next »</a>
+                                                </li>
+                                            </c:if>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </c:if>
 
 
 
-                            
+
                         </div>
                     </div>
                 </div>
@@ -662,163 +662,165 @@
 
 
         <script>
-                          
 
 
 
-                            document.addEventListener('DOMContentLoaded', function () {
-                                document.getElementById('showMoreBtn').addEventListener('click', function () {
-                                    let collapseOne = document.getElementById('collapseOne');
-                                    let collapseOnes = document.getElementById('collapseOnes');
-                                    let expanded = this.getAttribute('aria-expanded') === 'true';
-                                    this.setAttribute('aria-expanded', !expanded);
-                                    collapseOnes.classList.toggle('show');
-                                    this.innerHTML = !expanded ? '<i class="feather-minus me-1"></i>Show Less' : '<i class="feather-plus me-1"></i>Show More';
-                                    filterPosts(); // Gọi lại hàm lọc sau khi thay đổi
-                                });
 
-                                document.getElementById('showMoreBtn1').addEventListener('click', function () {
-                                    let collapseOne1 = document.getElementById('collapseOne1');
-                                    let collapseOnes1 = document.getElementById('collapseOnes1');
-                                    let expanded = this.getAttribute('aria-expanded') === 'true';
-                                    this.setAttribute('aria-expanded', !expanded);
-                                    collapseOnes1.classList.toggle('show');
-                                    this.innerHTML = !expanded ? '<i class="feather-minus me-1"></i>Show Less' : '<i class="feather-plus me-1"></i>Show More';
-                                    filterPosts(); // Gọi lại hàm lọc sau khi thay đổi
-                                });
+                                                            document.addEventListener('DOMContentLoaded', function () {
+                                                                document.getElementById('showMoreBtn').addEventListener('click', function () {
+                                                                    let collapseOne = document.getElementById('collapseOne');
+                                                                    let collapseOnes = document.getElementById('collapseOnes');
+                                                                    let expanded = this.getAttribute('aria-expanded') === 'true';
+                                                                    this.setAttribute('aria-expanded', !expanded);
+                                                                    collapseOnes.classList.toggle('show');
+                                                                    this.innerHTML = !expanded ? '<i class="feather-minus me-1"></i>Show Less' : '<i class="feather-plus me-1"></i>Show More';
+                                                                    filterPosts(); // Gọi lại hàm lọc sau khi thay đổi
+                                                                });
 
-                                let checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                                checkboxes.forEach(function (checkbox) {
-                                    checkbox.addEventListener('change', filterPosts);
-                                });
-                            });
+                                                                document.getElementById('showMoreBtn1').addEventListener('click', function () {
+                                                                    let collapseOne1 = document.getElementById('collapseOne1');
+                                                                    let collapseOnes1 = document.getElementById('collapseOnes1');
+                                                                    let expanded = this.getAttribute('aria-expanded') === 'true';
+                                                                    this.setAttribute('aria-expanded', !expanded);
+                                                                    collapseOnes1.classList.toggle('show');
+                                                                    this.innerHTML = !expanded ? '<i class="feather-minus me-1"></i>Show Less' : '<i class="feather-plus me-1"></i>Show More';
+                                                                    filterPosts(); // Gọi lại hàm lọc sau khi thay đổi
+                                                                });
 
-                            function filterPosts() {
-                                let selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(el => el.value.toLowerCase());
-                                let selectedProjectTypes = Array.from(document.querySelectorAll('input[name="projectType"]:checked')).map(el => el.value.toLowerCase());
-                                let selectedDurations = Array.from(document.querySelectorAll('input[name="projectDuration"]:checked')).map(el => el.value.toLowerCase());
-                                let selectedSkills = Array.from(document.querySelectorAll('input[name="skills"]:checked')).map(el => el.value.toLowerCase());
+                                                                let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                                                                checkboxes.forEach(function (checkbox) {
+                                                                    checkbox.addEventListener('change', filterPosts);
+                                                                });
+                                                            });
 
-                                let posts = document.querySelectorAll('.post-item');
+                                                            function filterPosts() {
+                                                                let selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(el => el.value.toLowerCase());
+                                                                let selectedProjectTypes = Array.from(document.querySelectorAll('input[name="projectType"]:checked')).map(el => el.value.toLowerCase());
+                                                                let selectedDurations = Array.from(document.querySelectorAll('input[name="projectDuration"]:checked')).map(el => el.value.toLowerCase());
+                                                                let selectedSkills = Array.from(document.querySelectorAll('input[name="skills"]:checked')).map(el => el.value.toLowerCase());
 
-                                posts.forEach(function (post) {
-                                    let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
-                                    let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
-                                    let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
-                                    let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
+                                                                let posts = document.querySelectorAll('.post-item');
 
-                                    let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
-                                    let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
-                                    let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));
-                                    let matchSkill = selectedSkills.length === 0 || selectedSkills.every(skill => postSkills.includes(skill));
+                                                                posts.forEach(function (post) {
+                                                                    let postCategory = post.querySelector('.freelance-info h3 a').innerText.toLowerCase();
+                                                                    let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
+                                                                    let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
+                                                                    let postSkills = Array.from(post.querySelectorAll('.freelance-tags .badge')).map(el => el.innerText.toLowerCase());
 
-                                    if (matchCategory && matchProjectType && matchDuration && matchSkill) {
-                                        post.style.display = 'block';
-                                    } else {
-                                        post.style.display = 'none';
-                                    }
-                                });
-                            }
+                                                                    let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
+                                                                    let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
+                                                                    let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));
+                                                                    let matchSkill = selectedSkills.length === 0 || selectedSkills.every(skill => postSkills.includes(skill));
 
-                            // Định nghĩa hàm cắt chuỗi và thêm "..."
-                            function truncateString(str, maxLength) {
-                                if (str.length <= maxLength) {
-                                    return str;
-                                } else {
-                                    return str.substring(0, maxLength) + "...";
-                                }
-                            }
+                                                                    if (matchCategory && matchProjectType && matchDuration && matchSkill) {
+                                                                        post.style.display = 'block';
+                                                                    } else {
+                                                                        post.style.display = 'none';
+                                                                    }
+                                                                });
+                                                            }
 
-                            // Lấy nội dung của element có id là 'title-list-post'
-                            let titleElement = document.getElementById('title-list-post');
+                                                            // Định nghĩa hàm cắt chuỗi và thêm "..."
+                                                            function truncateString(str, maxLength) {
+                                                                if (str.length <= maxLength) {
+                                                                    return str;
+                                                                } else {
+                                                                    return str.substring(0, maxLength) + "...";
+                                                                }
+                                                            }
 
-                            // Lấy nội dung ban đầu từ innerHTML của element
-                            let originalTitle = titleElement.innerHTML;
+                                                            // Lấy nội dung của element có id là 'title-list-post'
+                                                            let titleElement = document.getElementById('title-list-post');
 
-                            // Sử dụng hàm truncateString để cắt chuỗi và gán lại vào innerHTML của element
-                            let truncatedTitle = truncateString(originalTitle, 5);
-                            titleElement.innerHTML = truncatedTitle;
+                                                            // Lấy nội dung ban đầu từ innerHTML của element
+                                                            let originalTitle = titleElement.innerHTML;
+
+                                                            // Sử dụng hàm truncateString để cắt chuỗi và gán lại vào innerHTML của element
+                                                            let truncatedTitle = truncateString(originalTitle, 5);
+                                                            titleElement.innerHTML = truncatedTitle;
         </script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-                            function addToFavorites(postID) {
-                                $.ajax({
-                                    url: 'AddFavourites',
-                                    type: 'GET',
-                                    data: {
-                                        postID: postID
-                                    },
-                                    success: function (response) {
-                                        // Xử lý phản hồi thành công (nếu cần)
-                                        //alert('Đã thêm vào danh sách yêu thích!');
-                                        $('#favourite_' + postID).addClass('color-active');
-                                    },
-                                    error: function (xhr, status, error) {
-                                        // Xử lý lỗi (nếu có)
-                                        alert('Đã xảy ra lỗi: ' + error);
-                                    }
-                                });
-                            }
+                                                            function addToFavorites(postID) {
+                                                                $.ajax({
+                                                                    url: 'AddFavourites',
+                                                                    type: 'GET',
+                                                                    data: {
+                                                                        postID: postID
+                                                                    },
+                                                                    success: function (response) {
+                                                                        // Xử lý phản hồi thành công (nếu cần)
+                                                                        //alert('Đã thêm vào danh sách yêu thích!');
+                                                                        $('#favourite_' + postID).addClass('color-active');
+                                                                    },
+                                                                    error: function (xhr, status, error) {
+                                                                        // Xử lý lỗi (nếu có)
+                                                                        alert('Đã xảy ra lỗi: ' + error);
+                                                                    }
+                                                                });
+                                                            }
 
-                            function removeFromFavorites(postID) {
-                                $.ajax({
-                                    url: 'DeleteFavourites',
-                                    type: 'GET',
-                                    data: {
-                                        postID: postID
-                                    },
-                                    success: function (response) {
-                                        // Xử lý phản hồi thành công (nếu cần)
-                                        //alert('Đã xóa khỏi danh sách yêu thích!');
-                                        $('#favourite_' + postID).removeClass('color-active');
-                                    },
-                                    error: function (xhr, status, error) {
-                                        // Xử lý lỗi (nếu có)
-                                        alert('Đã xảy ra lỗi: ' + error);
-                                    }
-                                });
-                            }
+                                                            function removeFromFavorites(postID) {
+                                                                $.ajax({
+                                                                    url: 'DeleteFavourites',
+                                                                    type: 'GET',
+                                                                    data: {
+                                                                        postID: postID
+                                                                    },
+                                                                    success: function (response) {
+                                                                        // Xử lý phản hồi thành công (nếu cần)
+                                                                        //alert('Đã xóa khỏi danh sách yêu thích!');
+                                                                        $('#favourite_' + postID).removeClass('color-active');
+                                                                    },
+                                                                    error: function (xhr, status, error) {
+                                                                        // Xử lý lỗi (nếu có)
+                                                                        alert('Đã xảy ra lỗi: ' + error);
+                                                                    }
+                                                                });
+                                                            }
         </script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-                            $(document).ready(function () {
-                                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
-                                $('.apply-button').on('click', function (e) {
-                                    e.preventDefault();
-                                    var postID = $(this).data('postid');
-                                    // Hiển thị modal tương ứng
-                                    $('#applyModal_' + postID).modal('show');
-                                });
+                                                            $(document).ready(function () {
+                                                                // Xử lý sự kiện khi người dùng nhấn vào nút "Apply Now"
+                                                                $('.apply-button').on('click', function (e) {
+                                                                    e.preventDefault();
+                                                                    var postID = $(this).data('postid');
+                                                                    // Hiển thị modal tương ứng
+                                                                    $('#applyModal_' + postID).modal('show');
+                                                                });
 
-                                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
-                                $('.confirm-btn').on('click', function (e) {
-                                    e.preventDefault();
-                                    var postID = $(this).data('postid');
+                                                                // Xử lý sự kiện khi người dùng nhấn vào nút "Yes" trong modal
+                                                                $('.confirm-btn').on('click', function (e) {
+                                                                    e.preventDefault();
+                                                                    var postID = $(this).data('postid');
 
-                                    // Gửi yêu cầu AJAX để ứng tuyển công việc
-                                    $.ajax({
-                                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
-                                        type: 'GET',
-                                        data: {
-                                            postID: postID
-                                        },
-                                        success: function (response) {
-                                            // Xử lý phản hồi thành công (nếu cần)
-                                            // Đổi nút sang trạng thái "Applied"
-                                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').addClass('apply').css('background-color', '#FF3300').css('color', 'white');
-                                            // Đóng modal sau khi xử lý thành công
-                                            $('#applyModal_' + postID).modal('hide');
-                                        },
-                                        error: function (xhr, status, error) {
-                                            // Xử lý lỗi (nếu có)
-                                            alert('Đã xảy ra lỗi: ' + error);
-                                        }
-                                    });
-                                });
-                            });
+                                                                    // Gửi yêu cầu AJAX để ứng tuyển công việc
+                                                                    $.ajax({
+                                                                        url: 'ApplyJob', // Đường dẫn xử lý ứng tuyển công việc
+                                                                        type: 'GET',
+                                                                        data: {
+                                                                            postID: postID
+                                                                        },
+                                                                        success: function (response) {
+                                                                            // Xử lý phản hồi thành công (nếu cần)
+                                                                            // Đổi nút sang trạng thái "Applied"
+                                                                            $('#applyButton_' + postID).text('Applied').removeAttr('href').removeClass('apply-button').addClass('apply').css('background-color', '#FF3300').css('color', 'white');
+                                                                            // Đóng modal sau khi xử lý thành công
+                                                                            $('#applyModal_' + postID).modal('hide');
+                                                                        },
+                                                                        error: function (xhr, status, error) {
+                                                                            // Xử lý lỗi (nếu có)
+                                                                            alert('Đã xảy ra lỗi: ' + error);
+                                                                        }
+                                                                    });
+                                                                });
+                                                            });
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="adminAssets/js/notification.js"></script>
 
 
         <script src="assets/js/filterMyListPost.js" type="text/javascript"></script>
@@ -833,8 +835,24 @@
 
         <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
         <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
-        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script></body>
-    <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-    <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
+        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script>
+        <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
+
+    <script src="assets/js/filterMyListPost.js" type="text/javascript"></script>
+    <script src="assets/js/jquery-3.7.1.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+
+    <script src="assets/js/bootstrap.bundle.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+
+    <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+    <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+
+    <script src="assets/plugins/select2/js/select2.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+
+    <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+    <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+    <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script></body>
+<script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+<script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script>
+<!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
 </html>
