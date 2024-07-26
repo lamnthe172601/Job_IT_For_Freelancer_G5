@@ -237,8 +237,9 @@
                                             <i class="fas fa-flag custom-flag"></i> 
                                         </a>
                                     </div>
+                                            </c:if>
                                 </div>
-                                    </c:if>
+                                    
                                <div class="company-address">
                                     <ul>
                                         <li>
@@ -494,7 +495,7 @@
                                     </div>
                                 </div>
                             </div>
-zz
+
 
                             <div class="card budget-widget">
                                 <div class="budget-widget-details">

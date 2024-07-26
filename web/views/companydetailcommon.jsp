@@ -155,9 +155,8 @@
                                     <h4>$125 - $180</h4>
                                     <p class="mb-0">Hourly Rate</p>
                                 </div>
-                                <c:if test="${postApply == null}">
-                                    <a href="login" class="btn proposal-btn btn-primary"  tabindex="-1">Apply Now</a> 
-                                </c:if>
+                                
+                                
                             </div>
                             <div class="card budget-widget">
                                 <div class="budget-widget-details">
