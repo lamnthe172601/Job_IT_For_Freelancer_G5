@@ -154,7 +154,9 @@
                                     <h6>Budget</h6>
                                     <h4>$125 - $180</h4>
                                     <p class="mb-0">Hourly Rate</p>
-                                </div>                                
+                                </div>
+                                
+                                
                             </div>
                             <div class="card budget-widget">
                                 <div class="budget-widget-details">

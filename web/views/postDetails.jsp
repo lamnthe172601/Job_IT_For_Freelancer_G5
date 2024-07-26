@@ -510,7 +510,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
 
                             <div class="card budget-widget">
                                 <div class="budget-widget-details">
