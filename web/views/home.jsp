@@ -153,7 +153,7 @@
                                 <div class="home-count">
                                     <ul class="nav">
                                         <li class="course-count"><span class="counter-up">${NumberUsers}</span><span class="list-count">Freelance developers</span></li>
-                                        <li class="course-count"><span class="counter-up">${NumberPost} </span><span>+</span><span class="list-count">Projects Added</span></li>
+                                        <li class="course-count"><span class="counter-up">${NumberPost}  </span><span class="list-count">Projects Added</span></li>
                                         <li class="course-count"><span class="counter-up">919,207</span><span class="list-count">Completed projects</span></li>
                                     </ul>
                                 </div>

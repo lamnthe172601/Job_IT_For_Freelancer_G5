@@ -95,7 +95,8 @@ public class CompletedProjectsControll extends HttpServlet {
             
             request.getRequestDispatcher("views/completedProjects.jsp").forward(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ManageJobsPostsControll.class.getName()).log(Level.SEVERE, null, ex);
+            
+            request.getRequestDispatcher("login").forward(request, response);
         }
     }
 
@@ -142,7 +143,7 @@ public class CompletedProjectsControll extends HttpServlet {
             response.sendRedirect("CompletedProjects");
 
         } catch (ServletException | IOException | InterruptedException e) {
-            response.getWriter().write(" " + e);
+            request.getRequestDispatcher("login").forward(request, response);
         }
 
     }

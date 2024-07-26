@@ -407,10 +407,10 @@
                                                     </div>
                                                     <div class="skills-container">
                                                         <c:forEach items="${fn:split(list.skill, ',')}" var="skill" varStatus="loop">
-                                                            <c:if test="${loop.index < 3}">
+                                                            <c:if test="${loop.index < 2}">
                                                                 <span class="badge badge-pill badge-design">${skill}</span>
                                                             </c:if>                                                              
-                                                            <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                            <c:if test="${loop.index == 1 and not loop.last}">                                                                 
                                                                 <span class="badge badge-pill badge-design">...</span>
                                                             </c:if>
                                                         </c:forEach>
