@@ -310,7 +310,7 @@
                                 <ul class="pagination" style="display: flex;justify-content: center;margin-top: 20px">
                                     <c:if test="${trangHienTai > 1}">
                                         <li class="page-item">
-                                            <a style="margin: 0 5px;padding: 10px 20px;border: 1px solid #ddd;text-decoration: none;color: #333;" class="page-link " href="searchBlog?page=${trangHienTai - 1}" aria-label="Trước">
+                                            <a style="margin: 0 5px;padding: 10px 20px;border: 1px solid #ddd;text-decoration: none;color: #333;" class="page-link" href="searchBlog?page=${trangHienTai - 1}" aria-label="Trước">
                                                 <span style="margin: 0 5px;padding: 10px 20px;border: 1px solid #ddd;text-decoration: none;color: #333;" aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
