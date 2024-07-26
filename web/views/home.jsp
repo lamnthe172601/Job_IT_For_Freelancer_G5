@@ -819,10 +819,10 @@
                             <div class="review-blog user-review">
                                 <div class="review-top ">
                                     <div class="review-img mx-auto">
-                                        <a href="review.html"><img class="img-fluid" src="assets/img/review/review-01.jpg" alt="Post Image"></a>
+                                        <a href=""><img class="img-fluid" src="assets/img/review/review-01.jpg" alt="Post Image"></a>
                                     </div>
                                     <div class="review-info text-center">
-                                        <h3><a href="review.html">Durso Raeen</a></h3>
+                                        <h3><a href="">Durso Raeen</a></h3>
                                         <h5>Project Lead</h5>
                                     </div>
                                 </div>
@@ -845,10 +845,10 @@
                             <div class="review-blog user-review">
                                 <div class="review-top ">
                                     <div class="review-img mx-auto">
-                                        <a href="review.html"><img class="img-fluid" src="assets/img/review/review-02.jpg" alt="Post Image"></a>
+                                        <a href=""><img class="img-fluid" src="assets/img/review/review-02.jpg" alt="Post Image"></a>
                                     </div>
                                     <div class="review-info text-center">
-                                        <h3><a href="review.html">Camelia Rennesa</a></h3>
+                                        <h3><a href="">Camelia Rennesa</a></h3>
                                         <h5>Team Lead</h5>
                                     </div>
                                 </div>
@@ -871,10 +871,10 @@
                             <div class="review-blog user-review">
                                 <div class="review-top ">
                                     <div class="review-img mx-auto">
-                                        <a href="review.html"><img class="img-fluid" src="assets/img/review/review-03.jpg" alt="Post Image"></a>
+                                        <a href=""><img class="img-fluid" src="assets/img/review/review-03.jpg" alt="Post Image"></a>
                                     </div>
                                     <div class="review-info text-center">
-                                        <h3><a href="review.html">Brayan</a></h3>
+                                        <h3><a href="">Brayan</a></h3>
                                         <h5>Project Lead</h5>
                                     </div>
                                 </div>
