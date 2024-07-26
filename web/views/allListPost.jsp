@@ -279,21 +279,7 @@
                                     <h4 class="card-title mb-0">Search Filter</h4>
                                 </div>
                                 <div class="card-body">
-                                    <div class="filter-widget">
-                                        <div class="row">
-                                            <div class="col-xl-6  col-sm-6 d-flex ">
-                                                <div class="sort-by">
-                                                    <select class="select" id="sortSelect">
-                                                        <option value="default">Sort by (Default)</option>
-                                                        <option value="newest">Newest</option>
-                                                        <option value="oldest">Oldest</option>
-                                                        <option value="proposals">Proposals</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                    
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -430,7 +416,7 @@
                                             </div>
                                             <div class="freelance-content">
                                                 <div style="padding-bottom: 30px; padding-top: 16px">
-                                                    <div style="margin-top: 10px;" class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
+                                                    <div style="margin-top: 10px;" class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.expired}</div>
                                                     
                                                     
 
@@ -479,15 +465,15 @@
                                                 <div class="counter-stats">
                                                     <ul>
                                                         <li>
-                                                            <h5>Duration</h5>
+                                                            <h5>Work time</h5>
                                                             <h3 class="counter-value">${list.durationID.durationName}</h3>
                                                         </li>
                                                         <li>
-                                                            <h5>Proposals</h5>
+                                                            <h5>Quantity</h5>
                                                             <h3 class="counter-value">${list.quantity}</h3>
                                                         </li>
                                                         <li>
-                                                            <h5>Job Type</h5>
+                                                            <h5>Level</h5>
                                                             <h3 class="counter-value"><span class="jobtype">${list.jobTypeID.jobName}</span></h3>
                                                         </li>
                                                     </ul>

@@ -60,7 +60,7 @@ public class PostDAO extends DBContext {
 
     public String getPostImagePath(int postID) {
         String imagePath = null;
-        String query = "SELECT image FROM Posts WHERE postID = ?";
+        String query = "SELECT image FROM Post WHERE postID = ?";
 
         try {
             PreparedStatement stmt = connection.prepareStatement(query);

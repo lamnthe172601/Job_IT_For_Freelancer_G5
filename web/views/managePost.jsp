@@ -14,8 +14,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/milestones.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:32:13 GMT -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">

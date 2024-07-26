@@ -344,7 +344,7 @@
 
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="" class="btn btn-primary">View More Projects</a>
+                                    <a href="AllListPost" class="btn btn-primary">View More Projects</a>
                                 </div>
                             </div>
                         </div> 
@@ -468,7 +468,7 @@
 
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="PostDetails?postID=${list.postID}" class="btn btn-primary">View More Projects</a>
+                                    <a href="AllListPost" class="btn btn-primary">View More Projects</a>
                                 </div>
                             </div>
                         </div> 
