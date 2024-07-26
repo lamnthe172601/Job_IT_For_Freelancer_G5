@@ -252,21 +252,7 @@
                                     <h4 class="card-title mb-0">Search Filter</h4>
                                 </div>
                                 <div class="card-body">
-                                    <div class="filter-widget">
-                                        <div class="row">
-                                            <div class="col-xl-6  col-sm-6 d-flex ">
-                                                <div class="sort-by">
-                                                    <select class="select" id="sortSelect">
-                                                        <option value="default">Sort by (Default)</option>
-                                                        <option value="newest">Newest</option>
-                                                        <option value="oldest">Oldest</option>
-                                                        <option value="proposals">Proposals</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                    
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -397,7 +383,8 @@
                                     <div class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
-                                                <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
+                                                 <div style="padding-bottom: 30px; padding-top: 16px">
+                                                <div  class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
 
                                                 <c:set var="favo" value="false" />
                                                 <c:forEach items="${postFavourites}" var="post">
@@ -415,12 +402,10 @@
                                                         <a href="javascript:void(0);" onclick="addToFavorites(${list.postID})" id="favourite_${list.postID}" class="favourite"><i class="feather-heart"></i></a>
                                                         </c:otherwise>
                                                     </c:choose>
+                                                 </div>
                                                 <div class="author-heading">
-                                                    <div class="freelance-img">
-                                                        <a href="javascript:void(0);">
-                                                            <img src="${list.image}" alt="author">
-                                                            <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                        </a>
+                                                   <div class="text-center1" >                                                                                                              
+                                                        <img style="width: 100%; height: 100%;" src="${list.image}" alt="author">                                                       
                                                     </div>
                                                     <div class="profile-name">
                                                         <div class="author-location titlepost"><a>${list.title} </a></div>

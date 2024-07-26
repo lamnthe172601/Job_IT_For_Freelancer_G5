@@ -215,8 +215,7 @@
                         </div>
 
                         <div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
-                            <div class="pro-post widget-box follow-widget">
-                                <a href="javascript:void(0);" class="btn follow-btn">+ Follow</a>
+                            <div class="pro-post widget-box follow-widget">                               
                                 <ul class="follow-posts pro-post">
                                     <li><p>Following</p><h6>49</h6></li>
                                     <li><p>Followers</p><h6>422</h6></li>

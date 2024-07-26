@@ -314,22 +314,7 @@
 
 
                         <div class="col-md-12 col-lg-8 col-xl-9">
-                            <div class="sort-tab ">
-                                <div class="row">
-                                    <div class="col-xl-6  col-sm-6 d-flex ">
-                                        <div class="sort-by">
-                                            <select class="select" id="sortSelect">
-                                                <option value="default">Sort by (Default)</option>
-                                                <option value="newest">Newest</option>
-                                                <option value="oldest">Oldest</option>
-                                                <option value="proposals">Proposals</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
+                            
 
 
 
@@ -339,7 +324,8 @@
                                     <div class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
-                                                <div class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${post.datePost}</div>
+                                                 <div style="padding-bottom: 30px; padding-top: 16px">
+                                              <div  class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
 
                                                 <c:set var="favo" value="false" />
                                                 <c:forEach items="${postFavourites}" var="favPost">
@@ -357,14 +343,11 @@
                                                         <a href="javascript:void(0);" onclick="addToFavorites(${post.postID})" id="favourite_${post.postID}" class="favourite"><i class="feather-heart"></i></a>
                                                         </c:otherwise>
                                                     </c:choose>
-
+                                                        </div>
 
                                                 <div class="author-heading">
-                                                    <div class="freelance-img">
-                                                        <a href="javascript:void(0);">
-                                                            <img src="${post.image}" alt="author">
-                                                            <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                        </a>
+                                                      <div class="text-center1" >                                                                                                              
+                                                        <img style="width: 50%; height: 100%;" src="${post.image}" alt="author">                                                       
                                                     </div>
                                                     <div class="profile-name">
                                                         <div class="author-location titlepost"><a>${post.title} </a></div>
