@@ -22,6 +22,10 @@ public class AuthenFilter implements Filter {
     private static final boolean debug = true;
     private FilterConfig filterConfig = null;
 
+    private List<String> publicResources = Arrays.asList(
+            ".css", ".js", ".jpg", ".png", ".gif", ".ico", ".svg", ".pdf"
+    );
+
     private List<String> publicURLs = Arrays.asList(
             "/login", "/logout", "/Register", "/lostpassword",
             "/blogList", "/blogGrid", "/home", "/BlogDetails", "/companydetail", "/PostDetails",
@@ -65,7 +69,7 @@ public class AuthenFilter implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response,
-                        FilterChain chain)
+            FilterChain chain)
             throws IOException, ServletException {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -73,42 +77,47 @@ public class AuthenFilter implements Filter {
         HttpSession session = httpRequest.getSession(false);
         String requestURI = httpRequest.getRequestURI();
 
-        // Check if the requested URL is public
+        // Check if the requested resource is public
+        // Check if the requested resource is a file (contains a dot)
+        boolean isFile = requestURI.contains(".");
+        boolean isPublicResource = publicResources.stream().anyMatch(requestURI::endsWith);
         boolean isPublicURL = publicURLs.stream().anyMatch(requestURI::contains);
 
-        if (!isPublicURL) {
-            // Authentication check
-            if (session == null || session.getAttribute("account") == null) {
-                httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
-                return;
-            }
-
-            // Role-based access control
-            User user = (User) session.getAttribute("account");
-            int role = user.getRoleID().getRoleID();
-
-            if (role == 3) { // Freelancer
-                if (adminURLs.stream().anyMatch(requestURI::contains) ||
-                    recruiterURLs.stream().anyMatch(requestURI::contains)) {
-                    httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
-                    return;
-                }
-            } else if (role == 4) { // Recruiter
-                if (freelancerURLs.stream().anyMatch(requestURI::contains) ||
-                    adminURLs.stream().anyMatch(requestURI::contains)) {
-                    httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
-                    return;
-                }
-            } else if (role == 1 || role == 2) { // Admin
-                if (freelancerURLs.stream().anyMatch(requestURI::contains) ||
-                    recruiterURLs.stream().anyMatch(requestURI::contains)) {
-                    httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
-                    return;
-                }
-            }
+        // Nếu là tài nguyên công khai, không kiểm tra xác thực
+        if (isFile || isPublicResource || isPublicURL) {
+            chain.doFilter(request, response);
+            return;
         }
 
-        chain.doFilter(request, response);
+        // Authentication check
+        if (session == null || session.getAttribute("account") == null) {
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+            return;
+        }
+
+        // Role-based access control
+        User user = (User) session.getAttribute("account");
+        int role = user.getRoleID().getRoleID();
+
+        boolean hasAccess = true;
+
+        if (role == 3) { // Freelancer
+            hasAccess = !adminURLs.stream().anyMatch(requestURI::contains)
+                    && !recruiterURLs.stream().anyMatch(requestURI::contains);
+        } else if (role == 4) { // Recruiter
+            hasAccess = !freelancerURLs.stream().anyMatch(requestURI::contains)
+                    && !adminURLs.stream().anyMatch(requestURI::contains);
+        } else if (role == 1 || role == 2) { // Admin
+            hasAccess = !freelancerURLs.stream().anyMatch(requestURI::contains)
+                    && !recruiterURLs.stream().anyMatch(requestURI::contains);
+        }
+
+        if (hasAccess) {
+            chain.doFilter(request, response);
+        } else {
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+        }
+
         doAfterProcessing(request, response);
     }
 
