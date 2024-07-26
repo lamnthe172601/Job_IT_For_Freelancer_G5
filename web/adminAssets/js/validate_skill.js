@@ -1,79 +1,122 @@
-// Function to validate a single input field
-function validateField(field) {
-    const value = field.value.trim();
-    const fieldName = field.name;
-    let errorMessage = '';
-
-    switch (fieldName) {
-        case 'skillName':
-            if (value.length === 0) {
-                errorMessage = 'Skill Name is required.';
-            } else if (value.length > 100) {
-                errorMessage = 'Skill Name must be 100 characters or less.';
-            }
-            break;        
-        case 'description':
-            if (value.length === 0) {
-                errorMessage = 'Description is required.';
-            } else if (value.length > 500) {
-                errorMessage = 'Description must be 500 characters or less.';
-            }
-            break;
-    }
-
-    // Display error message
-    const errorSpan = field.nextElementSibling;
-    if (errorMessage) {
-        if (!errorSpan || !errorSpan.classList.contains('error-message')) {
-            const span = document.createElement('span');
-            span.className = 'error-message text-danger';
-            field.parentNode.insertBefore(span, field.nextSibling);
-        }
-        errorSpan.textContent = errorMessage;
-        field.classList.add('is-invalid');
-    } else {
-        if (errorSpan && errorSpan.classList.contains('error-message')) {
-            errorSpan.remove();
-        }
-        field.classList.remove('is-invalid');
-        field.classList.add('is-valid');
-    }
-
-    return !errorMessage;
-}
-
-// Function to validate entire form
-function validateForm(formId) {
-    const form = document.getElementById(formId);
-    const fields = form.querySelectorAll('input[name="skillName"], textarea[name="description"]');
+// Function to validate skill form
+function validateSkillForm(form) {
+    const skillName = form.querySelector('input[name="skillName"]');
+    const description = form.querySelector('textarea[name="description"]');
     let isValid = true;
 
-    fields.forEach(field => {
-        if (!validateField(field)) {
-            isValid = false;
-        }
-    });
+    // Validate skill name
+    if (!validateField(skillName, 'Skill name is required', (value) => value.trim() !== '' && value.length <= 50)) {
+        isValid = false;
+    }
+
+    // Validate description
+    if (!validateField(description, 'Description is required', (value) => value.trim() !== '' && value.length <= 500)) {
+        isValid = false;
+    }
 
     return isValid;
 }
 
-// Add event listeners to forms and fields
+// Function to validate individual field
+function validateField(field, errorMessage, validationFunction) {
+    const errorElement = field.nextElementSibling;
+    if (!validationFunction(field.value)) {
+        displayError(field, errorMessage);
+        return false;
+    } else {
+        clearError(field);
+        field.classList.add('is-valid');
+        return true;
+    }
+}
+
+// Function to display error message
+function displayError(input, message) {
+    input.classList.remove('is-valid');
+    input.classList.add('is-invalid');
+    let errorElement = input.nextElementSibling;
+    if (!errorElement || !errorElement.classList.contains('error-message')) {
+        errorElement = document.createElement('div');
+        errorElement.className = 'error-message';
+        input.parentNode.insertBefore(errorElement, input.nextSibling);
+    }
+    errorElement.textContent = message;
+}
+
+// Function to clear error message
+function clearError(input) {
+    input.classList.remove('is-invalid');
+    const errorElement = input.nextElementSibling;
+    if (errorElement && errorElement.classList.contains('error-message')) {
+        errorElement.remove();
+    }
+}
+
+// Function to check for duplicate skill name
+function checkDuplicateSkill(skillName) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: 'checkDuplicateSkill',
+            type: 'POST',
+            data: { skillName: skillName },
+            success: function(response) {
+                resolve(response.isDuplicate);
+            },
+            error: function() {
+                console.error('Error checking duplicate skill');
+                reject(new Error('Error checking duplicate skill'));
+            }
+        });
+    });
+}
+
+// Add event listeners to forms
 document.addEventListener('DOMContentLoaded', function() {
-    const forms = document.querySelectorAll('#add-blog-form, [id^="update-blog-form-"]');
+    const forms = document.querySelectorAll('#add-blog-form, .update-skill-form');
 
-    forms.forEach(form => {
-        const fields = form.querySelectorAll('input[name="skillName"], textarea[name="description"]');
+    forms.forEach(function(form) {
+        const skillNameInput = form.querySelector('input[name="skillName"]');
+        const descriptionInput = form.querySelector('textarea[name="description"]');
 
-        fields.forEach(field => {
-            field.addEventListener('blur', function() {
-                validateField(this);
-            });
-           
+        // Add input event listeners for real-time validation
+        skillNameInput.addEventListener('input', function() {
+            validateField(this, 'Skill name is required', (value) => value.trim() !== '' && value.length <= 50);
         });
 
-        form.addEventListener('submit', function(event) {
-            if (!validateForm(this.id)) {
-                event.preventDefault();
+        skillNameInput.addEventListener('blur', function() {
+            if (this.value.trim() !== '') {
+                checkDuplicateSkill(this.value).then((isDuplicate) => {
+                    if (isDuplicate) {
+                        displayError(this, 'This skill name already exists');
+                    } else {
+                        clearError(this);
+                        this.classList.add('is-valid');
+                    }
+                }).catch((error) => {
+                    console.error('Error checking duplicate skill:', error);
+                });
+            }
+        });
+
+        descriptionInput.addEventListener('input', function() {
+            validateField(this, 'Description is required', (value) => value.trim() !== '' && value.length <= 500);
+        });
+
+        // Form submission handler
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (validateSkillForm(this)) {
+                const skillNameInput = this.querySelector('input[name="skillName"]');
+                checkDuplicateSkill(skillNameInput.value).then((isDuplicate) => {
+                    if (isDuplicate) {
+                        displayError(skillNameInput, 'This skill name already exists');
+                    } else {
+                        // If validation passes and there's no duplicate, submit the form
+                        this.submit();
+                    }
+                }).catch((error) => {
+                    console.error('Error during form submission:', error);
+                });
             }
         });
     });

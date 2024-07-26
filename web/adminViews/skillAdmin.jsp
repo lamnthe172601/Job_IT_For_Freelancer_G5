@@ -315,8 +315,9 @@
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>   
 
                                 <button type="reset" class="btn btn-secondary" >Reset</button>                               
-
-                                <button type="submit" class="btn btn-primary" name="mode" value="add" id="add-blog-btn">Add Skill</button>
+                                <input type="hidden" name="mode" value="add">
+                                
+                                <button type="submit" class="btn btn-primary" id="add-blog-btn">Add Skill</button>
                             </div>
                         </form>
                     </div>
