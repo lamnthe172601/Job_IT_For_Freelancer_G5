@@ -74,7 +74,7 @@ public class ManageJobsPostsControll extends HttpServlet {
 
             request.getRequestDispatcher("views/managePost.jsp").forward(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ManageJobsPostsControll.class.getName()).log(Level.SEVERE, null, ex);
+            request.getRequestDispatcher("login").forward(request, response);
         }
     }
 
@@ -89,7 +89,10 @@ public class ManageJobsPostsControll extends HttpServlet {
 
         Recruiter re = reDAO.getRecruiterProfile(id);
 
-        // Lấy dữ liệu từ request
+        
+
+        try {
+            // Lấy dữ liệu từ request
         int postID = Integer.parseInt(request.getParameter("postID"));
         String title = request.getParameter("title");
         String jobsType = request.getParameter("jobsType");
@@ -111,8 +114,6 @@ public class ManageJobsPostsControll extends HttpServlet {
 
         // Giữ nguyên ảnh cũ nếu không có ảnh mới
         String oldImagePath = null;
-
-        try {
             Part imgPart = request.getPart("profileImage");
 
             if (imgPart != null && imgPart.getSize() > 0) {
@@ -133,7 +134,7 @@ public class ManageJobsPostsControll extends HttpServlet {
             response.sendRedirect("manageJobsPosts");
 
         } catch (ServletException | IOException | InterruptedException e) {
-            response.getWriter().write("Error: " + e.getMessage());
+           request.getRequestDispatcher("login").forward(request, response);
         }
 
     }

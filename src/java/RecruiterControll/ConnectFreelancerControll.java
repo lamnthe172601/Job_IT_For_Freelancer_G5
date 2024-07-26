@@ -88,6 +88,7 @@ public class ConnectFreelancerControll extends HttpServlet {
         } catch (Exception e) {
             response.setContentType("application/json");
             response.getWriter().write("{\"success\": false, \"message\": \"An error occurred.\"}");
+            request.getRequestDispatcher("login").forward(request, response);
         }
     }
 

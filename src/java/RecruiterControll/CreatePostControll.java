@@ -108,11 +108,11 @@ public class CreatePostControll extends HttpServlet {
                     response.getWriter().write("{\"success\": false, \"message\": \"Failed to create job\"}");
                 }
             } catch (ServletException | IOException | NumberFormatException | SQLException e) {
-                response.getWriter().write(" " + e);
+                request.getRequestDispatcher("login").forward(request, response);
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(CreatePostControll.class.getName()).log(Level.SEVERE, null, ex);
+           request.getRequestDispatcher("login").forward(request, response);
         }
 
     }

@@ -94,7 +94,7 @@ public class ChangeStatusPostServlet extends HttpServlet {
             response.setContentType("application/json");
             response.getWriter().write("{\"success\": true}");
         } catch (Exception e) {
-
+            request.getRequestDispatcher("login").forward(request, response);
         }
     }
 
