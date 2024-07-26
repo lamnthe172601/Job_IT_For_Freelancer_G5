@@ -9,7 +9,6 @@ import Models.User;
 import dal.DAO;
 import dal.FavoritesDAO;
 import dal.FreelancerDAO;
-import dal.RecruiterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
