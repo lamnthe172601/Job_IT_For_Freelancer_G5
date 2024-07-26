@@ -230,6 +230,7 @@
                                     <div class="company-title">
                                         <h4>${post.title}</h4>
                                     </div>
+                                    <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
                                     <div class="company-detail-flag">
                                         <!-- biểu tượng cái cờ-->
                                         <a href="#" data-bs-toggle="modal" class="btn btn-danger ml-2 report-post" id="reportPostBtn" data-bs-target="#reportModal_${post.postID}" data-postid="${post.postID}" tabindex="-1">
@@ -237,8 +238,8 @@
                                         </a>
                                     </div>
                                 </div>
-
-                                <div class="company-address">
+                                    </c:if>
+                               <div class="company-address">
                                     <ul>
                                         <li>
                                             <i class="feather-map-pin"></i>${post.location}
@@ -379,8 +380,9 @@
                                     <h4>$${post.budget}</h4>
                                     <p class="mb-0">Hourly Rate</p>
                                 </div>
+                                     <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
                                 <div>
-                                    <!--                                    <a data-bs-toggle="modal" href="#file" class="btn proposal-btn btn-primary">Apply Now </a>-->
+                                    
                                     <c:if test="${postApply != null}">
                                         <c:set var="applied" value="false" />
                                         <c:forEach items="${postApply}" var="j">
@@ -410,6 +412,7 @@
                                         <a href="login" class="btn proposal-btn btn-primary"  tabindex="-1">Apply Now</a> 
                                     </c:if>
                                 </div>
+                                     </c:if>
                             </div>
 
                             <div class="modal custom-modal fade" id="applyModal_${post.postID}" role="dialog">

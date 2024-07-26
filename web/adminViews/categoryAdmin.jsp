@@ -129,7 +129,7 @@
                                             <tr>
                                                 <th>S.No</th>
                                                 <th>Position Name</th>
-                                                <th>Description</th>
+                                                <th>Categories</th>
                                                 <th>Status</th>
                                                 <th class="text-end">Actions</th>
                                             </tr>
@@ -139,7 +139,7 @@
                                                 <tr>
                                                     <td>${c.getCaID()}</td>
                                                     <td>${c.getCategoriesName()}</td>
-                                                    <td>....</td>
+                                                    <td>Language</td>
 
                                                     <td>
                                                         <c:choose>
