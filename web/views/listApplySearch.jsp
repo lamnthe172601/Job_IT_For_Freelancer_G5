@@ -82,7 +82,7 @@
                                         <ul class="submenu">
 
                                             <li><a href="AllListPost">Jobs List</a></li>                                        
-                                            
+
                                         </ul>
                                     </li>
                                 </c:if>
@@ -466,107 +466,7 @@
                 </div>
 
 
-                <footer class="footer">
-                    <div class="footer-top">
-                        <div class="container">
-                            <div class="row">
-                                <div class=" col-lg-4 col-md-12">
-                                    <div class="footer-bottom-logo">
-                                        <a href="index.html" class="menu-logo">
-                                            <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
-                                        </a>
-                                        <p>We’re always in search for talented and motivated people. Don’t be shy introduce yourself!</p>
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:void(0);"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
-                                            </li>
-                                        </ul>
-                                        <a href="javascript:void(0);" class="btn btn-connectus">Contact with us</a>
-                                    </div>
-                                </div>
-                                <div class=" col-lg-8 col-md-12">
-                                    <div class="row">
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="footer-widget footer-menu">
-                                                <h2 class="footer-title">Useful Links</h2>
-                                                <ul>
-                                                    <li><a href="about.html"><i class="fas fa-angle-right me-1"></i>About Us</a></li>
-                                                    <li><a href="blog-list.html"><i class="fas fa-angle-right me-1"></i>Blog</a></li>
-                                                    <li><a href="login.html"><i class="fas fa-angle-right me-1"></i>Login</a></li>
-                                                    <li><a href="register.html"><i class="fas fa-angle-right me-1"></i>Register</a></li>
-                                                    <li><a href="forgot-password.html"><i class="fas fa-angle-right me-1"></i>Forgot Password</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="footer-widget footer-menu">
-                                                <h2 class="footer-title">Help & Support</h2>
-                                                <ul>
-                                                    <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Browse Candidates</a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Employers Dashboard</a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Job Packages</a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Jobs Featured</a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fas fa-angle-right me-1"></i>Post A Job</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="footer-widget footer-menu">
-                                                <h2 class="footer-title">Other Links</h2>
-                                                <ul>
-                                                    <li><a href="freelancer-dashboard.html"><i class="fas fa-angle-right me-1"></i>Freelancers</a></li>
-                                                    <li><a href="freelancer-portfolio.html"><i class="fas fa-angle-right me-1"></i>Freelancer Details</a></li>
-                                                    <li><a href="project.html"><i class="fas fa-angle-right me-1"></i>Project</a></li>
-                                                    <li><a href="project-details.html"><i class="fas fa-angle-right me-1"></i>Project Details</a></li>
-                                                    <li><a href="post-project.html"><i class="fas fa-angle-right me-1"></i>Post Project</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="footer-widget footer-menu">
-                                                <h2 class="footer-title">Connect With Us</h2>
-                                                <ul>
-                                                    <li><a href="freelancer-chats.html"><i class="fas fa-angle-right me-1"></i>Chat</a></li>
-                                                    <li><a href="faq.html"><i class="fas fa-angle-right me-1"></i>Faq</a></li>
-                                                    <li><a href="freelancer-review.html"><i class="fas fa-angle-right me-1"></i>Reviews</a></li>
-                                                    <li><a href="privacy-policy.html"><i class="fas fa-angle-right me-1"></i>Privacy Policy</a></li>
-                                                    <li><a href="term-condition.html"><i class="fas fa-angle-right me-1"></i>Terms of use</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="footer-bottom">
-                        <div class="container">
-
-                            <div class="copyright">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="copyright-text text-center">
-                                            <p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </footer>
+                <jsp:include page="footter.jsp" />
 
             </div>
 
@@ -763,109 +663,109 @@
                     background-color: #ddd;
                 }
             </style>
-            
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Toggle filter container visibility
-            $('#filterIcon').click(function() {
-                $('#filterContainer').toggle();
-            });
 
-            // Close filter when clicking outside of it
-            $(document).click(function(event) {
-                if (!$(event.target).closest('#filterIcon, #filterContainer').length) {
-                    $('#filterContainer').hide();
-                }
-            });
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    // Toggle filter container visibility
+                    $('#filterIcon').click(function () {
+                        $('#filterContainer').toggle();
+                    });
 
-            // Filter by date input
-            $('#filterInput').change(function() {
-                var selectedDate = $(this).val();
-                $('tbody tr').each(function() {
-                    var applyDate = $(this).find('td:eq(4)').text(); // Assuming Apply On column is the fifth column (index 4)
-                    if (applyDate === selectedDate || selectedDate === '') {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
+                    // Close filter when clicking outside of it
+                    $(document).click(function (event) {
+                        if (!$(event.target).closest('#filterIcon, #filterContainer').length) {
+                            $('#filterContainer').hide();
+                        }
+                    });
+
+                    // Filter by date input
+                    $('#filterInput').change(function () {
+                        var selectedDate = $(this).val();
+                        $('tbody tr').each(function () {
+                            var applyDate = $(this).find('td:eq(4)').text(); // Assuming Apply On column is the fifth column (index 4)
+                            if (applyDate === selectedDate || selectedDate === '') {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        });
+                    });
                 });
-            });
-        });
-    </script>
-    
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Toggle filter container visibility
-            $('#filterIcon1').click(function() {
-                $('#filterContainer1').toggle();
-            });
+            </script>
 
-            // Close filter when clicking outside of it
-            $(document).click(function(event) {
-                if (!$(event.target).closest('#filterIcon1, #filterContainer1').length) {
-                    $('#filterContainer1').hide();
-                }
-            });
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    // Toggle filter container visibility
+                    $('#filterIcon1').click(function () {
+                        $('#filterContainer1').toggle();
+                    });
 
-            // Filter by date input
-            $('#filterInput1').change(function() {
-                var selectedDate = $(this).val();
-                $('tbody tr').each(function() {
-                    var applyDate = $(this).find('td:eq(3)').text(); // Assuming Apply On column is the fifth column (index 4)
-                    if (applyDate === selectedDate || selectedDate === '') {
-                         $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
+                    // Close filter when clicking outside of it
+                    $(document).click(function (event) {
+                        if (!$(event.target).closest('#filterIcon1, #filterContainer1').length) {
+                            $('#filterContainer1').hide();
+                        }
+                    });
+
+                    // Filter by date input
+                    $('#filterInput1').change(function () {
+                        var selectedDate = $(this).val();
+                        $('tbody tr').each(function () {
+                            var applyDate = $(this).find('td:eq(3)').text(); // Assuming Apply On column is the fifth column (index 4)
+                            if (applyDate === selectedDate || selectedDate === '') {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        });
+                    });
                 });
-            });
-        });
-    </script>
-    
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Toggle filter container visibility
-            $('#filterIcon0').click(function() {
-                $('#filterContainer0').toggle();
-            });
+            </script>
 
-            // Filter by position select
-            $('#filterSelect').change(function() {
-                var selectedPosition = $(this).val();
-                $('tbody tr').each(function() {
-                    var position = $(this).find('td:eq(1)').text(); // Assuming Position column is the second column (index 1)
-                    if (selectedPosition === '' || position === selectedPosition) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    // Toggle filter container visibility
+                    $('#filterIcon0').click(function () {
+                        $('#filterContainer0').toggle();
+                    });
+
+                    // Filter by position select
+                    $('#filterSelect').change(function () {
+                        var selectedPosition = $(this).val();
+                        $('tbody tr').each(function () {
+                            var position = $(this).find('td:eq(1)').text(); // Assuming Position column is the second column (index 1)
+                            if (selectedPosition === '' || position === selectedPosition) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        });
+                    });
+
+                    // Close filter when clicking outside of it
+                    $(document).click(function (event) {
+                        if (!$(event.target).closest('#filterIcon0, #filterContainer0').length) {
+                            $('#filterContainer0').hide();
+                        }
+                    });
                 });
-            });
+            </script>
 
-            // Close filter when clicking outside of it
-            $(document).click(function(event) {
-                if (!$(event.target).closest('#filterIcon0, #filterContainer0').length) {
-                    $('#filterContainer0').hide();
+            <script>
+                function submitForm(postID) {
+                    if (validateForm(postID) === true) {
+                        event.preventDefault();
+                        showSuccessNotification('Approve project successfully!');
+                        setTimeout(function () {
+                            document.getElementById('jobApplicationForm_' + postID).submit();
+                        }, 1000);
+                    }
+
                 }
-            });
-        });
-    </script>
-    
-    <script>
-function submitForm(postID) {
-    if(validateForm(postID)===true){
-        event.preventDefault();
-    showSuccessNotification('Approve project successfully!');
-    setTimeout(function() {
-        document.getElementById('jobApplicationForm_' + postID).submit();
-    }, 1000);
-    }
-    
-}
-</script>
+            </script>
 
             <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="e07a54eb38ecbc80607f458c-text/javascript"></script>
 
