@@ -223,6 +223,11 @@
                     </div>
                 </div>
             </div>
+<!--                    <div>
+                                    <div class="company-title">
+                                        <h4 style="margin-bottom: 30px"></h4>
+                                    </div>
+                                </div>-->
 
 
             <div class="content">
@@ -234,23 +239,22 @@
                                     <div class="postimage">
                                         <img src="${post.image}" class="img-fluid" alt="logo">
                                     </div>
-                                    <div class="company-title">
-                                        <h4>${post.title}</h4>
-                                    </div>
-                                    <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+                                        <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
                                     <div class="company-detail-flag" style="margin-bottom: 190px">
                                         <!-- biểu tượng cái cờ-->
                                         <a href="#" data-bs-toggle="modal" class="btn btn-danger ml-2 report-post" id="reportPostBtn" data-bs-target="#reportModal_${post.postID}" data-postid="${post.postID}" tabindex="-1">
                                             <i class="fas fa-flag custom-flag"></i> 
                                         </a>
                                     </div>
+                                            </c:if>
                                 </div>
+                                           
                                 <div>
                                     <div class="company-title">
                                         <h4 style="margin-bottom: 30px">${post.title}</h4>
                                     </div>
                                 </div>
-                                    </c:if>
+                                    
                                <div class="company-address">
                                     <ul>
                                         <li>

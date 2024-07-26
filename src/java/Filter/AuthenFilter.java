@@ -26,7 +26,7 @@ public class AuthenFilter implements Filter {
             "/login", "/logout", "/Register", "/lostpassword",
             "/blogList", "/blogGrid", "/home", "/BlogDetails", "/companydetail", "/PostDetails",
             "/SearchBlogController", "/postbylocation", "/postbycategory", "/companydetailcommon",
-            "/SelectAccountType", "/About", "/SearchInHome", "/ApplyJobFormSearch", "/CompanyDetailCommon"
+            "/SelectAccountType", "/About", "/SearchInHome", "/ApplyJobFormSearch", "/CompanyDetailCommon","/AllListPost"
     );
 
     private List<String> adminURLs = Arrays.asList(
