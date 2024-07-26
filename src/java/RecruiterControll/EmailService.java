@@ -16,7 +16,7 @@ public class EmailService {
 
     public boolean sendEmail(String emailReceive, String title, String message) {
         final String from = "mixikhuong29@gmail.com";
-        final String password2 = "mnxgfciemlossqgh";
+        final String password2 = "mnxgfciemlossqgh"; // Consider storing this securely
         final String to = emailReceive;
 
         Properties props = new Properties();
@@ -35,19 +35,35 @@ public class EmailService {
         Session session = Session.getInstance(props, auth);
         MimeMessage msg = new MimeMessage(session);
 
+        final boolean[] isSent = {false};
+
+        Thread emailThread = new Thread(() -> {
+            try {
+                msg.setHeader("Content-type", "text/HTML; charset=UTF-8");
+                msg.setFrom(new InternetAddress(from));
+                msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+                msg.setSubject(title, "UTF-8");
+                msg.setContent(message, "text/HTML; charset=UTF-8");
+                Transport.send(msg);
+                isSent[0] = true;
+            } catch (MessagingException e) {
+            }
+        });
+
+        emailThread.start();
         try {
-            msg.setHeader("Content-type", "text/HTML; charset=UTF-8");
-            msg.setFrom(new InternetAddress(from));
-            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            msg.setSubject(title, "UTF-8");
-            msg.setContent(message, "text/HTML; charset=UTF-8");
-            Transport.send(msg);
-            return true;
-        } catch (MessagingException e) {
+            emailThread.join(); 
+        } catch (InterruptedException e) {
             e.printStackTrace();
-            return false;
         }
+
+        return isSent[0];
     }
+
+    
+    
+    
+    
 
     public static void main(String[] args) {
         EmailService emailService = new EmailService();

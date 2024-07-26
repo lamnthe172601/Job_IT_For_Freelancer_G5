@@ -190,7 +190,7 @@
                                     <div class="project-item feature-project-item aos" data-aos="fade-up">
                                         <div class="project-img position-relative">
                                             <!-- Hình ảnh -->
-                                            <a href="project.html"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
+                                            <a href="PostDetails?postID=${list.postID}"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
                                             <!-- Biểu tượng trái tym -->
 
                                             <a class="yeuthich" post-id="${list.postID}">

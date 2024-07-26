@@ -8,8 +8,6 @@ package RecruiterControll;
 import Models.Post;
 import Models.Recruiter;
 import Models.User;
-import MutiModels.ChartData;
-import dal.DashboardDAO;
 import dal.RecruiterDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;

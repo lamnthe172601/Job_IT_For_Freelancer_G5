@@ -53,6 +53,7 @@ public class ManageJobsPostsControll extends HttpServlet {
 
             postdao.updatePostStatus();
             postdao.updatePostStatusByQuantity();
+            postdao.updatePostStatusByQuantity1();
             List<Post> listpost = reDAO.ListAllPostByRecruiter(re.getRecruiterID());
 
             List<SkillSet> skill = postdao.getAllSkillSet();
