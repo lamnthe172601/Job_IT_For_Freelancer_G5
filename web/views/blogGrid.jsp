@@ -150,7 +150,7 @@
 
                                         <li><a href="blogGrid">Blog</a></li>
                                         <li><a href="About">About us</a></li>
-                                        <li><a href="ContactUs">Contact us</a></li>
+                                        
                                     </ul>
                                 </li>
 
