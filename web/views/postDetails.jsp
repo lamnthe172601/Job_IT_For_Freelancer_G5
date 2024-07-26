@@ -30,7 +30,14 @@
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <style>
-
+        .postimage {
+            width: 300px;
+            height: auto;
+        }
+        .postimage img {
+            width: 100%;
+            height: auto;
+        }
         .custom-flag {
 
             padding: 2px; /* Khoảng cách bên trong để nhìn đẹp hơn */
@@ -223,18 +230,20 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-12">
                             <div class="company-detail-block pt-0">
-                                <div class="company-detail">
-                                    <div class="company-detail-image">
+                                <div class="company-detail" style="border: none">
+                                    <div class="postimage">
                                         <img src="${post.image}" class="img-fluid" alt="logo">
                                     </div>
-                                    <div class="company-title">
-                                        <h4>${post.title}</h4>
-                                    </div>
-                                    <div class="company-detail-flag">
+                                    <div class="company-detail-flag" style="margin-bottom: 190px">
                                         <!-- biểu tượng cái cờ-->
                                         <a href="#" data-bs-toggle="modal" class="btn btn-danger ml-2 report-post" id="reportPostBtn" data-bs-target="#reportModal_${post.postID}" data-postid="${post.postID}" tabindex="-1">
                                             <i class="fas fa-flag custom-flag"></i> 
                                         </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="company-title">
+                                        <h4 style="margin-bottom: 30px">${post.title}</h4>
                                     </div>
                                 </div>
 
@@ -446,7 +455,7 @@
                                 </div>
                             </div>
 
-                            
+
                             <!-- report post -->
                             <div class="modal custom-modal fade" id="reportModal_${post.postID}" role="dialog">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -491,7 +500,7 @@
                                     </div>
                                 </div>
                             </div>
-zz
+                            
 
                             <div class="card budget-widget">
                                 <div class="budget-widget-details">
@@ -522,7 +531,7 @@ zz
             </div>
 
 
-           <jsp:include page="footter.jsp" />
+            <jsp:include page="footter.jsp" />
 
         </div>
 
@@ -720,14 +729,14 @@ zz
 
             }
             .describe {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.5em;
-            max-height: 3em; /* 2 lines * 1.5em line-height */
-        }
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: 1.5em;
+                max-height: 3em; /* 2 lines * 1.5em line-height */
+            }
         </style>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

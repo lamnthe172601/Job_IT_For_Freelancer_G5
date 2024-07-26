@@ -146,11 +146,11 @@
                     <div class="row align-items-center inner-banner">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h3>My List Post Project</h3>
+                                <h3>All Project</h3>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="home"> Home</a></li>
-                                        <li class="breadcrumb-item" aria-current="page">My List Post</li>
+                                        <li class="breadcrumb-item" aria-current="page">All Project</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -172,19 +172,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="filter-widget">
-                                        <div class="row">
-                                            <div class="col-xl-6  col-sm-6 d-flex ">
-                                                <div class="sort-by">
-                                                    <select class="select" id="sortSelect">
-                                                        <option value="default">Sort by (Default)</option>
-                                                        <option value="newest">Newest</option>
-                                                        <option value="oldest">Oldest</option>
-                                                        <option value="proposals">Proposals</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
+                                        
                                     </div>
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
