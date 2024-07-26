@@ -108,7 +108,7 @@ public class ApplyJobFormListPostControll extends HttpServlet {
             int index=Integer.parseInt(request.getParameter("index"));
             
             String link="AllListPost?page="+index;
-            request.getRequestDispatcher(link).forward(request, response); 
+            response.sendRedirect(link); 
 
         } catch (Exception e) {
             request.getRequestDispatcher("login").forward(request, response);
