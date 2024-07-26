@@ -355,7 +355,7 @@
                                                 <div class="dash-widget-info">Completed Projects</div>
                                             </div>
                                             <div class="dash-widget-more d-flex align-items-center justify-content-between">
-                                                <div class="dash-widget-count">25</div>
+                                                <div class="dash-widget-count">${numberComplete}</div>
                                                 <a href="CompletedProjects" class="d-flex">View Details</a>
                                             </div>
                                         </div>
@@ -369,7 +369,7 @@
                                                 <div class="dash-widget-info">Freelancer Approved</div>
                                             </div>
                                             <div class="dash-widget-more d-flex align-items-center justify-content-between">
-                                                <div class="dash-widget-count">52</div>
+                                                <div class="dash-widget-count">${getNumberApplyAproed}</div>
                                                 <a href="ExpiredProjects" class="d-flex">View Details</a>
                                             </div>
                                         </div>

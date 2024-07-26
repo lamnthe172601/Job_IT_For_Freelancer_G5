@@ -149,40 +149,26 @@ function checkDescription() {
 
 
 
-function checknameCategory(isInternalCall = false) {
-    var category = document.getElementById('categoryname').value.trim();
+function checknameCategory() {
+   
+    var category = document.getElementById('categorynamee').value.trim();
+     console.log(category + "hhh");
     var eCategoryname = document.getElementById('eCategoryname');
     var submitButton = document.getElementById('submit-category-btn');
-
-    if (category.length < 2 || category.length > 100 || !category.replace(/\s/g, '').length) {
+    if (category.length < 2 || category.length > 50  || !category.replace(/\s/g, '').length) {
         eCategoryname.style.display = 'block';
-        eCategoryname.innerHTML = 'Category name must be between 2 and 100 characters and cannot consist only of whitespace.';
+        eCategoryname.innerHTML = "Position must be between 2 and 50 characters and cannot consist only of whitespace.";
         submitButton.disabled = true;
         return false;
     } else {
         eCategoryname.innerHTML = '';
-        if (!isInternalCall && checkDescription(true)) {
+        if (checkDescription(true)) {
             submitButton.disabled = false;
         }
         return true;
     }
 }
 
-function checknameCategory() {
-    var category = document.getElementById('categoryname').value.trim();
-    var eCategoryname = document.getElementById('eCategoryname');
-    var submitButton = document.getElementById('submit-category-btn');
-
-    if (category.length < 2 || category.length > 100 || !category.replace(/\s/g, '').length) {
-        eCategoryname.style.display = 'block';
-        eCategoryname.innerHTML = 'Category name must be between 2 and 100 characters and cannot consist only of whitespace.';
-        submitButton.disabled = true;
-    } else {
-        eCategoryname.style.display = 'none';
-        eCategoryname.innerHTML = '';
-        submitButton.disabled = false;
-    }
-}
 
 
 

@@ -205,10 +205,6 @@
         <servlet-class>AdminControlles.AddSkill</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteSkill</servlet-name>
-        <servlet-class>AdminControlles.DeleteSkill</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ApplyJobFormListPostControll</servlet-name>
         <servlet-class>FreelancerControll.ApplyJobFormListPostControll</servlet-class>
     </servlet>
@@ -295,6 +291,10 @@
     <servlet>
         <servlet-name>SearchBlogController</servlet-name>
         <servlet-class>CommonControll.SearchBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetChartDataServlet</servlet-name>
+        <servlet-class>AdminControlles.GetChartDataServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
@@ -509,10 +509,6 @@
         <url-pattern>/addSkill</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteSkill</servlet-name>
-        <url-pattern>/deleteSkill</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ApplyJobFormListPostControll</servlet-name>
         <url-pattern>/ApplyJobFormListPost</url-pattern>
     </servlet-mapping>
@@ -599,5 +595,9 @@
     <servlet-mapping>
         <servlet-name>SearchBlogController</servlet-name>
         <url-pattern>/searchBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetChartDataServlet</servlet-name>
+        <url-pattern>/GetChartData</url-pattern>
     </servlet-mapping>
 </web-app>

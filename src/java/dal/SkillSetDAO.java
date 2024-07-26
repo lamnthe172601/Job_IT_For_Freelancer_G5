@@ -190,15 +190,6 @@ public class SkillSetDAO extends DBContext {
         return name;
     }
 
-    public static void main(String[] args) {
-        SkillSetDAO s = new SkillSetDAO();
-        HashMap<String, String> map = s.getAllSkill();
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
-
-        }
-
-    }
+   
 
 }

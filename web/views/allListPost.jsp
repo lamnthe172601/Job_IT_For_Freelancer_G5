@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,12 +25,6 @@
         <link rel="stylesheet" href="assets/css/style.css">
 
         <style>
-            .text-center1 {
-                width: 150px;
-                height: 150px;
-                margin: 0 auto 15px;
-            }
-
             .pagination {
                 display: flex;
                 justify-content: center;
@@ -54,77 +49,19 @@
                 background-color: #ddd;
             }
 
-            .btn-cart1 {
-                width: 40%;
-                display: inline-block;
-                border-radius: 5px;
-                border-color: transparent;
-                text-transform: capitalize;
-                background: transparent;
-                border: 1px solid #E65425;
-                color: #E65425;
-                padding: 9px 15px;
-                font-weight: 700;
-                margin:0 10px 0;
-                font-size: 14px;
+            .skills-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
             }
-
-            .classbtn:hover {
-                background-color: #FF3300;
-                color: white;
+            .freelance-tags {
+                margin: 5px;
             }
-            .apply{
-                background-color: #FF3300;
-                color: white;
-            }
-
-            .confirm-btn{
-
-                background: #E65425;
-                border-radius: 90px;
-                font-weight: bold;
-                font-size: 17px;
-                padding: 13px 50px;
-                color: #FFFFFF;
-                margin-right: 15px;
-                text-transform: uppercase;
-
-            }
-            input.file {
-                border: 1px solid #000; /* Viền đen 2px */
-                color: black; /* Màu chữ đen */
-                padding: 8px; /* Khoảng cách giữa viền và nội dung */
-                border-radius: 5px; /* Bo tròn góc */
-                outline: none; /* Loại bỏ viền xung quanh khi focus */
-
-            }
-
-            .custom-flag {
-
-                padding: 2px; /* Khoảng cách bên trong để nhìn đẹp hơn */
-                border-radius: 3px; /* Bo tròn các góc */
-            }
-
-            .btn.report-post {
-                background-color: transparent; /* Làm nền nút trong suốt */
-                border: none; /* Bỏ viền nút */
-                padding: 0; /* Bỏ khoảng cách bên trong */
-                color: black;
-                margin-left: 225px;
-                margin-top: 10px;
-                width: 30px;
-            }
-            .reporrt {
-                display: none;
-                position: fixed;
-                z-index: 1;
-                left: 0;
-                top: 0;
+            .skills-row {
+                display: flex;
+                justify-content: center;
                 width: 100%;
-                height: 100%;
-                overflow: auto;
-                background-color: rgba(0,0,0,0.4);
-                z-index: 1050;
             }
 
             .reporrt-content {
@@ -168,6 +105,7 @@
                 text-overflow: ellipsis;
             }
         </style>
+
     </head>
     <body>
 
@@ -198,7 +136,114 @@
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
-                            <jsp:include page="header.jsp" />
+                            <ul class="main-nav">
+                                <li class="active has-submenu">
+                                    <a href="home">Home <i class="fas "></i></a>
+
+                                </li>
+
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3 || sessionScope.account.roleID.getRoleID() == null}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu"> 
+
+                                            <li><a href="PostFavourites">Jobs Favourites</a></li>                                                                                                                 
+                                            <li><a href="ListApply">Jobs Apply</a></li>
+                                            <li><a href="jobforyou">Jobs For you</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">For Jobs<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="AllListPost">Jobs List</a></li>                                        
+                                            <li><a href="SreachJob">Find Jobs</a></li>  
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Find Freelancer<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="jobsList">Top Freelancer</a></li>
+                                            <li><a href="newsJobs">Skills</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">My Post<i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="CreatePost">Create a new Post</a></li>
+                                            <li><a href="myListJobProject">My List Post</a></li>
+                                            <li><a href="newsJobs">Reviews</a></li>
+
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <li class="has-submenu">
+                                    <a href="javascript:void(0);">About<i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">                                                                           
+
+                                        <li><a href="blogGrid">Blog</a></li>
+                                        <li><a href="About">About us</a></li>
+                                        <li><a href="ContactUs">Contact us</a></li>
+                                    </ul>
+                                </li>
+
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 3}">
+
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="MyProfile?id=${sessionScope.account.userID}">My Profile</a></li>
+                                            <li><a href="Project">Projects</a></li>                        
+                                            <li><a href="changePassword">Change Password</a></li>                                                                                     
+                                            <li><a href="profile-settings">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 4}">
+                                    <li class="has-submenu">
+                                        <a href="javascript:void(0);">Hello ${sessionScope.account.username} <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="submenu">
+
+                                            <li><a href="Dashboard">Dashboard</a></li>
+                                            <li><a href="companydetail">My Profile</a></li>
+                                            <li><a href="company-details">Company Details</a></li>
+                                            <li><a href="manage-projects">Projects</a></li>
+                                            <li><a href="favourites">Favourites</a></li>                                                                                       
+                                            <li><a href="recruitersetting">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account.roleID.getRoleID() == 1 || sessionScope.account.roleID.getRoleID() == 2}">
+                                    <li>
+                                        <a href="home" target="_blank">Admin</a>
+                                        <ul class="submenu">
+
+                                            <li><a href="dashboardAdmin">Dashboard</a></li>                                           
+                                            <li><a href="profile-settings">Settings</a></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>
+                                <c:if test="${sessionScope.account == null}">
+                                    <li><a href="Register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
+                                    <li><a href="login" class="log-btn active"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
+                                        </c:if>
+                            </ul>
+                        </div>
+                        <ul style="margin-left: 5px;" class="nav header-navbar-rht">
+
+
+
+
+
+                        </ul>
                     </nav>
                 </div>
             </header>
@@ -206,14 +251,14 @@
 
             <div class="bread-crumb-bar">
                 <div class="container">
-                    <div class="row align-items-center inner-banner">
+                    <div style="padding: 10px;" class="row align-items-center ">
                         <div class="col-md-12 col-12 text-center">
                             <div class="breadcrumb-list">
-                                <h3>All Project</h3>
+                                <h3>My List Post Project</h3>
                                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="home"> Home</a></li>
-                                        <li class="breadcrumb-item" aria-current="page">All Project</li>
+                                        <li class="breadcrumb-item" aria-current="page">My List Post</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -223,7 +268,7 @@
             </div>
 
 
-            <div class="content">
+            <div style="padding: 20px 0 30px;" class="content">
                 <div class="container">
                     <div class="row">
 
@@ -283,6 +328,45 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="filter-widget">
+                                        <h4 class="filter-title">
+                                            <a href="javascript:void(0);" class="w-100" id="projectTypeLink" data-bs-toggle="collapse" data-bs-target="#collapsproject" aria-expanded="true" aria-controls="collapsproject">
+                                                Project Type
+                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                                            </a>
+                                        </h4>
+                                        <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
+                                            <c:forEach items="${jobtype}" var="jobtype">
+                                                <div class="project-type-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="projectType" value="${jobtype.jobName}" data-filter="projectType">
+                                                        <span class="checkmark"></span>${jobtype.jobName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-widget">
+                                        <h4 class="filter-title">
+                                            <a href="javascript:void(0);" class="w-100" id="projectDurationLink" data-bs-toggle="collapse" data-bs-target="#collapseOneDuration" aria-expanded="true" aria-controls="collapseOneDuration">
+                                                Project Duration
+                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                                            </a>
+                                        </h4>
+                                        <div id="collapseOneDuration" class="collapse show" data-bs-parent="#accordionExample1">
+                                            <c:forEach items="${dura}" var="dura">
+                                                <div class="duration-item">
+                                                    <label class="custom_check">
+                                                        <input type="checkbox" name="projectDuration" value="${dura.durationName}" data-filter="projectDuration">
+                                                        <span class="checkmark"></span>${dura.durationName}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+
                                     <div class="filter-widget">
                                         <h4 class="filter-title">
                                             <a href="javascript:void(0);" class="w-100" id="skillsLink" data-bs-toggle="collapse" data-bs-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
@@ -316,46 +400,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" id="projectTypeLink" data-bs-toggle="collapse" data-bs-target="#collapsproject" aria-expanded="true" aria-controls="collapsproject">
-                                                Level
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapsproject" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${jobtype}" var="jobtype">
-                                                <div class="project-type-item">
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="projectType" value="${jobtype.jobName}" data-filter="projectType">
-                                                        <span class="checkmark"></span>${jobtype.jobName}
-                                                    </label>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-
-                                    <div class="filter-widget">
-                                        <h4 class="filter-title">
-                                            <a href="javascript:void(0);" class="w-100" id="projectDurationLink" data-bs-toggle="collapse" data-bs-target="#collapseOneDuration" aria-expanded="true" aria-controls="collapseOneDuration">
-                                                Work time
-                                                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                                            </a>
-                                        </h4>
-                                        <div id="collapseOneDuration" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${dura}" var="dura">
-                                                <div class="duration-item">
-                                                    <label class="custom_check">
-                                                        <input type="checkbox" name="projectDuration" value="${dura.durationName}" data-filter="projectDuration">
-                                                        <span class="checkmark"></span>${dura.durationName}
-                                                    </label>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -375,44 +419,26 @@
                             <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
                             <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
 
+
                             <%-- Hiển thị danh sách bài đăng --%>
-                            <div class="row" id="listpostContainer">
+                            <div  class="row" id="listpostContainer">
                                 <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
-                                    <div class="col-xl-4 col-md-6 post-item">
+                                    <div  class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
+                                            <div id="noPostsMessage" style="display:none; text-align:center; margin-top:20px;">
+                                                Không tìm thấy project nào phù hợp
+                                            </div>
                                             <div class="freelance-content">
                                                 <div style="padding-bottom: 30px; padding-top: 16px">
                                                     <div style="margin-top: 10px;" class="freelance-location freelance-time"><i class="feather-clock me-1"></i> ${list.datePost}</div>
-                                                    <c:set var="favo" value="false" />
-                                                    <c:forEach items="${postFavourites}" var="post">
-                                                        <c:choose>
-                                                            <c:when test="${list.postID == post.postID}">
-                                                                <c:set var="favo" value="true" />
-                                                            </c:when>                                                                
-                                                        </c:choose>
+                                                    
+                                                    
 
-                                                    </c:forEach>
-
-                                                    <!-- biểu tượng cái cờ -->
-                                                    <a href="#" data-bs-toggle="modal"  class="btn btn-danger ml-2 report-post" data-postid="${list.postID}"  data-bs-target="#applyModal_a" data-postid="a" tabindex="-1">
-                                                        <i class="fas fa-flag custom-flag"></i>
-                                                    </a>
-                                                       
-                                                            
-                                                    <c:set var="postId" value="${list.postID}" />
-
-                                                    <c:choose>
-                                                        <c:when test="${favo}">
-                                                            <a href="javascript:void(0);" onclick="toggleFavorite(${list.postID})" id="favourite_${postId}" class="favourite color-active"><i class="feather-heart"></i></a>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                            <a href="javascript:void(0);" onclick="toggleFavorite(${list.postID})" id="favourite_${postId}" class="favourite"><i class="feather-heart"></i></a>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    
                                                 </div>
                                                 <div class="author-heading">
                                                     <div class="text-center1" >                                                                                                              
-                                                        <img style="width: 100%; height: 100%;" src="${list.image}" alt="author">                                                       
+                                                        <img style="width: 239px; height: 139px;" src="${list.image}" alt="author">                                                       
                                                     </div>
                                                     <div class="profile-name">
                                                         <div class="author-location titlepost"><a>${list.title} </a></div>
@@ -423,179 +449,52 @@
                                                     </div>
                                                     <div class="skills-container">
                                                         <c:forEach items="${fn:split(list.skill, ',')}" var="skill" varStatus="loop">
-                                                            <c:if test="${loop.index < 3}">
+                                                            <c:if test="${loop.index < 2}">
                                                                 <span class="badge badge-pill badge-design">${skill}</span>
                                                             </c:if>                                                              
-                                                            <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                            <c:if test="${loop.index == 1 and not loop.last}">                                                                 
                                                                 <span class="badge badge-pill badge-design">...</span>
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>
-                                                    <!--
-                                                                                                        <div class="skills-container">
-                                                    <c:forEach var="skill" items="${list.skill.split(',')}" varStatus="loop">
-                                                        <c:if test="${loop.index % 3 == 0}">
-                                                            <div class="skills-row">
-                                                        </c:if>
-                                                        <div class="freelance-tags">
-                                                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">${skill.trim()}</span></a>
-                                                        </div>
-                                                        <c:if test="${loop.index % 3 == 2 || loop.last}">
-                                                        </div>
-                                                        </c:if>
-                                                    </c:forEach>
-                                                </div>-->
+                                                    <style>
 
-                                                    <!--                                                    <style>
-                                                    
-                                                    
-                                                                                                            .skills-container {
-                                                                                                                display: flex;
-                                                                                                                flex-wrap: wrap;
-                                                                                                                justify-content: center;
-                                                                                                                align-items: center;
-                                                                                                            }
-                                                                                                            .freelance-tags {
-                                                                                                                margin: 5px;
-                                                                                                            }
-                                                                                                            .skills-row {
-                                                                                                                display: flex;
-                                                                                                                justify-content: center;
-                                                                                                                width: 100%;
-                                                                                                            }
-                                                                                                        </style>-->
+
+                                                        .skills-container {
+                                                            display: flex;
+                                                            flex-wrap: wrap;
+                                                            justify-content: center;
+                                                            align-items: center;
+                                                        }
+                                                        .freelance-tags {
+                                                            margin: 5px;
+                                                        }
+                                                        .skills-row {
+                                                            display: flex;
+                                                            justify-content: center;
+                                                            width: 100%;
+                                                        }
+                                                    </style>
                                                 </div>
                                                 <div class="counter-stats">
                                                     <ul>
                                                         <li>
-                                                            <h5>Work Time</h5>
+                                                            <h5>Duration</h5>
                                                             <h3 class="counter-value">${list.durationID.durationName}</h3>
                                                         </li>
                                                         <li>
-                                                            <h5>Quantity</h5>
+                                                            <h5>Proposals</h5>
                                                             <h3 class="counter-value">${list.quantity}</h3>
                                                         </li>
                                                         <li>
-                                                            <h5>Level</h5>
+                                                            <h5>Job Type</h5>
                                                             <h3 class="counter-value"><span class="jobtype">${list.jobTypeID.jobName}</span></h3>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
-
-
                                             <div class="cart-hover">
-                                                <a href="PostDetails?postID=${list.postID}" class="btn-cart1 classbtn" tabindex="-1">View Details</a>
-
-                                                <c:if test="${postApply != null}">
-                                                    <c:set var="applied" value="false" />
-                                                    <c:forEach items="${postApply}" var="j">
-                                                        <c:if test="${list.postID == j.postID}">
-                                                            <c:choose>
-                                                                <c:when test="${j.status == '0' || j.status == '1'}">
-                                                                    <c:set var="applied" value="true" />
-                                                                </c:when>
-                                                                <c:when test="${j.status == '2'}">
-                                                                    <c:remove var="applied" />
-                                                                </c:when>
-                                                            </c:choose>
-                                                        </c:if>
-                                                    </c:forEach>
-
-                                                    <c:choose>
-                                                        <c:when test="${applied}">
-                                                            <a class="btn-cart1 apply" tabindex="-1">Applied</a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <a data-bs-toggle="modal" data-bs-target="#applyModal_${list.postID}" id="applyButton_${list.postID}" class="btn-cart1 apply-button classbtn" data-postid="${list.postID}" tabindex="-1">Apply Now</a>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </c:if> 
-
-                                                <c:if test="${postApply == null}">
-                                                    <a href="login" class="btn-cart1  classbtn"  tabindex="-1">Apply Now</a> 
-                                                </c:if>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="modal custom-modal fade" id="applyModal_${list.postID}" role="dialog">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <div class="form-header">
-                                                            <input type="hidden" class="user-id1" id="">
-                                                            <h3>Status</h3>
-                                                            <p>Submit your resume so employers can know more about you.</p>
-                                                        </div>
-                                                        <div class="modal-btn Suspend-action">
-
-                                                            <form id="jobApplicationForm_${list.postID}" action="ApplyJobFormListPost" method="post"  enctype="multipart/form-data" onsubmit="return validateForm('${list.postID}')" >
-                                                                <div class="row">
-                                                                    <div style='margin-bottom: 30px'>
-                                                                        <input oninput="check('${list.postID}')" class='file' type='file' id='fileInput_${list.postID}' name="file"/>
-                                                                        <div style="color: red" id="error_${list.postID}"></div>
-                                                                        <input hidden="" name="postID" value="${list.postID}"/>
-                                                                        <input hidden="" name="index" value="${trangHienTai}"/>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <!-- Nút "Yes" để xử lý AJAX -->
-                                                                        <button id="submitButton_${list.postID}" class="btn btn-primary confirm-btn" type="submit" onclick="submitForm('${list.postID}')">Submit</button>
-                                                                    </div>
-                                                                    <div class="col-6 " >
-                                                                        <!-- Nút "Cancel" để đóng modal -->
-                                                                        <a data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
-                                                                    </div>
-                                                                </div>
-                                                            </form>    
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- report post -->
-                                    <div class="modal custom-modal fade" id="applyModal_a" role="dialog">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <div class="form-header">
-                                                        <input type="hidden" class="user-id1" id="">
-                                                        <span id="closeModal" class="close-wrap">&times;</span>
-                                                        <h5 class="modal-title" id="reportPostModalLabel">Report Post</h5>
-                                                    </div>
-                                                    <div class="modal-btn Suspend-action">
-                                                        <form action="${pageContext.request.contextPath}/allListPost" method="post" id="report-post-form-content">
-                                                            <input type="hidden" name="action" value="report">
-                                                            <input type="hidden" name="postID" id="reportPostID">
-                                                            <div class="form-group">
-                                                                <label for="report_post_message">Select a reason for reporting:</label><br>
-                                                                <div class="form-check">
-                                                                    <input type="radio" id="report_post_reason_spam" name="report_post_message" value="Spam" class="form-check-input">
-                                                                    <label for="report_post_reason_spam" class="form-check-label">Spam</label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input type="radio" id="report_post_message_inappropriate" name="report_post_message" value="Inappropriate behavior" class="form-check-input">
-                                                                    <label for="report_post_message_inappropriate" class="form-check-label">Inappropriate behavior</label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input type="radio" id="report_post_message_abuse" name="report_post_message" value="Abuse" class="form-check-input">
-                                                                    <label for="report_post_message_abuse" class="form-check-label">Abuse</label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input type="radio" id="report_post_message_other" name="report_post_message" value="Other" class="form-check-input">
-                                                                    <label for="report_post_message_other" class="form-check-label">Other</label>
-                                                                </div>
-                                                                <textarea id="report_post_message_additional" name="report_post_message_additional" class="form-control mt-3" rows="5" placeholder="Enter additional details (optional)" style="display: none;"></textarea>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <a  data-bs-dismiss="modal" class="btn btn-primary confirm-btn">Cancel</a>
-                                                                <button  type="submit" class="btn btn-primary confirm-btn">Submit</button>
-                                                            </div>
-                                                        </form> 
-                                                    </div>
-                                                </div>
+                                                <a href="PostDetails?postID=${list.postID}" class="btn-cart" tabindex="-1">View Project</a>
                                             </div>
                                         </div>
                                     </div>
@@ -608,19 +507,19 @@
                                         <ul class="pagination">
                                             <c:if test="${trangHienTai > 1}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="AllListPost?page=${trangHienTai - 1}" aria-label="Trước">
+                                                    <a class="page-link" href="?page=${trangHienTai - 1}" aria-label="Trước">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
                                             </c:if>
                                             <c:forEach var="i" begin="1" end="${tongSoTrang}">
                                                 <li class="page-item ${i == trangHienTai ? 'active' : ''}">
-                                                    <a class="page-link" href="AllListPost?page=${i}">${i}</a>
+                                                    <a class="page-link" href="?page=${i}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <c:if test="${trangHienTai < tongSoTrang}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="AllListPost?page=${trangHienTai + 1}" aria-label="Sau">
+                                                    <a class="page-link" href="?page=${trangHienTai + 1}" aria-label="Sau">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
@@ -764,117 +663,6 @@
         </div>
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-        <!-- Bootstrap JS -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <script>
-    $(document).ready(function () {
-        var messageModal =
-                  <c:if test="${sessionScope.check == 1}">
-            `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body text-center">
-                            <div class="checkmark-circle">
-                                <div class="background"></div>
-                                <div class="checkmark"></div>
-                            </div>
-                            <h3>Notification</h3>
-                            <p>Report successful</p>
-                            <a href="recruitersetting" style="margin-left= 50%  width: 4%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
-                        </div>
-                    </div>
-                </div>
-            </div>`</c:if>
-           <c:remove var="check" scope="session" />
-   ;
-
-        $('body').append(messageModal);
-        $('#messageModal').modal('show');
-    });
-</script>
-
-
-
-        <style>
-            .modal-body.text-center {
-                text-align: center;
-            }
-            .checkmark-circle {
-                width: 80px;
-                height: 80px;
-                position: relative;
-                display: inline-block;
-                vertical-align: top;
-                margin-bottom: 10px;
-            }
-            .background {
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                background: #f8f8f8;
-                position: absolute;
-            }
-            .checkmark {
-                width: 50px;
-                height: 15px;
-                border-width: 5px;
-                border-style: solid;
-                border-color: #28a745;
-                border-top: none;
-                border-right: none;
-                transform: rotate(-45deg);
-                position: absolute;
-                top: 35%;
-                left: 25%;
-            }
-            .notification-title {
-                margin-top: 20px;
-                margin-bottom: 20px;
-                font-size: 24px;
-                font-weight: bold;
-            }
-            .notification-message {
-                margin-bottom: 30px;
-                font-size: 16px;
-
-            }
-
-        </style>
-        <script>
-
-            document.addEventListener("DOMContentLoaded", function () {
-                const radioButtons = document.getElementsByName("report_post_message");
-                const textarea = document.getElementById("report_post_message_additional");
-
-                radioButtons.forEach(radio => {
-                    radio.addEventListener("click", function () {
-                        if (radio.value === "Other") {
-                            textarea.style.display = "block";
-                        } else {
-                            textarea.style.display = "none";
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.report-post').forEach(button => {
-                    button.addEventListener('click', function (event) {
-                        event.preventDefault();
-                        const postID = this.getAttribute('data-postid');
-                        document.getElementById('reportPostID').value = postID;
-                        document.getElementById('report-postBackdrop').style.display = 'block';
-                        document.getElementById('report-post-modal-container').style.display = 'block';
-                    });
-                });
-
-                document.getElementById('closeModal').addEventListener('click', function () {
-                    $('#applyModal_a').modal('hide');
-                });
-            });
-        </script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('showMoreBtn').addEventListener('click', function () {
@@ -916,6 +704,7 @@
                     let postProjectType = post.querySelector('.counter-stats .jobtype').innerText.toLowerCase();
                     let postDuration = post.querySelector('.counter-stats .counter-value').innerText.toLowerCase();
                     let postSkills = Array.from(post.querySelectorAll(' .badge')).map(el => el.innerText.toLowerCase());
+
                     let matchCategory = selectedCategories.length === 0 || (selectedCategories.length === 1 && selectedCategories.includes(postCategory));
                     let matchProjectType = selectedProjectTypes.length === 0 || (selectedProjectTypes.length === 1 && selectedProjectTypes.includes(postProjectType));
                     let matchDuration = selectedDurations.length === 0 || (selectedDurations.length === 1 && selectedDurations.includes(postDuration));
@@ -948,130 +737,7 @@
             let truncatedTitle = truncateString(originalTitle, 5);
             titleElement.innerHTML = truncatedTitle;
         </script>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-                 function addToFavorites(postID) {
-                     $.ajax({
-                         url: 'AddFavourites',
-                         type: 'GET',
-                         data: {
-                             postID: postID
-                         },
-                         success: function (response) {
-                             // Xử lý phản hồi thành công (nếu cần)
-                             //alert('Đã thêm vào danh sách yêu thích!');
-                             $('#favourite_' + postID).addClass('color-active');
-                         },
-                         error: function (xhr, status, error) {
-                             // Xử lý lỗi (nếu có)
-                             alert('Đã xảy ra lỗi: ' + error);
-                         }
-                     });
-                 }
-
-                 function removeFromFavorites(postID) {
-                     $.ajax({
-                         url: 'DeleteFavourites',
-                         type: 'GET',
-                         data: {
-                             postID: postID
-                         },
-                         success: function (response) {
-                             // Xử lý phản hồi thành công (nếu cần)
-                             //alert('Đã xóa khỏi danh sách yêu thích!');
-                             $('#favourite_' + postID).removeClass('color-active');
-                         },
-                         error: function (xhr, status, error) {
-                             // Xử lý lỗi (nếu có)
-                             alert('Đã xảy ra lỗi: ' + error);
-                         }
-                     });
-                 }
-        </script>
-
-
-        <script>
-            function validateForm(postID) {
-                var fileInput = document.getElementById('fileInput_' + postID);
-                var errorDiv = document.getElementById('error_' + postID);
-                if (fileInput.files.length === 0) {
-                    errorDiv.innerHTML = 'Please select a file.';
-                    return false; // Prevent form submission
-                } else {
-                    errorDiv.innerHTML = '';
-                    return true;
-                }
-            }
-
-            function check(postID) {
-                var fileInput = document.getElementById('fileInput_' + postID);
-                var errorDiv = document.getElementById('error_' + postID);
-                if (fileInput.files.length === 0) {
-                    errorDiv.innerHTML = 'Please select a file.';
-                } else {
-                    errorDiv.innerHTML = '';
-                }
-            }
-
-
-        </script>
-
-        <script>
-            function submitForm(postID) {
-                if (validateForm(postID) === true) {
-                    event.preventDefault();
-                    showSuccessNotification('Approve project successfully!');
-                    setTimeout(function () {
-                        document.getElementById('jobApplicationForm_' + postID).submit();
-                    }, 1000);
-                }
-
-            }
-        </script>
-
-        <script>
-            function toggleFavorite(postId) {
-                var favouriteLink = $('#favourite_' + postId);
-
-                if (favouriteLink.hasClass('color-active')) {
-                    // Remove from favorites
-                    $.ajax({
-                        url: 'DeleteFavourites', // Thay đổi đường dẫn phù hợp
-                        type: 'GET',
-                        data: {
-                            postID: postId
-                        },
-                        success: function (response) {
-                            favouriteLink.removeClass('color-active');
-                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(error);
-                        }
-                    });
-                } else {
-                    // Add to favorites
-                    $.ajax({
-                        url: 'AddFavourites', // Thay đổi đường dẫn phù hợp
-                        type: 'GET',
-                        data: {
-                            postID: postId
-                        },
-                        success: function (response) {
-                            favouriteLink.addClass('color-active');
-                            favouriteLink.attr('onclick', 'toggleFavorite(' + postId + ')');
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(error);
-                        }
-                    });
-                }
-            }
-        </script>
-
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="adminAssets/js/notification.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
         <script src="assets/js/filterMyListPost.js" type="text/javascript"></script>
@@ -1086,8 +752,7 @@
 
         <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
         <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script></body>
 
-        <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
 </html>

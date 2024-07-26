@@ -110,6 +110,9 @@ public class ApplyJobInListPostControll extends HttpServlet {
             HttpSession session = request.getSession();
             Object u = session.getAttribute("account");
             User user = (User) u;
+            if (user == null) {
+                request.getRequestDispatcher("views/404Page.jsp").forward(request, response);
+            }
             PostDAO p = new PostDAO();
             DAO d = new DAO();
             int userId = user.getUserID();

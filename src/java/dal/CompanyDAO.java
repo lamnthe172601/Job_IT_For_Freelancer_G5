@@ -72,7 +72,7 @@ public class CompanyDAO extends DBContext {
 
     public static void main(String[] args) {
         CompanyDAO t = new CompanyDAO();
-        Company n = t.getCompanyByCompanyID(4);
+        Company n = t.getCompanyByReID(51);
         System.out.println(n.toString());
     }
 

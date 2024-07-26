@@ -482,7 +482,7 @@
                                                         <tr>
                                                             <td>
                                                                 <a
-                                                                    href="PostDetails?postID=${listapply.post.postID}">${listapply.freelancer.name()}</a><br>
+                                                                    href="ViewFreelancerProfile?id=${listapply.freelancer.freelanceID}">${listapply.freelancer.name()}</a><br>
                                                                 <div class="applied">Applied:<a
                                                                         href="PostDetails?postID=${listapply.post.postID}"
                                                                         target="_blank">

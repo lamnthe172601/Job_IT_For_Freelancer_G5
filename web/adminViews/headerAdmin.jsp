@@ -39,7 +39,7 @@
                 <a class="dropdown-item" href="profileAdmin?adminID=${adminProfile.getAdminID()}"><i data-feather="user" class="me-1"></i>
                     Profile</a>
                 <a class="dropdown-item" href="changePass"><i data-feather="settings" class="me-1"></i>
-                    ChangePassword</a>
+                    Change Password</a>
                 <a class="dropdown-item" href="logout"><i data-feather="log-out" class="me-1"></i>
                     Logout</a>
             </div>

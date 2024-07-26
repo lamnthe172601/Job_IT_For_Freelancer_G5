@@ -32,11 +32,17 @@ public class Dashboard extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
-        RecruiterDAO reDAO = new RecruiterDAO();
+        if (user == null) {
+                request.getRequestDispatcher("views/404Page.jsp").forward(request, response);
+            }
+        RecruiterDAO reDAO = new RecruiterDAO();        
         Recruiter re = reDAO.getRecruiterProfile(user.getUserID());
         int numberPost = reDAO.getNumberPostbyRecruiter(re.getRecruiterID());
         int numberApply = reDAO.getNumberApplyPostbyRecruiter(re.getRecruiterID());
+        int numberComplete = reDAO.getNumberPostbyRecruiter2(re.getRecruiterID());
         request.setAttribute("numberPost", numberPost);
+        request.setAttribute("numberComplete", numberComplete);
+        request.setAttribute("getNumberApplyAproed",  reDAO.getNumberApplyPostbyRecruiter2(re.getRecruiterID()));
         request.setAttribute("recruiter", re);
         request.setAttribute("numberApply", numberApply);
         List<Post> listpost = reDAO.ListPostByDateTime(re.getRecruiterID());

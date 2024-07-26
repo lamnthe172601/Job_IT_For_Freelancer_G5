@@ -8,6 +8,7 @@ import Models.Admin;
 import Models.Blogs;
 import Models.Categories;
 import Models.Duration;
+import Models.ExpertiseSkill;
 import Models.JobType;
 import Models.Report;
 import MutiDAO.FreelancerInformationDAO;
@@ -15,12 +16,15 @@ import MutiModels.ReportDetails;
 import MutiModels.PostBasic;
 import MutiModels.Project;
 import MutiModels.RecruiterBasic;
+import MutiModels.skillFull;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.Normalizer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -86,24 +90,6 @@ public class AdminDAO extends DBContext {
         }
         return reports;
     }
-
-//    public List<Report> getReportsByFreelancerId(int freelancerId) {
-//        List<Report> reports = new ArrayList<>();
-//        String query = """
-//                   select * from Report where freelancerID= ?""";
-//        try {
-//            PreparedStatement ps = connection.prepareStatement(query);
-//            ps.setInt(1, freelancerId);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Report r = new Report(rs.getInt(1), rs.getInt(3), rs.getInt(2), rs.getString(5), rs.getDate(4));
-//                reports.add(r);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return reports;
-//    }
     public List<Blogs> getAllBlogs() {
         List<Blogs> blogs = new ArrayList<>();
         String query = """
@@ -184,7 +170,7 @@ public class AdminDAO extends DBContext {
             ps.setString(2, image);
             ps.setString(3, currentDate.toString());
             ps.setString(4, descripition);
-            ps.setString(5, null);
+            ps.setString(5, "Job");
             ps.setInt(6, 1);
             ps.setBoolean(7, true);
 
@@ -265,13 +251,13 @@ public class AdminDAO extends DBContext {
     }
 
     public int getTotalBlog() {
-        String query = "  SELECT count(blogID) as totalblog FROM Blogs";
+        String query = "  SELECT count(blogID) as totalBlog FROM Blogs";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                return rs.getInt("totalblog");
+                return rs.getInt("totalBlog");
             }
         } catch (SQLException e) {
         }
@@ -319,12 +305,149 @@ public class AdminDAO extends DBContext {
         
         return admin;
     }
-        
 
+        public boolean updateAdmin(String adminID, String firstName, String lastName, String phone, String email, String image, String userID) {
+        String sql = "UPDATE Admin SET first_name = ?, last_name = ?, phone = ?, email = ?, image = ?, userID = ? WHERE adminID = ?";
+        try (
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            
+            stmt.setString(1, firstName);
+            stmt.setString(2, lastName);
+            stmt.setString(3, phone);
+            stmt.setString(4, email);
+            stmt.setString(5, image);
+            stmt.setString(6, userID);
+            stmt.setString(7, adminID);
+            
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+       
+     public List<skillFull> getListSkill() {
+        List<skillFull> list = new ArrayList<>();
+        String query = """
+                       select * from Skill_Set  s
+                       inner join Expertise e on s.ExpertiID=e.ExpertiseID                                           
+                       """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                skillFull s = new skillFull(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getBoolean(4),new ExpertiseSkill(rs.getInt(6),rs.getString(7)));
+                list.add(s);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
+public boolean changeSkillsStatus(int skillId, boolean b) {
+        String query = """
+                 UPDATE [dbo].[Skill_Set]
+                     SET [statusSkill] = ?    
+                   WHERE skill_set_ID=?
+                  """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setBoolean(1, b);
+            ps.setInt(2, skillId);
+            int rowsAffected = ps.executeUpdate(); // Sử dụng executeUpdate thay vì executeQuery
+            return rowsAffected > 0; // Trả về true nếu có dòng bị ảnh hưởng
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+        return false;
+    }
+
+ public void addSkill(String skillName, int categoriesId, String descripition) {
+        String query = """
+                      INSERT INTO [dbo].[Skill_Set]
+                                 ([skill_set_name]
+                                 ,[description]
+                                 ,[statusSkill]
+                                 ,[ExpertiID])
+                           VALUES
+                                 (?,?,?,?)
+                       ; """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);           
+            ps.setString(1, skillName);            
+            ps.setString(2, descripition);
+            ps.setBoolean(3, true);
+            ps.setInt(4, categoriesId);
+
+            ResultSet rs = ps.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+
+    public void updateSkill(int skillId,String skillName, int categoriesId, String descripition) {
+
+        String query = """
+                     UPDATE [dbo].[Skill_Set]
+                                        SET [skill_set_name] = ?
+                                           ,[description] = ?
+                                          
+                                           ,[ExpertiID] = ?
+                                      WHERE skill_set_ID=? """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);           
+            ps.setString(1, skillName);
+            ps.setString(2,descripition);
+            ps.setInt(3,categoriesId);
+            ps.setInt(4, skillId);
+
+            ResultSet rs = ps.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+   public  boolean checkSkillExist(String skillName){
+      String name = normalizeString(skillName);
+       for (skillFull skill : getListSkill()) {
+           if (skill.getSkillName().equalsIgnoreCase(name)) {
+               return true;
+           }
+       }
+      return false;
+   }
+   public static String normalizeString(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Input string cannot be null");
+        }
+
+        // Chuyển đổi về dạng tách biệt và loại bỏ dấu
+        String temp = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        temp = pattern.matcher(temp).replaceAll("");
+
+        // Chuyển về chữ thường
+        temp = temp.toLowerCase();
+
+        // Loại bỏ khoảng trắng đầu và cuối
+        temp = temp.trim();
+
+        // Thay thế nhiều khoảng trắng bằng một khoảng trắng
+        temp = temp.replaceAll("\\s+", " ");
+
+        // Loại bỏ các ký tự đặc biệt, chỉ giữ lại chữ cái, số và khoảng trắng
+        temp = temp.replaceAll("[^a-z0-9\\s]", "");
+
+        return temp;
+    }
     public static void main(String[] args) {
         AdminDAO adminDAO = new AdminDAO();
-        Admin admin = adminDAO.getAdminByID("1");
-        System.out.println(admin.toString());
+       adminDAO.addSkill("sssss", 1,"sssssssssssssssss");
+        System.out.println(adminDAO.getAllBlogs().get(1).getImage());
     
     }
 }

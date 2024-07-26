@@ -351,6 +351,23 @@ public class RecruiterDAO extends DBContext {
         }
         return -1;
     }
+    
+    public int getNumberPostbyRecruiter2(int recreuiterID) {
+        String query = """
+                          SELECT COUNT(postID) AS total_posts
+                                              FROM [Post] where recruiterID = ? and status = 2;""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recreuiterID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("total_posts");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
 
     public int getNumberApplyPostbyRecruiter(int recreuiterID) {
         String query = """
@@ -358,6 +375,25 @@ public class RecruiterDAO extends DBContext {
                                               FROM Post P
                                               LEFT JOIN JobApply JA ON P.postID = JA.postID
                                               where recruiterID =?""";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, recreuiterID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("TotalApplies");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
+    
+    public int getNumberApplyPostbyRecruiter2(int recreuiterID) {
+        String query = """
+                        SELECT COUNT(JA.applyID) AS TotalApplies
+                                                                       FROM Post P
+                                                                       LEFT JOIN JobApply JA ON P.postID = JA.postID
+                                                                       where recruiterID =? and JA.status = 1""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, recreuiterID);
@@ -461,26 +497,58 @@ public class RecruiterDAO extends DBContext {
         }
     }
     
-    public boolean updateRecruiterR(Recruiter recruiter) throws SQLException {
-    String query = """
-                   UPDATE Recruiter SET first_name = ?, last_name = ?, image = ?, gender = ?, dob = ?, phone_contact = ?, email_contact = ? WHERE recruiterID = ?
-                   """;
-    try (PreparedStatement stmt = connection.prepareStatement(query)) {
-        stmt.setString(1, recruiter.getFirstName());
-        stmt.setString(2, recruiter.getLastName());
-        stmt.setString(3, recruiter.getImage());
-        stmt.setBoolean(4, recruiter.isGender());
-        stmt.setDate(5, (java.sql.Date) recruiter.getDob());
-        stmt.setString(6, recruiter.getPhone());
-        stmt.setString(7, recruiter.getEmail());
-        stmt.setInt(8, recruiter.getRecruiterID());
+     public boolean updateRecruiterR(int recruiterID, String firstName, String lastName, boolean gender, 
+                                    java.sql.Date dob, String image, String emailContact, 
+                                    String phoneContact, int userID) {
+        String sql = "UPDATE Recruiter SET first_name = ?, last_name = ?, gender = ?, dob = ?, "
+                   + "image = ?, email_contact = ?, phone_contact = ?, userID = ? WHERE recruiterID = ?";
 
-        int rowsUpdated = stmt.executeUpdate();
-        return rowsUpdated > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        throw new SQLException("Error while updating recruiter", e);
+        try ( // Ensure you have a method to get a connection
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, firstName);
+            ps.setString(2, lastName);
+            ps.setBoolean(3, gender);
+            ps.setDate(4, dob);
+            ps.setString(5, image);
+            ps.setString(6, emailContact);
+            ps.setString(7, phoneContact);
+            ps.setInt(8, userID);
+            ps.setInt(9, recruiterID);
+
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0; // Return true if at least one row was updated
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception appropriately in your application
+            return false;
+        }
     }
+
+     
+     public Recruiter getRecruiterById(int id) {
+    String query = "SELECT * FROM Recruiter WHERE userID = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        stmt.setInt(1, id);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return new Recruiter(
+                        rs.getInt("recruiterID"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getBoolean("gender"),
+                        rs.getDate("dob"),
+                        rs.getString("image"),
+                        rs.getString("email_contact"),
+                        rs.getString("phone_contact"),
+                        rs.getInt("userID")
+                );
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // In chi tiết lỗi ra console
+    }
+    return null;
 }
 
 }

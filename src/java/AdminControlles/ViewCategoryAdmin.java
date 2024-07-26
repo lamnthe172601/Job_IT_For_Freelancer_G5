@@ -17,7 +17,7 @@ public class ViewCategoryAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Categories> categoriesList = categoryDAO.getCategory();
+        List<Categories> categoriesList = categoryDAO.getAllCategories();
         request.setAttribute("categories", categoriesList);
         request.getRequestDispatcher("adminViews/categoryAdmin.jsp").forward(request, response);
     }

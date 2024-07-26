@@ -65,6 +65,9 @@ public class CreatePostControll extends HttpServlet {
 
             HttpSession session = request.getSession();
             User userInfor = (User) session.getAttribute("account");
+            if (userInfor == null) {
+                request.getRequestDispatcher("views/404Page.jsp").forward(request, response);
+            }
             int id = userInfor.getUserID();
             RecruiterDAO reDAO = new RecruiterDAO();
 

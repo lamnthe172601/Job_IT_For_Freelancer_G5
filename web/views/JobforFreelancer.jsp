@@ -24,9 +24,9 @@
         <link rel="stylesheet" href="assets/css/style.css">
 
 
-       <style>
+        <style>
 
-        
+
             .pagination .page-item.active .page-link {
                 font-weight: bold;
                 color: #fff;
@@ -173,7 +173,16 @@
                 font-size: 20px; /* Kích thước chữ */
                 position: relative; /* Đặt vị trí tương đối để điều chỉnh vị trí */
             }
+
+            .titlepost{
+                max-width: 300px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
         </style>
+
     </head>
     <body>
 
@@ -265,7 +274,7 @@
                                                 <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span></a>
                                         </h4>
                                         <div id="collapseOne" class="collapse show" data-bs-parent="#accordionExample1">
-                                            <c:forEach items="${cate}" var="category" varStatus="loop">
+                                            <c:forEach items="${categories}" var="category" varStatus="loop">
                                                 <div style="${loop.index > 3 ? 'display:none;' : ''}" class="category-item">
                                                     <label class="custom_check">
                                                         <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
@@ -275,7 +284,7 @@
                                             </c:forEach>
 
                                             <div id="collapseOnes" class="collapse" data-bs-parent="#accordionExample1">
-                                                <c:forEach items="${cate}" var="category" begin="4">
+                                                <c:forEach items="${categories}" var="category" begin="4">
                                                     <div class="category-item">
                                                         <label class="custom_check">
                                                             <input type="checkbox" name="category" value="${category.categoriesName}" data-filter="category">
@@ -380,13 +389,11 @@
                             <c:set var="tongSoTrang" value="${requestScope.tongSoTrang}" />
                             <c:set var="trangHienTai" value="${requestScope.trangHienTai}" />
 
-                            <%-- Tính chỉ số bắt đầu và kết thúc cho danh sách bài đăng hiển thị trên trang hiện tại --%>
-                            <c:set var="chiSoBatDau" value="${(trangHienTai - 1) * baiDangTrenMotTrang}" />
-                            <c:set var="chiSoKetThuc" value="${chiSoBatDau + baiDangTrenMotTrang}" />
 
-                           <%-- Hiển thị danh sách bài đăng --%>
+
+                            <%-- Hiển thị danh sách bài đăng --%>
                             <div class="row" id="listpostContainer">
-                                <c:forEach items="${listpost}" var="list" begin="${chiSoBatDau}" end="${chiSoKetThuc - 1}">
+                                <c:forEach items="${listpost}" var="list" >
                                     <div class="col-xl-4 col-md-6 post-item">
                                         <div class="freelance-widget widget-author position-relative">
                                             <div class="freelance-content">
@@ -416,7 +423,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="profile-name">
-                                                        <div id="title-list-post" style="font-weight: bold; font-size: 20px;">${list.title}</div>
+                                                        <div class="author-location titlepost"><a>${list.title} </a></div>
                                                     </div>
                                                     <div class="freelance-info">
                                                         <h3><a href="javascript:void(0);">${list.caID.categoriesName}</a></h3>
@@ -424,10 +431,10 @@
                                                     </div>
                                                     <div class="skills-container">
                                                         <c:forEach items="${fn:split(list.skill, ',')}" var="skill" varStatus="loop">
-                                                            <c:if test="${loop.index < 3}">
+                                                            <c:if test="${loop.index < 2}">
                                                                 <span class="badge badge-pill badge-design">${skill}</span>
                                                             </c:if>                                                              
-                                                            <c:if test="${loop.index == 2 and not loop.last}">                                                                 
+                                                            <c:if test="${loop.index == 1 and not loop.last}">                                                                 
                                                                 <span class="badge badge-pill badge-design">...</span>
                                                             </c:if>
                                                         </c:forEach>
@@ -532,34 +539,39 @@
                                     </div>
                                 </c:forEach>
                             </div>
-                          <c:if test="${endPage > 1}">
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="pagination list-pagination">
-                <c:if test="${tag > 1}">
-                    <li class="page-item">
-                        <a class="page-link" aria-label="Trước" href="JobforFreelancer?page=${tag - 1}">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                </c:if>
-                <c:forEach begin="1" end="${endPage}" var="e">
-                    <li class="page-item ${page == e ? 'active' : ''}">
-                        <a class="page-link" href="JobforFreelancer?page=${e}">${e}</a>
-                    </li>
-                </c:forEach>
-                <c:if test="${tag < endPage}">
-                    <li class="page-item">
-                        <a class="page-link" href="JobforFreelancer?page=${tag + 1}" aria-label="Sau">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </c:if>
-            </ul>
-        </div>
-    </div>
-</c:if>
+                            <c:if test="${tongSoTrang > 1}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ul class="pagination list-pagination">
+                                            <!-- Trang trước -->
+                                            <c:if test="${trangHienTai > 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="JobforFreelancer?page=${trangHienTai - 1}">« Previous</a>
+                                                </li>
+                                            </c:if>
 
+                                            <!-- Các trang -->
+                                            <c:forEach begin="1" end="${tongSoTrang}" var="e">
+                                                <li class="page-item ${trangHienTai == e ? 'active' : ''}">
+                                                    <a class="page-link" href="JobforFreelancer?page=${e}">${e}</a>
+                                                </li>
+                                            </c:forEach>
+
+                                            <!-- Trang tiếp theo -->
+                                            <c:if test="${trangHienTai < tongSoTrang}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="JobforFreelancer?page=${trangHienTai + 1}">Next »</a>
+                                                </li>
+                                            </c:if>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </c:if>
+                            <!-- Thêm debug 
+                            <p>Tổng số trang: ${tongSoTrang}</p>
+                            <p>Trang hiện tại: ${trangHienTai}</p>
+                            <p>Số bài đăng trên mỗi trang: ${baiDangTrenMotTrang}</p>
+                            <p>Tổng số bài đăng: ${tongSoBaiDang}</p>-->
 
 
                         </div>
@@ -921,7 +933,6 @@
                 }
             }
         </script>
-
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="adminAssets/js/notification.js"></script>
 
@@ -938,8 +949,27 @@
 
         <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
         <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
-
+        <script src="assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="43b4fcd1b9965a5423af7613-|49" defer></script>
         <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
         <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="adminAssets/js/notification.js"></script>
+
+
+    <script src="assets/js/filterMyListPost.js" type="text/javascript"></script>
+    <script src="assets/js/jquery-3.7.1.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+
+    <script src="assets/js/bootstrap.bundle.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+
+    <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+    <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+
+    <script src="assets/plugins/select2/js/select2.min.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+
+    <script src="assets/js/profile-settings.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+    <script src="assets/js/script.js" type="43b4fcd1b9965a5423af7613-text/javascript"></script>
+
+    <script src="assets/js/bootstrap.bundle.min.js" type="39bd9d3b5f9a12b82c2bbcef-text/javascript"></script>
+    <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="39bd9d3b5f9a12b82c2bbcef-|49" defer></script></body>
+<!-- Mirrored from kofejob.dreamstechnologies.com/html/template/project.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:34:26 GMT -->
 </html>
