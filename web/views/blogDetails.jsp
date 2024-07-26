@@ -118,13 +118,13 @@
                                         <c:forEach items="${blognew}" var="i">
                                         <li>
                                             <div class="post-thumb">
-                                                <a href="blog-details.html">
+                                                <a href="BlogDetails?blogID=${i.getBlogID()}">
                                                     <img class="img-fluid" src="${i.image}" alt="Img">
                                                 </a>
                                             </div>
                                             <div class="post-info">
                                                 <h4>
-                                                    <a href="blog-details.html">${i.title}</a>
+                                                    <a href="BlogDetails?blogID=${i.getBlogID()}">${i.title}</a>
                                                 </h4>
                                                 <a href="javascript:void(0);" class="posts-date"><i class="feather-calendar"></i> 2 May 2021</a>
                                             </div>
