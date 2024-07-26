@@ -70,7 +70,8 @@ public class ListFreelancerControll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        try{
+            HttpSession session = request.getSession();
         Object u = session.getAttribute("account");
         User user = (User) u;
         if (user == null) {
@@ -124,6 +125,10 @@ public class ListFreelancerControll extends HttpServlet {
         
         
         request.getRequestDispatcher("views/listFreelancer.jsp").forward(request, response);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
     }
 
     /**
