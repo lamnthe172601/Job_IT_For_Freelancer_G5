@@ -4,29 +4,21 @@
  */
 package AdminControlles;
 
-import dal.SkillSetDAO;
+import MutiModels.ChartDataAdmin;
+import dal.DashboardDAO;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
- * @author DUC MINH
+ * @author kudol
  */
-@WebServlet(name = "UpdateSkill", urlPatterns = {"/updateSkill"})
-public class UpdateSkill extends HttpServlet {
-
-    private SkillSetDAO skillSetDAO;
-
-    @Override
-    public void init() {
-        skillSetDAO = new SkillSetDAO();
-    }
+public class GetChartDataServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,10 +37,10 @@ public class UpdateSkill extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateSkill</title>");
+            out.println("<title>Servlet GetChartDataServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateSkill at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet GetChartDataServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -66,7 +58,31 @@ public class UpdateSkill extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int year = Integer.parseInt(request.getParameter("year"));
+        
+        DashboardDAO d = new DashboardDAO();
+        List<ChartDataAdmin> chartData = d.getChartData(year);
+        
+         // Convert the data to a JSON string manually
+        StringBuilder jsonBuilder = new StringBuilder("[");
+        for (int i = 0; i < chartData.size(); i++) {
+            ChartDataAdmin data = chartData.get(i);
+            jsonBuilder.append("{")
+                       .append("\"month\":").append(data.getMonthNumber()).append(",")
+                       .append("\"freelancers\":").append(data.getFreelancers()).append(",")
+                       .append("\"projects\":").append(data.getProjects()).append(",")
+                       .append("\"applications\":").append(data.getApplications())
+                       .append("}");
+            if (i < chartData.size() - 1) {
+                jsonBuilder.append(",");
+            }
+        }
+        jsonBuilder.append("]");
+        String chartDataJson = jsonBuilder.toString();
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(chartDataJson);
     }
 
     /**
@@ -80,25 +96,7 @@ public class UpdateSkill extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int skillSetID = Integer.parseInt(request.getParameter("skillSetID"));
-        String skillSetName = request.getParameter("skillSetName").trim();
-        String description = request.getParameter("description").trim();
-
-        if (skillSetName.isEmpty() || description.isEmpty()) {
-            request.setAttribute("editSkillError", "Skill Name and Description cannot be empty or just spaces.");
-            request.getRequestDispatcher("skillAdmin.jsp").forward(request, response);
-            return;
-        }
-
-        SkillSetDAO dao = new SkillSetDAO();
-        try {
-            dao.updateSkillSet(skillSetID, skillSetName, description);
-            request.getSession().setAttribute("message", "Skill updated successfully");
-            response.sendRedirect("skillAdmin");
-        } catch (SQLException e) {
-            request.getSession().setAttribute("error", "Error updating skill");
-            response.sendRedirect("skillAdmin");
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -1,4 +1,4 @@
-<%-- 
+ <%-- 
     Document   : ProfileSettingFreelancer
     Created on : Jun 2, 2024, 1:34:33 AM
     Author     : Admin
@@ -90,7 +90,7 @@
                                             <li><a href="PostFavourites">Jobs Favourites</a></li>
 
                                             <li><a href="jobsApply">Jobs Apply</a></li>
-                                            <li><a href="jobforyou">Jobs For you</a></li>
+                                            <li><a href="JobforFreelancer">Jobs For you</a></li>
                                         </ul>
                                     </li>
 

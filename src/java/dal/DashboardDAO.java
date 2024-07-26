@@ -101,7 +101,7 @@ public class DashboardDAO extends DBContext {
         }
         return -1;
     }
-   public List<ChartDataAdmin> getChartData() {
+public List<ChartDataAdmin> getChartData(int year) {
     List<ChartDataAdmin> chartData = new ArrayList<>();
     String sql = """
             WITH AllMonths AS (
@@ -114,37 +114,41 @@ public class DashboardDAO extends DBContext {
             
             SELECT 
                 AM.MonthNumber,
-                DATENAME(MONTH, DATEADD(MONTH, AM.MonthNumber - 1, DATEFROMPARTS(YEAR(GETDATE()), 1, 1))) AS MonthName,
+                DATENAME(MONTH, DATEADD(MONTH, AM.MonthNumber - 1, DATEFROMPARTS(?, 1, 1))) AS MonthName,
                 COUNT(DISTINCT CASE WHEN U.roleID = 3 AND MONTH(U.CreateDate) <= AM.MonthNumber THEN U.userID END) as freelancers,
                 COUNT(DISTINCT CASE WHEN MONTH(P.date_post) <= AM.MonthNumber THEN P.postID END) as projects,
                 COUNT(DISTINCT CASE WHEN MONTH(JA.dateApply) <= AM.MonthNumber THEN JA.applyID END) as applications
             FROM 
                 AllMonths AM
             LEFT JOIN 
-                [User] U ON MONTH(U.CreateDate) <= AM.MonthNumber AND YEAR(U.CreateDate) = YEAR(GETDATE())
+                [User] U ON MONTH(U.CreateDate) <= AM.MonthNumber AND YEAR(U.CreateDate) = ?
             LEFT JOIN 
-                Post P ON MONTH(P.date_post) <= AM.MonthNumber AND YEAR(P.date_post) = YEAR(GETDATE())
+                Post P ON MONTH(P.date_post) <= AM.MonthNumber AND YEAR(P.date_post) = ?
             LEFT JOIN 
-                JobApply JA ON MONTH(JA.dateApply) <= AM.MonthNumber AND YEAR(JA.dateApply) = YEAR(GETDATE())
+                JobApply JA ON MONTH(JA.dateApply) <= AM.MonthNumber AND YEAR(JA.dateApply) = ?
             GROUP BY 
                 AM.MonthNumber
             ORDER BY 
                 AM.MonthNumber;
          """;
     
-    try {
-         PreparedStatement pstmt = connection.prepareStatement(sql);
-         ResultSet rs = pstmt.executeQuery(); 
+    try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        pstmt.setInt(1, year);
+        pstmt.setInt(2, year);
+        pstmt.setInt(3, year);
+        pstmt.setInt(4, year);
         
-        while (rs.next()) {
-            ChartDataAdmin data = new ChartDataAdmin(
-                 rs.getInt("monthNumber"),
-                rs.getString("monthName"),
-                rs.getInt("freelancers"),
-                rs.getInt("projects"),
-                rs.getInt("applications")
-            );
-            chartData.add(data);
+        try (ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                ChartDataAdmin data = new ChartDataAdmin(
+                    rs.getInt("monthNumber"),
+                    rs.getString("monthName"),
+                    rs.getInt("freelancers"),
+                    rs.getInt("projects"),
+                    rs.getInt("applications")
+                );
+                chartData.add(data);
+            }
         }
     } catch (SQLException e) {
         e.printStackTrace();
@@ -153,6 +157,31 @@ public class DashboardDAO extends DBContext {
     return chartData;
 }
 
+public List<Integer> getAvailableYears() {
+    List<Integer> years = new ArrayList<>();
+    String sql = """
+            SELECT DISTINCT YEAR(CreateDate) as Year
+            FROM [User]
+            UNION
+            SELECT DISTINCT YEAR(date_post) as Year
+            FROM Post
+            UNION
+            SELECT DISTINCT YEAR(dateApply) as Year
+            FROM JobApply
+            ORDER BY Year DESC
+         """;
+    
+    try (PreparedStatement pstmt = connection.prepareStatement(sql);
+         ResultSet rs = pstmt.executeQuery()) {
+        while (rs.next()) {
+            years.add(rs.getInt("Year"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    
+    return years;
+}
 //      public List<Integer> getApplicationsData(){
 //        List<Integer> applicationsData = new ArrayList<>();
 //        try {
@@ -267,13 +296,8 @@ public class DashboardDAO extends DBContext {
         return chartDataList;
     }
 
-    public static void main(String[] args) {
-        DashboardDAO dao = new DashboardDAO();
-        List<ChartDataAdmin> m = dao.getChartData();
-        for (ChartDataAdmin chartData : m) {
-            System.out.println( chartData.getMonthName());
-        }
+    
         
     }
 
-}
+

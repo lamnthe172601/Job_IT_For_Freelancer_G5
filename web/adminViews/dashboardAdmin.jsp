@@ -23,6 +23,17 @@
         <link rel="stylesheet" href="adminAssets/plugins/datatables/datatables.min.css">
 
         <link rel="stylesheet" href="adminAssets/css/style.css">
+        <style>
+            .year-select-container {
+                position: relative;
+                z-index: 1000;
+                min-width: 100px;
+            }
+            #yearSelect {
+                width: 100%;
+                padding: 5px;
+            }
+        </style>
     </head>
     <body>
         <div class="main-wrapper">
@@ -52,8 +63,8 @@
                                 <div class="col-md-4 d-flex">
                                     <div class="card wizard-card flex-fill">
                                         <div class="card-body">
-                                            <p class="text-primary mt-0 mb-2">Completed Projects</p>
-                                            <h5>${totalPosts}</h5>
+                                            <p class="text-primary mt-0 mb-2">Projects</p>
+                                            <h5>${totalProjects}</h5>
                                             <!--<p><a href="projects.html">view details</a></p>-->
                                             <span class="dash-widget-icon bg-1">
                                                 <i class="fas fa-th-large"></i>
@@ -64,8 +75,8 @@
                                 <div class="col-md-4 d-flex">
                                     <div class="card wizard-card flex-fill">
                                         <div class="card-body">
-                                            <p class="text-primary mt-0 mb-2">Active Projects</p>
-                                            <h5>${totalJobApplys}</h5>
+                                            <p class="text-primary mt-0 mb-2">Blog</p>
+                                            <h5>${totalBlogs}</h5>
                                             <!--<p><a href="projects.html">view details</a></p>-->
                                             <span class="dash-widget-icon bg-1">
                                                 <i class="fas fa-bezier-curve"></i>
@@ -79,37 +90,44 @@
                                 <div class="col-lg-12 d-flex">
                                     <div class="card w-100">
                                         <div class="card-body pt-0 pb-2">
-                                            <div class="card-header">
-                                                <h5 class="card-title">Over view</h5>
+                                            <div class="card-header d-flex justify-content-between align-items-center">
+                                                <h5 class="card-title">Overview</h5>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="yearDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Select Year
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="yearDropdown" id="yearList">
+                                                        <!-- Year options will be added here dynamically -->
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <div id="chart" class="mt-4"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>              
+                    </div>
 
-                    </div>              
                 </div>
 
             </div>
 
-        </div>
-
-        <script>
-            var chartData = ${chartDataJson};
-        </script>
-        <script src="adminAssets/js/jquery-3.7.1.min.js" defer></script>
-        <script src="adminAssets/js/bootstrap.bundle.min.js" defer></script>
-        <script src="adminAssets/js/feather.min.js" defer></script>
-        <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" defer></script>
-        <script src="adminAssets/plugins/select2/js/select2.min.js" defer></script>
-        <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" defer></script>
-        <script src="adminAssets/plugins/datatables/datatables.min.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts" defer></script>
-        <script src="adminAssets/js/script.js" defer></script>
-        <script src="adminAssets/js/Chart.js" defer></script>
-        <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="164eb6d6a75caec95434e247-|49" defer></script>
+            <script>
+                var chartData = ${chartDataJson};
+                var availableYears = ${availableYearsJson};
+            </script>
+            <script src="adminAssets/js/jquery-3.7.1.min.js" defer></script>
+            <script src="adminAssets/js/bootstrap.bundle.min.js" defer></script>
+            <script src="adminAssets/js/feather.min.js" defer></script>
+            <script src="adminAssets/plugins/slimscroll/jquery.slimscroll.min.js" defer></script>
+            <script src="adminAssets/plugins/select2/js/select2.min.js" defer></script>
+            <script src="adminAssets/plugins/datatables/jquery.dataTables.min.js" defer></script>
+            <script src="adminAssets/plugins/datatables/datatables.min.js" defer></script>
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts" defer></script>
+            <script src="adminAssets/js/script.js" defer></script>
+            <script src="adminAssets/js/Chart.js" defer></script>
+            <script src="assets/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="164eb6d6a75caec95434e247-|49" defer></script>
     </body>
 
     <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:37:17 GMT -->
