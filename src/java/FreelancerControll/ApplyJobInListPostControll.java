@@ -154,7 +154,7 @@ public class ApplyJobInListPostControll extends HttpServlet {
             request.setAttribute("postFavourites", postFavourites);
             request.setAttribute("endPage", endPage);
             request.setAttribute("tag", index);
-            request.getRequestDispatcher("views/allListPostSearch.jsp").forward(request, response);
+            response.sendRedirect("views/allListPostSearch.jsp");
 
         } catch (Exception e) {
             request.getRequestDispatcher("login").forward(request, response);

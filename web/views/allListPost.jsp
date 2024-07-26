@@ -381,8 +381,8 @@
                                                     <a href="#" data-bs-toggle="modal"  class="btn btn-danger ml-2 report-post" data-postid="${list.postID}"  data-bs-target="#applyModal_a" data-postid="a" tabindex="-1">
                                                         <i class="fas fa-flag custom-flag"></i>
                                                     </a>
-                                                       
-                                                            
+
+
                                                     <c:set var="postId" value="${list.postID}" />
 
                                                     <c:choose>
@@ -654,32 +654,32 @@
         <!-- Bootstrap JS -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <script>
-    $(document).ready(function () {
-        var messageModal =
-                  <c:if test="${sessionScope.check == 1}">
-            `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body text-center">
-                            <div class="checkmark-circle">
-                                <div class="background"></div>
-                                <div class="checkmark"></div>
-                            </div>
-                            <h3>Notification</h3>
-                            <p>Report successful</p>
-                            <a href="recruitersetting" style="margin-left= 50%  width: 4%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
-                        </div>
-                    </div>
-                </div>
-            </div>`</c:if>
-           <c:remove var="check" scope="session" />
-   ;
+        <script>
+                                                                            $(document).ready(function () {
+                                                                                var messageModal =
+            <c:if test="${sessionScope.check == 1}">
+                                                                                `<div class="modal custom-modal fade" id="messageModal" tabindex="-1" role="dialog">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                              <div class="modal-body text-center">
+                                  <div class="checkmark-circle">
+                                      <div class="background"></div>
+                                      <div class="checkmark"></div>
+                                  </div>
+                                  <h3>Notification</h3>
+                                  <p>Report successful</p>
+                                  <a href="recruitersetting" style="margin-left= 50%  width: 4%; background-color: #6c5ce7; border-color: #6c5ce7;" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">OK</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>`</c:if>
+            <c:remove var="check" scope="session" />
+                                                                                ;
 
-        $('body').append(messageModal);
-        $('#messageModal').modal('show');
-    });
-</script>
+                                                                                $('body').append(messageModal);
+                                                                                $('#messageModal').modal('show');
+                                                                            });
+        </script>
 
 
 
@@ -841,43 +841,43 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-                 function addToFavorites(postID) {
-                     $.ajax({
-                         url: 'AddFavourites',
-                         type: 'GET',
-                         data: {
-                             postID: postID
-                         },
-                         success: function (response) {
-                             // Xử lý phản hồi thành công (nếu cần)
-                             //alert('Đã thêm vào danh sách yêu thích!');
-                             $('#favourite_' + postID).addClass('color-active');
-                         },
-                         error: function (xhr, status, error) {
-                             // Xử lý lỗi (nếu có)
-                             alert('Đã xảy ra lỗi: ' + error);
-                         }
-                     });
-                 }
+            function addToFavorites(postID) {
+                $.ajax({
+                    url: 'AddFavourites',
+                    type: 'GET',
+                    data: {
+                        postID: postID
+                    },
+                    success: function (response) {
+                        // Xử lý phản hồi thành công (nếu cần)
+                        //alert('Đã thêm vào danh sách yêu thích!');
+                        $('#favourite_' + postID).addClass('color-active');
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi (nếu có)
+                        alert('Đã xảy ra lỗi: ' + error);
+                    }
+                });
+            }
 
-                 function removeFromFavorites(postID) {
-                     $.ajax({
-                         url: 'DeleteFavourites',
-                         type: 'GET',
-                         data: {
-                             postID: postID
-                         },
-                         success: function (response) {
-                             // Xử lý phản hồi thành công (nếu cần)
-                             //alert('Đã xóa khỏi danh sách yêu thích!');
-                             $('#favourite_' + postID).removeClass('color-active');
-                         },
-                         error: function (xhr, status, error) {
-                             // Xử lý lỗi (nếu có)
-                             alert('Đã xảy ra lỗi: ' + error);
-                         }
-                     });
-                 }
+            function removeFromFavorites(postID) {
+                $.ajax({
+                    url: 'DeleteFavourites',
+                    type: 'GET',
+                    data: {
+                        postID: postID
+                    },
+                    success: function (response) {
+                        // Xử lý phản hồi thành công (nếu cần)
+                        //alert('Đã xóa khỏi danh sách yêu thích!');
+                        $('#favourite_' + postID).removeClass('color-active');
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi (nếu có)
+                        alert('Đã xảy ra lỗi: ' + error);
+                    }
+                });
+            }
         </script>
 
 
@@ -887,11 +887,18 @@
                 var errorDiv = document.getElementById('error_' + postID);
                 if (fileInput.files.length === 0) {
                     errorDiv.innerHTML = 'Please select a file.';
-                    return false; // Prevent form submission
-                } else {
-                    errorDiv.innerHTML = '';
-                    return true;
+                    return false;
                 }
+
+                var allowedExtensions = /(\.pdf|\.doc|\.png)$/i;
+                if (!allowedExtensions.exec(fileInput.value)) {
+                    errorDiv.innerHTML = 'Please upload file having extensions .pdf, .doc or .png only.';
+                    // Clear the file input
+                    return false;
+                }
+
+                errorDiv.innerHTML = '';
+                return true;
             }
 
             function check(postID) {
@@ -923,7 +930,6 @@
         <script>
             function toggleFavorite(postId) {
                 var favouriteLink = $('#favourite_' + postId);
-
                 if (favouriteLink.hasClass('color-active')) {
                     // Remove from favorites
                     $.ajax({

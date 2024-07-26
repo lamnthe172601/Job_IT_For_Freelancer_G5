@@ -789,11 +789,18 @@
                 var errorDiv = document.getElementById('error_' + postID);
                 if (fileInput.files.length === 0) {
                     errorDiv.innerHTML = 'Please select a file.';
-                    return false; // Prevent form submission
-                } else {
-                    errorDiv.innerHTML = '';
-                    return true;
+                    return false;
                 }
+
+                var allowedExtensions = /(\.pdf|\.doc|\.png)$/i;
+                if (!allowedExtensions.exec(fileInput.value)) {
+                    errorDiv.innerHTML = 'Please upload file having extensions .pdf, .doc or .png only.';
+                    // Clear the file input
+                    return false;
+                }
+
+                errorDiv.innerHTML = '';
+                return true;
             }
 
             function check(postID) {

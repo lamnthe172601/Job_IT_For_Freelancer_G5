@@ -88,7 +88,7 @@ public class ApplyJobControll extends HttpServlet {
             int userId = user.getUserID();
             int freelancerID = d.getFreelancerIDbyUserID(userId);
             p.applyJob(freelancerID, postID, formattedDate);
-
+            //request.getRequestDispatcher("views/freelancerFavourites.jsp").forward(request, response); 
         } catch (Exception e) {
             request.getRequestDispatcher("login").forward(request, response);
         }
@@ -140,7 +140,8 @@ public class ApplyJobControll extends HttpServlet {
             List<JobApply> postAplly=p.getPostApply(freelancerID);
             request.setAttribute("postApply", postAplly);
             request.setAttribute("freelancer", freelancer);
-            request.getRequestDispatcher("views/freelancerFavourites.jsp").forward(request, response);           
+            response.sendRedirect("views/freelancerFavourites.jsp"); 
+                      
 
         } catch (Exception e) {
             request.getRequestDispatcher("login").forward(request, response);
