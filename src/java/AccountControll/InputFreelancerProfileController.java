@@ -72,7 +72,7 @@ public class InputFreelancerProfileController extends HttpServlet {
         DAO dao = new DAO();
         ArrayList<SkillSet> listSkill = dao.listSkill();
         request.setAttribute("listskill", listSkill);
-        SkillSetDAO s= new SkillSetDAO();
+        SkillSetDAO s = new SkillSetDAO();
         HashMap<String, String> map = s.getAllSkill();
         request.setAttribute("map", map);
         request.getRequestDispatcher("views/inputFreelancerProfile.jsp").forward(request, response);
@@ -92,50 +92,54 @@ public class InputFreelancerProfileController extends HttpServlet {
             throws ServletException, IOException {
         DAO dao = new DAO();
 
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String date = request.getParameter("dob");
-        String gender = request.getParameter("gender");
-        String decscribe = request.getParameter("decscribe"); 
-        String img="IMG/chung.png";
+        try {
+            String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String date = request.getParameter("dob");
+            String gender = request.getParameter("gender");
+            String decscribe = request.getParameter("decscribe");
+            String img = "IMG/chung.png";
 
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            int userID = user.getUserID();
-            dao.inputFreelancerInfo(firstname, lastname, img, gender, date, decscribe, email, phone, userID);
-            int freelancerID = dao.getFreelancerIDbyUserID(userID);
-            String[] skills = request.getParameterValues("skill");
-            String[] level=request.getParameterValues("level");
-            SkillSetDAO skill = new SkillSetDAO();
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("account");
+            if (user != null) {
+                int userID = user.getUserID();
+                dao.inputFreelancerInfo(firstname, lastname, img, gender, date, decscribe, email, phone, userID);
+                int freelancerID = dao.getFreelancerIDbyUserID(userID);
+                String[] skills = request.getParameterValues("skill");
+                String[] level = request.getParameterValues("level");
+                SkillSetDAO skill = new SkillSetDAO();
 
-            if (skills != null) {
-                int s=skills.length;
-                int index=0;
-                while(s>index){
-                    int skillID=skill.getSkillIDBySkillName(skills[index].trim());
-                    dao.inputFreelancerSkill(skillID, freelancerID,level[index]);
-                    index++;
+                if (skills != null) {
+                    int s = skills.length;
+                    int index = 0;
+                    while (s > index) {
+                        int skillID = skill.getSkillIDBySkillName(skills[index].trim());
+                        dao.inputFreelancerSkill(skillID, freelancerID, level[index]);
+                        index++;
+                    }
+
                 }
-                
-            }
-            dao.UpdateRole(userID, 3);
-            String position = request.getParameter("position");
-            String datestart = request.getParameter("datestart");
-            String dateend = request.getParameter("dateend");
-            String project = request.getParameter("project");
-            String exworkname = request.getParameter("exworkname");
-            String degreename = request.getParameter("degreename");
-            String university = request.getParameter("university");
-            String edustart = request.getParameter("edustart");
-            String eduend = request.getParameter("eduend");
+                dao.UpdateRole(userID, 3);
+                String position = request.getParameter("position");
+                String datestart = request.getParameter("datestart");
+                String dateend = request.getParameter("dateend");
+                String project = request.getParameter("project");
+                String exworkname = request.getParameter("exworkname");
+                String degreename = request.getParameter("degreename");
+                String university = request.getParameter("university");
+                String edustart = request.getParameter("edustart");
+                String eduend = request.getParameter("eduend");
 
-            dao.inputFreelancerEducation(university, edustart, eduend, freelancerID, degreename);
-            dao.inputFreelancerExperiance(exworkname, project, position, datestart, dateend, freelancerID);
-            request.setAttribute("mess", "Registration successful. Please log in again!");
-            request.getRequestDispatcher("views/login.jsp").forward(request, response);
+                dao.inputFreelancerEducation(university, edustart, eduend, freelancerID, degreename);
+                dao.inputFreelancerExperiance(exworkname, project, position, datestart, dateend, freelancerID);
+                request.setAttribute("mess", "Registration successful. Please log in again!");
+                request.getRequestDispatcher("views/login.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
     }
