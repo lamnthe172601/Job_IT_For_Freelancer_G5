@@ -15,22 +15,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
 /**
  *
  * @author Admin
  */
 public class AboutControll extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -39,7 +29,7 @@ public class AboutControll extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AboutControll</title>");            
+            out.println("<title>Servlet AboutControll</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AboutControll at " + request.getContextPath() + "</h1>");
@@ -47,7 +37,7 @@ public class AboutControll extends HttpServlet {
             out.println("</html>");
         }
     }
-CategoriesDAO cDao = new CategoriesDAO();
+    CategoriesDAO cDao = new CategoriesDAO();
     HomeDAO pDAO = new HomeDAO();
     FreelancerDAO free = new FreelancerDAO();
     RecruiterDAO recrui = new RecruiterDAO();
@@ -55,32 +45,19 @@ CategoriesDAO cDao = new CategoriesDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.setAttribute("allpostopen", pDAO.getAllOpenPosts());
-       request.setAttribute("NumberUsers", pDAO.getNumberUsers());
+        request.setAttribute("allpostopen", pDAO.getAllOpenPosts());
+        request.setAttribute("NumberUsers", pDAO.getNumberUsers());
         request.setAttribute("NumberPost", pDAO.getNumberPost());
         request.setAttribute("NumberCompany", pDAO.getNumberCompany());
         request.getRequestDispatcher("views/about.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
