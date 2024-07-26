@@ -81,7 +81,7 @@ public class InputRecruiterProfileController extends HttpServlet {
             throws ServletException, IOException {
         DAO dao = new DAO();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("account");
         int userID = user.getUserID();
         dao.UpdateRole(userID, 4);
         String firstname = request.getParameter("firstname");
