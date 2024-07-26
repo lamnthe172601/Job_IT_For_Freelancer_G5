@@ -410,16 +410,12 @@
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="favourites.html">Bookmarked Projects</a>
+                                                        <a href="RecruiterFavourites">Bookmarked Projects</a>
                                                     </li>
                                                     
                                                 </ul>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="review.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
-                                                </a>
-                                            </li>
+                                           
                                             
                                             <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
@@ -428,10 +424,10 @@
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="profile-settings.html">Profile</a>
+                                                        <a href="companydetail">Profile</a>
                                                     </li> 
                                                     <li>
-                                                        <a href="change-password.html">Change Password</a>
+                                                        <a href="changePassword">Change Password</a>
                                                     </li>
                                                     
                                                 </ul>
