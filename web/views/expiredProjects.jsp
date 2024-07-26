@@ -390,12 +390,7 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img">
-                                                    Reviews
-                                                </a>
-                                            </li>
+                                            
                                             <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img">

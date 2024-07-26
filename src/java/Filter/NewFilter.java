@@ -50,15 +50,15 @@ public class NewFilter implements Filter {
     );
 
     private List<String> freelancerURLs = Arrays.asList(
-            "/InputFreelancerProfile", "/UpdateProfile", "/MyProfile", "/listapply",
+            "/InputFreelancerProfile", "/UpdateProfile", "/MyProfile", "/ListApply",
             "/ApplyJob", "/ApplyJobInListPost", "/ApplyJobFormListPost", "/ApplyJobFromPostDetail",
-            "/AddFavourites", "/DeleteFavourites", "/RecruiterFavourites",
+            "/AddFavourites", "/DeleteFavourites","/JobforFreelancer",
             "/ViewFreelancerProfile", "/AddFreelancerFavorites", "/DeleteFreelancerFavorites",
             "/allListPost"
     );
 
     private List<String> recruiterURLs = Arrays.asList(
-            "/InputRecruiterProfile", "/recruitersetting", "/myListJobProject", "/DeleteRecruiterFavourites"
+            "/InputRecruiterProfile", "/recruitersetting", "/myListJobProject", "/DeleteRecruiterFavourites","/Dashboard"
     );
 
     

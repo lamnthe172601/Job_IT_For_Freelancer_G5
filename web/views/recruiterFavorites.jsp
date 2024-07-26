@@ -354,11 +354,7 @@
                                                     </li>                                                    
                                                 </ul>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="review.html" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
-                                                </a>
-                                            </li>                                         
+                                                                                  
                                             <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
@@ -366,11 +362,11 @@
                                                 </a>
                                                 <ul class="sub-menu-ul">
                                                     <li>
-                                                        <a href="profile-settings.html">Profile</a>
+                                                        <a href="companydetail">Profile</a>
                                                     </li>
 
                                                     <li>
-                                                        <a href="change-password.html">Change Password</a>
+                                                        <a href="changePassword">Change Password</a>
                                                     </li>                                                    
                                                 </ul>
                                             </li>
@@ -419,13 +415,13 @@
                                                 <a  class="favourite color-active" class="dropdown-item typeChange" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#delete${l.freelanceID}"><i class="feather-heart"></i></a>
                                                 
                                                 <div class="freelance-img">
-                                                    <a href="developer-details.html">
+                                                    <a href="">
                                                         <img src="${l.image}" alt="User Image">
                                                         <span class="verified"><i class="fas fa-check-circle"></i></span>
                                                     </a>
                                                 </div>
                                                 <div class="freelance-info">
-                                                    <h3><a href="developer-details.html">${l.first_name} ${l.last_name}</a></h3>
+                                                    <h3><a href="">${l.first_name} ${l.last_name}</a></h3>
                                                     <c:set var="dob" value="${l.dob}" />
                                                     <c:set var="year" value="${fn:substring(dob, 0, 4)}" />
                                                     <div class="freelance-specific">${year}</div>

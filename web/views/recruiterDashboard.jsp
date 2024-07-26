@@ -284,11 +284,7 @@
                                                    
                                                 </ul>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="review" class="nav-link">
-                                                    <img src="assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
-                                                </a>
-                                            </li>
+                                            
                                             
                                             <li class="nav-item">
                                                 <a href="javascript:void(0);" class="nav-link">
