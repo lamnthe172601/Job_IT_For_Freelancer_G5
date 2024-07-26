@@ -71,6 +71,16 @@ function checkDuplicateSkill(skillName, skillId = null) {
 }
 
 // Add event listeners to forms
+function resetForm(form) {
+    form.reset(); // Reset form fields
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        clearError(input);
+        input.classList.remove('is-valid', 'is-invalid');
+    });
+}
+
+// Add event listeners to forms
 document.addEventListener('DOMContentLoaded', function() {
     const addForm = document.getElementById('add-blog-form');
     const updateForms = document.querySelectorAll('.update-skill-form');
@@ -79,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const skillNameInput = form.querySelector('input[name="skillName"]');
         const descriptionInput = form.querySelector('textarea[name="description"]');
         const skillId = form.querySelector('input[name="skillId"]')?.value;
+        const resetButton = form.querySelector('button[type="reset"]');
 
         // Add input event listeners for real-time validation
         skillNameInput.addEventListener('input', function() {
@@ -103,6 +114,14 @@ document.addEventListener('DOMContentLoaded', function() {
         descriptionInput.addEventListener('input', function() {
             validateField(this, 'Description is required', (value) => value.trim() !== '' && value.length <= 500);
         });
+
+        // Reset button handler
+        if (resetButton) {
+            resetButton.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default reset behavior
+                resetForm(form);
+            });
+        }
 
         // Form submission handler
         form.addEventListener('submit', function(e) {
