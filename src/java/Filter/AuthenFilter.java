@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Filter.java to edit this template
- */
 package Filter;
 
+import Models.User;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -17,19 +14,38 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
 
-/**
- *
- * @author Admin
- */
 public class AuthenFilter implements Filter {
 
     private static final boolean debug = true;
-
-    // The filter configuration object we are associated with.  If
-    // this value is null, this filter instance is not currently
-    // configured. 
     private FilterConfig filterConfig = null;
+
+    private List<String> publicURLs = Arrays.asList(
+            "/login", "/logout", "/Register", "/lostpassword",
+            "/blogList", "/blogGrid", "/home", "/BlogDetails", "/companydetail", "/PostDetails",
+            "/SearchBlogController", "/postbylocation", "/postbycategory", "/companydetailcommon",
+            "/SelectAccountType", "/About", "/SearchInHome", "/ApplyJobFormSearch", "/CompanyDetailCommon"
+    );
+
+    private List<String> adminURLs = Arrays.asList(
+            "/dashboardAdmin", "/profileAdmin", "/manageFreelancerAdmin", "/manageRecruiterAdmin",
+            "/changeStatusUserAdmin", "/projectAdmin", "/moderationProjectAdmin",
+            "/blogAdmin", "/skillAdmin"
+    );
+
+    private List<String> freelancerURLs = Arrays.asList(
+            "/InputFreelancerProfile", "/UpdateProfile", "/MyProfile", "/listapply",
+            "/ApplyJob", "/ApplyJobInListPost", "/ApplyJobFormListPost", "/ApplyJobFromPostDetail",
+            "/AddFavourites", "/DeleteFavourites", "/RecruiterFavourites", "/ListFreelancer",
+            "/ViewFreelancerProfile", "/AddFreelancerFavorites", "/DeleteFreelancerFavorites",
+            "/allListPost"
+    );
+
+    private List<String> recruiterURLs = Arrays.asList(
+            "/InputRecruiterProfile", "/recruitersetting", "/myListJobProject", "/DeleteRecruiterFavourites"
+    );
 
     public AuthenFilter() {
     }
@@ -39,7 +55,6 @@ public class AuthenFilter implements Filter {
         if (debug) {
             log("AuthenFilter:DoBeforeProcessing");
         }
-
     }
 
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
@@ -47,39 +62,60 @@ public class AuthenFilter implements Filter {
         if (debug) {
             log("AuthenFilter:DoAfterProcessing");
         }
-
-        
     }
 
-  
     public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain)
+                        FilterChain chain)
             throws IOException, ServletException {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
         String requestURI = httpRequest.getRequestURI();
-        if (requestURI.contains("PostFavourites") || requestURI.contains("ListApply")
-                || requestURI.contains("checkout") || requestURI.contains("admin") || requestURI.contains("managerUser")
-                || requestURI.contains("editInfoUser") || requestURI.contains("managerListOrder") || requestURI.contains("loading")) {
-            if (session.getAttribute("account") == null) {
-                httpResponse.sendRedirect("login");
+
+        // Check if the requested URL is public
+        boolean isPublicURL = publicURLs.stream().anyMatch(requestURI::contains);
+
+        if (!isPublicURL) {
+            // Authentication check
+            if (session == null || session.getAttribute("account") == null) {
+                httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
                 return;
             }
+
+            // Role-based access control
+            User user = (User) session.getAttribute("account");
+            int role = user.getRoleID().getRoleID();
+
+            if (role == 3) { // Freelancer
+                if (adminURLs.stream().anyMatch(requestURI::contains) ||
+                    recruiterURLs.stream().anyMatch(requestURI::contains)) {
+                    httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+                    return;
+                }
+            } else if (role == 4) { // Recruiter
+                if (freelancerURLs.stream().anyMatch(requestURI::contains) ||
+                    adminURLs.stream().anyMatch(requestURI::contains)) {
+                    httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+                    return;
+                }
+            } else if (role == 1 || role == 2) { // Admin
+                if (freelancerURLs.stream().anyMatch(requestURI::contains) ||
+                    recruiterURLs.stream().anyMatch(requestURI::contains)) {
+                    httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+                    return;
+                }
+            }
         }
+
         chain.doFilter(request, response);
-
         doAfterProcessing(request, response);
-
     }
 
-  
     public FilterConfig getFilterConfig() {
         return (this.filterConfig);
     }
 
-   
     public void setFilterConfig(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
     }
@@ -87,9 +123,6 @@ public class AuthenFilter implements Filter {
     public void destroy() {
     }
 
-    /**
-     * Init method for this filter
-     */
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
@@ -99,9 +132,6 @@ public class AuthenFilter implements Filter {
         }
     }
 
-    /**
-     * Return a String representation of this object.
-     */
     @Override
     public String toString() {
         if (filterConfig == null) {
@@ -121,12 +151,10 @@ public class AuthenFilter implements Filter {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
                 PrintWriter pw = new PrintWriter(ps);
-                pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
-
-                // PENDING! Localize this for next official release
+                pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n");
                 pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
                 pw.print(stackTrace);
-                pw.print("</pre></body>\n</html>"); //NOI18N
+                pw.print("</pre></body>\n</html>");
                 pw.close();
                 ps.close();
                 response.getOutputStream().close();
@@ -160,5 +188,4 @@ public class AuthenFilter implements Filter {
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);
     }
-
 }
