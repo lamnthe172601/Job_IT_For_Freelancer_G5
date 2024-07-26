@@ -30,7 +30,7 @@ public class AuthenFilter implements Filter {
             "/login", "/logout", "/Register", "/lostpassword",
             "/blogList", "/blogGrid", "/home", "/BlogDetails", "/companydetail", "/PostDetails",
             "/SearchBlogController", "/postbylocation", "/postbycategory", "/companydetailcommon",
-            "/SelectAccountType", "/About", "/SearchInHome", "/ApplyJobFormSearch", "/CompanyDetailCommon","/AllListPost"
+            "/SelectAccountType", "/About", "/SearchInHome", "/ApplyJobFormSearch", "/CompanyDetailCommon","/AllListPost","/InputRecruiterProfile","/InputFreelancerProfile","/changePassword"
     );
 
     private List<String> adminURLs = Arrays.asList(
@@ -101,15 +101,25 @@ public class AuthenFilter implements Filter {
 
         boolean hasAccess = true;
 
-        if (role == 3) { // Freelancer
-            hasAccess = !adminURLs.stream().anyMatch(requestURI::contains)
-                    && !recruiterURLs.stream().anyMatch(requestURI::contains);
-        } else if (role == 4) { // Recruiter
-            hasAccess = !freelancerURLs.stream().anyMatch(requestURI::contains)
-                    && !adminURLs.stream().anyMatch(requestURI::contains);
-        } else if (role == 1 || role == 2) { // Admin
-            hasAccess = !freelancerURLs.stream().anyMatch(requestURI::contains)
-                    && !recruiterURLs.stream().anyMatch(requestURI::contains);
+        switch (role) {
+            case 3:
+                // Freelancer
+                hasAccess = !adminURLs.stream().anyMatch(requestURI::contains)
+                        && !recruiterURLs.stream().anyMatch(requestURI::contains);
+                break;
+            case 4:
+                // Recruiter
+                hasAccess = !freelancerURLs.stream().anyMatch(requestURI::contains)
+                        && !adminURLs.stream().anyMatch(requestURI::contains);
+                break;
+            case 1:
+            case 2:
+                // Admin
+                hasAccess = !freelancerURLs.stream().anyMatch(requestURI::contains)
+                        && !recruiterURLs.stream().anyMatch(requestURI::contains);
+                break;
+            default:
+                break;
         }
 
         if (hasAccess) {
