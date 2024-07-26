@@ -4,43 +4,26 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="SWP391">
             <file>file:/D:/SU24/A/src/java/dal/RecruiterDAO.java</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/AddFreelancerFavoritesControll.java</file>
-            <file>file:/D:/SU24/A/web/views/blogGrid.jsp</file>
-            <file>file:/D:/SU24/A/web/views/recruiterFavorites.jsp</file>
-            <file>file:/D:/SU24/A/src/java/Models/User.java</file>
-            <file>file:/D:/SU24/A/src/java/dal/DashboardDAO.java</file>
-            <file>file:/D:/SU24/A/src/java/Models/Recruiter.java</file>
-            <file>file:/D:/SU24/A/src/java/FreelancerControll/JobforFreelancer.java</file>
-            <file>file:/D:/SU24/A/web/views/listFreelancer.jsp</file>
-            <file>file:/D:/SU24/A/src/java/Models/Categories.java</file>
-            <file>file:/D:/SU24/A/src/java/dal/CompanyDAO.java</file>
-            <file>file:/D:/SU24/A/web/views/header.jsp</file>
-            <file>file:/D:/SU24/A/src/java/AccountControll/HomeContronller.java</file>
-            <file>file:/D:/SU24/A/src/java/dal/DurationDAO.java</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/ConnectFreelancerControll.java</file>
-            <file>file:/D:/SU24/A/src/java/Models/Company.java</file>
-            <file>file:/D:/SU24/A/src/java/dal/FreelancerDAO.java</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/CompletedProjectsControll.java</file>
-            <file>file:/D:/SU24/A/web/views/recruiterDashboard.jsp</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/ExpiredProjectsControll.java</file>
-            <file>file:/D:/SU24/A/web/adminViews/projectAdmin.jsp</file>
-            <file>file:/D:/SU24/A/web/views/FreelancerProfile.jsp</file>
+            <file>file:/D:/SU24/A/src/java/dal/BlogDAO.java</file>
             <file>file:/D:/SU24/A/web/views/managePost.jsp</file>
+            <file>file:/D:/SU24/A/web/views/blogDetails.jsp</file>
             <file>file:/D:/SU24/A/web/views/CreatePost.jsp</file>
+            <file>file:/D:/SU24/A/web/views/ProfileSettingFreelancer.jsp</file>
             <file>file:/D:/SU24/A/src/java/dal/CategoriesDAO.java</file>
-            <file>file:/D:/SU24/A/src/java/AccountControll/InputFreelancerProfileController.java</file>
-            <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
-            <file>file:/D:/SU24/A/web/views/login.jsp</file>
+            <file>file:/D:/SU24/A/src/java/dal/PostDAO.java</file>
             <file>file:/D:/SU24/A/web/views/home.jsp</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageJobsPostsControll.java</file>
+            <file>file:/D:/SU24/A/src/java/Models/Post.java</file>
+            <file>file:/D:/SU24/A/src/java/CommonControll/BlogDetailsControll.java</file>
             <file>file:/D:/SU24/A/src/java/dal/HomeDAO.java</file>
         </group>
         <group>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/web/adminViews/skillAdmin.jsp</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/Models/ExpertiseSkill.java</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/BlogsAdmin.java</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/AdminControlles/SkillAdmin.java</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/dal/AdminDAO.java</file>
-            <file>file:/E:/SU24/SWP391/Job_IT_For_Freelancer_G5/src/java/MutiModels/skillFull.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputFreelancerProfileController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputRecruiterProfileController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/home.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
         </group>
     </open-files>
 </project-private>
