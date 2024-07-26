@@ -129,7 +129,7 @@
                                         <ul class="submenu">
                                             <li><a href="CreatePost">Create a new Project</a></li>
                                             <li><a href="myListJobProject">My list project</a></li>
-                                            <li><a href="newsJobs">Reviews</a></li>
+                                            
 
                                         </ul>
                                     </li>
@@ -139,7 +139,7 @@
                                     <ul class="submenu">                                                                           
                                         <li><a href="blogGrid">Blog</a></li>
                                         <li><a href="About">About us</a></li>
-                                        <li><a href="ContactUs">Contact us</a></li>
+                                        
                                     </ul>
                                 </li>
                                 <li class="has-submenu"> <li><a href="blogGrid">Blog</a></li></li>

@@ -90,11 +90,17 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item submenu">
-                                                <a href="companydetail" class="nav-link">
+                                                <a href="manageJobsPosts" class="nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-02.svg" alt="Img"> Projects
-
+                                                    <span class="menu-arrow"></span>
                                                 </a>
+                                                <ul class="sub-menu-ul">
+                                                    <li><a href="manageJobsPosts">Manage projects</a></li>
+                                                    <li><a href="ManageApplication">All applicants</a></li>
+                                                    <li><a href="CompletedProjects">Completed Projects</a></li>
+                                                    <li><a href="ExpiredProjects">Expired Projects</a></li>
 
+                                                </ul>
                                             </li>
                                             <li class="nav-item submenu">
                                                 <a href="RecruiterFavourites" class="nav-link">
@@ -105,7 +111,7 @@
                                             </li>
 
                                             <li class="nav-item submenu">
-                                                <a href="recruitersetting" class="nav-link">
+                                                <a href="recruitersetting" class="active nav-link">
                                                     <img src="assets/img/icon/sidebar-icon-10.svg" alt="Img"> Settings
 
                                                 </a>
