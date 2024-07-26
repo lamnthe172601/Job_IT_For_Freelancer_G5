@@ -104,7 +104,7 @@ public class ApplyJobFromPostDetailControl extends HttpServlet {
             int freelancerID = d.getFreelancerIDbyUserID(userId);
             p.applyJob(freelancerID, postID, linkDB);
 
-            request.getRequestDispatcher("PostDetails?postID="+postID).forward(request, response);           
+            response.sendRedirect("PostDetails?postID="+postID);           
 
         } catch (Exception e) {
             request.getRequestDispatcher("login").forward(request, response);

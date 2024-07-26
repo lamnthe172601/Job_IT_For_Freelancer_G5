@@ -130,7 +130,7 @@ public class ApplyJobFormSearchControll extends HttpServlet {
             request.getRequestDispatcher("views/listPostFavoritesSearch.jsp").forward(request, response);          
 
         } catch (Exception e) {
-            request.getRequestDispatcher("login").forward(request, response);
+            response.sendRedirect("login");
         }
     }
 

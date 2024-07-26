@@ -3,15 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="SWP391">
-            <file>file:/D:/SU24/A/src/java/CommonControll/PostDetailsControll.java</file>
-            <file>file:/D:/SU24/A/src/java/dal/PostDAO.java</file>
-            <file>file:/D:/SU24/A/src/java/dal/DBContext.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageAllApplicationControll.java</file>
+            <file>file:/D:/SU24/A/src/java/Filter/AuthenFilter.java</file>
             <file>file:/D:/SU24/A/web/views/managePost.jsp</file>
+            <file>file:/D:/SU24/A/src/java/Models/User.java</file>
             <file>file:/D:/SU24/A/src/java/Models/Freelancer.java</file>
-            <file>file:/D:/SU24/A/web/views/home.jsp</file>
-            <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageJobsPostsControll.java</file>
             <file>file:/D:/SU24/A/web/views/CreatePost.jsp</file>
             <file>file:/D:/SU24/A/web/views/allListPost.jsp</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/DeleteFreelancerFavoritesControll.java</file>
+            <file>file:/D:/SU24/A/web/views/myListPostRecruiter.jsp</file>
+            <file>file:/D:/SU24/A/web/WEB-INF/web.xml</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ChartControll.java</file>
+            <file>file:/D:/SU24/A/src/java/AccountControll/HomeContronller.java</file>
+            <file>file:/D:/SU24/A/web/views/header.jsp</file>
+            <file>file:/D:/SU24/A/web/views/home.jsp</file>
+            <file>file:/D:/SU24/A/src/java/Models/Post.java</file>
+            <file>file:/D:/SU24/A/src/java/RecruiterControll/ManageJobsPostsControll.java</file>
+            <file>file:/D:/SU24/A/src/java/AccountControll/LoginController.java</file>
+            <file>file:/D:/SU24/A/src/java/dal/HomeDAO.java</file>
         </group>
         <group>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/EmailService.java</file>

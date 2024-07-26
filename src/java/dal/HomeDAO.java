@@ -118,7 +118,7 @@ public class HomeDAO extends DBContext {
                                                   WHERE TRIM(ps.value) IN (SELECT skill_set_name FROM FreelancerSkills) and p.status =1
                                               )
                                               
-                                              SELECT TOP 6 *
+                                              SELECT DISTINCT TOP 6 *
                                               FROM MatchingPosts;""";
         try {
             PreparedStatement ps = connection.prepareStatement(query);

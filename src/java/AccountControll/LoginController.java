@@ -98,7 +98,7 @@ public class LoginController extends HttpServlet {
                 }
             }
         } catch (Exception e) {
-
+            System.out.println(e);
         }
     }
 }
