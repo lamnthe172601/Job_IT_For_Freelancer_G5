@@ -296,6 +296,10 @@
         <servlet-name>GetChartDataServlet</servlet-name>
         <servlet-class>AdminControlles.GetChartDataServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckDuplicateSkill</servlet-name>
+        <servlet-class>AdminControlles.CheckDuplicateSkill</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeContronller</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -599,5 +603,9 @@
     <servlet-mapping>
         <servlet-name>GetChartDataServlet</servlet-name>
         <url-pattern>/GetChartData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckDuplicateSkill</servlet-name>
+        <url-pattern>/checkDuplicateSkill</url-pattern>
     </servlet-mapping>
 </web-app>
