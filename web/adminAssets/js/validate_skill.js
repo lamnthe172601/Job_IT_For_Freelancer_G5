@@ -53,12 +53,12 @@ function clearError(input) {
 }
 
 // Function to check for duplicate skill name
-function checkDuplicateSkill(skillName) {
+function checkDuplicateSkill(skillName, skillId = null) {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: 'checkDuplicateSkill',
             type: 'POST',
-            data: { skillName: skillName },
+            data: { skillName: skillName, skillId: skillId },
             success: function(response) {
                 resolve(response.isDuplicate);
             },
@@ -71,12 +71,25 @@ function checkDuplicateSkill(skillName) {
 }
 
 // Add event listeners to forms
-document.addEventListener('DOMContentLoaded', function() {
-    const forms = document.querySelectorAll('#add-blog-form, .update-skill-form');
+function resetForm(form) {
+    form.reset(); // Reset form fields
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        clearError(input);
+        input.classList.remove('is-valid', 'is-invalid');
+    });
+}
 
-    forms.forEach(function(form) {
+// Add event listeners to forms
+document.addEventListener('DOMContentLoaded', function() {
+    const addForm = document.getElementById('add-blog-form');
+    const updateForms = document.querySelectorAll('.update-skill-form');
+
+    function setupFormValidation(form) {
         const skillNameInput = form.querySelector('input[name="skillName"]');
         const descriptionInput = form.querySelector('textarea[name="description"]');
+        const skillId = form.querySelector('input[name="skillId"]')?.value;
+        const resetButton = form.querySelector('button[type="reset"]');
 
         // Add input event listeners for real-time validation
         skillNameInput.addEventListener('input', function() {
@@ -85,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         skillNameInput.addEventListener('blur', function() {
             if (this.value.trim() !== '') {
-                checkDuplicateSkill(this.value).then((isDuplicate) => {
+                checkDuplicateSkill(this.value, skillId).then((isDuplicate) => {
                     if (isDuplicate) {
                         displayError(this, 'This skill name already exists');
                     } else {
@@ -102,12 +115,19 @@ document.addEventListener('DOMContentLoaded', function() {
             validateField(this, 'Description is required', (value) => value.trim() !== '' && value.length <= 500);
         });
 
+        // Reset button handler
+        if (resetButton) {
+            resetButton.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default reset behavior
+                resetForm(form);
+            });
+        }
+
         // Form submission handler
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             if (validateSkillForm(this)) {
-                const skillNameInput = this.querySelector('input[name="skillName"]');
-                checkDuplicateSkill(skillNameInput.value).then((isDuplicate) => {
+                checkDuplicateSkill(skillNameInput.value, skillId).then((isDuplicate) => {
                     if (isDuplicate) {
                         displayError(skillNameInput, 'This skill name already exists');
                     } else {
@@ -119,5 +139,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
-    });
+    }
+
+    // Setup validation for add form
+    if (addForm) {
+        setupFormValidation(addForm);
+    }
+
+    // Setup validation for update forms
+    updateForms.forEach(setupFormValidation);
 });

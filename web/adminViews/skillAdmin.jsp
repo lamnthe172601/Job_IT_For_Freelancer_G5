@@ -238,7 +238,7 @@
                                                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form id="update-blog-form-${skill.getSkillID()}" data-validate="blog-form" method="post" action="skillAdmin">
+                                                                <form id="update-blog-form-${skill.getSkillID()}" class="update-skill-form" data-validate="skill-form" method="post" action="skillAdmin">
                                                                     <input type="hidden" name="skillId" value="${skill.getSkillID()}">
                                                                     <div class="row mb-3">
                                                                         <div class="col-md-6">
@@ -261,7 +261,8 @@
                                                                     </div>
                                                                     <div class="text-end">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                        <button type="submit" class="btn btn-primary" name="mode" value="update">Update Skill</button>
+                                                                       <input type="hidden" name="mode" value="update">
+                                                                        <button type="submit" class="btn btn-primary" >Update Skill</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -290,7 +291,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="add-blog-form" data-validate="blog-form" method="post" action="skillAdmin">
+                        <form id="add-blog-form" data-validate="skill-form" method="post" action="skillAdmin">
 
                             <div class="mb-3">
                                 <label for="blog-title" class="form-label">Skill</label>
