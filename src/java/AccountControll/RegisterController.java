@@ -91,7 +91,7 @@ public class RegisterController extends HttpServlet {
                 dao.register(username, pw, email, "active");
                 User user = dao.getUserByEmail(email);
                 HttpSession session = request.getSession();
-                session.setAttribute("user", user);
+                session.setAttribute("account", user);
                 request.getRequestDispatcher("views/accountType.jsp").forward(request, response);
             }
 

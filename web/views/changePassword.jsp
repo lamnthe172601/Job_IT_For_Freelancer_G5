@@ -29,7 +29,7 @@
     <body class="account-page">
 
         <div class="main-wrapper">
-<!--            <header class="header">
+            <header class="header">
                 <div class="container">                                                                   
                     <a href="home" class="navbar-brand logo">
                         <img style="margin: 20px;" src="assets/img/logo.svg" class="img-fluid" alt="Logo">
@@ -69,7 +69,7 @@
                     </div>
 
                 </div>
-            </div>-->
+            </div>
 
 
 

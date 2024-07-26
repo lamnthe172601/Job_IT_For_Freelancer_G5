@@ -25,8 +25,20 @@
         <group>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/RecruiterControll/EmailService.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/SearchController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobFormListPostControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/RegisterController.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/dal/DBContext.java</file>
             <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/Email.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/header.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobFromPostDetailControl.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/postDetails.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobFormSearchControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/AccountControll/InputFreelancerProfileController.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/CommonControll/AllListPostControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPostSearch.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/FreelancerControll/ApplyJobControll.java</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/web/views/allListPost.jsp</file>
+            <file>file:/D:/Job_IT_For_Freelancer_G5/src/java/Filter/AuthenFilter.java</file>
         </group>
     </open-files>
 </project-private>
