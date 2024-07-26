@@ -49,7 +49,6 @@
 //
 //    private List<String> recruiterURLs = Arrays.asList(
 //            "/InputRecruiterProfile", "/recruitersetting", "/myListJobProject", "/DeleteRecruiterFavourites"
-//            ,"/ListFreelancer"
 //    );
 //
 //    public AuthenFilter() {
@@ -77,13 +76,13 @@
 //        HttpServletResponse httpResponse = (HttpServletResponse) response;
 //        HttpSession session = httpRequest.getSession(false);
 //        String requestURI = httpRequest.getRequestURI();
-//        
+//
 //        // Check if the requested resource is public
 //        // Check if the requested resource is a file (contains a dot)
 //        boolean isFile = requestURI.contains(".");
 //        boolean isPublicResource = publicResources.stream().anyMatch(requestURI::endsWith);
 //        boolean isPublicURL = publicURLs.stream().anyMatch(requestURI::contains);
-//        
+//
 //        // Nếu là tài nguyên công khai, không kiểm tra xác thực
 //        if (isFile || isPublicResource || isPublicURL) {
 //            chain.doFilter(request, response);
