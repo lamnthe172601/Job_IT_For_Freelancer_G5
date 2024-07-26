@@ -60,7 +60,7 @@ public class PostDAO extends DBContext {
 
     public String getPostImagePath(int postID) {
         String imagePath = null;
-        String query = "SELECT image FROM Posts WHERE postID = ?";
+        String query = "SELECT image FROM Post WHERE postID = ?";
 
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -377,6 +377,25 @@ public class PostDAO extends DBContext {
                 + "    FROM JobApply j\n"
                 + "    WHERE j.postID = post.postID\n"
                 + ") AND status != 2\n";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        try {
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+
+        }
+
+    }
+
+    public void updatePostStatusByQuantity1() throws SQLException {
+
+        String sql = " UPDATE post \n"
+                + "                SET status = 1\n"
+                + "                WHERE quantity not like (\n"
+                + "                   SELECT COUNT(j.applyID)\n"
+                + "                   FROM JobApply j\n"
+                + "                   WHERE j.postID = post.postID\n"
+                + "                ) AND status != 3 and status != 0";
         PreparedStatement stmt = connection.prepareStatement(sql);
         try {
 
@@ -1075,9 +1094,10 @@ public class PostDAO extends DBContext {
         }
         return count;
     }
+
     public List<PostBasic> getPostsByFreelancerSkillsPage(int freelancerID, int offset) {
-     List<PostBasic> posts = new ArrayList<>();
-     String query = """
+        List<PostBasic> posts = new ArrayList<>();
+        String query = """
                  
                    WITH FreelancerSkills AS (
                        SELECT ss.skill_set_name
@@ -1145,36 +1165,36 @@ public class PostDAO extends DBContext {
                    FROM MatchingPosts;
                    
                    """;
-    try (PreparedStatement ps = connection.prepareStatement(query)) {
-        ps.setInt(1, freelancerID);
-        ps.setInt(2, offset);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("category_description"), rs.getInt("statusCate"));
-            Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
-            RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString("recruiter_image"));
-            JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
-            PostBasic post = new PostBasic(
-                rs.getInt("postID"), 
-                rs.getInt("quantity"), 
-                rs.getInt("budget"), 
-                rs.getString("title"), 
-                rs.getString("description"), 
-                rs.getString("location"), 
-                rs.getString("skill"), 
-                rs.getString("image"), 
-                rs.getDate("date_post"),
-                job, du, re, ca, 
-                rs.getBoolean("status"), 
-                rs.getInt("checking")
-            );
-            posts.add(post);
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, freelancerID);
+            ps.setInt(2, offset);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categories ca = new Categories(rs.getInt("caID"), rs.getString("categories_name"), rs.getString("categories_img"), rs.getString("category_description"), rs.getInt("statusCate"));
+                Duration du = new Duration(rs.getInt("durationID"), rs.getString("duration_name"));
+                RecruiterBasic re = new RecruiterBasic(rs.getInt("recruiterID"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_contact"), rs.getString("company_name"), rs.getString("recruiter_image"));
+                JobType job = new JobType(rs.getInt("job_type_ID"), rs.getString("job_name"));
+                PostBasic post = new PostBasic(
+                        rs.getInt("postID"),
+                        rs.getInt("quantity"),
+                        rs.getInt("budget"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getString("location"),
+                        rs.getString("skill"),
+                        rs.getString("image"),
+                        rs.getDate("date_post"),
+                        job, du, re, ca,
+                        rs.getBoolean("status"),
+                        rs.getInt("checking")
+                );
+                posts.add(post);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return posts;
     }
-    return posts;
-}
 
     public static void main(String[] args) {
         PostDAO dao = new PostDAO();

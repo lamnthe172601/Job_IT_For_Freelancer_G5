@@ -153,7 +153,7 @@
                                 <div class="home-count">
                                     <ul class="nav">
                                         <li class="course-count"><span class="counter-up">${NumberUsers}</span><span class="list-count">Freelance developers</span></li>
-                                        <li class="course-count"><span class="counter-up">${NumberPost} </span><span>+</span><span class="list-count">Projects Added</span></li>
+                                        <li class="course-count"><span class="counter-up">${NumberPost}  </span><span class="list-count">Projects Added</span></li>
                                         <li class="course-count"><span class="counter-up">919,207</span><span class="list-count">Completed projects</span></li>
                                     </ul>
                                 </div>
@@ -190,7 +190,7 @@
                                     <div class="project-item feature-project-item aos" data-aos="fade-up">
                                         <div class="project-img position-relative">
                                             <!-- Hình ảnh -->
-                                            <a href="project.html"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
+                                            <a href="PostDetails?postID=${list.postID}"><img style="width: 326px; height: 230px;" src="${list.image}" alt="Img" class="img-fluid"></a>
                                             <!-- Biểu tượng trái tym -->
 
                                             <a class="yeuthich" post-id="${list.postID}">
@@ -344,7 +344,7 @@
 
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="" class="btn btn-primary">View More Projects</a>
+                                    <a href="AllListPost" class="btn btn-primary">View More Projects</a>
                                 </div>
                             </div>
                         </div> 
@@ -468,7 +468,7 @@
 
                             <div class="col-xl-12">
                                 <div class="more-project text-center aos" data-aos="fade-up">
-                                    <a href="PostDetails?postID=${list.postID}" class="btn btn-primary">View More Projects</a>
+                                    <a href="AllListPost" class="btn btn-primary">View More Projects</a>
                                 </div>
                             </div>
                         </div> 
@@ -918,86 +918,7 @@
                 </div>
             </section>
 
-            <footer class="footer footer-two" id="bottom-scroll">
-                <div class="footer-top ">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-3 col-md-3">
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">Useful Links</h2>
-                                    <ul>
-                                        <li><a href="javascript:void(0);">Browse Candidates</a></li>
-                                        <li><a href="javascript:void(0);">Employers Dashboard</a></li>
-                                        <li><a href="javascript:void(0);">Job Packages</a></li>
-                                        <li><a href="javascript:void(0);">Jobs Featured</a></li>
-                                        <li><a href="javascript:void(0);">Post A Job</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xl-2 col-md-3">
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">Pages</h2>
-                                    <ul>
-                                        <li><a href="freelancer-dashboard.html">Freelancers</a></li>
-                                        <li><a href="freelancer-portfolio.html">Freelancer Details</a></li>
-                                        <li><a href="project.html">Project</a></li>
-                                        <li><a href="project-details.html">Project Details</a></li>
-                                        <li><a href="post-project.html">Post Project</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4">
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">Featured Categories</h2>
-                                    <ul>
-                                        <li><a href="javascript:void(0);">Website Design</a></li>
-                                        <li><a href="javascript:void(0);">Mobile Apps</a></li>
-                                        <li><a href="javascript:void(0);">Android Apps</a></li>
-                                        <li><a href="javascript:void(0);">iPhone Apps</a></li>
-                                        <li><a href="javascript:void(0);">Software Architecture</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-6">
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">Get Contact</h2>
-                                    <ul class="info-contact">
-                                        <li>Phone: (406) 555-0120</li>
-                                        <li>E-mail: <a href="https://kofejob.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bdd4d3dbd2fdd8c5dcd0cdd1d893ded2d0">[email&#160;protected]</a></li>
-                                    </ul>
-                                    <h2 class="footer-title mb-0">Newsletter</h2>
-                                    <div class="banner-content aos aos-init aos-animate" data-aos="fade-up">
-                                        <form class="form" name="store" method="post" action="https://kofejob.dreamstechnologies.com/html/template/project.html">
-                                            <div class="form-inner mb-0">
-                                                <div class="input-group">
-                                                    <input type="email" class="form-control" placeholder="Enter Your Email here..">
-                                                    <button class="btn btn-primary sub-btn" type="submit">Subscribe</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="footer-bottom">
-
-                    <div class="copyright">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright-text text-center">
-                                    <p class="mb-0">Copyright 2024 &copy; KofeJob. All right reserved. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </footer>
+            <jsp:include page="footter.jsp" />
 
         </div>
 

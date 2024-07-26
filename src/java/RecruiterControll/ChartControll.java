@@ -100,6 +100,7 @@ public class ChartControll extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Error: Failed to retrieve chart data");
             e.printStackTrace();
+            request.getRequestDispatcher("login").forward(request, response);
         }
     }
 

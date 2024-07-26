@@ -444,6 +444,22 @@ public boolean changeSkillsStatus(int skillId, boolean b) {
 
         return temp;
     }
+   
+     public boolean isSkillNameDuplicate(String skillName) {
+        String sql = "SELECT COUNT(*) FROM Skill_Set WHERE skill_set_name = ?";
+        try (
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, skillName);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     public static void main(String[] args) {
         AdminDAO adminDAO = new AdminDAO();
        adminDAO.addSkill("sssss", 1,"sssssssssssssssss");

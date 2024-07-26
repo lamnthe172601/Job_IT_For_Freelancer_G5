@@ -14,8 +14,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-    <!-- Mirrored from kofejob.dreamstechnologies.com/html/template/milestones.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 May 2024 10:32:13 GMT -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -825,7 +823,7 @@
         </div>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                // Function to add event listeners for validation to a form
+                
                 function setupValidation(form) {
                     form.querySelector('#title').addEventListener('input', validateTitle);
                     form.querySelector('#target').addEventListener('input', validateQuantity);
@@ -834,22 +832,23 @@
                     form.querySelector('#expired').addEventListener('input', validateDate);
                     form.querySelector('#description').addEventListener('input', validateDescription);
 
-                    
-
                     form.addEventListener('submit', function (event) {
                         event.preventDefault(); // Prevent default form submission
 
+                        // Perform all validations
                         validateTitle();
                         validateQuantity();
                         validateLocation();
                         validateBudget();
                         validateDate();
                         validateDescription();
-                        
 
-                        // Check if there are no validation errors
-                        if (form.querySelector('.text-danger').innerText === '') {
-                            // Use Fetch API to send form data
+                        // Check if there are any error messages
+                        var errorMessages = form.querySelectorAll('.text-danger');
+                        var hasErrors = Array.from(errorMessages).some(element => element.innerText !== '');
+
+                        if (!hasErrors) {
+                            // If no errors, proceed with form submission
                             fetch(form.action, {
                                 method: form.method,
                                 body: new FormData(form)
@@ -859,7 +858,7 @@
                                             // Show success message
                                             Swal.fire({
                                                 title: 'Success!',
-                                                text: 'Update Thành công',
+                                                text: 'Update Success',
                                                 icon: 'success',
                                                 confirmButtonText: 'OK'
                                             }).then((result) => {
@@ -882,6 +881,9 @@
                                         console.error('Error:', error);
                                         Swal.fire('Error!', 'There was an error updating the project.', 'error');
                                     });
+                        } else {
+                            // If there are errors, show a message to the user
+                            Swal.fire('Validation Error!', 'Please check all fields and try again.', 'error');
                         }
                     });
                 }
@@ -984,10 +986,7 @@
                         }
                     });
                 }
-
-                
             });
-
         </script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
