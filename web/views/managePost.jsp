@@ -783,7 +783,7 @@
                                                                                                 <div class="col-lg-12">
                                                                                                     <div class="input-block">
                                                                                                         <label class="form-label">Description</label>
-                                                                                                        <textarea name="description" id="description" class="form-control summernote">${list.description}</textarea>
+                                                                                                        <textarea name="description" id="description" class="form-control ">${list.description}</textarea>
                                                                                                         <div id="error-description" class="text-danger"></div>
                                                                                                     </div>
                                                                                                 </div>
